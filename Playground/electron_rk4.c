@@ -27,7 +27,7 @@ int main(int argc, const char * argv[]) {
 
     
     // open file identifier
-    FILE *fid = fopen("solution.txt","w");
+    FILE *fid = fopen("solution_rk4.txt","w");
     
     // boundary condition
     x = 0.5;
