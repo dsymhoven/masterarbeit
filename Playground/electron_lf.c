@@ -16,7 +16,7 @@ int main(int argc, const char * argv[]) {
     double e2 = 1;
     double GM = 1;
     double t = 0;
-    double tEnd = 1000;
+    double tEnd = 10000;
     double x1,x1n,y1,y1n;
     double vx1,vy1;
     double x2,x2n,y2,y2n;
@@ -30,12 +30,12 @@ int main(int argc, const char * argv[]) {
     // boundary condition
     x1 = 0.5;
     y1 = 0.5;
-    vx1 = -0.8;
+    vx1 = -0.9;
     vy1 = 0.0;
     
     x2 = 0.0;
     y2 = 0.0;
-    vx2 = 0.8;
+    vx2 = 0.9;
     vy2 = 0.0;
     
     // leap frog

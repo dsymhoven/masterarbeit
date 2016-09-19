@@ -29,7 +29,7 @@ set style line 2 lc rgb "blue" lt 1 lw 2 dt 1 pt 0 pi 2
 
 # plot commands
 
-set title ''
+set title 'IC: (x1,y1) = (0.5,0.5); (vx1, vy1) = (-0.9,0); (x2,y2) = (0,0) (vx1, vy1) = (0.9,0)'
 set xlabel "x"
 set ylabel "y"
 plot "solution_lf.txt" using 2:3 with lines lc rgb "red" title "path of particle 1", "solution_lf.txt" using 4:5 with lines lc rgb "blue" title "path of particle 2"
