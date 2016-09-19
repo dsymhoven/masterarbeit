@@ -1,6 +1,6 @@
 
-// x'' = -1/4 M_pi e_0 x / (x^2 + y^2)^(3/2)
-// y'' = -1/4 M_pi e_0 y / (x^2 + y^2)^(3/2)
+// x'' = -1/4 M_pi e_0 x1 / (x^2 + y^2)^(3/2)
+// y'' = -1/4 M_pi e_0 y1 / (x^2 + y^2)^(3/2)
 
 // x(0) = 0.5, y(0) = 0, vx(0) = 0, vy(0) = 1.0
 
@@ -11,15 +11,16 @@
 int main(int argc, const char * argv[]) {
     
     // Parameter definitions and allocations
-    double h = 0.001;
-    double e = 1;
+    double h = 0.01;
+    double e1 = 1;
+    double e2 = 1;
     double GM = 1;
     double t = 0;
-    double tEnd = 700;
-    double x,xn;
-    double vx;
-    double y,yn;
-    double vy;
+    double tEnd = 1000;
+    double x1,x1n,y1,y1n;
+    double vx1,vy1;
+    double x2,x2n,y2,y2n;
+    double vx2, vy2;
     double Ekin,Epot;
 
     
@@ -27,26 +28,43 @@ int main(int argc, const char * argv[]) {
     FILE *fid = fopen("solution_lf.txt","w");
     
     // boundary condition
-    x = 0.5;
-    vx = 0;
-    y = 0;
-    vy = 0.2;
+    x1 = 0.5;
+    y1 = 0.5;
+    vx1 = -0.8;
+    vy1 = 0.0;
+    
+    x2 = 0.0;
+    y2 = 0.0;
+    vx2 = 0.8;
+    vy2 = 0.0;
     
     // leap frog
     while(t <= tEnd){
     
-        xn = x + h * vx - h * h / 2.0 * GM * e * e * x / pow(x*x + y*y, 1.5);
-        yn = y + h * vy - h * h / 2.0 * GM * e * e * y / pow(x*x + y*y, 1.5); 
-        vx = vx + h / 2.0 * -GM * e * e * ( xn / pow(xn*xn + yn*yn, 1.5) + x / pow(x*x + y*y, 1.5));
-        vy = vy + h / 2.0 * -GM * e * e * ( yn / pow(xn*xn + yn*yn, 1.5) + y / pow(x*x + y*y, 1.5)); 
- 	
- 		x = xn;
- 		y = yn;	
+    	// EoM for first particle
+        x1n = x1 + h * vx1 - h * h / 2.0 * GM * e1 * e2 * (x1 - x2) / pow((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2), 1.5);
+        y1n = y1 + h * vy1 - h * h / 2.0 * GM * e1 * e2 * (y1 - y2) / pow((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2), 1.5);
+        vx1 = vx1 + h / 2.0 * -GM * e1 * e2 * ( (x1n - x2n) / pow((x1n - x2n)*(x1n - x2n) + (y1n - y2n)*(y1n - y2n), 1.5) + (x1 - x2) / pow((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2), 1.5));
+        vy1 = vy1 + h / 2.0 * -GM * e1 * e2 * ( (y1n - y2n)/ pow((x1n - x2n)*(x1n - x2n) + (y1n - y2n)*(y1n - y2n), 1.5) + (y1 - y2) / pow((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2), 1.5));
+	
        	
-       	Ekin = 0.5 * (vx*vx + vy*vy);
- 		Epot = -GM / sqrt(x*x + y*y);
+       	// EoM for second particle
+        x2n = x2 + h * vx2 - h * h / 2.0 * GM * e1 * e2 * (x2 - x1) / pow((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1), 1.5);
+        y2n = y2 + h * vy2 - h * h / 2.0 * GM * e1 * e2 * (y2 - y1) / pow((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1), 1.5); 
+        vx2 = vx2 + h / 2.0 * -GM * e1 * e2 * ( (x2n - x1n) / pow((x2n - x1n)*(x2n - x1n) + (y2n - y1n)*(y2n - y1n), 1.5) + (x2 - x1) / pow((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1), 1.5));
+        vy2 = vy2 + h / 2.0 * -GM * e1 * e2 * ( (y2n - y1n) / pow((x2n - x1n)*(x2n - x1n) + (y2n - y1n)*(y2n - y1n), 1.5) + (y2 - y1) / pow((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1), 1.5));
+ 	
+ 	 	
+ 		x1 = x1n;
+ 		y1 = y1n;
  		
-        fprintf(fid, "%f %f %f %f %f %f\n", t, x, vx, y, vy, Ekin+Epot);
+ 		x2 = x2n;
+ 		y2 = y2n;
+ 		
+       	Ekin = 0.5 * (vx2*vx2 + vy1*vy1);
+ 		Epot = -GM / sqrt(x2*x2 + y1*y1);
+ 		
+        fprintf(fid, "%f %f %f %f %f %f %f %f %f %f\n", t, x1, y1, x2, y2, vx1, vy1, vx2, vy2, Ekin+Epot);
       	t += 1;
         
     }

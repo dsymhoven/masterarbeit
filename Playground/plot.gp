@@ -29,8 +29,8 @@ set style line 2 lc rgb "blue" lt 1 lw 2 dt 1 pt 0 pi 2
 
 # plot commands
 
-set title 'path of electron around proton in 0/0. Initial Condition (x,y) = (0.5,0) (vx,vy) = (0,0.2)'
+set title ''
 set xlabel "x"
 set ylabel "y"
-plot "solution_lf.txt" using 2:4 with lines lc rgb "red" title "path of electron"
+plot "solution_lf.txt" using 2:3 with lines lc rgb "red" title "path of particle 1", "solution_lf.txt" using 4:5 with lines lc rgb "blue" title "path of particle 2"
 
