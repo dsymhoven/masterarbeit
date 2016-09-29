@@ -1,0 +1,125 @@
+\documentclass[
+a4paper,					% alle weiteren Papierformat einstellbar
+%landscape,					% Querformat
+11pt,						% SchriftgrößŸe (12pt, 11pt (Standard))
+BCOR0.8cm,					% Bindekorrektur, bspw. 1 cm
+%DIVcalc,					% führt die Satzspiegelberechnung neu aus
+twoside,					% einseitiges Layout
+%twocolumn,					% zweispaltiger Satz
+%openany,					% Kapitel können auch auf linken Seiten beginnen
+%halfparskip*,				% Absatzformatierung s. scrguide 3.1
+%notitlepage,				% in-page-Titel, keine eigene Titelseite
+%chapterprefix,				% vor Kapitelüberschrift wird "Kapitel Nummer" gesetzt
+%appendixprefix,			% Anhang wird "Anhang" vor die Üœberschrift gesetzt 
+%normalheadings,			% Üœberschriften etwas kleiner (smallheadings)
+%idxtotoc,					% Index im Inhaltsverzeichnis
+%liststotoc,				% Abb.- und Tab.verzeichnis im Inhalt
+%bibtotoc,					% Literaturverzeichnis im Inhalt
+bibliography=totoc,
+%leqno,						% Nummerierung von Gleichungen links
+%fleqn,						% Ausgabe von Gleichungen linksbündig
+%draft						% Überlangen Zeilen in Ausgabe gekennzeichnet
+]{scrreprt}
+
+% ============================ Packages ============================ 
+
+\usepackage[inner=3.0cm,outer=2.5cm,top=1.5cm,bottom=1.5cm,includeheadfoot]{geometry}
+									% Einstellungen der Seitenränder
+
+\usepackage[T1]{fontenc}				% neue Rechtschreibung
+\usepackage[latin1]{inputenc}		         % Umlaute ermöglichen
+\usepackage[english, german]{babel}
+\usepackage{fancyhdr}				% für Kopf- und FußŸzeile
+\usepackage[hyperref]{xcolor}		
+\definecolor{MyBlue}{RGB}{50,79,132}		% für Kopf- und Fußzeile
+\usepackage[colorlinks, linktocpage, linkcolor=MyBlue]{hyperref}
+\usepackage{color}					% Farbe
+\usepackage[pdftex]{graphicx}
+\usepackage{float}
+\usepackage{listings}				% Programm-Code
+\usepackage{longtable}				% Tabellen über mehrere Seiten
+\usepackage{siunitx}				% Einheiten nach SI-Norm
+\usepackage{listings}                                    % Verwendung von Matlab-Code
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[tight]{subfigure}
+\usepackage{empheq}
+\usepackage{overcite}
+\usepackage{url}
+\usepackage{framed}
+\usepackage{pdfpages}
+\usepackage[compact]{titlesec}
+% ============================ Kopf- und Fußzeile ==========================
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[CO,CE]{\scshape\leftmark}	% Kopfzeile links [L], mitte [C], rechts [R]
+\fancyfoot[RO,LE]{\thepage}				% Fußzeile
+\renewcommand{\headrulewidth}{0.5pt}	% Linie oben
+\renewcommand{\footrulewidth}{0pt}		% Linie unten
+\pagenumbering{roman}
+
+%============================ new Definitions ============================
+\include{definitions}
+\include{newChapterDefinition}
+% =============================Titelseite ==================================
+
+\begin{document}
+
+\pagenumbering{roman}
+\include{titlepage}
+
+%================================= ERKLÄRUNG=============================
+\includepdf{Erklaerung_Abschlussarbeit.pdf}
+
+%================================= ABSTRACT==============================
+\include{abstract}
+
+%================================= SYMBOLE UND KONTANTEN ================
+\include{symbols}
+
+%================================= Inhaltsverzeichnis ==========================
+\tableofcontents
+
+%============================ Beginn Textseiten ================================
+\pagenumbering{arabic}
+
+
+
+%================================= Bildvorlage ====================================
+
+%Code für Bildumgebung
+%\begin{figure}[H]
+	%\centering
+	%	\includegraphics[width=0.50\textwidth]{Destruktive_Interferenz.jpg} %Bild 1
+	%\caption[Destruktive Interferenz]{Destruktive Interferenz \cite{[Wiki12]}}
+	%\label{fig:Interferenzfilterr}
+%\end{figure}
+
+%===========================================================================
+
+
+%======================== EINLEITUNG ========================
+%===========================================================
+\chapter{Einleitung}
+Now it's going loose ...
+
+\chapter{What is Physics?}
+\section{The ancient Greeks}
+hu?
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
