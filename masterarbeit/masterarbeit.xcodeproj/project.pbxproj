@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		611BB7491D8D4D6200DDBF08 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 611BB7481D8D4D6200DDBF08 /* main.c */; };
+		619129211DA531BD00A848D1 /* calculations.c in Sources */ = {isa = PBXBuildFile; fileRef = 619129201DA531BD00A848D1 /* calculations.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		611BB7451D8D4D6200DDBF08 /* masterarbeit */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = masterarbeit; sourceTree = BUILT_PRODUCTS_DIR; };
 		611BB7481D8D4D6200DDBF08 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		6191291D1DA530A700A848D1 /* calculations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = calculations.h; sourceTree = "<group>"; };
+		619129201DA531BD00A848D1 /* calculations.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = calculations.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +60,27 @@
 		611BB7471D8D4D6200DDBF08 /* masterarbeit */ = {
 			isa = PBXGroup;
 			children = (
+				619129231DA531DD00A848D1 /* Implementations */,
+				619129221DA531D300A848D1 /* Header */,
 				611BB7481D8D4D6200DDBF08 /* main.c */,
 			);
 			path = masterarbeit;
+			sourceTree = "<group>";
+		};
+		619129221DA531D300A848D1 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				6191291D1DA530A700A848D1 /* calculations.h */,
+			);
+			name = Header;
+			sourceTree = "<group>";
+		};
+		619129231DA531DD00A848D1 /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				619129201DA531BD00A848D1 /* calculations.c */,
+			);
+			name = Implementations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				611BB7491D8D4D6200DDBF08 /* main.c in Sources */,
+				619129211DA531BD00A848D1 /* calculations.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +268,7 @@
 				611BB74E1D8D4D6200DDBF08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
