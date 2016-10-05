@@ -1,4 +1,14 @@
 \BOOKMARK [0][-]{chapter*.1}{Deklaration}{}% 1
 \BOOKMARK [0][-]{chapter.1}{Einleitung}{}% 2
-\BOOKMARK [0][-]{chapter.2}{What is Physics?}{}% 3
-\BOOKMARK [1][-]{section.2.1}{The ancient Greeks}{chapter.2}% 4
+\BOOKMARK [0][-]{chapter.2}{Grundlagen}{}% 3
+\BOOKMARK [1][-]{section.2.1}{Li\351nard-Wiechert Potentiale}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.2}{Numerik}{chapter.2}% 5
+\BOOKMARK [2][-]{subsection.2.2.1}{Bewegungsgleichung}{section.2.2}% 6
+\BOOKMARK [2][-]{subsection.2.2.2}{Euler-Verfahren}{section.2.2}% 7
+\BOOKMARK [2][-]{subsection.2.2.3}{Leap-Frog-Verfahren}{section.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.4}{Boris-Pusher}{section.2.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.5}{Vay-Pusher}{section.2.2}% 10
+\BOOKMARK [1][-]{section.2.3}{Hybride Felder}{chapter.2}% 11
+\BOOKMARK [2][-]{subsection.2.3.1}{Maxwell-Gleichungen}{section.2.3}% 12
+\BOOKMARK [2][-]{subsection.2.3.2}{Maxwell-Solver}{section.2.3}% 13
+\BOOKMARK [2][-]{subsection.2.3.3}{Nah-und Fernfelder}{section.2.3}% 14
