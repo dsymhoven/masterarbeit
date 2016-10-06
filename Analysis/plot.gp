@@ -31,4 +31,4 @@ set style line 2 lc rgb "blue" lt 1 lw 2 dt 1 pt 0 pi 2
 set title 'borisPusher'
 set xlabel "vx"
 set ylabel "vy"
-plot "borisPusher2.txt" using 2:3 with lines lc rgb "red"
+plot "borisPusher.txt" using 2:3 with lines lc rgb "red"

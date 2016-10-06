@@ -14,17 +14,16 @@ int main(int argc, const char * argv[]) {
 
     double B[3] = {0,0,1};
     double E[3] = {0,0,0};
-    double u[4] = {0,0,1,0};
+    double u[3] = {0,1,0};
     double dt = 0.01;
     double t = 0;
-    double tEnd = 15;
+    double tEnd = 20;
     double chargeOverMass = 1;
     
     FILE *fid = fopen("borisPusher.txt", "w");
     
     while(t < tEnd){
-        fprintf(fid, "%f %f %f %f\n", t, u[1], u[2], u[3]);
-        //push_u_boris(u, chargeOverMass, dt, E, B);
+        fprintf(fid, "%f %f %f %f\n", t, u[0], u[1], u[2]);
         borisPusher(u, E, B, -0.5*dt, chargeOverMass);
         t += dt;
         
