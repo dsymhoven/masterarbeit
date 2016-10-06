@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
     double u[3] = {0,1,0};
     double dt = 0.01;
     double t = 0;
-    double tEnd = 20;
+    double tEnd = 100;
     double chargeOverMass = 1;
     
     FILE *fid = fopen("borisPusher.txt", "w");

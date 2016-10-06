@@ -17,6 +17,13 @@ void crossProduct(double *a, double *b, double *result)
 	result[2] = a[0]*b[1]-a[1]*b[0];
 }
 
+/**
+ updates velocity with boris method. 
+ 
+ First obtain “uMinus” by adding half acceleration to the initial velocity.
+ Then obtain "uPlus" by performing rotation with "uPrime" and internally computed assisting values.
+ Finally, add another half acceleration.
+ */
 void borisPusher(double *u, double *E, double *B, double dt, double chargeOverMass){
 
     int dimension = 3;
@@ -24,23 +31,13 @@ void borisPusher(double *u, double *E, double *B, double dt, double chargeOverMa
     double t[3];
     double s[3];
     double uMinusCrossT[3];
-    double uMinus[3];
-    double uPlus[3];
     double uPrimeCrossS[3];
     double absoluteSquareValueOfT;
     
-    for (int i = 0; i < dimension; i++){
-        uMinus[i] = u[i] + chargeOverMass * E[i] * dt * 0.5;
-    }
     
+    // assisting values
     for (int i = 0; i < dimension; i++){
         t[i] = chargeOverMass * B[i] * dt * 0.5;
-    }
-    
-    crossProduct(uMinus, t, uMinusCrossT);
-    
-    for (int i = 0; i < dimension; i++){
-        uPrime[i] = uMinus[i] + uMinusCrossT[i];
     }
     
     absoluteSquareValueOfT = t[0] * t[0] + t[1] * t[1] + t[2] * t[2];
@@ -49,15 +46,28 @@ void borisPusher(double *u, double *E, double *B, double dt, double chargeOverMa
         s[i] = 2 * t[i] / (1 + absoluteSquareValueOfT);
     }
     
+    // implementation of boris method
+    // first obtain “uMinus” by adding half acceleration to the initial velocity
+    for (int i = 0; i < dimension; i++){
+        u[i] +=  chargeOverMass * E[i] * dt * 0.5;
+    }
+    
+    crossProduct(u, t, uMinusCrossT);
+    
+    for (int i = 0; i < dimension; i++){
+        uPrime[i] = u[i] + uMinusCrossT[i];
+    }
     
     crossProduct(uPrime, s, uPrimeCrossS);
     
+    // then obtain "uPlus" by performing rotation with "uPrime" and "s"
     for (int i = 0; i < dimension; i++){
-        uPlus[i] = uMinus[i] + uPrimeCrossS[i];
+        u[i] +=  uPrimeCrossS[i];
     }
     
+    // finally, add another half acceleration,
     for (int i = 0; i < dimension; i++){
-        u[i] = uPlus[i] + chargeOverMass * E[i] * dt * 0.5;
+        u[i] += chargeOverMass * E[i] * dt * 0.5;
     }
     
 }
