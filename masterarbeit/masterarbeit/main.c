@@ -26,9 +26,8 @@ int main(int argc, const char * argv[]) {
         fprintf(fid, "%f %f %f %f\n", t, u[0], u[1], u[2]);
         borisPusher(u, E, B, -0.5*dt, chargeOverMass);
         t += dt;
-        
     }
-    
+
     
     
     fclose(fid);
