@@ -32,7 +32,7 @@ bibliography=totoc,
 \usepackage{fancyhdr}				% für Kopf- und FußŸzeile
 \usepackage[hyperref]{xcolor}		
 \definecolor{MyBlue}{RGB}{50,79,132}		% für Kopf- und Fußzeile
-\usepackage[colorlinks, linktocpage, linkcolor=MyBlue]{hyperref}
+\usepackage[colorlinks, citecolor=MyBlue, linktocpage, linkcolor=MyBlue]{hyperref}
 \usepackage{color}					% Farbe
 \usepackage[pdftex]{graphicx}
 \usepackage{float}
@@ -103,13 +103,43 @@ bibliography=totoc,
 %======================== EINLEITUNG ========================
 %===========================================================
 \chapter{Einleitung}
-Now it's going loose ...
+Now it's going loose ...  \cite{Manuel}
 
 \chapter{Grundlagen}
 \section{Liénard-Wiechert Potentiale}
+\label{sec: lw-Potentiale}
 \section{Numerik}
+\noindent
+Der folgende Abschnitt beschäftigt sich mit dem numerischen Aspekt der Arbeit. Wir stellen die zugrunde liegende Bewegungsgleichung und deren Historie vor. Anschließend gehen wir auf diverse Methoden ein, mit Hilfe derer sich Differentialgleichungen lösen lassen. Über die vergangenen Jahre wurden unzählige Verfahren entwickelt, wobei jedes seine Stärken und Schwächen hat. Deshalb sollte zunächst immer wohl überlegt sein, was erreicht werden soll. Einige Methoden sind sehr einfach, dafür unpräzise, andere sind sehr aufwändig zu implementieren, dafür sehr genau. Eine Methode für alle Probleme gibt es leider nicht. \\
+Im Anschluss wollen wir dann noch die numerische Komplexität ausgewählter Algorithmen definieren und berechnen.
+
 \subsection{Bewegungsgleichung}
+Wie aus der Mechanik bekannt, ist die Dynamik eines Teilchens durch die auf ihn wirkenden Kräfte vorgeschrieben. In unserem Fall wirkt eine Kraft aufgrund von elektrischen und magnetischen Feldern. Dies können zum einen externe Felder, aber auch Felder sein, die durch die Bewegung anderer Teilchen entstehen, wie wir im Abschnitt \ref{sec: lw-Potentiale} bereits gesehen haben. \\
+Unsere Systemdynamik wird durch die \textit{Lorentz-Newton} Gleichung beschrieben
+\beq
+\label{eqn: Lorentz-Newton}
+\bal
+\frac{\dm x^{\mu}}{\dm s} &= u^{\mu}\\
+\frac{\dm u^{\mu}}{\dm s} &= F^{\mu}_{~\nu}~u^{\nu} + g^{\mu},
+\eal
+\eeq
+deren Herleitung länglich ist und wir deshalb auf Literatur verweisen möchten. %MISSING: cite
+Der Term $F^{\mu}_{~\nu}$ beschreibt den elektromagnetischen Feldstärketensor
+\beq
+F^{\mu}_{~\nu} = 
+\begin{pmatrix}
+0 & E_x & E_y & E_z \\
+E_x & 0 & B_z & -B_y \\
+E_y & -B_z & 0 & B_x \\
+E_z & B_y & -B_x & 0
+\end{pmatrix}
+.
+\eeq
+Der Dämpfungsterm $g^{\mu}$ berücksichtigt den Fakt, dass bewegte Ladungen Felder abstrahlen und dadurch kinetische Energie verlieren. Die Strahlungsdämpfung wurde erstmals durch Max \textit{Abraham} und Hendrick \textit{Lorentz} in ihrer gleichnamigen Gleichung im Rahmen der klassischen Elektrodynamik behandelt. 1938 verallgemeinerte \textit{Dirac} dann die Gleichung, unter Berücksichtigung der Relativitästheorie. % MISSING: Cites
+% MISSING: Details missing. Historisches. Abraham, Lorentz, Dirac Landau Lifschitz Gleichung usw.
+Wir wollen uns nun damit beschäftigen, wie wir die Bewegungsgleichung \eqref{eqn: Lorentz-Newton} numerisch integrieren können.
 \subsection{Euler-Verfahren}
+ Das wohl einfachste aller Verfahren ist das \textit{Euler} Verfahren.
 \subsection{Leap-Frog-Verfahren}
 \subsection{Boris-Pusher}
 \subsection{Vay-Pusher}
@@ -119,8 +149,13 @@ Now it's going loose ...
 \subsection{Nah-und Fernfelder}
 
 
+%============================= Abbildungsverzeichnis ===========================
+\listoffigures
 
+%======================== Literaturverzeichnis ========================
 
+\bibliography{reference}{}
+\bibliographystyle{plain}
 
 \end{document}
 
