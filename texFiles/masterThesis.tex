@@ -42,6 +42,7 @@ bibliography=totoc,
 \usepackage{listings}                                    % Verwendung von Matlab-Code
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{mathtools}
 \usepackage[tight]{subfigure}
 \usepackage{empheq}
 \usepackage{overcite}
@@ -139,7 +140,48 @@ Der Dämpfungsterm $g^{\mu}$ berücksichtigt den Fakt, dass bewegte Ladungen Felde
 % MISSING: Details missing. Historisches. Abraham, Lorentz, Dirac Landau Lifschitz Gleichung usw.
 Wir wollen uns nun damit beschäftigen, wie wir die Bewegungsgleichung \eqref{eqn: Lorentz-Newton} numerisch integrieren können.
 \subsection{Euler-Verfahren}
- Das wohl einfachste aller Verfahren ist das \textit{Euler} Verfahren.
+Das wohl einfachste aller Verfahren ist das explizite \textit{Euler}-Verfahren. Es ist sehr schnell zu implementieren, aber auch sehr unpräzise, wie wir in Kürze sehen werden. Bevor wir uns aber mit den Details des expliziten Euler-Verfahrens beschäftigen, müssen wir über die Voraussetzungen sprechen, die alle Verfahren gemeinsam haben. Ausgangspunkt ist immer ein System erster Ordnung der Form 
+\beq
+\label{eqn: Euler}
+\bal
+\frac{\dm x^{\mu}}{\dm s} &= u^{\mu}\\
+\frac{\dm u^{\mu}}{\dm s} &= f^{\mu}(x^{\nu},u^{\nu})\\
+x^{\mu}(s_0) &= x^{\mu}_0\\
+u^{\mu}(s_0) &= u^{\mu}_0.
+\eal
+\eeq
+Systeme höherer Ordnung können immer auf ein System erster Ordnung reduziert werden. \\
+Um die Bewegungsgleichung numerisch lösen zu können, muss der Definitionsraum diskretisiert werden. Dazu wird das Zeitintervall in N äquidistante Teilintervalle $\Delta s$ zerlegt, sodass
+\beq
+\Delta s = s_{i+1} - s_i \nn
+\eeq
+gilt. Die Idee ist nun, dass man ausgehend von den Startwerten $x^{\mu}_0$ und $u^{\mu}_0$, iterativ jeden weiteren Punkt der Trajektorie $x^{\mu}_i = x^{\mu}(s_i)$ berechnet. Um diese Punkte berechnen zu können, müssen allerdings auch die Differentialoperatoren in \eqref{eqn: Euler} diskretisiert werden. Darin unterscheiden sich nun die Verfahren. Grundlage des Euler-Verfahrens bildet eine Taylorentwicklung erster Ordnung der Integrationsvariablen $x^{\mu}$ in der Variable s um den Zeitpunkt $s_i$
+\beq
+x^{\mu}(s_{i+1}) =  x^{\mu}(s_i) + \frac{\dm x^{\mu}}{\dm s} \Big |_{s=s_i} \underbrace{(s_{i+1} - s_i)}_{=\Delta s} + \mathcal{O}\left((\Delta s)^2\right).
+\eeq
+Analoges Vorgehen für $u^{\mu}$ und auflösen nach $\frac{\dm x^{\mu}}{\dm s}$ bzw. $\frac{\dm u^{\mu}}{\dm s}$ liefert schließlich
+\beq
+\bal
+\frac{x^{\mu}_{i+1} - x^{\mu}_i}{\Delta s} &= u^{\mu}_i\\
+\frac{u^{\mu}_{i+1} - u^{\mu}_i}{\Delta s} &= f^{\mu}(x^{\nu}_i,u^{\nu}_i).
+\eal
+\eeq
+Diese Art der Diskretisierung ermöglicht eine sehr einfach Berechnung der Punkte $x^{\mu}_i$ gemäß
+ \beq
+\bal
+x^{\mu}_{i+1} &= x^{\mu}_i + u^{\mu}_i~\Delta s \\
+u^{\mu}_{i+1} &= u^{\mu}_i + f^{\mu}(x^{\nu}_i,u^{\nu}_i)~\Delta s.
+\eal
+\eeq
+Um nun die Güte dieser Approximation zu bestimmen, benötigen wir den Begriff der \textit{Konsistenz} - und \textit{Konvergenzordung}. \\
+\subsubsection{Konsistenz - und Konvergenzordnung}
+Wir definieren zunächst den in jedem Zeitschritt gemachten numerischen Fehler für den Ort $\epsilon^x_i$ und für die Geschwindigkeit $\epsilon^u_i$
+\beq
+\bal
+\epsilon^x_i \coloneqq x^{\mu}(s_i) - x^{\mu}_i \\
+\epsilon^u_i \coloneqq u^{\mu}(s_i) - u^{\mu}_i
+\eal
+\eeq
 \subsection{Leap-Frog-Verfahren}
 \subsection{Boris-Pusher}
 \subsection{Vay-Pusher}

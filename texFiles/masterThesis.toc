@@ -6,11 +6,12 @@
 \contentsline {section}{\numberline {2.2}Numerik}{3}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Bewegungsgleichung}{3}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Euler-Verfahren}{3}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Leap-Frog-Verfahren}{4}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Boris-Pusher}{4}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Vay-Pusher}{4}{subsection.2.2.5}
-\contentsline {section}{\numberline {2.3}Hybride Felder}{4}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Maxwell-Gleichungen}{4}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Maxwell-Solver}{4}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}Nah-und Fernfelder}{4}{subsection.2.3.3}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{6}{chapter*.5}
+\contentsline {subsubsection}{\numberline {2.2.2.1}Konsistenz - und Konvergenzordnung}{4}{subsubsection.2.2.2.1}
+\contentsline {subsection}{\numberline {2.2.3}Leap-Frog-Verfahren}{5}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Boris-Pusher}{5}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Vay-Pusher}{5}{subsection.2.2.5}
+\contentsline {section}{\numberline {2.3}Hybride Felder}{5}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Maxwell-Gleichungen}{5}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Maxwell-Solver}{5}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Nah-und Fernfelder}{5}{subsection.2.3.3}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{7}{chapter*.5}
