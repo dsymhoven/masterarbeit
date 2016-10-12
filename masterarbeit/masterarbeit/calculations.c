@@ -55,42 +55,43 @@ bool isInsideForwardLightcone(double *xParticle, double *xObserver) {
 
 
 /**
- calcualtes the difference between two four vectors and saves the result in the array passed as argument.
+ calcualtes the difference between two three dimensional vectors and saves the result in the array passed as argument.
  */
-void minkowskiDifference(double *x, double *y, double *result){
-    for (int i = 0; i < 4; i++){
+void vectorDifference(double *x, double *y, double *result){
+    for (int i = 0; i < 3; i++){
         result[i] = x[i] - y[i];
     }
 }
 
-/**
- returns the minkowski product with (+,-,-,-) metric.
- */
-double minkowskiProduct(double *x, double *y){
 
-    return x[0]*y[0] - x[1]*y[1] - x[2]*y[2] - x[3]*y[3];
+/**
+ returns the vector product in three dimensions.
+ */
+double vectorProduct(double *x, double *y){
+    
+    return x[0]*y[0] + x[1]*y[1] + x[2]*y[2];
 }
 
 /**
  returns parameter lambda for the linear interpolation between particle trajectory and backwards lightcone at observation point.
  
- In order to calculate the Liénard-Wiechart fields at the observation point the intersection of the trajectory and the backward lightcone at the observation point is needed. Since the calculated trajectory is discrete we need to interpolate between the last point inside the lightcone and the first point outside the lightcone.
+ In order to calculate the Liénard-Wiechart fields at the observation point the intersection of the trajectory and the backward lightcone at the observation point is needed. Since the calculated trajectory is discrete we need to interpolate between the first point outside the lightcone and the last point inside the lightcone.
  */
 double calculateLambdaForLinearInterpolation(double *xInside, double *xOutside, double *xObserver) {
     
-    double A, B, C;
+    double a, b, c;
     double lambda;
-    double xOutsideMinusxInside[4];
-    double xInsideMinusxObserver[4];
+    double xInsideMinusxOutside[3];
+    double xObserverMinusxOutside[3];
     
-    minkowskiDifference(xOutside, xInside, xOutsideMinusxInside);
-    minkowskiDifference(xInside, xObserver, xInsideMinusxObserver);
+    vectorDifference(xInside, xOutside, xInsideMinusxOutside);
+    vectorDifference(xObserver, xOutside, xObserverMinusxOutside);
     
-    A = minkowskiProduct(xOutsideMinusxInside, xOutsideMinusxInside);
-    B = 2.0 * minkowskiProduct(xOutsideMinusxInside, xInsideMinusxObserver);
-    C = minkowskiProduct(xInside, xInside) + minkowskiProduct(xObserver, xObserver)- 2.0 * minkowskiProduct(xInside, xObserver);
+    a = vectorProduct(xInsideMinusxOutside, xInsideMinusxOutside);
+    b = 2.0 * vectorProduct(xInsideMinusxOutside, xObserverMinusxOutside);
+    c = vectorProduct(xOutside, xOutside) + vectorProduct(xObserver, xObserver) - 2.0 * vectorProduct(xOutside, xObserver);
     
-    lambda = (-B+sqrt(B*B-4.0*A*C))/(2.0*A);
+    lambda = (-b+sqrt(b*b-4.0*a*c))/(2.0*a);
     return lambda;
 }
 /**
@@ -109,6 +110,7 @@ void borisPusher(double *u, double *E, double *B, double dt, double chargeOverMa
     double uMinusCrossT[3];
     double uPrimeCrossS[3];
     double absoluteSquareValueOfT;
+    double uModifiedForCrossProduct[3];
     
     
     // assisting values
@@ -125,25 +127,39 @@ void borisPusher(double *u, double *E, double *B, double dt, double chargeOverMa
     // implementation of boris method
     // first obtain “uMinus” by adding half acceleration to the initial velocity
     for (int i = 0; i < dimension; i++){
-        u[i] +=  chargeOverMass * E[i] * dt * 0.5;
+        u[i+1] +=  chargeOverMass * E[i] * dt * 0.5;
     }
     
-    crossProduct(u, t, uMinusCrossT);
+    // Since u is a four vector rewrite it to a three dimensional vector to make it usabale for crossProduct
+    for(int i = 0; i < dimension; i++){
+        uModifiedForCrossProduct[i] = u[i+1];
+    }
+    
+    crossProduct(uModifiedForCrossProduct, t, uMinusCrossT);
     
     for (int i = 0; i < dimension; i++){
-        uPrime[i] = u[i] + uMinusCrossT[i];
+        uPrime[i] = u[i+1] + uMinusCrossT[i];
     }
     
     crossProduct(uPrime, s, uPrimeCrossS);
     
     // then obtain "uPlus" by performing rotation with "uPrime" and "s"
     for (int i = 0; i < dimension; i++){
-        u[i] +=  uPrimeCrossS[i];
+        u[i+1] +=  uPrimeCrossS[i];
     }
     
     // finally, add another half acceleration,
     for (int i = 0; i < dimension; i++){
-        u[i] += chargeOverMass * E[i] * dt * 0.5;
+        u[i+1] += chargeOverMass * E[i] * dt * 0.5;
+    }
+    
+}
+
+void updateLocation(double *u, double *x, double dt){
+    int dimension = 3;
+    
+    for(int i = 0; i < dimension; i++){
+        x[i+1] += u[i+1] * dt;
     }
     
 }

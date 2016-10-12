@@ -31,4 +31,4 @@ set style line 2 lc rgb "blue" lt 1 lw 2 dt 1 pt 0 pi 2
 set title 'test of borisPusher with dt = 0.01 and tEnd = 100'
 set xlabel "vx"
 set ylabel "vy"
-plot "borisPusher.txt" using 2:3 with lines lc rgb "red" title "velocity"
+plot "test.txt" using 4:5 with lines lc rgb "red" title "velocity"
