@@ -1,5 +1,6 @@
 # ===============================================
 # plot command for gnuplot
+# Exercise 1 Sheet 07 CP 1
 # ===============================================
 
 # ===============================================
@@ -23,12 +24,12 @@
 
 set style func linespoints
 set termoption dashed
-set style line 1 lc rgb "red" lt 1 lw 2 dt 1 pt 0 pi 2
-set style line 2 lc rgb "blue" lt 1 lw 2 dt 1 pt 0 pi 2
+set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 5   # blue
+set style line 2 lc rgb '#dd181f' lt 1 lw 2 pt 7   # red
 
 # plot commands
 
-set title 'test of borisPusher with dt = 0.01 and tEnd = 100'
-set xlabel "vx"
-set ylabel "vy"
-plot "test.txt" using 4:5 with lines lc rgb "red" title "velocity"
+set title 'k = 256'
+set xlabel "x"
+set ylabel "y"
+plot "completeTrajectory.txt" using 4:5 with lines ls 2

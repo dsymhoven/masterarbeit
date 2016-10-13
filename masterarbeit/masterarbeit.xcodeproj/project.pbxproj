@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		611BB7491D8D4D6200DDBF08 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 611BB7481D8D4D6200DDBF08 /* main.c */; };
+		61514EEE1DAF771D00BD0B90 /* grid.c in Sources */ = {isa = PBXBuildFile; fileRef = 61514EEC1DAF771D00BD0B90 /* grid.c */; };
 		619129211DA531BD00A848D1 /* calculations.c in Sources */ = {isa = PBXBuildFile; fileRef = 619129201DA531BD00A848D1 /* calculations.c */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,8 @@
 /* Begin PBXFileReference section */
 		611BB7451D8D4D6200DDBF08 /* masterarbeit */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = masterarbeit; sourceTree = BUILT_PRODUCTS_DIR; };
 		611BB7481D8D4D6200DDBF08 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		61514EEC1DAF771D00BD0B90 /* grid.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = grid.c; sourceTree = "<group>"; };
+		61514EED1DAF771D00BD0B90 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grid.h; sourceTree = "<group>"; };
 		6191291D1DA530A700A848D1 /* calculations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = calculations.h; sourceTree = "<group>"; };
 		619129201DA531BD00A848D1 /* calculations.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = calculations.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				6191291D1DA530A700A848D1 /* calculations.h */,
+				61514EED1DAF771D00BD0B90 /* grid.h */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -79,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				619129201DA531BD00A848D1 /* calculations.c */,
+				61514EEC1DAF771D00BD0B90 /* grid.c */,
 			);
 			name = Implementations;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				611BB7491D8D4D6200DDBF08 /* main.c in Sources */,
+				61514EEE1DAF771D00BD0B90 /* grid.c in Sources */,
 				619129211DA531BD00A848D1 /* calculations.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
