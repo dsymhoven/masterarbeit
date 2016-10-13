@@ -104,7 +104,7 @@ bibliography=totoc,
 %======================== EINLEITUNG ========================
 %===========================================================
 \chapter{Einleitung}
-Now it's going loose ...  \cite{Manuel}
+Now it's going loose ...  \cite{Allen}
 
 \chapter{Grundlagen}
 \section{Liénard-Wiechert Potentiale}
@@ -120,8 +120,8 @@ Unsere Systemdynamik wird durch die \textit{Lorentz-Newton} Gleichung beschriebe
 \beq
 \label{eqn: Lorentz-Newton}
 \bal
-\frac{\dm x^{\mu}}{\dm s} &= u^{\mu}\\
-\frac{\dm u^{\mu}}{\dm s} &= F^{\mu}_{~\nu}~u^{\nu} + g^{\mu},
+\frac{\dm x^{\mu}}{\dm \tau} &= u^{\mu}\\
+\frac{\dm u^{\mu}}{\dm \tau} &= F^{\mu}_{~\nu}~u^{\nu} + g^{\mu},
 \eal
 \eeq
 deren Herleitung länglich ist und wir deshalb auf Literatur verweisen möchten. %MISSING: cite
@@ -144,44 +144,98 @@ Das wohl einfachste aller Verfahren ist das explizite \textit{Euler}-Verfahren. 
 \beq
 \label{eqn: Euler}
 \bal
-\frac{\dm x^{\mu}}{\dm s} &= u^{\mu}\\
-\frac{\dm u^{\mu}}{\dm s} &= f^{\mu}(x^{\nu},u^{\nu})\\
-x^{\mu}(s_0) &= x^{\mu}_0\\
-u^{\mu}(s_0) &= u^{\mu}_0.
+\frac{\dm x^{\mu}}{\dm \tau} &= u^{\mu}\\
+\frac{\dm u^{\mu}}{\dm \tau} &= f^{\mu}(x^{\nu},u^{\nu})\\
+x^{\mu}(\tau_0) &= x^{\mu}_0\\
+u^{\mu}(\tau_0) &= u^{\mu}_0.
 \eal
 \eeq
 Systeme höherer Ordnung können immer auf ein System erster Ordnung reduziert werden. \\
-Um die Bewegungsgleichung numerisch lösen zu können, muss der Definitionsraum diskretisiert werden. Dazu wird das Zeitintervall in N äquidistante Teilintervalle $\Delta s$ zerlegt, sodass
+Um die Bewegungsgleichung numerisch lösen zu können, muss der Definitionsraum diskretisiert werden. Dazu wird das Zeitintervall in N äquidistante Teilintervalle $h$ zerlegt, sodass
 \beq
-\Delta s = s_{i+1} - s_i \nn
+h \coloneqq \Delta \tau = \tau_{i+1} - \tau_i \nn
 \eeq
-gilt. Die Idee ist nun, dass man ausgehend von den Startwerten $x^{\mu}_0$ und $u^{\mu}_0$, iterativ jeden weiteren Punkt der Trajektorie $x^{\mu}_i = x^{\mu}(s_i)$ berechnet. Um diese Punkte berechnen zu können, müssen allerdings auch die Differentialoperatoren in \eqref{eqn: Euler} diskretisiert werden. Darin unterscheiden sich nun die Verfahren. Grundlage des Euler-Verfahrens bildet eine Taylorentwicklung erster Ordnung der Integrationsvariablen $x^{\mu}$ in der Variable s um den Zeitpunkt $s_i$
+gilt. Die Idee ist nun, dass man ausgehend von den Startwerten $x^{\mu}_0$ und $u^{\mu}_0$, iterativ jeden weiteren Punkt der Trajektorie $x^{\mu}_i = x^{\mu}(\tau_i)$ berechnet. Um diese Punkte berechnen zu können, müssen allerdings auch die Differentialoperatoren in \eqref{eqn: Euler} diskretisiert werden. Darin unterscheiden sich nun die Verfahren. Grundlage des Euler-Verfahrens bildet eine Taylorentwicklung erster Ordnung der Integrationsvariablen $x^{\mu}$ in der Variable $\tau$ um den Zeitpunkt $\tau_i$
 \beq
-x^{\mu}(s_{i+1}) =  x^{\mu}(s_i) + \frac{\dm x^{\mu}}{\dm s} \Big |_{s=s_i} \underbrace{(s_{i+1} - s_i)}_{=\Delta s} + \mathcal{O}\left((\Delta s)^2\right).
+\label{eqn: Taylor}
+x^{\mu}(\tau_{i+1}) =  x^{\mu}(\tau_i) + \frac{\dm x^{\mu}}{\dm \tau} \Big |_{\tau=\tau_i} \underbrace{(\tau_{i+1} - \tau_i)}_{=h} + \mathcal{O}(h^2).
 \eeq
-Analoges Vorgehen für $u^{\mu}$ und auflösen nach $\frac{\dm x^{\mu}}{\dm s}$ bzw. $\frac{\dm u^{\mu}}{\dm s}$ liefert schließlich
+Analoges Vorgehen für $u^{\mu}$ und auflösen nach $\frac{\dm x^{\mu}}{\dm \tau}$ bzw. $\frac{\dm u^{\mu}}{\dm \tau}$ liefert schließlich
 \beq
 \bal
-\frac{x^{\mu}_{i+1} - x^{\mu}_i}{\Delta s} &= u^{\mu}_i\\
-\frac{u^{\mu}_{i+1} - u^{\mu}_i}{\Delta s} &= f^{\mu}(x^{\nu}_i,u^{\nu}_i).
+\frac{x^{\mu}_{i+1} - x^{\mu}_i}{h} &= u^{\mu}_i\\
+\frac{u^{\mu}_{i+1} - u^{\mu}_i}{h} &= f^{\mu}(x^{\nu}_i,u^{\nu}_i).
 \eal
 \eeq
 Diese Art der Diskretisierung ermöglicht eine sehr einfach Berechnung der Punkte $x^{\mu}_i$ gemäß
  \beq
 \bal
-x^{\mu}_{i+1} &= x^{\mu}_i + u^{\mu}_i~\Delta s \\
-u^{\mu}_{i+1} &= u^{\mu}_i + f^{\mu}(x^{\nu}_i,u^{\nu}_i)~\Delta s.
+x^{\mu}_{i+1} &= x^{\mu}_i + h~u^{\mu}_i\\
+u^{\mu}_{i+1} &= u^{\mu}_i + h~f^{\mu}(x^{\nu}_i,u^{\nu}_i).
 \eal
 \eeq
 Um nun die Güte dieser Approximation zu bestimmen, benötigen wir den Begriff der \textit{Konsistenz} - und \textit{Konvergenzordung}. \\
 \subsubsection{Konsistenz - und Konvergenzordnung}
-Wir definieren zunächst den in jedem Zeitschritt gemachten numerischen Fehler für den Ort $\epsilon^x_i$ und für die Geschwindigkeit $\epsilon^u_i$
+\newtheorem{env_definition}{Definition}[section]
+\begin{env_definition}[Verfahrensfehler und Konsistenzordnung]
+\label{def: Verfahrensfehler}
+Sei $[a,b] \subseteq \mathbb{R}$, $f : [a,b] \times \mathbb{R}^d \to \mathbb{R}^d$, $y : [a,b] \to \mathbb{R}^{d}$ eine Lösung des Anfangswertproblems
 \beq
 \bal
-\epsilon^x_i \coloneqq x^{\mu}(s_i) - x^{\mu}_i \\
-\epsilon^u_i \coloneqq u^{\mu}(s_i) - u^{\mu}_i
+\frac{\dm}{\dm \tau}y(\tau) &= f(\tau,y(\tau)),\\
+y(\tau_0) &= y_0. 
 \eal
 \eeq
+\begin{description}
+\item[(a)] Die Größe 
+\beq
+\eta(\tau,h) \coloneqq y(\tau) + h f(\tau, y(\tau)) - y(\tau+h)\quad \text{für}~\tau \in [a,b],~ 0 < h \le b - \tau
+\eeq
+heißt lokaler Verfahrensfehler des Einschrittverfahrens im Punkt $\tau$ zur Schrittweite h.
+\item[(b)] Das Einschrittverfahren besitzt die Konsistenzordnung $p \ge 1$, wenn für den lokalen Verfahrensfehler die Ungleichung
+\beq
+||\eta(\tau,h) || \le Ch^{p+1}\quad \text{für}~\tau \in [a,b],~ 0 < h \le b - \tau,
+\eeq 
+mit einer von $\tau$ und h unabhängigen Konstanten $C\ge 0$ erfüllt ist. 
+\end{description}
+\end{env_definition}
+Anschaulich ist der Verfahrensfehler die Differenz zwischen der exakten Lösung $y(\tau+h)$ und dem Ergebnis, das man durch das Einschrittverfahren erhält, wenn man von der exakten Lösung zum früheren Zeitpunkt $y(\tau)$ startet. Abbildung \ref{fig: Verfahrensfehler} veranschaulicht die Situation.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.50\textwidth]{Pictures/Verfahrensfehler.png} %Bild 1
+	\caption[Verfahrensfehler]{Veranschaulichung des Verfahrensfehlers eines Einschrittverfahrens.~ \cite{NumerikSkript}}
+	\label{fig: Verfahrensfehler}
+\end{figure}
+\noindent
+Wir wollen nun die Definitionen anwenden, um die Konsistenzordnung des Euler-Verfahrens zu bestimmen. \\
+Ausgangspunkt ist das System (\ref{eqn: Lorentz-Newton}). Dabei konzentrieren wir uns nur auf die Gleichung für $u^{\mu}$, da $x^{\mu}$ einfach aus $u^{\mu}$ integriert werden kann.
+Nach Definition \ref{def: Verfahrensfehler} gilt für unser System
+\beq
+y = u^{\mu}. \nn \\
+\eeq
+Wir erhalten
+\beq
+\label{eqn: eta u}
+\eta(\tau, h) = u^{\mu}(\tau_i) + h f^{\mu}(x^{\nu}, u^{\nu}) - u^{\mu}(\tau_{i+1}).
+\eeq
+Den letzten Term berechnen wir mithilfe einer Taylorentwicklung analog zu (\ref{eqn: Taylor})
+\beq
+\label{eqn: Taylor u}
+u^{\mu}(\tau_{i+1}) =  u^{\mu}(\tau_i) + h~\frac{\dm u^{\mu}}{\dm \tau} \Big |_{s=\tau_i}  + h^2~\frac{\dm^2 u^{\mu}}{\dm \tau^2} \Big |_{s=\tau_i}.
+\eeq
+Einsetzen von (\ref{eqn: Taylor u}) in (\ref{eqn: eta u}) liefert
+\beq
+\bal
+\eta(\tau, h) &= u^{\mu}(\tau_i) + h\frac{\dm u^{\mu}}{\dm \tau}  - u^{\mu}(\tau_{i+1}) \\
+\eta(\tau, h) &= u^{\mu}(\tau_i) + h\frac{\dm u^{\mu}}{\dm \tau}  - u^{\mu}(\tau_i) - h\frac{\dm u^{\mu}}{\dm \tau} - h^2\frac{\dm^2 u^{\mu}}{\dm \tau^2}\\
+\eta(\tau, h) &= \frac{\dm^2 u^{\mu}}{\dm \tau^2}~h^2 ,
+\eal
+\eeq
+da $\frac{\dm u^{\mu}}{\dm \tau} = f^{\mu}(x^{\nu}, u^{\nu})$ für das Euler-Verfahren gilt. Daraus folgt
+\beq
+|\eta(\tau, h)| \le C h^2 \quad \text{mit}~C \coloneqq \frac{1}{2} \max_{\tau \in \mathcal{D}(u^{\mu})}\left| \frac{\dm^2 u^{\mu}}{\dm \tau^2}\right|.
+\eeq
+Das Euler-Verfahren hat also Konsistenzordnung eins.
 \subsection{Leap-Frog-Verfahren}
 \subsection{Boris-Pusher}
 \subsection{Vay-Pusher}

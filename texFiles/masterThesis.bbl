@@ -1,8 +1,14 @@
 \begin{thebibliography}{1}
 
-\bibitem{Manuel}
-C.~Schirm, M.~Matt, F.~Pauly, J.~C. Cuevas, P.~Nielaba, and E.~Scheer.
-\newblock A current-driven single-atom memory.
-\newblock {\em Nature Nanotechnology}, 8(9):645--648, 2013.
+\bibitem{Allen}
+M.~P. Allen and D.~J. Tildesley.
+\newblock {\em Computer Simulation of Liquids}.
+\newblock Clarendon Press, New York, NY, USA, 1989.
+
+\bibitem{NumerikSkript}
+Christian Kanzow.
+\newblock {\em Numerische Mathematik II}.
+\newblock 2005.
+\newblock [Online; accessed 13-Oktober-2016].
 
 \end{thebibliography}
