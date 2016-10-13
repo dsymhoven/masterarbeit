@@ -34,8 +34,7 @@ int main(int argc, const char * argv[]) {
     double Eextern[3] = {0,0,0};
     double Bextern[3] = {0,0,0.5};
 
-    char filename[16] = "some";
-    
+    char filename[32] = "some";
 
 #pragma mark: Allocations
     double x[4], u[4];
@@ -76,32 +75,38 @@ int main(int argc, const char * argv[]) {
     // 3. Loop über alle Gitterpunkte, um LW Fields zu berechnen.
     
 
-    FILE *fid2 = fopen("nearFieldBox.txt","w");
     FILE *fid3 = fopen("completeTrajectory.txt","w");
     
     for(int j = 0; j < tEnd / dt; j++){
+        calcualteNearFieldBoxes(x, lengthOfSimulationBox, numberOfGridPoints, edgeOfNearFieldBox);
+        
         // Write in File for Video
         if(j % 5 == 0){
             sprintf(filename, "%d", j);
             strcat(filename, ".txt");
             FILE *fid = fopen(filename,"w");
+            sprintf(filename, "nearFieldBox%d", j);
+            strcat(filename, ".txt");
+            FILE *fid2 = fopen(filename,"w");
+            
             fprintf(fid, "%f %f\n", x[1], x[2]);
+            fprintf(fid2, "%f %f %f %f %f %f %f %f\n", edgeOfNearFieldBox[0], edgeOfNearFieldBox[1], edgeOfNearFieldBox[3], edgeOfNearFieldBox[4], edgeOfNearFieldBox[6], edgeOfNearFieldBox[7], edgeOfNearFieldBox[9], edgeOfNearFieldBox[10]);
+            
             fclose(fid);
+            fclose(fid2);
         }
         
         fprintf(fid3, "%f %f %f %f %f\n", t, u[1], u[2], x[1], x[2]);
-        fprintf(fid2, "%f\n", edgeOfNearFieldBox[0]);
+
 
         
         borisPusher(u, Eextern, Bextern, dt, charge/mass);
         updateLocation(u, x, dt);
-        calcualteNearFieldBoxes(x, lengthOfSimulationBox, numberOfGridPoints, edgeOfNearFieldBox);
+        
         t += dt;
 
     }
     
-    
-    fclose(fid2);
     fclose(fid3);
     free(E);
     free(B);

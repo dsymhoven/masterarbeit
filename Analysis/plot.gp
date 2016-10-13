@@ -29,7 +29,11 @@ set style line 2 lc rgb '#dd181f' lt 1 lw 2 pt 7   # red
 
 # plot commands
 
-set title 'k = 256'
 set xlabel "x"
 set ylabel "y"
-plot "completeTrajectory.txt" using 4:5 with lines ls 2
+set xrange [0:30]
+set yrange [0:30]
+plot "test.txt" using 1:2 with points ls 2, \
+	"test.txt" using 3:4 with points ls 2, \
+	"test.txt" using 5:6 with points ls 2, \
+	"test.txt" using 7:8 with points ls 2
