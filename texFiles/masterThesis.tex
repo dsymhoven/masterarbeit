@@ -174,12 +174,12 @@ x^{\mu}_{i+1} &= x^{\mu}_i + h~u^{\mu}_i\\
 u^{\mu}_{i+1} &= u^{\mu}_i + h~f^{\mu}(x^{\nu}_i,u^{\nu}_i).
 \eal
 \eeq
-Um nun die Güte dieser Approximation zu bestimmen, benötigen wir den Begriff der \textit{Konsistenz} - und \textit{Konvergenzordung}. \\
+Um nun die Güte dieser Approximation zu bestimmen, benötigen wir den Begriff des \textit{Verfahrensfehlers} und der \textit{Konsistenzordung}. \cite{NumerikSkript}\\
 \subsubsection{Konsistenz - und Konvergenzordnung}
 \newtheorem{env_definition}{Definition}[section]
 \begin{env_definition}[Verfahrensfehler und Konsistenzordnung]
 \label{def: Verfahrensfehler}
-Sei $[a,b] \subseteq \mathbb{R}$, $f : [a,b] \times \mathbb{R}^d \to \mathbb{R}^d$, $y : [a,b] \to \mathbb{R}^{d}$ eine Lösung des Anfangswertproblems
+Sei $I \subseteq \mathbb{R}$ ein Intervall, $f : I \times \mathbb{R}^d \to \mathbb{R}^d$, $y : I \to \mathbb{R}^{d}$ eine Lösung des Anfangswertproblems
 \beq
 \bal
 \frac{\dm}{\dm \tau}y(\tau) &= f(\tau,y(\tau)),\\
@@ -189,12 +189,12 @@ y(\tau_0) &= y_0.
 \begin{description}
 \item[(a)] Die Größe 
 \beq
-\eta(\tau,h) \coloneqq y(\tau) + h f(\tau, y(\tau)) - y(\tau+h)\quad \text{für}~\tau \in [a,b],~ 0 < h \le b - \tau
+\eta(\tau,h) \coloneqq y(\tau) + h f(\tau, y(\tau)) - y(\tau+h)\quad \text{für}~\tau \in I,~ 0 < h \le b - \tau
 \eeq
 heißt lokaler Verfahrensfehler des Einschrittverfahrens im Punkt $\tau$ zur Schrittweite h.
 \item[(b)] Das Einschrittverfahren besitzt die Konsistenzordnung $p \ge 1$, wenn für den lokalen Verfahrensfehler die Ungleichung
 \beq
-||\eta(\tau,h) || \le Ch^{p+1}\quad \text{für}~\tau \in [a,b],~ 0 < h \le b - \tau,
+||\eta(\tau,h) || \le Ch^{p+1}\quad \text{für}~\tau \in I,~ 0 < h \le b - \tau,
 \eeq 
 mit einer von $\tau$ und h unabhängigen Konstanten $C\ge 0$ erfüllt ist. 
 \end{description}
@@ -235,8 +235,33 @@ da $\frac{\dm u^{\mu}}{\dm \tau} = f^{\mu}(x^{\nu}, u^{\nu})$ für das Euler-Verf
 \beq
 |\eta(\tau, h)| \le C h^2 \quad \text{mit}~C \coloneqq \frac{1}{2} \max_{\tau \in \mathcal{D}(u^{\mu})}\left| \frac{\dm^2 u^{\mu}}{\dm \tau^2}\right|.
 \eeq
-Das Euler-Verfahren hat also Konsistenzordnung eins.
+$\mathcal{D}(u^{\mu})$ bezeichnet dabei den Definitionsbereich von $u^{\mu}$. Das Euler-Verfahren hat also Konsistenzordnung eins.
+
 \subsection{Leap-Frog-Verfahren}
+Ein deutlich besseres Verfahren ist das \textit{Leap-Frog}-Verfahren, das eine Konsistenzordnung von zwei hat, wie man leicht nachrechnen kann. \\
+Im Vergleich zum expliziten Euler-Verfahren hat diese Methode mehrere Vorteile. Sie ist zum einen zeitlich umkehrbar (reversibel), d.h. man kann von jedem Zeitpunkt aus, zu jedem vorherigen Zeitpunkt zurückkehren und zum anderen ist dieses Verfahren \textit{symplektisch}, d.h. es erhält das Phasenraumvolumen, woraus Energie - und Impulserhaltung folgt.\\
+Ein Nachteil des Verfahrens ist jedoch, dass es sich nur gut für Systeme eignet, bei denen die Kraft lediglich vom aktuellen Ort, nicht aber von der Geschwindigkeit des Teilchens abhängt, da es sich sonst um eine implizite Gleichung handeln würde, die sich nur deutlich rechenaufwändiger lösen ließe.\\
+Die zu lösende Differentialgleichung sollte also von folgender Gestalt sein
+\beq
+\frac{\dm^2 x^{\mu}}{\dm \tau^2} = \frac{\dm u^{\mu}}{\dm \tau} = f^{\mu}(x^{\nu}).
+\eeq
+Wie vorhin erwähnt unterscheiden sich die verschiedenen Verfahren durch die Art und Weise der Diskretisierung der Differentialoperatoren.
+Beim Leap-Frog-Verfahren wählt man
+\beq
+\bal
+\frac{x^{\mu}_{i+1} - x^{\mu}_i}{h} &= u^{\mu}_{i+\frac{1}{2}}\\
+\frac{u^{\mu}_{i+\frac{1}{2}} - u^{\mu}_{i-\frac{1}{2}}}{h} &= f^{\mu}(x^{\nu}_i).
+\eal
+\eeq
+Auflösen nach dem neuen Zeitschritt ergibt dann
+\beq
+\bal
+x^{\mu}_{i+1} &= x^{\mu}_i + h u^{\mu}_{i+\frac{1}{2}}\\
+u^{\mu}_{i+\frac{1}{2}} &= u^{\mu}_{i-\frac{1}{2}} + h f^{\mu}(x^{\nu}_i).
+\eal
+\eeq
+\noindent
+Wie man sieht, werden Ort und Geschwindigkeit zu unterschiedlichen Zeitpunkten berechnet. Sie sind zeitlich um $h = \frac{1}{2}$ gegeneinander versetzt. 
 \subsection{Boris-Pusher}
 \subsection{Vay-Pusher}
 \section{Hybride Felder}
