@@ -39,6 +39,8 @@ int main(int argc, const char * argv[]) {
 #pragma mark: Allocations
     double x[4], u[4];
     double xOld[4];
+    double uOld[4];
+    double xNew[4];
     double xObserver[4];
     double edgeOfNearFieldBox[24];
     
@@ -69,6 +71,9 @@ int main(int argc, const char * argv[]) {
     u[2] = sin(dir)*sqrt(gamma*gamma-1.0);
     u[3] = 0;
     
+    double xTrajectory[320][4] = {0};
+    
+
     // Vorgehen: Startgeschwindigkeit und Position ist gegeben.
     // 1. Teilchen Push aufgrund äußeren Feldes mit borisPusher und updateLocation
     // 2. Zwischenspeichern der alten und der neuen Teilchenposition, um bestimmen zu können, ob Lichtkegel des Beobachtungspunktes durchquert wurde
@@ -98,11 +103,47 @@ int main(int argc, const char * argv[]) {
         
         fprintf(fid3, "%f %f %f %f %f\n", t, u[1], u[2], x[1], x[2]);
 
-
+//        for (int i = 0; i < 4; i++){
+//            xOld[i] = x[i];
+//            uOld[i] = u[i];
+//        }
+        
+        // save position of particle for lienard wiechert fields calculation
+        for(int i = 0; i < 4; i++){
+            xTrajectory[j][i] = x[i];
+        }
+//        double origin[4] = {0};
+//        double distance = calculateDistance(*xTrajectory, origin);
+        
+        xOld[0] = 0;
+        xOld[1] = 10;
+        xOld[2] = 14;
+        xOld[3] = 10;
+        
+        xNew[0] = 0.0625;
+        xNew[1] = 10.084120;
+        xNew[2] = 14.079020;
+        xNew[3] = 10.0;
+        
+        xObserver[0] = t;
+        xObserver[1] = edgeOfNearFieldBox[21];
+        xObserver[2] = edgeOfNearFieldBox[22];
+        xObserver[3] = edgeOfNearFieldBox[23];
+        
+        double lengthOfNearFieldBox = edgeOfNearFieldBox[18] - edgeOfNearFieldBox[21];
+        double numberOfGridPointsOfNearFieldBox = lengthOfNearFieldBox / dx;
+        
+        for(int i = 0; i < numberOfGridPointsOfNearFieldBox; i++){
+            xObserver[1] += dx;
+            if(isInsideBackwardLightcone(xOld, xObserver) && !isInsideBackwardLightcone(xNew, xObserver)){
+                //double lambda = calculateLambdaForLinearInterpolation(xOld, xNew, xObserver);
+                printf("is Inside at %f\n", xObserver[1]);
+            }
+            
+        }
         
         borisPusher(u, Eextern, Bextern, dt, charge/mass);
         updateLocation(u, x, dt);
-        
         t += dt;
 
     }

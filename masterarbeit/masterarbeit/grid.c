@@ -7,6 +7,7 @@
 //
 
 #include "grid.h"
+
 void calcualteNearFieldBoxes(double *x, int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox){
     int i, j, k;
     double numberOfBoxesPerDimension = numberOfGridPoints / lengthOfSimulationBox;
