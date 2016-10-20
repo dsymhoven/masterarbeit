@@ -6,7 +6,6 @@ IMPLEMENTATION OF CALCULATIONS HEADER
 #import <stdbool.h>
 #import <stdio.h>
 #include "calculations.h"
-
 /**
 calculates the cross product of two vectors "a" and "b" and saves the result in array "result"
  
@@ -88,6 +87,13 @@ double calculateDistance(double *x, double *y){
 }
 
 /**
+ returns the minkowski product with metric (+,-,-,-)
+ */
+double minkowskiProduct(double x[4], double y[4]){
+    return x[0] * y[0] - x[1] * y[1] - x[2] * y[2] - x[3] * y[3];
+}
+
+/**
  returns parameter lambda for the linear interpolation between particle trajectory and backwards lightcone at observation point.
  
  In order to calculate the Liénard-Wiechart fields at the observation point the intersection of the trajectory and the backward lightcone at the observation point is needed. Since the calculated trajectory is discrete we need to interpolate between the first point outside the lightcone and the last point inside the lightcone.
@@ -97,17 +103,25 @@ double calculateLambdaForLinearInterpolation(double xInside[4], double xOutside[
     double a, b, c;
     double lambda;
     double xInsideMinusxOutside[4];
-    double xObserverMinusxOutside[4];
+    double xOutsideMinusxObserver[4];
     
     vectorDifference(xInside, xOutside, xInsideMinusxOutside);
-    vectorDifference(xObserver, xOutside, xObserverMinusxOutside);
+    vectorDifference(xOutside, xObserver, xOutsideMinusxObserver);
     
-    a = vectorProduct(xInsideMinusxOutside, xInsideMinusxOutside);
-    b = 2.0 * vectorProduct(xInsideMinusxOutside, xObserverMinusxOutside);
-    c = vectorProduct(xOutside, xOutside) + vectorProduct(xObserver, xObserver) - 2.0 * vectorProduct(xOutside, xObserver);
-    
+    a = minkowskiProduct(xInsideMinusxOutside, xInsideMinusxOutside);
+    b = 2.0 * minkowskiProduct(xInsideMinusxOutside, xOutsideMinusxObserver);
+    c = minkowskiProduct(xOutside, xOutside) + minkowskiProduct(xObserver, xObserver) - 2.0 * minkowskiProduct(xOutside, xObserver);
+
     lambda = (-b+sqrt(b*b-4.0*a*c))/(2.0*a);
     return lambda;
+}
+
+void calculateIntersectionPoint(double xInside[4], double xOutside[4], double xObserver[4], double intersectionPoint[4]){
+    double lambda = calculateLambdaForLinearInterpolation(xInside, xOutside, xObserver);
+    for(int i = 0; i < 4; i++){
+        intersectionPoint[i] = xOutside[i] + lambda * (xInside[i] - xOutside[i]);
+    }
+    
 }
 /**
  updates velocity with boris method. 

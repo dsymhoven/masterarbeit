@@ -132,12 +132,11 @@ int main(int argc, const char * argv[]) {
         
         double lengthOfNearFieldBox = edgeOfNearFieldBox[18] - edgeOfNearFieldBox[21];
         double numberOfGridPointsOfNearFieldBox = lengthOfNearFieldBox / dx;
-        
+        double intersectionPoint[4];
         for(int i = 0; i < numberOfGridPointsOfNearFieldBox; i++){
             xObserver[1] += dx;
             if(isInsideBackwardLightcone(xOld, xObserver) && !isInsideBackwardLightcone(xNew, xObserver)){
-                //double lambda = calculateLambdaForLinearInterpolation(xOld, xNew, xObserver);
-                printf("is Inside at %f\n", xObserver[1]);
+                calculateIntersectionPoint(xOld, xNew, xObserver, intersectionPoint);
             }
             
         }
