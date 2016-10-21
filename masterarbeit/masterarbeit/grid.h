@@ -10,6 +10,6 @@
 #define grid_h
 
 #include <stdio.h>
-void calcualteNearFieldBoxes(double *x, int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox);
+void calcualteNearFieldBoxes(double x[4], int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox);
 
 #endif /* grid_h */

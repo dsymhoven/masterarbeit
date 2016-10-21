@@ -12,8 +12,7 @@ calculates the cross product of two vectors "a" and "b" and saves the result in 
  - remark:
  array "result" is automatically available in outer scope
  */
-void crossProduct(double *a, double *b, double *result)
-{
+void crossProduct(double a[3], double b[3], double result[3]){
 	result[0] = a[1]*b[2]-a[2]*b[1];
 	result[1] = a[2]*b[0]-a[0]*b[2];
 	result[2] = a[0]*b[1]-a[1]*b[0];
@@ -116,6 +115,9 @@ double calculateLambdaForLinearInterpolation(double xInside[4], double xOutside[
     return lambda;
 }
 
+/**
+ calculates the intersection point of the particle trajectory and the backward lightcone of the observation point with linear interpolation.
+ */
 void calculateIntersectionPoint(double xInside[4], double xOutside[4], double xObserver[4], double intersectionPoint[4]){
     double lambda = calculateLambdaForLinearInterpolation(xInside, xOutside, xObserver);
     for(int i = 0; i < 4; i++){
@@ -123,6 +125,7 @@ void calculateIntersectionPoint(double xInside[4], double xOutside[4], double xO
     }
     
 }
+
 /**
  updates velocity with boris method. 
  

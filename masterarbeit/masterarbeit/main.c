@@ -43,22 +43,22 @@ int main(int argc, const char * argv[]) {
     double xNew[4];
     double xObserver[4];
     double edgeOfNearFieldBox[24];
-    
-    double *E = (double *) malloc(3 * numberOfGridPoints * numberOfGridPoints * numberOfGridPoints * sizeof(double));
-    double *B = (double *) malloc(3 * numberOfGridPoints * numberOfGridPoints * numberOfGridPoints * sizeof(double));
-    
-    if( B == NULL || E == NULL){
-        printf("ERROR: Speicher für E und B konnte nicht reserviert werden\n");
-        return -1;
-    }
-    else{
-        printf("Speicher für E und B wurde reserviert.\n");
-    }
-    
-    for (int i = 0; i < 3; i++){
-        E[i] = 0;
-        B[i] = 0;
-    }
+    double xTrajectory[320][4] = {0};
+//    double *E = (double *) malloc(3 * numberOfGridPoints * numberOfGridPoints * numberOfGridPoints * sizeof(double));
+//    double *B = (double *) malloc(3 * numberOfGridPoints * numberOfGridPoints * numberOfGridPoints * sizeof(double));
+//    
+//    if( B == NULL || E == NULL){
+//        printf("ERROR: Speicher für E und B konnte nicht reserviert werden\n");
+//        return -1;
+//    }
+//    else{
+//        printf("Speicher für E und B wurde reserviert.\n");
+//    }
+//    
+//    for (int i = 0; i < 3; i++){
+//        E[i] = 0;
+//        B[i] = 0;
+//    }
 
     
     x[0] = 0;
@@ -71,7 +71,7 @@ int main(int argc, const char * argv[]) {
     u[2] = sin(dir)*sqrt(gamma*gamma-1.0);
     u[3] = 0;
     
-    double xTrajectory[320][4] = {0};
+
     
 
     // Vorgehen: Startgeschwindigkeit und Position ist gegeben.
@@ -82,15 +82,15 @@ int main(int argc, const char * argv[]) {
 
     FILE *fid3 = fopen("completeTrajectory.txt","w");
     
-    for(int j = 0; j < tEnd / dt; j++){
+    for(int p = 0; p < tEnd / dt; p++){
         calcualteNearFieldBoxes(x, lengthOfSimulationBox, numberOfGridPoints, edgeOfNearFieldBox);
         
         // Write in File for Video
-        if(j % 5 == 0){
-            sprintf(filename, "%d", j);
+        if(p % 5 == 0){
+            sprintf(filename, "%d", p);
             strcat(filename, ".txt");
             FILE *fid = fopen(filename,"w");
-            sprintf(filename, "nearFieldBox%d", j);
+            sprintf(filename, "nearFieldBox%d", p);
             strcat(filename, ".txt");
             FILE *fid2 = fopen(filename,"w");
             
@@ -110,10 +110,8 @@ int main(int argc, const char * argv[]) {
         
         // save position of particle for lienard wiechert fields calculation
         for(int i = 0; i < 4; i++){
-            xTrajectory[j][i] = x[i];
+            xTrajectory[p][i] = x[i];
         }
-//        double origin[4] = {0};
-//        double distance = calculateDistance(*xTrajectory, origin);
         
         xOld[0] = 0;
         xOld[1] = 10;
@@ -133,12 +131,20 @@ int main(int argc, const char * argv[]) {
         double lengthOfNearFieldBox = edgeOfNearFieldBox[18] - edgeOfNearFieldBox[21];
         double numberOfGridPointsOfNearFieldBox = lengthOfNearFieldBox / dx;
         double intersectionPoint[4];
+
+        // vorgehen:
+        // 1. teilchen push
+        // 2. loop über nahfeldbox als beobachtungspunkte
+        // 3. check ob alte Position des Teilchens außerhalb des Lichtkegels des Beobachtungspunktes liegt und neue Position innerhalb
+        // 4. Schnittpunkt mit Lichtkegel berechnen --> intersection Point berücksichtigt bereits die endliche Ausbreitungsgschwindigkeit.
+        // 5. intersection Point nutzen um LW Felder zu berechnen
+        
+        xObserver[0] = t;
         for(int i = 0; i < numberOfGridPointsOfNearFieldBox; i++){
             xObserver[1] += dx;
             if(isInsideBackwardLightcone(xOld, xObserver) && !isInsideBackwardLightcone(xNew, xObserver)){
                 calculateIntersectionPoint(xOld, xNew, xObserver, intersectionPoint);
             }
-            
         }
         
         borisPusher(u, Eextern, Bextern, dt, charge/mass);
@@ -148,8 +154,8 @@ int main(int argc, const char * argv[]) {
     }
     
     fclose(fid3);
-    free(E);
-    free(B);
+//    free(E);
+//    free(B);
     
 
     return 0;

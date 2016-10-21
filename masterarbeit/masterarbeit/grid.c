@@ -7,11 +7,39 @@
 //
 
 #include "grid.h"
+#include "stdlib.h"
 
-void calcualteNearFieldBoxes(double *x, int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox){
+void calcualteNearFieldBoxes(double x[4], int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox){
     int i, j, k;
-    double numberOfBoxesPerDimension = numberOfGridPoints / lengthOfSimulationBox;
+    int numberOfBoxesPerDimension = numberOfGridPoints / lengthOfSimulationBox;
     double lengthOfOneBox = lengthOfSimulationBox / numberOfBoxesPerDimension;
+    int numberOfGridPointsInOneBox = numberOfGridPoints / numberOfBoxesPerDimension;
+    int numberOfGridPointsInNearFieldBox = numberOfGridPointsInOneBox * 3;
+    
+//    edgeOfNearFieldBox = (double ***) malloc(numberOfGridPointsInNearFieldBox * sizeof(double **));
+//    if (edgeOfNearFieldBox == NULL){
+//        printf("An error occured while allocation edgeOfNearFieldBox");
+//    }
+//    else{
+//        for (int i = 0; i < numberOfGridPointsInNearFieldBox; i++){
+//            edgeOfNearFieldBox[i] = (double **) malloc(numberOfGridPointsInNearFieldBox * sizeof(double *));
+//            if (edgeOfNearFieldBox[i] == NULL){
+//                printf("An error occured while allocation edgeOfNearFieldBox at position i");
+//            }
+//            else{
+//                for (int j = 0; j < numberOfGridPointsInNearFieldBox; j++){
+//                    edgeOfNearFieldBox[i][j] = (double *) malloc(numberOfGridPointsInNearFieldBox * sizeof(double));
+//                    if (edgeOfNearFieldBox[i][j] == NULL){
+//                        printf("An error occured while allocation edgeOfNearFieldBox at position i,j");
+//                    }
+//                    else{
+//                        printf("edgeOfNearFieldBox allocated succesfully");
+//                    }
+//                }
+//
+//            }
+//        }
+//    }
     
     i = x[1] / lengthOfOneBox;
     j = x[2] / lengthOfOneBox;
@@ -23,6 +51,15 @@ void calcualteNearFieldBoxes(double *x, int lengthOfSimulationBox, int numberOfG
     double yMax = (j + 2) * lengthOfOneBox;
     double zMin = (k - 1) * lengthOfOneBox;
     double zMax = (k + 2) * lengthOfOneBox;
+    
+//    for (int i = 0; i < numberOfGridPointsInNearFieldBox; i++){
+//        for (int j = 0; i < numberOfGridPointsInNearFieldBox; i++){
+//            for (int k = 0; i < numberOfGridPointsInNearFieldBox; i++){
+//                edgeOfNearFieldBox[i][j][k] = xMin;
+//                printf("%f\n", edgeOfNearFieldBox[i][j][k]);
+//            }
+//        }
+//    }
     
     edgeOfNearFieldBox[0] = xMin;
     edgeOfNearFieldBox[1] = yMin;
