@@ -208,7 +208,7 @@ Anschaulich ist der Verfahrensfehler die Differenz zwischen der exakten Lösung $
 \end{figure}
 \noindent
 Wir wollen nun die Definitionen anwenden, um die Konsistenzordnung des Euler-Verfahrens zu bestimmen. \\
-Ausgangspunkt ist das System (\ref{eqn: Lorentz-Newton}). Dabei konzentrieren wir uns nur auf die Gleichung für $u^{\mu}$, da $x^{\mu}$ einfach aus $u^{\mu}$ integriert werden kann.
+Ausgangspunkt ist das System \eqref{eqn: Lorentz-Newton}. Dabei konzentrieren wir uns nur auf die Gleichung für $u^{\mu}$, da $x^{\mu}$ einfach aus $u^{\mu}$ integriert werden kann.
 Nach Definition \ref{def: Verfahrensfehler} gilt für unser System
 \beq
 y = u^{\mu}. \nn \\
@@ -218,12 +218,12 @@ Wir erhalten
 \label{eqn: eta u}
 \eta(\tau, h) = u^{\mu}(\tau_i) + h f^{\mu}(x^{\nu}, u^{\nu}) - u^{\mu}(\tau_{i+1}).
 \eeq
-Den letzten Term berechnen wir mithilfe einer Taylorentwicklung analog zu (\ref{eqn: Taylor})
+Den letzten Term berechnen wir mithilfe einer Taylorentwicklung analog zu \eqref{eqn: Taylor}
 \beq
 \label{eqn: Taylor u}
 u^{\mu}(\tau_{i+1}) =  u^{\mu}(\tau_i) + h~\frac{\dm u^{\mu}}{\dm \tau} \Big |_{s=\tau_i}  + h^2~\frac{\dm^2 u^{\mu}}{\dm \tau^2} \Big |_{s=\tau_i}.
 \eeq
-Einsetzen von (\ref{eqn: Taylor u}) in (\ref{eqn: eta u}) liefert
+Einsetzen von \eqref{eqn: Taylor u} in \eqref{eqn: eta u} liefert
 \beq
 \bal
 \eta(\tau, h) &= u^{\mu}(\tau_i) + h\frac{\dm u^{\mu}}{\dm \tau}  - u^{\mu}(\tau_{i+1}) \\
@@ -264,6 +264,43 @@ u^{\mu}_{i+\frac{1}{2}} &= u^{\mu}_{i-\frac{1}{2}} + h f^{\mu}(x^{\nu}_i).
 Wie man sieht, werden Ort und Geschwindigkeit zu unterschiedlichen Zeitpunkten berechnet. Sie sind zeitlich um $h = \frac{1}{2}$ gegeneinander versetzt. 
 \subsection{Boris-Pusher}
 \subsection{Vay-Pusher}
+\subsection{Interpolation der Trajektorien}
+Die vorangegangenen vorgestellten Verfahren berechnen die Teilchentrajektorien nur an diskreten Stellen $x_i^{\mu}(\tau)$. Um die Liénard-Wiechert Felder nach Gleichung \eqref{eqn: LW} an einem Beobachtungspunkt zu berechnen, wird jedoch der Schnittpunkt der Trajektorie mit dem Rückwärtslichtkegel des jeweiligen Beobachtungspunktes benötigt. Da in den meisten Fällen 
+die berechneten Punkte der Trajektorie nicht direkt auf dem Lichtkegel liegen werden, benötigen wir ein Verfahren, um den genauen Schnittpunkt zu berechnen. \\
+Die einfachste Lösung ist eine lineare Interpolation zwischen dem letzten Punkt außerhalb und des ersten Punktes innerhalb des Lichtkegels. Bild \ref{fig: Interpolation} veranschaulicht die Situation.\\ %MISSING: FIGURE
+Sei dazu $x_j^{\mu} \in \mathbb{R}^{3+1}$ der letzte Punkt außerhalb und $x_{j+1}^{\mu} \in \mathbb{R}^{3+1}$ der erste Punkt innerhalb des Lichtkegels. Ferner sei $x_{c}^{\mu} \in \mathbb{R}^{3+1}$ der gesuchte Schnittpunkt, dann gilt:
+\beq
+\label{eqn: linInt}
+x_c^{\mu} = x_j^{\mu} + \lambda ~\left(x_{j+1}^{\mu} - x_j^{\mu}\right),
+\eeq
+wobei $\lambda \in [0,1]$. Aufgrund der endlichen Ausbreitungsgeschwindigkeit des Lichtes, muss der Punkt $x_c^{\mu}$ Bedingung \eqref{eqn: tret} erfüllen 
+\beq
+\label{eqn: constraint}
+\left| \vec{x}_o(t) - \vec{x}_c(t_{ret})\right| = c~(t - t_{ret}) \Longleftrightarrow (x_o - x_c)_{\mu} (x_o - x_c)^{\mu} = 0.
+\eeq
+Dabei bezeichnet $x_o^{\mu} \in \mathbb{R}^{3+1}$ den Beobachtungspunkt, an dem die Felder berechnet werden sollen. Zu beachten ist, dass auf der linken Seite des Äquivalenzzeichens ausschließlich die räumlichen Komponenten der respektiven Vierervektoren stehen. \\
+Einsetzen von \eqref{eqn: linInt} in \eqref{eqn: constraint} liefert 
+\beq
+\label{eqn: quadEq}
+\lambda^2 (x_{j+1} - x_j)_{\mu}(x_{j+1} - x_j)^{\mu} + \lambda~2(x_{j+1} - x_j)_{\mu}(x_j - x_o)^{\mu} + (x_j)_{\mu}(x_j)^{\mu} + (x_o)_{\mu}(x_o)^{\mu} - 2(x_j)_{\mu}(x_o)^{\mu}  = 0.
+\eeq
+Wir definieren
+\beq
+\bal
+a &\coloneqq (x_{j+1} - x_j)_{\mu}(x_{j+1} - x_j)^{\mu}\\
+b &\coloneqq 2(x_{j+1} - x_j)_{\mu}(x_j - x_o)^{\mu} \\
+c &\coloneqq (x_j)_{\mu}(x_j)^{\mu} + (x_o)_{\mu}(x_o)^{\mu} - 2(x_j)_{\mu}(x_o)^{\mu}. \nn
+\eal
+\eeq
+Die quadratische Gleichung \eqref{eqn: quadEq} in $\lambda$ hat im allgemeinen zwei Lösungen
+\beq
+\lambda_{1/2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}. \nn
+\eeq
+Eine Lösung beschreibt den Schnittpunkt mit dem Rückwärtslichtkegel, die andere den mit dem Vorwärtslichtkegel. Da $\lambda \in [0,1]$, interessieren wir uns nur für die größere der beiden Lösungen
+\beq
+\lambda_{1/2} = \frac{-b + \sqrt{b^2 - 4ac}}{2a}. \nn
+\eeq
+Einsetzen von $\lambda$ in \eqref{eqn: linInt} liefert den gewünschten Schnittpunkt. 
 \section{Hybride Felder}
 \subsection{Maxwell-Gleichungen}
 \subsection{Maxwell-Solver}

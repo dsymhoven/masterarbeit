@@ -137,7 +137,7 @@ int main(int argc, const char * argv[]) {
         // 2. loop über nahfeldbox als beobachtungspunkte
         // 3. check ob alte Position des Teilchens außerhalb des Lichtkegels des Beobachtungspunktes liegt und neue Position innerhalb
         // 4. Schnittpunkt mit Lichtkegel berechnen --> intersection Point berücksichtigt bereits die endliche Ausbreitungsgschwindigkeit.
-        // 5. intersection Point nutzen um LW Felder zu berechnen
+        // 5. intersection Point nutzen um LW Felder am Beobachtungsort zu berechnen
         
         xObserver[0] = t;
         for(int i = 0; i < numberOfGridPointsOfNearFieldBox; i++){
