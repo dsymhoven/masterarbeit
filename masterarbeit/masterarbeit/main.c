@@ -16,8 +16,9 @@
 
 int main(int argc, const char * argv[]) {
 
-
-#pragma mark: Initialisierungen
+// ======================================================
+    #pragma mark: Initializations
+// ======================================================
     int numberOfGridPoints = 256;
     int lengthOfSimulationBox = 32;
     double dx = (double)lengthOfSimulationBox / numberOfGridPoints;
@@ -33,18 +34,48 @@ int main(int argc, const char * argv[]) {
     
     double Eextern[3] = {0,0,0};
     double Bextern[3] = {0,0,0.5};
-
-    char filename[32] = "some";
-
-#pragma mark: Allocations
+    
     double x[4], u[4];
-    double xOld[4];
-    double uOld[4];
-    double uNew[4];
-    double xNew[4];
     double xObserver[4];
     double edgeOfNearFieldBox[24];
-    double xTrajectory[320][4] = {0};
+    
+    char filename[32] = "some";
+    
+    
+// ======================================================
+    #pragma mark: Allocations
+// ======================================================
+
+    
+    // initialize trajectory[tEnd/dt][4]. First allocate array of pointers and then allocate for each pointer another pointer of length 4
+    double **trajectory = (double **) malloc(tEnd / dt * sizeof(double *));
+    if (trajectory == NULL){
+        printf("ERROR: Could not allocate memory for trajectory[]");
+    }
+    else{
+        for (int i = 0; i < tEnd / dt; i++){
+            trajectory[i] = (double *) malloc(4 * sizeof(double));
+            if (trajectory[i] == NULL){
+                printf("ERROR: Could not allocate memory for trajectory[][]");
+            }
+        }
+    }
+    
+    // same for velocity
+    double **velocity = (double **) malloc(tEnd / dt * sizeof(double *));
+    if (velocity == NULL){
+        printf("ERROR: Could not allocate memory for velocity[]");
+    }
+    else{
+        for (int i = 0; i < tEnd / dt; i++){
+            velocity[i] = (double *) malloc(4 * sizeof(double));
+            if (velocity[i] == NULL){
+                printf("ERROR: Could not allocate memory for velocity[][]");
+            }
+        }
+    }
+    
+    
 //    double *E = (double *) malloc(3 * numberOfGridPoints * numberOfGridPoints * numberOfGridPoints * sizeof(double));
 //    double *B = (double *) malloc(3 * numberOfGridPoints * numberOfGridPoints * numberOfGridPoints * sizeof(double));
 //    
@@ -62,6 +93,9 @@ int main(int argc, const char * argv[]) {
 //    }
 
     
+// ======================================================
+    # pragma mark: initial conditions
+// ======================================================
     x[0] = 0;
     x[1] = 10;
     x[2] = 14;
@@ -72,15 +106,12 @@ int main(int argc, const char * argv[]) {
     u[2] = sin(dir)*sqrt(gamma*gamma-1.0);
     u[3] = 0;
     
-
+    
     
 
-    // Vorgehen: Startgeschwindigkeit und Position ist gegeben.
-    // 1. Teilchen Push aufgrund äußeren Feldes mit borisPusher und updateLocation
-    // 2. Zwischenspeichern der alten und der neuen Teilchenposition, um bestimmen zu können, ob Lichtkegel des Beobachtungspunktes durchquert wurde
-    // 3. Loop über alle Gitterpunkte, um LW Fields zu berechnen.
-    
-
+// ======================================================
+    #pragma mark: main routine
+// ======================================================
     FILE *fid3 = fopen("completeTrajectory.txt","w");
     
     for(int p = 0; p < tEnd / dt; p++){
@@ -104,40 +135,18 @@ int main(int argc, const char * argv[]) {
         
         fprintf(fid3, "%f %f %f %f %f\n", t, u[1], u[2], x[1], x[2]);
 
-//        for (int i = 0; i < 4; i++){
-//            xOld[i] = x[i];
-//            uOld[i] = u[i];
-//        }
         
-        // save position of particle for lienard wiechert fields calculation
-//        for(int i = 0; i < 4; i++){
-//            xTrajectory[p][i] = x[i];
-//        }
-//        
-        xOld[0] = 0;
-        xOld[1] = 10;
-        xOld[2] = 14;
-        xOld[3] = 10;
+        // save position and velocity of particle for lw field calculations
+        for(int i = 0; i < 4; i++){
+            trajectory[p][i] = x[i];
+            velocity[p][i] = u[i];
+        }
         
-        xNew[0] = 0.0625;
-        xNew[1] = 10.084120;
-        xNew[2] = 14.079020;
-        xNew[3] = 10.0;
-        
-        uOld[0] = gamma;
-        uOld[1] = cos(dir)*sqrt(gamma*gamma-1.0);
-        uOld[2] = sin(dir)*sqrt(gamma*gamma-1.0);
-        uOld[3] = 0;
-        
-        uNew[0] = gamma + dt;
-        uNew[1] = 1.3459;
-        uNew[2] = 1.2643;
-        uNew[3] = 0.0;
         
         xObserver[0] = t;
         xObserver[1] = edgeOfNearFieldBox[21];
         xObserver[2] = edgeOfNearFieldBox[22];
-        xObserver[3] = 11;//edgeOfNearFieldBox[23];
+        xObserver[3] = 11; //same height as particle, so shortest distance to travel
         
         double lengthOfNearFieldBox = edgeOfNearFieldBox[18] - edgeOfNearFieldBox[21];
         double numberOfGridPointsOfNearFieldBox = lengthOfNearFieldBox / dx;
@@ -158,15 +167,25 @@ int main(int argc, const char * argv[]) {
         // 4. Schnittpunkt mit Lichtkegel berechnen --> intersection Point berücksichtigt bereits die endliche Ausbreitungsgschwindigkeit.
         // 5. intersection Point nutzen um LW Felder am Beobachtungsort zu berechnen
         
-        xObserver[0] = t;
+        
+        // for each observation point loop through the entire trajectory and check which points are inside or outisde the lightcone respectively.
+        // but if first two points of trajectory do not cross the lightcone, then don't bother with the following trajectory points. They can't cross the lightcone either.
         for(int i = 0; i < numberOfGridPointsOfNearFieldBox; i++){
-            if(!isInsideBackwardLightcone(xOld, xObserver) && isInsideBackwardLightcone(xNew, xObserver)){
-                calculateIntersectionPoint(xOld, xNew, xObserver, intersectionPoint);
-                calculateBeta(xOld, xNew, beta);
-                calculateLienardWiechertParameters(intersectionPoint, xObserver, u, &gamma_sq, &R_sq, &R, n, beta);
-                calculateBetaDot(uOld, uNew, dt, betaDot);
-                calcuateLienardWiechertFields(gamma_sq, R_sq, R, n, beta, betaDot, charge, E, B);
-                printf("%f E = %f in x = %f\n", t, E[0]*E[0] + E[1]*E[1] + E[2]*E[2], xObserver[1]);
+            for (int j = 0; j < p; j++){
+                // old position needs to be outside lightcone and new position inside lightcone.
+                // outisde the lightcone means that the information would be traveling faster than c, inside less than c
+                // on the lightcone information travels with c
+                if(!isInsideBackwardLightcone(trajectory[j], xObserver) && isInsideBackwardLightcone(trajectory[j+1], xObserver)){
+                    calculateIntersectionPoint(trajectory[j], trajectory[j+1], xObserver, intersectionPoint);
+                    calculateBeta(trajectory[j], trajectory[j+1], beta);
+                    calculateLienardWiechertParameters(intersectionPoint, xObserver, u, &gamma_sq, &R_sq, &R, n, beta);
+                    calculateBetaDot(velocity[j], velocity[j+1], dt, betaDot);
+                    calcuateLienardWiechertFields(gamma_sq, R_sq, R, n, beta, betaDot, charge, E, B);
+                    printf("%f E = %f in x = %f\n", t, E[0]*E[0] + E[1]*E[1] + E[2]*E[2], xObserver[1]);
+                }
+                else{
+                    break;
+                }
             }
             xObserver[1] += dx;
         }

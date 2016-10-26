@@ -279,6 +279,7 @@ void calcuateLienardWiechertFields(double gamma_sq, double R_sq, double R, doubl
     double nCrossnMinusBetaCrossBetaDot[3];
     double nMinusBetaCrossBetaDot[3];
     
+    
     if (R_sq==0||R==0) {
         E[0] = 0;
         E[1] = 0;
