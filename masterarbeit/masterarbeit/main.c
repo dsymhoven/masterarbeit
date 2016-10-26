@@ -40,6 +40,7 @@ int main(int argc, const char * argv[]) {
     double x[4], u[4];
     double xOld[4];
     double uOld[4];
+    double uNew[4];
     double xNew[4];
     double xObserver[4];
     double edgeOfNearFieldBox[24];
@@ -109,10 +110,10 @@ int main(int argc, const char * argv[]) {
 //        }
         
         // save position of particle for lienard wiechert fields calculation
-        for(int i = 0; i < 4; i++){
-            xTrajectory[p][i] = x[i];
-        }
-        
+//        for(int i = 0; i < 4; i++){
+//            xTrajectory[p][i] = x[i];
+//        }
+//        
         xOld[0] = 0;
         xOld[1] = 10;
         xOld[2] = 14;
@@ -123,14 +124,32 @@ int main(int argc, const char * argv[]) {
         xNew[2] = 14.079020;
         xNew[3] = 10.0;
         
+        uOld[0] = gamma;
+        uOld[1] = cos(dir)*sqrt(gamma*gamma-1.0);
+        uOld[2] = sin(dir)*sqrt(gamma*gamma-1.0);
+        uOld[3] = 0;
+        
+        uNew[0] = gamma + dt;
+        uNew[1] = 1.3459;
+        uNew[2] = 1.2643;
+        uNew[3] = 0.0;
+        
         xObserver[0] = t;
         xObserver[1] = edgeOfNearFieldBox[21];
         xObserver[2] = edgeOfNearFieldBox[22];
-        xObserver[3] = edgeOfNearFieldBox[23];
+        xObserver[3] = 11;//edgeOfNearFieldBox[23];
         
         double lengthOfNearFieldBox = edgeOfNearFieldBox[18] - edgeOfNearFieldBox[21];
         double numberOfGridPointsOfNearFieldBox = lengthOfNearFieldBox / dx;
         double intersectionPoint[4];
+        double gamma_sq = 0;
+        double R_sq;
+        double R;
+        double n[3];
+        double beta[3];
+        double betaDot[3];
+        double E[3];
+        double B[3];
 
         // vorgehen:
         // 1. teilchen push
@@ -141,10 +160,15 @@ int main(int argc, const char * argv[]) {
         
         xObserver[0] = t;
         for(int i = 0; i < numberOfGridPointsOfNearFieldBox; i++){
-            xObserver[1] += dx;
-            if(isInsideBackwardLightcone(xOld, xObserver) && !isInsideBackwardLightcone(xNew, xObserver)){
+            if(!isInsideBackwardLightcone(xOld, xObserver) && isInsideBackwardLightcone(xNew, xObserver)){
                 calculateIntersectionPoint(xOld, xNew, xObserver, intersectionPoint);
+                calculateBeta(xOld, xNew, beta);
+                calculateLienardWiechertParameters(intersectionPoint, xObserver, u, &gamma_sq, &R_sq, &R, n, beta);
+                calculateBetaDot(uOld, uNew, dt, betaDot);
+                calcuateLienardWiechertFields(gamma_sq, R_sq, R, n, beta, betaDot, charge, E, B);
+                printf("%f E = %f in x = %f\n", t, E[0]*E[0] + E[1]*E[1] + E[2]*E[2], xObserver[1]);
             }
+            xObserver[1] += dx;
         }
         
         borisPusher(u, Eextern, Bextern, dt, charge/mass);
