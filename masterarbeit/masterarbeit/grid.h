@@ -12,8 +12,15 @@
 #include <stdio.h>
 
 struct Grid {
-    int numberOfGridPoints;
-    double lengthOfSimulationBox;
+    int numberOfGridPointsInX;
+    int numberOfGridPointsInY;
+    int numberOfGridPointsInZ;
+    double lengthOfSimulationBoxInX;
+    double lengthOfSimulationBoxInY;
+    double lengthOfSimulationBoxInZ;
+    double dx;
+    double dy;
+    double dz;
     double *E;
     double *B;
     
@@ -21,9 +28,10 @@ struct Grid {
 
 typedef struct Grid Grid;
 
-void initGrid(Grid *Grid, int numberOfGridPoints, double lengthOfSimulationBox);
-void allocateFieldsOn(Grid *Grid);
-void freeMemoryOn(Grid *Grid);
+void initGrid(Grid *Grid, int numberOfGridPointsInX, int numberOfGridPointsInY, int numberOfGridPointsInZ, double lengthOfSimulationBoxInX, double lengthOfSimulationBoxInY, double lengthOfSimulationBoxInZ);
+void allocateFieldsOnGrid(Grid *Grid);
+void freeMemoryOnGrid(Grid *Grid);
+void pushEFieldOnGrid(Grid *Grid, double dt);
 //void calcualteNearFieldBoxes(double x[4], int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox);
 
 #endif /* grid_h */

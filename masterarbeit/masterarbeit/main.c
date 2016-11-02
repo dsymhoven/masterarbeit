@@ -18,32 +18,7 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
-//// ======================================================
-//    #pragma mark: Initializations
-//// ======================================================
-//    int numberOfGridPoints = 256;
-//    int lengthOfSimulationBox = 32;
-//    double dx = (double)lengthOfSimulationBox / numberOfGridPoints;
-//    double dy = dx;
-//    double dz = dx;
-//    double gamma = 2.1;
-//    double dir = M_PI/4.0;
-//    double dt = 0.5 * dx;
-//    double charge = 1;
-//    double mass = 1;
-//    double t = 0;
-//    double tEnd = 20;
-//    
-//    double Eextern[3] = {0,0,0};
-//    double Bextern[3] = {0,0,0.5};
-//    
-//    double x[4], u[4];
-//    double xObserver[4];
-//    double edgeOfNearFieldBox[24];
-//    
-//    char filename[32] = "some";
-//    
-//    
+
 //// ======================================================
 //    #pragma mark: Allocations
 //// ======================================================
@@ -77,24 +52,7 @@ int main(int argc, const char * argv[]) {
 //        }
 //    }
 //    
-//    
-////    double *E = (double *) malloc(3 * numberOfGridPoints * numberOfGridPoints * numberOfGridPoints * sizeof(double));
-////    double *B = (double *) malloc(3 * numberOfGridPoints * numberOfGridPoints * numberOfGridPoints * sizeof(double));
-////    
-////    if( B == NULL || E == NULL){
-////        printf("ERROR: Speicher für E und B konnte nicht reserviert werden\n");
-////        return -1;
-////    }
-////    else{
-////        printf("Speicher für E und B wurde reserviert.\n");
-////    }
-////    
-////    for (int i = 0; i < 3; i++){
-////        E[i] = 0;
-////        B[i] = 0;
-////    }
 //
-//    
 //// ======================================================
 //    # pragma mark: initial conditions
 //// ======================================================

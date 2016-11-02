@@ -8,15 +8,39 @@
 
 #include "experiment.h"
 #include "stdlib.h"
+#include "math.h"
 #include "stdio.h"
 #include "grid.h"
 
 
 void experiment1(){
+    
+    
+// ======================================================
+#pragma mark: Initializations
+// ======================================================
     Grid Grid;
-    initGrid(&Grid, 256, 32);
+    int numberOfGridPointsInX = 256;
+    int numberOfGridPointsInY = 256;
+    int numberOfGridPointsInZ = 256;
+    int lengthOfSimulationBoxInX = 32;
+    int lengthOfSimulationBoxInY = 32;
+    int lengthOfSimulationBoxInZ = 32;
+    
+    initGrid(&Grid, numberOfGridPointsInX, numberOfGridPointsInY, numberOfGridPointsInZ, lengthOfSimulationBoxInX, lengthOfSimulationBoxInY, lengthOfSimulationBoxInZ);
+    double dt = 0.5 * Grid.dx;
+    double t = 0;
+    double tEnd = 20;
+    char filename[32] = "some";
+    
+// ======================================================
+#pragma mark: Main Routine
+// ======================================================
+    for(int p = 0; p < tEnd / dt; p++){
+        
+        t += dt;
+    }
     
     
-    printf("%d\n", Grid.numberOfGridPoints);
-    freeMemoryOn(&Grid);
+    freeMemoryOnGrid(&Grid);
 }

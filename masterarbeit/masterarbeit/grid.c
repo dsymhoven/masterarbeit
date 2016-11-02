@@ -11,18 +11,30 @@
 
 
 
-void initGrid(Grid *Grid, int numberOfGridPoints, double lengthOfSimulationBox){
+void initGrid(Grid *Grid, int numberOfGridPointsInX, int numberOfGridPointsInY, int numberOfGridPointsInZ, double lengthOfSimulationBoxInX, double lengthOfSimulationBoxInY, double lengthOfSimulationBoxInZ){
     printf("initializing Grid ...\n");
-    Grid->numberOfGridPoints = numberOfGridPoints;
-    Grid->lengthOfSimulationBox = lengthOfSimulationBox;
-    allocateFieldsOn(Grid);
+    Grid->numberOfGridPointsInX = numberOfGridPointsInX;
+    Grid->numberOfGridPointsInY = numberOfGridPointsInY;
+    Grid->numberOfGridPointsInZ = numberOfGridPointsInZ;
+    Grid->lengthOfSimulationBoxInX = lengthOfSimulationBoxInX;
+    Grid->lengthOfSimulationBoxInY = lengthOfSimulationBoxInY;
+    Grid->lengthOfSimulationBoxInZ = lengthOfSimulationBoxInZ;
+    
+    Grid->dx = lengthOfSimulationBoxInX / numberOfGridPointsInX;
+    Grid->dy = lengthOfSimulationBoxInY / numberOfGridPointsInY;
+    Grid->dz = lengthOfSimulationBoxInZ / numberOfGridPointsInZ;
+    
+    allocateFieldsOnGrid(Grid);
     
 }
 
-void allocateFieldsOn(Grid *Grid){
+void allocateFieldsOnGrid(Grid *Grid){
     printf("allocating Fields ... \n");
-    int numberOfGridPoints = Grid->numberOfGridPoints;
-    int arrayLength = 3 * numberOfGridPoints * numberOfGridPoints * numberOfGridPoints;
+    int numberOfGridPointsInX = Grid->numberOfGridPointsInX;
+    int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
+    int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
+    
+    int arrayLength = 3 * numberOfGridPointsInX * numberOfGridPointsInY * numberOfGridPointsInZ;
     Grid->E = (double *) malloc(arrayLength * sizeof(double));
     Grid->B = (double *) malloc(arrayLength * sizeof(double));
     
@@ -37,10 +49,64 @@ void allocateFieldsOn(Grid *Grid){
     }
 }
 
-void freeMemoryOn(Grid *Grid){
+void freeMemoryOnGrid(Grid *Grid){
     printf("releasing allocated memory ...\n");
     free(Grid->B);
     free(Grid->E);
+}
+
+void pushEFieldOnGrid(Grid *Grid, double dt){
+    double Bx_ijk;
+    double By_ijk;
+    double Bz_ijk;
+    double Bz_ijm1k;
+    double By_ijkm1;
+    double Bx_ijkm1;
+    double Bz_im1jk;
+    double By_im1jk;
+    double Bx_ijm1k;
+    
+    double cnx = .5 * dt / Grid->dx;
+    double cny = .5 * dt / Grid->dy;
+    double cnz = .5 * dt / Grid->dz;
+    
+    
+    int nx = Grid->numberOfGridPointsInX;
+    int ny = Grid->numberOfGridPointsInY;
+    int nz = Grid->numberOfGridPointsInZ;
+    
+    int i, j, k;
+    for (i = 0; i < nx; i++)
+    {
+        for (j = 0; j < ny; j++)
+        {
+            for (k = 0; k < nz; k++)
+            {
+
+                Bx_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 0];
+                By_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 1];
+                Bz_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 2];
+                
+                Bz_ijm1k = Grid->B[3 * nz * ny * i + 3 * nz * (j - 1) + 3 * k + 2];
+                By_ijkm1 = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * (k - 1) + 1];
+                Bx_ijkm1 = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * (k - 1) + 0];
+                Bz_im1jk = Grid->B[3 * nz * ny * (i - 1) + 3 * nz * j + 3 * k + 2];
+                By_im1jk = Grid->B[3 * nz * ny * (i - 1) + 3 * nz * (j) + 3 * (k) + 1];
+                Bx_ijm1k = Grid->B[3 * nz * ny * (i) + 3 * nz * (j - 1) + 3 * (k) + 0];
+                
+                
+                double val_x = cny * (Bz_ijk - Bz_ijm1k) - cnz * (By_ijk - By_ijkm1);
+                double val_y = cnz * (Bx_ijk - Bx_ijkm1) - cnx * (Bz_ijk - Bz_im1jk);
+                double val_z = cnx * (By_ijk - By_im1jk) - cny * (Bx_ijk - Bx_ijm1k);
+                    
+                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += val_x;
+                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += val_y;
+                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] += val_z;
+                
+            }
+        }
+    }
+    
 }
 //void calcualteNearFieldBoxes(double x[4], int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox){
 ////    int i, j, k;
