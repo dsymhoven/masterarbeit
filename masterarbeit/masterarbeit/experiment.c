@@ -14,9 +14,9 @@
 
 void experiment1(){
     Grid Grid;
-    initGrid(Grid, 256, 32);
+    initGrid(&Grid, 256, 32);
     
-    printf("releasing allocated memory ...\n");
-    free(Grid.B);
-    free(Grid.E);
+    
+    printf("%d\n", Grid.numberOfGridPoints);
+    freeMemoryOn(&Grid);
 }

@@ -21,8 +21,9 @@ struct Grid {
 
 typedef struct Grid Grid;
 
-void initGrid(Grid Grid, int numberOfGridPoints, double lengthOfSimulationBox);
-void allocateFieldsOn(Grid Grid);
+void initGrid(Grid *Grid, int numberOfGridPoints, double lengthOfSimulationBox);
+void allocateFieldsOn(Grid *Grid);
+void freeMemoryOn(Grid *Grid);
 //void calcualteNearFieldBoxes(double x[4], int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox);
 
 #endif /* grid_h */

@@ -8,10 +8,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <string.h>
-#include "calculations.h"
-#include "grid.h"
 #include "experiment.h"
 
 

@@ -11,29 +11,36 @@
 
 
 
-void initGrid(Grid Grid, int numberOfGridPoints, double lengthOfSimulationBox){
+void initGrid(Grid *Grid, int numberOfGridPoints, double lengthOfSimulationBox){
     printf("initializing Grid ...\n");
-    Grid.numberOfGridPoints = numberOfGridPoints;
-    Grid.lengthOfSimulationBox = lengthOfSimulationBox;
+    Grid->numberOfGridPoints = numberOfGridPoints;
+    Grid->lengthOfSimulationBox = lengthOfSimulationBox;
     allocateFieldsOn(Grid);
     
 }
 
-void allocateFieldsOn(Grid Grid){
+void allocateFieldsOn(Grid *Grid){
     printf("allocating Fields ... \n");
-    int arrayLength = 3 * Grid.numberOfGridPoints * Grid.numberOfGridPoints * Grid.numberOfGridPoints;
-    Grid.E = (double *) malloc(arrayLength * sizeof(double));
-    Grid.B = (double *) malloc(arrayLength * sizeof(double));
+    int numberOfGridPoints = Grid->numberOfGridPoints;
+    int arrayLength = 3 * numberOfGridPoints * numberOfGridPoints * numberOfGridPoints;
+    Grid->E = (double *) malloc(arrayLength * sizeof(double));
+    Grid->B = (double *) malloc(arrayLength * sizeof(double));
     
-    if( Grid.B == NULL || Grid.E == NULL){
+    if( Grid->B == NULL || Grid->E == NULL){
         printf("ERROR: allocation for E and B failed!\n");
     }
     else{
         for (int i = 0; i < arrayLength; i++){
-            Grid.E[i] = 0;
-            Grid.B[i] = 0;
+            Grid->E[i] = 0;
+            Grid->B[i] = 0;
         }
     }
+}
+
+void freeMemoryOn(Grid *Grid){
+    printf("releasing allocated memory ...\n");
+    free(Grid->B);
+    free(Grid->E);
 }
 //void calcualteNearFieldBoxes(double x[4], int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox){
 ////    int i, j, k;
