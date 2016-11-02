@@ -31,7 +31,9 @@ typedef struct Grid Grid;
 void initGrid(Grid *Grid, int numberOfGridPointsInX, int numberOfGridPointsInY, int numberOfGridPointsInZ, double lengthOfSimulationBoxInX, double lengthOfSimulationBoxInY, double lengthOfSimulationBoxInZ);
 void allocateFieldsOnGrid(Grid *Grid);
 void freeMemoryOnGrid(Grid *Grid);
+void initFieldsOnGrid(Grid *Grid);
 void pushEFieldOnGrid(Grid *Grid, double dt);
+void PushBFieldOnGrid(Grid *Grid, double dt);
 //void calcualteNearFieldBoxes(double x[4], int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox);
 
 #endif /* grid_h */

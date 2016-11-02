@@ -11,5 +11,5 @@
 
 #include <stdio.h>
 
-void experiment1();
+void testMaxwellPusher();
 #endif /* experiment_h */

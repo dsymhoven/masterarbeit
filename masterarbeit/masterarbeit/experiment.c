@@ -13,7 +13,7 @@
 #include "grid.h"
 
 
-void experiment1(){
+void testMaxwellPusher(){
     
     
 // ======================================================
@@ -28,6 +28,7 @@ void experiment1(){
     int lengthOfSimulationBoxInZ = 32;
     
     initGrid(&Grid, numberOfGridPointsInX, numberOfGridPointsInY, numberOfGridPointsInZ, lengthOfSimulationBoxInX, lengthOfSimulationBoxInY, lengthOfSimulationBoxInZ);
+    initFieldsOnGrid(&Grid);
     double dt = 0.5 * Grid.dx;
     double t = 0;
     double tEnd = 20;
@@ -37,7 +38,7 @@ void experiment1(){
 #pragma mark: Main Routine
 // ======================================================
     for(int p = 0; p < tEnd / dt; p++){
-        
+
         t += dt;
     }
     

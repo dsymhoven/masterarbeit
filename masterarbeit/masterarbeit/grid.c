@@ -8,6 +8,7 @@
 
 #include "grid.h"
 #include "stdlib.h"
+#include "math.h"
 
 
 
@@ -66,9 +67,9 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
     double By_im1jk;
     double Bx_ijm1k;
     
-    double cnx = .5 * dt / Grid->dx;
-    double cny = .5 * dt / Grid->dy;
-    double cnz = .5 * dt / Grid->dz;
+    double cnx = 0.5 * dt / Grid->dx;
+    double cny = 0.5 * dt / Grid->dy;
+    double cnz = 0.5 * dt / Grid->dz;
     
     
     int nx = Grid->numberOfGridPointsInX;
@@ -76,11 +77,11 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
     int nz = Grid->numberOfGridPointsInZ;
     
     int i, j, k;
-    for (i = 0; i < nx; i++)
+    for (i = 1; i < nx - 1; i++)
     {
-        for (j = 0; j < ny; j++)
+        for (j = 1; j < ny - 1; j++)
         {
-            for (k = 0; k < nz; k++)
+            for (k = 1; k < nz - 1; k++)
             {
 
                 Bx_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 0];
@@ -107,6 +108,75 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
         }
     }
     
+}
+
+void initFieldsOnGrid(Grid *Grid){
+    int nx = Grid->numberOfGridPointsInX;
+    int ny = Grid->numberOfGridPointsInY;
+    int nz = Grid->numberOfGridPointsInZ;
+    
+    for (int i = 1; i < nx; i++){
+        for (int j = 1; j < ny; j++){
+            for (int k = 32*4; k < 32*5; k++){
+                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] = cos(i * Grid->dz);
+                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = cos(i * Grid->dz);
+                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] = cos(i * Grid->dz);
+            }
+        }
+    }
+    
+}
+
+void PushBFieldOnGrid(Grid *Grid, double dt){
+    double Ex_ijk;
+    double Ey_ijk;
+    double Ez_ijk;
+    double Ey_ijkp1;
+    double Ez_ijp1k;
+    double Ez_ip1jk;
+    double Ex_ijkp1;
+    double Ex_ijp1k;
+    double Ey_ip1jk;
+    
+    double cnx = 0.5 * dt / Grid->dx;
+    double cny = 0.5 * dt / Grid->dy;
+    double cnz = 0.5 * dt / Grid->dz;
+    
+    
+    int nx = Grid->numberOfGridPointsInX;
+    int ny = Grid->numberOfGridPointsInY;
+    int nz = Grid->numberOfGridPointsInZ;
+    
+    int i, j, k;
+    for (i = 1; i < nx - 1; i++)
+    {
+        for (j = 1; j < ny - 1; j++)
+        {
+            for (k = 1; k < nz - 1; k++)
+            {
+                
+                Ey_ijkp1 = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k + 1) + 1];
+                Ey_ijk = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
+                Ez_ijp1k = Grid->E[3 * nz * ny * (i) + 3 * nz * (j + 1) + 3 * (k) + 2];
+                Ez_ijk = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
+                Ez_ip1jk = Grid->E[3 * nz * ny * (i + 1) + 3 * nz * (j) + 3 * (k) + 2];
+                Ex_ijkp1 = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k + 1) + 0];
+                Ex_ijk = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
+                Ex_ijp1k = Grid->E[3 * nz * ny * (i) + 3 * nz * (j + 1) + 3 * (k) + 0];
+                Ey_ip1jk = Grid->E[3 * nz * ny * (i + 1) + 3 * nz * (j) + 3 * (k) + 1];
+                
+                
+                double add_x = cnz * (Ey_ijkp1 - Ey_ijk) - cny * (Ez_ijp1k - Ez_ijk);
+                double add_y = cnx * (Ez_ip1jk - Ez_ijk) - cnz * (Ex_ijkp1 - Ex_ijk);
+                double add_z = cny * (Ex_ijp1k - Ex_ijk) - cnx * (Ey_ip1jk - Ey_ijk);
+                    
+                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += add_x;
+                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += add_y;
+                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] += add_z;
+            
+            }
+        }
+    }
 }
 //void calcualteNearFieldBoxes(double x[4], int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox){
 ////    int i, j, k;
