@@ -13,7 +13,7 @@
 
 int main(int argc, const char * argv[]) {
     
-    experiment1();
+    testMaxwellPusher();
     
     return 0;
 }

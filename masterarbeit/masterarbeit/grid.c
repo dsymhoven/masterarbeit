@@ -110,17 +110,16 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
     
 }
 
-void initFieldsOnGrid(Grid *Grid){
+void initSamplePulseOnGrid(Grid *Grid){
     int nx = Grid->numberOfGridPointsInX;
     int ny = Grid->numberOfGridPointsInY;
     int nz = Grid->numberOfGridPointsInZ;
     
-    for (int i = 1; i < nx; i++){
+    for (int i = 32*4; i < 32*5; i++){
         for (int j = 1; j < ny; j++){
-            for (int k = 32*4; k < 32*5; k++){
-                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] = cos(i * Grid->dz);
-                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = cos(i * Grid->dz);
+            for (int k = 1; k < nz; k++){
                 Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] = cos(i * Grid->dz);
+                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = cos(i * Grid->dz);
             }
         }
     }
@@ -178,6 +177,49 @@ void PushBFieldOnGrid(Grid *Grid, double dt){
         }
     }
 }
+
+void writeFieldsToFile(Grid *Grid){
+    printf("Writing to file ...\n");
+    FILE *fid = fopen("fields.txt", "w");
+    if (fid == NULL){
+        printf("ERROR: Could not open file fields.txt");
+    }
+    else{
+        int nx = Grid->numberOfGridPointsInX;
+        int ny = Grid->numberOfGridPointsInY;
+        int nz = Grid->numberOfGridPointsInZ;
+        int k = 32*4;
+        double Ex, Ey, Ez, Bx, By, Bz;
+    
+        for (int i = 0; i < nx; i++)
+        {
+            for (int j = 0; j < ny; j++)
+            {
+                Bx = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
+                By = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
+                Bz = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
+                
+                Ex = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
+                Ey = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
+                Ez = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
+                double Bsq = Bx * Bx + By * By + Bz * Bz;
+                double Esq = Ex * Ex + Ey * Ey + Ez * Ez;
+                
+                if (i % 5 == 0){
+                    fprintf(fid, "%f %f %f\n", Grid->dx * i, Grid->dy * j, Esq);
+                }
+               
+                
+            }
+            if (i % 5 == 0){
+                fprintf(fid, "\n");
+            }
+            
+        }
+        fclose(fid);
+    }
+}
+
 //void calcualteNearFieldBoxes(double x[4], int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox){
 ////    int i, j, k;
 ////    int numberOfBoxesPerDimension = numberOfGridPoints / lengthOfSimulationBox;

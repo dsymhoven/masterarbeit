@@ -28,7 +28,7 @@ void testMaxwellPusher(){
     int lengthOfSimulationBoxInZ = 32;
     
     initGrid(&Grid, numberOfGridPointsInX, numberOfGridPointsInY, numberOfGridPointsInZ, lengthOfSimulationBoxInX, lengthOfSimulationBoxInY, lengthOfSimulationBoxInZ);
-    initFieldsOnGrid(&Grid);
+    initSamplePulseOnGrid(&Grid);
     double dt = 0.5 * Grid.dx;
     double t = 0;
     double tEnd = 20;
@@ -41,7 +41,7 @@ void testMaxwellPusher(){
 
         t += dt;
     }
-    
-    
+
+    writeFieldsToFile(&Grid);
     freeMemoryOnGrid(&Grid);
 }
