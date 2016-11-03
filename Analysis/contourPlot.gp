@@ -22,19 +22,33 @@
 # pi: point interval
 # ===============================================
 
-set style func linespoints
-set termoption dashed
+# line style definitions
 set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 5   # blue
 set style line 2 lc rgb '#dd181f' lt 1 lw 2 pt 7   # red
 
-# plot commands
-
+# Set terminal and output
+set terminal pngcairo 
+set output 'contour.png'
+ 
+# Set various features of the plot
+set pm3d
+unset surface  # don't need surfaces
+set view map
+set contour
+set key outside
+set cntrparam cubicspline  # smooth out the lines
+set cntrparam levels 0    # sets the num of contour lines
+set pm3d interpolate 20,20 # interpolate the color
+ 
+# Set a nice color palette
+set palette rgb 33,13,10
+ 
+# Axes
 set xlabel "x"
 set ylabel "y"
 set xrange [0:30]
 set yrange [0:30]
-plot "test.txt" using 1:2 with points ls 2, \
-	"test.txt" using 3:4 with points ls 2, \
-	"test.txt" using 5:6 with points ls 2, \
-	"test.txt" using 7:8 with points ls 2
- No newline at end of file
+ 
+# Now plot
+splot 'fields.txt' using 1:2:3 notitle with lines lt 1
+
