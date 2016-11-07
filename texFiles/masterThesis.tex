@@ -142,9 +142,10 @@ The damping term $g^{\mu}$ considers the fact that charged particles radiate fie
 In 1938 \textit{Dirac} generalized the equation whilst taking special relativity into account. \\% MISSING: Cites
 % MISSING: Details. Historisches. Abraham, Lorentz, Dirac Landau Lifschitz Gleichung usw.
 We now want to deal with how to solve the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} numerically.
-\subsection{Euler-Method}
-The most simple method is the explicit \textit{Euler}-Method. It's easy to implement but not very accurate, as we shall see later. But before we go into the details of the explicit Euler-scheme we need to address some prerequisites all following methods will have in common. 
-Starting point will always be a first oder system of the kind
+
+\subsection{Euler-Scheme}
+The most simple method is the explicit \textit{Euler}-Method. It's easy to implement but not very accurate, as we shall see later. But before we go into the details of the explicit Euler-Scheme we need to address some prerequisites all following methods will have in common. \\
+Starting point will always be a first order system of the kind
 \beq
 \label{eqn: Euler}
 \bal
@@ -155,13 +156,13 @@ u^{\mu}(\tau_0) &= u^{\mu}_0.
 \eal
 \eeq
 Systems of higher order can always be reduced to a first order system. \\
-In order to solve the equation of motion numerically the domain needs to be discretized. Therefore we divide the time interval into N equidistant partial intervals $h$, such that
+In order to solve the equation of motion numerically the domain needs to be discretized. Therefore we divide the time interval into N equidistant partial intervals $h$, by defining
 \beq
-h \coloneqq \Delta \tau = \tau_{i+1} - \tau_i \nn
+h \coloneqq \Delta \tau = \tau_{i+1} - \tau_i. \nn
 \eeq
-holds. The idea is to calculate each point along the trajectory $x^{\mu}_i = x^{\mu}(\tau_i)$ iteratively, starting from the initial values $x^{\mu}_0$ and $u^{\mu}_0$.
+The idea is to calculate each point along the trajectory $x^{\mu}_i = x^{\mu}(\tau_i)$ iteratively, starting from the initial values $x^{\mu}_0$ and $u^{\mu}_0$.
 But to calculate these points all differential operators in  \eqref{eqn: Euler} need to be discretized as well. That is where all methods differ. Each method has its own way to discretize the differential operators.\\
-The basis of the Euler-scheme is a first order Taylor expansion of the integration variable $x^{\mu}$ in $\tau$ around $\tau_i$
+The basis of the Euler-Scheme is a first order Taylor expansion of the integration variable $x^{\mu}$ in $\tau$ around $\tau_i$
 \beq
 \label{eqn: Taylor}
 x^{\mu}(\tau_{i+1}) =  x^{\mu}(\tau_i) + \frac{\dm x^{\mu}}{\dm \tau} \Big |_{\tau=\tau_i} \underbrace{(\tau_{i+1} - \tau_i)}_{=h} + \mathcal{O}(h^2).
@@ -195,41 +196,42 @@ y(\tau_0) &= y_0.
 \begin{description}
 \item[(a)] The term 
 \beq
-\eta(\tau,h) \coloneqq y(\tau) + h f(\tau, y(\tau)) - y(\tau+h)\quad \text{für}~\tau \in I,~ 0 < h \le b - \tau
+\eta(\tau,h) \coloneqq y(\tau) + h f(\tau, y(\tau)) - y(\tau+h)\quad \text{for}~\tau \in I,~ 0 < h \le b - \tau
 \eeq
-is called local Procedural Error of the one-step scheme at $\tau$ for the increment h.
-\item[(b)] The one-step scheme has an Order of Consistency $p \ge 1$, if the local Procedural Error fulfils
+is called local Procedural Error of the One-Step-Scheme at $\tau$ for the increment h.
+\item[(b)] The One-Step-Scheme has an Order of Consistency $p \ge 1$, if the local Procedural Error fulfils
 \beq
-||\eta(\tau,h) || \le Ch^{p+1}\quad \text{für}~\tau \in I,~ 0 < h \le b - \tau,
+||\eta(\tau,h) || \le Ch^{p+1}\quad \text{for}~\tau \in I,~ 0 < h \le b - \tau,
 \eeq 
 with a constant $C\ge 0$, which is independent of $\tau$ and $h$.
 \end{description}
 \end{env_definition}
-Anschaulich ist der Procedural Error die Differenz zwischen der exakten Lösung $y(\tau+h)$ und dem Ergebnis, das man durch das one-step scheme erhält, wenn man von der exakten Lösung zum früheren Zeitpunkt $y(\tau)$ startet. Abbildung \ref{fig: Procedural Error} veranschaulicht die Situation.
+Descriptively the Procedural Error is the difference between the exact solution $y(\tau+h)$ and the result, which we get from the One-Step-Scheme starting from the exact solution at the earlier time step $y(\tau)$.
+Figure \ref{fig: Procedural Error} illustrates the situation.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/Verfahrensfehler.png} %Bild 1
-	\caption[Procedural Error]{Veranschaulichung des Procedural Errors eines one-step schemes.~ \cite{NumerikSkript}}
+	\caption[Procedural Error]{Illustration of the Procedural Errors of an One-Step-Scheme.~ \cite{NumerikSkript}}
 	\label{fig: Procedural Error}
 \end{figure}
 \noindent
-Wir wollen nun die Definitionen anwenden, um die Order of Consistency  des Euler-Verfahrens zu bestimmen. \\
-Ausgangspunkt ist das System \eqref{eqn: Lorentz-Newton}. Dabei konzentrieren wir uns nur auf die Gleichung für $u^{\mu}$, da $x^{\mu}$ einfach aus $u^{\mu}$ integriert werden kann.
-Nach Definition \ref{def: Procedural Error} gilt für unser System
+We now want to use the definitions \ref{def: Procedural Error} to calculate the Order of Consistency of the Euler-Scheme.\\
+Starting point is the system \eqref{eqn: Lorentz-Newton}. Thereby we focus on the equation for $u^{\mu}$, since $x^{\mu}$ can be easily integrated from $u^{\mu}$.
+Following Definition \ref{def: Procedural Error} we have
 \beq
 y = u^{\mu}. \nn \\
 \eeq
-Wir erhalten
+We get
 \beq
 \label{eqn: eta u}
 \eta(\tau, h) = u^{\mu}(\tau_i) + h f^{\mu}(x^{\nu}, u^{\nu}) - u^{\mu}(\tau_{i+1}).
 \eeq
-Den letzten Term berechnen wir mithilfe einer Taylorentwicklung analog zu \eqref{eqn: Taylor}
+The last term can be calculated with a Taylor-expansion analogously to \eqref{eqn: Taylor}.
 \beq
 \label{eqn: Taylor u}
 u^{\mu}(\tau_{i+1}) =  u^{\mu}(\tau_i) + h~\frac{\dm u^{\mu}}{\dm \tau} \Big |_{s=\tau_i}  + h^2~\frac{\dm^2 u^{\mu}}{\dm \tau^2} \Big |_{s=\tau_i}.
 \eeq
-Einsetzen von \eqref{eqn: Taylor u} in \eqref{eqn: eta u} liefert
+Plugging in \eqref{eqn: Taylor u} in \eqref{eqn: eta u} yields
 \beq
 \bal
 \eta(\tau, h) &= u^{\mu}(\tau_i) + h\frac{\dm u^{\mu}}{\dm \tau}  - u^{\mu}(\tau_{i+1}) \\
@@ -237,29 +239,29 @@ Einsetzen von \eqref{eqn: Taylor u} in \eqref{eqn: eta u} liefert
 \eta(\tau, h) &= \frac{\dm^2 u^{\mu}}{\dm \tau^2}~h^2 ,
 \eal
 \eeq
-da $\frac{\dm u^{\mu}}{\dm \tau} = f^{\mu}(x^{\nu}, u^{\nu})$ für das Euler-Verfahren gilt. Daraus folgt
+since $\frac{\dm u^{\mu}}{\dm \tau} = f^{\mu}(x^{\nu}, u^{\nu})$ holds for the Euler-Scheme. Thus
 \beq
-|\eta(\tau, h)| \le C h^2 \quad \text{mit}~C \coloneqq \frac{1}{2} \max_{\tau \in \mathcal{D}(u^{\mu})}\left| \frac{\dm^2 u^{\mu}}{\dm \tau^2}\right|.
+|\eta(\tau, h)| \le C h^2 \quad \text{with}~C \coloneqq \frac{1}{2} \max_{\tau \in \mathcal{D}(u^{\mu})}\left| \frac{\dm^2 u^{\mu}}{\dm \tau^2}\right|.
 \eeq
-$\mathcal{D}(u^{\mu})$ bezeichnet dabei den Definitionsbereich von $u^{\mu}$. Das Euler-Verfahren hat also Order of Consistency  eins.
+$\mathcal{D}(u^{\mu})$ denotes the domain of $u^{\mu}$. Therefore, the Euler-Scheme has an Order of Consistency of one.
 
-\subsection{Leap-Frog-Verfahren}
-Ein deutlich besseres Verfahren ist das \textit{Leap-Frog}-Verfahren, das eine Order of Consistency  von zwei hat, wie man leicht nachrechnen kann. \\
-Im Vergleich zum expliziten Euler-Verfahren hat diese Methode mehrere Vorteile. Sie ist zum einen zeitlich umkehrbar (reversibel), d.h. man kann von jedem Zeitpunkt aus, zu jedem vorherigen Zeitpunkt zurückkehren und zum anderen ist dieses Verfahren \textit{symplektisch}, d.h. es erhält das Phasenraumvolumen, woraus Energie - und Impulserhaltung folgt.\\
-Ein Nachteil des Verfahrens ist jedoch, dass es sich nur gut für Systeme eignet, bei denen die Kraft lediglich vom aktuellen Ort, nicht aber von der Geschwindigkeit des Teilchens abhängt, da es sich sonst um eine implizite Gleichung handeln würde, die sich nur deutlich rechenaufwändiger lösen ließe.\\
-Die zu lösende Differentialgleichung sollte also von folgender Gestalt sein
+\subsection{Leap-Frog-Scheme}
+A definitely better method is the so called \textit{Leap-Frog}-Scheme. One can easily proof that it has an Order of Consistency of two. \\
+In contrast to the explicit Euler-Scheme this method has several advantages. For one it is time reversible, i.e. it is possible to reach any previous point in time from every point later in the trajectory. On the other hand the Leap-Frog-Scheme is symplectic, meaning it conserves the phase space volume from which energy and momentum conservation follows. \\
+However, one disadvantage is that it's only suited for systems in which the acting force exclusively depends on the current position, but not on the velocity of the particle. This would lead to an implicit equation system which is numerically way more expensive to solve. \\
+Thus the differential equation should be of the form
 \beq
 \frac{\dm^2 x^{\mu}}{\dm \tau^2} = \frac{\dm u^{\mu}}{\dm \tau} = f^{\mu}(x^{\nu}).
 \eeq
-Wie vorhin erwähnt unterscheiden sich die verschiedenen Verfahren durch die Art und Weise der Diskretisierung der Differentialoperatoren.
-Beim Leap-Frog-Verfahren wählt man
+As we already mentioned, the various methods discretize the differential operators differently
+The Leap-Frog-Scheme uses
 \beq
 \bal
 \frac{x^{\mu}_{i+1} - x^{\mu}_i}{h} &= u^{\mu}_{i+\frac{1}{2}}\\
 \frac{u^{\mu}_{i+\frac{1}{2}} - u^{\mu}_{i-\frac{1}{2}}}{h} &= f^{\mu}(x^{\nu}_i).
 \eal
 \eeq
-Auflösen nach dem neuen Zeitschritt ergibt dann
+Solving for the new time step yields
 \beq
 \bal
 x^{\mu}_{i+1} &= x^{\mu}_i + h u^{\mu}_{i+\frac{1}{2}}\\
@@ -267,30 +269,30 @@ u^{\mu}_{i+\frac{1}{2}} &= u^{\mu}_{i-\frac{1}{2}} + h f^{\mu}(x^{\nu}_i).
 \eal
 \eeq
 \noindent
-Wie man sieht, werden Ort und Geschwindigkeit zu unterschiedlichen Zeitpunkten berechnet. Sie sind zeitlich um $h = \frac{1}{2}$ gegeneinander versetzt. 
+As we can see, position and velocity are calculated at different times. They are shifted against each other in time by $h = \frac{1}{2}$.
 \subsection{Boris-Pusher}
 \subsection{Vay-Pusher}
-\subsection{Interpolation der Trajektorien}
-Die vorangegangenen vorgestellten Verfahren berechnen die Teilchentrajektorien nur an diskreten Stellen $x_i^{\mu}(\tau)$. Um die Liénard-Wiechert Felder nach Gleichung \eqref{eqn: LW} an einem Beobachtungspunkt zu berechnen, wird jedoch der Schnittpunkt der Trajektorie mit dem Rückwärtslichtkegel des jeweiligen Beobachtungspunktes benötigt. Da in den meisten Fällen 
-die berechneten Punkte der Trajektorie nicht direkt auf dem Lichtkegel liegen werden, benötigen wir ein Verfahren, um den genauen Schnittpunkt zu berechnen. \\
-Die einfachste Lösung ist eine lineare Interpolation zwischen dem letzten Punkt außerhalb und des ersten Punktes innerhalb des Lichtkegels. Bild \ref{fig: Interpolation} veranschaulicht die Situation.\\ %MISSING: FIGURE
-Sei dazu $x_j^{\mu} \in \mathbb{R}^{3+1}$ der letzte Punkt außerhalb und $x_{j+1}^{\mu} \in \mathbb{R}^{3+1}$ der erste Punkt innerhalb des Lichtkegels. Ferner sei $x_{c}^{\mu} \in \mathbb{R}^{3+1}$ der gesuchte Schnittpunkt, dann gilt:
+\subsection{Interpolation of Trajectories}
+The previously presented methods calculate the particle trajectory solely at discrete points in time $x_i^{\mu}(\tau)$. Calculating Liénard-Wiechert fields according to equation \eqref{eqn: LW} however, requires the intersection point of the trajectory with the backward lightcone of the observation point. 
+In most cases the calculated points of the trajectory are not lying directly on the lightcone, so we need a procedure to calculate the intersection point exactly.\\
+The simplest solution is a linear interpolation between the last point outside and the first point inside the lightcone. Figure \ref{fig: Interpolation} illustrates the situation.\\ %MISSING: FIGURE
+Thereto let $x_j^{\mu} \in \mathbb{R}^{3+1}$ be the last point outside and $x_{j+1}^{\mu} \in \mathbb{R}^{3+1}$ the first point inside the lightcone. Further let $x_{c}^{\mu} \in \mathbb{R}^{3+1}$ be the intersection point of interest then we get
 \beq
 \label{eqn: linInt}
 x_c^{\mu} = x_j^{\mu} + \lambda ~\left(x_{j+1}^{\mu} - x_j^{\mu}\right),
 \eeq
-wobei $\lambda \in [0,1]$. Aufgrund der endlichen Ausbreitungsgeschwindigkeit des Lichtes, muss der Punkt $x_c^{\mu}$ Bedingung \eqref{eqn: tret} erfüllen 
+where $\lambda \in [0,1]$. Due to the finite speed of light the intersection point $x_c^{\mu}$ needs to fulfil equation \eqref{eqn: tret} 
 \beq
 \label{eqn: constraint}
 \left| \vec{x}_o(t) - \vec{x}_c(t_{ret})\right| = c~(t - t_{ret}) \Longleftrightarrow (x_o - x_c)_{\mu} (x_o - x_c)^{\mu} = 0.
 \eeq
-Dabei bezeichnet $x_o^{\mu} \in \mathbb{R}^{3+1}$ den Beobachtungspunkt, an dem die Felder berechnet werden sollen. Zu beachten ist, dass auf der linken Seite des Äquivalenzzeichens ausschließlich die räumlichen Komponenten der respektiven Vierervektoren stehen. \\
-Einsetzen von \eqref{eqn: linInt} in \eqref{eqn: constraint} liefert 
+Thereby $x_o^{\mu} \in \mathbb{R}^{3+1}$ denotes the observation point where the fields shall be calculated. Note, that on the left hand side of \eqref{eqn: constraint} only spatial components of the respective four vectors are used. \\
+Plugging in \eqref{eqn: linInt} in \eqref{eqn: constraint} yields
 \beq
 \label{eqn: quadEq}
 \lambda^2 (x_{j+1} - x_j)_{\mu}(x_{j+1} - x_j)^{\mu} + \lambda~2(x_{j+1} - x_j)_{\mu}(x_j - x_o)^{\mu} + (x_j)_{\mu}(x_j)^{\mu} + (x_o)_{\mu}(x_o)^{\mu} - 2(x_j)_{\mu}(x_o)^{\mu}  = 0.
 \eeq
-Wir definieren
+We define
 \beq
 \bal
 a &\coloneqq (x_{j+1} - x_j)_{\mu}(x_{j+1} - x_j)^{\mu}\\
@@ -298,19 +300,19 @@ b &\coloneqq 2(x_{j+1} - x_j)_{\mu}(x_j - x_o)^{\mu} \\
 c &\coloneqq (x_j)_{\mu}(x_j)^{\mu} + (x_o)_{\mu}(x_o)^{\mu} - 2(x_j)_{\mu}(x_o)^{\mu}. \nn
 \eal
 \eeq
-Die quadratische Gleichung \eqref{eqn: quadEq} in $\lambda$ hat im allgemeinen zwei Lösungen
+In general the quadratic equation \eqref{eqn: quadEq} in $\lambda$ has two solutions
 \beq
 \lambda_{1/2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}. \nn
 \eeq
-Eine Lösung beschreibt den Schnittpunkt mit dem Rückwärtslichtkegel, die andere den mit dem Vorwärtslichtkegel. Da $\lambda \in [0,1]$, interessieren wir uns nur für die größere der beiden Lösungen
+One denotes the intersection point with the backward lightcone, the other one with the forward lightcone. Since  $\lambda \in [0,1]$ we are only interested in the larger one. 
 \beq
 \lambda_{1/2} = \frac{-b + \sqrt{b^2 - 4ac}}{2a}. \nn
 \eeq
-Einsetzen von $\lambda$ in \eqref{eqn: linInt} liefert den gewünschten Schnittpunkt. 
-\section{Hybride Felder}
-\subsection{Maxwell-Gleichungen}
+Plugging in $\lambda$ in \eqref{eqn: linInt} gives the desired intersection point.
+\section{Hybrid Fields}
+\subsection{Maxwell-Equations}
 \subsection{Maxwell-Solver}
-\subsection{Nah-und Fernfelder}
+\subsection{Near-and Farfields}
 
 
 %============================= Abbildungsverzeichnis ===========================

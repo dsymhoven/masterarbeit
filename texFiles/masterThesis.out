@@ -4,13 +4,13 @@
 \BOOKMARK [1][-]{section.2.1}{Li\351nard-Wiechert Potentials}{chapter.2}% 4
 \BOOKMARK [1][-]{section.2.2}{Numerics}{chapter.2}% 5
 \BOOKMARK [2][-]{subsection.2.2.1}{euqations of motion}{section.2.2}% 6
-\BOOKMARK [2][-]{subsection.2.2.2}{Euler-Method}{section.2.2}% 7
-\BOOKMARK [2][-]{subsection.2.2.3}{Leap-Frog-Verfahren}{section.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.2}{Euler-Scheme}{section.2.2}% 7
+\BOOKMARK [2][-]{subsection.2.2.3}{Leap-Frog-Scheme}{section.2.2}% 8
 \BOOKMARK [2][-]{subsection.2.2.4}{Boris-Pusher}{section.2.2}% 9
 \BOOKMARK [2][-]{subsection.2.2.5}{Vay-Pusher}{section.2.2}% 10
-\BOOKMARK [2][-]{subsection.2.2.6}{Interpolation der Trajektorien}{section.2.2}% 11
-\BOOKMARK [1][-]{section.2.3}{Hybride Felder}{chapter.2}% 12
-\BOOKMARK [2][-]{subsection.2.3.1}{Maxwell-Gleichungen}{section.2.3}% 13
+\BOOKMARK [2][-]{subsection.2.2.6}{Interpolation of Trajectories}{section.2.2}% 11
+\BOOKMARK [1][-]{section.2.3}{Hybrid Fields}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.3.1}{Maxwell-Equations}{section.2.3}% 13
 \BOOKMARK [2][-]{subsection.2.3.2}{Maxwell-Solver}{section.2.3}% 14
-\BOOKMARK [2][-]{subsection.2.3.3}{Nah-und Fernfelder}{section.2.3}% 15
+\BOOKMARK [2][-]{subsection.2.3.3}{Near-and Farfields}{section.2.3}% 15
 \BOOKMARK [0][-]{chapter*.5}{Bibliography}{}% 16

@@ -5,14 +5,14 @@
 \contentsline {section}{\numberline {2.1}Li\'enard-Wiechert Potentials}{3}{section.2.1}
 \contentsline {section}{\numberline {2.2}Numerics}{3}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}euqations of motion}{3}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Euler-Method}{3}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.2}Euler-Scheme}{3}{subsection.2.2.2}
 \contentsline {subsubsection}{\numberline {2.2.2.1}Procedural Error and Order of Consistency}{4}{subsubsection.2.2.2.1}
-\contentsline {subsection}{\numberline {2.2.3}Leap-Frog-Verfahren}{6}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.3}Leap-Frog-Scheme}{6}{subsection.2.2.3}
 \contentsline {subsection}{\numberline {2.2.4}Boris-Pusher}{6}{subsection.2.2.4}
 \contentsline {subsection}{\numberline {2.2.5}Vay-Pusher}{6}{subsection.2.2.5}
-\contentsline {subsection}{\numberline {2.2.6}Interpolation der Trajektorien}{6}{subsection.2.2.6}
-\contentsline {section}{\numberline {2.3}Hybride Felder}{7}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Maxwell-Gleichungen}{7}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.2.6}Interpolation of Trajectories}{6}{subsection.2.2.6}
+\contentsline {section}{\numberline {2.3}Hybrid Fields}{7}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Maxwell-Equations}{7}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Maxwell-Solver}{7}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}Nah-und Fernfelder}{7}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.3}Near-and Farfields}{7}{subsection.2.3.3}
 \contentsline {chapter}{\nonumberline Bibliography}{9}{chapter*.5}
