@@ -6,7 +6,7 @@
 \contentsline {section}{\numberline {2.2}Numerics}{3}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}euqations of motion}{3}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Euler-Method}{3}{subsection.2.2.2}
-\contentsline {subsubsection}{\numberline {2.2.2.1}Konsistenz - und Konvergenzordnung}{4}{subsubsection.2.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2.1}Procedural Error and Order of Consistency}{4}{subsubsection.2.2.2.1}
 \contentsline {subsection}{\numberline {2.2.3}Leap-Frog-Verfahren}{6}{subsection.2.2.3}
 \contentsline {subsection}{\numberline {2.2.4}Boris-Pusher}{6}{subsection.2.2.4}
 \contentsline {subsection}{\numberline {2.2.5}Vay-Pusher}{6}{subsection.2.2.5}
