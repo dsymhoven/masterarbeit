@@ -28,7 +28,7 @@ bibliography=totoc,
 
 \usepackage[T1]{fontenc}				% neue Rechtschreibung
 \usepackage[latin1]{inputenc}		         % Umlaute ermöglichen
-\usepackage[english, german]{babel}
+\usepackage[german, english]{babel}
 \usepackage{fancyhdr}				% für Kopf- und FußŸzeile
 \usepackage[hyperref]{xcolor}		
 \definecolor{MyBlue}{RGB}{50,79,132}		% für Kopf- und Fußzeile
@@ -103,20 +103,22 @@ bibliography=totoc,
 
 %======================== EINLEITUNG ========================
 %===========================================================
-\chapter{Einleitung}
+\chapter{Introduction}
 Now it's going loose ...  \cite{Allen}
 
-\chapter{Grundlagen}
-\section{Liénard-Wiechert Potentiale}
-\label{sec: lw-Potentiale}
-\section{Numerik}
+\chapter{Fundamentals}
+\section{Liénard-Wiechert Potentials}
+\label{sec: lw-potentials}
+\section{Numerics}
 \noindent
-Der folgende Abschnitt beschäftigt sich mit dem numerischen Aspekt der Arbeit. Wir stellen die zugrunde liegende Bewegungsgleichung und deren Historie vor. Anschließend gehen wir auf diverse Methoden ein, mit Hilfe derer sich Differentialgleichungen lösen lassen. Über die vergangenen Jahre wurden unzählige Verfahren entwickelt, wobei jedes seine Stärken und Schwächen hat. Deshalb sollte zunächst immer wohl überlegt sein, was erreicht werden soll. Einige Methoden sind sehr einfach, dafür unpräzise, andere sind sehr aufwändig zu implementieren, dafür sehr genau. Eine Methode für alle Probleme gibt es leider nicht. \\
-Im Anschluss wollen wir dann noch die numerische Komplexität ausgewählter Algorithmen definieren und berechnen.
+The following section deals with the numeric aspects of this thesis. We explain the underlying equation of motions and their history. After that, we go into several methods with which we can solve differential equations. Over the course of the last decades numerous methods were invented each of which has its own strength and weaknesses. 
+Some of them are very easy to implement, which in turn usually leads to unprecise results. Others are quite complicated and sophisticated to implement, but very accurate.
+Therefore one should always consider which method is best for the problem and what it is one want to to achieve.\\
+Following this, we also want to define and calculate the numerical complexity of some chosen algorithms. 
 
-\subsection{Bewegungsgleichung}
-Wie aus der Mechanik bekannt, ist die Dynamik eines Teilchens durch die auf ihn wirkenden Kräfte vorgeschrieben. In unserem Fall wirkt eine Kraft aufgrund von elektrischen und magnetischen Feldern. Dies können zum einen externe Felder, aber auch Felder sein, die durch die Bewegung anderer Teilchen entstehen, wie wir im Abschnitt \ref{sec: lw-Potentiale} bereits gesehen haben. \\
-Unsere Systemdynamik wird durch die \textit{Lorentz-Newton} Gleichung beschrieben
+\subsection{euqations of motion}
+As we know from mechanics the dynamic of a particle is determined by the forces acting on it. In our case there is a force due to electro-magnetic fields. That can be external fields, but also fields due to moving particles, as we explained in section \ref{sec: lw-potentials}.\\
+The dynamics of our system is described by the \textit{Lorentz-Newton} equation
 \beq
 \label{eqn: Lorentz-Newton}
 \bal
@@ -124,8 +126,8 @@ Unsere Systemdynamik wird durch die \textit{Lorentz-Newton} Gleichung beschriebe
 \frac{\dm u^{\mu}}{\dm \tau} &= F^{\mu}_{~\nu}~u^{\nu} + g^{\mu},
 \eal
 \eeq
-deren Herleitung länglich ist und wir deshalb auf Literatur verweisen möchten. %MISSING: cite
-Der Term $F^{\mu}_{~\nu}$ beschreibt den elektromagnetischen Feldstärketensor
+which derivation is quite longish, why we want to refer to literature. \\%MISSING: cite
+The term $F^{\mu}_{~\nu}$ describes the electromagnetic field strength tensor
 \beq
 F^{\mu}_{~\nu} = 
 \begin{pmatrix}
@@ -136,11 +138,13 @@ E_z & B_y & -B_x & 0
 \end{pmatrix}
 .
 \eeq
-Der Dämpfungsterm $g^{\mu}$ berücksichtigt den Fakt, dass bewegte Ladungen Felder abstrahlen und dadurch kinetische Energie verlieren. Die Strahlungsdämpfung wurde erstmals durch Max \textit{Abraham} und Hendrick \textit{Lorentz} in ihrer gleichnamigen Gleichung im Rahmen der klassischen Elektrodynamik behandelt. 1938 verallgemeinerte \textit{Dirac} dann die Gleichung, unter Berücksichtigung der Relativitästheorie. % MISSING: Cites
-% MISSING: Details missing. Historisches. Abraham, Lorentz, Dirac Landau Lifschitz Gleichung usw.
-Wir wollen uns nun damit beschäftigen, wie wir die Bewegungsgleichung \eqref{eqn: Lorentz-Newton} numerisch integrieren können.
-\subsection{Euler-Verfahren}
-Das wohl einfachste aller Verfahren ist das explizite \textit{Euler}-Verfahren. Es ist sehr schnell zu implementieren, aber auch sehr unpräzise, wie wir in Kürze sehen werden. Bevor wir uns aber mit den Details des expliziten Euler-Verfahrens beschäftigen, müssen wir über die Voraussetzungen sprechen, die alle Verfahren gemeinsam haben. Ausgangspunkt ist immer ein System erster Ordnung der Form 
+The damping term $g^{\mu}$ considers the fact that charged particles radiate fields when they are moving which leads to a loss in their kinetic energy. Within the context of classical electrodynamics Max \textit{Abraham} and Hendrick \textit{Lorentz} discussed radiation damping in their same-named equation first.
+In 1938 \textit{Dirac} generalized the equation whilst taking special relativity into account. \\% MISSING: Cites
+% MISSING: Details. Historisches. Abraham, Lorentz, Dirac Landau Lifschitz Gleichung usw.
+We now want to deal with how to solve the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} numerically.
+\subsection{Euler-Method}
+The most simple method is the explicit \textit{Euler}-Method. It's easy to implement but not very accurate, as we shall see later. But before we go into the details of the explicit Euler-scheme we need to address some prerequisites all following methods will have in common. 
+Starting point will always be a first oder system of the kind
 \beq
 \label{eqn: Euler}
 \bal
@@ -150,8 +154,8 @@ x^{\mu}(\tau_0) &= x^{\mu}_0\\
 u^{\mu}(\tau_0) &= u^{\mu}_0.
 \eal
 \eeq
-Systeme höherer Ordnung können immer auf ein System erster Ordnung reduziert werden. \\
-Um die Bewegungsgleichung numerisch lösen zu können, muss der Definitionsraum diskretisiert werden. Dazu wird das Zeitintervall in N äquidistante Teilintervalle $h$ zerlegt, sodass
+Systems of higher order can always be reduced to a first order system. \\
+In order to solve the equation of motion numerically the domain needs to be discretized. Therefore we divide the time interval into N equidistant partial intervals $h$, such that
 \beq
 h \coloneqq \Delta \tau = \tau_{i+1} - \tau_i \nn
 \eeq
