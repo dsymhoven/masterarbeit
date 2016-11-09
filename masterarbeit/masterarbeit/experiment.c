@@ -16,9 +16,9 @@
 void testMaxwellPusher(){
     
     
-// ======================================================
+    // ======================================================
 #pragma mark: Initializations
-// ======================================================
+    // ======================================================
     Grid Grid;
     int numberOfGridPointsInX = 256;
     int numberOfGridPointsInY = 256;
@@ -31,17 +31,22 @@ void testMaxwellPusher(){
     initSamplePulseOnGrid(&Grid);
     double dt = 0.5 * Grid.dx;
     double t = 0;
-    double tEnd = 20;
+    double tEnd = 1;
     char filename[32] = "some";
     
-// ======================================================
+    // ======================================================
 #pragma mark: Main Routine
-// ======================================================
-    for(int p = 0; p < tEnd / dt; p++){
-
-        t += dt;
-    }
-
-    writeFieldsToFile(&Grid);
+    // ======================================================
+//    for(int p = 0; p < tEnd / dt; p++){
+//        writeFieldsToFile(&Grid, filename, p);
+//        
+//        pushEFieldOnGrid(&Grid, dt);
+//        PushBFieldOnGrid(&Grid, dt);
+//        PushBFieldOnGrid(&Grid, dt);
+//        pushEFieldOnGrid(&Grid, dt);
+//        t += dt;
+//    }
+    printf("executing bash-script ...\n");
+    system("~/Desktop/Projects/masterarbeit/Analysis/script.sh");
     freeMemoryOnGrid(&Grid);
 }

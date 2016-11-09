@@ -34,7 +34,7 @@ void freeMemoryOnGrid(Grid *Grid);
 void initSamplePulseOnGrid(Grid *Grid);
 void pushEFieldOnGrid(Grid *Grid, double dt);
 void PushBFieldOnGrid(Grid *Grid, double dt);
-void writeFieldsToFile(Grid *Grid);
+void writeFieldsToFile(Grid *Grid, char *filename, int index);
 //void calcualteNearFieldBoxes(double x[4], int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox);
 
 #endif /* grid_h */

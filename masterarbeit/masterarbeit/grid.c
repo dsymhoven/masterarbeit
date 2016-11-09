@@ -9,6 +9,7 @@
 #include "grid.h"
 #include "stdlib.h"
 #include "math.h"
+#include "string.h"
 
 
 
@@ -178,9 +179,12 @@ void PushBFieldOnGrid(Grid *Grid, double dt){
     }
 }
 
-void writeFieldsToFile(Grid *Grid){
+void writeFieldsToFile(Grid *Grid, char *filename, int index){
     printf("Writing to file ...\n");
-    FILE *fid = fopen("fields.txt", "w");
+    sprintf(filename, "fields%d", index);
+    strcat(filename, ".txt");
+    FILE *fid = fopen(filename,"w");
+    
     if (fid == NULL){
         printf("ERROR: Could not open file fields.txt");
     }
