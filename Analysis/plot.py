@@ -23,6 +23,6 @@ for file in files:
 	plt.xlabel("X")
 	plt.ylabel("Y")
 	filename = file.replace(".txt", "")
-	filename = file.replace("fields/", "")
+	filename = filename.replace("fields/", "")
 	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight')
 	#plt.show()
