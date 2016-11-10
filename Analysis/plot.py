@@ -9,16 +9,18 @@ N = 100
 files = glob.glob('fields/*.txt')
 
 for file in files:
-	x, y, z = np.genfromtxt(file, unpack=True)
+	#x, y, z = np.genfromtxt(file, unpack=True)
+	data = np.genfromtxt(file)
 	
-	xi = np.linspace(x.min(), x.max(), N)
-	yi = np.linspace(y.min(), y.max(), N)
-	[X,Y]=np.meshgrid(xi,yi);
+	#xi = np.linspace(x.min(), x.max(), N)
+	#yi = np.linspace(y.min(), y.max(), N)
+	#[X,Y]=np.meshgrid(xi,yi);
 	#zi = griddata(x,y,z,X,Y, interp='linear');
-	zi = scipy.interpolate.griddata((x, y), z, (xi[None,:], yi[:,None]), method='linear')
+	#zi = scipy.interpolate.griddata((x, y), z, (xi[None,:], yi[:,None]), method='linear')
 	
 	fig = plt.figure()
-	plt.contourf(xi, yi, zi,100)
+	#plt.contourf(xi, yi, zi,100)
+	plt.imshow(data, vmin=0, vmax=1.0)
 	plt.colorbar()
 	plt.xlabel("X")
 	plt.ylabel("Y")
