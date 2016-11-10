@@ -12,7 +12,7 @@
 #include "string.h"
 
 
-
+/// @brief initializes all properties of struct Grid. Property dx, dy, dz are calcuated by lengthOfSimulationBoxInX / numberOfGridPointsInX or in the other dimensions respectively. Afterward field arrays for E and B are allocated
 void initGrid(Grid *Grid, int numberOfGridPointsInX, int numberOfGridPointsInY, int numberOfGridPointsInZ, double lengthOfSimulationBoxInX, double lengthOfSimulationBoxInY, double lengthOfSimulationBoxInZ){
     printf("initializing Grid ...\n");
     Grid->numberOfGridPointsInX = numberOfGridPointsInX;
@@ -29,7 +29,9 @@ void initGrid(Grid *Grid, int numberOfGridPointsInX, int numberOfGridPointsInY, 
     allocateFieldsOnGrid(Grid);
     
 }
-
+/// @brief Allocation of E and B field array.
+/// @remark arrayLength = 3 * numberOfGridPointsInX * numberOfGridPointsInY * numberOfGridPointsInZ. Factor 3 because we need x,y and z components on each grid point
+/// @throws ERROR: allocation for E and B failed! if memory couldn't be allocated
 void allocateFieldsOnGrid(Grid *Grid){
     printf("allocating Fields ... \n");
     int numberOfGridPointsInX = Grid->numberOfGridPointsInX;
@@ -51,12 +53,15 @@ void allocateFieldsOnGrid(Grid *Grid){
     }
 }
 
+///@brief method for releasing all previously allocated memory. Put all free() invokations in here
 void freeMemoryOnGrid(Grid *Grid){
     printf("releasing allocated memory ...\n");
     free(Grid->B);
     free(Grid->E);
 }
 
+///@brief maxwellPusher for E field.
+///@remark E field is calculated via negative curl. Therefore value of B on the left side of E on the grid is required. Thus start i,j,k with 1
 void pushEFieldOnGrid(Grid *Grid, double dt){
     double Bx_ijk;
     double By_ijk;
@@ -111,22 +116,24 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
     
 }
 
+///@brief inits a sample E and B field onto the grid for testing purposes.
 void initSamplePulseOnGrid(Grid *Grid){
-    int nx = Grid->numberOfGridPointsInX;
     int ny = Grid->numberOfGridPointsInY;
     int nz = Grid->numberOfGridPointsInZ;
     
     for (int i = 32*4; i < 32*5; i++){
-        for (int j = 1; j < ny; j++){
+        for (int j = 1; j < ny ; j++){
             for (int k = 1; k < nz; k++){
                 Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] = cos(i * Grid->dz);
-                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = cos(i * Grid->dz);
+                //Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = cos(i * Grid->dz);
             }
         }
     }
     
 }
 
+///@brief maxwellPusher for B field.
+///@remark B field is calculated via positive curl. Therefore value of E on the right side of B on the grid is required. Thus stop i,j,k with at n - 1 where n denotes the numberOfGridPoints
 void PushBFieldOnGrid(Grid *Grid, double dt){
     double Ex_ijk;
     double Ey_ijk;
@@ -179,6 +186,9 @@ void PushBFieldOnGrid(Grid *Grid, double dt){
     }
 }
 
+///@brief loops through the entire E and B array and writes |B|^2 and |E|^2 to seperate files. File is structured similiar to the grid.
+///@param filename pointer to a char. Gets modified inside the method
+///@param index outer loop index. Is used to name the output file
 void writeFieldsToFile(Grid *Grid, char *filename, int index){
     printf("Writing to file ...\n");
     sprintf(filename, "fields%d", index);
@@ -195,34 +205,30 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index){
         int k = 32*4;
         double Ex, Ey, Ez, Bx, By, Bz;
     
-        for (int i = 0; i < nx; i++)
+        for (int j = 0; j < ny; j++)
         {
-            for (int j = 0; j < ny; j++)
+            for (int i = 0; i < nx; i++)
             {
                 Bx = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
                 By = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
                 Bz = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
                 
-                Ex = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
-                Ey = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
-                Ez = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
+                Ex = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
+                Ey = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
+                Ez = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
                 double Bsq = Bx * Bx + By * By + Bz * Bz;
                 double Esq = Ex * Ex + Ey * Ey + Ez * Ez;
                 
-                if (i % 5 == 0){
-                    fprintf(fid, "%f %f %f\n", Grid->dx * i, Grid->dy * j, Esq);
-                }
-               
+                fprintf(fid, "%f\t", Esq);
+            }
+            fprintf(fid,"\n");
                 
-            }
-            if (i % 5 == 0){
-                fprintf(fid, "\n");
-            }
-            
         }
-        fclose(fid);
+
     }
+    fclose(fid);
 }
+
 
 //void calcualteNearFieldBoxes(double x[4], int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox){
 ////    int i, j, k;
