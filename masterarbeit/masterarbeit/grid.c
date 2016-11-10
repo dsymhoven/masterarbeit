@@ -191,12 +191,15 @@ void PushBFieldOnGrid(Grid *Grid, double dt){
 ///@param index outer loop index. Is used to name the output file
 void writeFieldsToFile(Grid *Grid, char *filename, int index){
     printf("Writing to file ...\n");
-    sprintf(filename, "fields%d", index);
+    sprintf(filename, "E_field%d", index);
     strcat(filename, ".txt");
     FILE *fid = fopen(filename,"w");
+    sprintf(filename, "B_field%d", index);
+    strcat(filename, ".txt");
+    FILE *fid2 = fopen(filename,"w");
     
-    if (fid == NULL){
-        printf("ERROR: Could not open file fields.txt");
+    if (fid == NULL || fid2 == NULL){
+        printf("ERROR: Could not open file for E or B field!");
     }
     else{
         int nx = Grid->numberOfGridPointsInX;
@@ -218,13 +221,12 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index){
                 Ez = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
                 double Bsq = Bx * Bx + By * By + Bz * Bz;
                 double Esq = Ex * Ex + Ey * Ey + Ez * Ez;
-                
+                fprintf(fid2, "%f\t", Bsq);
                 fprintf(fid, "%f\t", Esq);
             }
             fprintf(fid,"\n");
-                
+            fprintf(fid,"\n");
         }
-
     }
     fclose(fid);
 }
