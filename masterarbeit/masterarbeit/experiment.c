@@ -50,3 +50,8 @@ void testMaxwellPusher(){
     system("~/Desktop/Projects/masterarbeit/Analysis/script.sh");
     freeMemoryOnGrid(&Grid);
 }
+
+
+void testBorisPusher(){
+    
+}

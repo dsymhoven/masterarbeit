@@ -12,4 +12,5 @@
 #include <stdio.h>
 
 void testMaxwellPusher();
+void testBorisPusher();
 #endif /* experiment_h */

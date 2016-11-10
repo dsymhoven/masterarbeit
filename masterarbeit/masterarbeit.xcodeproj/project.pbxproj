@@ -11,6 +11,7 @@
 		611BB7491D8D4D6200DDBF08 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 611BB7481D8D4D6200DDBF08 /* main.c */; };
 		61514EEE1DAF771D00BD0B90 /* grid.c in Sources */ = {isa = PBXBuildFile; fileRef = 61514EEC1DAF771D00BD0B90 /* grid.c */; };
 		619129211DA531BD00A848D1 /* calculations.c in Sources */ = {isa = PBXBuildFile; fileRef = 619129201DA531BD00A848D1 /* calculations.c */; };
+		61B3BF5C1DD4DF650092B42E /* particle.c in Sources */ = {isa = PBXBuildFile; fileRef = 61B3BF5A1DD4DF650092B42E /* particle.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,8 @@
 		61514EED1DAF771D00BD0B90 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grid.h; sourceTree = "<group>"; };
 		6191291D1DA530A700A848D1 /* calculations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = calculations.h; sourceTree = "<group>"; };
 		619129201DA531BD00A848D1 /* calculations.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = calculations.c; sourceTree = "<group>"; };
+		61B3BF5A1DD4DF650092B42E /* particle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = particle.c; sourceTree = "<group>"; };
+		61B3BF5B1DD4DF650092B42E /* particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = particle.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +81,7 @@
 			children = (
 				6191291D1DA530A700A848D1 /* calculations.h */,
 				610195DF1DC9DC34000B08E9 /* experiment.h */,
+				61B3BF5B1DD4DF650092B42E /* particle.h */,
 				61514EED1DAF771D00BD0B90 /* grid.h */,
 			);
 			name = Header;
@@ -89,6 +93,7 @@
 				619129201DA531BD00A848D1 /* calculations.c */,
 				61514EEC1DAF771D00BD0B90 /* grid.c */,
 				610195DE1DC9DC34000B08E9 /* experiment.c */,
+				61B3BF5A1DD4DF650092B42E /* particle.c */,
 			);
 			name = Implementations;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61B3BF5C1DD4DF650092B42E /* particle.c in Sources */,
 				611BB7491D8D4D6200DDBF08 /* main.c in Sources */,
 				61514EEE1DAF771D00BD0B90 /* grid.c in Sources */,
 				610195E01DC9DC34000B08E9 /* experiment.c in Sources */,
