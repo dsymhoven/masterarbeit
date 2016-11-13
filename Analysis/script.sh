@@ -15,7 +15,7 @@ python2.7 plot.py
 # 6. chane to png folder
 cd png/
 # 7. execute ffmpeg to create video file
-~/../../usr/local/bin/ffmpeg -framerate 4 -start_number 0 -i fields%d.png -vf "scale=720:trunc(ow/a/2)*2" -c:v libx264 -r 30 -pix_fmt yuv420p movie.mp4
+~/../../opt/local/bin/ffmpeg -framerate 4 -start_number 0 -i E_field%d.png -vf "scale=720:trunc(ow/a/2)*2" -c:v libx264 -r 30 -pix_fmt yuv420p movie.mp4
 # 8. create new folder for Video file
 cd ../
 mkdir -p Movies/
