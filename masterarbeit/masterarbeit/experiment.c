@@ -11,6 +11,7 @@
 #include "math.h"
 #include "stdio.h"
 #include "grid.h"
+#include "stdbool.h"
 
 
 void testMaxwellPusher(){
@@ -38,7 +39,7 @@ void testMaxwellPusher(){
 #pragma mark: Main Routine
     // ======================================================
     for(int p = 0; p < tEnd / dt; p++){
-        writeFieldsToFile(&Grid, filename, p);
+        writeFieldsToFile(&Grid, filename, p, true, false);
         
         pushEFieldOnGrid(&Grid, dt);
         PushBFieldOnGrid(&Grid, dt);

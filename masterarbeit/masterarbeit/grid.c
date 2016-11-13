@@ -10,6 +10,7 @@
 #include "stdlib.h"
 #include "math.h"
 #include "string.h"
+#include "stdbool.h"
 
 
 /// @brief initializes all properties of struct Grid. Property dx, dy, dz are calcuated by lengthOfSimulationBoxInX / numberOfGridPointsInX or in the other dimensions respectively. Afterward field arrays for E and B are allocated
@@ -189,18 +190,28 @@ void PushBFieldOnGrid(Grid *Grid, double dt){
 ///@brief loops through the entire E and B array and writes |B|^2 and |E|^2 to seperate files. File is structured similiar to the grid.
 ///@param filename pointer to a char. Gets modified inside the method
 ///@param index outer loop index. Is used to name the output file
-void writeFieldsToFile(Grid *Grid, char *filename, int index){
+void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool plotB){
     printf("Writing to file ...\n");
-    sprintf(filename, "E_field%d", index);
-    strcat(filename, ".txt");
-    FILE *fid = fopen(filename,"w");
-    sprintf(filename, "B_field%d", index);
-    strcat(filename, ".txt");
-    FILE *fid2 = fopen(filename,"w");
+    FILE *fid = NULL;
+    FILE *fid2 = NULL;
     
-    if (fid == NULL || fid2 == NULL){
-        printf("ERROR: Could not open file for E or B field!");
+    if (plotE){
+        sprintf(filename, "E_field%d", index);
+        strcat(filename, ".txt");
+        fid = fopen(filename,"w");
+        if (fid == NULL){
+            printf("ERROR: Could not open file E_field!");
+        }
     }
+    if(plotB){
+        sprintf(filename, "B_field%d", index);
+        strcat(filename, ".txt");
+        fid2 = fopen(filename,"w");
+        if (fid2 == NULL){
+            printf("ERROR: Could not open file B_field!");
+        }
+    }
+    
     else{
         int nx = Grid->numberOfGridPointsInX;
         int ny = Grid->numberOfGridPointsInY;
@@ -219,13 +230,21 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index){
                 Ex = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
                 Ey = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
                 Ez = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
-                double Bsq = Bx * Bx + By * By + Bz * Bz;
-                double Esq = Ex * Ex + Ey * Ey + Ez * Ez;
-                fprintf(fid2, "%f\t", Bsq);
-                fprintf(fid, "%f\t", Esq);
+                if(plotE){
+                    double Esq = Ex * Ex + Ey * Ey + Ez * Ez;
+                    fprintf(fid, "%f\t", Esq);
+                }
+                if (plotB){
+                    double Bsq = Bx * Bx + By * By + Bz * Bz;
+                    fprintf(fid2, "%f\t", Bsq);
+                }
             }
-            fprintf(fid,"\n");
-            fprintf(fid,"\n");
+            if(plotE){
+                fprintf(fid,"\n");
+            }
+            if(plotB){
+                fprintf(fid2,"\n");
+            }
         }
     }
     fclose(fid);
