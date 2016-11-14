@@ -16,12 +16,15 @@ struct Particle {
     double mass;
     double x[4];
     double u[4];
-    double **trajectoryHistory;
-    double **velocityHistory;
+    double **xHistory;
+    double **uHistory;
     
 };
 
 typedef struct Particle Particle;
 
 void initParticle(Particle *Particle, double const charge, double const mass, int const arrayLength);
+void writeParticleToFile(Particle *Particle, char *filename, int index);
+void freeMemoryOnParticle(Particle *Particle, int const arrayLength);
+void allocateParticleHistories(Particle *Particle, int const arrayLength);
 #endif /* particle_h */
