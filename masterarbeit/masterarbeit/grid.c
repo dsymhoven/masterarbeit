@@ -14,7 +14,7 @@
 #include "particle.h"
 
 
-/// @brief initializes all properties of struct Grid. Property dx, dy, dz are calcuated by lengthOfSimulationBoxInX / numberOfGridPointsInX or in the other dimensions respectively. Afterward field arrays for E and B are allocated
+/// @brief initializes all properties of struct Grid. Property dx, dy, dz are calcuated by lengthOfSimulationBoxInX / numberOfGridPointsInX or in the other dimensions respectively.
 void initGrid(Grid *Grid, int numberOfGridPointsInX, int numberOfGridPointsInY, int numberOfGridPointsInZ, double lengthOfSimulationBoxInX, double lengthOfSimulationBoxInY, double lengthOfSimulationBoxInZ){
     printf("initializing Grid ...\n");
     Grid->numberOfGridPointsInX = numberOfGridPointsInX;
@@ -27,8 +27,6 @@ void initGrid(Grid *Grid, int numberOfGridPointsInX, int numberOfGridPointsInY, 
     Grid->dx = lengthOfSimulationBoxInX / numberOfGridPointsInX;
     Grid->dy = lengthOfSimulationBoxInY / numberOfGridPointsInY;
     Grid->dz = lengthOfSimulationBoxInZ / numberOfGridPointsInZ;
-    
-    allocateFieldsOnGrid(Grid);
     
 }
 /// @brief Allocation of E and B field array.
@@ -204,6 +202,7 @@ void PushBFieldOnGrid(Grid *Grid, double dt){
 ///@brief loops through the entire E and B array and writes |B|^2 and |E|^2 to seperate files. File is structured similiar to the grid.
 ///@param filename pointer to a char. Gets modified inside the method
 ///@param index outer loop index. Is used to name the output file
+///@throws ERROR: Could not open file for E or B field
 void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool plotB){
     printf("Writing fields to file ...\n");
     FILE *fid = NULL;

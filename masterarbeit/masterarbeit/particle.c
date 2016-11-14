@@ -10,6 +10,7 @@
 #include "stdlib.h"
 #include "string.h"
 
+/// @brief initializes all properties of struct Particle. x and u are initilized with 0
 void initParticle(Particle *Particle, double const charge, double const mass, int const arrayLength){
     printf("initializing Particle ...\n");
     for (int i = 0; i < 4; i++){
@@ -21,6 +22,10 @@ void initParticle(Particle *Particle, double const charge, double const mass, in
     allocateParticleHistories(Particle, arrayLength);
 }
 
+///@brief allocates memory for trajectroy and velocity history.
+///@remark Since x and u are both four vectors we need to allocate an array of arrays. We need "arrayLength = tEnd / dt" many arrays with length 4.
+///@param arrayLength number of simulation steps. Meaning tEnd / dt
+///@throws ERROR: Could not allocate memory for one of the arrays
 void allocateParticleHistories(Particle *Particle, int const arrayLength){
     printf("allocating memory for Particle histories\n");
     
@@ -56,6 +61,8 @@ void allocateParticleHistories(Particle *Particle, int const arrayLength){
 }
 
 ///@brief writes current position and velocity vectors to file. First line is four vector x. Second line is four vector u.
+///@param filename pointer to a char. Gets modified inside the method
+///@param index outer loop index. Is used to name the output file
 void writeParticleToFile(Particle *Particle, char *filename, int index){
     printf("Writing Particle to file ...\n");
     FILE *fid = NULL;

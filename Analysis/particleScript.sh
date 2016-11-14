@@ -36,4 +36,4 @@ mkdir -p Movies/
 # 10. copy video into new folder
 mv png/movie.mp4 Movies
 # clean up
-rm -rf png/ #fields/
+rm -rf png/

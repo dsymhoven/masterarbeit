@@ -31,6 +31,7 @@ void testMaxwellPusher(){
     int lengthOfSimulationBoxInZ = 32;
     
     initGrid(&Grid, numberOfGridPointsInX, numberOfGridPointsInY, numberOfGridPointsInZ, lengthOfSimulationBoxInX, lengthOfSimulationBoxInY, lengthOfSimulationBoxInZ);
+    allocateFieldsOnGrid(&Grid);
     initSamplePulseOnGrid(&Grid);
     
     double dt = 0.5 * Grid.dx;
@@ -63,13 +64,6 @@ void testBorisPusher(){
     // ======================================================
 #pragma mark: Initializations
     // ======================================================
-//    Grid Grid;
-//    int numberOfGridPointsInX = 256;
-//    int numberOfGridPointsInY = 256;
-//    int numberOfGridPointsInZ = 256;
-//    int lengthOfSimulationBoxInX = 32;
-//    int lengthOfSimulationBoxInY = 32;
-//    int lengthOfSimulationBoxInZ = 32;
     
     Particle Particle;
     double charge = 1.0;
@@ -87,7 +81,6 @@ void testBorisPusher(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    //initGrid(&Grid, numberOfGridPointsInX, numberOfGridPointsInY, numberOfGridPointsInZ, lengthOfSimulationBoxInX, lengthOfSimulationBoxInY, lengthOfSimulationBoxInZ);
     initParticle(&Particle, charge, mass, arrayLength);
     
     Particle.x[0] = 0;
@@ -118,6 +111,7 @@ void testBorisPusher(){
         
         t += dt;
     }
+    printf("executin bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/particleScript.sh");
     freeMemoryOnParticle(&Particle, arrayLength);
 }
