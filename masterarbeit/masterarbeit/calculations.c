@@ -142,7 +142,7 @@ void calculateIntersectionPoint(double xInside[4], double xOutside[4], double xO
  Then obtain "uPlus" by performing rotation with "uPrime" and internally computed assisting values.
  Finally, add another half acceleration.
  */
-void borisPusher(double *u, double *E, double *B, double dt, double chargeOverMass){
+void updateVelocityWithBorisPusher(double *u, double *E, double *B, double dt, double chargeOverMass){
 
     int dimension = 3;
     double uPrime[3];

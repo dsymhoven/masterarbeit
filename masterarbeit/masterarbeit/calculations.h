@@ -6,7 +6,7 @@ HEADER FÜR EIGENE FUNKTIONEN
 #ifndef CALCULATIONS
 #define CALCULATIONS
 
-void borisPusher(double *u, double *E, double *B, double dt, double chargeOverMass);
+void updateVelocityWithBorisPusher(double *u, double *E, double *B, double dt, double chargeOverMass);
 void updateLocation(double *u, double *x, double dt);
 void crossProduct(double a[3], double b[3], double result[3]);
 bool isInsideBackwardLightcone(double xParticle[4], double xObserver[4]);
