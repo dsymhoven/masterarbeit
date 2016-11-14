@@ -11,6 +11,7 @@
 #include "math.h"
 #include "string.h"
 #include "stdbool.h"
+#include "particle.h"
 
 
 /// @brief initializes all properties of struct Grid. Property dx, dy, dz are calcuated by lengthOfSimulationBoxInX / numberOfGridPointsInX or in the other dimensions respectively. Afterward field arrays for E and B are allocated
@@ -54,9 +55,9 @@ void allocateFieldsOnGrid(Grid *Grid){
     }
 }
 
-///@brief method for releasing all previously allocated memory. Put all free() invokations in here
+///@brief method for releasing all previously allocated memory in struct Grid. Put all free() invokations in here
 void freeMemoryOnGrid(Grid *Grid){
-    printf("releasing allocated memory ...\n");
+    printf("releasing allocated memory in Grid...\n");
     free(Grid->B);
     free(Grid->E);
 }
@@ -119,18 +120,31 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
 
 ///@brief inits a sample E and B field onto the grid for testing purposes.
 void initSamplePulseOnGrid(Grid *Grid){
+    int nx = Grid->numberOfGridPointsInX;
     int ny = Grid->numberOfGridPointsInY;
     int nz = Grid->numberOfGridPointsInZ;
     
-    for (int i = 32*4; i < 32*5; i++){
-        for (int j = 1; j < ny ; j++){
-            for (int k = 1; k < nz; k++){
-                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] = cos(i * Grid->dz);
-                //Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = cos(i * Grid->dz);
+//    for (int i = 32*4; i < 32*6; i++){
+//        for (int j = 32*4; j < 32*6; j++){
+//            for (int k = 32*4; k < 32*6; k++){
+//                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] = exp(-(pow((i - 32*5)*Grid->dx, 2) + pow((j - 32*5)*Grid->dy, 2) + pow((k - 32*5)*Grid->dz, 2)));
+//                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = exp(-(pow((i - 32*5)*Grid->dx, 2) + pow((j - 32*5)*Grid->dy, 2) + pow((k - 32*5)*Grid->dz, 2)));
+//            }
+//        }
+//    }
+    for (int i = 16 * 4; i < 16 * 5; i++)
+    {
+        for (int j = 1; j < ny; j++)
+        {
+            for (int l = 1; l < nz; l++)
+            {
+                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 2] = sin(i * 2 * M_PI / 32)*sin(M_PI*j/256);
+                
+                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 1] = sin(i * 2 * M_PI / 32)*sin(M_PI*j/256);
             }
         }
+        
     }
-    
 }
 
 ///@brief maxwellPusher for B field.
@@ -191,7 +205,7 @@ void PushBFieldOnGrid(Grid *Grid, double dt){
 ///@param filename pointer to a char. Gets modified inside the method
 ///@param index outer loop index. Is used to name the output file
 void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool plotB){
-    printf("Writing to file ...\n");
+    printf("Writing fields to file ...\n");
     FILE *fid = NULL;
     FILE *fid2 = NULL;
     
@@ -216,7 +230,7 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool p
         int nx = Grid->numberOfGridPointsInX;
         int ny = Grid->numberOfGridPointsInY;
         int nz = Grid->numberOfGridPointsInZ;
-        int k = 32*4;
+        int k = 32*5;
         double Ex, Ey, Ez, Bx, By, Bz;
     
         for (int j = 0; j < ny; j++)
