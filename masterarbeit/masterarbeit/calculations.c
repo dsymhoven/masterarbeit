@@ -6,6 +6,7 @@ IMPLEMENTATION OF CALCULATIONS HEADER
 #import <stdbool.h>
 #import <stdio.h>
 #include "calculations.h"
+#include "particle.h"
 /**
 @brief calculates the cross product of two vectors "a" and "b" and saves the result in array "result"
 @param a first vector of cross product
@@ -142,7 +143,7 @@ void calculateIntersectionPoint(double xInside[4], double xOutside[4], double xO
  Then obtain "uPlus" by performing rotation with "uPrime" and internally computed assisting values.
  Finally, add another half acceleration.
  */
-void updateVelocityWithBorisPusher(double *u, double *E, double *B, double dt, double chargeOverMass){
+void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *Bextern, double dt){
 
     int dimension = 3;
     double uPrime[3];
@@ -152,11 +153,11 @@ void updateVelocityWithBorisPusher(double *u, double *E, double *B, double dt, d
     double uPrimeCrossS[3];
     double absoluteSquareValueOfT;
     double uModifiedForCrossProduct[3];
-    
+    double chargeOverMass = Particle->charge / Particle->mass;
     
     // assisting values
     for (int i = 0; i < dimension; i++){
-        t[i] = chargeOverMass * B[i] * dt * 0.5;
+        t[i] = chargeOverMass * Bextern[i] * dt * 0.5;
     }
     
     absoluteSquareValueOfT = t[0] * t[0] + t[1] * t[1] + t[2] * t[2];
@@ -168,45 +169,45 @@ void updateVelocityWithBorisPusher(double *u, double *E, double *B, double dt, d
     // implementation of boris method
     // first obtain “uMinus” by adding half acceleration to the initial velocity
     for (int i = 0; i < dimension; i++){
-        u[i+1] +=  chargeOverMass * E[i] * dt * 0.5;
+        Particle->u[i+1] +=  chargeOverMass * Eextern[i] * dt * 0.5;
     }
     
     // Since u is a four vector rewrite it to a three dimensional vector to make it usabale for crossProduct
     for(int i = 0; i < dimension; i++){
-        uModifiedForCrossProduct[i] = u[i+1];
+        uModifiedForCrossProduct[i] = Particle->u[i+1];
     }
     
     crossProduct(uModifiedForCrossProduct, t, uMinusCrossT);
     
     for (int i = 0; i < dimension; i++){
-        uPrime[i] = u[i+1] + uMinusCrossT[i];
+        uPrime[i] = Particle->u[i+1] + uMinusCrossT[i];
     }
     
     crossProduct(uPrime, s, uPrimeCrossS);
     
     // then obtain "uPlus" by performing rotation with "uPrime" and "s"
     for (int i = 0; i < dimension; i++){
-        u[i+1] +=  uPrimeCrossS[i];
+        Particle->u[i+1] +=  uPrimeCrossS[i];
     }
     
     // finally, add another half acceleration,
     for (int i = 0; i < dimension; i++){
-        u[i+1] += chargeOverMass * E[i] * dt * 0.5;
+        Particle->u[i+1] += chargeOverMass * Eextern[i] * dt * 0.5;
     }
-    u[0] += dt;
+    Particle->u[0] += dt;
 }
 
 /**
  updates location x for particle with velocity u using x = v * dt
  time component x[0] gets updated as well.
  */
-void updateLocation(double *u, double *x, double dt){
+void updateLocation(Particle *Particle, double dt){
     int dimension = 3;
     
     for(int i = 0; i < dimension; i++){
-        x[i+1] += u[i+1] * dt;
+        Particle->x[i+1] += Particle->u[i+1] * dt;
     }
-    x[0] += dt;
+    Particle->x[0] += dt;
 }
 
 /**

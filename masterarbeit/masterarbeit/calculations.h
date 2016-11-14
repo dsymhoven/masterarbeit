@@ -2,12 +2,13 @@
 HEADER FÜR EIGENE FUNKTIONEN
 ================================================ */
 #import <stdbool.h>
+#import "particle.h"
 
 #ifndef CALCULATIONS
 #define CALCULATIONS
 
-void updateVelocityWithBorisPusher(double *u, double *E, double *B, double dt, double chargeOverMass);
-void updateLocation(double *u, double *x, double dt);
+void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *Bextern, double dt);
+void updateLocation(Particle *Particle, double dt);
 void crossProduct(double a[3], double b[3], double result[3]);
 bool isInsideBackwardLightcone(double xParticle[4], double xObserver[4]);
 bool isInsideForwardLightcone(double xParticle[4], double xObserver[4]);
