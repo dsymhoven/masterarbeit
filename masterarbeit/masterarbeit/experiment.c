@@ -12,6 +12,8 @@
 #include "stdio.h"
 #include "grid.h"
 #include "stdbool.h"
+#include "particle.h"
+#include "calculations.h"
 
 
 void testMaxwellPusher(){
@@ -30,15 +32,18 @@ void testMaxwellPusher(){
     
     initGrid(&Grid, numberOfGridPointsInX, numberOfGridPointsInY, numberOfGridPointsInZ, lengthOfSimulationBoxInX, lengthOfSimulationBoxInY, lengthOfSimulationBoxInZ);
     initSamplePulseOnGrid(&Grid);
+    
     double dt = 0.5 * Grid.dx;
     double t = 0;
-    double tEnd = 5;
+    double tEnd = 3;
     char filename[32] = "some";
+    int arrayLength = tEnd/dt;
+
     
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
-    for(int p = 0; p < tEnd / dt; p++){
+    for(int p = 0; p < arrayLength; p++){
         writeFieldsToFile(&Grid, filename, p, true, false);
         
         pushEFieldOnGrid(&Grid, dt);
@@ -55,4 +60,64 @@ void testMaxwellPusher(){
 
 void testBorisPusher(){
     
+    // ======================================================
+#pragma mark: Initializations
+    // ======================================================
+//    Grid Grid;
+//    int numberOfGridPointsInX = 256;
+//    int numberOfGridPointsInY = 256;
+//    int numberOfGridPointsInZ = 256;
+//    int lengthOfSimulationBoxInX = 32;
+//    int lengthOfSimulationBoxInY = 32;
+//    int lengthOfSimulationBoxInZ = 32;
+    
+    Particle Particle;
+    double charge = 1.0;
+    double mass = 1.0;
+    
+
+    double dt = 0.5 * 0.125;
+    double t = 0;
+    double tEnd = 3;
+    double gamma = 2.1;
+    double dir = M_PI / 4.0;
+    
+    char filename[32] = "some";
+    double Eextern[3];
+    double Bextern[3];
+    int arrayLength = tEnd / dt;
+    
+    //initGrid(&Grid, numberOfGridPointsInX, numberOfGridPointsInY, numberOfGridPointsInZ, lengthOfSimulationBoxInX, lengthOfSimulationBoxInY, lengthOfSimulationBoxInZ);
+    initParticle(&Particle, charge, mass, arrayLength);
+    
+    Particle.x[0] = 0;
+    Particle.x[1] = 10;
+    Particle.x[2] = 14;
+    Particle.x[3] = 10;
+    
+    Particle.u[0] = gamma;
+    Particle.u[1] = cos(dir)*sqrt(gamma*gamma-1.0);
+    Particle.u[2] = sin(dir)*sqrt(gamma*gamma-1.0);
+    Particle.u[3] = 0;
+    
+    Eextern[0] = 0;
+    Eextern[1] = 0;
+    Eextern[2] = 0;
+    
+    Bextern[0] = 0;
+    Bextern[1] = 0;
+    Bextern[2] = 1;
+    
+    // ======================================================
+#pragma mark: Main Routine
+    // ======================================================
+    for (int p = 0; p < tEnd / dt; p++){
+        writeParticleToFile(&Particle, filename, p);
+        updateVelocityWithBorisPusher(&Particle, Eextern, Bextern, dt);
+        updateLocation(&Particle, dt);
+        
+        t += dt;
+    }
+    system("~/Desktop/Projects/masterarbeit/Analysis/particleScript.sh");
+    freeMemoryOnParticle(&Particle, arrayLength);
 }
