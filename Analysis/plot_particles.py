@@ -6,7 +6,7 @@ from matplotlib import cm
 import scipy.interpolate
 
 N = 100
-files = glob.glob('fields/*.txt')
+files = glob.glob('Particles/*.txt')
 
 for file in files:
 	# read data from text and save it into array data
@@ -14,14 +14,18 @@ for file in files:
 	# open figure
 	fig = plt.figure()
 	# creates contour plot of data array automatically. vmin and vamx sets values for colorbar
-	plt.imshow(data, vmin=0, vmax=1.0)
-	plt.colorbar()
+	plt.plot(data[0][1], data[0][2], marker='o', color = 'r')
 	# set labels
 	plt.xlabel("X")
 	plt.ylabel("Y")
+	# set axis 
+	plt.xlim([0,32])
+	plt.ylim([0,32])
 	# define filename for saving
 	filename = file.replace(".txt", "")
-	filename = filename.replace("fields/", "")
+	filename = filename.replace("Particles/", "")
 	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight')
 	# close fig
 	plt.close(fig)
+	
+
