@@ -10,14 +10,8 @@ field = np.genfromtxt('E_fields/E_field0.txt')
 
 lengthOfSimulationBoxInX = gridParameters[0]
 lengthOfSimulationBoxInY = gridParameters[1]
-numberOfGridPointsInX = gridParameters[3]
-numberOfGridPointsInY = gridParameters[4]
-
-numberOfBoxesInX = numberOfGridPointsInX / lengthOfSimulationBoxInX
-numberOfBoxesInY = numberOfGridPointsInY / lengthOfSimulationBoxInY
-
-lengthOfOneBoxInX = lengthOfSimulationBoxInX / numberOfBoxesInX
-lengthOfOneBoxInY = lengthOfSimulationBoxInY / numberOfBoxesInY 
+lengthOfOneBoxInX = gridParameters[3]
+lengthOfOneBoxInY = gridParameters[4] 
 
 
 for file in files:
@@ -25,16 +19,28 @@ for file in files:
 	data = np.genfromtxt(file)
 	# open figure
 	fig = plt.figure()
+	# define variables
+	vx = data[0][1]
+	vy = data[0][2]
 	# plot x and y value of particle as red dot
-	plt.plot(data[0][1], data[0][2], marker='o', color = 'r')
+	plt.plot(vx, vy, marker='o', color = 'r')
 	plt.imshow(field, vmin=0, vmax=1.0)
 	plt.colorbar()
 	
 	currentAxis = plt.gca()
+	# define variables
+	xMin = data[2][0]
+	xMax = data[2][1]
+	yMin = data[2][2]
+	yMax = data[2][3]
+	
+	width = xMax - xMin
+	heigth = yMax - yMin
+	
 	rect = patches.Rectangle(
-        (10, 10),	# bottom left corner
-        20,			# width
-        20,			# heigth
+        (xMin, yMin),	
+        width,			# width
+        heigth,			# heigth
         linewidth = 1,
         edgecolor = 'r',
         fill=False  # remove background
