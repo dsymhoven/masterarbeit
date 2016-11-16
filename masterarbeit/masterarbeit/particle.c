@@ -102,6 +102,7 @@ void freeMemoryOnParticle(Particle *Particle, int const arrayLength){
     
 }
 
+///@brief saves the current box index for x,y and z in currentBoxIndexArray of Particle struct
 void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle){
     Particle->currentBoxIndexArray[0] = Particle->x[1] / Grid->boxLengthInX;
     Particle->currentBoxIndexArray[1] = Particle->x[2] / Grid->boxLengthInY;
@@ -109,6 +110,8 @@ void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle){
     
 }
 
+///@brief saves min and max values of x,y and z of the near field box in edgesOfNearFieldArray of Particle struct
+///@param sizeOfNearFieldBox the size of the near field box in units of box length. So sizeOfNearFieldBox = 1 means one box in each dimension from the current box, which particle is located in.
 void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle, int sizeOfNearFieldBox){
     int xMin = (Particle->currentBoxIndexArray[0] - sizeOfNearFieldBox) * Grid->boxLengthInX;
     int xMax = (Particle->currentBoxIndexArray[0] + sizeOfNearFieldBox + 1) * Grid->boxLengthInX;

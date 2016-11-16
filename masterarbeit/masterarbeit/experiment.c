@@ -180,7 +180,7 @@ void testNearFieldCalculation(){
         
         t += dt;
     }
-    printf("executin bash-script ...\n");
+    printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/postProcessing.sh");
     freeMemoryOnParticle(&Particle, arrayLength);
 }

@@ -56,7 +56,7 @@ for file in files:
 	plt.xticks(np.arange(0, lengthOfSimulationBoxInX + 1, lengthOfOneBoxInX))
 	plt.yticks(np.arange(0, lengthOfSimulationBoxInY + 1, lengthOfOneBoxInY))
 	
-	#plt.grid(linestyle='-', color='red')
+	plt.grid(color='red')
 	# define filename for saving
 	filename = file.replace(".txt", "")
 	filename = filename.replace("Particles/", "")

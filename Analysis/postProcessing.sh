@@ -35,7 +35,7 @@ python2.7 plot_nearField.py
 # chane to png folder
 cd png/
 # execute ffmpeg to create video file
-~/../../opt/local/bin/ffmpeg -framerate 4 -start_number 0 -i Particle%d.png -vf "scale=720:trunc(ow/a/2)*2" -c:v libx264 -r 30 -pix_fmt yuv420p movie.mp4
+~/../../opt/local/bin/ffmpeg -framerate 6 -start_number 0 -i Particle%d.png -vf "scale=720:trunc(ow/a/2)*2" -c:v libx264 -r 30 -pix_fmt yuv420p movie.mp4
 # create new folder for Video file
 cd ../
 mkdir -p Movies/
