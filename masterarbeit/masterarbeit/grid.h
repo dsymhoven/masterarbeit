@@ -16,6 +16,9 @@ struct Grid {
     int numberOfGridPointsInX;
     int numberOfGridPointsInY;
     int numberOfGridPointsInZ;
+    int boxLengthInX;
+    int boxLengthInY;
+    int boxLengthInZ;
     double lengthOfSimulationBoxInX;
     double lengthOfSimulationBoxInY;
     double lengthOfSimulationBoxInZ;
@@ -37,6 +40,5 @@ void pushEFieldOnGrid(Grid *Grid, double dt);
 void PushBFieldOnGrid(Grid *Grid, double dt);
 void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool plotB);
 void writeGridParametersToFile(Grid *Grid);
-//void calcualteNearFieldBoxes(double x[4], int lengthOfSimulationBox, int numberOfGridPoints, double *edgeOfNearFieldBox);
 
 #endif /* grid_h */

@@ -98,17 +98,25 @@ void freeMemoryOnParticle(Particle *Particle, int const arrayLength){
 }
 
 void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle, int currentBoxIndexArray[3]){
-    int numberOfBoxesInX = Grid->numberOfGridPointsInX / Grid->lengthOfSimulationBoxInX;
-    int numberOfBoxesInY = Grid->numberOfGridPointsInY / Grid->lengthOfSimulationBoxInY;
-    int numberOfBoxesInZ = Grid->numberOfGridPointsInZ / Grid->lengthOfSimulationBoxInZ;
-    
-    int boxLengthInX = Grid->lengthOfSimulationBoxInX / numberOfBoxesInX;
-    int boxLengthInY = Grid->lengthOfSimulationBoxInY / numberOfBoxesInY;
-    int boxLengthInZ = Grid->lengthOfSimulationBoxInZ / numberOfBoxesInZ;
-    
-    currentBoxIndexArray[0] = Particle->x[1] / boxLengthInX;
-    currentBoxIndexArray[1] = Particle->x[2] / boxLengthInY;
-    currentBoxIndexArray[2] = Particle->x[3] / boxLengthInZ;
+    currentBoxIndexArray[0] = Particle->x[1] / Grid->boxLengthInX;
+    currentBoxIndexArray[1] = Particle->x[2] / Grid->boxLengthInY;
+    currentBoxIndexArray[2] = Particle->x[3] / Grid->boxLengthInZ;
     
 }
 
+void getEdgesOfNearFieldBox(Grid *Grid, int currentBoxIndexArray[3], int sizeOfNearFieldBox, int edgesOfNearFieldBox[6]){
+    int xMin = (currentBoxIndexArray[0] - sizeOfNearFieldBox) * Grid->boxLengthInX;
+    int xMax = (currentBoxIndexArray[0] + sizeOfNearFieldBox + 1) * Grid->boxLengthInX;
+    int yMin = (currentBoxIndexArray[1] - sizeOfNearFieldBox) * Grid->boxLengthInY;
+    int yMax = (currentBoxIndexArray[1] - sizeOfNearFieldBox + 1) * Grid->boxLengthInY;
+    int zMin = (currentBoxIndexArray[2] - sizeOfNearFieldBox) * Grid->boxLengthInZ;
+    int zMax = (currentBoxIndexArray[2] - sizeOfNearFieldBox + 1) * Grid->boxLengthInZ;
+    
+    edgesOfNearFieldBox[0] = xMin;
+    edgesOfNearFieldBox[1] = xMax;
+    edgesOfNearFieldBox[2] = yMin;
+    edgesOfNearFieldBox[3] = yMax;
+    edgesOfNearFieldBox[4] = zMin;
+    edgesOfNearFieldBox[5] = zMax;
+    
+}

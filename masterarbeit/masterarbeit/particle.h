@@ -29,4 +29,5 @@ void writeParticleToFile(Particle *Particle, char *filename, int index);
 void freeMemoryOnParticle(Particle *Particle, int const arrayLength);
 void allocateParticleHistories(Particle *Particle, int const arrayLength);
 void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle, int currentBoxIndexArray[3]);
+void getEdgesOfNearFieldBox(Grid *Grid, int currentBoxIndexArray[3], int sizeOfNearFieldBox, int edgesOfNearFieldBox[6]);
 #endif /* particle_h */
