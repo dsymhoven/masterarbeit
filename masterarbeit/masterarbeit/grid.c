@@ -29,7 +29,7 @@ void initGrid(Grid *Grid, int numberOfGridPointsInX, int numberOfGridPointsInY, 
     Grid->dz = lengthOfSimulationBoxInZ / numberOfGridPointsInZ;
     
 }
-/// @brief Allocation of E and B field array.
+/// @brief Allocation of E and B field array. Inits E and B with 0 by default
 /// @remark arrayLength = 3 * numberOfGridPointsInX * numberOfGridPointsInY * numberOfGridPointsInZ. Factor 3 because we need x,y and z components on each grid point
 /// @throws ERROR: allocation for E and B failed! if memory couldn't be allocated
 void allocateFieldsOnGrid(Grid *Grid){
@@ -89,7 +89,7 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
         {
             for (k = 1; k < nz - 1; k++)
             {
-
+                
                 Bx_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 0];
                 By_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 1];
                 Bz_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 2];
@@ -105,7 +105,7 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
                 double val_x = cny * (Bz_ijk - Bz_ijm1k) - cnz * (By_ijk - By_ijkm1);
                 double val_y = cnz * (Bx_ijk - Bx_ijkm1) - cnx * (Bz_ijk - Bz_im1jk);
                 double val_z = cnx * (By_ijk - By_im1jk) - cny * (Bx_ijk - Bx_ijm1k);
-                    
+                
                 Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += val_x;
                 Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += val_y;
                 Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] += val_z;
@@ -121,28 +121,29 @@ void initSamplePulseOnGrid(Grid *Grid){
     int nx = Grid->numberOfGridPointsInX;
     int ny = Grid->numberOfGridPointsInY;
     int nz = Grid->numberOfGridPointsInZ;
+    double mu = 128;
     
-//    for (int i = 32*4; i < 32*6; i++){
-//        for (int j = 32*4; j < 32*6; j++){
-//            for (int k = 32*4; k < 32*6; k++){
-//                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] = exp(-(pow((i - 32*5)*Grid->dx, 2) + pow((j - 32*5)*Grid->dy, 2) + pow((k - 32*5)*Grid->dz, 2)));
-//                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = exp(-(pow((i - 32*5)*Grid->dx, 2) + pow((j - 32*5)*Grid->dy, 2) + pow((k - 32*5)*Grid->dz, 2)));
-//            }
-//        }
-//    }
-    for (int i = 16 * 4; i < 16 * 5; i++)
-    {
-        for (int j = 1; j < ny; j++)
-        {
-            for (int l = 1; l < nz; l++)
-            {
-                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 2] = sin(i * 2 * M_PI / 32)*sin(M_PI*j/256);
-                
-                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 1] = sin(i * 2 * M_PI / 32)*sin(M_PI*j/256);
+    for (int i = 32*2; i < 32*6; i++){
+        for (int j = 32*2; j < 32*6; j++){
+            for (int k = 32*2; k < 32*6; k++){
+                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] =  exp(-(pow((i - mu) * Grid->dx, 2) + pow((j - mu) * Grid->dy, 2) + pow((k - mu) * Grid->dz, 2)));
+                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] =  exp(-(pow((i - mu) * Grid->dx, 2) + pow((j - mu) * Grid->dy, 2) + pow((k - mu) * Grid->dz, 2)));
             }
         }
-        
     }
+    //    for (int i = 16 * 4; i < 16 * 5; i++)
+    //    {
+    //        for (int j = 1; j < ny; j++)
+    //        {
+    //            for (int l = 1; l < nz; l++)
+    //            {
+    //                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 2] = sin(i * 2 * M_PI / 32)*sin(M_PI*j/256);
+    //
+    //                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 1] = sin(i * 2 * M_PI / 32)*sin(M_PI*j/256);
+    //            }
+    //        }
+    //
+    //    }
 }
 
 ///@brief maxwellPusher for B field.
@@ -189,11 +190,11 @@ void PushBFieldOnGrid(Grid *Grid, double dt){
                 double add_x = cnz * (Ey_ijkp1 - Ey_ijk) - cny * (Ez_ijp1k - Ez_ijk);
                 double add_y = cnx * (Ez_ip1jk - Ez_ijk) - cnz * (Ex_ijkp1 - Ex_ijk);
                 double add_z = cny * (Ex_ijp1k - Ex_ijk) - cnx * (Ey_ip1jk - Ey_ijk);
-                    
+                
                 Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += add_x;
                 Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += add_y;
                 Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] += add_z;
-            
+                
             }
         }
     }
@@ -229,9 +230,9 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool p
         int nx = Grid->numberOfGridPointsInX;
         int ny = Grid->numberOfGridPointsInY;
         int nz = Grid->numberOfGridPointsInZ;
-        int k = 32*5;
+        int k = 128;
         double Ex, Ey, Ez, Bx, By, Bz;
-    
+        
         for (int j = 0; j < ny; j++)
         {
             for (int i = 0; i < nx; i++)
@@ -259,6 +260,20 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool p
                 fprintf(fid2,"\n");
             }
         }
+    }
+    fclose(fid);
+}
+
+///@brief writes Grid parameters to file, in order for python to use them as plot parameters
+///@throws ERROR: Could not open file gridParameters.txt
+void writeGridParametersToFile(Grid *Grid){
+    FILE *fid = fopen("gridParameters.txt", "w");
+    if (fid == NULL){
+        printf("ERROR: Could not open gridParameters.txt");
+    }
+    else{
+        printf("writing grid parameters to file\n");
+        fprintf(fid, "%f %f %f %d %d %d\n", Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ, Grid->numberOfGridPointsInX, Grid->numberOfGridPointsInY, Grid->numberOfGridPointsInZ);
     }
     fclose(fid);
 }
@@ -295,18 +310,18 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool p
 ////            }
 ////        }
 ////    }
-//    
+//
 //    i = x[1] / lengthOfOneBox;
 //    j = x[2] / lengthOfOneBox;
 //    k = x[3] / lengthOfOneBox;
-//    
+//
 //    double xMin = (i - 1) * lengthOfOneBox;
 //    double xMax = (i + 2) * lengthOfOneBox;
 //    double yMin = (j - 1) * lengthOfOneBox;
 //    double yMax = (j + 2) * lengthOfOneBox;
 //    double zMin = (k - 1) * lengthOfOneBox;
 //    double zMax = (k + 2) * lengthOfOneBox;
-//    
+//
 ////    for (int i = 0; i < numberOfGridPointsInNearFieldBox; i++){
 ////        for (int j = 0; i < numberOfGridPointsInNearFieldBox; i++){
 ////            for (int k = 0; i < numberOfGridPointsInNearFieldBox; i++){
@@ -315,35 +330,35 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool p
 ////            }
 ////        }
 ////    }
-//    
+//
 //    edgeOfNearFieldBox[0] = xMin;
 //    edgeOfNearFieldBox[1] = yMin;
 //    edgeOfNearFieldBox[2] = zMin;
-//    
+//
 //    edgeOfNearFieldBox[3] = xMax;
 //    edgeOfNearFieldBox[4] = yMin;
 //    edgeOfNearFieldBox[5] = zMin;
-//    
+//
 //    edgeOfNearFieldBox[6] = xMax;
 //    edgeOfNearFieldBox[7] = yMax;
 //    edgeOfNearFieldBox[8] = zMin;
-//    
+//
 //    edgeOfNearFieldBox[9] = xMin;
 //    edgeOfNearFieldBox[10] = yMax;
 //    edgeOfNearFieldBox[11] = zMin;
-//    
+//
 //    edgeOfNearFieldBox[12] = xMin;
 //    edgeOfNearFieldBox[13] = yMin;
 //    edgeOfNearFieldBox[14] = zMax;
-//    
+//
 //    edgeOfNearFieldBox[15] = xMax;
 //    edgeOfNearFieldBox[16] = yMin;
 //    edgeOfNearFieldBox[17] = zMax;
-//    
+//
 //    edgeOfNearFieldBox[18] = xMax;
 //    edgeOfNearFieldBox[19] = yMax;
 //    edgeOfNearFieldBox[20] = zMax;
-//    
+//
 //    edgeOfNearFieldBox[21] = xMin;
 //    edgeOfNearFieldBox[22] = yMax;
 //    edgeOfNearFieldBox[23] = zMax;

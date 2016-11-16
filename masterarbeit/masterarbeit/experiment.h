@@ -13,4 +13,5 @@
 
 void testMaxwellPusher();
 void testBorisPusher();
+void testNearFieldCalculation();
 #endif /* experiment_h */

@@ -10,6 +10,7 @@
 #include "stdlib.h"
 #include "string.h"
 
+
 /// @brief initializes all properties of struct Particle. x and u are initilized with 0
 void initParticle(Particle *Particle, double const charge, double const mass, int const arrayLength){
     printf("initializing Particle ...\n");
@@ -96,3 +97,5 @@ void freeMemoryOnParticle(Particle *Particle, int const arrayLength){
     
     
 }
+
+
