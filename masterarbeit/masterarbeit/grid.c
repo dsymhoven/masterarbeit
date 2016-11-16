@@ -280,7 +280,7 @@ void writeGridParametersToFile(Grid *Grid){
     }
     else{
         printf("writing grid parameters to file\n");
-        fprintf(fid, "%f %f %f %d %d %d\n", Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ, Grid->numberOfGridPointsInX, Grid->numberOfGridPointsInY, Grid->numberOfGridPointsInZ);
+        fprintf(fid, "%f %f %f %d %d %d\n", Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ, Grid->boxLengthInX, Grid->boxLengthInY, Grid->boxLengthInZ);
     }
     fclose(fid);
 }

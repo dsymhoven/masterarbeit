@@ -60,7 +60,7 @@ void allocateParticleHistories(Particle *Particle, int const arrayLength){
     
 }
 
-///@brief writes current position and velocity vectors to file. First line is four vector x. Second line is four vector u.
+///@brief writes current position, velocity vectors and near field info to file. First line is four vector x. Second line is four vector u. Third line is xMin up to yMax of near field box
 ///@param filename pointer to a char. Gets modified inside the method
 ///@param index outer loop index. Is used to name the output file
 void writeParticleToFile(Particle *Particle, char *filename, int index){
@@ -81,6 +81,11 @@ void writeParticleToFile(Particle *Particle, char *filename, int index){
     for (int i = 0; i < 4; i++){
         fprintf(fid, "%f\t", Particle->u[i]);
     }
+    fprintf(fid, "\n");
+    for (int i = 0; i < 4; i++){
+        fprintf(fid, "%d\t", Particle->edgesOfNearFieldBox[i]);
+    }
+    fprintf(fid, "\n");
     fclose(fid);
 }
 
@@ -97,26 +102,26 @@ void freeMemoryOnParticle(Particle *Particle, int const arrayLength){
     
 }
 
-void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle, int currentBoxIndexArray[3]){
-    currentBoxIndexArray[0] = Particle->x[1] / Grid->boxLengthInX;
-    currentBoxIndexArray[1] = Particle->x[2] / Grid->boxLengthInY;
-    currentBoxIndexArray[2] = Particle->x[3] / Grid->boxLengthInZ;
+void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle){
+    Particle->currentBoxIndexArray[0] = Particle->x[1] / Grid->boxLengthInX;
+    Particle->currentBoxIndexArray[1] = Particle->x[2] / Grid->boxLengthInY;
+    Particle->currentBoxIndexArray[2] = Particle->x[3] / Grid->boxLengthInZ;
     
 }
 
-void getEdgesOfNearFieldBox(Grid *Grid, int currentBoxIndexArray[3], int sizeOfNearFieldBox, int edgesOfNearFieldBox[6]){
-    int xMin = (currentBoxIndexArray[0] - sizeOfNearFieldBox) * Grid->boxLengthInX;
-    int xMax = (currentBoxIndexArray[0] + sizeOfNearFieldBox + 1) * Grid->boxLengthInX;
-    int yMin = (currentBoxIndexArray[1] - sizeOfNearFieldBox) * Grid->boxLengthInY;
-    int yMax = (currentBoxIndexArray[1] - sizeOfNearFieldBox + 1) * Grid->boxLengthInY;
-    int zMin = (currentBoxIndexArray[2] - sizeOfNearFieldBox) * Grid->boxLengthInZ;
-    int zMax = (currentBoxIndexArray[2] - sizeOfNearFieldBox + 1) * Grid->boxLengthInZ;
+void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle, int sizeOfNearFieldBox){
+    int xMin = (Particle->currentBoxIndexArray[0] - sizeOfNearFieldBox) * Grid->boxLengthInX;
+    int xMax = (Particle->currentBoxIndexArray[0] + sizeOfNearFieldBox + 1) * Grid->boxLengthInX;
+    int yMin = (Particle->currentBoxIndexArray[1] - sizeOfNearFieldBox) * Grid->boxLengthInY;
+    int yMax = (Particle->currentBoxIndexArray[1] + sizeOfNearFieldBox + 1) * Grid->boxLengthInY;
+    int zMin = (Particle->currentBoxIndexArray[2] - sizeOfNearFieldBox) * Grid->boxLengthInZ;
+    int zMax = (Particle->currentBoxIndexArray[2] + sizeOfNearFieldBox + 1) * Grid->boxLengthInZ;
     
-    edgesOfNearFieldBox[0] = xMin;
-    edgesOfNearFieldBox[1] = xMax;
-    edgesOfNearFieldBox[2] = yMin;
-    edgesOfNearFieldBox[3] = yMax;
-    edgesOfNearFieldBox[4] = zMin;
-    edgesOfNearFieldBox[5] = zMax;
+    Particle->edgesOfNearFieldBox[0] = xMin;
+    Particle->edgesOfNearFieldBox[1] = xMax;
+    Particle->edgesOfNearFieldBox[2] = yMin;
+    Particle->edgesOfNearFieldBox[3] = yMax;
+    Particle->edgesOfNearFieldBox[4] = zMin;
+    Particle->edgesOfNearFieldBox[5] = zMax;
     
 }

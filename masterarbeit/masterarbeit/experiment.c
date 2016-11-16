@@ -172,6 +172,8 @@ void testNearFieldCalculation(){
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
         writeFieldsToFile(&Grid, filename, p, true, false);
+        getCurrentBoxIndexOfParticle(&Grid, &Particle);
+        getEdgesOfNearFieldBox(&Grid, &Particle, 1);
         writeParticleToFile(&Particle, filename, p);
         updateVelocityWithBorisPusher(&Particle, Eextern, Bextern, dt);
         updateLocation(&Particle, dt);
