@@ -21,6 +21,10 @@ for file in files:
 	# set axis 
 	plt.xlim([0,32])
 	plt.ylim([0,32])
+	plt.xticks(np.arange(0,32 + 1,4))
+	plt.yticks(np.arange(0,32 + 1,4))
+	
+	plt.grid(linestyle='-', color='red')
 	# define filename for saving
 	filename = file.replace(".txt", "")
 	filename = filename.replace("Particles/", "")

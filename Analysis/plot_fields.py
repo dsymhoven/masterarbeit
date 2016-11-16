@@ -6,7 +6,7 @@ from matplotlib import cm
 import scipy.interpolate
 
 N = 100
-files = glob.glob('E_fields/*.txt')
+files = glob.glob('fields/*.txt')
 
 for file in files:
 	# read data from text and save it into array data
