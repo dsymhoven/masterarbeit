@@ -1,4 +1,6 @@
-*.xcuserstate
 E_fields/
 B_fields/
 Particles/
+fields/
+png/
+xcuserdata/
