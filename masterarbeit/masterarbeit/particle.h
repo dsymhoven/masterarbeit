@@ -10,6 +10,7 @@
 #define particle_h
 
 #include <stdio.h>
+#include "grid.h"
 
 struct Particle {
     double charge;
@@ -27,4 +28,5 @@ void initParticle(Particle *Particle, double const charge, double const mass, in
 void writeParticleToFile(Particle *Particle, char *filename, int index);
 void freeMemoryOnParticle(Particle *Particle, int const arrayLength);
 void allocateParticleHistories(Particle *Particle, int const arrayLength);
+void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle, int currentBoxIndexArray[3]);
 #endif /* particle_h */

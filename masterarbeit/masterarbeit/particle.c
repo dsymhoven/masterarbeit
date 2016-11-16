@@ -10,7 +10,6 @@
 #include "stdlib.h"
 #include "string.h"
 
-
 /// @brief initializes all properties of struct Particle. x and u are initilized with 0
 void initParticle(Particle *Particle, double const charge, double const mass, int const arrayLength){
     printf("initializing Particle ...\n");
@@ -98,4 +97,18 @@ void freeMemoryOnParticle(Particle *Particle, int const arrayLength){
     
 }
 
+void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle, int currentBoxIndexArray[3]){
+    int numberOfBoxesInX = Grid->numberOfGridPointsInX / Grid->lengthOfSimulationBoxInX;
+    int numberOfBoxesInY = Grid->numberOfGridPointsInY / Grid->lengthOfSimulationBoxInY;
+    int numberOfBoxesInZ = Grid->numberOfGridPointsInZ / Grid->lengthOfSimulationBoxInZ;
+    
+    int boxLengthInX = Grid->lengthOfSimulationBoxInX / numberOfBoxesInX;
+    int boxLengthInY = Grid->lengthOfSimulationBoxInY / numberOfBoxesInY;
+    int boxLengthInZ = Grid->lengthOfSimulationBoxInZ / numberOfBoxesInZ;
+    
+    currentBoxIndexArray[0] = Particle->x[1] / boxLengthInX;
+    currentBoxIndexArray[1] = Particle->x[2] / boxLengthInY;
+    currentBoxIndexArray[2] = Particle->x[3] / boxLengthInZ;
+    
+}
 
