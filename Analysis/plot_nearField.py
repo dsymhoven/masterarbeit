@@ -2,9 +2,12 @@ import numpy as np
 import glob
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+import fnmatch
+import os
 
+numberOfParticleFiles = len(fnmatch.filter(os.listdir('Particles/'), '*.txt'))
 
-files = glob.glob('Particles/*.txt')
+#files = glob.glob('Particles/*.txt')
 gridParameters = np.genfromtxt('gridParameters.txt')
 field = np.genfromtxt('E_fields/E_field0.txt')
 
@@ -12,18 +15,19 @@ lengthOfSimulationBoxInX = gridParameters[0]
 lengthOfSimulationBoxInY = gridParameters[1]
 lengthOfOneBoxInX = gridParameters[3]
 lengthOfOneBoxInY = gridParameters[4] 
+x=[]
+y=[]
 
-
-for file in files:
+for i in range(numberOfParticleFiles):
 	# read data from text and save it into array data
-	data = np.genfromtxt(file)
+	data = np.genfromtxt('Particles/Particle'+ str(i) +'.txt')
 	# open figure
 	fig = plt.figure()
 	# define variables
-	vx = data[0][1]
-	vy = data[0][2]
+	x.append(data[0][1])
+	y.append(data[0][2])
 	# plot x and y value of particle as red dot
-	plt.plot(vx, vy, marker='o', color = 'r')
+	plt.plot(x, y, color = 'r')
 	plt.imshow(field, vmin=0, vmax=1.0)
 	plt.colorbar()
 	
@@ -58,8 +62,7 @@ for file in files:
 	
 	plt.grid(color='red')
 	# define filename for saving
-	filename = file.replace(".txt", "")
-	filename = filename.replace("Particles/", "")
+	filename = 'Particle' + str(i)
 	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight')
 	# close fig
 	plt.close(fig)
