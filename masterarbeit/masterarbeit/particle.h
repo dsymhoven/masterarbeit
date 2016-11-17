@@ -32,4 +32,6 @@ void freeMemoryOnParticle(Particle *Particle, int const arrayLength);
 void allocateParticleHistories(Particle *Particle, int const arrayLength);
 void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle);
 void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle, int sizeOfNearFieldBox);
+void addCurrentStateToParticleHistory(Particle *Particle, int index);
+double getGammaFromVelocityVector(Particle *Particle);
 #endif /* particle_h */

@@ -8,6 +8,7 @@
 
 #include "particle.h"
 #include "stdlib.h"
+#include "math.h"
 #include "string.h"
 
 /// @brief initializes all properties of struct Particle. x and u are initilized with 0
@@ -127,4 +128,23 @@ void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle, int sizeOfNearFieldB
     Particle->edgesOfNearFieldBox[4] = zMin;
     Particle->edgesOfNearFieldBox[5] = zMax;
     
+}
+///@brief adds current position and velocity information (the entire four vectors) to respective history array of Particle struct
+///@param index outer loop index to indicate the current time step.
+void addCurrentStateToParticleHistory(Particle *Particle, int index){
+    for (int i = 0; i < 4; i++){
+        Particle->xHistory[index][i] = Particle->x[i];
+        Particle->uHistory[index][i] = Particle->u[i];
+    }
+}
+
+///@brief calculates gamma from spatial components of given velocity vector via gamma = sqrt(1 + u^2)
+///@remark Don't use this method before spatial components of u are initialized
+double getGammaFromVelocityVector(Particle *Particle){
+    double result = 0.0;
+    for (int i = 1; i < 4; i++){
+        result += Particle->u[i] * Particle->u[i];
+    }
+    return sqrt(1 + result);
+
 }
