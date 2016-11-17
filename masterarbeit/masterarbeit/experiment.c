@@ -23,14 +23,17 @@ void testMaxwellPusher(){
 #pragma mark: Initializations
     // ======================================================
     Grid Grid;
-    int numberOfGridPointsInX = 256;
-    int numberOfGridPointsInY = 256;
-    int numberOfGridPointsInZ = 256;
-    int lengthOfSimulationBoxInX = 32;
-    int lengthOfSimulationBoxInY = 32;
-    int lengthOfSimulationBoxInZ = 32;
+    double dx = 0.125;
+    double dy = 0.125;
+    double dz = 0.125;
+    int numberOfGridPointsForBoxInX = 32;
+    int numberOfGridPointsForBoxInY = 32;
+    int numberOfGridPointsForBoxInZ = 32;
+    int numberOfBoxesInX = 8;
+    int numberOfBoxesInY = 8;
+    int numberOfBoxesInZ = 8;
     
-    initGrid(&Grid, numberOfGridPointsInX, numberOfGridPointsInY, numberOfGridPointsInZ, lengthOfSimulationBoxInX, lengthOfSimulationBoxInY, lengthOfSimulationBoxInZ);
+    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateFieldsOnGrid(&Grid);
     initSamplePulseOnGrid(&Grid);
     
@@ -44,9 +47,9 @@ void testMaxwellPusher(){
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
+    
     for(int p = 0; p < arrayLength; p++){
         writeFieldsToFile(&Grid, filename, p, true, false);
-        
         pushEFieldOnGrid(&Grid, dt);
         PushBFieldOnGrid(&Grid, dt);
         PushBFieldOnGrid(&Grid, dt);
@@ -69,11 +72,9 @@ void testBorisPusher(){
     double charge = 1.0;
     double mass = 1.0;
     
-
     double dt = 0.5 * 0.125;
     double t = 0;
     double tEnd = 3;
-    double gamma = 2.1;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -83,13 +84,13 @@ void testBorisPusher(){
     initParticle(&Particle, charge, mass, arrayLength);
     
     Particle.x[0] = 0;
-    Particle.x[1] = 10;
-    Particle.x[2] = 14;
-    Particle.x[3] = 10;
+    Particle.x[1] = 11.21;
+    Particle.x[2] = 12.01;
+    Particle.x[3] = 14.401;
     
-    Particle.u[0] = gamma;
-    Particle.u[1] = 1.5;
-    Particle.u[2] = 1.5;
+    Particle.u[0] = 1.1;
+    Particle.u[1] = 0.458;
+    Particle.u[2] = 0;
     Particle.u[3] = 0;
     
     Eextern[0] = 0;
@@ -122,42 +123,43 @@ void testNearFieldCalculation(){
     // ======================================================
     
     Grid Grid;
-    int numberOfGridPointsInX = 256;
-    int numberOfGridPointsInY = 256;
-    int numberOfGridPointsInZ = 256;
-    int lengthOfSimulationBoxInX = 16;
-    int lengthOfSimulationBoxInY = 16;
-    int lengthOfSimulationBoxInZ = 16;
+    double dx = 0.2;
+    double dy = 0.2;
+    double dz = 0.2;
+    int numberOfGridPointsForBoxInX = 32;
+    int numberOfGridPointsForBoxInY = 32;
+    int numberOfGridPointsForBoxInZ = 32;
+    int numberOfBoxesInX = 5;
+    int numberOfBoxesInY = 5;
+    int numberOfBoxesInZ = 5;
     
     Particle Particle;
     double charge = 1.0;
     double mass = 1.0;
     
-    
-    double dt = 0.5 * 0.125;
+    double dt = 0.2;
     double t = 0;
-    double tEnd = 3;
-    double gamma = 2.1;
+    double tEnd = 40;
     
     char filename[32] = "some";
     double Eextern[3];
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, numberOfGridPointsInX, numberOfGridPointsInY, numberOfGridPointsInZ, lengthOfSimulationBoxInX, lengthOfSimulationBoxInY, lengthOfSimulationBoxInZ);
+    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateFieldsOnGrid(&Grid);
     writeGridParametersToFile(&Grid);
     initParticle(&Particle, charge, mass, arrayLength);
     
     Particle.x[0] = 0;
-    Particle.x[1] = 10;
-    Particle.x[2] = 14;
-    Particle.x[3] = 10;
+    Particle.x[1] = 11.21;
+    Particle.x[2] = 12.01;
+    Particle.x[3] = 14.401;
     
-    Particle.u[0] = gamma;
-    Particle.u[1] = 1.5;
-    Particle.u[2] = 1.5;
+    Particle.u[1] = 0.458;
+    Particle.u[2] = 0;
     Particle.u[3] = 0;
+    Particle.u[0] = getGammaFromVelocityVector(&Particle);
     
     Eextern[0] = 0;
     Eextern[1] = 0;
@@ -165,7 +167,7 @@ void testNearFieldCalculation(){
     
     Bextern[0] = 0;
     Bextern[1] = 0;
-    Bextern[2] = 1;
+    Bextern[2] = 0.2;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -173,14 +175,15 @@ void testNearFieldCalculation(){
     for (int p = 0; p < tEnd / dt; p++){
         writeFieldsToFile(&Grid, filename, p, true, false);
         getCurrentBoxIndexOfParticle(&Grid, &Particle);
-        getEdgesOfNearFieldBox(&Grid, &Particle, 1);
+        getEdgesOfNearFieldBox(&Grid, &Particle);
         writeParticleToFile(&Particle, filename, p);
         updateVelocityWithBorisPusher(&Particle, Eextern, Bextern, dt);
         updateLocation(&Particle, dt);
-        
         t += dt;
     }
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/postProcessing.sh");
     freeMemoryOnParticle(&Particle, arrayLength);
 }
+
+

@@ -84,7 +84,7 @@ void writeParticleToFile(Particle *Particle, char *filename, int index){
     }
     fprintf(fid, "\n");
     for (int i = 0; i < 4; i++){
-        fprintf(fid, "%d\t", Particle->edgesOfNearFieldBox[i]);
+        fprintf(fid, "%f\t", Particle->edgesOfNearFieldBox[i]);
     }
     fprintf(fid, "\n");
     fclose(fid);
@@ -105,21 +105,20 @@ void freeMemoryOnParticle(Particle *Particle, int const arrayLength){
 
 ///@brief saves the current box index for x,y and z in currentBoxIndexArray of Particle struct
 void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle){
-    Particle->currentBoxIndexArray[0] = Particle->x[1] / Grid->boxLengthInX;
-    Particle->currentBoxIndexArray[1] = Particle->x[2] / Grid->boxLengthInY;
-    Particle->currentBoxIndexArray[2] = Particle->x[3] / Grid->boxLengthInZ;
+    Particle->currentBoxIndexArray[0] = Particle->x[1] / (Grid->dx * Grid->numberOfGridPointsForBoxInX);
+    Particle->currentBoxIndexArray[1] = Particle->x[2] / (Grid->dy * Grid->numberOfGridPointsForBoxInY);
+    Particle->currentBoxIndexArray[2] = Particle->x[3] / (Grid->dz * Grid->numberOfGridPointsForBoxInZ);
     
 }
 
 ///@brief saves min and max values of x,y and z of the near field box in edgesOfNearFieldArray of Particle struct
-///@param sizeOfNearFieldBox the size of the near field box in units of box length. So sizeOfNearFieldBox = 1 means one box in each dimension from the current box, which particle is located in.
-void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle, int sizeOfNearFieldBox){
-    int xMin = (Particle->currentBoxIndexArray[0] - sizeOfNearFieldBox) * Grid->boxLengthInX;
-    int xMax = (Particle->currentBoxIndexArray[0] + sizeOfNearFieldBox + 1) * Grid->boxLengthInX;
-    int yMin = (Particle->currentBoxIndexArray[1] - sizeOfNearFieldBox) * Grid->boxLengthInY;
-    int yMax = (Particle->currentBoxIndexArray[1] + sizeOfNearFieldBox + 1) * Grid->boxLengthInY;
-    int zMin = (Particle->currentBoxIndexArray[2] - sizeOfNearFieldBox) * Grid->boxLengthInZ;
-    int zMax = (Particle->currentBoxIndexArray[2] + sizeOfNearFieldBox + 1) * Grid->boxLengthInZ;
+void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle){
+    double xMin = (Particle->currentBoxIndexArray[0] - 1) * (Grid->dx * Grid->numberOfGridPointsForBoxInX);
+    double xMax = (Particle->currentBoxIndexArray[0] + 1 + 1) * (Grid->dx * Grid->numberOfGridPointsForBoxInX);
+    double yMin = (Particle->currentBoxIndexArray[1] - 1) * (Grid->dy * Grid->numberOfGridPointsForBoxInY);
+    double yMax = (Particle->currentBoxIndexArray[1] + 1 + 1) * (Grid->dy * Grid->numberOfGridPointsForBoxInY);
+    double zMin = (Particle->currentBoxIndexArray[2] - 1) * (Grid->dz * Grid->numberOfGridPointsForBoxInZ);
+    double zMax = (Particle->currentBoxIndexArray[2] + 1 + 1) * (Grid->dz * Grid->numberOfGridPointsForBoxInZ);
     
     Particle->edgesOfNearFieldBox[0] = xMin;
     Particle->edgesOfNearFieldBox[1] = xMax;

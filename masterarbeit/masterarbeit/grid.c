@@ -14,27 +14,28 @@
 
 
 /// @brief initializes all properties of struct Grid.
-void initGrid(Grid *Grid, int numberOfGridPointsInX, int numberOfGridPointsInY, int numberOfGridPointsInZ, double lengthOfSimulationBoxInX, double lengthOfSimulationBoxInY, double lengthOfSimulationBoxInZ){
+void initGrid(Grid *Grid, double dx, double dy, double dz, int numberOfGridPointsForBoxInX, int numberOfGridPointsForBoxInY, int numberOfGridPointsForBoxInZ, int numberOfBoxesInX, int numberOfBoxesInY, int numberOfBoxesInZ){
+    
     printf("initializing Grid ...\n");
-    Grid->numberOfGridPointsInX = numberOfGridPointsInX;
-    Grid->numberOfGridPointsInY = numberOfGridPointsInY;
-    Grid->numberOfGridPointsInZ = numberOfGridPointsInZ;
-    Grid->lengthOfSimulationBoxInX = lengthOfSimulationBoxInX;
-    Grid->lengthOfSimulationBoxInY = lengthOfSimulationBoxInY;
-    Grid->lengthOfSimulationBoxInZ = lengthOfSimulationBoxInZ;
+    Grid->dx = dx;
+    Grid->dy = dy;
+    Grid->dz = dz;
     
-    Grid->dx = lengthOfSimulationBoxInX / numberOfGridPointsInX;
-    Grid->dy = lengthOfSimulationBoxInY / numberOfGridPointsInY;
-    Grid->dz = lengthOfSimulationBoxInZ / numberOfGridPointsInZ;
+    Grid->numberOfBoxesInX = numberOfBoxesInX;
+    Grid->numberOfBoxesInY = numberOfBoxesInY;
+    Grid->numberOfBoxesInZ = numberOfBoxesInZ;
     
-    int numberOfBoxesInX = Grid->numberOfGridPointsInX / Grid->lengthOfSimulationBoxInX;
-    int numberOfBoxesInY = Grid->numberOfGridPointsInY / Grid->lengthOfSimulationBoxInY;
-    int numberOfBoxesInZ = Grid->numberOfGridPointsInZ / Grid->lengthOfSimulationBoxInZ;
+    Grid->numberOfGridPointsForBoxInX = numberOfGridPointsForBoxInX;
+    Grid->numberOfGridPointsForBoxInY = numberOfGridPointsForBoxInY;
+    Grid->numberOfGridPointsForBoxInZ = numberOfGridPointsForBoxInZ;
     
-    Grid->boxLengthInX = lengthOfSimulationBoxInX / numberOfBoxesInX;
-    Grid->boxLengthInY = lengthOfSimulationBoxInY / numberOfBoxesInY;
-    Grid->boxLengthInZ = lengthOfSimulationBoxInZ / numberOfBoxesInZ;
+    Grid->numberOfGridPointsInX = numberOfGridPointsForBoxInX * numberOfBoxesInX;
+    Grid->numberOfGridPointsInY = numberOfGridPointsForBoxInY * numberOfBoxesInY;
+    Grid->numberOfGridPointsInZ = numberOfGridPointsForBoxInZ * numberOfBoxesInZ;
     
+    Grid->lengthOfSimulationBoxInX = Grid->numberOfGridPointsInX * dx;
+    Grid->lengthOfSimulationBoxInY = Grid->numberOfGridPointsInY * dy;
+    Grid->lengthOfSimulationBoxInZ = Grid->numberOfGridPointsInZ * dz;
 }
 /// @brief Allocation of E and B field array. Inits E and B with 0 by default
 /// @remark arrayLength = 3 * numberOfGridPointsInX * numberOfGridPointsInY * numberOfGridPointsInZ. Factor 3 because we need x,y and z components on each grid point
@@ -125,7 +126,7 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
 
 ///@brief inits a sample E and B field onto the grid for testing purposes.
 void initSamplePulseOnGrid(Grid *Grid){
-    int nx = Grid->numberOfGridPointsInX;
+    
     int ny = Grid->numberOfGridPointsInY;
     int nz = Grid->numberOfGridPointsInZ;
     double mu = 128;
@@ -210,6 +211,8 @@ void PushBFieldOnGrid(Grid *Grid, double dt){
 ///@brief loops through the entire E and B array and writes |B|^2 and |E|^2 to seperate files. File is structured similiar to the grid.
 ///@param filename pointer to a char. Gets modified inside the method
 ///@param index outer loop index. Is used to name the output file
+///@param plotE set to true, if you want to write E-field to file
+///@param plotB set to true, if you want to write B-field to file
 ///@throws ERROR: Could not open file for E or B field
 void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool plotB){
     printf("Writing fields to file ...\n");
@@ -280,7 +283,7 @@ void writeGridParametersToFile(Grid *Grid){
     }
     else{
         printf("writing grid parameters to file\n");
-        fprintf(fid, "%f %f %f %d %d %d\n", Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ, Grid->boxLengthInX, Grid->boxLengthInY, Grid->boxLengthInZ);
+        fprintf(fid, "%f %f %f %d %d %d %f %f %f\n", Grid->dx, Grid->dy, Grid->dz, Grid->numberOfGridPointsForBoxInX, Grid->numberOfGridPointsForBoxInY, Grid->numberOfGridPointsForBoxInZ, Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ);
     }
     fclose(fid);
 }

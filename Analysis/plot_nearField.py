@@ -11,10 +11,10 @@ numberOfParticleFiles = len(fnmatch.filter(os.listdir('Particles/'), '*.txt'))
 gridParameters = np.genfromtxt('gridParameters.txt')
 field = np.genfromtxt('E_fields/E_field0.txt')
 
-lengthOfSimulationBoxInX = gridParameters[0]
-lengthOfSimulationBoxInY = gridParameters[1]
-lengthOfOneBoxInX = gridParameters[3]
-lengthOfOneBoxInY = gridParameters[4] 
+lengthOfSimulationBoxInX = gridParameters[6]
+lengthOfSimulationBoxInY = gridParameters[7]
+lengthOfOneBoxInX = gridParameters[0] * gridParameters[3]
+lengthOfOneBoxInY = gridParameters[1] * gridParameters[4] 
 x=[]
 y=[]
 

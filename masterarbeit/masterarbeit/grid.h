@@ -13,18 +13,26 @@
 #include "stdbool.h"
 
 struct Grid {
+    int numberOfBoxesInX;
+    int numberOfBoxesInY;
+    int numberOfBoxesInZ;
+    
+    int numberOfGridPointsForBoxInX;
+    int numberOfGridPointsForBoxInY;
+    int numberOfGridPointsForBoxInZ;
+    
     int numberOfGridPointsInX;
     int numberOfGridPointsInY;
     int numberOfGridPointsInZ;
-    int boxLengthInX;
-    int boxLengthInY;
-    int boxLengthInZ;
+    
     double lengthOfSimulationBoxInX;
     double lengthOfSimulationBoxInY;
     double lengthOfSimulationBoxInZ;
+    
     double dx;
     double dy;
     double dz;
+    
     double *E;
     double *B;
     
@@ -32,7 +40,7 @@ struct Grid {
 
 typedef struct Grid Grid;
 
-void initGrid(Grid *Grid, int numberOfGridPointsInX, int numberOfGridPointsInY, int numberOfGridPointsInZ, double lengthOfSimulationBoxInX, double lengthOfSimulationBoxInY, double lengthOfSimulationBoxInZ);
+void initGrid(Grid *Grid, double dx, double dy, double dz, int numberOfGridPointsForBoxInX, int numberOfGridPointsForBoxInY, int numberOfGridPointsForBoxInZ, int numberOfBoxesInX, int numberOfBoxesInY, int numberOfBoxesInZ);
 void allocateFieldsOnGrid(Grid *Grid);
 void freeMemoryOnGrid(Grid *Grid);
 void initSamplePulseOnGrid(Grid *Grid);
