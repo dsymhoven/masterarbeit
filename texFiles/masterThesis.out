@@ -1,16 +1,16 @@
-\BOOKMARK [0][-]{chapter*.1}{Deklaration}{}% 1
-\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 2
-\BOOKMARK [0][-]{chapter.2}{Fundamentals}{}% 3
-\BOOKMARK [1][-]{section.2.1}{Li\351nard-Wiechert Potentials}{chapter.2}% 4
-\BOOKMARK [1][-]{section.2.2}{Numerics}{chapter.2}% 5
-\BOOKMARK [2][-]{subsection.2.2.1}{euqations of motion}{section.2.2}% 6
-\BOOKMARK [2][-]{subsection.2.2.2}{Euler-Scheme}{section.2.2}% 7
-\BOOKMARK [2][-]{subsection.2.2.3}{Leap-Frog-Scheme}{section.2.2}% 8
-\BOOKMARK [2][-]{subsection.2.2.4}{Boris-Pusher}{section.2.2}% 9
-\BOOKMARK [2][-]{subsection.2.2.5}{Vay-Pusher}{section.2.2}% 10
-\BOOKMARK [2][-]{subsection.2.2.6}{Interpolation of Trajectories}{section.2.2}% 11
-\BOOKMARK [1][-]{section.2.3}{Hybrid Fields}{chapter.2}% 12
-\BOOKMARK [2][-]{subsection.2.3.1}{Maxwell-Equations}{section.2.3}% 13
-\BOOKMARK [2][-]{subsection.2.3.2}{Maxwell-Solver}{section.2.3}% 14
-\BOOKMARK [2][-]{subsection.2.3.3}{Near-and Farfields}{section.2.3}% 15
-\BOOKMARK [0][-]{chapter*.5}{Bibliography}{}% 16
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Fundamentals}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Li\351nard-Wiechert Potentials}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.2}{Numerics}{chapter.2}% 4
+\BOOKMARK [2][-]{subsection.2.2.1}{Equations of motion}{section.2.2}% 5
+\BOOKMARK [2][-]{subsection.2.2.2}{Euler-Scheme}{section.2.2}% 6
+\BOOKMARK [2][-]{subsection.2.2.3}{Leap-Frog-Scheme}{section.2.2}% 7
+\BOOKMARK [2][-]{subsection.2.2.4}{Boris-Method}{section.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.5}{Vay-Pusher}{section.2.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.6}{Interpolation of Trajectories}{section.2.2}% 10
+\BOOKMARK [1][-]{section.2.3}{Hybrid Fields}{chapter.2}% 11
+\BOOKMARK [2][-]{subsection.2.3.1}{Maxwell-Equations}{section.2.3}% 12
+\BOOKMARK [2][-]{subsection.2.3.2}{Maxwell-Solver}{section.2.3}% 13
+\BOOKMARK [2][-]{subsection.2.3.3}{Near-and Farfields}{section.2.3}% 14
+\BOOKMARK [0][-]{chapter*.4}{Bibliography}{}% 15
+\BOOKMARK [0][-]{chapter*.5}{Declaration}{}% 16

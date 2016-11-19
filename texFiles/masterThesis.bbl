@@ -5,6 +5,17 @@ M.~P. Allen and D.~J. Tildesley.
 \newblock {\em Computer Simulation of Liquids}.
 \newblock Clarendon Press, New York, NY, USA, 1989.
 
+\bibitem{boris}
+J.~P. Boris.
+\newblock Relativistic plasma simulation-optimization of a hybrid code.
+\newblock {\em Proceeding of Fourth Conference on Numerical Simulations of
+  Plasmas}, November 1970.
+
+\bibitem{Birdsall}
+A.Bruce~Langdon Charles K.~Birdsall.
+\newblock {\em Plasma physics via computer simulation}.
+\newblock IOP, 1991.
+
 \bibitem{NumerikSkript}
 Christian Kanzow.
 \newblock {\em Numerische Mathematik II}.

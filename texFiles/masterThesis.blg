@@ -2,51 +2,51 @@ This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: masterThesis.aux
 A level-1 auxiliary file: titlepage.aux
-A level-1 auxiliary file: declaration.aux
 A level-1 auxiliary file: abstract.aux
 A level-1 auxiliary file: symbols.aux
 The style file: plain.bst
+A level-1 auxiliary file: declaration.aux
 Database file #1: reference.bib
 Warning--empty publisher in NumerikSkript
-You've used 2 entries,
+You've used 4 entries,
             2118 wiz_defined-function locations,
-            515 strings with 4346 characters,
-and the built_in function-call counts, 500 in all, are:
-= -- 43
-> -- 20
+            526 strings with 4591 characters,
+and the built_in function-call counts, 921 in all, are:
+= -- 82
+> -- 34
 < -- 0
-+ -- 8
-- -- 6
-* -- 25
-:= -- 93
-add.period$ -- 7
-call.type$ -- 2
-change.case$ -- 7
++ -- 14
+- -- 10
+* -- 43
+:= -- 170
+add.period$ -- 13
+call.type$ -- 4
+change.case$ -- 14
 chr.to.int$ -- 0
-cite$ -- 3
-duplicate$ -- 24
-empty$ -- 45
-format.name$ -- 6
-if$ -- 102
+cite$ -- 5
+duplicate$ -- 46
+empty$ -- 84
+format.name$ -- 10
+if$ -- 189
 int.to.chr$ -- 0
-int.to.str$ -- 2
-missing$ -- 4
-newline$ -- 14
-num.names$ -- 4
-pop$ -- 16
+int.to.str$ -- 4
+missing$ -- 7
+newline$ -- 24
+num.names$ -- 8
+pop$ -- 28
 preamble$ -- 1
-purify$ -- 7
+purify$ -- 13
 quote$ -- 0
-skip$ -- 13
+skip$ -- 26
 stack$ -- 0
-substring$ -- 10
-swap$ -- 2
+substring$ -- 20
+swap$ -- 4
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 4
+type$ -- 10
 warning$ -- 1
-while$ -- 4
-width$ -- 3
-write$ -- 24
+while$ -- 8
+width$ -- 5
+write$ -- 44
 (There was 1 warning)

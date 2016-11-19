@@ -71,9 +71,6 @@ bibliography=totoc,
 \pagenumbering{roman}
 \include{titlepage}
 
-%================================= ERKLÄRUNG=============================
-\include{declaration}
-
 %================================= ABSTRACT==============================
 \include{abstract}
 
@@ -116,7 +113,7 @@ Some of them are very easy to implement, which in turn usually leads to unprecis
 Therefore one should always consider which method is best for the problem and what it is one want to to achieve.\\
 Following this, we also want to define and calculate the numerical complexity of some chosen algorithms. 
 
-\subsection{euqations of motion}
+\subsection{Equations of motion}
 As we know from mechanics the dynamic of a particle is determined by the forces acting on it. In our case there is a force due to electro-magnetic fields. That can be external fields, but also fields due to moving particles, as we explained in section \ref{sec: lw-potentials}.\\
 The dynamics of our system is described by the \textit{Lorentz-Newton} equation
 \beq
@@ -235,8 +232,8 @@ Plugging in \eqref{eqn: Taylor u} in \eqref{eqn: eta u} yields
 \beq
 \bal
 \eta(\tau, h) &= u^{\mu}(\tau_i) + h\frac{\dm u^{\mu}}{\dm \tau}  - u^{\mu}(\tau_{i+1}) \\
-\eta(\tau, h) &= u^{\mu}(\tau_i) + h\frac{\dm u^{\mu}}{\dm \tau}  - u^{\mu}(\tau_i) - h\frac{\dm u^{\mu}}{\dm \tau} - h^2\frac{\dm^2 u^{\mu}}{\dm \tau^2}\\
-\eta(\tau, h) &= \frac{\dm^2 u^{\mu}}{\dm \tau^2}~h^2 ,
+\stackrel{ \eqref{eqn: Taylor u}}{\Longrightarrow}\eta(\tau, h) &= u^{\mu}(\tau_i) + h\frac{\dm u^{\mu}}{\dm \tau}  - u^{\mu}(\tau_i) - h\frac{\dm u^{\mu}}{\dm \tau} - h^2\frac{\dm^2 u^{\mu}}{\dm \tau^2}\\
+\Longleftrightarrow\eta(\tau, h) &= \frac{\dm^2 u^{\mu}}{\dm \tau^2}~h^2 ,
 \eal
 \eeq
 since $\frac{\dm u^{\mu}}{\dm \tau} = f^{\mu}(x^{\nu}, u^{\nu})$ holds for the Euler-Scheme. Thus
@@ -269,8 +266,31 @@ u^{\mu}_{i+\frac{1}{2}} &= u^{\mu}_{i-\frac{1}{2}} + h f^{\mu}(x^{\nu}_i).
 \eal
 \eeq
 \noindent
-As we can see, position and velocity are calculated at different times. They are shifted against each other in time by $h = \frac{1}{2}$.
-\subsection{Boris-Pusher}
+As we can see, position and velocity are calculated at different times. They are shifted against each other in time by $h = \frac{1}{2}$. \\
+But what if we have a system in which the force depends on the velocity ? Are we stuck with expensive implicit methods ? Fortunately not. We can use the \textit{Boris} - Method.
+\subsection{Boris-Method}
+This method was invented in 1970 by J.P. Boris \cite{boris} and is the standard method for pushing particles in plasma simulations today. We want to solve the Lorentz-Newton equation
+\beq
+\label{eqn: LorentzNewton}
+\bal
+\frac{v_{i+\frac{1}{2}} - v_{i - \frac{1}{2}}}{h} &= \frac{q}{m}\left(\vec{E} + \frac{v_{i+\frac{1}{2}} + v_{i - \frac{1}{2}}}{2} \times \vec{B}\right)
+\eal
+\eeq
+Boris noticed, that upon defining
+\beq
+\label{eqn:vMinusAndPlus}
+\bal
+\vec{v}_{-} &\coloneqq v_{i - \frac{1}{2}} + \frac{h}{2}\frac{q \vec{E}}{m}\quad\text{and} \\
+\vec{v}_{+} &\coloneqq v_{i + \frac{1}{2}} + \frac{h}{2}\frac{q \vec{E}}{m},
+\eal
+\eeq
+one can eliminate the electric field. Plugging in \eqref{eqn:vMinusAndPlus} into \eqref{eqn: LorentzNewton} yields
+\beq
+\bal
+\frac{\vec{v}_{+} - \vec{v}_{-}}{h} = \frac{q}{m} (\vec{v}_{+} + \vec{v}_{-}) \times \vec{B}.
+\eal
+\eeq
+Following the geometrical analysis in ~\cite{Birdsall} we find %MISSING:PIctures from Birdsall and rest of explaination
 \subsection{Vay-Pusher}
 \subsection{Interpolation of Trajectories}
 The previously presented methods calculate the particle trajectory solely at discrete points in time $x_i^{\mu}(\tau)$. Calculating Liénard-Wiechert fields according to equation \eqref{eqn: LW} however, requires the intersection point of the trajectory with the backward lightcone of the observation point. 
@@ -322,6 +342,10 @@ Plugging in $\lambda$ in \eqref{eqn: linInt} gives the desired intersection poin
 
 \bibliography{reference}{}
 \bibliographystyle{plain}
+
+%================================= ERKLÄRUNG=============================
+\include{declaration}
+
 
 \end{document}
 
