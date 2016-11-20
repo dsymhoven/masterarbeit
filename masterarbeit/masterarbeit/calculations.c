@@ -308,7 +308,8 @@ void calcuateLienardWiechertFields(double gamma_sq, double R_sq, double R, doubl
     
     crossProduct(n, E, B);
 }
-
+///@brief calcualtes Liénard-Wiechert Fields everywhere on the grid. Each point on the grid is considered to be the observation point, where the zeroth component is the current simulation time and also the time at which we want to calculate the fields. Therefore loop through the particle xhistory vector up to the current simulation time and search for the pair of positions which fulfil the condition that the old position is inside and the new position is outside the backward lightcone of the observation point. Once that pair of positions is found the rest of the xHistory vector can be skipped because all following points will be outside as well.
+///@param outerLoopIndex outer loop index indicating the current simulation time
 void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int outerLoopIndex){
     printf("Calculating LW Fields on grid\n");
     double xObserver[4] = {0};
@@ -350,7 +351,6 @@ void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int outerLoopI
                         Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = B[1];
                         Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] = B[2];
                         //printf("%d %d %d\n", i,j,k);
-                        //there can only be one pair of particle positions within the xHistory vector fulfilling the if-condition. Is xHistory[index+1] outside the lighcone of the observation point, all following points will be outside
                         break;
                     }
                 }
