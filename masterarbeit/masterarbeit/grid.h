@@ -46,7 +46,7 @@ void freeMemoryOnGrid(Grid *Grid);
 void initSamplePulseOnGrid(Grid *Grid);
 void pushEFieldOnGrid(Grid *Grid, double dt);
 void PushBFieldOnGrid(Grid *Grid, double dt);
-void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool plotB);
+void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotting, bool plotE, bool plotB);
 void writeGridParametersToFile(Grid *Grid);
 
 #endif /* grid_h */

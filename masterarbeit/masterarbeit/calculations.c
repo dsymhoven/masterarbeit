@@ -310,7 +310,7 @@ void calcuateLienardWiechertFields(double gamma_sq, double R_sq, double R, doubl
 }
 
 void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int outerLoopIndex){
-    printf("Calculating LW Fields On grid\n");
+    printf("Calculating LW Fields on grid\n");
     double xObserver[4] = {0};
     double beta[3] = {0};
     double intersectionPoint[4] = {0};
@@ -330,14 +330,12 @@ void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int outerLoopI
     for(int i = 0; i < nx; i++){
         for (int j = 0; j < ny; j++){
             for(int k = 0; k < nz; k++){
-                // old position needs to be outside lightcone and new position inside lightcone.
-                // outisde the lightcone means that the information would be traveling faster than c, inside less than c
-                // on the lightcone information travels with c
                 
                 xObserver[0] = outerLoopIndex * dt;
                 xObserver[1] = i * Grid->dx;
                 xObserver[2] = j * Grid->dy;
                 xObserver[3] = k * Grid->dz;
+
                 for (int index = 0; index < outerLoopIndex; index ++){
                     if(isInsideBackwardLightcone(Particle->xHistory[index], xObserver) && !isInsideBackwardLightcone(Particle->xHistory[index+1], xObserver)){
                         calculateIntersectionPoint(Particle->xHistory[index], Particle->xHistory[index+1], xObserver, intersectionPoint);
@@ -345,14 +343,15 @@ void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int outerLoopI
                         calculateLienardWiechertParameters(intersectionPoint, xObserver, Particle->u, &gamma_sq, &R_sq, &R, n, beta);
                         calculateBetaDot(Particle->uHistory[index], Particle->uHistory[index+1], dt, betaDot);
                         calcuateLienardWiechertFields(gamma_sq, R_sq, R, n, beta, betaDot, Particle->charge, E, B);
-                        Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += E[0];
-                        Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += E[1];
-                        Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] += E[2];
-                        Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += B[0];
-                        Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += B[1];
-                        Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] += B[2];
-                        //printf("%d %d %d %f\n", i,j,k, E[0]);
-                        
+                        Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] = E[0];
+                        Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = E[1];
+                        Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] = E[2];
+                        Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] = B[0];
+                        Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = B[1];
+                        Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] = B[2];
+                        //printf("%d %d %d\n", i,j,k);
+                        //there can only be one pair of particle positions within the xHistory vector fulfilling the if-condition. Is xHistory[index+1] outside the lighcone of the observation point, all following points will be outside
+                        break;
                     }
                 }
             }

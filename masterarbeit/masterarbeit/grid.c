@@ -214,7 +214,7 @@ void PushBFieldOnGrid(Grid *Grid, double dt){
 ///@param plotE set to true, if you want to write E-field to file
 ///@param plotB set to true, if you want to write B-field to file
 ///@throws ERROR: Could not open file for E or B field
-void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool plotB){
+void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotting, bool plotE, bool plotB){
     printf("Writing fields to file ...\n");
     FILE *fid = NULL;
     FILE *fid2 = NULL;
@@ -240,7 +240,7 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool p
         int nx = Grid->numberOfGridPointsInX;
         int ny = Grid->numberOfGridPointsInY;
         int nz = Grid->numberOfGridPointsInZ;
-        int k = 72;
+        int k = planeForPlotting;
         double Ex, Ey, Ez, Bx, By, Bz;
         
         for (int j = 0; j < ny; j++)

@@ -43,13 +43,13 @@ void testMaxwellPusher(){
     char filename[32] = "some";
     int arrayLength = tEnd/dt;
 
-    
+    int planeForPlotting = 124;
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
     
     for(int p = 0; p < arrayLength; p++){
-        writeFieldsToFile(&Grid, filename, p, true, false);
+        writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
         pushEFieldOnGrid(&Grid, dt);
         PushBFieldOnGrid(&Grid, dt);
         PushBFieldOnGrid(&Grid, dt);
@@ -169,11 +169,13 @@ void testNearFieldCalculation(){
     Bextern[1] = 0;
     Bextern[2] = 0.2;
     
+    int planeForPlotting = Particle.x[3] / dz;
+    
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
-        writeFieldsToFile(&Grid, filename, p, true, false);
+        writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
         getCurrentBoxIndexOfParticle(&Grid, &Particle);
         getEdgesOfNearFieldBox(&Grid, &Particle);
         writeParticleToFile(&Particle, filename, p);
@@ -194,9 +196,9 @@ void testLWFieldCalculation(){
     // ======================================================
     
     Grid Grid;
-    double dx = 0.2;
-    double dy = 0.2;
-    double dz = 0.2;
+    double dx = 0.125;
+    double dy = 0.125;
+    double dz = 0.125;
     int numberOfGridPointsForBoxInX = 32;
     int numberOfGridPointsForBoxInY = 32;
     int numberOfGridPointsForBoxInZ = 32;
@@ -210,7 +212,7 @@ void testLWFieldCalculation(){
     
     double dt = 0.5 * dx;
     double t = 0;
-    double tEnd = 10;
+    double tEnd = 6;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -241,13 +243,13 @@ void testLWFieldCalculation(){
     Bextern[1] = 0;
     Bextern[2] = 1;
     
+    int planeForPlotting = Particle.x[3] / dz;
+    
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
-        writeFieldsToFile(&Grid, filename, p, true, false);
-        //getCurrentBoxIndexOfParticle(&Grid, &Particle);
-        //getEdgesOfNearFieldBox(&Grid, &Particle);
+        writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
         writeParticleToFile(&Particle, filename, p);
         addCurrentStateToParticleHistory(&Particle, p);
         calcLWFieldsEverywhereOnGrid(&Grid, &Particle, p);
