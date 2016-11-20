@@ -15,7 +15,8 @@ int main(int argc, const char * argv[]) {
     
     //testMaxwellPusher();
     //testBorisPusher();
-    testNearFieldCalculation();
+    //testNearFieldCalculation();
+    testLWFieldCalculation();
     
     return 0;
 }

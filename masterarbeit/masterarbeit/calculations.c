@@ -1,6 +1,6 @@
 /* =============================================
-IMPLEMENTATION OF CALCULATIONS HEADER
-================================================ */
+ IMPLEMENTATION OF CALCULATIONS HEADER
+ ================================================ */
 
 #import <math.h>
 #import <stdbool.h>
@@ -8,26 +8,26 @@ IMPLEMENTATION OF CALCULATIONS HEADER
 #include "calculations.h"
 #include "particle.h"
 /**
-@brief calculates the cross product of two vectors "a" and "b" and saves the result in array "result"
-@param a first vector of cross product
-@param b second vector of cross product
-@param result the result vector which  is automatically available in outer scope
-
+ @brief calculates the cross product of two vectors "a" and "b" and saves the result in array "result"
+ @param a first vector of cross product
+ @param b second vector of cross product
+ @param result the result vector which  is automatically available in outer scope
+ 
  */
 void crossProduct(double a[3], double b[3], double result[3]){
-	result[0] = a[1]*b[2]-a[2]*b[1];
-	result[1] = a[2]*b[0]-a[0]*b[2];
-	result[2] = a[0]*b[1]-a[1]*b[0];
+    result[0] = a[1]*b[2]-a[2]*b[1];
+    result[1] = a[2]*b[0]-a[0]*b[2];
+    result[2] = a[0]*b[1]-a[1]*b[0];
 }
 
 /**
-@brief true if position of particle is inside the backward lightcone of the observer, otherwise false.
-@remark two conditions have to be fulfilled. Since the information needs time to travel from particle position to observer position, time difference has to be positive: 
-@code xObserver[0]-xParticle[0] > 0
-@endcode
-And Since
-@code c > v <=> (ct)^2 > x^2
-@endcode
+ @brief true if position of particle is inside the backward lightcone of the observer, otherwise false.
+ @remark two conditions have to be fulfilled. Since the information needs time to travel from particle position to observer position, time difference has to be positive:
+ @code xObserver[0]-xParticle[0] > 0
+ @endcode
+ And Since
+ @code c > v <=> (ct)^2 > x^2
+ @endcode
  */
 bool isInsideBackwardLightcone(double xParticle[4], double xObserver[4]) {
     double dt;
@@ -42,13 +42,13 @@ bool isInsideBackwardLightcone(double xParticle[4], double xObserver[4]) {
 }
 
 /**
-@brief returns true if position of particle is inside the forward lightcone of the observer, otherwise false.
-@remark two conditions have to be fulfilled. Since the information needs time to travel from particle position to observer position, time difference has to be negative:
-@code xObserver[0]-xParticle[0] < 0
-@endcode
-And Since
-@code c > v <=> (ct)^2 > x^2
-@endcode
+ @brief returns true if position of particle is inside the forward lightcone of the observer, otherwise false.
+ @remark two conditions have to be fulfilled. Since the information needs time to travel from particle position to observer position, time difference has to be negative:
+ @code xObserver[0]-xParticle[0] < 0
+ @endcode
+ And Since
+ @code c > v <=> (ct)^2 > x^2
+ @endcode
  */
 bool isInsideForwardLightcone(double xParticle[4], double xObserver[4]) {
     
@@ -66,10 +66,10 @@ bool isInsideForwardLightcone(double xParticle[4], double xObserver[4]) {
 
 
 /**
-@brief calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result in the array passed as argument.
-@param x vector you want to substract from
-@param y vector to substract from x
-@param result the resulting vector of substracting y from x
+ @brief calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result in the array passed as argument.
+ @param x vector you want to substract from
+ @param y vector to substract from x
+ @param result the resulting vector of substracting y from x
  */
 void vectorDifference(double x[4], double y[4], double result[4]){
     for (int i = 0; i < 4; i++){
@@ -120,7 +120,7 @@ double calculateLambdaForLinearInterpolation(double xInside[4], double xOutside[
     a = minkowskiProduct(xInsideMinusxOutside, xInsideMinusxOutside);
     b = 2.0 * minkowskiProduct(xInsideMinusxOutside, xOutsideMinusxObserver);
     c = minkowskiProduct(xOutside, xOutside) + minkowskiProduct(xObserver, xObserver) - 2.0 * minkowskiProduct(xOutside, xObserver);
-
+    
     lambda = (-b+sqrt(b*b-4.0*a*c))/(2.0*a);
     return lambda;
 }
@@ -137,14 +137,14 @@ void calculateIntersectionPoint(double xInside[4], double xOutside[4], double xO
 }
 
 /**
- updates velocity with boris method. 
+ updates velocity with boris method.
  
  First obtain “uMinus” by adding half acceleration to the initial velocity.
  Then obtain "uPlus" by performing rotation with "uPrime" and internally computed assisting values.
  Finally, add another half acceleration.
  */
 void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *Bextern, double dt){
-
+    
     int dimension = 3;
     double uPrime[3];
     double t[3];
@@ -211,16 +211,16 @@ void updateLocation(Particle *Particle, double dt){
 }
 
 /**
-@brief calcualtes Liénard Wiechert Parameters gamma_sq, R_sq, R, n, beta from xParticle, u and xObserver
-@remark in order to have the values of R_sq, R and gamma_sq available in the outer scope, we need to work with pointers like we do when we passing arrays as function arguments
-@param xParticle position vector of particle
-@param xObserver observation point where you want to calcualte the lw fields
-@param u velocity vector the your particle
-@param gamma_sq gets calculated
-@param R_sq gets calculated
-@param R gets calculated
-@param n gets calculated
-@param beta gets calculated
+ @brief calcualtes Liénard Wiechert Parameters gamma_sq, R_sq, R, n, beta from xParticle, u and xObserver
+ @remark in order to have the values of R_sq, R and gamma_sq available in the outer scope, we need to work with pointers like we do when we passing arrays as function arguments
+ @param xParticle position vector of particle
+ @param xObserver observation point where you want to calcualte the lw fields
+ @param u velocity vector the your particle
+ @param gamma_sq gets calculated
+ @param R_sq gets calculated
+ @param R gets calculated
+ @param n gets calculated
+ @param beta gets calculated
  */
 void calculateLienardWiechertParameters(double xParticle[4], double xObserver[4], double u[4], double *gamma_sq, double *R_sq, double *R, double n[3], double beta[3]) {
     n[0] = xObserver[1]-xParticle[1];
@@ -243,7 +243,7 @@ void calculateLienardWiechertParameters(double xParticle[4], double xObserver[4]
 
 
 /**
- @brief calcultes time derivative in each component of beta. 
+ @brief calcultes time derivative in each component of beta.
  @param uOld velocity vector of particle before it gets pushed
  @param uNew actual velocity vector of particle
  @param dt step size for calculating the derivative
@@ -256,11 +256,11 @@ void calculateBetaDot(double uOld[4], double uNew[4], double dt, double betaDot[
 }
 
 /**
-@brief calcuates acceleration of particle
-@param xOld position of particle before it was pushed via borisPusher
-@param xNew actual position of particle
-@param beta acceleration vector of spatial components
-*/
+ @brief calcuates acceleration of particle
+ @param xOld position of particle before it was pushed via borisPusher
+ @param xNew actual position of particle
+ @param beta acceleration vector of spatial components
+ */
 void calculateBeta(double xOld[4], double xNew[4], double beta[3]) {
     double dt = xNew[0]-xOld[0];
     beta[0] = (xNew[1]-xOld[1])/dt;
@@ -270,8 +270,8 @@ void calculateBeta(double xOld[4], double xNew[4], double beta[3]) {
 
 
 void calcuateLienardWiechertFields(double gamma_sq, double R_sq, double R, double *n,
-                    double *beta, double *beta_dot, double charge, double *E,
-                    double *B) {
+                                   double *beta, double *beta_dot, double charge, double *E,
+                                   double *B) {
     double denominator1;
     double denominator2;
     double oneMinusBetaN;
@@ -307,6 +307,59 @@ void calcuateLienardWiechertFields(double gamma_sq, double R_sq, double R, doubl
     E[2] = charge*(denominator1*nMinusBeta[2]+denominator2*nCrossnMinusBetaCrossBetaDot[2]);
     
     crossProduct(n, E, B);
+}
+
+void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int outerLoopIndex){
+    printf("Calculating LW Fields On grid\n");
+    double xObserver[4] = {0};
+    double beta[3] = {0};
+    double intersectionPoint[4] = {0};
+    double gamma_sq;
+    double R_sq;
+    double R;
+    double n[3] = {0};
+    double betaDot[3] = {0};
+    double dt = 0.5 * Grid->dx;
+    double E[3] = {0};
+    double B[3] = {0};
+    
+    int nx = Grid->numberOfGridPointsInX;
+    int ny = Grid->numberOfGridPointsInY;
+    int nz = Grid->numberOfGridPointsInZ;
+    
+    for(int i = 0; i < nx; i++){
+        for (int j = 0; j < ny; j++){
+            for(int k = 0; k < nz; k++){
+                // old position needs to be outside lightcone and new position inside lightcone.
+                // outisde the lightcone means that the information would be traveling faster than c, inside less than c
+                // on the lightcone information travels with c
+                
+                xObserver[0] = outerLoopIndex * dt;
+                xObserver[1] = i * Grid->dx;
+                xObserver[2] = j * Grid->dy;
+                xObserver[3] = k * Grid->dz;
+                for (int index = 0; index < outerLoopIndex; index ++){
+                    if(isInsideBackwardLightcone(Particle->xHistory[index], xObserver) && !isInsideBackwardLightcone(Particle->xHistory[index+1], xObserver)){
+                        calculateIntersectionPoint(Particle->xHistory[index], Particle->xHistory[index+1], xObserver, intersectionPoint);
+                        calculateBeta(Particle->xHistory[index], Particle->xHistory[index+1], beta);
+                        calculateLienardWiechertParameters(intersectionPoint, xObserver, Particle->u, &gamma_sq, &R_sq, &R, n, beta);
+                        calculateBetaDot(Particle->uHistory[index], Particle->uHistory[index+1], dt, betaDot);
+                        calcuateLienardWiechertFields(gamma_sq, R_sq, R, n, beta, betaDot, Particle->charge, E, B);
+                        Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += E[0];
+                        Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += E[1];
+                        Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] += E[2];
+                        Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += B[0];
+                        Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += B[1];
+                        Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] += B[2];
+                        //printf("%d %d %d %f\n", i,j,k, E[0]);
+                        
+                    }
+                }
+            }
+        }
+    }
+    
+    
 }
 
 

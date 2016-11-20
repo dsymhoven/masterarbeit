@@ -240,7 +240,7 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, bool plotE, bool p
         int nx = Grid->numberOfGridPointsInX;
         int ny = Grid->numberOfGridPointsInY;
         int nz = Grid->numberOfGridPointsInZ;
-        int k = 128;
+        int k = 72;
         double Ex, Ey, Ez, Bx, By, Bz;
         
         for (int j = 0; j < ny; j++)
