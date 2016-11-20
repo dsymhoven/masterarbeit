@@ -11,7 +11,7 @@ mkdir -p $PATHTOANALYSIS/png
 # 4. change directory to Analysis folder in order for python script to work properly
 cd $PATHTOANALYSIS
 # 5. execute python script
-python2.7 plot_fields.py
+python2.7 plot_maxwellPusher.py
 # 6. chane to png folder
 cd png/
 # 7. execute ffmpeg to create video file

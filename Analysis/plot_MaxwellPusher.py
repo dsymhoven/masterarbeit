@@ -5,7 +5,7 @@ from matplotlib.mlab import griddata
 from matplotlib import cm
 import scipy.interpolate
 
-N = 100
+    	
 files = glob.glob('fields/*.txt')
 
 for file in files:
@@ -14,7 +14,6 @@ for file in files:
 	# open figure
 	fig = plt.figure()
 	# creates contour plot of data array automatically. vmin and vamx sets values for colorbar
-	plt.imshow(data, vmin=0, vmax=1.0)
 	plt.colorbar()
 	# set labels
 	plt.xlabel("X")
