@@ -21,6 +21,7 @@ struct Particle {
     double **uHistory;
     int currentBoxIndexArray[3];
     double edgesOfNearFieldBox[6];
+    int lengthOfHistoryArray;
     
 };
 

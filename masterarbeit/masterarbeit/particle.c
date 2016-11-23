@@ -20,6 +20,7 @@ void initParticle(Particle *Particle, double const charge, double const mass, in
     }
     Particle->charge = charge;
     Particle->mass = mass;
+    Particle->lengthOfHistoryArray = arrayLength;
     allocateParticleHistories(Particle, arrayLength);
 }
 
