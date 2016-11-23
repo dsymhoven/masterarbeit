@@ -249,17 +249,19 @@ void testLWFieldCalculation(){
 #pragma mark: Main Routine
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
-        writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
+        //writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
         writeParticleToFile(&Particle, filename, p);
         addCurrentStateToParticleHistory(&Particle, p);
-        calcLWFieldsEverywhereOnGrid(&Grid, &Particle, p);
         updateVelocityWithBorisPusher(&Particle, Eextern, Bextern, dt);
         updateLocation(&Particle, dt);
         t += dt;
     }
 
-    printf("executing bash-script ...\n");
-    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
+    //calcLWFieldsOnGrid(&Grid, &Particle, t);
+    calcLWFieldsEverywhereOnGrid2(&Grid, &Particle, t);
+    writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
+    //printf("executing bash-script ...\n");
+    //system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticle(&Particle, arrayLength);
     freeMemoryOnGrid(&Grid);
 }

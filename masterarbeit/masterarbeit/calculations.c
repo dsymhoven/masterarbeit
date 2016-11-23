@@ -7,6 +7,7 @@
 #import <stdio.h>
 #include "calculations.h"
 #include "particle.h"
+#include "string.h"
 /**
  @brief calculates the cross product of two vectors "a" and "b" and saves the result in array "result"
  @param a first vector of cross product
@@ -128,10 +129,11 @@ double calculateLambdaForLinearInterpolation(double xInside[4], double xOutside[
 /**
  calculates the intersection point of the particle trajectory and the backward lightcone of the observation point with linear interpolation.
  */
-void calculateIntersectionPoint(double xInside[4], double xOutside[4], double xObserver[4], double intersectionPoint[4]){
+void calculateIntersectionPoint(double xInside[4], double xOutside[4], double uInside[4], double uOutside[4], double xObserver[4], double intersectionPoint[4], double velocityAtIntersectionPoint[4]){
     double lambda = calculateLambdaForLinearInterpolation(xInside, xOutside, xObserver);
     for(int i = 0; i < 4; i++){
         intersectionPoint[i] = xOutside[i] + lambda * (xInside[i] - xOutside[i]);
+        velocityAtIntersectionPoint[i] = uOutside[i] + lambda * (uInside[i] - uOutside[i]);
     }
     
 }
@@ -194,7 +196,8 @@ void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *
     for (int i = 0; i < dimension; i++){
         Particle->u[i+1] += chargeOverMass * Eextern[i] * dt * 0.5;
     }
-    Particle->u[0] += dt;
+    
+    Particle->u[0] = getGammaFromVelocityVector(Particle);
 }
 
 /**
@@ -309,12 +312,13 @@ void calcuateLienardWiechertFields(double gamma_sq, double R_sq, double R, doubl
     crossProduct(n, E, B);
 }
 ///@brief calcualtes Liénard-Wiechert Fields everywhere on the grid. Each point on the grid is considered to be the observation point, where the zeroth component is the current simulation time and also the time at which we want to calculate the fields. Therefore loop through the particle xhistory vector up to the current simulation time and search for the pair of positions which fulfil the condition that the old position is inside and the new position is outside the backward lightcone of the observation point. Once that pair of positions is found the rest of the xHistory vector can be skipped because all following points will be outside as well.
-///@param outerLoopIndex outer loop index indicating the current simulation time
-void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int outerLoopIndex){
+///@param timeStep outer loop index indicating the current simulation time
+void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int timeStep){
     printf("Calculating LW Fields on grid\n");
     double xObserver[4] = {0};
     double beta[3] = {0};
     double intersectionPoint[4] = {0};
+    double velocityAtIntersectionPoint[4] = {0};
     double gamma_sq;
     double R_sq;
     double R;
@@ -330,18 +334,18 @@ void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int outerLoopI
     
     for(int i = 0; i < nx; i++){
         for (int j = 0; j < ny; j++){
-            for(int k = 0; k < nz; k++){
+            for(int k = 115; k < nz; k++){
                 
-                xObserver[0] = outerLoopIndex * dt;
-                xObserver[1] = i * Grid->dx;
-                xObserver[2] = j * Grid->dy;
-                xObserver[3] = k * Grid->dz;
-
-                for (int index = 0; index < outerLoopIndex; index ++){
+                xObserver[0] = timeStep * dt;
+                xObserver[1] = (i + 0.5)* Grid->dx;
+                xObserver[2] = (j + 0.5) * Grid->dy;
+                xObserver[3] = (k + 0.5) * Grid->dz;
+                
+                for (int index = 0; index < timeStep; index ++){
                     if(isInsideBackwardLightcone(Particle->xHistory[index], xObserver) && !isInsideBackwardLightcone(Particle->xHistory[index+1], xObserver)){
-                        calculateIntersectionPoint(Particle->xHistory[index], Particle->xHistory[index+1], xObserver, intersectionPoint);
+                        calculateIntersectionPoint(Particle->xHistory[index], Particle->xHistory[index+1], Particle->uHistory[index], Particle->uHistory[index+1], xObserver, intersectionPoint, velocityAtIntersectionPoint);
                         calculateBeta(Particle->xHistory[index], Particle->xHistory[index+1], beta);
-                        calculateLienardWiechertParameters(intersectionPoint, xObserver, Particle->u, &gamma_sq, &R_sq, &R, n, beta);
+                        calculateLienardWiechertParameters(intersectionPoint, xObserver, velocityAtIntersectionPoint, &gamma_sq, &R_sq, &R, n, beta);
                         calculateBetaDot(Particle->uHistory[index], Particle->uHistory[index+1], dt, betaDot);
                         calcuateLienardWiechertFields(gamma_sq, R_sq, R, n, beta, betaDot, Particle->charge, E, B);
                         Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] = E[0];
@@ -360,5 +364,185 @@ void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int outerLoopI
     
     
 }
+
+void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t){
+    int totalNumberOfBoxes = Grid->numberOfBoxesInX * Grid->numberOfBoxesInY * Grid->numberOfBoxesInZ;
+    for (int boxIndex = 0; boxIndex < totalNumberOfBoxes; boxIndex++){
+        addLWFieldsInBox(Grid, Particle, boxIndex, t);
+    }
+}
+
+void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
+    printf("calculating LW fields in box %d\n", boxIndex);
+    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
+    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
+    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    
+    int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
+    int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
+    
+    int numberOfBoxesInX = Grid->numberOfBoxesInX;
+    int numberOfBoxesInY = Grid->numberOfBoxesInY;
+    int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
+    
+    double dx = Grid->dx;
+    double dy = Grid->dy;
+    double dz = Grid->dz;
+    
+    int ib = boxIndex / (numberOfBoxesInY * numberOfBoxesInZ);
+    int jb = (boxIndex - ( ib * numberOfBoxesInY * numberOfBoxesInZ)) / numberOfBoxesInY;
+    int kb = (boxIndex - ( ib * numberOfBoxesInY * numberOfBoxesInZ)) - jb * numberOfBoxesInY;
+    
+    double xObserver[4] = {0};
+    xObserver[0] = t;
+    
+    int lowerLeftGridIndexInBox = ib * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + jb * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + kb * numberOfGridPointsForBoxInZ * 3;
+    
+    for (int id = 0; id < numberOfGridPointsForBoxInX; id++)
+        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++)
+            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++)
+            {
+                int gridIndexInBox = lowerLeftGridIndexInBox + 3 * kd + 3 * jd * numberOfGridPointsInZ + 3 * id * numberOfGridPointsInZ * numberOfGridPointsInY;
+                
+                xObserver[1] = (ib * numberOfGridPointsForBoxInX + id) * dx;
+                xObserver[2] = (jb * numberOfGridPointsForBoxInY + jd) * dy;
+                xObserver[3] = (kb * numberOfGridPointsForBoxInZ + kd) * dz;
+                
+                AddLWField(Grid, xObserver, 3, gridIndexInBox, Particle);
+                AddLWField(Grid, xObserver, 4, gridIndexInBox, Particle);
+                AddLWField(Grid, xObserver, 5, gridIndexInBox, Particle);
+                
+                AddLWField(Grid, xObserver, 0, gridIndexInBox, Particle);
+                AddLWField(Grid, xObserver, 1, gridIndexInBox, Particle);
+                AddLWField(Grid, xObserver, 2, gridIndexInBox, Particle);
+                
+            }
+}
+
+void AddLWField(Grid *Grid, double xCopy[4], int component, int gridIndexInBox, Particle *Particle){
+    double xObserver[4];
+    memcpy(xObserver, xCopy, 4 * sizeof(double));
+    switch (component)
+    {
+        case 0:
+            xObserver[1] += 0.5 * (Grid->dx);
+            break;
+        case 1:
+            xObserver[2] += 0.5 * (Grid->dy);
+            break;
+        case 2:
+            xObserver[3] += 0.5 * (Grid->dz);
+            break;
+        case 3:
+            xObserver[2] += 0.5 * (Grid->dy);
+            xObserver[3] += 0.5 * (Grid->dz);
+            break;
+        case 4:
+            xObserver[3] += 0.5 * (Grid->dz);
+            xObserver[1] += 0.5 * (Grid->dx);
+            break;
+        case 5:
+            xObserver[1] += 0.5 * (Grid->dx);
+            xObserver[2] += 0.5 * (Grid->dy);
+            break;
+    }
+    
+    
+    double beta[3] = {0};
+    double intersectionPoint[4] = {0};
+    double velocityAtIntersectionPoint[4] = {0};
+    double gamma_sq;
+    double R_sq;
+    double R;
+    double n[3] = {0};
+    double betaDot[3] = {0};
+    double dt = 0.5 * Grid->dx;
+    double E[3] = {0};
+    double B[3] = {0};
+    int lengthOfHistoryArray = Particle->lengthOfHistoryArray;
+    
+    
+    for (int index = 0; index < lengthOfHistoryArray - 1; index ++){
+        if(isInsideBackwardLightcone(Particle->xHistory[index], xObserver) && !isInsideBackwardLightcone(Particle->xHistory[index+1], xObserver)){
+            calculateIntersectionPoint(Particle->xHistory[index], Particle->xHistory[index+1], Particle->uHistory[index], Particle->uHistory[index+1], xObserver, intersectionPoint, velocityAtIntersectionPoint);
+            calculateBeta(Particle->xHistory[index], Particle->xHistory[index+1], beta);
+            calculateLienardWiechertParameters(intersectionPoint, xObserver, velocityAtIntersectionPoint, &gamma_sq, &R_sq, &R, n, beta);
+            calculateBetaDot(Particle->uHistory[index], Particle->uHistory[index+1], dt, betaDot);
+            calcuateLienardWiechertFields(gamma_sq, R_sq, R, n, beta, betaDot, Particle->charge, E, B);
+            break;
+        }
+    }
+    
+    switch (component)
+    {
+        case 0:
+            Grid->E[gridIndexInBox] += E[0];
+            break;
+        case 1:
+            Grid->E[gridIndexInBox + 1] += E[1];
+            break;
+        case 2:
+            Grid->E[gridIndexInBox + 2] += E[2];
+            break;
+        case 3:
+            Grid->B[gridIndexInBox] += B[0];
+            break;
+        case 4:
+            Grid->B[gridIndexInBox + 1] += B[1];
+            break;
+        case 5:
+            Grid->B[gridIndexInBox + 2] += B[2];
+            break;
+    }
+    
+}
+
+void calcLWFieldsEverywhereOnGrid2(Grid *Grid, Particle *Particle, double t){
+    printf("Calculating LW Fields on grid\n");
+    double xObserver[4] = {0};
+    double beta[3] = {0};
+    double intersectionPoint[4] = {0};
+    double velocityAtIntersectionPoint[4] = {0};
+    double gamma_sq;
+    double R_sq;
+    double R;
+    double n[3] = {0};
+    double betaDot[3] = {0};
+    double dt = 0.5 * Grid->dx;
+    double E[3] = {0};
+    double B[3] = {0};
+    
+    double xCopy[4];
+    int k = 115;
+    int nx = Grid->numberOfGridPointsInX;
+    int ny = Grid->numberOfGridPointsInY;
+    int nz = Grid->numberOfGridPointsInZ;
+    
+    for(int i = 0; i < nx; i++){
+        for (int j = 0; j < ny; j++){
+            
+            
+            xCopy[0] = t;
+            xCopy[1] = (i)* Grid->dx;
+            xCopy[2] = (j) * Grid->dy;
+            xCopy[3] = (k) * Grid->dz;
+            
+            double gridIndexInBox = 3 * ny * nz * i + 3 * nz * j + 3 * k;
+            
+            AddLWField(Grid, xCopy, 3, gridIndexInBox, Particle);
+            AddLWField(Grid, xCopy, 4, gridIndexInBox, Particle);
+            AddLWField(Grid, xCopy, 5, gridIndexInBox, Particle);
+            
+            AddLWField(Grid, xCopy, 0, gridIndexInBox, Particle);
+            AddLWField(Grid, xCopy, 1, gridIndexInBox, Particle);
+            AddLWField(Grid, xCopy, 2, gridIndexInBox, Particle);
+            
+            
+        }
+    }
+    
+    
+}
+
 
 
