@@ -25,5 +25,5 @@ void calculateBeta(double xOld[4], double xNew[4], double beta[3]);
 void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t);
 void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t);
 void AddLWField(Grid *Grid, double xObserver[4], int component, int gridIndexInBox, Particle *Particle);
-void calcLWFieldsEverywhereOnGrid2(Grid *Grid, Particle *Particle, double t);
+void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeForPlotting);
 #endif

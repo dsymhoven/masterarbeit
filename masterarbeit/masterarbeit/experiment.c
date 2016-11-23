@@ -189,7 +189,7 @@ void testNearFieldCalculation(){
     freeMemoryOnGrid(&Grid);
 }
 
-void testLWFieldCalculation(){
+void testLWFieldCalculationForPlane(){
     
     // ======================================================
 #pragma mark: Initializations
@@ -249,7 +249,6 @@ void testLWFieldCalculation(){
 #pragma mark: Main Routine
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
-        //writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
         writeParticleToFile(&Particle, filename, p);
         addCurrentStateToParticleHistory(&Particle, p);
         updateVelocityWithBorisPusher(&Particle, Eextern, Bextern, dt);
@@ -257,11 +256,10 @@ void testLWFieldCalculation(){
         t += dt;
     }
 
-    //calcLWFieldsOnGrid(&Grid, &Particle, t);
-    calcLWFieldsEverywhereOnGrid2(&Grid, &Particle, t);
+    calcLWFieldsForPlane(&Grid, &Particle, t, planeForPlotting);
     writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
-    //printf("executing bash-script ...\n");
-    //system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
+    printf("executing bash-script ...\n");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
     freeMemoryOnParticle(&Particle, arrayLength);
     freeMemoryOnGrid(&Grid);
 }

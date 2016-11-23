@@ -381,7 +381,6 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
     
-    int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
     
@@ -419,31 +418,31 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
             }
 }
 
-void AddLWField(Grid *Grid, double xCopy[4], int component, int gridIndexInBox, Particle *Particle){
-    double xObserver[4];
-    memcpy(xObserver, xCopy, 4 * sizeof(double));
+void AddLWField(Grid *Grid, double xObserver[4], int component, int gridIndexInBox, Particle *Particle){
+    double xObserverCopy[4];
+    memcpy(xObserverCopy, xObserver, 4 * sizeof(double));
     switch (component)
     {
         case 0:
-            xObserver[1] += 0.5 * (Grid->dx);
+            xObserverCopy[1] += 0.5 * (Grid->dx);
             break;
         case 1:
-            xObserver[2] += 0.5 * (Grid->dy);
+            xObserverCopy[2] += 0.5 * (Grid->dy);
             break;
         case 2:
-            xObserver[3] += 0.5 * (Grid->dz);
+            xObserverCopy[3] += 0.5 * (Grid->dz);
             break;
         case 3:
-            xObserver[2] += 0.5 * (Grid->dy);
-            xObserver[3] += 0.5 * (Grid->dz);
+            xObserverCopy[2] += 0.5 * (Grid->dy);
+            xObserverCopy[3] += 0.5 * (Grid->dz);
             break;
         case 4:
-            xObserver[3] += 0.5 * (Grid->dz);
-            xObserver[1] += 0.5 * (Grid->dx);
+            xObserverCopy[3] += 0.5 * (Grid->dz);
+            xObserverCopy[1] += 0.5 * (Grid->dx);
             break;
         case 5:
-            xObserver[1] += 0.5 * (Grid->dx);
-            xObserver[2] += 0.5 * (Grid->dy);
+            xObserverCopy[1] += 0.5 * (Grid->dx);
+            xObserverCopy[2] += 0.5 * (Grid->dy);
             break;
     }
     
@@ -463,10 +462,10 @@ void AddLWField(Grid *Grid, double xCopy[4], int component, int gridIndexInBox, 
     
     
     for (int index = 0; index < lengthOfHistoryArray - 1; index ++){
-        if(isInsideBackwardLightcone(Particle->xHistory[index], xObserver) && !isInsideBackwardLightcone(Particle->xHistory[index+1], xObserver)){
-            calculateIntersectionPoint(Particle->xHistory[index], Particle->xHistory[index+1], Particle->uHistory[index], Particle->uHistory[index+1], xObserver, intersectionPoint, velocityAtIntersectionPoint);
+        if(isInsideBackwardLightcone(Particle->xHistory[index], xObserverCopy) && !isInsideBackwardLightcone(Particle->xHistory[index+1], xObserverCopy)){
+            calculateIntersectionPoint(Particle->xHistory[index], Particle->xHistory[index+1], Particle->uHistory[index], Particle->uHistory[index+1], xObserverCopy, intersectionPoint, velocityAtIntersectionPoint);
             calculateBeta(Particle->xHistory[index], Particle->xHistory[index+1], beta);
-            calculateLienardWiechertParameters(intersectionPoint, xObserver, velocityAtIntersectionPoint, &gamma_sq, &R_sq, &R, n, beta);
+            calculateLienardWiechertParameters(intersectionPoint, xObserverCopy, velocityAtIntersectionPoint, &gamma_sq, &R_sq, &R, n, beta);
             calculateBetaDot(Particle->uHistory[index], Particle->uHistory[index+1], dt, betaDot);
             calcuateLienardWiechertFields(gamma_sq, R_sq, R, n, beta, betaDot, Particle->charge, E, B);
             break;
@@ -497,23 +496,11 @@ void AddLWField(Grid *Grid, double xCopy[4], int component, int gridIndexInBox, 
     
 }
 
-void calcLWFieldsEverywhereOnGrid2(Grid *Grid, Particle *Particle, double t){
-    printf("Calculating LW Fields on grid\n");
-    double xObserver[4] = {0};
-    double beta[3] = {0};
-    double intersectionPoint[4] = {0};
-    double velocityAtIntersectionPoint[4] = {0};
-    double gamma_sq;
-    double R_sq;
-    double R;
-    double n[3] = {0};
-    double betaDot[3] = {0};
-    double dt = 0.5 * Grid->dx;
-    double E[3] = {0};
-    double B[3] = {0};
-    
-    double xCopy[4];
-    int k = 115;
+void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeForPlotting){
+    printf("Calculating LW Fields on plane %d, heigth:%f\n", planeForPlotting, planeForPlotting * Grid->dz);
+
+    double xObserver[4];
+    int k = planeForPlotting;
     int nx = Grid->numberOfGridPointsInX;
     int ny = Grid->numberOfGridPointsInY;
     int nz = Grid->numberOfGridPointsInZ;
@@ -522,20 +509,20 @@ void calcLWFieldsEverywhereOnGrid2(Grid *Grid, Particle *Particle, double t){
         for (int j = 0; j < ny; j++){
             
             
-            xCopy[0] = t;
-            xCopy[1] = (i)* Grid->dx;
-            xCopy[2] = (j) * Grid->dy;
-            xCopy[3] = (k) * Grid->dz;
+            xObserver[0] = t;
+            xObserver[1] = (i)* Grid->dx;
+            xObserver[2] = (j) * Grid->dy;
+            xObserver[3] = (k) * Grid->dz;
             
             double gridIndexInBox = 3 * ny * nz * i + 3 * nz * j + 3 * k;
             
-            AddLWField(Grid, xCopy, 3, gridIndexInBox, Particle);
-            AddLWField(Grid, xCopy, 4, gridIndexInBox, Particle);
-            AddLWField(Grid, xCopy, 5, gridIndexInBox, Particle);
+            AddLWField(Grid, xObserver, 3, gridIndexInBox, Particle);
+            AddLWField(Grid, xObserver, 4, gridIndexInBox, Particle);
+            AddLWField(Grid, xObserver, 5, gridIndexInBox, Particle);
             
-            AddLWField(Grid, xCopy, 0, gridIndexInBox, Particle);
-            AddLWField(Grid, xCopy, 1, gridIndexInBox, Particle);
-            AddLWField(Grid, xCopy, 2, gridIndexInBox, Particle);
+            AddLWField(Grid, xObserver, 0, gridIndexInBox, Particle);
+            AddLWField(Grid, xObserver, 1, gridIndexInBox, Particle);
+            AddLWField(Grid, xObserver, 2, gridIndexInBox, Particle);
             
             
         }
