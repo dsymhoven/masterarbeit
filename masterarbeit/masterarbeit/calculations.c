@@ -197,7 +197,7 @@ void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *
         Particle->u[i+1] += chargeOverMass * Eextern[i] * dt * 0.5;
     }
     
-    Particle->u[0] = getGammaFromVelocityVector(Particle);
+    Particle->u[0] = getGammaFromVelocityVector(Particle->u);
 }
 
 /**
@@ -365,6 +365,7 @@ void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int timeStep){
     
 }
 
+///@brief calculates LW fields
 void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t){
     int totalNumberOfBoxes = Grid->numberOfBoxesInX * Grid->numberOfBoxesInY * Grid->numberOfBoxesInZ;
     for (int boxIndex = 0; boxIndex < totalNumberOfBoxes; boxIndex++){
@@ -458,10 +459,10 @@ void AddLWField(Grid *Grid, double xObserver[4], int component, int gridIndexInB
     double dt = 0.5 * Grid->dx;
     double E[3] = {0};
     double B[3] = {0};
-    int lengthOfHistoryArray = Particle->lengthOfHistoryArray;
+    int currentHistoryLength = Particle->currentHistoryLength;
     
     
-    for (int index = 0; index < lengthOfHistoryArray - 1; index ++){
+    for (int index = 0; index < currentHistoryLength - 1; index ++){
         if(isInsideBackwardLightcone(Particle->xHistory[index], xObserverCopy) && !isInsideBackwardLightcone(Particle->xHistory[index+1], xObserverCopy)){
             calculateIntersectionPoint(Particle->xHistory[index], Particle->xHistory[index+1], Particle->uHistory[index], Particle->uHistory[index+1], xObserverCopy, intersectionPoint, velocityAtIntersectionPoint);
             calculateBeta(Particle->xHistory[index], Particle->xHistory[index+1], beta);

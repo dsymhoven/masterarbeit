@@ -21,6 +21,7 @@ void initParticle(Particle *Particle, double const charge, double const mass, in
     Particle->charge = charge;
     Particle->mass = mass;
     Particle->lengthOfHistoryArray = arrayLength;
+    Particle->currentHistoryLength = 0;
     allocateParticleHistories(Particle, arrayLength);
 }
 
@@ -129,6 +130,8 @@ void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle){
     Particle->edgesOfNearFieldBox[5] = zMax;
     
 }
+
+
 ///@brief adds current position and velocity information (the entire four vectors) to respective history array of Particle struct
 ///@param index outer loop index to indicate the current time step.
 void addCurrentStateToParticleHistory(Particle *Particle, int index){
@@ -136,14 +139,15 @@ void addCurrentStateToParticleHistory(Particle *Particle, int index){
         Particle->xHistory[index][i] = Particle->x[i];
         Particle->uHistory[index][i] = Particle->u[i];
     }
+    Particle->currentHistoryLength = index;
 }
 
 ///@brief calculates gamma from spatial components of given velocity vector via gamma = sqrt(1 + u^2)
 ///@remark Don't use this method before spatial components of u are initialized
-double getGammaFromVelocityVector(Particle *Particle){
+double getGammaFromVelocityVector(double u[4]){
     double result = 0.0;
     for (int i = 1; i < 4; i++){
-        result += Particle->u[i] * Particle->u[i];
+        result += u[i] * u[i];
     }
     return sqrt(1 + result);
 

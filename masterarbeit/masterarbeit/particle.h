@@ -22,6 +22,7 @@ struct Particle {
     int currentBoxIndexArray[3];
     double edgesOfNearFieldBox[6];
     int lengthOfHistoryArray;
+    int currentHistoryLength;
     
 };
 
@@ -34,5 +35,5 @@ void allocateParticleHistories(Particle *Particle, int const arrayLength);
 void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle);
 void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle);
 void addCurrentStateToParticleHistory(Particle *Particle, int index);
-double getGammaFromVelocityVector(Particle *Particle);
+double getGammaFromVelocityVector(double u[4]);
 #endif /* particle_h */

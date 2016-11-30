@@ -59,6 +59,7 @@ void allocateFieldsOnGrid(Grid *Grid){
             Grid->B[i] = 0;
         }
     }
+    
 }
 
 ///@brief method for releasing all previously allocated memory in struct Grid. Put all free() invokations in here
