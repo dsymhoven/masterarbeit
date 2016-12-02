@@ -533,4 +533,51 @@ void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeFor
 }
 
 
+int calcCurrentBoxIndexOfParticle(Particle *Particle, Grid *Grid){
+    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
+    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
+    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    
+    int numberOfBoxesInY = Grid->numberOfBoxesInY;
+    int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
+    
+    double dx = Grid->dx;
+    double dy = Grid->dy;
+    double dz = Grid->dz;
+    
+    int ib = Particle->x[1] / dx / numberOfGridPointsForBoxInX;
+    int jb = Particle->x[2] / dy / numberOfGridPointsForBoxInY;
+    int kb = Particle->x[3] / dz / numberOfGridPointsForBoxInZ;
+    
+    return ib * numberOfBoxesInY * numberOfBoxesInZ + jb * numberOfBoxesInZ + kb;
+}
+
+void calcBoxIndizesOfNextNeighbourBoxes(Grid *Grid, Particle *Particle, int boxIndizesOfNextNeighbourBoxes[27]){
+    
+    int numberOfBoxesInY = Grid->numberOfBoxesInY;
+    int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
+    int numberOfBoxesInX = Grid->numberOfBoxesInX;
+    
+    int currentBoxIndexOfParticle = calcCurrentBoxIndexOfParticle(Particle, Grid);
+    int indexOfNextNeighbourBox = 0;
+    int maxBoxIndex = numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ;
+    int index = 0;
+        
+    for (int ii = -1; ii <= 1; ii++){
+        for(int ij = -1; ij <= 1; ij++){
+            for(int ik = -1; ik <= 1; ik++){
+                indexOfNextNeighbourBox = currentBoxIndexOfParticle + (ik + numberOfBoxesInZ * ij + numberOfBoxesInZ * numberOfBoxesInY * ii);
+                if (indexOfNextNeighbourBox < 0 || indexOfNextNeighbourBox > maxBoxIndex){
+                    boxIndizesOfNextNeighbourBoxes[index] = -1;
+                }
+                else{
+                    boxIndizesOfNextNeighbourBoxes[index] = indexOfNextNeighbourBox;
+                }
+                index++;
+            }
+        }
+        
+    }
+}
+
 

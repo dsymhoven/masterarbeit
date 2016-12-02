@@ -26,4 +26,6 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t);
 void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t);
 void AddLWField(Grid *Grid, double xObserver[4], int component, int gridIndexInBox, Particle *Particle);
 void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeForPlotting);
+int calcuCurrentBoxIndexOfParticle(Particle *Particle, Grid *Grid);
+void calcBoxIndizesOfNextNeighbourBoxes(Grid *Grid, Particle *Particle, int boxIndizesOfNextNeighbourBoxes[27]);
 #endif
