@@ -16,4 +16,5 @@ void testBorisPusher();
 void testNearFieldCalculation();
 void testLWFieldCalculationForPlane();
 void testLWFieldCalculationForEachTimeStep();
+void testNearAndFarFields();
 #endif /* experiment_h */

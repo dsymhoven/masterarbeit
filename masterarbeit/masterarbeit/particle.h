@@ -19,8 +19,8 @@ struct Particle {
     double u[4];
     double **xHistory;
     double **uHistory;
-    int currentBoxIndexArray[3];
     double edgesOfNearFieldBox[6];
+    int currentBoxIndexArray[3];
     int lengthOfHistoryArray;
     int currentHistoryLength;
     

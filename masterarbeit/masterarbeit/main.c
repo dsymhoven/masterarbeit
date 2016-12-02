@@ -17,7 +17,8 @@ int main(int argc, const char * argv[]) {
     //testBorisPusher();
     //testNearFieldCalculation();
     //testLWFieldCalculationForPlane();
-    testLWFieldCalculationForEachTimeStep();
+    //testLWFieldCalculationForEachTimeStep();
+    testNearAndFarFields();
     return 0;
 }   
 
