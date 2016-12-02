@@ -120,13 +120,20 @@ void allocateFieldsOnBoxBorders(Grid *Grid){
 
 }
 
+///@brief calls allocateFieldsOnGrid() and allocateFieldsOnBoxBorders(). For details see their documentation
+void allocateMemoryOnGrid(Grid *Grid){
+    allocateFieldsOnGrid(Grid);
+    allocateFieldsOnBoxBorders(Grid);
+    
+}
+
 ///@brief method for releasing all previously allocated memory in struct Grid. Put all free() invokations in here
 void freeMemoryOnGrid(Grid *Grid){
     printf("releasing allocated memory in Grid...\n");
     free(Grid->B);
     free(Grid->E);
     
-    for (int i = 0; i < Grid->numberOfGridPointsForBoxInX * Grid->numberOfGridPointsForBoxInY * Grid->numberOfGridPointsForBoxInZ; i++)
+    for (int i = 0; i < Grid->numberOfBoxesInX * Grid->numberOfBoxesInY * Grid->numberOfBoxesInZ; i++)
     {
         
         free(Grid->Bz_im1[i]);
@@ -600,7 +607,7 @@ void setBFieldOnBorders(Grid *Grid){
         }
 }
 
-void SetEFieldOnBorders(Grid *Grid){
+void setEFieldOnBorders(Grid *Grid){
     
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
