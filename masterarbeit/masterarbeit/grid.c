@@ -600,4 +600,86 @@ void setBFieldOnBorders(Grid *Grid){
         }
 }
 
+void SetEFieldOnBorders(Grid *Grid){
+    
+    int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
+    int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
+    
+    int numberOfBoxesInX = Grid->numberOfGridPointsForBoxInX;
+    int numberOfBoxesInY = Grid->numberOfGridPointsForBoxInY;
+    int numberOfBoxesInZ = Grid->numberOfGridPointsForBoxInZ;
+    
+    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
+    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
+    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    
+    int ib, jb, kb;
+    
+    for (ib = 0; ib < numberOfBoxesInX; ib++)
+        for (jb = 0; jb < numberOfBoxesInY; jb++)
+            for (kb = 0; kb < numberOfBoxesInZ; kb++)
+            {
+                
+                if (ib != numberOfBoxesInX - 1)
+                    for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++)
+                        for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++)
+                        {
+                            Grid->Ey_ip1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = Grid->E[3 * numberOfGridPointsInZ
+                                                                                            * numberOfGridPointsInY * ((ib + 1) * numberOfGridPointsForBoxInX) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
+                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 1];
+                            Grid->Ez_ip1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = Grid->E[3 * numberOfGridPointsInZ
+                                                                                            * numberOfGridPointsInY * ((ib + 1) * numberOfGridPointsForBoxInX) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
+                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
+                        }
+                else
+                    for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++)
+                        for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++)
+                        {
+                            Grid->Ey_ip1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = 0;
+                            Grid->Ez_ip1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = 0;
+                        }
+                
+                if (jb != numberOfBoxesInY - 1)
+                    for (int id = 0; id < numberOfGridPointsForBoxInX; id++)
+                        for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++)
+                        {
+                            Grid->Ez_jp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = Grid->E[3 * numberOfGridPointsInZ
+                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * ((jb + 1) * numberOfGridPointsForBoxInY)
+                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
+                            Grid->Ex_jp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = Grid->E[3 * numberOfGridPointsInZ
+                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * ((jb + 1) * numberOfGridPointsForBoxInY)
+                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 0];
+                        }
+                else
+                    for (int id = 0; id < numberOfGridPointsForBoxInX; id++)
+                        for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++)
+                        {
+                            Grid->Ez_jp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = 0;
+                            Grid->Ex_jp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = 0;
+                        }
+                
+                if (kb != numberOfBoxesInZ - 1)
+                    for (int id = 0; id < numberOfGridPointsForBoxInX; id++)
+                        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++)
+                        {
+                            Grid->Ex_kp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = Grid->E[3 * numberOfGridPointsInZ
+                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
+                                                                                            + 3 * ((kb + 1) * numberOfGridPointsForBoxInZ) + 0];
+                            Grid->Ey_kp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = Grid->E[3 * numberOfGridPointsInZ
+                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
+                                                                                            + 3 * ((kb + 1) * numberOfGridPointsForBoxInZ) + 1];
+                        }
+                else
+                    for (int id = 0; id < numberOfGridPointsForBoxInX; id++)
+                        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++)
+                        {
+                            Grid->Ex_kp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = 0;
+                            Grid->Ey_kp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = 0;
+                        }
+                
+            }
+    
+}
+
+
 
