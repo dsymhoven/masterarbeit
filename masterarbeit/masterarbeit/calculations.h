@@ -24,8 +24,16 @@ void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int timeStep);
 void calculateBeta(double xOld[4], double xNew[4], double beta[3]);
 void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t);
 void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t);
-void AddLWField(Grid *Grid, double xObserver[4], int component, int gridIndexInBox, Particle *Particle);
+void addLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component);
+void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component);
 void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeForPlotting);
 int calcuCurrentBoxIndexOfParticle(Particle *Particle, Grid *Grid);
 void calcBoxIndizesOfNextNeighbourBoxes(Grid *Grid, Particle *Particle, int boxIndizesOfNextNeighbourBoxes[27]);
+bool boxIsInNearFieldOfParticle(Grid *Grid, Particle *Particle, int boxIndex);
+int calcBoxIndexIm1(Grid *Grid, const int boxIndex);
+int calcBoxIndexJm1(Grid *Grid, const int boxIndex);
+int calcBoxIndexKm1(Grid *Grid, const int boxIndex);
+int calcBoxIndexIp1(Grid *Grid, const int boxIndex);
+int calcBoxIndexJp1(Grid *Grid, const int boxIndex);
+int calcBoxIndexKp1(Grid *Grid, const int boxIndex);
 #endif

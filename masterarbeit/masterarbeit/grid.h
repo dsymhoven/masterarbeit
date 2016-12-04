@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "stdbool.h"
+#include "particle.h"
 
 struct Grid {
     int numberOfBoxesInX;
@@ -64,4 +65,7 @@ void writeGridParametersToFile(Grid *Grid);
 void pushEFieldInsideBoxes(Grid *Grid, double dt);
 void pushBFieldInsideBoxes(Grid *Grid, double dt);
 void allocateFieldsOnBoxBorders(Grid *Grid);
+void adjustByz_im1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t);
+void adjustBxz_jm1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t);
+void adjustBxy_km1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t);
 #endif /* grid_h */

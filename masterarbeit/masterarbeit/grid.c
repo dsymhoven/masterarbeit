@@ -11,6 +11,7 @@
 #include "math.h"
 #include "string.h"
 #include "particle.h"
+#include "calculations.h"
 
 
 /// @brief initializes all properties of struct Grid.
@@ -117,7 +118,7 @@ void allocateFieldsOnBoxBorders(Grid *Grid){
             printf("cannot allocate memory for the fields on box borders in for loop!\n");
         
     }
-
+    
 }
 
 ///@brief calls allocateFieldsOnGrid() and allocateFieldsOnBoxBorders(). For details see their documentation
@@ -409,6 +410,8 @@ void writeGridParametersToFile(Grid *Grid){
     fclose(fid);
 }
 
+
+
 ///@brief Maxwell Pusher for EField inside Boxes. This method is used for the hybrid field method.
 ///@remark E field is calculated via negative curl. Therefore value of B on the left side of E on the grid is required. Thus start i,j,k with 1
 void pushEFieldInsideBoxes(Grid *Grid, double dt){
@@ -468,7 +471,7 @@ void pushEFieldInsideBoxes(Grid *Grid, double dt){
     
 }
 ///@brief Maxwell Pusher for BField inside Boxes. This method is used for the hybrid field method.
-///@remark B field is calculated via positive curl. Therefore value of E on the right side of B on the grid is required. Thus stop i,j,k with at n - 1 where n denotes the numberOfGridPoints
+///@remark B field is calculated via positive curl. Therefore value of E on the right side of B on the grid is required. Thus stop i,j,k at n - 1 where n denotes the numberOfGridPoints
 void pushBFieldInsideBoxes(Grid *Grid, double dt){
     double Ex_ijk;
     double Ey_ijk;
@@ -541,11 +544,11 @@ void setBFieldOnBorders(Grid *Grid){
                     for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
                         for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
                             Grid->Bz_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = Grid->B[3 * numberOfGridPointsInZ
-                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX - 1) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
-                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
+                                                                                                                                                                 * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX - 1) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
+                                                                                                                                                                 + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
                             Grid->By_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = Grid->B[3 * numberOfGridPointsInZ
-                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX - 1) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
-                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 1];
+                                                                                                                                                                 * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX - 1) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
+                                                                                                                                                                 + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 1];
                         }
                     }
                 }
@@ -562,11 +565,11 @@ void setBFieldOnBorders(Grid *Grid){
                     for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
                         for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
                             Grid->Bx_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = Grid->B[3 * numberOfGridPointsInZ
-                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY - 1)
-                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 0];
+                                                                                                                                                                 * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY - 1)
+                                                                                                                                                                 + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 0];
                             Grid->Bz_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = Grid->B[3 * numberOfGridPointsInZ
-                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY - 1)
-                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
+                                                                                                                                                                 * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY - 1)
+                                                                                                                                                                 + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
                         }
                     }
                 }
@@ -582,13 +585,13 @@ void setBFieldOnBorders(Grid *Grid){
                 if (kb != 0){
                     for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
                         for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-                        
+                            
                             Grid->Bx_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = Grid->B[3 * numberOfGridPointsInZ
-                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
-                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ - 1) + 0];
+                                                                                                                                                                 * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
+                                                                                                                                                                 + 3 * (kb * numberOfGridPointsForBoxInZ - 1) + 0];
                             Grid->By_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = Grid->B[3 * numberOfGridPointsInZ
-                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
-                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ - 1) + 1];
+                                                                                                                                                                 * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
+                                                                                                                                                                 + 3 * (kb * numberOfGridPointsForBoxInZ - 1) + 1];
                         }
                     }
                 }
@@ -601,10 +604,10 @@ void setBFieldOnBorders(Grid *Grid){
                     }
                 }
             }
-
-                
-            }
+            
+            
         }
+    }
 }
 
 void setEFieldOnBorders(Grid *Grid){
@@ -632,11 +635,11 @@ void setEFieldOnBorders(Grid *Grid){
                         for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++)
                         {
                             Grid->Ey_ip1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = Grid->E[3 * numberOfGridPointsInZ
-                                                                                            * numberOfGridPointsInY * ((ib + 1) * numberOfGridPointsForBoxInX) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
-                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 1];
+                                                                                                                                                                 * numberOfGridPointsInY * ((ib + 1) * numberOfGridPointsForBoxInX) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
+                                                                                                                                                                 + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 1];
                             Grid->Ez_ip1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = Grid->E[3 * numberOfGridPointsInZ
-                                                                                            * numberOfGridPointsInY * ((ib + 1) * numberOfGridPointsForBoxInX) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
-                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
+                                                                                                                                                                 * numberOfGridPointsInY * ((ib + 1) * numberOfGridPointsForBoxInX) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
+                                                                                                                                                                 + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
                         }
                 else
                     for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++)
@@ -651,11 +654,11 @@ void setEFieldOnBorders(Grid *Grid){
                         for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++)
                         {
                             Grid->Ez_jp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = Grid->E[3 * numberOfGridPointsInZ
-                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * ((jb + 1) * numberOfGridPointsForBoxInY)
-                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
+                                                                                                                                                                 * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * ((jb + 1) * numberOfGridPointsForBoxInY)
+                                                                                                                                                                 + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
                             Grid->Ex_jp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = Grid->E[3 * numberOfGridPointsInZ
-                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * ((jb + 1) * numberOfGridPointsForBoxInY)
-                                                                                            + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 0];
+                                                                                                                                                                 * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * ((jb + 1) * numberOfGridPointsForBoxInY)
+                                                                                                                                                                 + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 0];
                         }
                 else
                     for (int id = 0; id < numberOfGridPointsForBoxInX; id++)
@@ -670,11 +673,11 @@ void setEFieldOnBorders(Grid *Grid){
                         for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++)
                         {
                             Grid->Ex_kp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = Grid->E[3 * numberOfGridPointsInZ
-                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
-                                                                                            + 3 * ((kb + 1) * numberOfGridPointsForBoxInZ) + 0];
+                                                                                                                                                                 * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
+                                                                                                                                                                 + 3 * ((kb + 1) * numberOfGridPointsForBoxInZ) + 0];
                             Grid->Ey_kp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = Grid->E[3 * numberOfGridPointsInZ
-                                                                                            * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
-                                                                                            + 3 * ((kb + 1) * numberOfGridPointsForBoxInZ) + 1];
+                                                                                                                                                                 * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd)
+                                                                                                                                                                 + 3 * ((kb + 1) * numberOfGridPointsForBoxInZ) + 1];
                         }
                 else
                     for (int id = 0; id < numberOfGridPointsForBoxInX; id++)
@@ -688,5 +691,162 @@ void setEFieldOnBorders(Grid *Grid){
     
 }
 
+void AdjustBFields(Grid *Grid, Particle *Particle, const double t){
+    int numberOfBoxesInX = Grid->numberOfBoxesInX;
+    int numberOfBoxesInY = Grid->numberOfBoxesInY;
+    int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
+    
+    for (int ib = 0; ib < numberOfBoxesInX; ib++)
+        for (int jb = 0; jb < numberOfBoxesInY; jb++)
+            for (int kb = 0; kb < numberOfBoxesInZ; kb++)
+            {
+                
+                int boxIndex = ib * numberOfBoxesInY * numberOfBoxesInZ + jb * numberOfBoxesInZ + kb;
+                
+                if (ib != 0){
+                    adjustByz_im1(Grid, Particle, boxIndex, ib, jb, kb, t);
+                }
+                
+                if (jb != 0){
+                    adjustBxz_jm1(Grid, Particle, boxIndex, ib, jb, kb, t);
+                }
+                
+                if (kb != 0){
+                    adjustBxy_km1(Grid, Particle, boxIndex, ib, jb, kb, t);
+                }
+            }
+    
+}
 
+void adjustByz_im1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
+    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
+    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
+    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    
+    int boxIndexIm1 = calcBoxIndexIm1(Grid, boxIndex);
+    double xObserver[4];
+    
+    if (boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
+        && !boxIsInNearFieldOfParticle(Grid, Particle, boxIndexIm1)){
+        
+        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                
+                xObserver[0] = t;
+                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX - 1);
+                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                
+                subLWField(Grid, Particle, &Grid->By_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 4);
+                subLWField(Grid, Particle, &Grid->Bz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 5);
+            }
+        }
+    }
+    else if (!boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
+             && boxIsInNearFieldOfParticle(Grid, Particle, boxIndexIm1)){
+        
+        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                
+                xObserver[0] = t;
+                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX - 1);
+                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                
+                addLWField(Grid, Particle, &(Grid->By_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 4);
+                addLWField(Grid, Particle, &(Grid->Bz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 5);
+            }
+        }
+    
+    }
+
+}
+
+void adjustBxz_jm1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
+    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
+    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
+    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    
+    int boxIndexJm1 = calcBoxIndexJm1(Grid, boxIndex);
+    double xObserver[4];
+    
+    if (boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
+        && !boxIsInNearFieldOfParticle(Grid, Particle, boxIndexJm1)){
+        
+        for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                
+                xObserver[0] = t;
+                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
+                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY - 1);
+                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                
+                subLWField(Grid, Particle, &Grid->Bx_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 3);
+                subLWField(Grid, Particle, &Grid->Bz_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 5);
+            }
+        }
+    }
+    else if (!boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
+             && boxIsInNearFieldOfParticle(Grid, Particle, boxIndexJm1)){
+        
+        for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                
+                xObserver[0] = t;
+                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
+                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY - 1);
+                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                
+                addLWField(Grid, Particle, &(Grid->By_im1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 3);
+                addLWField(Grid, Particle, &(Grid->Bz_im1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 5);
+            }
+        }
+        
+    }
+    
+}
+
+void adjustBxy_km1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
+    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
+    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
+    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    
+    int boxIndexKm1 = calcBoxIndexKm1(Grid, boxIndex);
+    double xObserver[4];
+    
+    if (boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
+        && !boxIsInNearFieldOfParticle(Grid, Particle, boxIndexKm1)){
+        
+        for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+            for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+                
+                xObserver[0] = t;
+                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
+                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ - 1);
+                
+                subLWField(Grid, Particle, &Grid->Bx_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 3);
+                subLWField(Grid, Particle, &Grid->By_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 4);
+            }
+        }
+    }
+    else if (!boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
+             && boxIsInNearFieldOfParticle(Grid, Particle, boxIndexKm1)){
+        
+        for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+            for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+                
+                xObserver[0] = t;
+                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
+                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ - 1);
+                
+                addLWField(Grid, Particle, &(Grid->By_im1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 3);
+                addLWField(Grid, Particle, &(Grid->Bz_im1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 4);
+            }
+        }
+        
+    }
+    
+}
 

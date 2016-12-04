@@ -106,7 +106,7 @@ void freeMemoryOnParticle(Particle *Particle, int const arrayLength){
 }
 
 ///@brief saves the current box index for x,y and z in currentBoxIndexArray of Particle struct
-void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle){
+void getCurrentBoxIndexArrayOfParticle(Grid *Grid, Particle *Particle){
     Particle->currentBoxIndexArray[0] = Particle->x[1] / (Grid->dx * Grid->numberOfGridPointsForBoxInX);
     Particle->currentBoxIndexArray[1] = Particle->x[2] / (Grid->dy * Grid->numberOfGridPointsForBoxInY);
     Particle->currentBoxIndexArray[2] = Particle->x[3] / (Grid->dz * Grid->numberOfGridPointsForBoxInZ);

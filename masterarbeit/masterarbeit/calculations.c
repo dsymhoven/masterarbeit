@@ -391,16 +391,14 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
     
-    int numberOfBoxesInY = Grid->numberOfBoxesInY;
-    int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
-    
     double dx = Grid->dx;
     double dy = Grid->dy;
     double dz = Grid->dz;
     
-    int ib = boxIndex / (numberOfBoxesInY * numberOfBoxesInZ);
-    int jb = (boxIndex - ( ib * numberOfBoxesInY * numberOfBoxesInZ)) / numberOfBoxesInY;
-    int kb = (boxIndex - ( ib * numberOfBoxesInY * numberOfBoxesInZ)) - jb * numberOfBoxesInY;
+    getCurrentBoxIndexArrayOfParticle(Grid, Particle);
+    int ib = Particle->currentBoxIndexArray[0];
+    int jb = Particle->currentBoxIndexArray[1];
+    int kb = Particle->currentBoxIndexArray[2];
     
     double xObserver[4] = {0};
     xObserver[0] = t;
@@ -417,13 +415,13 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
                 xObserver[2] = (jb * numberOfGridPointsForBoxInY + jd) * dy;
                 xObserver[3] = (kb * numberOfGridPointsForBoxInZ + kd) * dz;
                 
-                AddLWField(Grid, xObserver, 3, gridIndexInBox, Particle);
-                AddLWField(Grid, xObserver, 4, gridIndexInBox, Particle);
-                AddLWField(Grid, xObserver, 5, gridIndexInBox, Particle);
+                addLWField(Grid, Particle, &Grid->B[gridIndexInBox], xObserver, 3);
+                addLWField(Grid, Particle, &Grid->B[gridIndexInBox + 1], xObserver, 4);
+                addLWField(Grid, Particle, &Grid->B[gridIndexInBox + 2], xObserver, 5);
                 
-                AddLWField(Grid, xObserver, 0, gridIndexInBox, Particle);
-                AddLWField(Grid, xObserver, 1, gridIndexInBox, Particle);
-                AddLWField(Grid, xObserver, 2, gridIndexInBox, Particle);
+                addLWField(Grid, Particle, &Grid->E[gridIndexInBox], xObserver, 0);
+                addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 1], xObserver, 1);
+                addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 2], xObserver, 2);
                 
             }
 }
@@ -433,9 +431,9 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
 ///@param xObserver observation point at which the LW fields ahall be calculted
 ///@param component component in which the observation point shall be shifted.
 ///@param Particle pointer to an instance of a Particle struct
-///@param gridIndexInBox specified grid point in box, at which E and B field shall be saved
+///@param destination pointer to where LW fields shall ne added.
 ///@remark the Yee-scheme requires that the E and B fields are shifted against each other. Maybe the switch case is not neccessary. But I didn't tested it yet. For the staggering a xObservationCopy vector is introduced, which is used for field calculations, so that the original xObservation vector is left untouched. After staggering took place the currentHistoryLength property of Particle struct is used as upper loop index. By doing this, this method (and all above the chain) can be used either within the outer simulation loop to calculate the fileds every time step (video) or afterwards to caluclate the fields just ones. If you want to make a video, you need to change "+=" in last switch block to "=" because the fields get calculated everywhere on the grid over and over again. So we don't want to add upp each fields every time.
-void AddLWField(Grid *Grid, double xObserver[4], int component, int gridIndexInBox, Particle *Particle){
+void addLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component){
     double xObserverCopy[4];
     memcpy(xObserverCopy, xObserver, 4 * sizeof(double));
     switch (component)
@@ -492,26 +490,112 @@ void AddLWField(Grid *Grid, double xObserver[4], int component, int gridIndexInB
     switch (component)
     {
         case 0:
-            Grid->E[gridIndexInBox] += E[0];
+            *destination += E[0];
             break;
         case 1:
-            Grid->E[gridIndexInBox + 1] += E[1];
+            *destination += E[1];
             break;
         case 2:
-            Grid->E[gridIndexInBox + 2] += E[2];
+            *destination += E[2];
             break;
         case 3:
-            Grid->B[gridIndexInBox] += B[0];
+            *destination += B[0];
             break;
         case 4:
-            Grid->B[gridIndexInBox + 1] += B[1];
+            *destination += B[1];
             break;
         case 5:
-            Grid->B[gridIndexInBox + 2] += B[2];
+            *destination += B[2];
             break;
     }
     
 }
+
+///@brief adds LW fields at grid point with index "gridIndexInBox". Each point on the grid is considered to be the observation point, where the zeroth component is the current simulation time and also the time at which we want to calculate the fields. Therefore loop through the particle xhistory vector up to the current simulation time and search for the pair of positions which fulfil the condition that the old position is inside and the new position is outside the backward lightcone of the observation point. Once that pair of positions is found the rest of the xHistory vector can be skipped because all following points will be outside as well.
+///@param Grid pointer to an instance of a Grid struct.
+///@param xObserver observation point at which the LW fields ahall be calculted
+///@param component component in which the observation point shall be shifted.
+///@param Particle pointer to an instance of a Particle struct
+///@param destination pointer to where LW fields shall be subtracted.
+///@remark the Yee-scheme requires that the E and B fields are shifted against each other. Maybe the switch case is not neccessary. But I didn't tested it yet. For the staggering a xObservationCopy vector is introduced, which is used for field calculations, so that the original xObservation vector is left untouched. After staggering took place the currentHistoryLength property of Particle struct is used as upper loop index. By doing this, this method (and all above the chain) can be used either within the outer simulation loop to calculate the fileds every time step (video) or afterwards to caluclate the fields just ones. If you want to make a video, you need to change "+=" in last switch block to "=" because the fields get calculated everywhere on the grid over and over again. So we don't want to add upp each fields every time.
+void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component){
+    double xObserverCopy[4];
+    memcpy(xObserverCopy, xObserver, 4 * sizeof(double));
+    switch (component)
+    {
+        case 0:
+            xObserverCopy[1] += 0.5 * (Grid->dx);
+            break;
+        case 1:
+            xObserverCopy[2] += 0.5 * (Grid->dy);
+            break;
+        case 2:
+            xObserverCopy[3] += 0.5 * (Grid->dz);
+            break;
+        case 3:
+            xObserverCopy[2] += 0.5 * (Grid->dy);
+            xObserverCopy[3] += 0.5 * (Grid->dz);
+            break;
+        case 4:
+            xObserverCopy[3] += 0.5 * (Grid->dz);
+            xObserverCopy[1] += 0.5 * (Grid->dx);
+            break;
+        case 5:
+            xObserverCopy[1] += 0.5 * (Grid->dx);
+            xObserverCopy[2] += 0.5 * (Grid->dy);
+            break;
+    }
+    
+    
+    double beta[3] = {0};
+    double intersectionPoint[4] = {0};
+    double velocityAtIntersectionPoint[4] = {0};
+    double gamma_sq;
+    double R_sq;
+    double R;
+    double n[3] = {0};
+    double betaDot[3] = {0};
+    double dt = 0.5 * Grid->dx;
+    double E[3] = {0};
+    double B[3] = {0};
+    int currentHistoryLength = Particle->currentHistoryLength;
+    
+    
+    for (int index = 0; index < currentHistoryLength - 1; index ++){
+        if(isInsideBackwardLightcone(Particle->xHistory[index], xObserverCopy) && !isInsideBackwardLightcone(Particle->xHistory[index+1], xObserverCopy)){
+            calculateIntersectionPoint(Particle->xHistory[index], Particle->xHistory[index+1], Particle->uHistory[index], Particle->uHistory[index+1], xObserverCopy, intersectionPoint, velocityAtIntersectionPoint);
+            calculateBeta(Particle->xHistory[index], Particle->xHistory[index+1], beta);
+            calculateLienardWiechertParameters(intersectionPoint, xObserverCopy, velocityAtIntersectionPoint, &gamma_sq, &R_sq, &R, n, beta);
+            calculateBetaDot(Particle->uHistory[index], Particle->uHistory[index+1], dt, betaDot);
+            calcuateLienardWiechertFields(gamma_sq, R_sq, R, n, beta, betaDot, Particle->charge, E, B);
+            break;
+        }
+    }
+    
+    switch (component)
+    {
+        case 0:
+            *destination -= E[0];
+            break;
+        case 1:
+            *destination -= E[1];
+            break;
+        case 2:
+            *destination -= E[2];
+            break;
+        case 3:
+            *destination -= B[0];
+            break;
+        case 4:
+            *destination -= B[1];
+            break;
+        case 5:
+            *destination -= B[2];
+            break;
+    }
+    
+}
+
 
 ///@remark calcuates LW fields at simulation time t only on specyfied plane with index "planeForPlotting".
 ///@param Grid pointer to an instance of a Grid struct.
@@ -536,15 +620,15 @@ void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeFor
             xObserver[2] = (j) * Grid->dy;
             xObserver[3] = (k) * Grid->dz;
             
-            double gridIndexInBox = 3 * ny * nz * i + 3 * nz * j + 3 * k;
+            int gridIndexInBox = 3 * ny * nz * i + 3 * nz * j + 3 * k;
             
-            AddLWField(Grid, xObserver, 3, gridIndexInBox, Particle);
-            AddLWField(Grid, xObserver, 4, gridIndexInBox, Particle);
-            AddLWField(Grid, xObserver, 5, gridIndexInBox, Particle);
+            addLWField(Grid, Particle, &Grid->B[gridIndexInBox], xObserver, 3);
+            addLWField(Grid, Particle, &Grid->B[gridIndexInBox + 1], xObserver, 4);
+            addLWField(Grid, Particle, &Grid->B[gridIndexInBox + 2], xObserver, 5);
             
-            AddLWField(Grid, xObserver, 0, gridIndexInBox, Particle);
-            AddLWField(Grid, xObserver, 1, gridIndexInBox, Particle);
-            AddLWField(Grid, xObserver, 2, gridIndexInBox, Particle);
+            addLWField(Grid, Particle, &Grid->E[gridIndexInBox], xObserver, 0);
+            addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 1], xObserver, 1);
+            addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 2], xObserver, 2);
             
             
         }
@@ -609,4 +693,62 @@ void calcBoxIndizesOfNextNeighbourBoxes(Grid *Grid, Particle *Particle, int boxI
     }
 }
 
+///@param Grid pointer to an instance of a Grid struct.
+///@param Particle pointer to an instance of a Particle struct
+///@param boxIndex current box index from outter loop
+///@return true if box with Index "boxIndex" is in near field of particle or false if not.
+bool boxIsInNearFieldOfParticle(Grid *Grid, Particle *Particle, int boxIndex){
+    int boxIndizesOfNextNeighbourBoxes[27] = {0};
+    calcBoxIndizesOfNextNeighbourBoxes(Grid, Particle, boxIndizesOfNextNeighbourBoxes);
+    bool isInNF = false;
+    
+    for (int i = 0; i < 27; i++){
+        if(boxIndizesOfNextNeighbourBoxes[i] == boxIndex){
+            isInNF = true;
+        }
+        else{
+            isInNF = false;
+        }
+    }
+    return isInNF;
+}
 
+int calcLowerLeftGridIndexInBox(Grid *Grid, Particle *Particle){
+    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
+    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
+    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    
+    int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
+    int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
+    
+    getCurrentBoxIndexArrayOfParticle(Grid, Particle);
+    int ib = Particle->currentBoxIndexArray[0];
+    int jb = Particle->currentBoxIndexArray[1];
+    int kb = Particle->currentBoxIndexArray[2];
+    
+    return ib * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + jb * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + kb * numberOfGridPointsForBoxInZ * 3;
+}
+
+int calcBoxIndexIm1(Grid *Grid, const int boxIndex){
+    return boxIndex - (Grid->numberOfBoxesInZ) * (Grid->numberOfBoxesInY);
+}
+
+int calcBoxIndexJm1(Grid *Grid, const int boxIndex){
+    return boxIndex - (Grid->numberOfBoxesInZ);
+}
+
+int calcBoxIndexKm1(Grid *Grid, const int boxIndex){
+    return boxIndex - 1;
+}
+
+int calcBoxIndexIp1(Grid *Grid, const int boxIndex){
+    return boxIndex + (Grid->numberOfBoxesInZ) * (Grid->numberOfBoxesInY);
+}
+
+int calcBoxIndexJp1(Grid *Grid, const int boxIndex){
+    return boxIndex + (Grid->numberOfBoxesInZ);
+}
+
+int calcBoxIndexKp1(Grid *Grid, const int boxIndex){
+    return boxIndex + 1;
+}

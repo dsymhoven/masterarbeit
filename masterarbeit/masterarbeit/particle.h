@@ -32,7 +32,7 @@ void initParticle(Particle *Particle, double const charge, double const mass, in
 void writeParticleToFile(Particle *Particle, char *filename, int index);
 void freeMemoryOnParticle(Particle *Particle, int const arrayLength);
 void allocateParticleHistories(Particle *Particle, int const arrayLength);
-void getCurrentBoxIndexOfParticle(Grid *Grid, Particle *Particle);
+void getCurrentBoxIndexArrayOfParticle(Grid *Grid, Particle *Particle);
 void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle);
 void addCurrentStateToParticleHistory(Particle *Particle, int index);
 double getGammaFromVelocityVector(double u[4]);
