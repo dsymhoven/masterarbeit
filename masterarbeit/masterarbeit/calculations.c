@@ -365,7 +365,10 @@ void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int timeStep){
     
 }
 
-///@brief calculates LW fields
+///@brief calculates LW fields on complete grid by looping through every box and calculating LW fields in there.
+///@param Grid pointer to an instance of a Grid struct.
+///@param Particle pointer to an instance of a Particle struct
+///@param t time at which the fields shall be calcualted. This is also the zeroth component of xObserver
 void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t){
     int totalNumberOfBoxes = Grid->numberOfBoxesInX * Grid->numberOfBoxesInY * Grid->numberOfBoxesInZ;
     for (int boxIndex = 0; boxIndex < totalNumberOfBoxes; boxIndex++){
@@ -373,6 +376,12 @@ void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t){
     }
 }
 
+///@brief calcualtes LW fields in box specified by input parameter "boxIndex"
+///@param Grid pointer to an instance of a Grid struct.
+///@param Particle pointer to an instance of a Particle struct
+///@param boxIndex specified box in which fields shall be calcualted
+///@param t time at which the fields shall be calcualted. This is also the zeroth component of xObserver
+///@remark translate box index into number of box in x,y and z direction first (ib, jb, kb). Then calculate the gridIndex of the lower left corner of the current box and start looping through all grid points in that box. Each gridpoint is the current observation point, where fields shall be calcualted. Also grid index is updated each time the current grid point changes in the loop. Then add Lw field at that point.
 void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     printf("calculating LW fields in box %d\n", boxIndex);
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
@@ -419,6 +428,13 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
             }
 }
 
+///@brief adds LW fields at grid point with index "gridIndexInBox". Each point on the grid is considered to be the observation point, where the zeroth component is the current simulation time and also the time at which we want to calculate the fields. Therefore loop through the particle xhistory vector up to the current simulation time and search for the pair of positions which fulfil the condition that the old position is inside and the new position is outside the backward lightcone of the observation point. Once that pair of positions is found the rest of the xHistory vector can be skipped because all following points will be outside as well.
+///@param Grid pointer to an instance of a Grid struct.
+///@param xObserver observation point at which the LW fields ahall be calculted
+///@param component component in which the observation point shall be shifted.
+///@param Particle pointer to an instance of a Particle struct
+///@param gridIndexInBox specified grid point in box, at which E and B field shall be saved
+///@remark the Yee-scheme requires that the E and B fields are shifted against each other. Maybe the switch case is not neccessary. But I didn't tested it yet. For the staggering a xObservationCopy vector is introduced, which is used for field calculations, so that the original xObservation vector is left untouched. After staggering took place the currentHistoryLength property of Particle struct is used as upper loop index. By doing this, this method (and all above the chain) can be used either within the outer simulation loop to calculate the fileds every time step (video) or afterwards to caluclate the fields just ones. If you want to make a video, you need to change "+=" in last switch block to "=" because the fields get calculated everywhere on the grid over and over again. So we don't want to add upp each fields every time.
 void AddLWField(Grid *Grid, double xObserver[4], int component, int gridIndexInBox, Particle *Particle){
     double xObserverCopy[4];
     memcpy(xObserverCopy, xObserver, 4 * sizeof(double));
@@ -497,6 +513,11 @@ void AddLWField(Grid *Grid, double xObserver[4], int component, int gridIndexInB
     
 }
 
+///@remark calcuates LW fields at simulation time t only on specyfied plane with index "planeForPlotting".
+///@param Grid pointer to an instance of a Grid struct.
+///@param Particle pointer to an instance of a Particle struct
+///@param t time at which the fields shall be calcualted. This is also the zeroth component of xObserver
+///@param planeForPlotting number of the plane in which fields shall be calcualted. planeForPlotting = x[3] / dz
 void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeForPlotting){
     printf("Calculating LW Fields on plane %d, heigth:%f\n", planeForPlotting, planeForPlotting * Grid->dz);
 
@@ -532,7 +553,11 @@ void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeFor
     
 }
 
-
+///@brief calcualtes the box index in which the particle is currently located.
+///@param Grid pointer to an instance of a Grid struct.
+///@param Particle pointer to an instance of a Particle struct
+///@return index of box where particle is currenty located.
+///@remark index for box is counted the same way as for E and B field array. First z component, then y and then x.
 int calcCurrentBoxIndexOfParticle(Particle *Particle, Grid *Grid){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
@@ -552,6 +577,10 @@ int calcCurrentBoxIndexOfParticle(Particle *Particle, Grid *Grid){
     return ib * numberOfBoxesInY * numberOfBoxesInZ + jb * numberOfBoxesInZ + kb;
 }
 
+///@brief calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIndizesOfNextNeighbourBoxes[27] array. If index is smaller than zero or larger than the maximal number of boxes then index is set to -1.
+///@param Grid pointer to an instance of a Grid struct.
+///@param Particle pointer to an instance of a Particle struct
+///@param boxIndizesOfNextNeighbourBoxes array in which the indicies will be stored.
 void calcBoxIndizesOfNextNeighbourBoxes(Grid *Grid, Particle *Particle, int boxIndizesOfNextNeighbourBoxes[27]){
     
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
