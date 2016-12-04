@@ -65,7 +65,14 @@ void writeGridParametersToFile(Grid *Grid);
 void pushEFieldInsideBoxes(Grid *Grid, double dt);
 void pushBFieldInsideBoxes(Grid *Grid, double dt);
 void allocateFieldsOnBoxBorders(Grid *Grid);
+void adjustBFields(Grid *Grid, Particle *Particle, const double t);
 void adjustByz_im1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t);
 void adjustBxz_jm1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t);
 void adjustBxy_km1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t);
+void adjustEFields(Grid *Grid, Particle *Particle, const double t);
+void adjustEyz_ip1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t);
+void adjustExz_jp1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t);
+void adjustExy_kp1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t);
+void pushBFieldAtBorders(Grid *Grid, double dt);
+void pushEFieldAtBorders(Grid *Grid, double dt);
 #endif /* grid_h */
