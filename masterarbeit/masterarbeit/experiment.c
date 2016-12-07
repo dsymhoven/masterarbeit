@@ -176,7 +176,7 @@ void testNearFieldCalculation(){
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
         writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
-        getCurrentBoxIndexOfParticle(&Grid, &Particle);
+        getCurrentBoxIndexArrayOfParticle(&Grid, &Particle);
         getEdgesOfNearFieldBox(&Grid, &Particle);
         writeParticleToFile(&Particle, filename, p);
         updateVelocityWithBorisPusher(&Particle, Eextern, Bextern, dt);
@@ -351,9 +351,9 @@ void testNearAndFarFields(){
     double dx = 0.125;
     double dy = 0.125;
     double dz = 0.125;
-    int numberOfGridPointsForBoxInX = 32;
-    int numberOfGridPointsForBoxInY = 32;
-    int numberOfGridPointsForBoxInZ = 32;
+    int numberOfGridPointsForBoxInX = 20;
+    int numberOfGridPointsForBoxInY = 20;
+    int numberOfGridPointsForBoxInZ = 20;
     int numberOfBoxesInX = 5;
     int numberOfBoxesInY = 5;
     int numberOfBoxesInZ = 5;
@@ -364,7 +364,7 @@ void testNearAndFarFields(){
     
     double dt = 0.5 * dx;
     double t = 0;
-    double tEnd = 6;
+    double tEnd = 12;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -378,9 +378,9 @@ void testNearAndFarFields(){
     
     
     Particle.x[0] = 0;
-    Particle.x[1] = 11.21;
-    Particle.x[2] = 12.01;
-    Particle.x[3] = 14.401;
+    Particle.x[1] = 6.21;
+    Particle.x[2] = 6.01;
+    Particle.x[3] = 6.401;
     
     Particle.u[1] = 0.458;
     Particle.u[2] = 0;
@@ -395,23 +395,30 @@ void testNearAndFarFields(){
     Bextern[1] = 0;
     Bextern[2] = 1;
     
-    int boxIndizesOfNextNeighbourBoxes[27];
     int planeForPlotting = Particle.x[3] / dz;
     
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
-        calcBoxIndizesOfNextNeighbourBoxes(&Grid, &Particle, boxIndizesOfNextNeighbourBoxes);
+        printf("step %d of %d\n", p, arrayLength);
+        writeParticleToFile(&Particle, filename, p);
+        writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
+
+        pushEField(&Grid, &Particle, t, dt);
+        pushBField(&Grid, &Particle, t + dt / 2., dt);
+        
         addCurrentStateToParticleHistory(&Particle, p);
         updateVelocityWithBorisPusher(&Particle, Eextern, Bextern, dt);
         updateLocation(&Particle, dt);
+        
+        pushBField(&Grid, &Particle, t + dt / 2., dt);
+        pushEField(&Grid, &Particle, t, dt);
         t += dt;
     }
     
-    
-//    printf("executing bash-script ...\n");
-//    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
+    printf("executing bash-script ...\n");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticle(&Particle, arrayLength);
     freeMemoryOnGrid(&Grid);
  

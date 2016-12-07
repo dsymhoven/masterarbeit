@@ -27,6 +27,7 @@ struct Particle {
 };
 
 typedef struct Particle Particle;
+typedef struct Grid Grid;
 
 void initParticle(Particle *Particle, double const charge, double const mass, int const arrayLength);
 void writeParticleToFile(Particle *Particle, char *filename, int index);

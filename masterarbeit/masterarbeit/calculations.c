@@ -475,7 +475,6 @@ void addLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
     double B[3] = {0};
     int currentHistoryLength = Particle->currentHistoryLength;
     
-    
     for (int index = 0; index < currentHistoryLength - 1; index ++){
         if(isInsideBackwardLightcone(Particle->xHistory[index], xObserverCopy) && !isInsideBackwardLightcone(Particle->xHistory[index+1], xObserverCopy)){
             calculateIntersectionPoint(Particle->xHistory[index], Particle->xHistory[index+1], Particle->uHistory[index], Particle->uHistory[index+1], xObserverCopy, intersectionPoint, velocityAtIntersectionPoint);
@@ -700,14 +699,13 @@ void calcBoxIndizesOfNextNeighbourBoxes(Grid *Grid, Particle *Particle, int boxI
 bool boxIsInNearFieldOfParticle(Grid *Grid, Particle *Particle, int boxIndex){
     int boxIndizesOfNextNeighbourBoxes[27] = {0};
     calcBoxIndizesOfNextNeighbourBoxes(Grid, Particle, boxIndizesOfNextNeighbourBoxes);
+
     bool isInNF = false;
     
     for (int i = 0; i < 27; i++){
         if(boxIndizesOfNextNeighbourBoxes[i] == boxIndex){
             isInNF = true;
-        }
-        else{
-            isInNF = false;
+            break;
         }
     }
     return isInNF;

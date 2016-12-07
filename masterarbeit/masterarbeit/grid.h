@@ -53,6 +53,7 @@ struct Grid {
 };
 
 typedef struct Grid Grid;
+typedef struct Particle Particle;
 
 void initGrid(Grid *Grid, double dx, double dy, double dz, int numberOfGridPointsForBoxInX, int numberOfGridPointsForBoxInY, int numberOfGridPointsForBoxInZ, int numberOfBoxesInX, int numberOfBoxesInY, int numberOfBoxesInZ);
 void allocateMemoryOnGrid(Grid *Grid);
@@ -75,4 +76,8 @@ void adjustExz_jp1(Grid *Grid, Particle *Particle, const int boxIndex, const int
 void adjustExy_kp1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t);
 void pushBFieldAtBorders(Grid *Grid, double dt);
 void pushEFieldAtBorders(Grid *Grid, double dt);
+void setBFieldOnBorders(Grid *Grid);
+void setEFieldOnBorders(Grid *Grid);
+void pushBField(Grid *Grid, Particle *Particle, double t, double dt);
+void pushEField(Grid *Grid, Particle *Particle, double t, double dt);
 #endif /* grid_h */

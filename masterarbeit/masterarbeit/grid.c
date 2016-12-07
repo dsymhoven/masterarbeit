@@ -411,6 +411,20 @@ void writeGridParametersToFile(Grid *Grid){
 }
 
 
+void pushEField(Grid *Grid, Particle *Particle, double t, double dt){
+    pushEFieldInsideBoxes(Grid, dt);
+    setBFieldOnBorders(Grid);
+    adjustBFields(Grid, Particle, t);
+    pushEFieldAtBorders(Grid, dt);
+    
+}
+
+void pushBField(Grid *Grid, Particle *Particle, double t, double dt){
+    pushBFieldInsideBoxes(Grid, dt);
+    setEFieldOnBorders(Grid);
+    adjustEFields(Grid, Particle, t);
+    pushBFieldAtBorders(Grid, dt);
+}
 
 ///@brief Maxwell Pusher for EField inside Boxes. This method is used for the hybrid field method.
 ///@remark E field is calculated via negative curl. Therefore value of B on the left side of E on the grid is required. Thus start i,j,k with 1
@@ -524,9 +538,11 @@ void setBFieldOnBorders(Grid *Grid){
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
+    
     int numberOfGridPointsForBoxInX = Grid -> numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid -> numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid -> numberOfGridPointsForBoxInZ;
+   
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
     
@@ -597,9 +613,9 @@ void setEFieldOnBorders(Grid *Grid){
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
     
-    int numberOfBoxesInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfBoxesInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfBoxesInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfBoxesInX = Grid->numberOfBoxesInX;
+    int numberOfBoxesInY = Grid->numberOfBoxesInY;
+    int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
     
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
@@ -733,7 +749,7 @@ void adjustByz_im1(Grid *Grid, Particle *Particle, const int boxIndex, const int
                 xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX - 1);
                 xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
                 xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
-                
+            
                 addLWField(Grid, Particle, &(Grid->By_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 4);
                 addLWField(Grid, Particle, &(Grid->Bz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 5);
             }
