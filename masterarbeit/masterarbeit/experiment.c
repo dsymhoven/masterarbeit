@@ -348,9 +348,9 @@ void testNearAndFarFields(){
     // ======================================================
     
     Grid Grid;
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
+    double dx = 0.2;
+    double dy = 0.2;
+    double dz = 0.2;
     int numberOfGridPointsForBoxInX = 20;
     int numberOfGridPointsForBoxInY = 20;
     int numberOfGridPointsForBoxInZ = 20;
@@ -378,9 +378,9 @@ void testNearAndFarFields(){
     
     
     Particle.x[0] = 0;
-    Particle.x[1] = 6.21;
-    Particle.x[2] = 6.01;
-    Particle.x[3] = 6.401;
+    Particle.x[1] = 10.21;
+    Particle.x[2] = 10.01;
+    Particle.x[3] = 10.401;
     
     Particle.u[1] = 0.458;
     Particle.u[2] = 0;

@@ -858,15 +858,15 @@ void adjustEFields(Grid *Grid, Particle *Particle, const double t){
                 
                 int boxIndex = ib * numberOfBoxesInY * numberOfBoxesInZ + jb * numberOfBoxesInZ + kb;
                 
-                if (ib != 0){
+                if (ib != numberOfBoxesInX - 1){
                     adjustEyz_ip1(Grid, Particle, boxIndex, ib, jb, kb, t);
                 }
                 
-                if (jb != 0){
+                if (jb != numberOfBoxesInY - 1){
                     adjustExz_jp1(Grid, Particle, boxIndex, ib, jb, kb, t);
                 }
                 
-                if (kb != 0){
+                if (kb != numberOfBoxesInZ - 1){
                     adjustExy_kp1(Grid, Particle, boxIndex, ib, jb, kb, t);
                 }
             }
@@ -1054,34 +1054,30 @@ void pushEFieldAtBorders(Grid *Grid, double dt){
 
                 
                 /*still need to be adjusted...*/
-                Bz_im1jk = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i - 1) + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
-                By_im1jk = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i - 1) + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
+                
                 Bx_ijm1k = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * (j - 1) + 3 * k + 0];
-                Bz_ijm1k = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * (j - 1) + 3 * k + 2];
+                By_im1jk = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i - 1) + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
+                Bz_im1jk = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i - 1) + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
+                
                 Bx_ijkm1 = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * (k - 1) + 0];
                 By_ijkm1 = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * (k - 1) + 1];
+                Bz_ijm1k = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * (j - 1) + 3 * k + 2];
+                
                 
                 /*adjust values*/
                 if (i % numberOfGridPointsForBoxInX == 0){
-                    Bz_im1jk =
-                    Grid->Bz_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (j % numberOfGridPointsForBoxInY) + (k % numberOfGridPointsForBoxInZ)];
-                    By_im1jk =
-                    Grid->By_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (j % numberOfGridPointsForBoxInY) + (k % numberOfGridPointsForBoxInZ)];
-                    
+                    Bz_im1jk = Grid->Bz_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (j % numberOfGridPointsForBoxInY) + (k % numberOfGridPointsForBoxInZ)];
+                    By_im1jk = Grid->By_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (j % numberOfGridPointsForBoxInY) + (k % numberOfGridPointsForBoxInZ)];
                 }
                 
                 if (j % numberOfGridPointsForBoxInY == 0){
-                    Bx_ijm1k =
-                    Grid->Bx_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (i % numberOfGridPointsForBoxInX) + (k % numberOfGridPointsForBoxInZ)];
-                    Bz_ijm1k =
-                    Grid->Bz_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (i % numberOfGridPointsForBoxInX) + (k % numberOfGridPointsForBoxInZ)];
+                    Bx_ijm1k = Grid->Bx_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (i % numberOfGridPointsForBoxInX) + (k % numberOfGridPointsForBoxInZ)];
+                    Bz_ijm1k = Grid->Bz_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (i % numberOfGridPointsForBoxInX) + (k % numberOfGridPointsForBoxInZ)];
                 }
                 
                 if (k % numberOfGridPointsForBoxInZ == 0){
-                    Bx_ijkm1 =
-                    Grid->Bx_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * (i % numberOfGridPointsForBoxInX) + (j % numberOfGridPointsForBoxInY)];
-                    By_ijkm1 =
-                    Grid->By_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * (i % numberOfGridPointsForBoxInX) + (j % numberOfGridPointsForBoxInY)];
+                    Bx_ijkm1 = Grid->Bx_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * (i % numberOfGridPointsForBoxInX) + (j % numberOfGridPointsForBoxInY)];
+                    By_ijkm1 = Grid->By_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * (i % numberOfGridPointsForBoxInX) + (j % numberOfGridPointsForBoxInY)];
                 }
                 
                     double val_x = cny * (Bz_ijk - Bz_ijm1k) - cnz * (By_ijk - By_ijkm1);
