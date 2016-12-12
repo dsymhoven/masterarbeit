@@ -12,7 +12,7 @@
 \contentsline {subsection}{\numberline {2.2.6}Interpolation of Trajectories}{8}{subsection.2.2.6}
 \contentsline {section}{\numberline {2.3}Hybrid Fields}{10}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Maxwell-Equations}{10}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}The Yee-Scheme}{10}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}Near-and Farfields}{11}{subsection.2.3.3}
-\contentsline {chapter}{\nonumberline Bibliography}{13}{chapter*.3}
-\contentsline {chapter}{Declaration}{14}{chapter*.4}
+\contentsline {subsection}{\numberline {2.3.2}The Yee-Scheme}{11}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Near-and Farfields}{12}{subsection.2.3.3}
+\contentsline {chapter}{\nonumberline Bibliography}{14}{chapter*.3}
+\contentsline {chapter}{Declaration}{15}{chapter*.4}
