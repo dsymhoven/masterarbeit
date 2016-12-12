@@ -348,12 +348,12 @@ void testNearAndFarFields(){
     // ======================================================
     
     Grid Grid;
-    double dx = 0.2;
-    double dy = 0.2;
-    double dz = 0.2;
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
+    double dx = 0.125;
+    double dy = 0.125;
+    double dz = 0.125;
+    int numberOfGridPointsForBoxInX = 32;
+    int numberOfGridPointsForBoxInY = 32;
+    int numberOfGridPointsForBoxInZ = 32;
     int numberOfBoxesInX = 5;
     int numberOfBoxesInY = 5;
     int numberOfBoxesInZ = 5;
@@ -364,7 +364,7 @@ void testNearAndFarFields(){
     
     double dt = 0.5 * dx;
     double t = 0;
-    double tEnd = 12;
+    double tEnd = 25;
     
     char filename[32] = "some";
     double Eextern[3];
