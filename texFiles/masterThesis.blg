@@ -8,45 +8,45 @@ The style file: plain.bst
 A level-1 auxiliary file: declaration.aux
 Database file #1: reference.bib
 Warning--empty publisher in NumerikSkript
-You've used 4 entries,
+You've used 6 entries,
             2118 wiz_defined-function locations,
-            526 strings with 4591 characters,
-and the built_in function-call counts, 921 in all, are:
-= -- 82
-> -- 34
-< -- 0
-+ -- 14
-- -- 10
-* -- 43
-:= -- 170
-add.period$ -- 13
-call.type$ -- 4
-change.case$ -- 14
+            539 strings with 4933 characters,
+and the built_in function-call counts, 1572 in all, are:
+= -- 152
+> -- 54
+< -- 1
++ -- 22
+- -- 16
+* -- 75
+:= -- 272
+add.period$ -- 20
+call.type$ -- 6
+change.case$ -- 22
 chr.to.int$ -- 0
-cite$ -- 5
-duplicate$ -- 46
-empty$ -- 84
-format.name$ -- 10
-if$ -- 189
+cite$ -- 7
+duplicate$ -- 78
+empty$ -- 138
+format.name$ -- 16
+if$ -- 336
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 7
-newline$ -- 24
-num.names$ -- 8
-pop$ -- 28
+int.to.str$ -- 6
+missing$ -- 10
+newline$ -- 34
+num.names$ -- 12
+pop$ -- 39
 preamble$ -- 1
-purify$ -- 13
+purify$ -- 20
 quote$ -- 0
-skip$ -- 26
+skip$ -- 52
 stack$ -- 0
-substring$ -- 20
-swap$ -- 4
-text.length$ -- 0
+substring$ -- 62
+swap$ -- 15
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 10
+type$ -- 16
 warning$ -- 1
-while$ -- 8
-width$ -- 5
-write$ -- 44
+while$ -- 15
+width$ -- 7
+write$ -- 66
 (There was 1 warning)

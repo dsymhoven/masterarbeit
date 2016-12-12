@@ -22,4 +22,16 @@ Christian Kanzow.
 \newblock 2005.
 \newblock [Online; accessed 13-Oktober-2016].
 
+\bibitem{Taflove}
+A.~Taflove and S.C. Hagness.
+\newblock {\em Computational Electrodynamics: The Finite-difference Time-domain
+  Method}.
+\newblock Artech House antennas and propagation library. Artech House, 2005.
+
+\bibitem{Yee66}
+Kane~S. Yee.
+\newblock Numerical solution of initial boundary value problems involving
+  maxwell's equations in isotropic media.
+\newblock {\em IEEE Trans. Antennas and Propagation}, pages 302--307, 1966.
+
 \end{thebibliography}

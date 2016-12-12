@@ -1,5 +1,6 @@
 \documentclass[
-a4paper,					% alle weiteren Papierformat einstellbar
+book,
+%a4paper,					% alle weiteren Papierformat einstellbar
 %landscape,					% Querformat
 11pt,						% SchriftgrößŸe (12pt, 11pt (Standard))
 BCOR0.8cm,					% Bindekorrektur, bspw. 1 cm
@@ -23,9 +24,9 @@ bibliography=totoc,
 
 % ============================ Packages ============================ 
 
-\usepackage[inner=3.0cm,outer=2.5cm,top=1.5cm,bottom=1.5cm,includeheadfoot]{geometry}
+%\usepackage[inner=3.0cm,outer=2.5cm,top=1.5cm,bottom=1.5cm,includeheadfoot]{geometry}
 									% Einstellungen der Seitenränder
-
+\usepackage[includeheadfoot]{geometry}
 \usepackage[T1]{fontenc}				% neue Rechtschreibung
 \usepackage[latin1]{inputenc}		         % Umlaute ermöglichen
 \usepackage[german, english]{babel}
@@ -64,18 +65,30 @@ bibliography=totoc,
 %============================ new Definitions ============================
 \include{definitions}
 \include{newChapterDefinition}
+\include{titlepageDefinition}
 % =============================Titelseite ==================================
 
 \begin{document}
 
 \pagenumbering{roman}
-\include{titlepage}
+
+  \LMUTitle
+      {Dies ist Titel der Masterarbeit \\
+       This is the title of the thesis}               % Titel der Arbeit
+      {David Symhoven}                       % Vor- und Nachname des Autors
+      {Witten}                             % Geburtsort des Autors
+      {Physikfakultät}                         % Name der Fakultaet
+      {München 2017}                          % Ort und Jahr der Erstellung
+      {30.06.2017}                            % Tag der Abgabe
+      {Prof.Dr.Hartmut Ruhl}                          % Name des Erstgutachters
+      {Zweitgutachter}                         % Name des Zweitgutachters
+
 
 %================================= ABSTRACT==============================
 \include{abstract}
 
 %================================= SYMBOLE UND KONTANTEN ================
-\include{symbols}
+%\include{symbols}
 
 %================================= Inhaltsverzeichnis ==========================
 \tableofcontents
@@ -308,10 +321,11 @@ where $\lambda \in [0,1]$. Due to the finite speed of light the intersection poi
 \eeq
 Thereby $x_o^{\mu} \in \mathbb{R}^{3+1}$ denotes the observation point where the fields shall be calculated. Note, that on the left hand side of \eqref{eqn: constraint} only spatial components of the respective four vectors are used. \\
 Plugging in \eqref{eqn: linInt} in \eqref{eqn: constraint} yields
-\beq
+
+\begin{multline}
 \label{eqn: quadEq}
-\lambda^2 (x_{j+1} - x_j)_{\mu}(x_{j+1} - x_j)^{\mu} + \lambda~2(x_{j+1} - x_j)_{\mu}(x_j - x_o)^{\mu} + (x_j)_{\mu}(x_j)^{\mu} + (x_o)_{\mu}(x_o)^{\mu} - 2(x_j)_{\mu}(x_o)^{\mu}  = 0.
-\eeq
+\lambda^2 (x_{j+1} - x_j)_{\mu}(x_{j+1} - x_j)^{\mu} + \lambda~2(x_{j+1} - x_j)_{\mu}(x_j - x_o)^{\mu} + (x_j)_{\mu}(x_j)^{\mu} \\ + (x_o)_{\mu}(x_o)^{\mu} - 2(x_j)_{\mu}(x_o)^{\mu}  = 0.
+\end{multline}
 We define
 \beq
 \bal
@@ -330,8 +344,29 @@ One denotes the intersection point with the backward lightcone, the other one wi
 \eeq
 Plugging in $\lambda$ in \eqref{eqn: linInt} gives the desired intersection point.
 \section{Hybrid Fields}
+In this section we introduce the concept of hybrid fields and how this approach reduces the numerical complexity from $N^2$ to $N$.
+% MISSING: More text about why N^2 and what the basic idea behind hybrid fields is
 \subsection{Maxwell-Equations}
-\subsection{Maxwell-Solver}
+% MISSING: Which one to use ? For Maxwell Pusher  the vacuum equations are suffice. For UPML we need the ones in anisotropic media
+\beq
+\label{eq: maxwellEq}
+\bal
+\vec{\nabla} \vec{E} &= 0 \\
+\vec{\nabla} \vec{B} &= 0\\
+\vec{\nabla} \times \vec{E} &= - \frac{\del \vec{B}}{\del t}\\
+\vec{\nabla} \times \vec{B} &=  \frac{\del \vec{E}}{\del t}
+\eal
+\eeq
+\subsection{The Yee-Scheme}
+To push the fields on the grid we use the \textit{Yee- Scheme} introduced by \textit{Kane Yee} in 1966 \cite{Yee66}.\\
+Figure \ref{fig: YeeBox} illustrates a so called Yee-Box and how to solve the curl equations of \eqref{eq: maxwellEq}.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.70\textwidth]{Pictures/YeeBox.png} 
+	\caption[Yee-Box]{An illustration of a Yee-Box which is used to solve the curl Maxwell Equations \cite{Taflove}.}
+	\label{fig: YeeBox}
+\end{figure}
+
 \subsection{Near-and Farfields}
 
 
