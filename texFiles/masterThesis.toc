@@ -8,12 +8,11 @@
 \contentsline {subsubsection}{\numberline {2.2.2.1}Procedural Error and Order of Consistency}{5}{subsubsection.2.2.2.1}
 \contentsline {subsection}{\numberline {2.2.3}Leap-Frog-Scheme}{7}{subsection.2.2.3}
 \contentsline {subsection}{\numberline {2.2.4}Boris-Method}{8}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Vay-Pusher}{8}{subsection.2.2.5}
-\contentsline {subsection}{\numberline {2.2.6}Interpolation of Trajectories}{8}{subsection.2.2.6}
-\contentsline {section}{\numberline {2.3}Hybrid Fields}{10}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Maxwell-Equations}{10}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}The Yee-Scheme}{11}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}Near-and Farfields}{12}{subsection.2.3.3}
-\contentsline {section}{\numberline {2.4}Uniaxial Perfectly Matched Layer}{12}{section.2.4}
-\contentsline {chapter}{\nonumberline Bibliography}{14}{chapter*.3}
-\contentsline {chapter}{Declaration}{15}{chapter*.4}
+\contentsline {subsection}{\numberline {2.2.5}Interpolation of Trajectories}{10}{subsection.2.2.5}
+\contentsline {section}{\numberline {2.3}Hybrid Fields}{11}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Maxwell-Equations}{12}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}The Yee-Scheme}{12}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Near-and Farfields}{13}{subsection.2.3.3}
+\contentsline {section}{\numberline {2.4}Uniaxial Perfectly Matched Layer}{13}{section.2.4}
+\contentsline {chapter}{\nonumberline Bibliography}{15}{chapter*.3}
+\contentsline {chapter}{Declaration}{16}{chapter*.4}

@@ -102,11 +102,12 @@ bibliography=totoc,
 
 %Code für Bildumgebung
 %\begin{figure}[H]
-	%\centering
-	%	\includegraphics[width=0.50\textwidth]{Destruktive_Interferenz.jpg} %Bild 1
-	%\caption[Destruktive Interferenz]{Destruktive Interferenz \cite{[Wiki12]}}
-	%\label{fig:Interferenzfilterr}
+%	\centering
+%		\includegraphics[width=0.50\textwidth]{Destruktive_Interferenz.jpg} %Bild 1
+%	\caption[Destruktive Interferenz]{Destruktive Interferenz \cite{[Wiki12]}}
+%	\label{fig:Interferenzfilterr}
 %\end{figure}
+%\noindent
 
 %===========================================================================
 
@@ -117,6 +118,8 @@ bibliography=totoc,
 Now it's going loose ...  \cite{Allen}
 
 \chapter{Fundamentals}
+%======================== LW Potentials ========================
+%===========================================================
 \section{Liénard-Wiechert Potentials}
 \beq
 \label{eqn: Liénard-Wiechert}
@@ -126,6 +129,9 @@ B = B
 \eal
 \eeq
 \label{sec: lw-potentials}
+
+%======================== Numerics ========================
+%===========================================================
 \section{Numerics}
 \noindent
 The following section deals with the numeric aspects of this thesis. We explain the underlying equation of motions and their history. After that, we go into several methods with which we can solve differential equations. Over the course of the last decades numerous methods were invented each of which has its own strength and weaknesses. 
@@ -133,6 +139,7 @@ Some of them are very easy to implement, which in turn usually leads to unprecis
 Therefore one should always consider which method is best for the problem and what it is one want to achieve.\\
 Following this, we also want to define and calculate the numerical complexity of some chosen algorithms. 
 
+%======================== Equation of Motion ========================
 \subsection{Equations of motion}
 As we know from mechanics the dynamic of a particle is determined by the forces acting on it. In our case there is a force due to electro-magnetic fields. That can be external fields, but also fields due to moving particles, as we explained in section \ref{sec: lw-potentials}.\\
 The dynamics of our system is described by the \textit{Lorentz-Newton} equation
@@ -160,6 +167,7 @@ In 1938 \textit{Dirac} generalized the equation whilst taking special relativity
 % MISSING: Details. Historisches. Abraham, Lorentz, Dirac Landau Lifschitz Gleichung usw.
 We now want to deal with how to solve the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} numerically.
 
+%======================== Euler Scheme ========================
 \subsection{Euler-Scheme}
 The most simple method is the explicit \textit{Euler}-Method. It's easy to implement but not very accurate, as we shall see later. But before we go into the details of the explicit Euler-Scheme we need to address some prerequisites all following methods will have in common. \\
 Starting point will always be a first order system of the kind
@@ -262,6 +270,8 @@ since $\frac{\dm u^{\mu}}{\dm \tau} = f^{\mu}(x^{\nu}, u^{\nu})$ holds for the E
 \eeq
 $\mathcal{D}(u^{\mu})$ denotes the domain of $u^{\mu}$. Therefore, the Euler-Scheme has an Order of Consistency of one.
 
+
+%======================== Leap Frog Scheme ========================
 \subsection{Leap-Frog-Scheme}
 A definitely better method is the so called \textit{Leap-Frog}-Scheme. One can easily proof that it has an Order of Consistency of two. \\
 In contrast to the explicit Euler-Scheme this method has several advantages. For one it is time reversible, i.e. it is possible to reach any previous point in time from every point later in the trajectory. On the other hand the Leap-Frog-Scheme is symplectic, meaning it conserves the phase space volume from which energy and momentum conservation follows. \\
@@ -311,12 +321,35 @@ one can eliminate the electric field. Plugging in \eqref{eqn:vMinusAndPlus} into
 \eal
 \eeq
 Following the geometrical analysis in ~\cite{Birdsall} we find %MISSING:PIctures from Birdsall and rest of explaination
-\subsection{Vay-Pusher}
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.70\textwidth]{Pictures/borisRotation.png} 
+	\caption[Caption]{Blah Blah}
+	\label{fig: borisRotation}
+\end{figure}
+\noindent
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.70\textwidth]{Pictures/borisProjection.png} 
+	\caption[Caption ]{Blah Blah}
+	\label{fig: borisProjection}
+\end{figure}
+\noindent
+
+%======================== Interpolation of Trajectories ========================
 \subsection{Interpolation of Trajectories}
 \label{sec: Interpolation of Trajectories}
 The previously presented methods calculate the particle trajectory solely at discrete points in time $x_i^{\mu}(\tau)$. Calculating Liénard-Wiechert fields according to equation \eqref{eqn: Liénard-Wiechert} however, requires the intersection point of the trajectory with the backward lightcone of the observation point. 
 In most cases the calculated points of the trajectory are not lying directly on the lightcone, so we need a procedure to calculate the intersection point exactly.\\
-The simplest solution is a linear interpolation between the last point inside and the first point outside the lightcone. Figure \ref{fig: Interpolation} illustrates the situation.\\ %MISSING: FIGURE
+The simplest solution is a linear interpolation between the last point inside and the first point outside the lightcone. Figure \ref{fig: Interpolation} illustrates the situation.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Pictures/LightconeNew.pdf}
+	\caption[Interpolation of Trajectories]{Minkowski space showing the particle trajectory with starting point $x^{\mu}_0(t_0)$ and last point $x^{\mu}_N(t)$. The observation point $x^{\mu}_o(t)$ with its backward lightcone is also shown. If we want to calculate the Liénard-Wiechert fields at the observation point $x^{\mu}_o(t)$, we need the intersection point $x^{\mu}_c(t_{ret})$ of the trajectory with the backward lightcone. }
+	\label{fig: Interpolation}
+\end{figure}
+\noindent
 Thereto let $x_j^{\mu} \in \mathbb{R}^{3+1}$ be the last point inside and $x_{j+1}^{\mu} \in \mathbb{R}^{3+1}$ the first point outside the lightcone. Further let $x_{c}^{\mu} \in \mathbb{R}^{3+1}$ be the intersection point of interest then we get
 \beq
 \label{eqn: linInt}
@@ -351,6 +384,9 @@ One denotes the intersection point with the backward lightcone, the other one wi
 \lambda_{1/2} = \frac{-b + \sqrt{b^2 - 4ac}}{2a}. \nn
 \eeq
 Plugging in $\lambda$ in \eqref{eqn: linInt} gives the desired intersection point.
+
+%======================== Hybrid Fields ========================
+%===========================================================
 \section{Hybrid Fields}
 In this section we introduce the concept of hybrid fields and how this approach reduces the numerical complexity from $N^2$ to $N$.\\
 Usually the numerical complexity of multi particle simulation is $N^2$, due to the interaction between each particle. In our case we need $N$ push operations for the particles. One push for each particle. In order to do that, however, we need to solve equation \eqref{eqn: Lorentz-Newton} and therefore all Liénard-Wiechert fields from the other $N-1$ particles are needed. This results in $N(N-1)$ calculations for each time step, period. If we want to calculate the Liénard-Wiechert fields, we also need to store all positions from all particles, as explained in section \ref{sec: Interpolation of Trajectories}. For a few particles such simulations are effortlessly feasible. But with increasing particle numbers such simulations may not just require more and more memory capacity but also become so time consuming that at some point we simply can not do them anylonger. That's where the hybrid field model comes in. Instead of calculating the Liénard-Wiechert fields at every time step for all particles at all grid points we save them onto the grid and propagate them through the grid using Maxwell equations. How that works in detail is explained in the following sections. 
@@ -363,13 +399,14 @@ The Maxwell equations are the foundation of the classical electromagnetism and d
 \epsilon_0\epsilon_r \vec{\nabla} \vec{E} &= \rho \\
 \mu_0\mu_r \vec{\nabla} \vec{B} &= 0\\
 \vec{\nabla} \times \vec{E} &= - \mu_0\mu_r \frac{\del \vec{B}}{\del t}\\
-\vec{\nabla} \times \vec{H} &=  \epsilon_0\epsilon_r \frac{\del \vec{E}}{\del t} + \sigma \vec{E}.
+\vec{\nabla} \times \vec{H} &=  \epsilon_0\epsilon_r \frac{\del \vec{E}}{\del t} + \sigma \vec{E},
 \eal
 \eeq
 where $\epsilon_0 $ and $\epsilon_r$ are the vacuum and the relative electric permeability respectively. Same holds for $\mu_0$ and $\mu_r $ for magnetic materials.
 $\rho$ denotes the current density of the electric source and $\sigma$ the electric conductivity. \\
 To solve the Maxwell equations numerically we need to discretize them first. The most robust and reliable way of doing this is with the \textit{Yee-Algorithm}. 
 
+%======================== Yee Scheme ========================
 \subsection{The Yee-Scheme}
 In this section we talk about how to solve the Maxwell Equations \eqref{eqn: maxwellEq} and how to propagate the fields on a numerical grid. We thereby focus on the Maxwell Equations in vacuum, i.e. $\rho = \sigma = 0$ and $\epsilon_r = \mu_r = 1$. As can be seen in the Liénard-Wiechert formula \eqref{eqn: Liénard-Wiechert} there is a singularity for the field values at the particle position itself. Thus, we just want to propagate fields far away from the source, which is explained in more detail later.\\
 \newline 
@@ -382,7 +419,13 @@ Figure \ref{fig: YeeBox} illustrates a so called Yee-Box and the components we n
 	\label{fig: YeeBox}
 \end{figure}
 
+
+%======================== Near and Far- Fields ========================
 \subsection{Near-and Farfields}
+
+
+%======================== UPML ============================
+%===========================================================
 \section{Uniaxial Perfectly Matched Layer}
 
 
