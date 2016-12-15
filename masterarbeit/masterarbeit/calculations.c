@@ -727,31 +727,51 @@ int calcLowerLeftGridIndexInBox(Grid *Grid, Particle *Particle){
     return ib * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + jb * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + kb * numberOfGridPointsForBoxInZ * 3;
 }
 
+///@param Grid pointer to Grid struct.
+///@param boxIndex current boxIndex of particle
+///@returns the boxIndex to the left of the current box where particle is located.
 int calcBoxIndexIm1(Grid *Grid, const int boxIndex){
     return boxIndex - (Grid->numberOfBoxesInZ) * (Grid->numberOfBoxesInY);
 }
 
+///@param Grid pointer to Grid struct.
+///@param boxIndex current boxIndex of particle
+///@returns the boxIndex in front of the current box where particle is located.
 int calcBoxIndexJm1(Grid *Grid, const int boxIndex){
     return boxIndex - (Grid->numberOfBoxesInZ);
 }
 
+///@param Grid pointer to Grid struct.
+///@param boxIndex current boxIndex of particle
+///@returns the boxIndex below of the current box where particle is located.
 int calcBoxIndexKm1(Grid *Grid, const int boxIndex){
     return boxIndex - 1;
 }
 
+///@param Grid pointer to Grid struct.
+///@param boxIndex current boxIndex of particle
+///@returns the boxIndex to the right of the current box where particle is located.
 int calcBoxIndexIp1(Grid *Grid, const int boxIndex){
     return boxIndex + (Grid->numberOfBoxesInZ) * (Grid->numberOfBoxesInY);
 }
 
+///@param Grid pointer to Grid struct.
+///@param boxIndex current boxIndex of particle
+///@returns the boxIndex behind the current box where particle is located.
 int calcBoxIndexJp1(Grid *Grid, const int boxIndex){
     return boxIndex + (Grid->numberOfBoxesInZ);
 }
 
+///@param Grid pointer to Grid struct.
+///@param boxIndex current boxIndex of particle
+///@returns the boxIndex above the current box where particle is located.
 int calcBoxIndexKp1(Grid *Grid, const int boxIndex){
     return boxIndex + 1;
 }
 
-
+///@brief calculates the UPML Coefficients according to Taflove page 301.
+///@param Grid pointer to Grid struct
+///@remark The idea is to introduce a medium at the edge of the grid which shall absrob all incident waves, regardless of angle, polarisation and impedance, so that there are no reflections at the border of the grid. A quite longish calculation yields the coefficients implmeneted below. Those coefficients need to be implemented into the Maxwell Equations so that in the inner part of the grid everything is calculated via Yee algorithm (sigma = 0, kappa = 1). At the edge however we want to absorb the incident waves quite strongly, so conductiity sigma and loss kappa need to change. One questions remains unanswered yet: How can we calculate optimal values for sigmaMax and kappaMax ?
 void calcUPMLCoefficients(Grid *Grid){
     printf("calculating UPML coefficients ...\n");
     

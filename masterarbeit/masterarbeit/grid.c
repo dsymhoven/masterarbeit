@@ -474,7 +474,7 @@ void pushHField(Grid *Grid, Particle *Particle, double t, double dt){
 }
 
 ///@brief Maxwell Pusher for EField inside Boxes. This method is used for the hybrid field method.
-///@remark E field is calculated via negative curl. Therefore value of B on the left side of E on the grid is required. Thus start i,j,k with 1
+///@remark E field is calculated via negative curl. Therefore value of H on the left side of E on the grid is required. Thus start i,j,k with 1. UPML is activated by default
 void pushEFieldInsideBoxes(Grid *Grid, double dt){
     double Hx_ijk;
     double Hy_ijk;
@@ -549,8 +549,8 @@ void pushEFieldInsideBoxes(Grid *Grid, double dt){
     }
     
 }
-///@brief Maxwell Pusher for BField inside Boxes. This method is used for the hybrid field method.
-///@remark B field is calculated via positive curl. Therefore value of E on the right side of B on the grid is required. Thus stop i,j,k at n - 1 where n denotes the numberOfGridPoints
+///@brief Maxwell Pusher for HField inside Boxes. This method is used for the hybrid field method.
+///@remark H field is calculated via positive curl. Therefore value of E on the right side of H on the grid is required. Thus stop i,j,k at n - 1 where n denotes the numberOfGridPoints. UPML is activated by default
 void pushHFieldInsideBoxes(Grid *Grid, double dt){
     double Ex_ijk;
     double Ey_ijk;
@@ -625,6 +625,9 @@ void pushHFieldInsideBoxes(Grid *Grid, double dt){
     }
 }
 
+///@brief this methods loops through all boxes and stores all values of H in the plane left, infront and below of the current box.  As can be seen from the Yee Scheme only Hy and Hz are needed from the left plane. Hz and Hx are needed from the plane infront and Hy and Hx are needed from the plane below. If the current box is a box where te left to the left does not exist (ib = 0) then the respective values for H are set to 0.
+///@remark Hz_im1 and all others are matrices. The first index denotes the boxIndex and the second Index the gridPoints in the plane.
+///@param Grid pointer to Grid struct
 void setHFieldOnBorders(Grid *Grid){
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
@@ -699,6 +702,9 @@ void setHFieldOnBorders(Grid *Grid){
     }
 }
 
+///@brief this methods loops through all boxes and stores all values of E in the plane right, behind and above of the current box.  As can be seen from the Yee Scheme only Ey and Ez are needed from the right plane. Ez and Ex are needed from the plane behind and Ey and Ex are needed from the plane above. If the current box is a box where the plane to the right does not exist (ib = numberOfBoxesInX) then the respective values for E are set to 0.
+///@remark Ey_ip1 and all others are matrices. The first index denotes the boxIndex and the second Index the gridPoints in the plane.
+///@param Grid pointer to Grid struct
 void setEFieldOnBorders(Grid *Grid){
     
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
@@ -779,6 +785,7 @@ void setEFieldOnBorders(Grid *Grid){
     }
 }
 
+///@brief this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in "adjustHyz_im1()", "adjustHxz_jm1()" and "adjustHxy_km1()" method.
 void adjustHFields(Grid *Grid, Particle *Particle, const double t){
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
@@ -806,6 +813,15 @@ void adjustHFields(Grid *Grid, Particle *Particle, const double t){
     }
 }
 
+///@brief this method adjusts the H values on the left and right side border of the near field.
+///@param Grid pointer to Grid struct
+///@param Particle pointer to Particle struct
+///@param boxIndex current boxIndex from outer loop
+///@param ib boxIndex in x direction
+///@param jb boxIndex in y direction
+///@param kb boxIndex in z direction
+///@param t current simulation time
+///@remark this method gets called over and over again from "adjustHFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexIm1 is not. Then we are at the left border of the near field. Since we want to push a value for the Efield inside the near field we need (among others) the value to the left. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the right border of the near field, i.e. current box is the not in near field but boxIndexIm1 is, then we push EField values from the far field. For this we need values to the left, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the E field value in the far field correctly.
 void adjustHyz_im1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
@@ -850,6 +866,15 @@ void adjustHyz_im1(Grid *Grid, Particle *Particle, const int boxIndex, const int
     
 }
 
+///@brief this method adjusts the H values infront and on the back side border of the near field.
+///@param Grid pointer to Grid struct
+///@param Particle pointer to Particle struct
+///@param boxIndex current boxIndex from outer loop
+///@param ib boxIndex in x direction
+///@param jb boxIndex in y direction
+///@param kb boxIndex in z direction
+///@param t current simulation time
+///@remark this method gets called over and over again from "adjustHFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexJm1 is not. Then we are at the facing border of the near field. Since we want to push a value for the Efield inside the near field we need (among others) the value infront. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the back border of the near field, i.e. current box is the not in near field but boxIndexJm1 is, then we push EField values from the far field. For this we need values infront, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the E field value in the far field correctly.
 void adjustHxz_jm1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
@@ -894,6 +919,15 @@ void adjustHxz_jm1(Grid *Grid, Particle *Particle, const int boxIndex, const int
     
 }
 
+///@brief this method adjusts the H values on the top and bottom side border of the near field.
+///@param Grid pointer to Grid struct
+///@param Particle pointer to Particle struct
+///@param boxIndex current boxIndex from outer loop
+///@param ib boxIndex in x direction
+///@param jb boxIndex in y direction
+///@param kb boxIndex in z direction
+///@param t current simulation time
+///@remark this method gets called over and over again from "adjustHFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexKm1 is not. Then we are at bottom border of the near field. Since we want to push a value for the Efield inside the near field we need (among others) the value below. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the top border of the near field, i.e. current box is the not in near field but boxIndexKm1 is, then we push EField values from the far field. For this we need values below, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the E field value in the far field correctly.
 void adjustHxy_km1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
@@ -938,6 +972,7 @@ void adjustHxy_km1(Grid *Grid, Particle *Particle, const int boxIndex, const int
     
 }
 
+///@brief this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in "adjustEyz_ip1()", "adjustExz_jp1()" and "adjustExy_kp1()" method.
 void adjustEFields(Grid *Grid, Particle *Particle, const double t){
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
@@ -965,6 +1000,16 @@ void adjustEFields(Grid *Grid, Particle *Particle, const double t){
     }
 }
 
+
+///@brief this method adjusts the E values on the left and right side border of the near field.
+///@param Grid pointer to Grid struct
+///@param Particle pointer to Particle struct
+///@param boxIndex current boxIndex from outer loop
+///@param ib boxIndex in x direction
+///@param jb boxIndex in y direction
+///@param kb boxIndex in z direction
+///@param t current simulation time
+///@remark this method gets called over and over again from "adjustEFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexIp1 is not. Then we are at the right border of the near field. Since we want to push a value for the Hfield inside the near field we need (among others) the E field value to the right. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the left border of the near field, i.e. current box is the not in near field but boxIndexIp1 is, then we push HField values from the far field. For this we need values to the rigth, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the H field value in the far field correctly.
 void adjustEyz_ip1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
@@ -1009,6 +1054,15 @@ void adjustEyz_ip1(Grid *Grid, Particle *Particle, const int boxIndex, const int
     
 }
 
+///@brief this method adjusts the E values infront and on the back side border of the near field.
+///@param Grid pointer to Grid struct
+///@param Particle pointer to Particle struct
+///@param boxIndex current boxIndex from outer loop
+///@param ib boxIndex in x direction
+///@param jb boxIndex in y direction
+///@param kb boxIndex in z direction
+///@param t current simulation time
+///@remark this method gets called over and over again from "adjustEFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexJp1 is not. Then we are at the back side border of the near field. Since we want to push a value for the Hfield inside the near field we need (among others) the E field value behind. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the front side border of the near field, i.e. current box is the not in near field but boxIndexJp1 is, then we push HField values from the far field. For this we need values infront, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the H field value in the far field correctly.
 void adjustExz_jp1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
@@ -1053,6 +1107,15 @@ void adjustExz_jp1(Grid *Grid, Particle *Particle, const int boxIndex, const int
     
 }
 
+///@brief this method adjusts the E values at top and bottom side border of the near field.
+///@param Grid pointer to Grid struct
+///@param Particle pointer to Particle struct
+///@param boxIndex current boxIndex from outer loop
+///@param ib boxIndex in x direction
+///@param jb boxIndex in y direction
+///@param kb boxIndex in z direction
+///@param t current simulation time
+///@remark this method gets called over and over again from "adjustEFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexKp1 is not. Then we are at the top side border of the near field. Since we want to push a value for the Hfield inside the near field we need (among others) the E field value above. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the bottom side border of the near field, i.e. current box is the not in near field but boxIndexKp1 is, then we push HField values from the far field. For this we need values above, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the H field value in the far field correctly.
 void adjustExy_kp1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
@@ -1097,7 +1160,8 @@ void adjustExy_kp1(Grid *Grid, Particle *Particle, const int boxIndex, const int
     
 }
 
-
+///@brief Maxwell Pusher for EField at box borders. This method is used for the hybrid field method.
+///@remark E field is calculated via negative curl. Therefore value of H on the left side of E on the grid is required. Thus start i,j,k with 1. UPML is activated by default
 void pushEFieldAtBorders(Grid *Grid, double dt){
     
     double Hx_ijk;
@@ -1208,6 +1272,9 @@ void pushEFieldAtBorders(Grid *Grid, double dt){
     }
 }
 
+
+///@brief Maxwell Pusher for HField at box borders. This method is used for the hybrid field method.
+///@remark H field is calculated via positive curl. Therefore value of E on the right side of H on the grid is required. Thus stop i,j,k at n - 1 where n denotes the numberOfGridPoints. UPML is activated by default
 void pushHFieldAtBorders(Grid *Grid, double dt){
     
     double Ex_ijk;
