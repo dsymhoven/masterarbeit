@@ -431,15 +431,15 @@ void testUPML(){
     // ======================================================
     
     Grid Grid;
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
-    int numberOfGridPointsForBoxInX = 32;
-    int numberOfGridPointsForBoxInY = 32;
-    int numberOfGridPointsForBoxInZ = 32;
-    int numberOfBoxesInX = 5;
-    int numberOfBoxesInY = 5;
-    int numberOfBoxesInZ = 5;
+    double dx = 0.2;
+    double dy = 0.2;
+    double dz = 0.2;
+    int numberOfGridPointsForBoxInX = 16;
+    int numberOfGridPointsForBoxInY = 16;
+    int numberOfGridPointsForBoxInZ = 16;
+    int numberOfBoxesInX = 8;
+    int numberOfBoxesInY = 8;
+    int numberOfBoxesInZ = 8;
     
     Particle Particle;
     double charge = 1.0;
@@ -447,7 +447,7 @@ void testUPML(){
     
     double dt = 0.5 * dx;
     double t = 0;
-    double tEnd = 15;
+    double tEnd = 20;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -462,9 +462,9 @@ void testUPML(){
     
     
     Particle.x[0] = 0;
-    Particle.x[1] = 10.21;
-    Particle.x[2] = 10.01;
-    Particle.x[3] = 10.401;
+    Particle.x[1] = 12.21;
+    Particle.x[2] = 12.01;
+    Particle.x[3] = 12.401;
     
     Particle.u[1] = 0.458;
     Particle.u[2] = 0;

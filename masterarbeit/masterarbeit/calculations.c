@@ -755,8 +755,6 @@ int calcBoxIndexKp1(Grid *Grid, const int boxIndex){
 void calcUPMLCoefficients(Grid *Grid){
     printf("calculating UPML coefficients ...\n");
     
-    FILE *fid = fopen("UPMLCoefficients.txt", "w");
-    
     double sigmaMax = 3.0;
     double kappaMax = 4.0;
     double m = 3.5;
@@ -778,8 +776,8 @@ void calcUPMLCoefficients(Grid *Grid){
             kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
         }
         
-        else if(j >= numberOfGridPointsInY - layerWidthInGridPoints){
-            depth = j - numberOfGridPointsInY + layerWidthInGridPoints;
+        else if(j >= numberOfGridPointsInY - layerWidthInGridPoints - 1){
+            depth = j - numberOfGridPointsInY + layerWidthInGridPoints + 1;
             sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
             kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
         }
@@ -789,7 +787,7 @@ void calcUPMLCoefficients(Grid *Grid){
         }
         Grid->upml1E[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
         Grid->upml2E[j] = (2 * dt) / (2 * kappa + sigma * dt);
-
+        
     }
     
     for (int k = 0; k < numberOfGridPointsInZ; k++){
@@ -799,8 +797,8 @@ void calcUPMLCoefficients(Grid *Grid){
             kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
         }
         
-        else if(k >= numberOfGridPointsInZ - layerWidthInGridPoints){
-            depth = k - numberOfGridPointsInZ + layerWidthInGridPoints;
+        else if(k >= numberOfGridPointsInZ - layerWidthInGridPoints - 1){
+            depth = k - numberOfGridPointsInZ + layerWidthInGridPoints + 1;
             sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
             kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
         }
@@ -810,7 +808,7 @@ void calcUPMLCoefficients(Grid *Grid){
         }
         Grid->upml3E[k] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
         Grid->upml4E[k] = 1.0 / (2 * kappa + sigma * dt);
-        fprintf(fid, "%f\t", Grid->upml4E[k]);
+
     }
     
     for (int i = 0; i < numberOfGridPointsInX; i++){
@@ -896,6 +894,5 @@ void calcUPMLCoefficients(Grid *Grid){
         Grid->upml6H[i] = (2 * kappa - sigma * dt);
         
     }
-    fclose(fid);
 }
 
