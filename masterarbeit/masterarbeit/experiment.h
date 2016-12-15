@@ -17,4 +17,5 @@ void testNearFieldCalculation();
 void testLWFieldCalculationForPlane();
 void testLWFieldCalculationForEachTimeStep();
 void testNearAndFarFields();
+void testUPML();
 #endif /* experiment_h */

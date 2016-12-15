@@ -36,4 +36,5 @@ int calcBoxIndexKm1(Grid *Grid, const int boxIndex);
 int calcBoxIndexIp1(Grid *Grid, const int boxIndex);
 int calcBoxIndexJp1(Grid *Grid, const int boxIndex);
 int calcBoxIndexKp1(Grid *Grid, const int boxIndex);
+void calcUPMLCoefficients(Grid *Grid);
 #endif

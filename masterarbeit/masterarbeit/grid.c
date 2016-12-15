@@ -14,6 +14,9 @@
 #include "calculations.h"
 
 
+bool useUPML = true;
+
+
 /// @brief initializes all properties of struct Grid.
 void initGrid(Grid *Grid, double dx, double dy, double dz, int numberOfGridPointsForBoxInX, int numberOfGridPointsForBoxInY, int numberOfGridPointsForBoxInZ, int numberOfBoxesInX, int numberOfBoxesInY, int numberOfBoxesInZ){
     
@@ -51,13 +54,18 @@ void allocateFieldsOnGrid(Grid *Grid){
     Grid->E = (double *) malloc(arrayLength * sizeof(double));
     Grid->B = (double *) malloc(arrayLength * sizeof(double));
     
-    if( Grid->B == NULL || Grid->E == NULL){
+    Grid->D = (double *) malloc(arrayLength * sizeof(double));
+    Grid->H = (double *) malloc(arrayLength * sizeof(double));
+    
+    if( Grid->B == NULL || Grid->E == NULL || Grid->D == NULL || Grid->H == NULL){
         printf("ERROR: allocation for E and B failed!\n");
     }
     else{
         for (int i = 0; i < arrayLength; i++){
             Grid->E[i] = 0;
             Grid->B[i] = 0;
+            Grid->D[i] = 0;
+            Grid->H[i] = 0;
         }
     }
     
@@ -72,12 +80,12 @@ void allocateFieldsOnBoxBorders(Grid *Grid){
     int numberOfGridPointsForBoxInY = Grid -> numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid -> numberOfGridPointsForBoxInZ;
     
-    Grid->Bz_im1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
-    Grid->By_im1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
-    Grid->Bx_jm1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
-    Grid->Bz_jm1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
-    Grid->Bx_km1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
-    Grid->By_km1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
+    Grid->Hz_im1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
+    Grid->Hy_im1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
+    Grid->Hx_jm1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
+    Grid->Hz_jm1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
+    Grid->Hx_km1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
+    Grid->Hy_km1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
     Grid->Ey_ip1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
     Grid->Ez_ip1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
     Grid->Ez_jp1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
@@ -85,24 +93,24 @@ void allocateFieldsOnBoxBorders(Grid *Grid){
     Grid->Ex_kp1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
     Grid->Ey_kp1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
     
-    if (Grid->Bz_im1 == NULL || Grid->By_im1 == NULL || Grid->Bx_jm1 == NULL || Grid->Bz_jm1 == NULL
-        || Grid->Bx_km1 == NULL || Grid->By_km1 == NULL || Grid->Ey_ip1 == NULL || Grid->Ez_ip1 == NULL
+    if (Grid->Hz_im1 == NULL || Grid->Hy_im1 == NULL || Grid->Hx_jm1 == NULL || Grid->Hz_jm1 == NULL
+        || Grid->Hx_km1 == NULL || Grid->Hy_km1 == NULL || Grid->Ey_ip1 == NULL || Grid->Ez_ip1 == NULL
         || Grid->Ez_jp1 == NULL || Grid->Ex_jp1 == NULL || Grid->Ex_kp1 == NULL || Grid->Ey_kp1 == NULL)
         printf("cannot allocate memory for the fields on box borders!\n");
     
     for (int i = 0; i < numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ; i++)
     {
-        if ((Grid->Bz_im1[i] = (double*) malloc(numberOfGridPointsForBoxInY * numberOfGridPointsForBoxInZ * sizeof(double))) == NULL)
+        if ((Grid->Hz_im1[i] = (double*) malloc(numberOfGridPointsForBoxInY * numberOfGridPointsForBoxInZ * sizeof(double))) == NULL)
             printf("cannot allocate memory for the fields on box borders in for loop!\n");
-        if ((Grid->By_im1[i] = (double*) malloc(numberOfGridPointsForBoxInY * numberOfGridPointsForBoxInZ * sizeof(double))) == NULL)
+        if ((Grid->Hy_im1[i] = (double*) malloc(numberOfGridPointsForBoxInY * numberOfGridPointsForBoxInZ * sizeof(double))) == NULL)
             printf("cannot allocate memory for the fields on box borders in for loop!\n");
-        if ((Grid->Bx_jm1[i] = (double*) malloc(numberOfGridPointsForBoxInX * numberOfGridPointsForBoxInZ * sizeof(double))) == NULL)
+        if ((Grid->Hx_jm1[i] = (double*) malloc(numberOfGridPointsForBoxInX * numberOfGridPointsForBoxInZ * sizeof(double))) == NULL)
             printf("cannot allocate memory for the fields on box borders in for loop!\n");
-        if ((Grid->Bz_jm1[i] = (double*) malloc(numberOfGridPointsForBoxInX * numberOfGridPointsForBoxInZ * sizeof(double))) == NULL)
+        if ((Grid->Hz_jm1[i] = (double*) malloc(numberOfGridPointsForBoxInX * numberOfGridPointsForBoxInZ * sizeof(double))) == NULL)
             printf("cannot allocate memory for the fields on box borders in for loop!\n");
-        if ((Grid->Bx_km1[i] = (double*) malloc(numberOfGridPointsForBoxInX * numberOfGridPointsForBoxInY * sizeof(double))) == NULL)
+        if ((Grid->Hx_km1[i] = (double*) malloc(numberOfGridPointsForBoxInX * numberOfGridPointsForBoxInY * sizeof(double))) == NULL)
             printf("cannot allocate memory for the fields on box borders in for loop!\n");
-        if ((Grid->By_km1[i] = (double*) malloc(numberOfGridPointsForBoxInX * numberOfGridPointsForBoxInY * sizeof(double))) == NULL)
+        if ((Grid->Hy_km1[i] = (double*) malloc(numberOfGridPointsForBoxInX * numberOfGridPointsForBoxInY * sizeof(double))) == NULL)
             printf("cannot allocate memory for the fields on box borders in for loop!\n");
         if ((Grid->Ey_ip1[i] = (double*) malloc(numberOfGridPointsForBoxInY * numberOfGridPointsForBoxInZ * sizeof(double))) == NULL)
             printf("cannot allocate memory for the fields on box borders in for loop!\n");
@@ -121,10 +129,35 @@ void allocateFieldsOnBoxBorders(Grid *Grid){
     
 }
 
+void allocateUPMLCoefficients(Grid *Grid){
+    Grid->upml1E = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml2E = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml3E = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml4E = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml5E = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml6E = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    
+    if(Grid->upml1E == NULL || Grid->upml2E == NULL || Grid->upml3E == NULL || Grid->upml4E == NULL || Grid->upml5E == NULL || Grid->upml6E == NULL){
+        printf("ERROR: Could not allocate memory for UPML coefficients for E field!");
+    }
+    
+    Grid->upml1H = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml2H = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml3H = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml4H = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml5H = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml6H = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    
+    if(Grid->upml1H == NULL || Grid->upml2H == NULL || Grid->upml3H == NULL || Grid->upml4H == NULL || Grid->upml5H == NULL || Grid->upml6H == NULL){
+        printf("ERROR: Could not allocate memory for UPML coefficients for H field!");
+    }
+}
+
 ///@brief calls allocateFieldsOnGrid() and allocateFieldsOnBoxBorders(). For details see their documentation
 void allocateMemoryOnGrid(Grid *Grid){
     allocateFieldsOnGrid(Grid);
     allocateFieldsOnBoxBorders(Grid);
+    allocateUPMLCoefficients(Grid);
     
 }
 
@@ -133,22 +166,36 @@ void freeMemoryOnGrid(Grid *Grid){
     printf("releasing allocated memory in Grid...\n");
     free(Grid->B);
     free(Grid->E);
+    free(Grid->D);
+    free(Grid->H);
+    free(Grid->upml1E);
+    free(Grid->upml2E);
+    free(Grid->upml3E);
+    free(Grid->upml4E);
+    free(Grid->upml5E);
+    free(Grid->upml6E);
+    free(Grid->upml1H);
+    free(Grid->upml2H);
+    free(Grid->upml3H);
+    free(Grid->upml4H);
+    free(Grid->upml5H);
+    free(Grid->upml6H);
     
     for (int i = 0; i < Grid->numberOfBoxesInX * Grid->numberOfBoxesInY * Grid->numberOfBoxesInZ; i++)
     {
         
-        free(Grid->Bz_im1[i]);
-        Grid->Bz_im1[i] = NULL;
-        free(Grid->By_im1[i]);
-        Grid->By_im1[i] = NULL;
-        free(Grid->Bx_jm1[i]);
-        Grid->Bx_jm1[i] = NULL;
-        free(Grid->Bz_jm1[i]);
-        Grid->Bz_jm1[i] = NULL;
-        free(Grid->Bx_km1[i]);
-        Grid->Bx_km1[i] = NULL;
-        free(Grid->By_km1[i]);
-        Grid->By_km1[i] = NULL;
+        free(Grid->Hz_im1[i]);
+        Grid->Hz_im1[i] = NULL;
+        free(Grid->Hy_im1[i]);
+        Grid->Hy_im1[i] = NULL;
+        free(Grid->Hx_jm1[i]);
+        Grid->Hx_jm1[i] = NULL;
+        free(Grid->Hz_jm1[i]);
+        Grid->Hz_jm1[i] = NULL;
+        free(Grid->Hx_km1[i]);
+        Grid->Hx_km1[i] = NULL;
+        free(Grid->Hy_km1[i]);
+        Grid->Hy_km1[i] = NULL;
         free(Grid->Ey_ip1[i]);
         Grid->Ey_ip1[i] = NULL;
         free(Grid->Ez_ip1[i]);
@@ -164,18 +211,18 @@ void freeMemoryOnGrid(Grid *Grid){
         
     }
     
-    free(Grid->Bz_im1);
-    Grid->Bz_im1 = NULL;
-    free(Grid->By_im1);
-    Grid->By_im1 = NULL;
-    free(Grid->Bx_jm1);
-    Grid->Bx_jm1 = NULL;
-    free(Grid->Bz_jm1);
-    Grid->Bz_jm1 = NULL;
-    free(Grid->Bx_km1);
-    Grid->Bx_km1 = NULL;
-    free(Grid->By_km1);
-    Grid->By_km1 = NULL;
+    free(Grid->Hz_im1);
+    Grid->Hz_im1 = NULL;
+    free(Grid->Hy_im1);
+    Grid->Hy_im1 = NULL;
+    free(Grid->Hx_jm1);
+    Grid->Hx_jm1 = NULL;
+    free(Grid->Hz_jm1);
+    Grid->Hz_jm1 = NULL;
+    free(Grid->Hx_km1);
+    Grid->Hx_km1 = NULL;
+    free(Grid->Hy_km1);
+    Grid->Hy_km1 = NULL;
     free(Grid->Ey_ip1);
     Grid->Ey_ip1 = NULL;
     free(Grid->Ez_ip1);
@@ -193,15 +240,15 @@ void freeMemoryOnGrid(Grid *Grid){
 ///@brief maxwellPusher for E field. This method is only used for testing purposes. See pushEFieldInsideBoxes for the final version
 ///@remark E field is calculated via negative curl. Therefore value of B on the left side of E on the grid is required. Thus start i,j,k with 1
 void pushEFieldOnGrid(Grid *Grid, double dt){
-    double Bx_ijk;
-    double By_ijk;
-    double Bz_ijk;
-    double Bz_ijm1k;
-    double By_ijkm1;
-    double Bx_ijkm1;
-    double Bz_im1jk;
-    double By_im1jk;
-    double Bx_ijm1k;
+    double Hx_ijk;
+    double Hy_ijk;
+    double Hz_ijk;
+    double Hz_ijm1k;
+    double Hy_ijkm1;
+    double Hx_ijkm1;
+    double Hz_im1jk;
+    double Hy_im1jk;
+    double Hx_ijm1k;
     
     double cnx = 0.5 * dt / Grid->dx;
     double cny = 0.5 * dt / Grid->dy;
@@ -220,21 +267,21 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
             for (k = 1; k < nz - 1; k++)
             {
                 
-                Bx_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 0];
-                By_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 1];
-                Bz_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 2];
+                Hx_ijk = Grid->H[3 * nz * ny * i + 3 * nz * j + 3 * k + 0];
+                Hy_ijk = Grid->H[3 * nz * ny * i + 3 * nz * j + 3 * k + 1];
+                Hz_ijk = Grid->H[3 * nz * ny * i + 3 * nz * j + 3 * k + 2];
                 
-                Bz_ijm1k = Grid->B[3 * nz * ny * i + 3 * nz * (j - 1) + 3 * k + 2];
-                By_ijkm1 = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * (k - 1) + 1];
-                Bx_ijkm1 = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * (k - 1) + 0];
-                Bz_im1jk = Grid->B[3 * nz * ny * (i - 1) + 3 * nz * j + 3 * k + 2];
-                By_im1jk = Grid->B[3 * nz * ny * (i - 1) + 3 * nz * (j) + 3 * (k) + 1];
-                Bx_ijm1k = Grid->B[3 * nz * ny * (i) + 3 * nz * (j - 1) + 3 * (k) + 0];
+                Hz_ijm1k = Grid->H[3 * nz * ny * i + 3 * nz * (j - 1) + 3 * k + 2];
+                Hy_ijkm1 = Grid->H[3 * nz * ny * i + 3 * nz * j + 3 * (k - 1) + 1];
+                Hx_ijkm1 = Grid->H[3 * nz * ny * i + 3 * nz * j + 3 * (k - 1) + 0];
+                Hz_im1jk = Grid->H[3 * nz * ny * (i - 1) + 3 * nz * j + 3 * k + 2];
+                Hy_im1jk = Grid->H[3 * nz * ny * (i - 1) + 3 * nz * (j) + 3 * (k) + 1];
+                Hx_ijm1k = Grid->H[3 * nz * ny * (i) + 3 * nz * (j - 1) + 3 * (k) + 0];
                 
                 
-                double val_x = cny * (Bz_ijk - Bz_ijm1k) - cnz * (By_ijk - By_ijkm1);
-                double val_y = cnz * (Bx_ijk - Bx_ijkm1) - cnx * (Bz_ijk - Bz_im1jk);
-                double val_z = cnx * (By_ijk - By_im1jk) - cny * (Bx_ijk - Bx_ijm1k);
+                double val_x = cny * (Hz_ijk - Hz_ijm1k) - cnz * (Hy_ijk - Hy_ijkm1);
+                double val_y = cnz * (Hx_ijk - Hx_ijkm1) - cnx * (Hz_ijk - Hz_im1jk);
+                double val_z = cnx * (Hy_ijk - Hy_im1jk) - cny * (Hx_ijk - Hx_ijm1k);
                 
                 Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += val_x;
                 Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += val_y;
@@ -257,7 +304,7 @@ void initSamplePulseOnGrid(Grid *Grid){
         for (int j = 32*2; j < 32*6; j++){
             for (int k = 32*2; k < 32*6; k++){
                 Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] =  exp(-(pow((i - mu) * Grid->dx, 2) + pow((j - mu) * Grid->dy, 2) + pow((k - mu) * Grid->dz, 2)));
-                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] =  exp(-(pow((i - mu) * Grid->dx, 2) + pow((j - mu) * Grid->dy, 2) + pow((k - mu) * Grid->dz, 2)));
+                Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] =  exp(-(pow((i - mu) * Grid->dx, 2) + pow((j - mu) * Grid->dy, 2) + pow((k - mu) * Grid->dz, 2)));
             }
         }
     }
@@ -321,9 +368,9 @@ void pushBFieldOnGrid(Grid *Grid, double dt){
                 double add_y = cnx * (Ez_ip1jk - Ez_ijk) - cnz * (Ex_ijkp1 - Ex_ijk);
                 double add_z = cny * (Ex_ijp1k - Ex_ijk) - cnx * (Ey_ip1jk - Ey_ijk);
                 
-                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += add_x;
-                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += add_y;
-                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] += add_z;
+                Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += add_x;
+                Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += add_y;
+                Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] += add_z;
                 
             }
         }
@@ -363,15 +410,15 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
         int ny = Grid->numberOfGridPointsInY;
         int nz = Grid->numberOfGridPointsInZ;
         int k = planeForPlotting;
-        double Ex, Ey, Ez, Bx, By, Bz;
+        double Ex, Ey, Ez, Hx, Hy, Hz;
         
         for (int j = 0; j < ny; j++)
         {
             for (int i = 0; i < nx; i++)
             {
-                Bx = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
-                By = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
-                Bz = Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
+                Hx = Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
+                Hy = Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
+                Hz = Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
                 
                 Ex = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
                 Ey = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
@@ -381,7 +428,7 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
                     fprintf(fid, "%f\t", Esq);
                 }
                 if (plotB){
-                    double Bsq = Bx * Bx + By * By + Bz * Bz;
+                    double Bsq = Hx * Hx + Hy * Hy + Hz * Hz;
                     fprintf(fid2, "%f\t", Bsq);
                 }
             }
@@ -413,69 +460,90 @@ void writeGridParametersToFile(Grid *Grid){
 
 void pushEField(Grid *Grid, Particle *Particle, double t, double dt){
     pushEFieldInsideBoxes(Grid, dt);
-    setBFieldOnBorders(Grid);
-    adjustBFields(Grid, Particle, t);
+    setHFieldOnBorders(Grid);
+    adjustHFields(Grid, Particle, t);
     pushEFieldAtBorders(Grid, dt);
     
 }
 
-void pushBField(Grid *Grid, Particle *Particle, double t, double dt){
-    pushBFieldInsideBoxes(Grid, dt);
+void pushHField(Grid *Grid, Particle *Particle, double t, double dt){
+    pushHFieldInsideBoxes(Grid, dt);
     setEFieldOnBorders(Grid);
     adjustEFields(Grid, Particle, t);
-    pushBFieldAtBorders(Grid, dt);
+    pushHFieldAtBorders(Grid, dt);
 }
 
 ///@brief Maxwell Pusher for EField inside Boxes. This method is used for the hybrid field method.
 ///@remark E field is calculated via negative curl. Therefore value of B on the left side of E on the grid is required. Thus start i,j,k with 1
 void pushEFieldInsideBoxes(Grid *Grid, double dt){
-    double Bx_ijk;
-    double By_ijk;
-    double Bz_ijk;
-    double Bz_ijm1k;
-    double By_ijkm1;
-    double Bx_ijkm1;
-    double Bz_im1jk;
-    double By_im1jk;
-    double Bx_ijm1k;
+    double Hx_ijk;
+    double Hy_ijk;
+    double Hz_ijk;
+    double Hz_ijm1k;
+    double Hy_ijkm1;
+    double Hx_ijkm1;
+    double Hz_im1jk;
+    double Hy_im1jk;
+    double Hx_ijm1k;
     
     double cnx = 0.5 * dt / Grid->dx;
     double cny = 0.5 * dt / Grid->dy;
     double cnz = 0.5 * dt / Grid->dz;
     
+    double dOld;
     
-    int nx = Grid->numberOfGridPointsInX;
-    int ny = Grid->numberOfGridPointsInY;
-    int nz = Grid->numberOfGridPointsInZ;
+    int numberOfGridPointsInX = Grid->numberOfGridPointsInX;
+    int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
+    int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
     
     int i, j, k;
-    for (i = 1; i < nx - 1; i++){
-        for (j = 1; j < ny - 1; j++){
-            for (k = 1; k < nz - 1; k++){
+    for (i = 1; i < numberOfGridPointsInX - 1; i++){
+        for (j = 1; j < numberOfGridPointsInY - 1; j++){
+            for (k = 1; k < numberOfGridPointsInZ - 1; k++){
                 
                 if (i % Grid->numberOfGridPointsForBoxInX == 0 || j % Grid->numberOfGridPointsForBoxInY == 0 || k % Grid->numberOfGridPointsForBoxInZ == 0){
                     continue;
                 }
-                Bx_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 0];
-                By_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 1];
-                Bz_ijk = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * k + 2];
+                Hx_ijk = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
+                Hy_ijk = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
+                Hz_ijk = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
                 
-                Bz_ijm1k = Grid->B[3 * nz * ny * i + 3 * nz * (j - 1) + 3 * k + 2];
-                By_ijkm1 = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * (k - 1) + 1];
-                Bx_ijkm1 = Grid->B[3 * nz * ny * i + 3 * nz * j + 3 * (k - 1) + 0];
-                Bz_im1jk = Grid->B[3 * nz * ny * (i - 1) + 3 * nz * j + 3 * k + 2];
-                By_im1jk = Grid->B[3 * nz * ny * (i - 1) + 3 * nz * (j) + 3 * (k) + 1];
-                Bx_ijm1k = Grid->B[3 * nz * ny * (i) + 3 * nz * (j - 1) + 3 * (k) + 0];
+                Hz_ijm1k = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * (j - 1) + 3 * k + 2];
+                Hy_ijkm1 = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * (k - 1) + 1];
+                Hx_ijkm1 = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * (k - 1) + 0];
+                Hz_im1jk = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i - 1) + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
+                Hy_im1jk = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i - 1) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 1];
+                Hx_ijm1k = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j - 1) + 3 * (k) + 0];
                 
-                
-                double val_x = cny * (Bz_ijk - Bz_ijm1k) - cnz * (By_ijk - By_ijkm1);
-                double val_y = cnz * (Bx_ijk - Bx_ijkm1) - cnx * (Bz_ijk - Bz_im1jk);
-                double val_z = cnx * (By_ijk - By_im1jk) - cny * (Bx_ijk - Bx_ijm1k);
-                
-                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += val_x;
-                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += val_y;
-                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] += val_z;
-                
+                if (useUPML){
+                    dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
+                    
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2E[j] * ((Hz_ijk - Hz_ijm1k) / Grid->dy - (Hy_ijk - Hy_ijkm1) / Grid->dz);
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3E[k] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4E[k] * (Grid->upml5E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6E[i] * dOld);
+                    
+                    dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
+                    
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2E[k] * ((Hx_ijk - Hx_ijkm1) / Grid->dz - (Hz_ijk - Hz_im1jk) / Grid->dx);
+                    
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3E[i] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4E[i] * (Grid->upml5E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6E[j] * dOld);
+                    
+                    dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
+                    
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2E[i] * ((Hy_ijk - Hy_im1jk) / Grid->dx - (Hx_ijk - Hx_ijm1k) / Grid->dy);
+                    
+                    
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3E[j] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4E[j] * (Grid->upml5E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6E[k] * dOld);
+
+                }
+                else{
+                    double val_x = cny * (Hz_ijk - Hz_ijm1k) - cnz * (Hy_ijk - Hy_ijkm1);
+                    double val_y = cnz * (Hx_ijk - Hx_ijkm1) - cnx * (Hz_ijk - Hz_im1jk);
+                    double val_z = cnx * (Hy_ijk - Hy_im1jk) - cny * (Hx_ijk - Hx_ijm1k);
+                    
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 0] += val_x;
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 1] += val_y;
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 2] += val_z;
+                }
             }
         }
     }
@@ -483,7 +551,7 @@ void pushEFieldInsideBoxes(Grid *Grid, double dt){
 }
 ///@brief Maxwell Pusher for BField inside Boxes. This method is used for the hybrid field method.
 ///@remark B field is calculated via positive curl. Therefore value of E on the right side of B on the grid is required. Thus stop i,j,k at n - 1 where n denotes the numberOfGridPoints
-void pushBFieldInsideBoxes(Grid *Grid, double dt){
+void pushHFieldInsideBoxes(Grid *Grid, double dt){
     double Ex_ijk;
     double Ey_ijk;
     double Ez_ijk;
@@ -499,42 +567,65 @@ void pushBFieldInsideBoxes(Grid *Grid, double dt){
     double cnz = 0.5 * dt / Grid->dz;
     
     
-    int nx = Grid->numberOfGridPointsInX;
-    int ny = Grid->numberOfGridPointsInY;
-    int nz = Grid->numberOfGridPointsInZ;
+    int numberOfGridPointsInX = Grid->numberOfGridPointsInX;
+    int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
+    int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
+    
+    double bOld;
     
     int i, j, k;
-    for (i = 1; i < nx - 1; i++){
-        for (j = 1; j < ny - 1; j++){
-            for (k = 1; k < nz - 1; k++){
+    for (i = 1; i < numberOfGridPointsInX - 1; i++){
+        for (j = 1; j < numberOfGridPointsInY - 1; j++){
+            for (k = 1; k < numberOfGridPointsInZ - 1; k++){
                 if ((i + 1) % Grid->numberOfGridPointsForBoxInX == 0 || (j + 1) % Grid->numberOfGridPointsForBoxInY == 0 || (k + 1) % Grid->numberOfGridPointsForBoxInZ == 0){
                     continue;
                 }
-                Ey_ijkp1 = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k + 1) + 1];
-                Ey_ijk = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
-                Ez_ijp1k = Grid->E[3 * nz * ny * (i) + 3 * nz * (j + 1) + 3 * (k) + 2];
-                Ez_ijk = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
-                Ez_ip1jk = Grid->E[3 * nz * ny * (i + 1) + 3 * nz * (j) + 3 * (k) + 2];
-                Ex_ijkp1 = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k + 1) + 0];
-                Ex_ijk = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
-                Ex_ijp1k = Grid->E[3 * nz * ny * (i) + 3 * nz * (j + 1) + 3 * (k) + 0];
-                Ey_ip1jk = Grid->E[3 * nz * ny * (i + 1) + 3 * nz * (j) + 3 * (k) + 1];
+                Ey_ijkp1 = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k + 1) + 1];
+                Ey_ijk = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 1];
+                Ez_ijp1k = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j + 1) + 3 * (k) + 2];
+                Ez_ijk = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 2];
+                Ez_ip1jk = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i + 1) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 2];
+                Ex_ijkp1 = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k + 1) + 0];
+                Ex_ijk = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 0];
+                Ex_ijp1k = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j + 1) + 3 * (k) + 0];
+                Ey_ip1jk = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i + 1) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 1];
                 
-                
-                double add_x = cnz * (Ey_ijkp1 - Ey_ijk) - cny * (Ez_ijp1k - Ez_ijk);
-                double add_y = cnx * (Ez_ip1jk - Ez_ijk) - cnz * (Ex_ijkp1 - Ex_ijk);
-                double add_z = cny * (Ex_ijp1k - Ex_ijk) - cnx * (Ey_ip1jk - Ey_ijk);
-                
-                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] += add_x;
-                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] += add_y;
-                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] += add_z;
-                
+                if(useUPML){
+                    
+                    bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
+                    
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2H[j] * ((Ey_ijkp1 - Ey_ijk) / Grid->dz - (Ez_ijp1k - Ez_ijk) / Grid->dy);
+                    
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3H[k] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4H[k] * (Grid->upml5H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6E[i] * bOld);
+                    
+                    bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
+                    
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2H[k] * ((Ez_ip1jk - Ez_ijk) / Grid->dx - (Ex_ijkp1 - Ex_ijk) / Grid->dz);
+                    
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3H[i] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4H[i] * (Grid->upml5H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6H[j] * bOld);
+                    
+                    bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
+                    
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2H[i] * ((Ex_ijp1k - Ex_ijk) / Grid->dy - (Ey_ip1jk - Ey_ijk) / Grid->dx);
+                    
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3H[j] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4H[j] * (Grid->upml5H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6H[k] * bOld);
+                }
+                else{
+                    
+                    double add_x = cnz * (Ey_ijkp1 - Ey_ijk) - cny * (Ez_ijp1k - Ez_ijk);
+                    double add_y = cnx * (Ez_ip1jk - Ez_ijk) - cnz * (Ex_ijkp1 - Ex_ijk);
+                    double add_z = cny * (Ex_ijp1k - Ex_ijk) - cnx * (Ey_ip1jk - Ey_ijk);
+                    
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 0] += add_x;
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 1] += add_y;
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 2] += add_z;
+                }
             }
         }
     }
 }
 
-void setBFieldOnBorders(Grid *Grid){
+void setHFieldOnBorders(Grid *Grid){
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
@@ -542,7 +633,7 @@ void setBFieldOnBorders(Grid *Grid){
     int numberOfGridPointsForBoxInX = Grid -> numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid -> numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid -> numberOfGridPointsForBoxInZ;
-   
+    
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
     
@@ -553,16 +644,16 @@ void setBFieldOnBorders(Grid *Grid){
                 if (ib != 0){
                     for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
                         for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                            Grid->Bz_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX - 1) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd) + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
-                            Grid->By_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX - 1) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd) + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 1];
+                            Grid->Hz_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX - 1) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd) + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
+                            Grid->Hy_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX - 1) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd) + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 1];
                         }
                     }
                 }
                 else{
                     for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
                         for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                            Grid->Bz_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = 0;
-                            Grid->By_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = 0;
+                            Grid->Hz_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = 0;
+                            Grid->Hy_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = 0;
                         }
                     }
                 }
@@ -570,16 +661,16 @@ void setBFieldOnBorders(Grid *Grid){
                 if (jb != 0){
                     for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
                         for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                            Grid->Bx_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY - 1) + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 0];
-                            Grid->Bz_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY - 1) + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
+                            Grid->Hx_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY - 1) + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 0];
+                            Grid->Hz_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY - 1) + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
                         }
                     }
                 }
                 else{
                     for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
                         for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                            Grid->Bx_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = 0;
-                            Grid->Bz_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = 0;
+                            Grid->Hx_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = 0;
+                            Grid->Hz_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = 0;
                         }
                     }
                 }
@@ -588,16 +679,16 @@ void setBFieldOnBorders(Grid *Grid){
                     for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
                         for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
                             
-                            Grid->Bx_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd) + 3 * (kb * numberOfGridPointsForBoxInZ - 1) + 0];
-                            Grid->By_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd) + 3 * (kb * numberOfGridPointsForBoxInZ - 1) + 1];
+                            Grid->Hx_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd) + 3 * (kb * numberOfGridPointsForBoxInZ - 1) + 0];
+                            Grid->Hy_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd) + 3 * (kb * numberOfGridPointsForBoxInZ - 1) + 1];
                         }
                     }
                 }
                 else{
                     for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
                         for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-                            Grid->Bx_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = 0;
-                            Grid->By_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = 0;
+                            Grid->Hx_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = 0;
+                            Grid->Hy_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = 0;
                         }
                     }
                 }
@@ -630,7 +721,7 @@ void setEFieldOnBorders(Grid *Grid){
                 if (ib != numberOfBoxesInX - 1){
                     for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
                         for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                        
+                            
                             Grid->Ey_ip1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * ((ib + 1) * numberOfGridPointsForBoxInX) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd) + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 1];
                             Grid->Ez_ip1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * ((ib + 1) * numberOfGridPointsForBoxInX) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd) + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
                         }
@@ -639,7 +730,7 @@ void setEFieldOnBorders(Grid *Grid){
                 else{
                     for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
                         for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                        
+                            
                             Grid->Ey_ip1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = 0;
                             Grid->Ez_ip1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * jd + kd] = 0;
                         }
@@ -649,7 +740,7 @@ void setEFieldOnBorders(Grid *Grid){
                 if (jb != numberOfBoxesInY - 1){
                     for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
                         for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                        
+                            
                             Grid->Ez_jp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * ((jb + 1) * numberOfGridPointsForBoxInY) + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 2];
                             Grid->Ex_jp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * ((jb + 1) * numberOfGridPointsForBoxInY) + 3 * (kb * numberOfGridPointsForBoxInZ + kd) + 0];
                         }
@@ -658,7 +749,7 @@ void setEFieldOnBorders(Grid *Grid){
                 else{
                     for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
                         for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-        
+                            
                             Grid->Ez_jp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = 0;
                             Grid->Ex_jp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * id + kd] = 0;
                         }
@@ -668,7 +759,7 @@ void setEFieldOnBorders(Grid *Grid){
                 if (kb != numberOfBoxesInZ - 1){
                     for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
                         for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-                        
+                            
                             Grid->Ex_kp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd) + 3 * ((kb + 1) * numberOfGridPointsForBoxInZ) + 0];
                             Grid->Ey_kp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (ib * numberOfGridPointsForBoxInX + id) + 3 * numberOfGridPointsInZ * (jb * numberOfGridPointsForBoxInY + jd) + 3 * ((kb + 1) * numberOfGridPointsForBoxInZ) + 1];
                         }
@@ -677,7 +768,7 @@ void setEFieldOnBorders(Grid *Grid){
                 else{
                     for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
                         for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-                        
+                            
                             Grid->Ex_kp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = 0;
                             Grid->Ey_kp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * id + jd] = 0;
                         }
@@ -688,7 +779,7 @@ void setEFieldOnBorders(Grid *Grid){
     }
 }
 
-void adjustBFields(Grid *Grid, Particle *Particle, const double t){
+void adjustHFields(Grid *Grid, Particle *Particle, const double t){
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
@@ -700,22 +791,22 @@ void adjustBFields(Grid *Grid, Particle *Particle, const double t){
                 int boxIndex = ib * numberOfBoxesInY * numberOfBoxesInZ + jb * numberOfBoxesInZ + kb;
                 
                 if (ib != 0){
-                    adjustByz_im1(Grid, Particle, boxIndex, ib, jb, kb, t);
+                    adjustHyz_im1(Grid, Particle, boxIndex, ib, jb, kb, t);
                 }
                 
                 if (jb != 0){
-                    adjustBxz_jm1(Grid, Particle, boxIndex, ib, jb, kb, t);
+                    adjustHxz_jm1(Grid, Particle, boxIndex, ib, jb, kb, t);
                 }
                 
                 if (kb != 0){
-                    adjustBxy_km1(Grid, Particle, boxIndex, ib, jb, kb, t);
+                    adjustHxy_km1(Grid, Particle, boxIndex, ib, jb, kb, t);
                 }
             }
         }
     }
 }
 
-void adjustByz_im1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
+void adjustHyz_im1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
@@ -734,8 +825,8 @@ void adjustByz_im1(Grid *Grid, Particle *Particle, const int boxIndex, const int
                 xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
                 xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
                 
-                subLWField(Grid, Particle, &Grid->By_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 4);
-                subLWField(Grid, Particle, &Grid->Bz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 5);
+                subLWField(Grid, Particle, &Grid->Hy_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 4);
+                subLWField(Grid, Particle, &Grid->Hz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 5);
             }
         }
     }
@@ -749,17 +840,17 @@ void adjustByz_im1(Grid *Grid, Particle *Particle, const int boxIndex, const int
                 xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX - 1);
                 xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
                 xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
-            
-                addLWField(Grid, Particle, &(Grid->By_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 4);
-                addLWField(Grid, Particle, &(Grid->Bz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 5);
+                
+                addLWField(Grid, Particle, &(Grid->Hy_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 4);
+                addLWField(Grid, Particle, &(Grid->Hz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 5);
             }
         }
-    
+        
     }
-
+    
 }
 
-void adjustBxz_jm1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
+void adjustHxz_jm1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
@@ -778,8 +869,8 @@ void adjustBxz_jm1(Grid *Grid, Particle *Particle, const int boxIndex, const int
                 xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY - 1);
                 xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
                 
-                subLWField(Grid, Particle, &Grid->Bx_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 3);
-                subLWField(Grid, Particle, &Grid->Bz_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 5);
+                subLWField(Grid, Particle, &Grid->Hx_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 3);
+                subLWField(Grid, Particle, &Grid->Hz_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 5);
             }
         }
     }
@@ -794,8 +885,8 @@ void adjustBxz_jm1(Grid *Grid, Particle *Particle, const int boxIndex, const int
                 xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY - 1);
                 xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
                 
-                addLWField(Grid, Particle, &(Grid->Bx_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 3);
-                addLWField(Grid, Particle, &(Grid->Bz_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 5);
+                addLWField(Grid, Particle, &(Grid->Hx_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 3);
+                addLWField(Grid, Particle, &(Grid->Hz_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 5);
             }
         }
         
@@ -803,7 +894,7 @@ void adjustBxz_jm1(Grid *Grid, Particle *Particle, const int boxIndex, const int
     
 }
 
-void adjustBxy_km1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
+void adjustHxy_km1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
@@ -822,8 +913,8 @@ void adjustBxy_km1(Grid *Grid, Particle *Particle, const int boxIndex, const int
                 xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
                 xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ - 1);
                 
-                subLWField(Grid, Particle, &Grid->Bx_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 3);
-                subLWField(Grid, Particle, &Grid->By_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 4);
+                subLWField(Grid, Particle, &Grid->Hx_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 3);
+                subLWField(Grid, Particle, &Grid->Hy_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 4);
             }
         }
     }
@@ -838,8 +929,8 @@ void adjustBxy_km1(Grid *Grid, Particle *Particle, const int boxIndex, const int
                 xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
                 xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ - 1);
                 
-                addLWField(Grid, Particle, &(Grid->Bx_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 3);
-                addLWField(Grid, Particle, &(Grid->By_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 4);
+                addLWField(Grid, Particle, &(Grid->Hx_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 3);
+                addLWField(Grid, Particle, &(Grid->Hy_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 4);
             }
         }
         
@@ -1009,15 +1100,17 @@ void adjustExy_kp1(Grid *Grid, Particle *Particle, const int boxIndex, const int
 
 void pushEFieldAtBorders(Grid *Grid, double dt){
     
-    double Bx_ijk;
-    double By_ijk;
-    double Bz_ijk;
-    double Bz_ijm1k;
-    double By_ijkm1;
-    double Bx_ijkm1;
-    double Bz_im1jk;
-    double By_im1jk;
-    double Bx_ijm1k;
+    double Hx_ijk;
+    double Hy_ijk;
+    double Hz_ijk;
+    double Hz_ijm1k;
+    double Hy_ijkm1;
+    double Hx_ijkm1;
+    double Hz_im1jk;
+    double Hy_im1jk;
+    double Hx_ijm1k;
+    
+    double dOld;
     
     double cnx = 0.5 * dt / Grid->dx;
     double cny = 0.5 * dt / Grid->dy;
@@ -1048,52 +1141,74 @@ void pushEFieldAtBorders(Grid *Grid, double dt){
                 int jb = j / numberOfGridPointsForBoxInY;
                 int kb = k / numberOfGridPointsForBoxInZ;
                 
-                Bx_ijk = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
-                By_ijk = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
-                Bz_ijk = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
-
+                Hx_ijk = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
+                Hy_ijk = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
+                Hz_ijk = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
+                
                 
                 /*still need to be adjusted...*/
                 
-                Bx_ijm1k = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * (j - 1) + 3 * k + 0];
-                By_im1jk = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i - 1) + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
-                Bz_im1jk = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i - 1) + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
+                Hx_ijm1k = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * (j - 1) + 3 * k + 0];
+                Hy_im1jk = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i - 1) + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
+                Hz_im1jk = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i - 1) + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
                 
-                Bx_ijkm1 = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * (k - 1) + 0];
-                By_ijkm1 = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * (k - 1) + 1];
-                Bz_ijm1k = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * (j - 1) + 3 * k + 2];
+                Hx_ijkm1 = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * (k - 1) + 0];
+                Hy_ijkm1 = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * (k - 1) + 1];
+                Hz_ijm1k = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * (j - 1) + 3 * k + 2];
                 
                 
                 /*adjust values*/
                 if (i % numberOfGridPointsForBoxInX == 0){
-                    Bz_im1jk = Grid->Bz_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (j % numberOfGridPointsForBoxInY) + (k % numberOfGridPointsForBoxInZ)];
-                    By_im1jk = Grid->By_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (j % numberOfGridPointsForBoxInY) + (k % numberOfGridPointsForBoxInZ)];
+                    Hz_im1jk = Grid->Hz_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (j % numberOfGridPointsForBoxInY) + (k % numberOfGridPointsForBoxInZ)];
+                    Hy_im1jk = Grid->Hy_im1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (j % numberOfGridPointsForBoxInY) + (k % numberOfGridPointsForBoxInZ)];
                 }
                 
                 if (j % numberOfGridPointsForBoxInY == 0){
-                    Bx_ijm1k = Grid->Bx_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (i % numberOfGridPointsForBoxInX) + (k % numberOfGridPointsForBoxInZ)];
-                    Bz_ijm1k = Grid->Bz_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (i % numberOfGridPointsForBoxInX) + (k % numberOfGridPointsForBoxInZ)];
+                    Hx_ijm1k = Grid->Hx_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (i % numberOfGridPointsForBoxInX) + (k % numberOfGridPointsForBoxInZ)];
+                    Hz_ijm1k = Grid->Hz_jm1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInZ * (i % numberOfGridPointsForBoxInX) + (k % numberOfGridPointsForBoxInZ)];
                 }
                 
                 if (k % numberOfGridPointsForBoxInZ == 0){
-                    Bx_ijkm1 = Grid->Bx_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * (i % numberOfGridPointsForBoxInX) + (j % numberOfGridPointsForBoxInY)];
-                    By_ijkm1 = Grid->By_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * (i % numberOfGridPointsForBoxInX) + (j % numberOfGridPointsForBoxInY)];
+                    Hx_ijkm1 = Grid->Hx_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * (i % numberOfGridPointsForBoxInX) + (j % numberOfGridPointsForBoxInY)];
+                    Hy_ijkm1 = Grid->Hy_km1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * (i % numberOfGridPointsForBoxInX) + (j % numberOfGridPointsForBoxInY)];
                 }
                 
-                    double val_x = cny * (Bz_ijk - Bz_ijm1k) - cnz * (By_ijk - By_ijkm1);
-                    double val_y = cnz * (Bx_ijk - Bx_ijkm1) - cnx * (Bz_ijk - Bz_im1jk);
-                    double val_z = cnx * (By_ijk - By_im1jk) - cny * (Bx_ijk - Bx_ijm1k);
+                if (useUPML){
+                    
+                    
+                    dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
+                    
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2E[j] * ((Hz_ijk - Hz_ijm1k) / Grid->dy - (Hy_ijk - Hy_ijkm1) / Grid->dz);
+                    
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3E[k] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4E[k] * (Grid->upml5E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6E[i] * dOld);
+                    
+                    dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
+                    
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2E[k] * ((Hx_ijk - Hx_ijkm1) / Grid->dz - (Hz_ijk - Hz_im1jk) / Grid->dx);
+                    
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3E[i] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4E[i] * (Grid->upml5E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6E[j] * dOld);
+                    
+                    dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
+                    
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2E[i] * ((Hy_ijk - Hy_im1jk) / Grid->dx - (Hx_ijk - Hx_ijm1k) / Grid->dy);
+                    
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3E[j] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4E[j] * (Grid->upml5E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6E[k] * dOld);
+                }
+                else{
+                    double val_x = cny * (Hz_ijk - Hz_ijm1k) - cnz * (Hy_ijk - Hy_ijkm1);
+                    double val_y = cnz * (Hx_ijk - Hx_ijkm1) - cnx * (Hz_ijk - Hz_im1jk);
+                    double val_z = cnx * (Hy_ijk - Hy_im1jk) - cny * (Hx_ijk - Hx_ijm1k);
                     
                     Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 0] += val_x;
                     Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 1] += val_y;
                     Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 2] += val_z;
-                
+                }
             }
         }
     }
 }
 
-void pushBFieldAtBorders(Grid *Grid, double dt){
+void pushHFieldAtBorders(Grid *Grid, double dt){
     
     double Ex_ijk;
     double Ey_ijk;
@@ -1104,6 +1219,8 @@ void pushBFieldAtBorders(Grid *Grid, double dt){
     double Ex_ijkp1;
     double Ex_ijp1k;
     double Ey_ip1jk;
+    
+    double bOld;
     
     double cnx = 0.5 * dt / Grid->dx;
     double cny = 0.5 * dt / Grid->dy;
@@ -1170,16 +1287,39 @@ void pushBFieldAtBorders(Grid *Grid, double dt){
                     Grid->Ey_kp1[numberOfBoxesInZ * numberOfBoxesInY * ib + numberOfBoxesInZ * jb + kb][numberOfGridPointsForBoxInY * (i % numberOfGridPointsForBoxInX) + (j % numberOfGridPointsForBoxInY)];
                 }
                 
-                double val_x = cnz * (Ey_ijkp1 - Ey_ijk) - cny * (Ez_ijp1k - Ez_ijk);
-                double val_y = cnx * (Ez_ip1jk - Ez_ijk) - cnz * (Ex_ijkp1 - Ex_ijk);
-                double val_z = cny * (Ex_ijp1k - Ex_ijk) - cnx * (Ey_ip1jk - Ey_ijk);
-                
-                Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 0] += val_x;
-                Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 1] += val_y;
-                Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 2] += val_z;
-                
+                if (useUPML){
+                    
+                    bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
+                    
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2H[j] * ((Ey_ijkp1 - Ey_ijk) / Grid->dz - (Ez_ijp1k - Ez_ijk) / Grid->dy);
+                    
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3H[k] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4H[k] * (Grid->upml5H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6E[i] * bOld);
+                    
+                    bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
+                    
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2H[k] * ((Ez_ip1jk - Ez_ijk) / Grid->dx - (Ex_ijkp1 - Ex_ijk) / Grid->dz);
+                    
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3H[i] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4H[i] * (Grid->upml5H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6H[j] * bOld);
+                    
+                    bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
+                    
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2H[i] * ((Ex_ijp1k - Ex_ijk) / Grid->dy - (Ey_ip1jk - Ey_ijk) / Grid->dx);
+                    
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3H[j] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4H[j] * (Grid->upml5H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6H[k] * bOld);
+                }
+                else{
+                    
+                    double val_x = cnz * (Ey_ijkp1 - Ey_ijk) - cny * (Ez_ijp1k - Ez_ijk);
+                    double val_y = cnx * (Ez_ip1jk - Ez_ijk) - cnz * (Ex_ijkp1 - Ex_ijk);
+                    double val_z = cny * (Ex_ijp1k - Ex_ijk) - cnx * (Ey_ip1jk - Ey_ijk);
+                    
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 0] += val_x;
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 1] += val_y;
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 2] += val_z;
+                }
             }
         }
     }
 }
+
 
