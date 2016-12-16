@@ -35,7 +35,7 @@ for i in range(numberOfParticleFiles):
 	# plot x and y value of particle as red dot
 	plt.plot(x, y, color = 'r')
 	# plot fields
-	plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.05)
+	plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.2)
 	plt.colorbar()
 	# set labels
 	plt.xlabel("X")
