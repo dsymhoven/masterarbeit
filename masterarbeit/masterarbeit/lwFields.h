@@ -34,4 +34,5 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
 void addLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component);
 void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component);
 void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t);
+void subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t);
 #endif /* lwFields_h */

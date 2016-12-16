@@ -23,6 +23,9 @@ struct Particle {
     int currentBoxIndexArray[3];
     int lengthOfHistoryArray;
     int currentHistoryLength;
+    bool didChangeBox;
+    int boxIndicesOfNearFieldBoxesBeforePush[27];
+    int boxIndicesOfNearFieldBoxesAfterPush[27];
     
 };
 

@@ -201,15 +201,25 @@ void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *
     Particle->u[0] = getGammaFromVelocityVector(Particle->u);
 }
 
-/**
- updates location x for particle with velocity u using x = v * dt
- time component x[0] gets updated as well.
- */
-void updateLocation(Particle *Particle, double dt){
+///@brief updates location x for particle with velocity u using x = v * dt time component x[0] gets updated as well.
+///@remark when particle is pushed the old and new box indeces are calculted. When this index changes the Paticle property "didChangeBox" is set accordingly.
+
+void updateLocation(Particle *Particle, Grid *Grid, double dt){
     int dimension = 3;
     
+    int oldBoxIndexOfParticle = calcCurrentBoxIndexOfParticle(Particle, Grid);
+    calcBoxIndizesOfNextNeighbourBoxes(Grid, Particle, Particle->boxIndicesOfNearFieldBoxesBeforePush);
     for(int i = 0; i < dimension; i++){
         Particle->x[i+1] += Particle->u[i+1] * dt;
+    }
+    int newBoxIndexOfParticle = calcCurrentBoxIndexOfParticle(Particle, Grid);
+    calcBoxIndizesOfNextNeighbourBoxes(Grid, Particle, Particle->boxIndicesOfNearFieldBoxesAfterPush);
+    
+    if(oldBoxIndexOfParticle != newBoxIndexOfParticle){
+        Particle->didChangeBox = true;
+    }
+    else{
+        Particle->didChangeBox = false;
     }
     Particle->x[0] += dt;
 }
@@ -697,4 +707,29 @@ void calcUPMLCoefficients(Grid *Grid){
         
     }
 }
+
+void updateNearField(Grid *Grid, Particle *Particle, double t){
+
+    if (Particle->didChangeBox == true){
+        printf("updating NearField ...\n");
+        
+        for(int i = 0; i < 27; i++){
+            if(!boxIsInNearFieldOfParticle(Grid, Particle, Particle->boxIndicesOfNearFieldBoxesBeforePush[i])){
+                addLWFieldsInBox(Grid, Particle, Particle->boxIndicesOfNearFieldBoxesBeforePush[i], t);
+            }
+        
+            bool wasInNFBefore = false;
+            for (int j = 0; j < 27; j++){
+                if ( Particle->boxIndicesOfNearFieldBoxesAfterPush[i] == Particle->boxIndicesOfNearFieldBoxesBeforePush[j] )
+                    wasInNFBefore = true;
+            }
+            if (wasInNFBefore == false){
+                subLWFieldsInBox(Grid, Particle, Particle->boxIndicesOfNearFieldBoxesAfterPush[i], t);
+            }
+        }
+    }
+
+}
+
+
 

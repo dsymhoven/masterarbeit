@@ -8,7 +8,7 @@ HEADER FÜR EIGENE FUNKTIONEN
 #define CALCULATIONS
 
 void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *Bextern, double dt);
-void updateLocation(Particle *Particle, double dt);
+void updateLocation(Particle *Particle, Grid *Grid, double dt);
 void crossProduct(double a[3], double b[3], double result[3]);
 bool isInsideBackwardLightcone(double xParticle[4], double xObserver[4]);
 bool isInsideForwardLightcone(double xParticle[4], double xObserver[4]);
@@ -34,4 +34,5 @@ int calcBoxIndexIp1(Grid *Grid, const int boxIndex);
 int calcBoxIndexJp1(Grid *Grid, const int boxIndex);
 int calcBoxIndexKp1(Grid *Grid, const int boxIndex);
 void calcUPMLCoefficients(Grid *Grid);
+void updateNearField(Grid *Grid, Particle *Particle, double t);
 #endif

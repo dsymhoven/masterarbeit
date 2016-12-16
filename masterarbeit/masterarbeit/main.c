@@ -19,7 +19,8 @@ int main(int argc, const char * argv[]) {
     //testLWFieldCalculationForPlane();
     //testLWFieldCalculationForEachTimeStep();
     //testNearAndFarFields();
-    testUPML();
+    //testUPML();
+    testNearFieldUpdate();
     return 0;
 }   
 

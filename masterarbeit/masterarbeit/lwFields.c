@@ -1010,14 +1010,14 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
 }
 
 
-///@brief calcualtes LW fields in box specified by input parameter "boxIndex"
+///@brief adds LW fields in box specified by input parameter "boxIndex"
 ///@param Grid pointer to an instance of a Grid struct.
 ///@param Particle pointer to an instance of a Particle struct
 ///@param boxIndex specified box in which fields shall be calcualted
 ///@param t time at which the fields shall be calcualted. This is also the zeroth component of xObserver
 ///@remark translate box index into number of box in x,y and z direction first (ib, jb, kb). Then calculate the gridIndex of the lower left corner of the current box and start looping through all grid points in that box. Each gridpoint is the current observation point, where fields shall be calcualted. Also grid index is updated each time the current grid point changes in the loop. Then add Lw field at that point.
 void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
-    printf("calculating LW fields in box %d\n", boxIndex);
+    printf("adding LW fields in box %d\n", boxIndex);
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
@@ -1025,24 +1025,26 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
     
+    int numberOfBoxesInY = Grid->numberOfBoxesInY;
+    int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
+    
     double dx = Grid->dx;
     double dy = Grid->dy;
     double dz = Grid->dz;
     
-    getCurrentBoxIndexArrayOfParticle(Grid, Particle);
-    int ib = Particle->currentBoxIndexArray[0];
-    int jb = Particle->currentBoxIndexArray[1];
-    int kb = Particle->currentBoxIndexArray[2];
+    int ib = boxIndex / (numberOfBoxesInY * numberOfBoxesInZ);
+    int jb = (boxIndex - ib * (numberOfBoxesInY * numberOfBoxesInZ)) / numberOfBoxesInY;
+    int kb = (boxIndex - ib * (numberOfBoxesInZ * numberOfBoxesInZ)) - jb * numberOfBoxesInZ;
     
     double xObserver[4] = {0};
     xObserver[0] = t;
     
     int lowerLeftGridIndexInBox = ib * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + jb * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + kb * numberOfGridPointsForBoxInZ * 3;
     
-    for (int id = 0; id < numberOfGridPointsForBoxInX; id++)
-        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++)
-            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++)
-            {
+    for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                
                 int gridIndexInBox = lowerLeftGridIndexInBox + 3 * kd + 3 * jd * numberOfGridPointsInZ + 3 * id * numberOfGridPointsInZ * numberOfGridPointsInY;
                 
                 xObserver[1] = (ib * numberOfGridPointsForBoxInX + id) * dx;
@@ -1058,6 +1060,62 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
                 addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 2], xObserver, 2);
                 
             }
+        }
+    }
+}
+
+///@brief subtracts LW fields in box specified by input parameter "boxIndex"
+///@param Grid pointer to an instance of a Grid struct.
+///@param Particle pointer to an instance of a Particle struct
+///@param boxIndex specified box in which fields shall be calcualted
+///@param t time at which the fields shall be calcualted. This is also the zeroth component of xObserver
+///@remark translate box index into number of box in x,y and z direction first (ib, jb, kb). Then calculate the gridIndex of the lower left corner of the current box and start looping through all grid points in that box. Each gridpoint is the current observation point, where fields shall be calcualted. Also grid index is updated each time the current grid point changes in the loop. Then sub Lw field at that point.
+void subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
+    printf("subtracting LW fields in box %d\n", boxIndex);
+    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
+    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
+    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    
+    int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
+    int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
+    
+    int numberOfBoxesInY = Grid->numberOfBoxesInY;
+    int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
+    
+    double dx = Grid->dx;
+    double dy = Grid->dy;
+    double dz = Grid->dz;
+
+    int ib = boxIndex / (numberOfBoxesInY * numberOfBoxesInZ);
+    int jb = (boxIndex - ib * (numberOfBoxesInY * numberOfBoxesInZ)) / numberOfBoxesInY;
+    int kb = (boxIndex - ib * (numberOfBoxesInZ * numberOfBoxesInZ)) - jb * numberOfBoxesInZ;
+    
+    double xObserver[4] = {0};
+    xObserver[0] = t;
+    
+    int lowerLeftGridIndexInBox = ib * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + jb * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + kb * numberOfGridPointsForBoxInZ * 3;
+    
+    for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+            
+                int gridIndexInBox = lowerLeftGridIndexInBox + 3 * kd + 3 * jd * numberOfGridPointsInZ + 3 * id * numberOfGridPointsInZ * numberOfGridPointsInY;
+                
+                xObserver[1] = (ib * numberOfGridPointsForBoxInX + id) * dx;
+                xObserver[2] = (jb * numberOfGridPointsForBoxInY + jd) * dy;
+                xObserver[3] = (kb * numberOfGridPointsForBoxInZ + kd) * dz;
+                
+                subLWField(Grid, Particle, &Grid->H[gridIndexInBox], xObserver, 3);
+                subLWField(Grid, Particle, &Grid->H[gridIndexInBox + 1], xObserver, 4);
+                subLWField(Grid, Particle, &Grid->H[gridIndexInBox + 2], xObserver, 5);
+                
+                subLWField(Grid, Particle, &Grid->E[gridIndexInBox], xObserver, 0);
+                subLWField(Grid, Particle, &Grid->E[gridIndexInBox + 1], xObserver, 1);
+                subLWField(Grid, Particle, &Grid->E[gridIndexInBox + 2], xObserver, 2);
+                
+            }
+        }
+    }
 }
 
 ///@brief adds LW fields at grid point with index "gridIndexInBox". Each point on the grid is considered to be the observation point, where the zeroth component is the current simulation time and also the time at which we want to calculate the fields. Therefore loop through the particle xhistory vector up to the current simulation time and search for the pair of positions which fulfil the condition that the old position is inside and the new position is outside the backward lightcone of the observation point. Once that pair of positions is found the rest of the xHistory vector can be skipped because all following points will be outside as well.
