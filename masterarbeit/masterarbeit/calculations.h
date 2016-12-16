@@ -22,12 +22,9 @@ void calcuateLienardWiechertFields(double gamma_sq, double R_sq, double R, doubl
 void calculateIntersectionPoint(double xInside[4], double xOutside[4], double uInside[4], double uOutside[4], double xObserver[4], double intersectionPoint[4], double velocityAtIntersectionPoint[4]);
 void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int timeStep);
 void calculateBeta(double xOld[4], double xNew[4], double beta[3]);
-void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t);
 void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t);
-void addLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component);
-void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component);
 void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeForPlotting);
-int calcuCurrentBoxIndexOfParticle(Particle *Particle, Grid *Grid);
+int calcCurrentBoxIndexOfParticle(Particle *Particle, Grid *Grid);
 void calcBoxIndizesOfNextNeighbourBoxes(Grid *Grid, Particle *Particle, int boxIndizesOfNextNeighbourBoxes[27]);
 bool boxIsInNearFieldOfParticle(Grid *Grid, Particle *Particle, int boxIndex);
 int calcBoxIndexIm1(Grid *Grid, const int boxIndex);

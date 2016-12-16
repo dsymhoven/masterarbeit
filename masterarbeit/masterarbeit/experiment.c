@@ -14,6 +14,7 @@
 #include "stdbool.h"
 #include "particle.h"
 #include "calculations.h"
+#include "lwFields.h"
 
 
 void testMaxwellPusher(){
@@ -51,8 +52,8 @@ void testMaxwellPusher(){
     for(int p = 0; p < arrayLength; p++){
         writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
         pushEFieldOnGrid(&Grid, dt);
-        pushBFieldOnGrid(&Grid, dt);
-        pushBFieldOnGrid(&Grid, dt);
+        pushHFieldOnGrid(&Grid, dt);
+        pushHFieldOnGrid(&Grid, dt);
         pushEFieldOnGrid(&Grid, dt);
         t += dt;
     }
