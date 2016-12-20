@@ -9,6 +9,7 @@
 #include "lwFields.h"
 #include "calculations.h"
 #include "string.h"
+#include "math.h"
 
 bool useUPML = true;
 
@@ -976,7 +977,7 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
         int ny = Grid->numberOfGridPointsInY;
         int nz = Grid->numberOfGridPointsInZ;
         int k = planeForPlotting;
-        double Ex, Ey, Ez, Hx, Hy, Hz;
+        double Ex, Ey, Ez, Hx, Hy, Hz, Esq, Bsq;
         
         for (int j = 0; j < ny; j++)
         {
@@ -990,12 +991,18 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
                 Ey = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
                 Ez = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
                 if(plotE){
-                    double Esq = Ex * Ex + Ey * Ey + Ez * Ez;
+                    Esq = Ex * Ex + Ey * Ey + Ez * Ez;
                     fprintf(fid, "%f\t", Esq);
+                    if (Esq > Grid->EMax){
+                        Grid->EMax = Esq;
+                    }
                 }
                 if (plotB){
-                    double Bsq = Hx * Hx + Hy * Hy + Hz * Hz;
+                    Bsq = Hx * Hx + Hy * Hy + Hz * Hz;
                     fprintf(fid2, "%f\t", Bsq);
+                    if (Bsq > Grid->HMax){
+                        Grid->HMax = Bsq;
+                    }
                 }
             }
             if(plotE){
@@ -1018,6 +1025,8 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
 ///@remark translate box index into number of box in x,y and z direction first (ib, jb, kb). Then calculate the gridIndex of the lower left corner of the current box and start looping through all grid points in that box. Each gridpoint is the current observation point, where fields shall be calcualted. Also grid index is updated each time the current grid point changes in the loop. Then add Lw field at that point.
 void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     printf("adding LW fields in box %d\n", boxIndex);
+    
+
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
@@ -1032,18 +1041,58 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     double dy = Grid->dy;
     double dz = Grid->dz;
     
+    int adjustmentDueToUpmlInXRight = 0;
+    int adjustmentDueToUpmlInXLeft = 0;
+    int adjustmentDueToUpmlInYBack = 0;
+    int adjustmentDueToUpmlInYFront = 0;
+    int adjustmentDueToUpmlInZTop = 0;
+    int adjustmentDueToUpmlInZBottom = 0;
+    
     int ib = boxIndex / (numberOfBoxesInY * numberOfBoxesInZ);
     int jb = (boxIndex - ib * (numberOfBoxesInY * numberOfBoxesInZ)) / numberOfBoxesInY;
     int kb = (boxIndex - ib * (numberOfBoxesInZ * numberOfBoxesInZ)) - jb * numberOfBoxesInZ;
+    
+    if (useUPML){
+        if(ib == 0) {
+            adjustmentDueToUpmlInXLeft = Grid->upmlLayerWidth - 1;
+        }
+        else if(ib == Grid->numberOfBoxesInX){
+            adjustmentDueToUpmlInXRight = Grid->upmlLayerWidth - 1;
+        }
+        else{
+            adjustmentDueToUpmlInXRight = 0;
+            adjustmentDueToUpmlInXLeft = 0;
+        }
+        if(jb == 0){
+            adjustmentDueToUpmlInYFront = Grid->upmlLayerWidth - 1;
+        }
+        else if(jb == Grid->numberOfBoxesInY){
+            adjustmentDueToUpmlInYBack = Grid->upmlLayerWidth - 1;
+        }
+        else{
+            adjustmentDueToUpmlInYBack = 0;
+            adjustmentDueToUpmlInYFront = 0;
+        }
+        if(kb == 0){
+            adjustmentDueToUpmlInZBottom = Grid->upmlLayerWidth - 1;
+        }
+        else if(kb == Grid->numberOfBoxesInZ){
+            adjustmentDueToUpmlInZTop = Grid->upmlLayerWidth - 1;
+        }
+        else{
+            adjustmentDueToUpmlInZBottom = 0;
+            adjustmentDueToUpmlInZTop = 0;
+        }
+    }
     
     double xObserver[4] = {0};
     xObserver[0] = t;
     
     int lowerLeftGridIndexInBox = ib * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + jb * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + kb * numberOfGridPointsForBoxInZ * 3;
     
-    for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
-        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+    for (int id = 0 + adjustmentDueToUpmlInXLeft; id < numberOfGridPointsForBoxInX - adjustmentDueToUpmlInXRight; id++){
+        for (int jd = 0 + adjustmentDueToUpmlInYFront; jd < numberOfGridPointsForBoxInY - adjustmentDueToUpmlInYBack; jd++){
+            for (int kd = 0 + adjustmentDueToUpmlInZBottom; kd < numberOfGridPointsForBoxInZ - adjustmentDueToUpmlInZTop; kd++){
                 
                 int gridIndexInBox = lowerLeftGridIndexInBox + 3 * kd + 3 * jd * numberOfGridPointsInZ + 3 * id * numberOfGridPointsInZ * numberOfGridPointsInY;
                 
@@ -1085,19 +1134,59 @@ void subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     double dx = Grid->dx;
     double dy = Grid->dy;
     double dz = Grid->dz;
+    
+    int adjustmentDueToUpmlInXRight = 0;
+    int adjustmentDueToUpmlInXLeft = 0;
+    int adjustmentDueToUpmlInYBack = 0;
+    int adjustmentDueToUpmlInYFront = 0;
+    int adjustmentDueToUpmlInZTop = 0;
+    int adjustmentDueToUpmlInZBottom = 0;
 
     int ib = boxIndex / (numberOfBoxesInY * numberOfBoxesInZ);
     int jb = (boxIndex - ib * (numberOfBoxesInY * numberOfBoxesInZ)) / numberOfBoxesInY;
     int kb = (boxIndex - ib * (numberOfBoxesInZ * numberOfBoxesInZ)) - jb * numberOfBoxesInZ;
+    
+    if (useUPML){
+        if(ib == 0) {
+            adjustmentDueToUpmlInXLeft = Grid->upmlLayerWidth - 1;
+        }
+        else if(ib == Grid->numberOfBoxesInX){
+            adjustmentDueToUpmlInXRight = Grid->upmlLayerWidth - 1;
+        }
+        else{
+            adjustmentDueToUpmlInXRight = 0;
+            adjustmentDueToUpmlInXLeft = 0;
+        }
+        if(jb == 0){
+            adjustmentDueToUpmlInYFront = Grid->upmlLayerWidth - 1;
+        }
+        else if(jb == Grid->numberOfBoxesInY){
+            adjustmentDueToUpmlInYBack = Grid->upmlLayerWidth - 1;
+        }
+        else{
+            adjustmentDueToUpmlInYBack = 0;
+            adjustmentDueToUpmlInYFront = 0;
+        }
+        if(kb == 0){
+            adjustmentDueToUpmlInZBottom = Grid->upmlLayerWidth - 1;
+        }
+        else if(kb == Grid->numberOfBoxesInZ){
+            adjustmentDueToUpmlInZTop = Grid->upmlLayerWidth - 1;
+        }
+        else{
+            adjustmentDueToUpmlInZBottom = 0;
+            adjustmentDueToUpmlInZTop = 0;
+        }
+    }
     
     double xObserver[4] = {0};
     xObserver[0] = t;
     
     int lowerLeftGridIndexInBox = ib * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + jb * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + kb * numberOfGridPointsForBoxInZ * 3;
     
-    for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
-        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+    for (int id = 0 + adjustmentDueToUpmlInXLeft; id < numberOfGridPointsForBoxInX - adjustmentDueToUpmlInXRight; id++){
+        for (int jd = 0 + adjustmentDueToUpmlInYFront; jd < numberOfGridPointsForBoxInY - adjustmentDueToUpmlInYBack; jd++){
+            for (int kd = 0 + adjustmentDueToUpmlInZBottom; kd < numberOfGridPointsForBoxInZ - adjustmentDueToUpmlInZTop; kd++){
             
                 int gridIndexInBox = lowerLeftGridIndexInBox + 3 * kd + 3 * jd * numberOfGridPointsInZ + 3 * id * numberOfGridPointsInZ * numberOfGridPointsInY;
                 

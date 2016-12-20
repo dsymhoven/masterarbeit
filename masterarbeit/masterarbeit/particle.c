@@ -113,8 +113,18 @@ void getCurrentBoxIndexArrayOfParticle(Grid *Grid, Particle *Particle){
     
 }
 
-///@brief saves min and max values of x,y and z of the near field box in edgesOfNearFieldArray of Particle struct
+/** @brief saves min and max values of x,y and z of the near field box in edgesOfNearFieldArray of Particle struct
+@code edgesOfNearFieldBox[0] = xMin; 
+ edgesOfNearFieldBox[1] = xMax;
+ edgesOfNearFieldBox[2] = yMin;
+ edgesOfNearFieldBox[3] = yMax;
+ edgesOfNearFieldBox[4] = zMin;
+ edgesOfNearFieldBox[5] = zMax;
+@endcode
+ */
 void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle){
+    
+    getCurrentBoxIndexArrayOfParticle(Grid, Particle);
     double xMin = (Particle->currentBoxIndexArray[0] - 1) * (Grid->dx * Grid->numberOfGridPointsForBoxInX);
     double xMax = (Particle->currentBoxIndexArray[0] + 1 + 1) * (Grid->dx * Grid->numberOfGridPointsForBoxInX);
     double yMin = (Particle->currentBoxIndexArray[1] - 1) * (Grid->dy * Grid->numberOfGridPointsForBoxInY);

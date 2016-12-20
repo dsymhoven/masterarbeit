@@ -10,6 +10,7 @@ HEADER FÜR EIGENE FUNKTIONEN
 void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *Bextern, double dt);
 void updateLocation(Particle *Particle, Grid *Grid, double dt);
 void crossProduct(double a[3], double b[3], double result[3]);
+void scaleVector(double x[3], double factor);
 bool isInsideBackwardLightcone(double xParticle[4], double xObserver[4]);
 bool isInsideForwardLightcone(double xParticle[4], double xObserver[4]);
 void vectorDifference(double x[4], double y[4], double result[4]);
@@ -24,6 +25,7 @@ void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int timeStep);
 void calculateBeta(double xOld[4], double xNew[4], double beta[3]);
 void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t);
 void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeForPlotting);
+void calcLWFieldsForPlaneWithNearField(Grid *Grid, Particle *Particle, double t, int planeForPlotting);
 int calcCurrentBoxIndexOfParticle(Particle *Particle, Grid *Grid);
 void calcBoxIndizesOfNextNeighbourBoxes(Grid *Grid, Particle *Particle, int boxIndizesOfNextNeighbourBoxes[27]);
 bool boxIsInNearFieldOfParticle(Grid *Grid, Particle *Particle, int boxIndex);

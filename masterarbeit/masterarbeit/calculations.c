@@ -88,6 +88,13 @@ double vectorProduct(double x[4], double y[4]){
     return x[1]*y[1] + x[2]*y[2] + x[3]*y[3];
 }
 
+
+void scaleVector(double x[3], double factor){
+    for (int i = 0; i < 3; i++){
+        x[i] *= factor;
+    }
+}
+
 /**
  returns the spatial distance between two four vectors.
  */
@@ -428,6 +435,49 @@ void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeFor
     
 }
 
+
+void calcLWFieldsForPlaneWithNearField(Grid *Grid, Particle *Particle, double t, int planeForPlotting){
+    printf("Calculating LW Fields on plane %d, heigth:%f\n", planeForPlotting, planeForPlotting * Grid->dz);
+    
+    double xObserver[4];
+    int k = planeForPlotting;
+    
+    int nx = Grid->numberOfGridPointsInX;
+    int ny = Grid->numberOfGridPointsInY;
+    int nz = Grid->numberOfGridPointsInZ;
+    
+    getEdgesOfNearFieldBox(Grid, Particle);
+    
+    for(int i = 0; i < nx; i++){
+        for (int j = 0; j < ny; j++){
+            
+            
+            xObserver[0] = t;
+            xObserver[1] = (i)* Grid->dx;
+            xObserver[2] = (j) * Grid->dy;
+            xObserver[3] = (k) * Grid->dz;
+            
+            if(xObserver[1] >= Particle->edgesOfNearFieldBox[0] && xObserver[1] <= Particle->edgesOfNearFieldBox[1] && xObserver[2] >= Particle->edgesOfNearFieldBox[2] && xObserver[2] <= Particle->edgesOfNearFieldBox[3] && xObserver[3] >= Particle->edgesOfNearFieldBox[4] && xObserver[3] <= Particle->edgesOfNearFieldBox[5]){
+                continue;
+            }
+            
+            int gridIndexInBox = 3 * ny * nz * i + 3 * nz * j + 3 * k;
+            
+            addLWField(Grid, Particle, &Grid->H[gridIndexInBox], xObserver, 3);
+            addLWField(Grid, Particle, &Grid->H[gridIndexInBox + 1], xObserver, 4);
+            addLWField(Grid, Particle, &Grid->H[gridIndexInBox + 2], xObserver, 5);
+            
+            addLWField(Grid, Particle, &Grid->E[gridIndexInBox], xObserver, 0);
+            addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 1], xObserver, 1);
+            addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 2], xObserver, 2);
+            
+            
+        }
+    }
+    
+    
+}
+
 ///@brief calcualtes the box index in which the particle is currently located.
 ///@param Grid pointer to an instance of a Grid struct.
 ///@param Particle pointer to an instance of a Particle struct
@@ -563,14 +613,14 @@ int calcBoxIndexKp1(Grid *Grid, const int boxIndex){
 
 ///@brief calculates the UPML Coefficients according to Taflove page 301.
 ///@param Grid pointer to Grid struct
-///@remark The idea is to introduce a medium at the edge of the grid which shall absrob all incident waves, regardless of angle, polarisation and impedance, so that there are no reflections at the border of the grid. A quite longish calculation yields the coefficients implmeneted below. Those coefficients need to be implemented into the Maxwell Equations so that in the inner part of the grid everything is calculated via Yee algorithm (sigma = 0, kappa = 1). At the edge however we want to absorb the incident waves quite strongly, so conductiity sigma and loss kappa need to change. One questions remains unanswered yet: How can we calculate optimal values for sigmaMax and kappaMax ?
+///@remark The idea is to introduce a medium at the edge of the grid which shall absrob all incident waves, regardless of angle, polarisation and impedance, so that there are no reflections at the border of the grid. A quite longish calculation yields the coefficients implmeneted below. Those coefficients need to be implemented into the Maxwell Equations so that in the inner part of the grid everything is calculated via Yee algorithm (sigma = 0, kappa = 1). At the edge however we want to absorb the incident waves quite strongly, so conductiity sigma and loss kappa need to change. One questions still remains unanswered: How can we calculate optimal values for sigmaMax and kappaMax ?
 void calcUPMLCoefficients(Grid *Grid){
     printf("calculating UPML coefficients ...\n");
     
-    double sigmaMax = 3.0;
-    double kappaMax = 4.0;
+    double sigmaMax = 18.0;
+    double kappaMax = 1.0;
     double m = 3.5;
-    int layerWidthInGridPoints = 10;
+    int upmlLayerWidth = Grid->upmlLayerWidth;
     
     double sigma = 0.0;
     double kappa = 0.0;
@@ -582,16 +632,16 @@ void calcUPMLCoefficients(Grid *Grid){
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
     
     for (int j = 0; j < numberOfGridPointsInY; j++){
-        if(j < layerWidthInGridPoints){
-            depth = layerWidthInGridPoints - j;
-            sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
-            kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
+        if(j < upmlLayerWidth){
+            depth = upmlLayerWidth - j;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
         }
         
-        else if(j >= numberOfGridPointsInY - layerWidthInGridPoints - 1){
-            depth = j - numberOfGridPointsInY + layerWidthInGridPoints + 1;
-            sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
-            kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
+        else if(j >= numberOfGridPointsInY - upmlLayerWidth - 1){
+            depth = j - numberOfGridPointsInY + upmlLayerWidth + 1;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
         }
         else{
             sigma = 0.0;
@@ -603,16 +653,16 @@ void calcUPMLCoefficients(Grid *Grid){
     }
     
     for (int k = 0; k < numberOfGridPointsInZ; k++){
-        if(k < layerWidthInGridPoints){
-            depth = layerWidthInGridPoints - k;
-            sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
-            kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
+        if(k < upmlLayerWidth){
+            depth = upmlLayerWidth - k;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
         }
         
-        else if(k >= numberOfGridPointsInZ - layerWidthInGridPoints - 1){
-            depth = k - numberOfGridPointsInZ + layerWidthInGridPoints + 1;
-            sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
-            kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
+        else if(k >= numberOfGridPointsInZ - upmlLayerWidth - 1){
+            depth = k - numberOfGridPointsInZ + upmlLayerWidth + 1;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
         }
         else{
             sigma = 0.0;
@@ -624,16 +674,16 @@ void calcUPMLCoefficients(Grid *Grid){
     }
     
     for (int i = 0; i < numberOfGridPointsInX; i++){
-        if(i < layerWidthInGridPoints){
-            depth = layerWidthInGridPoints - i - 0.5;
-            sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
-            kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
+        if(i < upmlLayerWidth){
+            depth = upmlLayerWidth - i - 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
         }
         
-        else if(i >= numberOfGridPointsInX - layerWidthInGridPoints){
-            depth = i - numberOfGridPointsInX + layerWidthInGridPoints + 0.5;
-            sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
-            kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
+        else if(i >= numberOfGridPointsInX - upmlLayerWidth){
+            depth = i - numberOfGridPointsInX + upmlLayerWidth + 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
         }
         else{
             sigma = 0.0;
@@ -644,16 +694,16 @@ void calcUPMLCoefficients(Grid *Grid){
     }
     
     for (int j = 0; j < numberOfGridPointsInY; j++){
-        if(j < layerWidthInGridPoints){
-            depth = layerWidthInGridPoints - j - 0.5;
-            sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
-            kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
+        if(j < upmlLayerWidth){
+            depth = upmlLayerWidth - j - 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
         }
         
-        else if(j >= numberOfGridPointsInY - layerWidthInGridPoints){
-            depth = j - numberOfGridPointsInY + layerWidthInGridPoints + 0.5;
-            sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
-            kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
+        else if(j >= numberOfGridPointsInY - upmlLayerWidth){
+            depth = j - numberOfGridPointsInY + upmlLayerWidth + 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
         }
         else{
             sigma = 0.0;
@@ -665,16 +715,16 @@ void calcUPMLCoefficients(Grid *Grid){
     }
     
     for (int k = 0; k < numberOfGridPointsInZ; k++){
-        if(k < layerWidthInGridPoints){
-            depth = layerWidthInGridPoints - k - 0.5;
-            sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
-            kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
+        if(k < upmlLayerWidth){
+            depth = upmlLayerWidth - k - 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
         }
         
-        else if(k >= numberOfGridPointsInZ - layerWidthInGridPoints){
-            depth = k - numberOfGridPointsInZ + layerWidthInGridPoints + 0.5;
-            sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
-            kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
+        else if(k >= numberOfGridPointsInZ - upmlLayerWidth){
+            depth = k - numberOfGridPointsInZ + upmlLayerWidth + 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
         }
         else{
             sigma = 0.0;
@@ -687,16 +737,16 @@ void calcUPMLCoefficients(Grid *Grid){
     
     
     for (int i = 0; i < numberOfGridPointsInX; i++){
-        if(i < layerWidthInGridPoints){
-            depth = layerWidthInGridPoints - i;
-            sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
-            kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
+        if(i < upmlLayerWidth){
+            depth = upmlLayerWidth - i;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
         }
         
-        else if(i >= numberOfGridPointsInX - layerWidthInGridPoints - 1){
-            depth = i - numberOfGridPointsInX + layerWidthInGridPoints + 1;
-            sigma = pow(depth / layerWidthInGridPoints, m) * sigmaMax;
-            kappa = 1 + (kappaMax - 1) * pow(depth / layerWidthInGridPoints, m);
+        else if(i >= numberOfGridPointsInX - upmlLayerWidth - 1){
+            depth = i - numberOfGridPointsInX + upmlLayerWidth + 1;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
         }
         else{
             sigma = 0.0;
@@ -714,6 +764,9 @@ void updateNearField(Grid *Grid, Particle *Particle, double t){
         printf("updating NearField ...\n");
         
         for(int i = 0; i < 27; i++){
+            if(Particle->boxIndicesOfNearFieldBoxesBeforePush[i] == -1 || Particle->boxIndicesOfNearFieldBoxesAfterPush[i] == -1){
+                continue;
+            }
             if(!boxIsInNearFieldOfParticle(Grid, Particle, Particle->boxIndicesOfNearFieldBoxesBeforePush[i])){
                 addLWFieldsInBox(Grid, Particle, Particle->boxIndicesOfNearFieldBoxesBeforePush[i], t);
             }

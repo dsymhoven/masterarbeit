@@ -22,6 +22,11 @@ void initGrid(Grid *Grid, double dx, double dy, double dz, int numberOfGridPoint
     Grid->dy = dy;
     Grid->dz = dz;
     
+    Grid->EMax = 0;
+    Grid->HMax = 0;
+    
+    Grid->upmlLayerWidth = 10;
+    
     Grid->numberOfBoxesInX = numberOfBoxesInX;
     Grid->numberOfBoxesInY = numberOfBoxesInY;
     Grid->numberOfBoxesInZ = numberOfBoxesInZ;
@@ -384,7 +389,7 @@ void writeGridParametersToFile(Grid *Grid){
     }
     else{
         printf("writing grid parameters to file\n");
-        fprintf(fid, "%f %f %f %d %d %d %f %f %f\n", Grid->dx, Grid->dy, Grid->dz, Grid->numberOfGridPointsForBoxInX, Grid->numberOfGridPointsForBoxInY, Grid->numberOfGridPointsForBoxInZ, Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ);
+        fprintf(fid, "%f %f %f %d %d %d %f %f %f %f %f\n", Grid->dx, Grid->dy, Grid->dz, Grid->numberOfGridPointsForBoxInX, Grid->numberOfGridPointsForBoxInY, Grid->numberOfGridPointsForBoxInZ, Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ, Grid->EMax, Grid->HMax);
     }
     fclose(fid);
 }

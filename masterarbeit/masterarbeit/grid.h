@@ -31,9 +31,14 @@ struct Grid {
     double lengthOfSimulationBoxInY;
     double lengthOfSimulationBoxInZ;
     
+    double upmlLayerWidth;
+    
     double dx;
     double dy;
     double dz;
+    
+    double EMax;
+    double HMax;
     
     double *E;
     double *B;
