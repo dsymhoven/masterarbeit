@@ -26,6 +26,8 @@ X = np.zeros((numberOfParticles,1))
 Y = np.zeros((numberOfParticles,1))
 x = []
 y = []
+xnew = []
+ynew = []
 
 for i in range(numberOfParticleFiles):
 	# open figure
@@ -40,13 +42,10 @@ for i in range(numberOfParticleFiles):
 	Y = np.c_[Y,y]	
 	x=[]
 	y=[]
-	if i == 0:
+	if i == 0 or len(X[0]) > 40:
 		X = np.delete(X,0,1)
 		Y = np.delete(Y,0,1)
 	for p in range(numberOfParticles):
-		if len(X[p]) > 40:
-			X[p].pop(0)
-			Y[p].pop(0)
 		# plot x and y value of particle as red dot
 		plt.plot(X[p], Y[p], color = 'r')
 	field = np.genfromtxt('E_fields/E_field'+ str(i) +'.txt')
