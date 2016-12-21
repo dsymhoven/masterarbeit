@@ -36,4 +36,6 @@ mkdir -p $PATHTOANALYSIS/png
 cd $PATHTOANALYSIS
 # execute python script
 python2.7 sortParticleFiles.py
-#python2.7 plot_particlesAndFieldsForPlane.py
+python2.7 plot_particlesAndFieldsForPlane.py
+# delete numberOfParticles.txt file
+rm numberOfParticles.txt

@@ -5,11 +5,9 @@ import matplotlib.patches as patches
 import fnmatch
 import os
 
-numberOfParticleFiles = len(fnmatch.filter(os.listdir('Particles/'), '*.txt'))
-
-#files = glob.glob('Particles/*.txt')
+numberOfParticles = np.genfromtxt('numberOfParticles.txt')
+numberOfParticleFiles = len(fnmatch.filter(os.listdir('Particles/Particle0/'), '*.txt'))
 gridParameters = np.genfromtxt('gridParameters.txt')
-#field = np.genfromtxt('E_fields/E_field0.txt')
 
 lengthOfSimulationBoxInX = gridParameters[6]
 lengthOfSimulationBoxInY = gridParameters[7]
@@ -24,23 +22,34 @@ if gridParameters[9] < 0.1:
 if gridParameters[9] > 10:
 	EMax = 0.5
 	
-x=[]
-y=[]
+X = np.zeros((numberOfParticles,1))
+Y = np.zeros((numberOfParticles,1))
+x = []
+y = []
 
 for i in range(numberOfParticleFiles):
-	# read data from text and save it into array data
-	data = np.genfromtxt('Particles/Particle'+ str(i) +'.txt')
-	field = np.genfromtxt('E_fields/E_field'+ str(i) +'.txt')
 	# open figure
 	fig = plt.figure()
-	# define variables
-	x.append(data[0][1])
-	y.append(data[0][2])
-	if len(x) > 40:
-		x.pop(0)
-		y.pop(0)
-	# plot x and y value of particle as red dot
-	plt.plot(x, y, color = 'r')
+	for p in range(numberOfParticles):
+		# read data from text and save it into array data
+		data = np.genfromtxt('Particles/Particle'+ str(p) +'/Particle' + str(p) + '_' + str(i) + '.txt')
+		# define variables
+		x.append(data[0][1])
+		y.append(data[0][2])
+	X = np.c_[X,x]
+	Y = np.c_[Y,y]	
+	x=[]
+	y=[]
+	if i == 0:
+		X = np.delete(X,0,1)
+		Y = np.delete(Y,0,1)
+	for p in range(numberOfParticles):
+		if len(X[p]) > 40:
+			X[p].pop(0)
+			Y[p].pop(0)
+		# plot x and y value of particle as red dot
+		plt.plot(X[p], Y[p], color = 'r')
+	field = np.genfromtxt('E_fields/E_field'+ str(i) +'.txt')
 	# plot fields
 	plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=EMax)
 	plt.colorbar()

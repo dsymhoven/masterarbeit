@@ -5,11 +5,12 @@ import matplotlib.patches as patches
 import fnmatch
 import os
 
-numberOfParticleFiles = len(fnmatch.filter(os.listdir('Particles/'), '*.txt'))
+numberOfParticles = np.genfromtxt('numberOfParticles.txt')
+numberOfParticleFiles = len(fnmatch.filter(os.listdir('Particles/Particle0/'), '*.txt'))
 
 files = glob.glob('Particles/*.txt')
 gridParameters = np.genfromtxt('gridParameters.txt')
-#field = np.genfromtxt('E_fields/E_field0.txt')
+field = np.genfromtxt('E_fields/E_field0.txt')
 
 lengthOfSimulationBoxInX = gridParameters[6]
 lengthOfSimulationBoxInY = gridParameters[7]
@@ -27,20 +28,23 @@ if gridParameters[9] > 10:
 x=[]
 y=[]
 
-field = np.genfromtxt('E_fields/E_field0.txt')
-
-for i in range(numberOfParticleFiles):
-	# read data from text and save it into array data
-	data = np.genfromtxt('Particles/Particle'+ str(i) +'.txt')
-	
-	# define variables
-	x.append(data[0][1])
-	y.append(data[0][2])
-
-# open figure
+# open figure only once because we want to plot several particles in one figure
 fig = plt.figure()
-# plot x and y value of particle as red dot
-plt.plot(x, y, color = 'r')
+
+for p in range(numberOfParticles):
+	for i in range(numberOfParticleFiles):
+		# read data from text and save it into array data
+		data = np.genfromtxt('Particles/Particle'+ str(p) +'/Particle' + str(p) +'_' + str(i) + '.txt')
+		# define variables
+		x.append(data[0][1])
+		y.append(data[0][2])
+
+	# plot x and y value of particle as red dot
+	plt.plot(x, y, color = 'r')
+	# delete x,y array for next particle
+	x=[]
+	y=[]
+
 # plot fields
 plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=EMax)
 plt.colorbar()
@@ -58,5 +62,6 @@ filename = 'img'
 fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight')
 # close fig
 plt.close(fig)
+
 	
 

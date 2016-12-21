@@ -618,25 +618,26 @@ void testMultipleParticles(){
     // ======================================================
     
     Grid Grid;
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
-    int numberOfGridPointsForBoxInX = 25;
-    int numberOfGridPointsForBoxInY = 25;
-    int numberOfGridPointsForBoxInZ = 25;
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    double dx = 0.2;
+    double dy = 0.2;
+    double dz = 0.2;
+    int numberOfGridPointsForBoxInX = 20;
+    int numberOfGridPointsForBoxInY = 20;
+    int numberOfGridPointsForBoxInZ = 20;
+    int numberOfBoxesInX = 5;
+    int numberOfBoxesInY = 5;
+    int numberOfBoxesInZ = 5;
     
-    int numberOfParticles = 2;
+    int numberOfParticles = 3;
     
     Particle Particles[numberOfParticles];
     Particle *Particle1 = &Particles[0];
     Particle *Particle2 = &Particles[1];
+    Particle *Particle3 = &Particles[2];
     
     double dt = 0.5 * dx;
     double t = 0;
-    double tEnd = 12;
+    double tEnd = 1;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -673,6 +674,18 @@ void testMultipleParticles(){
     Particle2->u[3] = 0;
     Particle2->u[0] = getGammaFromVelocityVector(Particle2->u);
     
+    Particle3->mass = 1;
+    Particle3->charge = 1;
+    Particle3->x[0] = 0;
+    Particle3->x[1] = 6.41;
+    Particle3->x[2] = 14.41;
+    Particle3->x[3] = 11.401;
+    
+    Particle3->u[1] = 0.458;
+    Particle3->u[2] = 0;
+    Particle3->u[3] = 0;
+    Particle3->u[0] = getGammaFromVelocityVector(Particle3->u);
+    
     Eextern[0] = 0;
     Eextern[1] = 0.2;
     Eextern[2] = 0;
@@ -689,25 +702,24 @@ void testMultipleParticles(){
     for (int p = 0; p < tEnd / dt; p++){
         printf("step %d of %d\n", p, arrayLength);
         writeParticlesToFile(Particles, numberOfParticles, filename, p);
-        //writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
+        writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
         
-        //pushEField(&Grid, &Particle, t, dt);
-        //pushHField(&Grid, &Particle, t + dt / 2., dt);
+        pushEField(&Grid, &Particles[0], t, dt);
+        pushHField(&Grid, &Particles[0], t + dt / 2., dt);
         
         addCurrentStateToParticlesHistory(Particles, numberOfParticles, p);
         updateVelocityWithBorisPusherForParticles(Particles, numberOfParticles, Eextern, Bextern, dt);
         updateLocationForParticles(Particles, numberOfParticles, &Grid, dt);
         //updateNearField(&Grid, &Particle, t);
         
-        //pushHField(&Grid, &Particle, t + dt / 2., dt);
-        //pushEField(&Grid, &Particle, t, dt);
+        pushHField(&Grid, &Particles[0], t + dt / 2., dt);
+        pushEField(&Grid, &Particles[0], t, dt);
         t += dt;
     }
-//    calcLWFieldsForPlane(&Grid, &Particle, t, planeForPlotting);
-//    writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
+    writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
-    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles, arrayLength);
     freeMemoryOnGrid(&Grid);
     

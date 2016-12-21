@@ -35,6 +35,7 @@ mkdir -p $PATHTOANALYSIS/png
 # change directory to Analysis folder in order for python script to work properly
 cd $PATHTOANALYSIS
 # execute python script
+python2.7 sortParticleFiles.py
 python2.7 plot_particlesAndFields.py
 # chane to png folder
 cd png/
