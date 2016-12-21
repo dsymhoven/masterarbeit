@@ -17,7 +17,7 @@ then
 	mkdir -p $PATHTOANALYSIS/E_fields
 	mv $PATHTOEXECUTABLE/E_field*.txt $PATHTOANALYSIS/E_Fields
 fi
-if [ -e Particle0.txt ]
+if [ -e Particle0_0.txt ]
 then
 	mkdir -p $PATHTOANALYSIS/Particles
 	mv $PATHTOEXECUTABLE/Particle*.txt $PATHTOANALYSIS/Particles
@@ -26,9 +26,14 @@ if [ -e gridParameters.txt ]
 then
 	mv $PATHTOEXECUTABLE/gridParameters.txt $PATHTOANALYSIS/
 fi
+if [ -e numberOfParticles.txt ]
+then
+	mv $PATHTOEXECUTABLE/numberOfParticles.txt $PATHTOANALYSIS/
+fi
 #  create png folder in Analysis folder. Neccessary for python script
 mkdir -p $PATHTOANALYSIS/png
 # change directory to Analysis folder in order for python script to work properly
 cd $PATHTOANALYSIS
 # execute python script
-python2.7 plot_particlesAndFieldsForPlane.py
+python2.7 sortParticleFiles.py
+#python2.7 plot_particlesAndFieldsForPlane.py
