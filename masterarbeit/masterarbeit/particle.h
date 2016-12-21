@@ -32,12 +32,15 @@ struct Particle {
 typedef struct Particle Particle;
 typedef struct Grid Grid;
 
-void initParticle(Particle *Particle, double const charge, double const mass, int const arrayLength);
-void writeParticleToFile(Particle *Particle, char *filename, int index);
+void initParticle(Particle *Particle, int const arrayLength);
+void initParticles(Particle *Particles, int const numberOfParticles, int const arrayLength);
+void writeParticlesToFile(Particle *Particles, int numberOfParticles, char *filename, int index);
+void freeMemoryOnParticles(Particle *Particles, int const numberOfParticles, int const arrayLength);
 void freeMemoryOnParticle(Particle *Particle, int const arrayLength);
 void allocateParticleHistories(Particle *Particle, int const arrayLength);
 void getCurrentBoxIndexArrayOfParticle(Grid *Grid, Particle *Particle);
 void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle);
 void addCurrentStateToParticleHistory(Particle *Particle, int index);
+void addCurrentStateToParticlesHistory(Particle *Particles, int const numberOfParticles, int index);
 double getGammaFromVelocityVector(double u[4]);
 #endif /* particle_h */

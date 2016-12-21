@@ -163,6 +163,7 @@ void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *
     double uPrimeCrossS[3];
     double absoluteSquareValueOfT;
     double uModifiedForCrossProduct[3];
+    
     double chargeOverMass = Particle->charge / Particle->mass;
     
     // assisting values
@@ -206,6 +207,20 @@ void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *
     }
     
     Particle->u[0] = getGammaFromVelocityVector(Particle->u);
+    
+}
+
+/**
+ updates velocity with boris method for all particles.
+ 
+ First obtain “uMinus” by adding half acceleration to the initial velocity.
+ Then obtain "uPlus" by performing rotation with "uPrime" and internally computed assisting values.
+ Finally, add another half acceleration.
+ */
+void updateVelocityWithBorisPusherForParticles(Particle *Particles, int numberOfParticles, double *Eextern, double *Bextern, double dt){
+    for(int p = 0; p < numberOfParticles; p++){
+        updateVelocityWithBorisPusher(&Particles[p], Eextern, Bextern, dt);
+    }
 }
 
 ///@brief updates location x for particle with velocity u using x = v * dt time component x[0] gets updated as well.
@@ -229,8 +244,16 @@ void updateLocation(Particle *Particle, Grid *Grid, double dt){
         Particle->didChangeBox = false;
     }
     Particle->x[0] += dt;
+    
 }
 
+///@brief updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as well.
+///@remark when particle is pushed the old and new box indeces are calculted. When this index changes the Paticle property "didChangeBox" is set accordingly.
+void updateLocationForParticles(Particle *Particles, int numberOfParticles, Grid *Grid, double dt){
+    for(int p = 0; p < numberOfParticles; p++){
+        updateLocation(&Particles[p], Grid, dt);
+    }
+}
 /**
  @brief calcualtes Liénard Wiechert Parameters gamma_sq, R_sq, R, n, beta from xParticle, u and xObserver
  @remark in order to have the values of R_sq, R and gamma_sq available in the outer scope, we need to work with pointers like we do when we passing arrays as function arguments
@@ -402,7 +425,7 @@ void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t){
 ///@param planeForPlotting number of the plane in which fields shall be calcualted. planeForPlotting = x[3] / dz
 void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeForPlotting){
     printf("Calculating LW Fields on plane %d, heigth:%f\n", planeForPlotting, planeForPlotting * Grid->dz);
-
+    
     double xObserver[4];
     int k = planeForPlotting;
     int nx = Grid->numberOfGridPointsInX;
@@ -516,7 +539,7 @@ void calcBoxIndizesOfNextNeighbourBoxes(Grid *Grid, Particle *Particle, int boxI
     int indexOfNextNeighbourBox = 0;
     int maxBoxIndex = numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ;
     int index = 0;
-        
+    
     for (int ii = -1; ii <= 1; ii++){
         for(int ij = -1; ij <= 1; ij++){
             for(int ik = -1; ik <= 1; ik++){
@@ -541,7 +564,7 @@ void calcBoxIndizesOfNextNeighbourBoxes(Grid *Grid, Particle *Particle, int boxI
 bool boxIsInNearFieldOfParticle(Grid *Grid, Particle *Particle, int boxIndex){
     int boxIndizesOfNextNeighbourBoxes[27] = {0};
     calcBoxIndizesOfNextNeighbourBoxes(Grid, Particle, boxIndizesOfNextNeighbourBoxes);
-
+    
     bool isInNF = false;
     
     for (int i = 0; i < 27; i++){
@@ -670,7 +693,7 @@ void calcUPMLCoefficients(Grid *Grid){
         }
         Grid->upml3E[k] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
         Grid->upml4E[k] = 1.0 / (2 * kappa + sigma * dt);
-
+        
     }
     
     for (int i = 0; i < numberOfGridPointsInX; i++){
@@ -759,7 +782,7 @@ void calcUPMLCoefficients(Grid *Grid){
 }
 
 void updateNearField(Grid *Grid, Particle *Particle, double t){
-
+    
     if (Particle->didChangeBox == true){
         printf("updating NearField ...\n");
         
@@ -770,7 +793,7 @@ void updateNearField(Grid *Grid, Particle *Particle, double t){
             if(!boxIsInNearFieldOfParticle(Grid, Particle, Particle->boxIndicesOfNearFieldBoxesBeforePush[i])){
                 addLWFieldsInBox(Grid, Particle, Particle->boxIndicesOfNearFieldBoxesBeforePush[i], t);
             }
-        
+            
             bool wasInNFBefore = false;
             for (int j = 0; j < 27; j++){
                 if ( Particle->boxIndicesOfNearFieldBoxesAfterPush[i] == Particle->boxIndicesOfNearFieldBoxesBeforePush[j] )
@@ -781,7 +804,7 @@ void updateNearField(Grid *Grid, Particle *Particle, double t){
             }
         }
     }
-
+    
 }
 
 

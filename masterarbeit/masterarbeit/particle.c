@@ -11,15 +11,21 @@
 #include "math.h"
 #include "string.h"
 
+///@brief initializes all particles in Particles array with initParticle() method
+void initParticles(Particle *Particles, int const numberOfParticles, int const arrayLength){
+    for(int i = 0; i < numberOfParticles; i++){
+        initParticle(&Particles[i], arrayLength);
+    }
+}
+
+
 /// @brief initializes all properties of struct Particle. x and u are initilized with 0
-void initParticle(Particle *Particle, double const charge, double const mass, int const arrayLength){
+void initParticle(Particle *Particle, int const arrayLength){
     printf("initializing Particle ...\n");
     for (int i = 0; i < 4; i++){
         Particle->x[i] = 0;
         Particle->u[i] = 0;
     }
-    Particle->charge = charge;
-    Particle->mass = mass;
     Particle->lengthOfHistoryArray = arrayLength;
     Particle->currentHistoryLength = 0;
     allocateParticleHistories(Particle, arrayLength);
@@ -59,37 +65,52 @@ void allocateParticleHistories(Particle *Particle, int const arrayLength){
             }
         }
     }
-
+    
     
 }
+
 
 ///@brief writes current position, velocity vectors and near field info to file. First line is four vector x. Second line is four vector u. Third line is xMin up to yMax of near field box
 ///@param filename pointer to a char. Gets modified inside the method
 ///@param index outer loop index. Is used to name the output file
-void writeParticleToFile(Particle *Particle, char *filename, int index){
-    printf("Writing Particle to file ...\n");
-    FILE *fid = NULL;
-    sprintf(filename, "Particle%d", index);
-    strcat(filename, ".txt");
-    fid = fopen(filename,"w");
-    if (fid == NULL){
-        printf("ERROR: Could not open file Particle!\n");
+void writeParticlesToFile(Particle *Particles, int numberOfParticles, char *filename, int index){
+    for(int p = 0; p < numberOfParticles; p++){
+        
+        printf("Writing Particle %d to file ...\n", p);
+        FILE *fid = NULL;
+        sprintf(filename, "Particle%d_%d", p, index);
+        strcat(filename, ".txt");
+        fid = fopen(filename,"w");
+        if (fid == NULL){
+            printf("ERROR: Could not open file Particle!\n");
+        }
+        
+        for (int i = 0; i < 4; i++){
+            fprintf(fid, "%f\t", Particles[p].x[i]);
+        }
+        fprintf(fid, "\n");
+        
+        for (int i = 0; i < 4; i++){
+            fprintf(fid, "%f\t", Particles[p].u[i]);
+        }
+        fprintf(fid, "\n");
+        for (int i = 0; i < 4; i++){
+            fprintf(fid, "%f\t", Particles[p].edgesOfNearFieldBox[i]);
+        }
+        fprintf(fid, "\n");
+        fclose(fid);
     }
     
-    for (int i = 0; i < 4; i++){
-        fprintf(fid, "%f\t", Particle->x[i]);
+    FILE *fid2 = fopen("numberOfParticles.txt","w");
+    fprintf(fid2, "%d", numberOfParticles);
+    fclose(fid2);
+}
+
+///@brief  method for releasing all previously allocated memory in struct Particles.
+void freeMemoryOnParticles(Particle *Particles, int const numberOfParticles, int const arrayLength){
+    for (int p = 0; p < numberOfParticles; p++){
+        freeMemoryOnParticle(&Particles[p], arrayLength);
     }
-    fprintf(fid, "\n");
-    
-    for (int i = 0; i < 4; i++){
-        fprintf(fid, "%f\t", Particle->u[i]);
-    }
-    fprintf(fid, "\n");
-    for (int i = 0; i < 4; i++){
-        fprintf(fid, "%f\t", Particle->edgesOfNearFieldBox[i]);
-    }
-    fprintf(fid, "\n");
-    fclose(fid);
 }
 
 ///@brief  method for releasing all previously allocated memory in struct Particle. Put all free() invokations in here
@@ -114,13 +135,13 @@ void getCurrentBoxIndexArrayOfParticle(Grid *Grid, Particle *Particle){
 }
 
 /** @brief saves min and max values of x,y and z of the near field box in edgesOfNearFieldArray of Particle struct
-@code edgesOfNearFieldBox[0] = xMin; 
+ @code edgesOfNearFieldBox[0] = xMin;
  edgesOfNearFieldBox[1] = xMax;
  edgesOfNearFieldBox[2] = yMin;
  edgesOfNearFieldBox[3] = yMax;
  edgesOfNearFieldBox[4] = zMin;
  edgesOfNearFieldBox[5] = zMax;
-@endcode
+ @endcode
  */
 void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle){
     
@@ -141,10 +162,18 @@ void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle){
     
 }
 
+///@brief adds current position and velocity information (the entire four vectors) to respective history array of Particle struct
+///@param index outer loop index to indicate the current time step.
+void addCurrentStateToParticlesHistory(Particle *Particles, int const numberOfParticles, int index){
+    for (int p = 0; p < numberOfParticles; p++){
+        addCurrentStateToParticleHistory(&Particles[p], index);
+    }
+}
 
 ///@brief adds current position and velocity information (the entire four vectors) to respective history array of Particle struct
 ///@param index outer loop index to indicate the current time step.
-void addCurrentStateToParticleHistory(Particle *Particle, int index){
+void addCurrentStateToParticleHistory(Particle *Particle,  int index){
+    
     for (int i = 0; i < 4; i++){
         Particle->xHistory[index][i] = Particle->x[i];
         Particle->uHistory[index][i] = Particle->u[i];
@@ -160,5 +189,5 @@ double getGammaFromVelocityVector(double u[4]){
         result += u[i] * u[i];
     }
     return sqrt(1 + result);
-
+    
 }

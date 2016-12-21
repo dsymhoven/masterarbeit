@@ -8,7 +8,9 @@ HEADER FÜR EIGENE FUNKTIONEN
 #define CALCULATIONS
 
 void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *Bextern, double dt);
+void updateVelocityWithBorisPusherForParticles(Particle *Particles, int numberOfParticles, double *Eextern, double *Bextern, double dt);
 void updateLocation(Particle *Particle, Grid *Grid, double dt);
+void updateLocationForParticles(Particle *Particles, int numberOfParticles, Grid *Grid, double dt);
 void crossProduct(double a[3], double b[3], double result[3]);
 void scaleVector(double x[3], double factor);
 bool isInsideBackwardLightcone(double xParticle[4], double xObserver[4]);

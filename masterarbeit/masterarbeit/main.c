@@ -20,7 +20,8 @@ int main(int argc, const char * argv[]) {
     //testLWFieldCalculationForEachTimeStep();
     //testNearAndFarFields();
     //testUPML();
-    testNearFieldUpdate();
+    //testNearFieldUpdate();
+    testMultipleParticles();
     return 0;
 }   
 

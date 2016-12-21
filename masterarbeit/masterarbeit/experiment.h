@@ -19,4 +19,5 @@ void testLWFieldCalculationForEachTimeStep();
 void testNearAndFarFields();
 void testUPML();
 void testNearFieldUpdate();
+void testMultipleParticles();
 #endif /* experiment_h */

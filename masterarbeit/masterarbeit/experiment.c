@@ -69,10 +69,6 @@ void testBorisPusher(){
 #pragma mark: Initializations
     // ======================================================
     
-    Particle Particle;
-    double charge = 1.0;
-    double mass = 1.0;
-    
     double dt = 0.5 * 0.125;
     double t = 0;
     double tEnd = 3;
@@ -82,8 +78,15 @@ void testBorisPusher(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initParticle(&Particle, charge, mass, arrayLength);
+    int numberOfParticles = 1;
     
+    Particle Particles[numberOfParticles];
+    Particle Particle = Particles[0];
+    
+    initParticle(&Particle, arrayLength);
+    
+    Particle.mass = 1;
+    Particle.charge = 1;
     Particle.x[0] = 0;
     Particle.x[1] = 11.21;
     Particle.x[2] = 12.01;
@@ -106,7 +109,7 @@ void testBorisPusher(){
 #pragma mark: Main Routine
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
-        writeParticleToFile(&Particle, filename, p);
+        writeParticlesToFile(Particles, numberOfParticles, filename, p);
         updateVelocityWithBorisPusher(&Particle, Eextern, Bextern, dt);
         //updateLocation(&Particle, &Grid, dt);
         
@@ -134,9 +137,10 @@ void testNearFieldCalculation(){
     int numberOfBoxesInY = 5;
     int numberOfBoxesInZ = 5;
     
-    Particle Particle;
-    double charge = 1.0;
-    double mass = 1.0;
+    int numberOfParticles = 1;
+    
+    Particle Particles[numberOfParticles];
+    Particle Particle = Particles[0];
     
     double dt = 0.2;
     double t = 0;
@@ -150,8 +154,11 @@ void testNearFieldCalculation(){
     initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     writeGridParametersToFile(&Grid);
-    initParticle(&Particle, charge, mass, arrayLength);
+    initParticle(&Particle, arrayLength);
     
+    
+    Particle.mass = 1;
+    Particle.charge = 1;
     Particle.x[0] = 0;
     Particle.x[1] = 11.21;
     Particle.x[2] = 12.01;
@@ -179,7 +186,7 @@ void testNearFieldCalculation(){
         writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
         getCurrentBoxIndexArrayOfParticle(&Grid, &Particle);
         getEdgesOfNearFieldBox(&Grid, &Particle);
-        writeParticleToFile(&Particle, filename, p);
+        writeParticlesToFile(Particles, numberOfParticles, filename, p);
         updateVelocityWithBorisPusher(&Particle, Eextern, Bextern, dt);
         updateLocation(&Particle, &Grid, dt);
         t += dt;
@@ -207,9 +214,10 @@ void testLWFieldCalculationForPlane(){
     int numberOfBoxesInY = 5;
     int numberOfBoxesInZ = 5;
     
-    Particle Particle;
-    double charge = 1.0;
-    double mass = 1.0;
+    int numberOfParticles = 1;
+    
+    Particle Particles[numberOfParticles];
+    Particle Particle = Particles[0];;
     
     double dt = 0.5 * dx;
     double t = 0;
@@ -223,9 +231,10 @@ void testLWFieldCalculationForPlane(){
     initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     writeGridParametersToFile(&Grid);
-    initParticle(&Particle, charge, mass, arrayLength);
+    initParticle(&Particle, arrayLength);
 
-    
+    Particle.mass = 1;
+    Particle.charge = 1;
     Particle.x[0] = 0;
     Particle.x[1] = 11.21;
     Particle.x[2] = 12.01;
@@ -250,7 +259,7 @@ void testLWFieldCalculationForPlane(){
 #pragma mark: Main Routine
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
-        writeParticleToFile(&Particle, filename, p);
+        writeParticlesToFile(Particles, numberOfParticles, filename, p);
         addCurrentStateToParticleHistory(&Particle, p);
         updateVelocityWithBorisPusher(&Particle, Eextern, Bextern, dt);
         updateLocation(&Particle, &Grid, dt);
@@ -284,9 +293,10 @@ void testLWFieldCalculationForEachTimeStep(){
     int numberOfBoxesInY = 5;
     int numberOfBoxesInZ = 5;
     
-    Particle Particle;
-    double charge = 1.0;
-    double mass = 1.0;
+    int numberOfParticles = 1;
+    
+    Particle Particles[numberOfParticles];
+    Particle Particle = Particles[0];
     
     double dt = 0.5 * dx;
     double t = 0;
@@ -300,9 +310,10 @@ void testLWFieldCalculationForEachTimeStep(){
     initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     writeGridParametersToFile(&Grid);
-    initParticle(&Particle, charge, mass, arrayLength);
+    initParticle(&Particle, arrayLength);
     
-    
+    Particle.mass = 1;
+    Particle.charge = 1;
     Particle.x[0] = 0;
     Particle.x[1] = 11.21;
     Particle.x[2] = 12.01;
@@ -327,7 +338,7 @@ void testLWFieldCalculationForEachTimeStep(){
 #pragma mark: Main Routine
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
-        writeParticleToFile(&Particle, filename, p);
+        writeParticlesToFile(Particles, numberOfParticles, filename, p);
         writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
         addCurrentStateToParticleHistory(&Particle, p);
         calcLWFieldsForPlane(&Grid, &Particle, t, planeForPlotting);
@@ -359,9 +370,10 @@ void testNearAndFarFields(){
     int numberOfBoxesInY = 5;
     int numberOfBoxesInZ = 5;
     
-    Particle Particle;
-    double charge = 1.0;
-    double mass = 1.0;
+    int numberOfParticles = 1;
+    
+    Particle Particles[numberOfParticles];
+    Particle Particle = Particles[0];
     
     double dt = 0.5 * dx;
     double t = 0;
@@ -375,9 +387,10 @@ void testNearAndFarFields(){
     initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     writeGridParametersToFile(&Grid);
-    initParticle(&Particle, charge, mass, arrayLength);
+    initParticle(&Particle, arrayLength);
     
-    
+    Particle.mass = 1;
+    Particle.charge = 1;
     Particle.x[0] = 0;
     Particle.x[1] = 10.21;
     Particle.x[2] = 10.01;
@@ -403,7 +416,7 @@ void testNearAndFarFields(){
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
         printf("step %d of %d\n", p, arrayLength);
-        writeParticleToFile(&Particle, filename, p);
+        writeParticlesToFile(Particles, numberOfParticles, filename, p);
         writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
 
         pushEField(&Grid, &Particle, t, dt);
@@ -442,9 +455,10 @@ void testUPML(){
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
     
-    Particle Particle;
-    double charge = 1.0;
-    double mass = 1.0;
+    int numberOfParticles = 1;
+    
+    Particle Particles[numberOfParticles];
+    Particle Particle = Particles[0];
     
     double dt = 0.5 * dx;
     double t = 0;
@@ -459,9 +473,10 @@ void testUPML(){
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     writeGridParametersToFile(&Grid);
-    initParticle(&Particle, charge, mass, arrayLength);
+    initParticle(&Particle, arrayLength);
     
-    
+    Particle.mass = 1;
+    Particle.charge = 1;
     Particle.x[0] = 0;
     Particle.x[1] = 12.21;
     Particle.x[2] = 12.01;
@@ -487,7 +502,7 @@ void testUPML(){
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
         printf("step %d of %d\n", p, arrayLength);
-        writeParticleToFile(&Particle, filename, p);
+        writeParticlesToFile(Particles, numberOfParticles, filename, p);
         writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
         
         pushEField(&Grid, &Particle, t, dt);
@@ -525,9 +540,10 @@ void testNearFieldUpdate(){
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
     
-    Particle Particle;
-    double charge = 1.0;
-    double mass = 1.0;
+    int numberOfParticles = 1;
+    
+    Particle Particles[numberOfParticles];
+    Particle Particle = Particles[0];
     
     double dt = 0.5 * dx;
     double t = 0;
@@ -541,9 +557,10 @@ void testNearFieldUpdate(){
     initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
-    initParticle(&Particle, charge, mass, arrayLength);
+    initParticle(&Particle, arrayLength);
     
-    
+    Particle.mass = 1;
+    Particle.charge = 1;
     Particle.x[0] = 0;
     Particle.x[1] = 11.41;
     Particle.x[2] = 11.41;
@@ -569,7 +586,7 @@ void testNearFieldUpdate(){
     // ======================================================
     for (int p = 0; p < tEnd / dt; p++){
         printf("step %d of %d\n", p, arrayLength);
-        writeParticleToFile(&Particle, filename, p);
+        writeParticlesToFile(Particles, numberOfParticles, filename, p);
         //writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
         
         //pushEField(&Grid, &Particle, t, dt);
@@ -593,4 +610,107 @@ void testNearFieldUpdate(){
     freeMemoryOnGrid(&Grid);
     
 }
+
+
+void testMultipleParticles(){
+    // ======================================================
+#pragma mark: Initializations
+    // ======================================================
+    
+    Grid Grid;
+    double dx = 0.125;
+    double dy = 0.125;
+    double dz = 0.125;
+    int numberOfGridPointsForBoxInX = 25;
+    int numberOfGridPointsForBoxInY = 25;
+    int numberOfGridPointsForBoxInZ = 25;
+    int numberOfBoxesInX = 8;
+    int numberOfBoxesInY = 8;
+    int numberOfBoxesInZ = 8;
+    
+    int numberOfParticles = 2;
+    
+    Particle Particles[numberOfParticles];
+    Particle *Particle1 = &Particles[0];
+    Particle *Particle2 = &Particles[1];
+    
+    double dt = 0.5 * dx;
+    double t = 0;
+    double tEnd = 12;
+    
+    char filename[32] = "some";
+    double Eextern[3];
+    double Bextern[3];
+    int arrayLength = tEnd / dt;
+    
+    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    allocateMemoryOnGrid(&Grid);
+    calcUPMLCoefficients(&Grid);
+    initParticles(Particles, numberOfParticles, arrayLength);
+    
+    
+    Particle1->mass = 1;
+    Particle1->charge = 1;
+    Particle1->x[0] = 0;
+    Particle1->x[1] = 6.41;
+    Particle1->x[2] = 6.41;
+    Particle1->x[3] = 11.401;
+    
+    Particle1->u[1] = 0.458;
+    Particle1->u[2] = 0;
+    Particle1->u[3] = 0;
+    Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
+    
+    Particle2->mass = 1;
+    Particle2->charge = 1;
+    Particle2->x[0] = 0;
+    Particle2->x[1] = 14.41;
+    Particle2->x[2] = 14.41;
+    Particle2->x[3] = 11.401;
+    
+    Particle2->u[1] = 0.458;
+    Particle2->u[2] = 0;
+    Particle2->u[3] = 0;
+    Particle2->u[0] = getGammaFromVelocityVector(Particle2->u);
+    
+    Eextern[0] = 0;
+    Eextern[1] = 0.2;
+    Eextern[2] = 0;
+    
+    Bextern[0] = 0;
+    Bextern[1] = 0;
+    Bextern[2] = 1;
+    
+    int planeForPlotting = Particle1->x[3] / dz;
+    
+    // ======================================================
+#pragma mark: Main Routine
+    // ======================================================
+    for (int p = 0; p < tEnd / dt; p++){
+        printf("step %d of %d\n", p, arrayLength);
+        writeParticlesToFile(Particles, numberOfParticles, filename, p);
+        //writeFieldsToFile(&Grid, filename, p, planeForPlotting, true, false);
+        
+        //pushEField(&Grid, &Particle, t, dt);
+        //pushHField(&Grid, &Particle, t + dt / 2., dt);
+        
+        addCurrentStateToParticlesHistory(Particles, numberOfParticles, p);
+        updateVelocityWithBorisPusherForParticles(Particles, numberOfParticles, Eextern, Bextern, dt);
+        updateLocationForParticles(Particles, numberOfParticles, &Grid, dt);
+        //updateNearField(&Grid, &Particle, t);
+        
+        //pushHField(&Grid, &Particle, t + dt / 2., dt);
+        //pushEField(&Grid, &Particle, t, dt);
+        t += dt;
+    }
+//    calcLWFieldsForPlane(&Grid, &Particle, t, planeForPlotting);
+//    writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
+    writeGridParametersToFile(&Grid);
+    printf("executing bash-script ...\n");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
+    freeMemoryOnParticles(Particles, numberOfParticles, arrayLength);
+    freeMemoryOnGrid(&Grid);
+    
+}
+
 
