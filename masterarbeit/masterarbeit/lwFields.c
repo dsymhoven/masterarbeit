@@ -13,18 +13,18 @@
 
 bool useUPML = true;
 
-void pushEField(Grid *Grid, Particle *Particle, double t, double dt){
+void pushEField(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double dt){
     pushEFieldInsideBoxes(Grid, dt);
     setHFieldOnBorders(Grid);
-    adjustHFields(Grid, Particle, t);
+    adjustHFields(Grid, Particles, numberOfParticles, t);
     pushEFieldAtBorders(Grid, dt);
     
 }
 
-void pushHField(Grid *Grid, Particle *Particle, double t, double dt){
+void pushHField(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double dt){
     pushHFieldInsideBoxes(Grid, dt);
     setEFieldOnBorders(Grid);
-    adjustEFields(Grid, Particle, t);
+    adjustEFields(Grid, Particles, numberOfParticles, t);
     pushHFieldAtBorders(Grid, dt);
 }
 
@@ -341,7 +341,7 @@ void setEFieldOnBorders(Grid *Grid){
 }
 
 ///@brief this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in "adjustHyz_im1()", "adjustHxz_jm1()" and "adjustHxy_km1()" method.
-void adjustHFields(Grid *Grid, Particle *Particle, const double t){
+void adjustHFields(Grid *Grid, Particle *Particles, int numberOfParticles, const double t){
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
@@ -353,15 +353,15 @@ void adjustHFields(Grid *Grid, Particle *Particle, const double t){
                 int boxIndex = ib * numberOfBoxesInY * numberOfBoxesInZ + jb * numberOfBoxesInZ + kb;
                 
                 if (ib != 0){
-                    adjustHyz_im1(Grid, Particle, boxIndex, ib, jb, kb, t);
+                    adjustHyz_im1(Grid, Particles, numberOfParticles, boxIndex, ib, jb, kb, t);
                 }
                 
                 if (jb != 0){
-                    adjustHxz_jm1(Grid, Particle, boxIndex, ib, jb, kb, t);
+                    adjustHxz_jm1(Grid, Particles, numberOfParticles, boxIndex, ib, jb, kb, t);
                 }
                 
                 if (kb != 0){
-                    adjustHxy_km1(Grid, Particle, boxIndex, ib, jb, kb, t);
+                    adjustHxy_km1(Grid, Particles, numberOfParticles, boxIndex, ib, jb, kb, t);
                 }
             }
         }
@@ -370,120 +370,122 @@ void adjustHFields(Grid *Grid, Particle *Particle, const double t){
 
 ///@brief this method adjusts the H values on the left and right side border of the near field.
 ///@param Grid pointer to Grid struct
-///@param Particle pointer to Particle struct
+///@param Particles pointer to Particles struct array
 ///@param boxIndex current boxIndex from outer loop
 ///@param ib boxIndex in x direction
 ///@param jb boxIndex in y direction
 ///@param kb boxIndex in z direction
 ///@param t current simulation time
 ///@remark this method gets called over and over again from "adjustHFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexIm1 is not. Then we are at the left border of the near field. Since we want to push a value for the Efield inside the near field we need (among others) the value to the left. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the right border of the near field, i.e. current box is the not in near field but boxIndexIm1 is, then we push EField values from the far field. For this we need values to the left, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the E field value in the far field correctly.
-void adjustHyz_im1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
+void adjustHyz_im1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
     
     int boxIndexIm1 = calcBoxIndexIm1(Grid, boxIndex);
     double xObserver[4];
-    
-    if (boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
-        && !boxIsInNearFieldOfParticle(Grid, Particle, boxIndexIm1)){
-        
-        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                
-                xObserver[0] = t;
-                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX - 1);
-                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
-                
-                subLWField(Grid, Particle, &Grid->Hy_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 4);
-                subLWField(Grid, Particle, &Grid->Hz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 5);
+    for (int p = 0; p < numberOfParticles; p++){
+        if (boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)
+            && !boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndexIm1)){
+            
+            for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+                for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                    
+                    xObserver[0] = t;
+                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX - 1);
+                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    
+                    subLWField(Grid, &Particles[p], &Grid->Hy_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 4);
+                    subLWField(Grid, &Particles[p], &Grid->Hz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 5);
+                }
             }
         }
-    }
-    else if (!boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
-             && boxIsInNearFieldOfParticle(Grid, Particle, boxIndexIm1)){
-        
-        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                
-                xObserver[0] = t;
-                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX - 1);
-                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
-                
-                addLWField(Grid, Particle, &(Grid->Hy_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 4);
-                addLWField(Grid, Particle, &(Grid->Hz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 5);
+        else if (!boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)
+                 && boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndexIm1)){
+            
+            for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+                for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                    
+                    xObserver[0] = t;
+                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX - 1);
+                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    
+                    addLWField(Grid, &Particles[p], &(Grid->Hy_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 4);
+                    addLWField(Grid, &Particles[p], &(Grid->Hz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 5);
+                }
             }
+            
         }
-        
     }
     
 }
 
 ///@brief this method adjusts the H values infront and on the back side border of the near field.
 ///@param Grid pointer to Grid struct
-///@param Particle pointer to Particle struct
+///@param Particles pointer to Particles struct array
 ///@param boxIndex current boxIndex from outer loop
 ///@param ib boxIndex in x direction
 ///@param jb boxIndex in y direction
 ///@param kb boxIndex in z direction
 ///@param t current simulation time
 ///@remark this method gets called over and over again from "adjustHFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexJm1 is not. Then we are at the facing border of the near field. Since we want to push a value for the Efield inside the near field we need (among others) the value infront. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the back border of the near field, i.e. current box is the not in near field but boxIndexJm1 is, then we push EField values from the far field. For this we need values infront, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the E field value in the far field correctly.
-void adjustHxz_jm1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
+void adjustHxz_jm1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
     
     int boxIndexJm1 = calcBoxIndexJm1(Grid, boxIndex);
     double xObserver[4];
-    
-    if (boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
-        && !boxIsInNearFieldOfParticle(Grid, Particle, boxIndexJm1)){
-        
-        for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
-            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                
-                xObserver[0] = t;
-                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY - 1);
-                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
-                
-                subLWField(Grid, Particle, &Grid->Hx_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 3);
-                subLWField(Grid, Particle, &Grid->Hz_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 5);
+    for (int p = 0; p < numberOfParticles; p++){
+        if (boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)
+            && !boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndexJm1)){
+            
+            for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+                for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                    
+                    xObserver[0] = t;
+                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY - 1);
+                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    
+                    subLWField(Grid, &Particles[p], &Grid->Hx_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 3);
+                    subLWField(Grid, &Particles[p], &Grid->Hz_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 5);
+                }
             }
         }
-    }
-    else if (!boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
-             && boxIsInNearFieldOfParticle(Grid, Particle, boxIndexJm1)){
-        
-        for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
-            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                
-                xObserver[0] = t;
-                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY - 1);
-                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
-                
-                addLWField(Grid, Particle, &(Grid->Hx_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 3);
-                addLWField(Grid, Particle, &(Grid->Hz_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 5);
+        else if (!boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)
+                 && boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndexJm1)){
+            
+            for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+                for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                    
+                    xObserver[0] = t;
+                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY - 1);
+                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    
+                    addLWField(Grid, &Particles[p], &(Grid->Hx_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 3);
+                    addLWField(Grid, &Particles[p], &(Grid->Hz_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 5);
+                }
             }
+            
         }
-        
     }
     
 }
 
 ///@brief this method adjusts the H values on the top and bottom side border of the near field.
 ///@param Grid pointer to Grid struct
-///@param Particle pointer to Particle struct
+///@param Particles pointer to Particles struct array
 ///@param boxIndex current boxIndex from outer loop
 ///@param ib boxIndex in x direction
 ///@param jb boxIndex in y direction
 ///@param kb boxIndex in z direction
 ///@param t current simulation time
 ///@remark this method gets called over and over again from "adjustHFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexKm1 is not. Then we are at bottom border of the near field. Since we want to push a value for the Efield inside the near field we need (among others) the value below. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the top border of the near field, i.e. current box is the not in near field but boxIndexKm1 is, then we push EField values from the far field. For this we need values below, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the E field value in the far field correctly.
-void adjustHxy_km1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
+void adjustHxy_km1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
@@ -491,44 +493,46 @@ void adjustHxy_km1(Grid *Grid, Particle *Particle, const int boxIndex, const int
     int boxIndexKm1 = calcBoxIndexKm1(Grid, boxIndex);
     double xObserver[4];
     
-    if (boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
-        && !boxIsInNearFieldOfParticle(Grid, Particle, boxIndexKm1)){
-        
-        for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
-            for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-                
-                xObserver[0] = t;
-                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ - 1);
-                
-                subLWField(Grid, Particle, &Grid->Hx_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 3);
-                subLWField(Grid, Particle, &Grid->Hy_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 4);
+    for (int p = 0; p < numberOfParticles; p++){
+        if (boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)
+            && !boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndexKm1)){
+            
+            for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+                for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+                    
+                    xObserver[0] = t;
+                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ - 1);
+                    
+                    subLWField(Grid, &Particles[p], &Grid->Hx_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 3);
+                    subLWField(Grid, &Particles[p], &Grid->Hy_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 4);
+                }
             }
         }
-    }
-    else if (!boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
-             && boxIsInNearFieldOfParticle(Grid, Particle, boxIndexKm1)){
-        
-        for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
-            for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-                
-                xObserver[0] = t;
-                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ - 1);
-                
-                addLWField(Grid, Particle, &(Grid->Hx_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 3);
-                addLWField(Grid, Particle, &(Grid->Hy_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 4);
+        else if (!boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)
+                 && boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndexKm1)){
+            
+            for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+                for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+                    
+                    xObserver[0] = t;
+                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ - 1);
+                    
+                    addLWField(Grid, &Particles[p], &(Grid->Hx_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 3);
+                    addLWField(Grid, &Particles[p], &(Grid->Hy_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 4);
+                }
             }
+            
         }
-        
     }
     
 }
 
 ///@brief this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in "adjustEyz_ip1()", "adjustExz_jp1()" and "adjustExy_kp1()" method.
-void adjustEFields(Grid *Grid, Particle *Particle, const double t){
+void adjustEFields(Grid *Grid, Particle *Particles, int numberOfParticles, const double t){
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
@@ -540,15 +544,15 @@ void adjustEFields(Grid *Grid, Particle *Particle, const double t){
                 int boxIndex = ib * numberOfBoxesInY * numberOfBoxesInZ + jb * numberOfBoxesInZ + kb;
                 
                 if (ib != numberOfBoxesInX - 1){
-                    adjustEyz_ip1(Grid, Particle, boxIndex, ib, jb, kb, t);
+                    adjustEyz_ip1(Grid, Particles, numberOfParticles, boxIndex, ib, jb, kb, t);
                 }
                 
                 if (jb != numberOfBoxesInY - 1){
-                    adjustExz_jp1(Grid, Particle, boxIndex, ib, jb, kb, t);
+                    adjustExz_jp1(Grid, Particles, numberOfParticles, boxIndex, ib, jb, kb, t);
                 }
                 
                 if (kb != numberOfBoxesInZ - 1){
-                    adjustExy_kp1(Grid, Particle, boxIndex, ib, jb, kb, t);
+                    adjustExy_kp1(Grid, Particles, numberOfParticles, boxIndex, ib, jb, kb, t);
                 }
             }
         }
@@ -558,159 +562,162 @@ void adjustEFields(Grid *Grid, Particle *Particle, const double t){
 
 ///@brief this method adjusts the E values on the left and right side border of the near field.
 ///@param Grid pointer to Grid struct
-///@param Particle pointer to Particle struct
+///@param Particles pointer to Particles struct array
 ///@param boxIndex current boxIndex from outer loop
 ///@param ib boxIndex in x direction
 ///@param jb boxIndex in y direction
 ///@param kb boxIndex in z direction
 ///@param t current simulation time
 ///@remark this method gets called over and over again from "adjustEFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexIp1 is not. Then we are at the right border of the near field. Since we want to push a value for the Hfield inside the near field we need (among others) the E field value to the right. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the left border of the near field, i.e. current box is the not in near field but boxIndexIp1 is, then we push HField values from the far field. For this we need values to the rigth, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the H field value in the far field correctly.
-void adjustEyz_ip1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
+void adjustEyz_ip1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
     
     int boxIndexIp1 = calcBoxIndexIp1(Grid, boxIndex);
     double xObserver[4];
-    
-    if (boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
-        && !boxIsInNearFieldOfParticle(Grid, Particle, boxIndexIp1)){
-        
-        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                
-                xObserver[0] = t;
-                xObserver[1] = (Grid->dx) * ((ib + 1) * numberOfGridPointsForBoxInX);
-                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
-                
-                subLWField(Grid, Particle, &Grid->Ey_ip1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 1);
-                subLWField(Grid, Particle, &Grid->Ez_ip1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 2);
+    for (int p = 0; p < numberOfParticles; p++){
+        if (boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)
+            && !boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndexIp1)){
+            
+            for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+                for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                    
+                    xObserver[0] = t;
+                    xObserver[1] = (Grid->dx) * ((ib + 1) * numberOfGridPointsForBoxInX);
+                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    
+                    subLWField(Grid, &Particles[p], &Grid->Ey_ip1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 1);
+                    subLWField(Grid, &Particles[p], &Grid->Ez_ip1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 2);
+                }
             }
         }
-    }
-    else if (!boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
-             && boxIsInNearFieldOfParticle(Grid, Particle, boxIndexIp1)){
-        
-        for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                
-                xObserver[0] = t;
-                xObserver[1] = (Grid->dx) * ((ib + 1) * numberOfGridPointsForBoxInX);
-                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
-                
-                addLWField(Grid, Particle, &(Grid->Ey_ip1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 1);
-                addLWField(Grid, Particle, &(Grid->Ez_ip1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 2);
+        else if (!boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)
+                 && boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndexIp1)){
+            
+            for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+                for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                    
+                    xObserver[0] = t;
+                    xObserver[1] = (Grid->dx) * ((ib + 1) * numberOfGridPointsForBoxInX);
+                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    
+                    addLWField(Grid, &Particles[p], &(Grid->Ey_ip1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 1);
+                    addLWField(Grid, &Particles[p], &(Grid->Ez_ip1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 2);
+                }
             }
+            
         }
-        
     }
     
 }
 
 ///@brief this method adjusts the E values infront and on the back side border of the near field.
 ///@param Grid pointer to Grid struct
-///@param Particle pointer to Particle struct
+///@param Particles pointer to Particles struct array
 ///@param boxIndex current boxIndex from outer loop
 ///@param ib boxIndex in x direction
 ///@param jb boxIndex in y direction
 ///@param kb boxIndex in z direction
 ///@param t current simulation time
 ///@remark this method gets called over and over again from "adjustEFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexJp1 is not. Then we are at the back side border of the near field. Since we want to push a value for the Hfield inside the near field we need (among others) the E field value behind. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the front side border of the near field, i.e. current box is the not in near field but boxIndexJp1 is, then we push HField values from the far field. For this we need values infront, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the H field value in the far field correctly.
-void adjustExz_jp1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
+void adjustExz_jp1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
     
     int boxIndexJp1 = calcBoxIndexJp1(Grid, boxIndex);
     double xObserver[4];
-    
-    if (boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
-        && !boxIsInNearFieldOfParticle(Grid, Particle, boxIndexJp1)){
-        
-        for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
-            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                
-                xObserver[0] = t;
-                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                xObserver[2] = (Grid->dy) * ((jb + 1) * numberOfGridPointsForBoxInY);
-                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
-                
-                subLWField(Grid, Particle, &Grid->Ex_jp1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 0);
-                subLWField(Grid, Particle, &Grid->Ez_jp1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 2);
+    for (int p = 0; p < numberOfParticles; p++){
+        if (boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)
+            && !boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndexJp1)){
+            
+            for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+                for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                    
+                    xObserver[0] = t;
+                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->dy) * ((jb + 1) * numberOfGridPointsForBoxInY);
+                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    
+                    subLWField(Grid, &Particles[p], &Grid->Ex_jp1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 0);
+                    subLWField(Grid, &Particles[p], &Grid->Ez_jp1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 2);
+                }
             }
         }
-    }
-    else if (!boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
-             && boxIsInNearFieldOfParticle(Grid, Particle, boxIndexJp1)){
-        
-        for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
-            for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
-                
-                xObserver[0] = t;
-                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                xObserver[2] = (Grid->dy) * ((jb + 1) * numberOfGridPointsForBoxInY);
-                xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
-                
-                addLWField(Grid, Particle, &(Grid->Ex_jp1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 0);
-                addLWField(Grid, Particle, &(Grid->Ez_jp1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 2);
+        else if (!boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)
+                 && boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndexJp1)){
+            
+            for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+                for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
+                    
+                    xObserver[0] = t;
+                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->dy) * ((jb + 1) * numberOfGridPointsForBoxInY);
+                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    
+                    addLWField(Grid, &Particles[p], &(Grid->Ex_jp1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 0);
+                    addLWField(Grid, &Particles[p], &(Grid->Ez_jp1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 2);
+                }
             }
+            
         }
-        
     }
     
 }
 
 ///@brief this method adjusts the E values at top and bottom side border of the near field.
 ///@param Grid pointer to Grid struct
-///@param Particle pointer to Particle struct
+///@param Particles pointer to Particles struct array
 ///@param boxIndex current boxIndex from outer loop
 ///@param ib boxIndex in x direction
 ///@param jb boxIndex in y direction
 ///@param kb boxIndex in z direction
 ///@param t current simulation time
 ///@remark this method gets called over and over again from "adjustEFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexKp1 is not. Then we are at the top side border of the near field. Since we want to push a value for the Hfield inside the near field we need (among others) the E field value above. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the bottom side border of the near field, i.e. current box is the not in near field but boxIndexKp1 is, then we push HField values from the far field. For this we need values above, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the H field value in the far field correctly.
-void adjustExy_kp1(Grid *Grid, Particle *Particle, const int boxIndex, const int ib, const int jb, const int kb, const double t){
+void adjustExy_kp1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
     
     int boxIndexKp1 = calcBoxIndexKp1(Grid, boxIndex);
     double xObserver[4];
-    
-    if (boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
-        && !boxIsInNearFieldOfParticle(Grid, Particle, boxIndexKp1)){
-        
-        for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
-            for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-                
-                xObserver[0] = t;
-                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                xObserver[3] = (Grid->dz) * ((kb + 1) * numberOfGridPointsForBoxInZ);
-                
-                subLWField(Grid, Particle, &Grid->Ex_kp1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 0);
-                subLWField(Grid, Particle, &Grid->Ey_kp1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 1);
+    for(int p = 0; p < numberOfParticles; p++){
+        if (boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)
+            && !boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndexKp1)){
+            
+            for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+                for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+                    
+                    xObserver[0] = t;
+                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->dz) * ((kb + 1) * numberOfGridPointsForBoxInZ);
+                    
+                    subLWField(Grid, &Particles[p], &Grid->Ex_kp1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 0);
+                    subLWField(Grid, &Particles[p], &Grid->Ey_kp1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 1);
+                }
             }
         }
-    }
-    else if (!boxIsInNearFieldOfParticle(Grid, Particle, boxIndex)
-             && boxIsInNearFieldOfParticle(Grid, Particle, boxIndexKp1)){
-        
-        for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
-            for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
-                
-                xObserver[0] = t;
-                xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                xObserver[3] = (Grid->dz) * ((kb + 1) * numberOfGridPointsForBoxInZ);
-                
-                addLWField(Grid, Particle, &(Grid->Ex_kp1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 0);
-                addLWField(Grid, Particle, &(Grid->Ey_kp1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 1);
+        else if (!boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)
+                 && boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndexKp1)){
+            
+            for (int id = 0; id < numberOfGridPointsForBoxInX; id++){
+                for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
+                    
+                    xObserver[0] = t;
+                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->dz) * ((kb + 1) * numberOfGridPointsForBoxInZ);
+                    
+                    addLWField(Grid, &Particles[p], &(Grid->Ex_kp1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 0);
+                    addLWField(Grid, &Particles[p], &(Grid->Ey_kp1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 1);
+                }
             }
+            
         }
-        
     }
     
 }
@@ -1026,7 +1033,7 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
 void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     printf("adding LW fields in box %d\n", boxIndex);
     
-
+    
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
     int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
@@ -1141,7 +1148,7 @@ void subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     int adjustmentDueToUpmlInYFront = 0;
     int adjustmentDueToUpmlInZTop = 0;
     int adjustmentDueToUpmlInZBottom = 0;
-
+    
     int ib = boxIndex / (numberOfBoxesInY * numberOfBoxesInZ);
     int jb = (boxIndex - ib * (numberOfBoxesInY * numberOfBoxesInZ)) / numberOfBoxesInY;
     int kb = (boxIndex - ib * (numberOfBoxesInZ * numberOfBoxesInZ)) - jb * numberOfBoxesInZ;
@@ -1187,7 +1194,7 @@ void subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     for (int id = 0 + adjustmentDueToUpmlInXLeft; id < numberOfGridPointsForBoxInX - adjustmentDueToUpmlInXRight; id++){
         for (int jd = 0 + adjustmentDueToUpmlInYFront; jd < numberOfGridPointsForBoxInY - adjustmentDueToUpmlInYBack; jd++){
             for (int kd = 0 + adjustmentDueToUpmlInZBottom; kd < numberOfGridPointsForBoxInZ - adjustmentDueToUpmlInZTop; kd++){
-            
+                
                 int gridIndexInBox = lowerLeftGridIndexInBox + 3 * kd + 3 * jd * numberOfGridPointsInZ + 3 * id * numberOfGridPointsInZ * numberOfGridPointsInY;
                 
                 xObserver[1] = (ib * numberOfGridPointsForBoxInX + id) * dx;
@@ -1374,6 +1381,19 @@ void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
             break;
     }
     
+}
+
+void updateFieldsForParticlePush(Particle *Particle, Grid *Grid, double Eextern[3], double Bextern[3], double E[3], double B[3]){
+    int ip = Particle->x[0] / Grid->dx;
+    int jp = Particle->x[1] / Grid->dy;
+    int kp = Particle->x[2] / Grid->dz;
+    
+    int gridIndex = ip * Grid->numberOfGridPointsInY * Grid->numberOfGridPointsInZ * 3 + jp * Grid->numberOfGridPointsInZ * 3 + kp * 3;
+    for (int i = 0; i < 3; i++){
+        printf("%f\n", Grid->E[gridIndex + i]);
+        E[i] = Eextern[i] + Grid->E[gridIndex + i];
+        B[i] = Bextern[i] + Grid->H[gridIndex + i];
+    }
 }
 
 

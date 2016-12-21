@@ -76,7 +76,7 @@ void allocateParticleHistories(Particle *Particle, int const arrayLength){
 void writeParticlesToFile(Particle *Particles, int numberOfParticles, char *filename, int index){
     for(int p = 0; p < numberOfParticles; p++){
         
-        printf("Writing Particle %d to file ...\n", p);
+        printf("Writing Particle%d to file ...\n", p);
         FILE *fid = NULL;
         sprintf(filename, "Particle%d_%d", p, index);
         strcat(filename, ".txt");
@@ -106,23 +106,18 @@ void writeParticlesToFile(Particle *Particles, int numberOfParticles, char *file
     fclose(fid2);
 }
 
-///@brief  method for releasing all previously allocated memory in struct Particles.
-void freeMemoryOnParticles(Particle *Particles, int const numberOfParticles, int const arrayLength){
-    for (int p = 0; p < numberOfParticles; p++){
-        freeMemoryOnParticle(&Particles[p], arrayLength);
-    }
-}
 
 ///@brief  method for releasing all previously allocated memory in struct Particle. Put all free() invokations in here
-void freeMemoryOnParticle(Particle *Particle, int const arrayLength){
-    printf("releasing allocated memory in Particle...\n");
-    for (int i = 0; i < arrayLength; i++){
-        free(Particle->xHistory[i]);
-        free(Particle->uHistory[i]);
+void freeMemoryOnParticles(Particle *Particles, int numberOfParticles, int const arrayLength){
+    for (int p = 0; p < numberOfParticles; p++){
+        printf("releasing allocated memory in Particle%d...\n", p);
+        for (int i = 0; i < arrayLength; i++){
+            free(Particles[p].xHistory[i]);
+            free(Particles[p].uHistory[i]);
+        }
+        free(Particles[p].xHistory);
+        free(Particles[p].uHistory);
     }
-    free(Particle->xHistory);
-    free(Particle->uHistory);
-    
     
 }
 
@@ -162,13 +157,6 @@ void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle){
     
 }
 
-///@brief adds current position and velocity information (the entire four vectors) to respective history array of Particle struct
-///@param index outer loop index to indicate the current time step.
-void addCurrentStateToParticlesHistory(Particle *Particles, int const numberOfParticles, int index){
-    for (int p = 0; p < numberOfParticles; p++){
-        addCurrentStateToParticleHistory(&Particles[p], index);
-    }
-}
 
 ///@brief adds current position and velocity information (the entire four vectors) to respective history array of Particle struct
 ///@param index outer loop index to indicate the current time step.

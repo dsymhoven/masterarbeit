@@ -153,7 +153,7 @@ void calculateIntersectionPoint(double xInside[4], double xOutside[4], double uI
  Then obtain "uPlus" by performing rotation with "uPrime" and internally computed assisting values.
  Finally, add another half acceleration.
  */
-void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *Bextern, double dt){
+void updateVelocityWithBorisPusher(Particle *Particle, Grid *Grid, double Eextern[3], double Bextern[3], double dt){
     
     int dimension = 3;
     double uPrime[3];
@@ -161,14 +161,18 @@ void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *
     double s[3];
     double uMinusCrossT[3];
     double uPrimeCrossS[3];
+    double E[3];
+    double B[3];
     double absoluteSquareValueOfT;
     double uModifiedForCrossProduct[3];
-    
     double chargeOverMass = Particle->charge / Particle->mass;
+    
+    updateFieldsForParticlePush(Particle, Grid, Eextern, Bextern, E, B);
+    
     
     // assisting values
     for (int i = 0; i < dimension; i++){
-        t[i] = chargeOverMass * Bextern[i] * dt * 0.5;
+        t[i] = chargeOverMass * B[i] * dt * 0.5;
     }
     
     absoluteSquareValueOfT = t[0] * t[0] + t[1] * t[1] + t[2] * t[2];
@@ -180,7 +184,7 @@ void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *
     // implementation of boris method
     // first obtain “uMinus” by adding half acceleration to the initial velocity
     for (int i = 0; i < dimension; i++){
-        Particle->u[i+1] +=  chargeOverMass * Eextern[i] * dt * 0.5;
+        Particle->u[i+1] +=  chargeOverMass * E[i] * dt * 0.5;
     }
     
     // Since u is a four vector rewrite it to a three dimensional vector to make it usabale for crossProduct
@@ -203,25 +207,14 @@ void updateVelocityWithBorisPusher(Particle *Particle, double *Eextern, double *
     
     // finally, add another half acceleration,
     for (int i = 0; i < dimension; i++){
-        Particle->u[i+1] += chargeOverMass * Eextern[i] * dt * 0.5;
+        Particle->u[i+1] += chargeOverMass * E[i] * dt * 0.5;
     }
     
     Particle->u[0] = getGammaFromVelocityVector(Particle->u);
     
 }
 
-/**
- updates velocity with boris method for all particles.
- 
- First obtain “uMinus” by adding half acceleration to the initial velocity.
- Then obtain "uPlus" by performing rotation with "uPrime" and internally computed assisting values.
- Finally, add another half acceleration.
- */
-void updateVelocityWithBorisPusherForParticles(Particle *Particles, int numberOfParticles, double *Eextern, double *Bextern, double dt){
-    for(int p = 0; p < numberOfParticles; p++){
-        updateVelocityWithBorisPusher(&Particles[p], Eextern, Bextern, dt);
-    }
-}
+
 
 ///@brief updates location x for particle with velocity u using x = v * dt time component x[0] gets updated as well.
 ///@remark when particle is pushed the old and new box indeces are calculted. When this index changes the Paticle property "didChangeBox" is set accordingly.
@@ -420,41 +413,42 @@ void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t){
 
 ///@remark calcuates LW fields at simulation time t only on specyfied plane with index "planeForPlotting".
 ///@param Grid pointer to an instance of a Grid struct.
-///@param Particle pointer to an instance of a Particle struct
+///@param Particles pointer to  Particle struct array
 ///@param t time at which the fields shall be calcualted. This is also the zeroth component of xObserver
 ///@param planeForPlotting number of the plane in which fields shall be calcualted. planeForPlotting = x[3] / dz
-void calcLWFieldsForPlane(Grid *Grid, Particle *Particle, double t, int planeForPlotting){
-    printf("Calculating LW Fields on plane %d, heigth:%f\n", planeForPlotting, planeForPlotting * Grid->dz);
-    
-    double xObserver[4];
-    int k = planeForPlotting;
-    int nx = Grid->numberOfGridPointsInX;
-    int ny = Grid->numberOfGridPointsInY;
-    int nz = Grid->numberOfGridPointsInZ;
-    
-    for(int i = 0; i < nx; i++){
-        for (int j = 0; j < ny; j++){
-            
-            
-            xObserver[0] = t;
-            xObserver[1] = (i)* Grid->dx;
-            xObserver[2] = (j) * Grid->dy;
-            xObserver[3] = (k) * Grid->dz;
-            
-            int gridIndexInBox = 3 * ny * nz * i + 3 * nz * j + 3 * k;
-            
-            addLWField(Grid, Particle, &Grid->H[gridIndexInBox], xObserver, 3);
-            addLWField(Grid, Particle, &Grid->H[gridIndexInBox + 1], xObserver, 4);
-            addLWField(Grid, Particle, &Grid->H[gridIndexInBox + 2], xObserver, 5);
-            
-            addLWField(Grid, Particle, &Grid->E[gridIndexInBox], xObserver, 0);
-            addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 1], xObserver, 1);
-            addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 2], xObserver, 2);
-            
-            
+void calcLWFieldsForPlane(Grid *Grid, Particle *Particles, int numberOfParticles, double t, int planeForPlotting){
+    for (int p = 0; p < numberOfParticles; p++){
+        printf("Calculating LW Fields on plane %d, heigth:%f for Particle%d\n", planeForPlotting, planeForPlotting * Grid->dz, p);
+        
+        double xObserver[4];
+        int k = planeForPlotting;
+        int nx = Grid->numberOfGridPointsInX;
+        int ny = Grid->numberOfGridPointsInY;
+        int nz = Grid->numberOfGridPointsInZ;
+        
+        for(int i = 0; i < nx; i++){
+            for (int j = 0; j < ny; j++){
+                
+                
+                xObserver[0] = t;
+                xObserver[1] = (i)* Grid->dx;
+                xObserver[2] = (j) * Grid->dy;
+                xObserver[3] = (k) * Grid->dz;
+                
+                int gridIndexInBox = 3 * ny * nz * i + 3 * nz * j + 3 * k;
+                
+                addLWField(Grid, &Particles[p], &Grid->H[gridIndexInBox], xObserver, 3);
+                addLWField(Grid, &Particles[p], &Grid->H[gridIndexInBox + 1], xObserver, 4);
+                addLWField(Grid, &Particles[p], &Grid->H[gridIndexInBox + 2], xObserver, 5);
+                
+                addLWField(Grid, &Particles[p], &Grid->E[gridIndexInBox], xObserver, 0);
+                addLWField(Grid, &Particles[p], &Grid->E[gridIndexInBox + 1], xObserver, 1);
+                addLWField(Grid, &Particles[p], &Grid->E[gridIndexInBox + 2], xObserver, 2);
+                
+                
+            }
         }
     }
-    
     
 }
 
