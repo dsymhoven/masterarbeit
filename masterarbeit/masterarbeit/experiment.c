@@ -123,7 +123,7 @@ void testBorisPusher(){
     // ======================================================
     for (int step = 0; step < tEnd / dt; step++){
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
-        updateVelocityWithBorisPusher(&Particle, &Grid, Eextern, Bextern, dt);
+        updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, 1, Eextern, Bextern, dt);
         //updateLocation(&Particle, &Grid, dt);
         
         t += dt;
@@ -200,7 +200,7 @@ void testNearFieldCalculation(){
         getCurrentBoxIndexArrayOfParticle(&Grid, &Particle);
         getEdgesOfNearFieldBox(&Grid, &Particle);
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
-        updateVelocityWithBorisPusher(&Particle, &Grid, Eextern, Bextern, dt);
+        updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, 1, Eextern, Bextern, dt);
         updateLocation(&Particle, &Grid, dt);
         t += dt;
     }
@@ -274,7 +274,7 @@ void testLWFieldCalculationForPlane(){
     for (int step = 0; step < tEnd / dt; step++){
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
         addCurrentStateToParticleHistory(&Particle, step);
-        updateVelocityWithBorisPusher(&Particle, &Grid, Eextern, Bextern, dt);
+        updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, 1, Eextern, Bextern, dt);
         updateLocation(&Particle, &Grid, dt);
         t += dt;
     }
@@ -355,7 +355,7 @@ void testLWFieldCalculationForEachTimeStep(){
         writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
         addCurrentStateToParticleHistory(&Particle, step);
         calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
-        updateVelocityWithBorisPusher(&Particle, &Grid, Eextern, Bextern, dt);
+        updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, 1, Eextern, Bextern, dt);
         updateLocation(&Particle, &Grid, dt);
         t += dt;
     }
@@ -436,7 +436,7 @@ void testNearAndFarFields(){
         pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
         
         addCurrentStateToParticleHistory(&Particle, step);
-        updateVelocityWithBorisPusher(&Particle, &Grid, Eextern, Bextern, dt);
+        updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, 1, Eextern, Bextern, dt);
         updateLocation(&Particle, &Grid, dt);
 
         pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
@@ -523,7 +523,7 @@ void testUPML(){
         pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
         
         addCurrentStateToParticleHistory(&Particle, step);
-        updateVelocityWithBorisPusher(&Particle, &Grid, Eextern, Bextern, dt);
+        updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, 1, Eextern, Bextern, dt);
         updateLocation(&Particle, &Grid, dt);
         
         pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
@@ -607,7 +607,7 @@ void testNearFieldUpdate(){
         //pushHField(&Grid, &Particle, t + dt / 2., dt);
         
         addCurrentStateToParticleHistory(&Particle, step);
-        updateVelocityWithBorisPusher(&Particle, &Grid, Eextern, Bextern, dt);
+        updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, 1, Eextern, Bextern, dt);
         updateLocation(&Particle, &Grid, dt);
         //updateNearField(&Grid, &Particle, t);
         
@@ -667,10 +667,10 @@ void testMultipleParticles(){
     Particle1->charge = 1;
     Particle1->x[0] = 0;
     Particle1->x[1] = 6.41;
-    Particle1->x[2] = 10.41;
+    Particle1->x[2] = 11.60;
     Particle1->x[3] = 11.401;
     
-    Particle1->u[1] = 0.458;
+    Particle1->u[1] = 1.0;
     Particle1->u[2] = 0;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
@@ -679,10 +679,10 @@ void testMultipleParticles(){
     Particle2->charge = 1;
     Particle2->x[0] = 0;
     Particle2->x[1] = 14.41;
-    Particle2->x[2] = 10.41;
+    Particle2->x[2] = 10.00;
     Particle2->x[3] = 11.401;
     
-    Particle2->u[1] = 0.458;
+    Particle2->u[1] = -1.0;
     Particle2->u[2] = 0;
     Particle2->u[3] = 0;
     Particle2->u[0] = getGammaFromVelocityVector(Particle2->u);
@@ -693,7 +693,7 @@ void testMultipleParticles(){
     
     Bextern[0] = 0;
     Bextern[1] = 0;
-    Bextern[2] = 1;
+    Bextern[2] = 0;
     
     int planeForPlotting = Particle1->x[3] / dz;
     
@@ -710,7 +710,7 @@ void testMultipleParticles(){
         
         for(int p = 0; p < numberOfParticles; p++){
             addCurrentStateToParticleHistory(&Particles[p], step);
-            updateVelocityWithBorisPusher(&Particles[p], &Grid, Eextern, Bextern, dt);
+            updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
             updateLocation(&Particles[p], &Grid, dt);
             updateNearField(&Grid, &Particles[p], t);
         }
@@ -719,7 +719,8 @@ void testMultipleParticles(){
         pushEField(&Grid, Particles, numberOfParticles, t, dt);
         t += dt;
     }
-    
+    //calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    //writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");

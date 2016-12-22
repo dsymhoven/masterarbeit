@@ -7,7 +7,7 @@ HEADER FÜR EIGENE FUNKTIONEN
 #ifndef CALCULATIONS
 #define CALCULATIONS
 
-void updateVelocityWithBorisPusher(Particle *Particle, Grid *Grid, double *Eextern, double *Bextern, double dt);
+void updateVelocityWithBorisPusher(Particle *Particles, Grid *Grid, int numberOfParticles, int particleIndex, double Eextern[3], double Bextern[3], double dt);
 void updateLocation(Particle *Particle, Grid *Grid, double dt);
 void crossProduct(double a[3], double b[3], double result[3]);
 void scaleVector(double x[3], double factor);
@@ -37,4 +37,5 @@ int calcBoxIndexJp1(Grid *Grid, const int boxIndex);
 int calcBoxIndexKp1(Grid *Grid, const int boxIndex);
 void calcUPMLCoefficients(Grid *Grid);
 void updateNearField(Grid *Grid, Particle *Particle, double t);
+void calcInteractionWithOtherParticles(Particle *Particles, Grid *Grid, int numberOfParticles, int particleIndex, double E[3], double B[3]);
 #endif

@@ -1390,7 +1390,6 @@ void updateFieldsForParticlePush(Particle *Particle, Grid *Grid, double Eextern[
     
     int gridIndex = ip * Grid->numberOfGridPointsInY * Grid->numberOfGridPointsInZ * 3 + jp * Grid->numberOfGridPointsInZ * 3 + kp * 3;
     for (int i = 0; i < 3; i++){
-        printf("%f\n", Grid->E[gridIndex + i]);
         E[i] = Eextern[i] + Grid->E[gridIndex + i];
         B[i] = Bextern[i] + Grid->H[gridIndex + i];
     }

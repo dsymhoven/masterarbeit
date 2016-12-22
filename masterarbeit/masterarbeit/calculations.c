@@ -153,7 +153,9 @@ void calculateIntersectionPoint(double xInside[4], double xOutside[4], double uI
  Then obtain "uPlus" by performing rotation with "uPrime" and internally computed assisting values.
  Finally, add another half acceleration.
  */
-void updateVelocityWithBorisPusher(Particle *Particle, Grid *Grid, double Eextern[3], double Bextern[3], double dt){
+void updateVelocityWithBorisPusher(Particle *Particles, Grid *Grid, int numberOfParticles, int particleIndex, double Eextern[3], double Bextern[3], double dt){
+    
+    Particle *Particle = &Particles[particleIndex];
     
     int dimension = 3;
     double uPrime[3];
@@ -168,7 +170,7 @@ void updateVelocityWithBorisPusher(Particle *Particle, Grid *Grid, double Eexter
     double chargeOverMass = Particle->charge / Particle->mass;
     
     updateFieldsForParticlePush(Particle, Grid, Eextern, Bextern, E, B);
-    
+    calcInteractionWithOtherParticles(Particles, Grid, numberOfParticles, particleIndex, E, B);
     
     // assisting values
     for (int i = 0; i < dimension; i++){
@@ -801,5 +803,47 @@ void updateNearField(Grid *Grid, Particle *Particle, double t){
     
 }
 
+void calcInteractionWithOtherParticles(Particle *Particles, Grid *Grid, int numberOfParticles, int particleIndex, double E[3], double B[3]){
+    int currentBoxIndexOfOtherParticle = -1;
+    
+    for (int p = 0; p < numberOfParticles; p++){
+        if(p != particleIndex){
+            currentBoxIndexOfOtherParticle = calcCurrentBoxIndexOfParticle(&Particles[p], Grid);
+            if(boxIsInNearFieldOfParticle(Grid, &Particles[particleIndex], currentBoxIndexOfOtherParticle)){
+                
+                
+                double beta[3] = {0};
+                double intersectionPoint[4] = {0};
+                double velocityAtIntersectionPoint[4] = {0};
+                double gamma_sq;
+                double R_sq;
+                double R;
+                double n[3] = {0};
+                double betaDot[3] = {0};
+                double dt = 0.5 * Grid->dx;
+                double E_LW[3] = {0};
+                double B_LW[3] = {0};
+                
+                int currentHistoryLength = Particles[p].currentHistoryLength;
+                
+                for (int index = 0; index < currentHistoryLength - 1; index ++){
+                    if(isInsideBackwardLightcone(Particles[p].xHistory[index], Particles[particleIndex].x) && !isInsideBackwardLightcone(Particles[p].xHistory[index+1], Particles[particleIndex].x)){
+                        printf("calcuating interaction with Particle%d ...\n", p);
+                        calculateIntersectionPoint(Particles[p].xHistory[index], Particles[p].xHistory[index+1], Particles[p].uHistory[index], Particles[p].uHistory[index+1], Particles[particleIndex].x, intersectionPoint, velocityAtIntersectionPoint);
+                        calculateBeta(Particles[p].xHistory[index], Particles[p].xHistory[index+1], beta);
+                        calculateLienardWiechertParameters(intersectionPoint, Particles[particleIndex].x, velocityAtIntersectionPoint, &gamma_sq, &R_sq, &R, n, beta);
+                        calculateBetaDot(Particles[p].uHistory[index], Particles[p].uHistory[index+1], dt, betaDot);
+                        calcuateLienardWiechertFields(gamma_sq, R_sq, R, n, beta, betaDot, Particles[p].charge, E_LW, B_LW);
+                        for (int i = 0; i < 3; i++){
+                            E[i] += E_LW[i];
+                            B[i] += B_LW[i];
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
 
 

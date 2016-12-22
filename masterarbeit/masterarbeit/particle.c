@@ -179,3 +179,4 @@ double getGammaFromVelocityVector(double u[4]){
     return sqrt(1 + result);
     
 }
+
