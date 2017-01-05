@@ -777,6 +777,10 @@ void calcUPMLCoefficients(Grid *Grid){
     }
 }
 
+///@brief updates the near field region of a particle. If the particle moves into another box the near field region changes and therefore LW fields need to be added in those boxes which are not in the near field any longer and subtracted in those which were just added to the near field region.
+///@param Grid instance of a Grid struct
+///@param Particle instance of a Particle struct
+///@param t current simulation time
 void updateNearField(Grid *Grid, Particle *Particle, double t){
     
     if (Particle->didChangeBox == true){
@@ -803,6 +807,13 @@ void updateNearField(Grid *Grid, Particle *Particle, double t){
     
 }
 
+///@brief calcualtes the field interactions in the near field region of a particle with other particles. If a particle enters the near field region of another particle the interaction due to LW fields need to be taken into account. Therfore calculte the LW fields analytically each time step for as long as the particle is inside the near field region of the other particle.
+///@param Particles struct containing all particles
+///@param Grid instance of a Grid struct
+///@param numberOfParticles number of particles
+///@param particleIndex outer loop index for current particle for which the interaction shall be calcualted
+///@param E vector containing all E field components. At this point E contains not just the external field components but also the field contributions from other particles propagated on the grid inside the near field region of Particle with particleIndex
+///@param B same as E
 void calcInteractionWithOtherParticles(Particle *Particles, Grid *Grid, int numberOfParticles, int particleIndex, double E[3], double B[3]){
     int currentBoxIndexOfOtherParticle = -1;
     
@@ -845,5 +856,4 @@ void calcInteractionWithOtherParticles(Particle *Particles, Grid *Grid, int numb
         }
     }
 }
-
 

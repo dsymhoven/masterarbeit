@@ -1383,6 +1383,13 @@ void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
     
 }
 
+///@brief in order to push the current particle properly not just the external fields but also the field contributions from other particles propagated into the near field region need to be taken into account.
+///@param Particle instance of Particle struct
+///@param Grid instance of Grid struct
+///@param Eextern vector containing external E field components
+///@param Bextern vector containing external B field components
+///@param E vector containg both external fields and those from other particles propagated into the near field region of the current particle
+///@param B vector containg both external fields and those from other particles propagated into the near field region of the current particle
 void updateFieldsForParticlePush(Particle *Particle, Grid *Grid, double Eextern[3], double Bextern[3], double E[3], double B[3]){
     int ip = Particle->x[0] / Grid->dx;
     int jp = Particle->x[1] / Grid->dy;

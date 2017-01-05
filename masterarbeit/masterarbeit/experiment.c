@@ -700,6 +700,8 @@ void testMultipleParticles(){
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
+    
+    
     for (int step = 0; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, arrayLength);
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
