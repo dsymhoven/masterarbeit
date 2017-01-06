@@ -7,28 +7,31 @@ PATHTOEXECUTABLE=~/Library/Developer/Xcode/DerivedData/masterarbeit-gqaflsvzotvz
 # if so, create new folder "B_Fields" in Analysis folder of masterarbeit directory and copy all B_field files to that folder
 # analogue with E field and Particle files
 # if gridParameters were written out, copy them into Analysis folder. folder
-if [ -e B_field0.txt ]
-then
-	mkdir -p $PATHTOANALYSIS/B_fields
-	mv $PATHTOEXECUTABLE/B_field*.txt $PATHTOANALYSIS/B_Fields
-fi
-if [ -e E_field0.txt ]
-then
-	mkdir -p $PATHTOANALYSIS/E_fields
-	mv $PATHTOEXECUTABLE/E_field*.txt $PATHTOANALYSIS/E_Fields
-fi
-if [ -e Particle0_0.txt ]
-then
-	mkdir -p $PATHTOANALYSIS/Particles
-	mv $PATHTOEXECUTABLE/Particle*.txt $PATHTOANALYSIS/Particles
-fi
+for file in B_field*; do
+	if [[ -f $file ]]; then
+		mkdir -p $PATHTOANALYSIS/B_fields
+		mv $PATHTOEXECUTABLE/B_field*.txt $PATHTOANALYSIS/B_Fields
+	fi
+done
+for file in E_field*; do
+	if [[ -f $file ]]; then
+		mkdir -p $PATHTOANALYSIS/E_fields
+		mv $PATHTOEXECUTABLE/E_field*.txt $PATHTOANALYSIS/E_Fields
+	fi
+done
+for file in Particle*; do
+	if [[ -f $file ]]; then
+		mkdir -p $PATHTOANALYSIS/Particles
+		mv $PATHTOEXECUTABLE/Particle*.txt $PATHTOANALYSIS/Particles
+	fi
+done
 if [ -e gridParameters.txt ]
 then
 	mv $PATHTOEXECUTABLE/gridParameters.txt $PATHTOANALYSIS/
 fi
-if [ -e numberOfParticles.txt ]
+if [ -e simulationInfo.txt ]
 then
-	mv $PATHTOEXECUTABLE/numberOfParticles.txt $PATHTOANALYSIS/
+	mv $PATHTOEXECUTABLE/simulationInfo.txt $PATHTOANALYSIS/
 fi
 #  create png folder in Analysis folder. Neccessary for python script
 mkdir -p $PATHTOANALYSIS/png

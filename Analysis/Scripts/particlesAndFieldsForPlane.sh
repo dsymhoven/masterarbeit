@@ -26,9 +26,9 @@ if [ -e gridParameters.txt ]
 then
 	mv $PATHTOEXECUTABLE/gridParameters.txt $PATHTOANALYSIS/
 fi
-if [ -e numberOfParticles.txt ]
+if [ -e simulationInfo.txt ]
 then
-	mv $PATHTOEXECUTABLE/numberOfParticles.txt $PATHTOANALYSIS/
+	mv $PATHTOEXECUTABLE/simulationInfo.txt $PATHTOANALYSIS/
 fi
 #  create png folder in Analysis folder. Neccessary for python script
 mkdir -p $PATHTOANALYSIS/png
