@@ -40,7 +40,9 @@ for p in range(numberOfParticles):
 		# define variables
 		x.append(data[0][1])
 		y.append(data[0][2])
-
+		if len(x) > 40:
+			x.pop(0)
+			y.pop(0)
 	# plot x and y value of particle as red dot
 	plt.plot(x, y, color = 'r')
 	# delete x,y array for next particle

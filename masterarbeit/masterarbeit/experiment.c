@@ -754,7 +754,7 @@ void testHistoryBeforeSimulation(){
     //Particle *Particle2 = &Particles[1];
     
     double dt = 0.5 * dx;
-    double t = 5;
+    double t = 0;
     double tEnd = 8;
     
     char filename[32] = "some";
