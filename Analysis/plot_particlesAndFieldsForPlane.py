@@ -7,6 +7,7 @@ import os
 
 simulationInfo = np.genfromtxt('simulationInfo.txt')
 numberOfParticles = int(simulationInfo[0])
+startTime = int(simulationInfo[1])
 numberOfParticleFiles = len(fnmatch.filter(os.listdir('Particles/Particle0/'), '*.txt'))
 
 files = glob.glob('Particles/*.txt')
@@ -33,7 +34,7 @@ y=[]
 fig = plt.figure()
 
 for p in range(numberOfParticles):
-	for i in range(numberOfParticleFiles):
+	for i in range(startTime, startTime + numberOfParticleFiles):
 		# read data from text and save it into array data
 		data = np.genfromtxt('Particles/Particle'+ str(p) +'/Particle' + str(p) +'_' + str(i) + '.txt')
 		# define variables

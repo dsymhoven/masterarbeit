@@ -44,7 +44,7 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 	Y = np.c_[Y,y]	
 	x=[]
 	y=[]
-	if i == 0 or len(X[0]) > 40:
+	if i == startTime or len(X[0]) > 40:
 		X = np.delete(X,0,1)
 		Y = np.delete(Y,0,1)
 	for p in range(numberOfParticles):
@@ -52,7 +52,7 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 		plt.plot(X[p], Y[p], color = 'r')
 	field = np.genfromtxt('E_fields/E_field'+ str(i) +'.txt')
 	# plot fields
-	plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=EMax)
+	plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.05)
 	plt.colorbar()
 	# set labels
 	plt.xlabel("X")
