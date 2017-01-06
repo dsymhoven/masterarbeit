@@ -25,7 +25,7 @@ void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int timeStep);
 void calculateBeta(double xOld[4], double xNew[4], double beta[3]);
 void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t);
 void calcLWFieldsForPlane(Grid *Grid, Particle *Particles, int numberOfParticles, double t, int planeForPlotting);
-void calcLWFieldsForPlaneWithNearField(Grid *Grid, Particle *Particle, double t, int planeForPlotting);
+void calcLWFieldsForPlaneWithNearField(Grid *Grid, Particle *Particles, int numberOfParticles, double t, int planeForPlotting);
 int calcCurrentBoxIndexOfParticle(Particle *Particle, Grid *Grid);
 void calcBoxIndizesOfNextNeighbourBoxes(Grid *Grid, Particle *Particle, int boxIndizesOfNextNeighbourBoxes[27]);
 bool boxIsInNearFieldOfParticle(Grid *Grid, Particle *Particle, int boxIndex);
@@ -38,5 +38,6 @@ int calcBoxIndexKp1(Grid *Grid, const int boxIndex);
 void calcUPMLCoefficients(Grid *Grid);
 void updateNearField(Grid *Grid, Particle *Particle, double t);
 void calcInteractionWithOtherParticles(Particle *Particles, Grid *Grid, int numberOfParticles, int particleIndex, double E[3], double B[3]);
-void calcFieldsOnGridBeforeSimulation(Particle *Particles, Grid *Grid, int numberOfParticles, double Eextern[3], double Bextern[3], double dt, double t);
+void calcFieldsOnGridBeforeSimulation(Particle *Particles, Grid *Grid, int numberOfParticles, double t);
+void extendParticleHistory(Particle *Particles, Grid *Grid, int numberOfParticles, double Eextern[3], double Bextern[3], double dt, double t);
 #endif

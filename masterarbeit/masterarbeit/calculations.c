@@ -456,42 +456,45 @@ void calcLWFieldsForPlane(Grid *Grid, Particle *Particles, int numberOfParticles
 }
 
 
-void calcLWFieldsForPlaneWithNearField(Grid *Grid, Particle *Particle, double t, int planeForPlotting){
-    printf("Calculating LW Fields on plane %d, heigth:%f\n", planeForPlotting, planeForPlotting * Grid->dz);
-    
-    double xObserver[4];
-    int k = planeForPlotting;
-    
-    int nx = Grid->numberOfGridPointsInX;
-    int ny = Grid->numberOfGridPointsInY;
-    int nz = Grid->numberOfGridPointsInZ;
-    
-    getEdgesOfNearFieldBox(Grid, Particle);
-    
-    for(int i = 0; i < nx; i++){
-        for (int j = 0; j < ny; j++){
-            
-            
-            xObserver[0] = t;
-            xObserver[1] = (i) * Grid->dx;
-            xObserver[2] = (j) * Grid->dy;
-            xObserver[3] = (k) * Grid->dz;
-            
-            if(xObserver[1] >= Particle->edgesOfNearFieldBox[0] && xObserver[1] <= Particle->edgesOfNearFieldBox[1] && xObserver[2] >= Particle->edgesOfNearFieldBox[2] && xObserver[2] <= Particle->edgesOfNearFieldBox[3] && xObserver[3] >= Particle->edgesOfNearFieldBox[4] && xObserver[3] <= Particle->edgesOfNearFieldBox[5]){
-                continue;
+void calcLWFieldsForPlaneWithNearField(Grid *Grid, Particle *Particles, int numberOfParticles, double t, int planeForPlotting){
+    for (int p = 0; p < numberOfParticles; p++){
+        printf("Calculating LW Fields on plane %d, heigth:%f\n", planeForPlotting, planeForPlotting * Grid->dz);
+        Particle *Particle = &Particles[p];
+        
+        double xObserver[4];
+        int k = planeForPlotting;
+        
+        int nx = Grid->numberOfGridPointsInX;
+        int ny = Grid->numberOfGridPointsInY;
+        int nz = Grid->numberOfGridPointsInZ;
+        
+        getEdgesOfNearFieldBox(Grid, Particle);
+        
+        for(int i = 0; i < nx; i++){
+            for (int j = 0; j < ny; j++){
+                
+                
+                xObserver[0] = t;
+                xObserver[1] = (i) * Grid->dx;
+                xObserver[2] = (j) * Grid->dy;
+                xObserver[3] = (k) * Grid->dz;
+                
+                if(xObserver[1] >= Particle->edgesOfNearFieldBox[0] && xObserver[1] <= Particle->edgesOfNearFieldBox[1] && xObserver[2] >= Particle->edgesOfNearFieldBox[2] && xObserver[2] <= Particle->edgesOfNearFieldBox[3] && xObserver[3] >= Particle->edgesOfNearFieldBox[4] && xObserver[3] <= Particle->edgesOfNearFieldBox[5]){
+                    continue;
+                }
+                
+                int gridIndexInBox = 3 * ny * nz * i + 3 * nz * j + 3 * k;
+                
+                addLWField(Grid, Particle, &Grid->H[gridIndexInBox], xObserver, 3);
+                addLWField(Grid, Particle, &Grid->H[gridIndexInBox + 1], xObserver, 4);
+                addLWField(Grid, Particle, &Grid->H[gridIndexInBox + 2], xObserver, 5);
+                
+                addLWField(Grid, Particle, &Grid->E[gridIndexInBox], xObserver, 0);
+                addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 1], xObserver, 1);
+                addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 2], xObserver, 2);
+                
+                
             }
-            
-            int gridIndexInBox = 3 * ny * nz * i + 3 * nz * j + 3 * k;
-            
-            addLWField(Grid, Particle, &Grid->H[gridIndexInBox], xObserver, 3);
-            addLWField(Grid, Particle, &Grid->H[gridIndexInBox + 1], xObserver, 4);
-            addLWField(Grid, Particle, &Grid->H[gridIndexInBox + 2], xObserver, 5);
-            
-            addLWField(Grid, Particle, &Grid->E[gridIndexInBox], xObserver, 0);
-            addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 1], xObserver, 1);
-            addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 2], xObserver, 2);
-            
-            
         }
     }
     
@@ -923,8 +926,7 @@ void reallocateParticleHistory(Particle *Particles, int numberOfParticles, doubl
     }
 }
 
-void calcFieldsOnGridBeforeSimulation(Particle *Particles, Grid *Grid, int numberOfParticles, double Eextern[3], double Bextern[3], double dt, double t){
-
+void extendParticleHistory(Particle *Particles, Grid *Grid, int numberOfParticles, double Eextern[3], double Bextern[3], double dt, double t){
     reallocateParticleHistory(Particles, numberOfParticles, dt, t);
     reverseBorisPush(Particles, Grid, numberOfParticles, Eextern, Bextern, dt, t);
     resetInitialConditions(Particles, numberOfParticles, Eextern, Bextern);
@@ -938,6 +940,8 @@ void calcFieldsOnGridBeforeSimulation(Particle *Particles, Grid *Grid, int numbe
             
         }
     }
+}
+void calcFieldsOnGridBeforeSimulation(Particle *Particles, Grid *Grid, int numberOfParticles, double t){
   
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
