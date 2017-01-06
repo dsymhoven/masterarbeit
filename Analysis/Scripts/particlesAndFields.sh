@@ -9,12 +9,14 @@ PATHTOEXECUTABLE=~/Library/Developer/Xcode/DerivedData/masterarbeit-gqaflsvzotvz
 # if gridParameters were written out, copy them into Analysis folder. folder
 for file in B_field*; do
 	if [[ -f $file ]]; then
+		rm -rf $PATHTOANALYSIS/B_fields
 		mkdir -p $PATHTOANALYSIS/B_fields
 		mv $PATHTOEXECUTABLE/B_field*.txt $PATHTOANALYSIS/B_Fields
 	fi
 done
 for file in E_field*; do
 	if [[ -f $file ]]; then
+		rm -rf $PATHTOANALYSIS/E_fields
 		mkdir -p $PATHTOANALYSIS/E_fields
 		mv $PATHTOEXECUTABLE/E_field*.txt $PATHTOANALYSIS/E_Fields
 	fi
