@@ -3,7 +3,8 @@ import os
 import shutil
 import glob
 
-numberOfParticles = np.genfromtxt('numberOfParticles.txt')
+simulationInfo = np.genfromtxt('simulationInfo.txt')
+numberOfParticles = int(simulationInfo[0])
 for p in range(numberOfParticles):
 	path = 'Particles/Particle' + str(p)
 	try: 

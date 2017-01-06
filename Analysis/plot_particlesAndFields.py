@@ -5,7 +5,9 @@ import matplotlib.patches as patches
 import fnmatch
 import os
 
-numberOfParticles = np.genfromtxt('numberOfParticles.txt')
+simulationInfo = np.genfromtxt('simulationInfo.txt')
+numberOfParticles = int(simulationInfo[0])
+startTime = int(simulationInfo[1])
 numberOfParticleFiles = len(fnmatch.filter(os.listdir('Particles/Particle0/'), '*.txt'))
 gridParameters = np.genfromtxt('gridParameters.txt')
 
@@ -29,7 +31,7 @@ y = []
 xnew = []
 ynew = []
 
-for i in range(numberOfParticleFiles):
+for i in range(startTime, startTime + numberOfParticleFiles):
 	# open figure
 	fig = plt.figure()
 	for p in range(numberOfParticles):
@@ -62,7 +64,7 @@ for i in range(numberOfParticleFiles):
 	plt.yticks(np.arange(0, lengthOfSimulationBoxInY + 1, lengthOfOneBoxInY))
 	plt.grid(linestyle = "-", color='red')
 	# define filename for saving
-	filename = 'img' + str(i)
+	filename = 'img' + str(i - startTime)
 	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight')
 	# close fig
 	plt.close(fig)

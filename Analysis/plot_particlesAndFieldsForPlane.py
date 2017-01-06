@@ -5,7 +5,8 @@ import matplotlib.patches as patches
 import fnmatch
 import os
 
-numberOfParticles = np.genfromtxt('numberOfParticles.txt')
+simulationInfo = np.genfromtxt('simulationInfo.txt')
+numberOfParticles = int(simulationInfo[0])
 numberOfParticleFiles = len(fnmatch.filter(os.listdir('Particles/Particle0/'), '*.txt'))
 
 files = glob.glob('Particles/*.txt')
