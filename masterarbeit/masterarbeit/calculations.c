@@ -5,6 +5,7 @@
 #import <math.h>
 #import <stdbool.h>
 #import <stdio.h>
+#import <stdlib.h>
 #include "calculations.h"
 #include "string.h"
 #include "lwFields.h"
@@ -472,7 +473,7 @@ void calcLWFieldsForPlaneWithNearField(Grid *Grid, Particle *Particle, double t,
             
             
             xObserver[0] = t;
-            xObserver[1] = (i)* Grid->dx;
+            xObserver[1] = (i) * Grid->dx;
             xObserver[2] = (j) * Grid->dy;
             xObserver[3] = (k) * Grid->dz;
             
@@ -856,4 +857,101 @@ void calcInteractionWithOtherParticles(Particle *Particles, Grid *Grid, int numb
         }
     }
 }
+
+
+void reverseBorisPush(Particle *Particles, Grid *Grid, int numberOfParticles, double Eextern[3], double Bextern[3], double dt, double t){
+    scaleVector(Eextern, -1.0);
+    scaleVector(Bextern, -1.0);
+    
+    for (int p = 0; p < numberOfParticles; p++){
+        for (int i = 0; i < 3; i++){
+            Particles[p].u[i+1] *= -1;
+        }
+    }
+
+    for (int step = 0; step < t / dt; step++){
+        for(int p = 0; p < numberOfParticles; p++){
+            addCurrentStateToParticleHistory(&Particles[p], step);
+            updateVelocityWithBorisPusher(Particles, Grid, numberOfParticles, p, Eextern, Bextern, dt);
+            updateLocation(&Particles[p], Grid, dt);
+        }
+    }
+    
+}
+
+void resetInitialConditions(Particle *Particles, int numberOfParticles, double Eextern[3], double Bextern[3]){
+    scaleVector(Eextern, -1.0);
+    scaleVector(Bextern, -1.0);
+    
+    for (int p = 0; p < numberOfParticles; p++){
+        for (int i = 0; i < 3; i++){
+            Particles[p].u[i+1] *= -1;
+        }
+        Particles[p].x[0] = 0;
+    }
+}
+
+void reallocateParticleHistory(Particle *Particles, int numberOfParticles, double dt, double t){
+    for(int p = 0; p < numberOfParticles; p++){
+        Particles[p].xHistory = (double**) realloc(Particles[p].xHistory, (Particles[p].lengthOfHistoryArray + t / dt) * sizeof(double*));
+        if(Particles[p].xHistory == NULL){
+            printf("ERROR: Could not reallocate memory for particle xHistory!\n");
+            return;
+        }
+        for(int i = Particles[p].lengthOfHistoryArray; i < Particles[p].lengthOfHistoryArray + t / dt; i++){
+            Particles[p].xHistory[i] = (double*) malloc(4 * sizeof(double));
+            if(Particles[p].xHistory[i] == NULL){
+                printf("ERROR: Could not allocate extra memory in particle xHistory!\n");
+                return;
+            }
+        }
+        
+        Particles[p].uHistory = (double**) realloc(Particles[p].uHistory, (Particles[p].lengthOfHistoryArray + t / dt) * sizeof(double*));
+        if(Particles[p].uHistory == NULL){
+            printf("ERROR: Could not reallocate memory for particle uHistory!\n");
+            return;
+        }
+        for(int i = Particles[p].lengthOfHistoryArray; i < Particles[p].lengthOfHistoryArray + t / dt; i++){
+            Particles[p].uHistory[i] = (double*) malloc(4 * sizeof(double));
+            if(Particles[p].uHistory[i] == NULL){
+                printf("ERROR: Could not allocate extra memory in particle uHistory!\n");
+                return;
+            }
+        }
+        Particles[p].lengthOfHistoryArray += t / dt;
+
+    }
+}
+
+void calcFieldsOnGridBeforeSimulation(Particle *Particles, Grid *Grid, int numberOfParticles, double Eextern[3], double Bextern[3], double dt, double t){
+
+    reallocateParticleHistory(Particles, numberOfParticles, dt, t);
+    reverseBorisPush(Particles, Grid, numberOfParticles, Eextern, Bextern, dt, t);
+    resetInitialConditions(Particles, numberOfParticles, Eextern, Bextern);
+    
+    
+    for (int step = 0; step < t / dt; step++){
+        for(int p = 0; p < numberOfParticles; p++){
+            addCurrentStateToParticleHistory(&Particles[p], step);
+            updateVelocityWithBorisPusher(Particles, Grid, numberOfParticles, p, Eextern, Bextern, dt);
+            updateLocation(&Particles[p], Grid, dt);
+            
+        }
+    }
+  
+    int numberOfBoxesInX = Grid->numberOfBoxesInX;
+    int numberOfBoxesInY = Grid->numberOfBoxesInY;
+    int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
+    
+    for (int p = 0; p < numberOfParticles; p++){
+        for (int boxIndex = 0; boxIndex < numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ; boxIndex++){
+            if(!boxIsInNearFieldOfParticle(Grid, &Particles[p], boxIndex)){
+                addLWFieldsInBox(Grid, &Particles[p], boxIndex, t);
+            }
+            
+        }
+    }
+}
+
+
 

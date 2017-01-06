@@ -21,7 +21,8 @@ int main(int argc, const char * argv[]) {
     //testNearAndFarFields();
     //testUPML();
     //testNearFieldUpdate();
-    testMultipleParticles();
+    //testMultipleParticles();
+    testHistoryBeforeSimulation();
     return 0;
 }   
 

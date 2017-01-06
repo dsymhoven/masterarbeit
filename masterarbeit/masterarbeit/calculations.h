@@ -38,4 +38,5 @@ int calcBoxIndexKp1(Grid *Grid, const int boxIndex);
 void calcUPMLCoefficients(Grid *Grid);
 void updateNearField(Grid *Grid, Particle *Particle, double t);
 void calcInteractionWithOtherParticles(Particle *Particles, Grid *Grid, int numberOfParticles, int particleIndex, double E[3], double B[3]);
+void calcFieldsOnGridBeforeSimulation(Particle *Particles, Grid *Grid, int numberOfParticles, double Eextern[3], double Bextern[3], double dt, double t);
 #endif

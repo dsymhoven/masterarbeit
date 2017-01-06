@@ -101,16 +101,14 @@ void writeParticlesToFile(Particle *Particles, int numberOfParticles, char *file
         fclose(fid);
     }
     
-    FILE *fid2 = fopen("numberOfParticles.txt","w");
-    fprintf(fid2, "%d", numberOfParticles);
-    fclose(fid2);
 }
 
 
 ///@brief  method for releasing all previously allocated memory in struct Particle. Put all free() invokations in here
-void freeMemoryOnParticles(Particle *Particles, int numberOfParticles, int const arrayLength){
+void freeMemoryOnParticles(Particle *Particles, int numberOfParticles){
     for (int p = 0; p < numberOfParticles; p++){
         printf("releasing allocated memory in Particle%d...\n", p);
+        int arrayLength = Particles[p].lengthOfHistoryArray;
         for (int i = 0; i < arrayLength; i++){
             free(Particles[p].xHistory[i]);
             free(Particles[p].uHistory[i]);
@@ -167,6 +165,7 @@ void addCurrentStateToParticleHistory(Particle *Particle,  int index){
         Particle->uHistory[index][i] = Particle->u[i];
     }
     Particle->currentHistoryLength = index;
+
 }
 
 ///@brief calculates gamma from spatial components of given velocity vector via gamma = sqrt(1 + u^2)
@@ -178,5 +177,13 @@ double getGammaFromVelocityVector(double u[4]){
     }
     return sqrt(1 + result);
     
+}
+
+void writeSimulationInfoToFile(int numberOfParticles, int startTime){
+    printf("Writing simulationInfo to file ...\n");
+    
+    FILE *fid = fopen("simulationInfo.txt","w");
+    fprintf(fid, "%d %d", numberOfParticles, startTime);
+    fclose(fid);
 }
 

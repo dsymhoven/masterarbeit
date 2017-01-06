@@ -130,7 +130,7 @@ void testBorisPusher(){
     }
     printf("executin bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/borisPusherScript.sh");
-    freeMemoryOnParticles(Particles, numberOfParticles, arrayLength);
+    freeMemoryOnParticles(Particles, numberOfParticles);
 }
 
 void testNearFieldCalculation(){
@@ -206,7 +206,7 @@ void testNearFieldCalculation(){
     }
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/nearFieldScript.sh");
-    freeMemoryOnParticles(Particles, numberOfParticles, arrayLength);
+    freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
 }
 
@@ -284,7 +284,7 @@ void testLWFieldCalculationForPlane(){
     writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
-    freeMemoryOnParticles(Particles, numberOfParticles, arrayLength);
+    freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
 }
 
@@ -363,7 +363,7 @@ void testLWFieldCalculationForEachTimeStep(){
     
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
-    freeMemoryOnParticles(Particles, numberOfParticles, arrayLength);
+    freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
 }
 
@@ -447,7 +447,7 @@ void testNearAndFarFields(){
     
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
-    freeMemoryOnParticles(Particles, numberOfParticles, arrayLength);
+    freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
  
 }
@@ -533,7 +533,7 @@ void testUPML(){
     
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
-    freeMemoryOnParticles(Particles, numberOfParticles, arrayLength);
+    freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
     
 }
@@ -620,7 +620,7 @@ void testNearFieldUpdate(){
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
-    freeMemoryOnParticles(Particles, numberOfParticles, arrayLength);
+    freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
     
 }
@@ -726,7 +726,112 @@ void testMultipleParticles(){
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
-    freeMemoryOnParticles(Particles, numberOfParticles, arrayLength);
+    freeMemoryOnParticles(Particles, numberOfParticles);
+    freeMemoryOnGrid(&Grid);
+    
+}
+
+void testHistoryBeforeSimulation(){
+    // ======================================================
+#pragma mark: Initializations
+    // ======================================================
+    
+    Grid Grid;
+    double dx = 0.2;
+    double dy = 0.2;
+    double dz = 0.2;
+    int numberOfGridPointsForBoxInX = 20;
+    int numberOfGridPointsForBoxInY = 20;
+    int numberOfGridPointsForBoxInZ = 20;
+    int numberOfBoxesInX = 5;
+    int numberOfBoxesInY = 5;
+    int numberOfBoxesInZ = 5;
+    
+    int numberOfParticles = 1;
+    
+    Particle Particles[numberOfParticles];
+    Particle *Particle1 = &Particles[0];
+    //Particle *Particle2 = &Particles[1];
+    
+    double dt = 0.5 * dx;
+    double t = 10;
+    double tEnd = 12;
+    
+    char filename[32] = "some";
+    double Eextern[3];
+    double Bextern[3];
+    int arrayLength = (tEnd - t) / dt;
+    
+    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    allocateMemoryOnGrid(&Grid);
+    calcUPMLCoefficients(&Grid);
+    initParticles(Particles, numberOfParticles, arrayLength);
+    
+    
+    Particle1->mass = 1;
+    Particle1->charge = 1;
+    Particle1->x[0] = 0;
+    Particle1->x[1] = 10.41;
+    Particle1->x[2] = 12.20;
+    Particle1->x[3] = 11.401;
+    
+    Particle1->u[1] = 0.458;
+    Particle1->u[2] = 0;
+    Particle1->u[3] = 0;
+    Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
+    
+//    Particle2->mass = 1;
+//    Particle2->charge = 1;
+//    Particle2->x[0] = 0;
+//    Particle2->x[1] = 14.41;
+//    Particle2->x[2] = 10.00;
+//    Particle2->x[3] = 11.401;
+//    
+//    Particle2->u[1] = -1.0;
+//    Particle2->u[2] = 0;
+//    Particle2->u[3] = 0;
+//    Particle2->u[0] = getGammaFromVelocityVector(Particle2->u);
+    
+    Eextern[0] = 0;
+    Eextern[1] = 0;
+    Eextern[2] = 0;
+    
+    Bextern[0] = 0;
+    Bextern[1] = 0;
+    Bextern[2] = 1;
+    
+    int planeForPlotting = Particle1->x[3] / dz;
+    
+    // ======================================================
+#pragma mark: Main Routine
+    // ======================================================
+    calcFieldsOnGridBeforeSimulation(Particles, &Grid, numberOfParticles, Eextern, Bextern, dt, t);
+    writeSimulationInfoToFile(numberOfParticles, t / dt);
+    for (int step = t / dt; step < tEnd / dt; step++){
+        printf("step %d of %f\n", step, tEnd / dt);
+        writeParticlesToFile(Particles, numberOfParticles, filename, step);
+        writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
+        
+        pushEField(&Grid, Particles, numberOfParticles, t, dt);
+        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
+        
+        for(int p = 0; p < numberOfParticles; p++){
+            addCurrentStateToParticleHistory(&Particles[p], step);
+            updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
+            updateLocation(&Particles[p], &Grid, dt);
+            updateNearField(&Grid, &Particles[p], t);
+        }
+
+        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
+        pushEField(&Grid, Particles, numberOfParticles, t, dt);
+        t += dt;
+   }
+//    calcLWFieldsForPlaneWithNearField(&Grid, Particle1, t, planeForPlotting);
+//    writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
+    writeGridParametersToFile(&Grid);
+    printf("executing bash-script ...\n");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
+    freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
     
 }

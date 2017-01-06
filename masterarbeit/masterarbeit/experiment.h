@@ -20,4 +20,5 @@ void testNearAndFarFields();
 void testUPML();
 void testNearFieldUpdate();
 void testMultipleParticles();
+void testHistoryBeforeSimulation();
 #endif /* experiment_h */

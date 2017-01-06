@@ -1063,7 +1063,7 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
         if(ib == 0) {
             adjustmentDueToUpmlInXLeft = Grid->upmlLayerWidth - 1;
         }
-        else if(ib == Grid->numberOfBoxesInX){
+        else if(ib == Grid->numberOfBoxesInX - 1){
             adjustmentDueToUpmlInXRight = Grid->upmlLayerWidth - 1;
         }
         else{
@@ -1073,7 +1073,7 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
         if(jb == 0){
             adjustmentDueToUpmlInYFront = Grid->upmlLayerWidth - 1;
         }
-        else if(jb == Grid->numberOfBoxesInY){
+        else if(jb == Grid->numberOfBoxesInY - 1){
             adjustmentDueToUpmlInYBack = Grid->upmlLayerWidth - 1;
         }
         else{
@@ -1083,7 +1083,7 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
         if(kb == 0){
             adjustmentDueToUpmlInZBottom = Grid->upmlLayerWidth - 1;
         }
-        else if(kb == Grid->numberOfBoxesInZ){
+        else if(kb == Grid->numberOfBoxesInZ - 1){
             adjustmentDueToUpmlInZTop = Grid->upmlLayerWidth - 1;
         }
         else{
