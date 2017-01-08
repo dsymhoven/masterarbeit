@@ -21,4 +21,5 @@ void testUPML();
 void testNearFieldUpdate();
 void testMultipleParticles();
 void testHistoryBeforeSimulation();
+void testScattering();
 #endif /* experiment_h */

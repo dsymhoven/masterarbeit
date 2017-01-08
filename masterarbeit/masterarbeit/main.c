@@ -22,7 +22,8 @@ int main(int argc, const char * argv[]) {
     //testUPML();
     //testNearFieldUpdate();
     //testMultipleParticles();
-    testHistoryBeforeSimulation();
+    //testHistoryBeforeSimulation();
+    testScattering();
     return 0;
 }   
 

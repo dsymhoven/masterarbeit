@@ -10,6 +10,7 @@
 #include "calculations.h"
 #include "string.h"
 #include "math.h"
+#include "stdlib.h"
 
 bool useUPML = true;
 
@@ -1021,8 +1022,37 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
         }
     }
     fclose(fid);
+    fclose(fid2);
 }
 
+
+void writeInitialFieldsToFile(Grid *Grid){
+    printf("Writing initial fields to file ...\n");
+    FILE *fid = fopen("E_initialField.txt", "w");
+    if(fid == NULL){
+        printf("ERROR: Could not open E_initialField.txt!\n");
+    }
+    FILE *fid2 = fopen("H_initialField.txt","w");
+    if(fid2 == NULL){
+        printf("ERROR: Could not open H_initialField.txt!\n");
+    }
+
+    int nx = Grid->numberOfGridPointsInX;
+    int ny = Grid->numberOfGridPointsInY;
+    int nz = Grid->numberOfGridPointsInZ;
+
+    for(int i = 0; i < nx * ny * nz * 3; i++){
+        fprintf(fid,"%f\n", Grid->E[i]);
+        fprintf(fid2,"%f\n", Grid->H[i]);
+    }
+    fclose(fid);
+    fclose(fid2);
+    
+}
+
+void readInitialFieldsFromFile(Grid *Grid){
+    
+}
 
 ///@brief adds LW fields in box specified by input parameter "boxIndex"
 ///@param Grid pointer to an instance of a Grid struct.

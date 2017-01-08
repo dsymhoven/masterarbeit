@@ -9,6 +9,7 @@
 #include "calculations.h"
 #include "string.h"
 #include "lwFields.h"
+#include "unistd.h"
 
 /**
  @brief calculates the cross product of two vectors "a" and "b" and saves the result in array "result"
@@ -956,6 +957,116 @@ void calcFieldsOnGridBeforeSimulation(Particle *Particles, Grid *Grid, int numbe
         }
     }
 }
+
+void writeInitialConditionsToFile(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double tEnd, double Eextern[3], double Bextern[3]){
+    FILE *fid = fopen("initialConditions.txt","w");
+    fprintf(fid, "%f %f %f %d %d %d %d %d %d %d %f %f ", Grid->dx, Grid->dy, Grid->dz, Grid->numberOfGridPointsForBoxInX, Grid->numberOfGridPointsForBoxInY, Grid->numberOfGridPointsForBoxInZ, Grid->numberOfBoxesInX, Grid->numberOfBoxesInY, Grid->numberOfBoxesInZ, numberOfParticles, t, tEnd);
+    for(int p = 0; p < numberOfParticles; p++){
+        fprintf(fid, "%.16f %.16f %.16f %.16f %.16f %.16f %.16f %.16f ", Particles[p].x[0], Particles[p].x[1], Particles[p].x[2], Particles[p].x[3], Particles[p].u[0], Particles[p].u[1], Particles[p].u[2], Particles[p].u[3]);
+    }
+    fprintf(fid, "%f %f %f %f %f %f", Eextern[0], Eextern[1], Eextern[2], Bextern[0], Bextern[1], Bextern[2]);
+    fclose(fid);
+}
+
+bool double_equals(double a, double b){
+    return fabs(a - b) < pow(10,-12);
+}
+
+bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double tEnd, double Eextern[3], double Bextern[3]){
+    
+    double dx;
+    double dy;
+    double dz;
+    int numberOfGridPointsForBoxInX;
+    int numberOfGridPointsForBoxInY;
+    int numberOfGridPointsForBoxInZ;
+    int numberOfBoxesInX;
+    int numberOfBoxesInY;
+    int numberOfBoxesInZ;
+    int numberOfParticlesTest;
+    double tTest;
+    double tEndTest;
+    double x0, u0;
+    double x1, u1;
+    double x2, u2;
+    double x3, u3;
+    double E0, E1, E2;
+    double B0, B1, B2;
+    bool doesExist = false;
+    
+    int numberOfDirectories;
+    char file[32] = "some";
+    char command[128] = "../../../../../../../../Desktop/Projects/masterarbeit/Analysis/initialFields/";
+    FILE *fid;
+    FILE *fid2;
+    chdir(command);
+    fid = fopen("numberOfDirectories.txt", "r");
+    if(fid == NULL){
+        return doesExist;
+    }
+    fscanf(fid, "%d\n", &numberOfDirectories);
+
+    
+    for (int i = 0; i <= numberOfDirectories; i++){
+        sprintf(file, "%d", i);
+        chdir(file);
+        fid = fopen("initialConditions.txt", "r");
+        chdir("../");
+        if (fid == NULL){
+            continue;
+        }
+        fscanf(fid, "%lf %lf %lf %d %d %d %d %d %d %d %lf %lf", &dx, &dy, &dz, &numberOfGridPointsForBoxInX, &numberOfGridPointsForBoxInY, &numberOfGridPointsForBoxInZ, &numberOfBoxesInX, &numberOfBoxesInY, &numberOfBoxesInZ, &numberOfParticlesTest, &tTest, &tEndTest);
+        
+        if (double_equals(Grid->dx, dx) && double_equals(Grid->dy, dy) && double_equals(Grid->dz, dz) && Grid->numberOfGridPointsForBoxInX == numberOfGridPointsForBoxInX && Grid->numberOfGridPointsForBoxInY == numberOfGridPointsForBoxInY && Grid->numberOfGridPointsForBoxInZ == numberOfGridPointsForBoxInZ && Grid->numberOfBoxesInX == numberOfBoxesInX && Grid->numberOfBoxesInY == numberOfBoxesInY && Grid->numberOfBoxesInZ == numberOfBoxesInZ && numberOfParticles == numberOfParticlesTest && double_equals(t, tTest) && double_equals(tEnd, tEndTest)){
+            
+            for(int p = 0; p < numberOfParticles; p++){
+                fscanf(fid, "%lf %lf %lf %lf %lf %lf %lf %lf", &x0, &x1, &x2, &x3, &u0, &u1, &u2, &u3);
+                if(double_equals(Particles[p].x[0], x0) && double_equals(Particles[p].x[1], x1) && double_equals(Particles[p].x[2], x2) && double_equals(Particles[p].x[3], x3) && double_equals(Particles[p].u[0], u0) && double_equals(Particles[p].u[1], u1) && double_equals(Particles[p].u[2], u2) && double_equals(Particles[p].u[3], u3)){
+                    doesExist = true;
+                }
+                
+            }
+            if(doesExist){
+                fscanf(fid, "%lf %lf %lf %lf %lf %lf", &E0, &E1, &E2, &B0, &B1, &B2);
+                if (double_equals(Eextern[0], E0) && double_equals(Eextern[1], E1) && double_equals(Eextern[2], E2) && double_equals(Bextern[0], B0) && double_equals(Bextern[1], B1) && double_equals(Bextern[2], B2)){
+                    doesExist = true;
+                    chdir(file);
+                    fid = fopen("E_initialField.txt", "r");
+                    if (fid == NULL){
+                        printf("ERROR: Could not read from E_initialField.txt!\n");
+                        break;
+                    }
+                    fid2 = fopen("H_initialField.txt", "r");
+                    if (fid2 == NULL){
+                        printf("ERROR: Could not read from H_initialField.txt!\n");
+                        break;
+                    }
+                    chdir("../");
+                    printf("initial Field does already exist! Reading in ...\n");
+                    for (int i = 0; i < Grid->numberOfGridPointsInX * Grid->numberOfGridPointsInY * Grid->numberOfGridPointsInZ * 3; i++){
+                        fscanf(fid, "%lf", &Grid->E[i]);
+                        fscanf(fid2, "%lf", &Grid->H[i]);
+                    }
+                    fclose(fid2);
+                    break;
+                }
+                else{
+                    doesExist = false;
+                    break;
+                }
+            }
+        }
+        else{
+            doesExist = false;
+            continue;
+        }
+
+    }
+    fclose(fid);
+    chdir("../../../../../Library/Developer/Xcode/DerivedData/masterarbeit-gqaflsvzotvzahddhxaxmsryswvq/Build/Products/Debug/");
+    return doesExist;
+}
+
 
 
 
