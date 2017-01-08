@@ -862,7 +862,7 @@ void testScattering(){
     
     double dt = 0.5 * dx;
     double t = 8;
-    double tEnd = 8;
+    double tEnd = 12;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -922,25 +922,25 @@ void testScattering(){
         system("python2.7 ~/Desktop/Projects/masterarbeit/Analysis/initialFields.py");
     }
 
-//    writeSimulationInfoToFile(numberOfParticles, t / dt);
-//    for (int step = t / dt; step < tEnd / dt; step++){
-//        printf("step %d of %d\n", step, (int)(tEnd / dt));
-//        writeParticlesToFile(Particles, numberOfParticles, filename, step);
-//        writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
-//        
-//        pushEField(&Grid, Particles, numberOfParticles, t, dt);
-//        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
-//
-//        for(int p = 0; p < numberOfParticles; p++){
-//            addCurrentStateToParticleHistory(&Particles[p], step);
-//            updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
-//            updateLocation(&Particles[p], &Grid, dt);
-//            updateNearField(&Grid, &Particles[p], t);
-//        }
-//        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
-//        pushEField(&Grid, Particles, numberOfParticles, t, dt);
-//        t += dt;
-//    }
+    writeSimulationInfoToFile(numberOfParticles, t / dt);
+    for (int step = t / dt; step < tEnd / dt; step++){
+        printf("step %d of %d\n", step, (int)(tEnd / dt));
+        writeParticlesToFile(Particles, numberOfParticles, filename, step);
+        writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
+        
+        pushEField(&Grid, Particles, numberOfParticles, t, dt);
+        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
+
+        for(int p = 0; p < numberOfParticles; p++){
+            addCurrentStateToParticleHistory(&Particles[p], step);
+            updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
+            updateLocation(&Particles[p], &Grid, dt);
+            updateNearField(&Grid, &Particles[p], t);
+        }
+        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
+        pushEField(&Grid, Particles, numberOfParticles, t, dt);
+        t += dt;
+    }
 //    calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
     writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);

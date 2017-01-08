@@ -418,6 +418,7 @@ void calcLWFieldsOnGrid(Grid *Grid, Particle *Particle, double t){
 ///@remark calcuates LW fields at simulation time t only on specyfied plane with index "planeForPlotting".
 ///@param Grid pointer to an instance of a Grid struct.
 ///@param Particles pointer to  Particle struct array
+///@param numberOfParticles number of particles
 ///@param t time at which the fields shall be calcualted. This is also the zeroth component of xObserver
 ///@param planeForPlotting number of the plane in which fields shall be calcualted. planeForPlotting = x[3] / dz
 void calcLWFieldsForPlane(Grid *Grid, Particle *Particles, int numberOfParticles, double t, int planeForPlotting){
@@ -456,7 +457,12 @@ void calcLWFieldsForPlane(Grid *Grid, Particle *Particles, int numberOfParticles
     
 }
 
-
+///@remark calcuates LW fields at simulation time t only on specyfied plane with index "planeForPlotting" under consideration of particles nearField.
+///@param Grid pointer to an instance of a Grid struct.
+///@param Particles pointer to  Particle struct array
+///@param numberOfParticles number of particles
+///@param t time at which the fields shall be calcualted. This is also the zeroth component of xObserver
+///@param planeForPlotting number of the plane in which fields shall be calcualted. planeForPlotting = x[3] / dz
 void calcLWFieldsForPlaneWithNearField(Grid *Grid, Particle *Particles, int numberOfParticles, double t, int planeForPlotting){
     for (int p = 0; p < numberOfParticles; p++){
         printf("Calculating LW Fields on plane %d, heigth:%f\n", planeForPlotting, planeForPlotting * Grid->dz);
@@ -862,7 +868,14 @@ void calcInteractionWithOtherParticles(Particle *Particles, Grid *Grid, int numb
     }
 }
 
-
+///@brief performs a reverse Boris Push. Uses same methods like standard BorisPusher but uses -E und -B, so that particle moves in the opposite direction. The particles velocites are also reversed.
+///@param Particles struct containing all particles
+///@param Grid instance of a Grid struct
+///@param numberOfParticles number of particles
+///@param Eextern vector containing external E-Field components
+///@param Bextern vector containing external B-Field components
+///@param dt time increment
+///@param t current simulation time
 void reverseBorisPush(Particle *Particles, Grid *Grid, int numberOfParticles, double Eextern[3], double Bextern[3], double dt, double t){
     scaleVector(Eextern, -1.0);
     scaleVector(Bextern, -1.0);
@@ -883,6 +896,11 @@ void reverseBorisPush(Particle *Particles, Grid *Grid, int numberOfParticles, do
     
 }
 
+///@brief After a reverse borisBush was performed the initial conditions have to be reset in order to start the actual simulation at the initial conditions the user has set in the beginning.
+///@param Particles struct containing all particles
+///@param numberOfParticles number of particles
+///@param Eextern vector containing external E-Field components
+///@param Bextern vector containing external B-Field components
 void resetInitialConditions(Particle *Particles, int numberOfParticles, double Eextern[3], double Bextern[3]){
     scaleVector(Eextern, -1.0);
     scaleVector(Bextern, -1.0);
@@ -895,6 +913,11 @@ void resetInitialConditions(Particle *Particles, int numberOfParticles, double E
     }
 }
 
+///@brief reallocates the size of particle xHistory and uHistory array by t / dt. If simulation starts at t > 0 then the history array needs to be extended by t / dt entries.
+///@param Particles struct containing all particles
+///@param numberOfParticles number of particles
+///@param dt time increment
+///@param t current simulation time
 void reallocateParticleHistory(Particle *Particles, int numberOfParticles, double dt, double t){
     for(int p = 0; p < numberOfParticles; p++){
         Particles[p].xHistory = (double**) realloc(Particles[p].xHistory, (Particles[p].lengthOfHistoryArray + t / dt) * sizeof(double*));
@@ -927,6 +950,14 @@ void reallocateParticleHistory(Particle *Particles, int numberOfParticles, doubl
     }
 }
 
+///@brief extends and calculates particle history up to time t. Example: Let's say t = 8 and tEnd = 12 then the actual simulation starts at t = 8 but all LW fields have been calculated up to this time. Therefore particle histories got expanded in such a way that particle positions are know from t = 0 up to t = 8, where the position at t = 8 equals the inital position specified by the user in the beginning. This is realized by a reverse borisPush with inverted velocity and inverted external fields. Now the particle position is known at t = -8. At this point the current velocity is reverted again and zeroth component is set to 0. The particle can now be pushed to t = 8 again, but now all positions are known and LW fields can be calculated.
+///@param Particles struct containing all particles
+///@param Grid instance of a Grid struct
+///@param numberOfParticles number of particles
+///@param Eextern vector containing external E-Field components
+///@param Bextern vector containing external B-Field components
+///@param dt time increment
+///@param t current simulation time
 void extendParticleHistory(Particle *Particles, Grid *Grid, int numberOfParticles, double Eextern[3], double Bextern[3], double dt, double t){
     reallocateParticleHistory(Particles, numberOfParticles, dt, t);
     reverseBorisPush(Particles, Grid, numberOfParticles, Eextern, Bextern, dt, t);
@@ -958,6 +989,14 @@ void calcFieldsOnGridBeforeSimulation(Particle *Particles, Grid *Grid, int numbe
     }
 }
 
+///@brief In order to have a unique characterization of each simulation all parameters are written into a file called "initialConditions.txt".
+///@param Particles struct containing all particles
+///@param Grid instance of a Grid struct
+///@param numberOfParticles number of particles
+///@param t current simulation time
+///@param tEnd time where simulation should end
+///@param Eextern vector containing external E-Field components
+///@param Bextern vector containing external B-Field components
 void writeInitialConditionsToFile(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double tEnd, double Eextern[3], double Bextern[3]){
     FILE *fid = fopen("initialConditions.txt","w");
     fprintf(fid, "%f %f %f %d %d %d %d %d %d %d %f %f ", Grid->dx, Grid->dy, Grid->dz, Grid->numberOfGridPointsForBoxInX, Grid->numberOfGridPointsForBoxInY, Grid->numberOfGridPointsForBoxInZ, Grid->numberOfBoxesInX, Grid->numberOfBoxesInY, Grid->numberOfBoxesInZ, numberOfParticles, t, tEnd);
@@ -968,10 +1007,15 @@ void writeInitialConditionsToFile(Grid *Grid, Particle *Particles, int numberOfP
     fclose(fid);
 }
 
+///@brief checks if two toubles are equal. Due to floating point arithmetic errors "==" is a very error prone way to go. If difference between two doubles is smaller then 10^-12 we consider them equal and true will be returned.
+///@param a first double
+///@param b second double
+///@returns bool true if |a - b| < 10^-12, false otherwise
 bool double_equals(double a, double b){
     return fabs(a - b) < pow(10,-12);
 }
 
+///@brief checks if initalFields have already been calcualted and reads them into Grid struct if so. Changes working directory to "~/Desktop/Projects/masterarbeit/Analysis/initialFields/" and reads in "numberOfDirectories.txt". Loops through all those directories with name "0", "1", "2", ... reads in "initialConditions.txt" into coresponding variables and checks if they are equal. Check "writeInitialConditionsToFile()" for parameter ordering. If at any point one parameter doesn't match then break and immediately return false.
 bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double tEnd, double Eextern[3], double Bextern[3]){
     
     double dx;
@@ -999,6 +1043,7 @@ bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numbe
     char command[128] = "../../../../../../../../Desktop/Projects/masterarbeit/Analysis/initialFields/";
     FILE *fid;
     FILE *fid2;
+    // here were are in /initialFields
     chdir(command);
     fid = fopen("numberOfDirectories.txt", "r");
     if(fid == NULL){
@@ -1009,9 +1054,12 @@ bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numbe
     
     for (int i = 0; i <= numberOfDirectories; i++){
         sprintf(file, "%d", i);
+        // here were are in /'file'
         chdir(file);
         fid = fopen("initialConditions.txt", "r");
+        // here were are in /initialFields
         chdir("../");
+        // first time without any initalFields there is no "initalConditions.txt" file yet.
         if (fid == NULL){
             continue;
         }
@@ -1024,12 +1072,17 @@ bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numbe
                 if(double_equals(Particles[p].x[0], x0) && double_equals(Particles[p].x[1], x1) && double_equals(Particles[p].x[2], x2) && double_equals(Particles[p].x[3], x3) && double_equals(Particles[p].u[0], u0) && double_equals(Particles[p].u[1], u1) && double_equals(Particles[p].u[2], u2) && double_equals(Particles[p].u[3], u3)){
                     doesExist = true;
                 }
-                
+                else{
+                    doesExist = false;
+                    continue;
+                }
             }
+            // only continue when all parameters for all particles match
             if(doesExist){
                 fscanf(fid, "%lf %lf %lf %lf %lf %lf", &E0, &E1, &E2, &B0, &B1, &B2);
                 if (double_equals(Eextern[0], E0) && double_equals(Eextern[1], E1) && double_equals(Eextern[2], E2) && double_equals(Bextern[0], B0) && double_equals(Bextern[1], B1) && double_equals(Bextern[2], B2)){
                     doesExist = true;
+                    // here were are in /'file'
                     chdir(file);
                     fid = fopen("E_initialField.txt", "r");
                     if (fid == NULL){
@@ -1041,6 +1094,7 @@ bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numbe
                         printf("ERROR: Could not read from H_initialField.txt!\n");
                         break;
                     }
+                    // here were are in /initialFields
                     chdir("../");
                     printf("initial Field does already exist! Reading in ...\n");
                     for (int i = 0; i < Grid->numberOfGridPointsInX * Grid->numberOfGridPointsInY * Grid->numberOfGridPointsInZ * 3; i++){
@@ -1048,6 +1102,7 @@ bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numbe
                         fscanf(fid2, "%lf", &Grid->H[i]);
                     }
                     fclose(fid2);
+                    // if an initial field was found don't continue in other directories.
                     break;
                 }
                 else{
@@ -1063,6 +1118,7 @@ bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numbe
 
     }
     fclose(fid);
+    // here were are back to executable directory
     chdir("../../../../../Library/Developer/Xcode/DerivedData/masterarbeit-gqaflsvzotvzahddhxaxmsryswvq/Build/Products/Debug/");
     return doesExist;
 }
