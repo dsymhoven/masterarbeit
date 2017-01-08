@@ -46,6 +46,7 @@ void initGrid(Grid *Grid, double dx, double dy, double dz, int numberOfGridPoint
 /// @brief Allocation of E and B field array. Inits E and B with 0 by default
 /// @remark arrayLength = 3 * numberOfGridPointsInX * numberOfGridPointsInY * numberOfGridPointsInZ. Factor 3 because we need x,y and z components on each grid point
 /// @throws ERROR: allocation for E and B failed! if memory couldn't be allocated
+/// @param Grid pointer to Grid struct
 void allocateFieldsOnGrid(Grid *Grid){
     printf("allocating Fields ... \n");
     int numberOfGridPointsInX = Grid->numberOfGridPointsInX;
@@ -72,7 +73,8 @@ void allocateFieldsOnGrid(Grid *Grid){
     }
     
 }
-
+/// @brief allocates memory for H and E fields on the planes at box borders
+/// @param Grid pointer to Grid struct
 void allocateFieldsOnBoxBorders(Grid *Grid){
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
@@ -130,7 +132,8 @@ void allocateFieldsOnBoxBorders(Grid *Grid){
     }
     
 }
-
+/// @brief allocates memeory for UPML coefficients
+/// @param Grid pointer to Grid struct
 void allocateUPMLCoefficients(Grid *Grid){
     Grid->upml1E = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
     Grid->upml2E = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
@@ -156,6 +159,7 @@ void allocateUPMLCoefficients(Grid *Grid){
 }
 
 ///@brief calls allocateFieldsOnGrid() and allocateFieldsOnBoxBorders(). For details see their documentation
+///@param Grid pointer to Grid struct
 void allocateMemoryOnGrid(Grid *Grid){
     allocateFieldsOnGrid(Grid);
     allocateFieldsOnBoxBorders(Grid);
@@ -164,6 +168,7 @@ void allocateMemoryOnGrid(Grid *Grid){
 }
 
 ///@brief method for releasing all previously allocated memory in struct Grid. Put all free() invokations in here
+///@param Grid pointer to Grid struct
 void freeMemoryOnGrid(Grid *Grid){
     printf("releasing allocated memory in Grid...\n");
     free(Grid->B);
@@ -241,6 +246,8 @@ void freeMemoryOnGrid(Grid *Grid){
 
 ///@brief maxwellPusher for E field. This method is only used for testing purposes. See pushEFieldInsideBoxes for the final version
 ///@remark E field is calculated via negative curl. Therefore value of B on the left side of E on the grid is required. Thus start i,j,k with 1
+///@param Grid pointer to Grid struct
+///@param dt time increment
 void pushEFieldOnGrid(Grid *Grid, double dt){
     double Hx_ijk;
     double Hy_ijk;
@@ -296,6 +303,7 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
 }
 
 ///@brief inits a sample E and B field onto the grid for testing purposes.
+///@param Grid pointer to Grid struct
 void initSamplePulseOnGrid(Grid *Grid){
     
     int ny = Grid->numberOfGridPointsInY;
@@ -327,6 +335,8 @@ void initSamplePulseOnGrid(Grid *Grid){
 
 ///@brief maxwellPusher for H field.
 ///@remark H field is calculated via positive curl. Therefore value of E on the right side of H on the grid is required. Thus stop i,j,k with at n - 1 where n denotes the numberOfGridPoints
+///@param Grid pointer to Grid struct
+///@param dt time increment
 void pushHFieldOnGrid(Grid *Grid, double dt){
     double Ex_ijk;
     double Ey_ijk;
@@ -382,6 +392,7 @@ void pushHFieldOnGrid(Grid *Grid, double dt){
 
 ///@brief writes Grid parameters to file, in order for python to use them as plot parameters
 ///@throws ERROR: Could not open file gridParameters.txt
+///@param Grid pointer to Grid struct
 void writeGridParametersToFile(Grid *Grid){
     FILE *fid = fopen("gridParameters.txt", "w");
     if (fid == NULL){

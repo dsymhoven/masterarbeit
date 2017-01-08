@@ -12,6 +12,9 @@
 #include "string.h"
 
 ///@brief initializes all particles in Particles array with initParticle() method
+///@param Particles pointer to Particle struct containing all particles
+///@param numberOfParticles number of particles
+///@param arrayLength length of particle history array
 void initParticles(Particle *Particles, int const numberOfParticles, int const arrayLength){
     for(int i = 0; i < numberOfParticles; i++){
         initParticle(&Particles[i], arrayLength);
@@ -20,6 +23,8 @@ void initParticles(Particle *Particles, int const numberOfParticles, int const a
 
 
 /// @brief initializes all properties of struct Particle. x and u are initilized with 0
+///@param Particle pointer to Particl struct
+///@param arrayLength length of particle history array
 void initParticle(Particle *Particle, int const arrayLength){
     printf("initializing Particle ...\n");
     for (int i = 0; i < 4; i++){
@@ -33,6 +38,7 @@ void initParticle(Particle *Particle, int const arrayLength){
 
 ///@brief allocates memory for trajectroy and velocity history.
 ///@remark Since x and u are both four vectors we need to allocate an array of arrays. We need "arrayLength = tEnd / dt" many arrays with length 4.
+///@param Particle pointer to Particl struct
 ///@param arrayLength number of simulation steps. Meaning tEnd / dt
 ///@throws ERROR: Could not allocate memory for one of the arrays
 void allocateParticleHistories(Particle *Particle, int const arrayLength){
@@ -73,6 +79,8 @@ void allocateParticleHistories(Particle *Particle, int const arrayLength){
 ///@brief writes current position, velocity vectors and near field info to file. First line is four vector x. Second line is four vector u. Third line is xMin up to yMax of near field box
 ///@param filename pointer to a char. Gets modified inside the method
 ///@param index outer loop index. Is used to name the output file
+///@param Particles pointer to Particle struct containing all particles
+///@param numberOfParticles number of particles
 void writeParticlesToFile(Particle *Particles, int numberOfParticles, char *filename, int index){
     for(int p = 0; p < numberOfParticles; p++){
         
@@ -104,7 +112,9 @@ void writeParticlesToFile(Particle *Particles, int numberOfParticles, char *file
 }
 
 
-///@brief  method for releasing all previously allocated memory in struct Particle. Put all free() invokations in here
+///@brief method for releasing all previously allocated memory in struct Particle. Put all free() invokations in here
+///@param Particles pointer to Particle struct containing all particles
+///@param numberOfParticles number of particles
 void freeMemoryOnParticles(Particle *Particles, int numberOfParticles){
     for (int p = 0; p < numberOfParticles; p++){
         printf("releasing allocated memory in Particle%d...\n", p);
@@ -120,6 +130,8 @@ void freeMemoryOnParticles(Particle *Particles, int numberOfParticles){
 }
 
 ///@brief saves the current box index for x,y and z in currentBoxIndexArray of Particle struct
+///@param Grid pointer to Grid struct
+///@param Particle pointer to Particle struct
 void getCurrentBoxIndexArrayOfParticle(Grid *Grid, Particle *Particle){
     Particle->currentBoxIndexArray[0] = Particle->x[1] / (Grid->dx * Grid->numberOfGridPointsForBoxInX);
     Particle->currentBoxIndexArray[1] = Particle->x[2] / (Grid->dy * Grid->numberOfGridPointsForBoxInY);
@@ -135,6 +147,8 @@ void getCurrentBoxIndexArrayOfParticle(Grid *Grid, Particle *Particle){
  edgesOfNearFieldBox[4] = zMin;
  edgesOfNearFieldBox[5] = zMax;
  @endcode
+ @param Grid pointer to Grid struct
+ @param Particle pointer to Particle struct
  */
 void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle){
     

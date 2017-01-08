@@ -42,6 +42,8 @@ void pushHField(Grid *Grid, Particle *Particles, int numberOfParticles, double t
 
 ///@brief Maxwell Pusher for EField inside Boxes. This method is used for the hybrid field method.
 ///@remark E field is calculated via negative curl. Therefore value of H on the left side of E on the grid is required. Thus start i,j,k with 1. UPML is activated by default
+///@param Grid instance of Grid struct
+///@param dt time increment
 void pushEFieldInsideBoxes(Grid *Grid, double dt){
     double Hx_ijk;
     double Hy_ijk;
@@ -118,6 +120,8 @@ void pushEFieldInsideBoxes(Grid *Grid, double dt){
 }
 ///@brief Maxwell Pusher for HField inside Boxes. This method is used for the hybrid field method.
 ///@remark H field is calculated via positive curl. Therefore value of E on the right side of H on the grid is required. Thus stop i,j,k at n - 1 where n denotes the numberOfGridPoints. UPML is activated by default
+///@param Grid instance of Grid struct
+///@param dt time increment
 void pushHFieldInsideBoxes(Grid *Grid, double dt){
     double Ex_ijk;
     double Ey_ijk;
@@ -353,6 +357,10 @@ void setEFieldOnBorders(Grid *Grid){
 }
 
 ///@brief this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in "adjustHyz_im1()", "adjustHxz_jm1()" and "adjustHxy_km1()" method.
+///@param Grid pointer to Grid struct
+///@param Particles pointer to Particles struct array
+///@param numberOfParticles number of particles
+///@param t current simulation time
 void adjustHFields(Grid *Grid, Particle *Particles, int numberOfParticles, const double t){
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
@@ -383,6 +391,7 @@ void adjustHFields(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@brief this method adjusts the H values on the left and right side border of the near field.
 ///@param Grid pointer to Grid struct
 ///@param Particles pointer to Particles struct array
+///@param numberOfParticles number of particles
 ///@param boxIndex current boxIndex from outer loop
 ///@param ib boxIndex in x direction
 ///@param jb boxIndex in y direction
@@ -437,6 +446,7 @@ void adjustHyz_im1(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@brief this method adjusts the H values infront and on the back side border of the near field.
 ///@param Grid pointer to Grid struct
 ///@param Particles pointer to Particles struct array
+///@param numberOfParticles number of particles
 ///@param boxIndex current boxIndex from outer loop
 ///@param ib boxIndex in x direction
 ///@param jb boxIndex in y direction
@@ -491,6 +501,7 @@ void adjustHxz_jm1(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@brief this method adjusts the H values on the top and bottom side border of the near field.
 ///@param Grid pointer to Grid struct
 ///@param Particles pointer to Particles struct array
+///@param numberOfParticles number of particles
 ///@param boxIndex current boxIndex from outer loop
 ///@param ib boxIndex in x direction
 ///@param jb boxIndex in y direction
@@ -544,6 +555,10 @@ void adjustHxy_km1(Grid *Grid, Particle *Particles, int numberOfParticles, const
 }
 
 ///@brief this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in "adjustEyz_ip1()", "adjustExz_jp1()" and "adjustExy_kp1()" method.
+///@param Grid pointer to Grid struct
+///@param Particles pointer to Particles struct array
+///@param numberOfParticles number of particles
+///@param t current simulation time
 void adjustEFields(Grid *Grid, Particle *Particles, int numberOfParticles, const double t){
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
@@ -575,6 +590,7 @@ void adjustEFields(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@brief this method adjusts the E values on the left and right side border of the near field.
 ///@param Grid pointer to Grid struct
 ///@param Particles pointer to Particles struct array
+///@param numberOfParticles number of particles
 ///@param boxIndex current boxIndex from outer loop
 ///@param ib boxIndex in x direction
 ///@param jb boxIndex in y direction
@@ -629,6 +645,7 @@ void adjustEyz_ip1(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@brief this method adjusts the E values infront and on the back side border of the near field.
 ///@param Grid pointer to Grid struct
 ///@param Particles pointer to Particles struct array
+///@param numberOfParticles number of particles
 ///@param boxIndex current boxIndex from outer loop
 ///@param ib boxIndex in x direction
 ///@param jb boxIndex in y direction
@@ -683,6 +700,7 @@ void adjustExz_jp1(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@brief this method adjusts the E values at top and bottom side border of the near field.
 ///@param Grid pointer to Grid struct
 ///@param Particles pointer to Particles struct array
+///@param numberOfParticles number of particles
 ///@param boxIndex current boxIndex from outer loop
 ///@param ib boxIndex in x direction
 ///@param jb boxIndex in y direction
@@ -736,6 +754,8 @@ void adjustExy_kp1(Grid *Grid, Particle *Particles, int numberOfParticles, const
 
 ///@brief Maxwell Pusher for EField at box borders. This method is used for the hybrid field method.
 ///@remark E field is calculated via negative curl. Therefore value of H on the left side of E on the grid is required. Thus start i,j,k with 1. UPML is activated by default
+///@param Grid pointer to Grid struct
+///@param dt time increment
 void pushEFieldAtBorders(Grid *Grid, double dt){
     
     double Hx_ijk;
@@ -849,6 +869,8 @@ void pushEFieldAtBorders(Grid *Grid, double dt){
 
 ///@brief Maxwell Pusher for HField at box borders. This method is used for the hybrid field method.
 ///@remark H field is calculated via positive curl. Therefore value of E on the right side of H on the grid is required. Thus stop i,j,k at n - 1 where n denotes the numberOfGridPoints. UPML is activated by default
+///@param Grid pointer to Grid struct
+///@param dt time increment
 void pushHFieldAtBorders(Grid *Grid, double dt){
     
     double Ex_ijk;
