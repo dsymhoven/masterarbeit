@@ -14,6 +14,12 @@
 
 bool useUPML = true;
 
+///@brief pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally pushes E field at box borders.
+///@param Grid instance of Grid struct
+///@param Particles struct containing all particles
+///@param numberOfParticles number of particles
+///@param t current simulation time
+///@param dt time increment
 void pushEField(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double dt){
     pushEFieldInsideBoxes(Grid, dt);
     setHFieldOnBorders(Grid);
@@ -21,7 +27,12 @@ void pushEField(Grid *Grid, Particle *Particles, int numberOfParticles, double t
     pushEFieldAtBorders(Grid, dt);
     
 }
-
+///@brief pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally pushes H field at box borders.
+///@param Grid instance of Grid struct
+///@param Particles struct containing all particles
+///@param numberOfParticles number of particles
+///@param t current simulation time
+///@param dt time increment
 void pushHField(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double dt){
     pushHFieldInsideBoxes(Grid, dt);
     setEFieldOnBorders(Grid);
@@ -1026,7 +1037,9 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
 }
 
 
-void writeInitialFieldsToFile(Grid *Grid){
+///@brief loops through the entire grid and writes respective E and B values to E_initalFields.txt and H_initialFields.txt respectively.
+///@param Grid instance of Grid struct
+void writeFieldsFromCompleteGridToFile(Grid *Grid){
     printf("Writing initial fields to file ...\n");
     FILE *fid = fopen("E_initialField.txt", "w");
     if(fid == NULL){
@@ -1047,10 +1060,6 @@ void writeInitialFieldsToFile(Grid *Grid){
     }
     fclose(fid);
     fclose(fid2);
-    
-}
-
-void readInitialFieldsFromFile(Grid *Grid){
     
 }
 

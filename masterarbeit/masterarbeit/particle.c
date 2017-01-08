@@ -157,6 +157,7 @@ void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle){
 
 
 ///@brief adds current position and velocity information (the entire four vectors) to respective history array of Particle struct
+///@param Particle instance of Particle struct
 ///@param index outer loop index to indicate the current time step.
 void addCurrentStateToParticleHistory(Particle *Particle,  int index){
     
@@ -179,6 +180,9 @@ double getGammaFromVelocityVector(double u[4]){
     
 }
 
+///@brief writes numberOfParticles and startTime of simulation to file. This is needed for python scripts, if simulation does not start at t = 0.
+///@param numberOfParticles number of particles
+///@param startTime start time of simulation
 void writeSimulationInfoToFile(int numberOfParticles, int startTime){
     printf("Writing simulationInfo to file ...\n");
     

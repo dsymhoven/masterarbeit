@@ -915,14 +915,14 @@ void testScattering(){
     // ======================================================
 
     extendParticleHistory(Particles, &Grid, numberOfParticles, Eextern, Bextern, dt, t);
+    writeSimulationInfoToFile(numberOfParticles, t / dt);
     if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern)){
-        calcFieldsOnGridBeforeSimulation(Particles, &Grid, numberOfParticles, t);
-        writeInitialFieldsToFile(&Grid);
+        calcFieldsOnGridWithoutNearField(Particles, &Grid, numberOfParticles, t);
+        writeFieldsFromCompleteGridToFile(&Grid);
         writeInitialConditionsToFile(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern);
         system("python2.7 ~/Desktop/Projects/masterarbeit/Analysis/initialFields.py");
     }
-
-    writeSimulationInfoToFile(numberOfParticles, t / dt);
+    
     for (int step = t / dt; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, (int)(tEnd / dt));
         writeParticlesToFile(Particles, numberOfParticles, filename, step);

@@ -32,6 +32,8 @@ void crossProduct(double a[3], double b[3], double result[3]){
  And Since
  @code c > v <=> (ct)^2 > x^2
  @endcode
+ @param xParticle four  position vector of particle
+ @param xObserver four  position vector of observation point
  */
 bool isInsideBackwardLightcone(double xParticle[4], double xObserver[4]) {
     double dt;
@@ -53,6 +55,8 @@ bool isInsideBackwardLightcone(double xParticle[4], double xObserver[4]) {
  And Since
  @code c > v <=> (ct)^2 > x^2
  @endcode
+ @param xParticle four  position vector of particle
+ @param xObserver four  position vector of observation point
  */
 bool isInsideForwardLightcone(double xParticle[4], double xObserver[4]) {
     
@@ -114,9 +118,12 @@ double minkowskiProduct(double x[4], double y[4]){
 }
 
 /**
- returns parameter lambda for the linear interpolation between particle trajectory and backwards lightcone at observation point.
+@brief returns parameter lambda for the linear interpolation between particle trajectory and backwards lightcone at observation point.
  
  In order to calculate the Liénard-Wiechart fields at the observation point the intersection of the trajectory and the backward lightcone at the observation point is needed. Since the calculated trajectory is discrete we need to interpolate between the first point outside the lightcone and the last point inside the lightcone.
+ @param xInside last four position vector of particle inside the lightcone
+ @param xOutside first four position vector of particle outside the lightcone
+ @param xObserver four  position vector of observation point
  */
 double calculateLambdaForLinearInterpolation(double xInside[4], double xOutside[4], double xObserver[4]) {
     
@@ -149,11 +156,18 @@ void calculateIntersectionPoint(double xInside[4], double xOutside[4], double uI
 }
 
 /**
- updates velocity with boris method.
+@brief updates velocity with boris method.
  
  First obtain “uMinus” by adding half acceleration to the initial velocity.
  Then obtain "uPlus" by performing rotation with "uPrime" and internally computed assisting values.
  Finally, add another half acceleration.
+ 
+ @param Particles struct containing all particles
+ @param Grid instance of Grid struct
+ @param numberOfParticles number of Particles
+ @param Eextern vector containing external E-Field components
+ @param Bextern vector containing external B-Field components
+ @param dt time increment
  */
 void updateVelocityWithBorisPusher(Particle *Particles, Grid *Grid, int numberOfParticles, int particleIndex, double Eextern[3], double Bextern[3], double dt){
     
@@ -973,7 +987,13 @@ void extendParticleHistory(Particle *Particles, Grid *Grid, int numberOfParticle
         }
     }
 }
-void calcFieldsOnGridBeforeSimulation(Particle *Particles, Grid *Grid, int numberOfParticles, double t){
+
+///@brief calcualtes LW fields on complete grid by looping through all boxes. In the near field region of each particle no fields are calculated.
+///@param Particles struct containing all particles
+///@param Grid instance of a Grid struct
+///@param numberOfParticles number of particles
+///@param t current simulation time
+void calcFieldsOnGridWithoutNearField(Particle *Particles, Grid *Grid, int numberOfParticles, double t){
   
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
