@@ -42,4 +42,5 @@ void calcFieldsOnGridWithoutNearField(Particle *Particles, Grid *Grid, int numbe
 void extendParticleHistory(Particle *Particles, Grid *Grid, int numberOfParticles, double Eextern[3], double Bextern[3], double dt, double t);
 void writeInitialConditionsToFile(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double tEnd, double Eextern[3], double Bextern[3]);
 bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double tEnd, double Eextern[3], double Bextern[3]);
+void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3]);
 #endif

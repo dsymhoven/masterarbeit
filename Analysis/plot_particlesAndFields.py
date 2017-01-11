@@ -52,7 +52,7 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 		plt.plot(X[p], Y[p], color = 'r')
 	field = np.genfromtxt('E_fields/E_field'+ str(i) +'.txt')
 	# plot fields
-	plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.05)
+	plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.01)
 	plt.colorbar()
 	# set labels
 	plt.xlabel("X")

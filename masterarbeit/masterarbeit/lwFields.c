@@ -1281,7 +1281,7 @@ void subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
 ///@param component component in which the observation point shall be shifted.
 ///@param Particle pointer to an instance of a Particle struct
 ///@param destination pointer to where LW fields shall ne added.
-///@remark the Yee-scheme requires that the E and B fields are shifted against each other. Maybe the switch case is not neccessary. But I didn't tested it yet. For the staggering a xObservationCopy vector is introduced, which is used for field calculations, so that the original xObservation vector is left untouched. After staggering took place the currentHistoryLength property of Particle struct is used as upper loop index. By doing this, this method (and all above the chain) can be used either within the outer simulation loop to calculate the fileds every time step (video) or afterwards to caluclate the fields just ones. If you want to make a video, you need to change "+=" in last switch block to "=" because the fields get calculated everywhere on the grid over and over again. So we don't want to add upp each fields every time.
+///@remark the Yee-scheme requires that the E and B fields are shifted against each other. Maybe the switch case is not neccessary. But I didn't tested it yet. For the staggering a xObservationCopy vector is introduced, which is used for field calculations, so that the original xObservation vector is left untouched. After staggering took place the currentHistoryLength property of Particle struct is used as upper loop index. By doing this, this method (and all above the chain) can be used either within the outer simulation loop to calculate the fileds every time step (video) or afterwards to caluclate the fields just ones.
 void addLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component){
     double xObserverCopy[4];
     memcpy(xObserverCopy, xObserver, 4 * sizeof(double));
@@ -1365,7 +1365,7 @@ void addLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
 ///@param component component in which the observation point shall be shifted.
 ///@param Particle pointer to an instance of a Particle struct
 ///@param destination pointer to where LW fields shall be subtracted.
-///@remark the Yee-scheme requires that the E and B fields are shifted against each other. Maybe the switch case is not neccessary. But I didn't tested it yet. For the staggering a xObservationCopy vector is introduced, which is used for field calculations, so that the original xObservation vector is left untouched. After staggering took place the currentHistoryLength property of Particle struct is used as upper loop index. By doing this, this method (and all above the chain) can be used either within the outer simulation loop to calculate the fileds every time step (video) or afterwards to caluclate the fields just ones. If you want to make a video, you need to change "+=" in last switch block to "=" because the fields get calculated everywhere on the grid over and over again. So we don't want to add upp each fields every time.
+///@remark the Yee-scheme requires that the E and B fields are shifted against each other. Maybe the switch case is not neccessary. But I didn't tested it yet. For the staggering a xObservationCopy vector is introduced, which is used for field calculations, so that the original xObservation vector is left untouched. After staggering took place the currentHistoryLength property of Particle struct is used as upper loop index. By doing this, this method (and all above the chain) can be used either within the outer simulation loop to calculate the fileds every time step (video) or afterwards to caluclate the fields just once.
 void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component){
     double xObserverCopy[4];
     memcpy(xObserverCopy, xObserver, 4 * sizeof(double));
@@ -1452,14 +1452,11 @@ void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
 ///@param E vector containg both external fields and those from other particles propagated into the near field region of the current particle
 ///@param B vector containg both external fields and those from other particles propagated into the near field region of the current particle
 void updateFieldsForParticlePush(Particle *Particle, Grid *Grid, double Eextern[3], double Bextern[3], double E[3], double B[3]){
-    int ip = Particle->x[0] / Grid->dx;
-    int jp = Particle->x[1] / Grid->dy;
-    int kp = Particle->x[2] / Grid->dz;
     
-    int gridIndex = ip * Grid->numberOfGridPointsInY * Grid->numberOfGridPointsInZ * 3 + jp * Grid->numberOfGridPointsInZ * 3 + kp * 3;
+    interpolateFields(Grid, Particle, E, B);
     for (int i = 0; i < 3; i++){
-        E[i] = Eextern[i] + Grid->E[gridIndex + i];
-        B[i] = Bextern[i] + Grid->H[gridIndex + i];
+        E[i] = Eextern[i] + E[i];
+        B[i] = Bextern[i] + B[i];
     }
 }
 

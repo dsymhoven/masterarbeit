@@ -1160,6 +1160,77 @@ bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numbe
     return doesExist;
 }
 
+void calcGridIndizesAtEdgesOfBox(Grid *Grid, int boxIndexInX, int boxIndexInY, int boxIndexInZ, int gridIndizesAtEdgesOfBox[8]){
+    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
+    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
+    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    
+    int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
+    int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
+    
+    
+    gridIndizesAtEdgesOfBox[0] = boxIndexInX * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + boxIndexInY * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + boxIndexInZ * numberOfGridPointsForBoxInZ * 3;
+    gridIndizesAtEdgesOfBox[1] = boxIndexInX * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (boxIndexInY + 1) * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + boxIndexInZ * numberOfGridPointsForBoxInZ * 3;
+    gridIndizesAtEdgesOfBox[2] = boxIndexInX * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + boxIndexInY * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + (boxIndexInZ + 1) * numberOfGridPointsForBoxInZ * 3;
+    gridIndizesAtEdgesOfBox[3] = boxIndexInX * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (boxIndexInY + 1) * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + (boxIndexInZ + 1) * numberOfGridPointsForBoxInZ * 3;
+    gridIndizesAtEdgesOfBox[4] = (boxIndexInX + 1) * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + boxIndexInY * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + boxIndexInZ * numberOfGridPointsForBoxInZ * 3;
+    gridIndizesAtEdgesOfBox[5] = (boxIndexInX + 1) * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (boxIndexInY + 1) * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + boxIndexInZ * numberOfGridPointsForBoxInZ * 3;
+    gridIndizesAtEdgesOfBox[6] = (boxIndexInX + 1) * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + boxIndexInY * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + (boxIndexInZ + 1) * numberOfGridPointsForBoxInZ * 3;
+    gridIndizesAtEdgesOfBox[7] = (boxIndexInX + 1) * numberOfGridPointsForBoxInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (boxIndexInY + 1) * numberOfGridPointsForBoxInY * numberOfGridPointsInZ * 3 + (boxIndexInZ + 1) * numberOfGridPointsForBoxInZ * 3;
+}
+
+double trilinearInterpolation(double interpolationPoint[3], double A, double B, double C, double D, double E, double F, double G, double H, double u, double v, double w){
+    double P1, P2, P3, P4, Pu, Po;
+    
+    P1 = A + u * ( B - A );
+    P2 = C + u * ( D - C );
+    Pu = P1 + v * ( P2 - P1 );
+    
+    P3 = E + u * ( F - E );
+    P4 = G + u * ( H - G );
+    Po = P3 + v * ( P4 - P3 );
+    
+    return Pu + w * ( Po - Pu);
+    
+}
+void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3]){
+    int ib, jb, kb;
+    double u,v,w;
+    int gridIndizesAtEdgesOfBox[8];
+    double interpolationPoint[3];
+    
+    getCurrentBoxIndexArrayOfParticle(Grid, Particle);
+    ib = Particle->currentBoxIndexArray[0];
+    jb = Particle->currentBoxIndexArray[1];
+    kb = Particle->currentBoxIndexArray[2];
+    
+    calcGridIndizesAtEdgesOfBox(Grid, ib, jb, kb, gridIndizesAtEdgesOfBox);
+    
+    interpolationPoint[0] = Particle->x[1];
+    interpolationPoint[1] = Particle->x[2];
+    interpolationPoint[2] = Particle->x[3];
+    
+    double x0 = ib * Grid->numberOfGridPointsForBoxInX * Grid->dx;
+    double x1 = (ib + 1) * Grid->numberOfGridPointsForBoxInX * Grid->dx;
+    
+    double y0 = jb * Grid->numberOfGridPointsForBoxInY * Grid->dy;
+    double y1 = (jb + 1) * Grid->numberOfGridPointsForBoxInY * Grid->dy;
+
+    double z0 = kb * Grid->numberOfGridPointsForBoxInZ * Grid->dz;
+    double z1 = (kb + 1) * Grid->numberOfGridPointsForBoxInZ * Grid->dz;
+    
+    u = (Particle->x[1] - x0)/(x1 - x0);
+    v = (Particle->x[2] - y0)/(y1 - y0);
+    w = (Particle->x[3] - z0)/(z1 - z0);
+    
+    for(int i = 0; i < 3; i++){
+    E[i] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesAtEdgesOfBox[0] + i], Grid->E[gridIndizesAtEdgesOfBox[1] + i], Grid->E[gridIndizesAtEdgesOfBox[2] + i], Grid->E[gridIndizesAtEdgesOfBox[3] + i], Grid->E[gridIndizesAtEdgesOfBox[4] + i], Grid->E[gridIndizesAtEdgesOfBox[5] + i], Grid->E[gridIndizesAtEdgesOfBox[6] + i], Grid->E[gridIndizesAtEdgesOfBox[7] + i], u, v, w);
+    B[i] = trilinearInterpolation(interpolationPoint, Grid->H[gridIndizesAtEdgesOfBox[0] + i], Grid->H[gridIndizesAtEdgesOfBox[1] + i], Grid->H[gridIndizesAtEdgesOfBox[2] + i], Grid->H[gridIndizesAtEdgesOfBox[3] + i], Grid->H[gridIndizesAtEdgesOfBox[4] + i], Grid->H[gridIndizesAtEdgesOfBox[5] + i], Grid->H[gridIndizesAtEdgesOfBox[6] + i], Grid->H[gridIndizesAtEdgesOfBox[7] + i], u, v, w);
+    }
+}
+
+
+
 
 
 
