@@ -172,21 +172,37 @@ void allocateMemoryOnGrid(Grid *Grid){
 void freeMemoryOnGrid(Grid *Grid){
     printf("releasing allocated memory in Grid...\n");
     free(Grid->B);
+    Grid->B = NULL;
     free(Grid->E);
+    Grid->E = NULL;
     free(Grid->D);
+    Grid->D = NULL;
     free(Grid->H);
+    Grid->H = NULL;
     free(Grid->upml1E);
+    Grid->upml1E = NULL;
     free(Grid->upml2E);
+    Grid->upml2E = NULL;
     free(Grid->upml3E);
+    Grid->upml3E = NULL;
     free(Grid->upml4E);
+    Grid->upml4E = NULL;
     free(Grid->upml5E);
+    Grid->upml5E = NULL;
     free(Grid->upml6E);
+    Grid->upml6E = NULL;
     free(Grid->upml1H);
+    Grid->upml1H = NULL;
     free(Grid->upml2H);
+    Grid->upml2H = NULL;
     free(Grid->upml3H);
+    Grid->upml3H = NULL;
     free(Grid->upml4H);
+    Grid->upml4H = NULL;
     free(Grid->upml5H);
+    Grid->upml5H = NULL;
     free(Grid->upml6H);
+    Grid->upml6H = NULL;
     
     for (int i = 0; i < Grid->numberOfBoxesInX * Grid->numberOfBoxesInY * Grid->numberOfBoxesInZ; i++)
     {

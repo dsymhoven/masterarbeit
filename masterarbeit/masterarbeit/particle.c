@@ -121,10 +121,15 @@ void freeMemoryOnParticles(Particle *Particles, int numberOfParticles){
         int arrayLength = Particles[p].lengthOfHistoryArray;
         for (int i = 0; i < arrayLength; i++){
             free(Particles[p].xHistory[i]);
+            Particles[p].xHistory[i] = NULL;
             free(Particles[p].uHistory[i]);
+            Particles[p].uHistory[i] = NULL;
         }
         free(Particles[p].xHistory);
+        Particles[p].xHistory = NULL;
+        
         free(Particles[p].uHistory);
+        Particles[p].uHistory = NULL;
     }
     
 }
