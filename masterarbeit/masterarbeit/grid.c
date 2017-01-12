@@ -405,6 +405,14 @@ void writeGridParametersToFile(Grid *Grid){
     fclose(fid);
 }
 
-
+void clearFieldsFromGrid(Grid *Grid){
+    printf("Clearing Fields from Grid ...\n");
+    for(int i = 0; i < Grid->numberOfGridPointsInX * Grid->numberOfGridPointsInY * Grid->numberOfGridPointsInZ * 3; i++){
+        Grid->E[i] = 0;
+        Grid->H[i] = 0;
+        Grid->D[i] = 0;
+        Grid->B[i] = 0;
+    }
+}
 
 

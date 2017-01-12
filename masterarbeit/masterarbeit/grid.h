@@ -87,4 +87,5 @@ void pushHFieldOnGrid(Grid *Grid, double dt);
 void writeGridParametersToFile(Grid *Grid);
 void allocateFieldsOnBoxBorders(Grid *Grid);
 void allocateUPMLCoefficients(Grid *Grid);
+void clearFieldsFromGrid(Grid *Grid);
 #endif /* grid_h */
