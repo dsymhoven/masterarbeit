@@ -69,4 +69,40 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 	# close fig
 	plt.close(fig)
 	
+# open figure only once because we want to plot several particles in one figure
+fig = plt.figure()
 
+for p in range(numberOfParticles):
+	for i in range(startTime, startTime + numberOfParticleFiles):
+		# read data from text and save it into array data
+		data = np.genfromtxt('Particles/Particle'+ str(p) +'/Particle' + str(p) +'_' + str(i) + '.txt')
+		# define variables
+		x.append(data[0][1])
+		y.append(data[0][2])
+		if len(x) > 40:
+			x.pop(0)
+			y.pop(0)
+	# plot x and y value of particle as red dot
+	plt.plot(x, y, color = 'r')
+	# delete x,y array for next particle
+	x=[]
+	y=[]
+
+field = np.genfromtxt('E_fields/E_field'+ str(i+1) +'.txt')
+# plot fields
+plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.01)
+plt.colorbar()
+# set labels
+plt.xlabel("X")
+plt.ylabel("Y")
+# set axis 
+plt.xlim([0, lengthOfSimulationBoxInX])
+plt.ylim([0, lengthOfSimulationBoxInY])
+plt.xticks(np.arange(0, lengthOfSimulationBoxInX + 1, lengthOfOneBoxInX))
+plt.yticks(np.arange(0, lengthOfSimulationBoxInY + 1, lengthOfOneBoxInY))
+plt.grid(linestyle = "-", color='red')
+# define filename for saving
+filename = 'img'
+fig.savefig("Pictures/" + "analyticSolution.png".format(filename), bbox_inches='tight')
+# close fig
+plt.close(fig)

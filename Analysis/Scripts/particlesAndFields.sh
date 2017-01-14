@@ -23,6 +23,7 @@ for file in E_field*; do
 done
 for file in Particle*; do
 	if [[ -f $file ]]; then
+		rm -rf $PATHTOANALYSIS/Particles
 		mkdir -p $PATHTOANALYSIS/Particles
 		mv $PATHTOEXECUTABLE/Particle*.txt $PATHTOANALYSIS/Particles
 	fi
