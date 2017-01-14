@@ -1059,6 +1059,7 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
 }
 
 
+
 ///@brief loops through the entire grid and writes respective E and B values to E_initalFields.txt and H_initialFields.txt respectively.
 ///@param Grid instance of Grid struct
 void writeFieldsFromCompleteGridToFile(Grid *Grid){

@@ -42,4 +42,5 @@ void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle);
 void addCurrentStateToParticleHistory(Particle *Particle, int index);
 double getGammaFromVelocityVector(double u[4]);
 void writeSimulationInfoToFile(int numberOfParticles, int startTime);
+bool particleIsInsideSimulationArea(Grid *Grid, Particle *Particle);
 #endif /* particle_h */

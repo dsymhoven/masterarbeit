@@ -186,14 +186,17 @@ void updateVelocityWithBorisPusher(Particle *Particles, Grid *Grid, int numberOf
     double s[3];
     double uMinusCrossT[3];
     double uPrimeCrossS[3];
-    double E[3];
-    double B[3];
+    double E[3]={0};
+    double B[3]={0};
     double absoluteSquareValueOfT;
     double uModifiedForCrossProduct[3];
     double chargeOverMass = Particle->charge / Particle->mass;
     
-    updateFieldsForParticlePush(Particle, Grid, Eextern, Bextern, E, B);
-    calcInteractionWithOtherParticles(Particles, Grid, numberOfParticles, particleIndex, E, B);
+    if (particleIsInsideSimulationArea(Grid, Particle)){
+        updateFieldsForParticlePush(Particle, Grid, Eextern, Bextern, E, B);
+        calcInteractionWithOtherParticles(Particles, Grid, numberOfParticles, particleIndex, E, B);
+    }
+    
     
     // assisting values
     for (int i = 0; i < dimension; i++){
@@ -314,7 +317,7 @@ void calculateLienardWiechertParameters(double xParticle[4], double xObserver[4]
 /**
  @brief calcultes time derivative in each component of beta.
  @param uOld velocity vector of particle before it gets pushed
- @param uNew actual velocity vector of particle
+ @param uNew current velocity vector of particle
  @param dt step size for calculating the derivative
  @param betaDot the result vector containing the derivatives
  */
@@ -327,7 +330,7 @@ void calculateBetaDot(double uOld[4], double uNew[4], double dt, double betaDot[
 /**
  @brief calcuates acceleration of particle
  @param xOld position of particle before it was pushed via borisPusher
- @param xNew actual position of particle
+ @param xNew current position of particle
  @param beta acceleration vector of spatial components
  */
 void calculateBeta(double xOld[4], double xNew[4], double beta[3]) {
@@ -942,6 +945,7 @@ void resetInitialConditions(Particle *Particles, int numberOfParticles, double E
             Particles[p].u[i+1] *= -1;
         }
         Particles[p].x[0] = 0;
+        Particles[p].currentHistoryLength = 0;
     }
 }
 
@@ -1001,7 +1005,6 @@ void extendParticleHistory(Particle *Particles, Grid *Grid, int numberOfParticle
             addCurrentStateToParticleHistory(&Particles[p], step);
             updateVelocityWithBorisPusher(Particles, Grid, numberOfParticles, p, Eextern, Bextern, dt);
             updateLocation(&Particles[p], Grid, dt);
-            
         }
     }
 }
@@ -1194,33 +1197,36 @@ void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3])
     double u,v,w;
     int gridIndizesNextNeighbours[8];
     double interpolationPoint[3];
-
+    
     ip = Particle->x[1] / Grid->dx;
     jp = Particle->x[2] / Grid->dy;
     kp = Particle->x[3] / Grid->dz;
     
-    calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-    
-    interpolationPoint[0] = Particle->x[1];
-    interpolationPoint[1] = Particle->x[2];
-    interpolationPoint[2] = Particle->x[3];
-    
-    double x0 = ip * Grid->dx;
-    double x1 = (ip + 1) * Grid->dx;
-    
-    double y0 = jp * Grid->dy;
-    double y1 = (jp + 1) * Grid->dy;
-
-    double z0 = kp * Grid->dz;
-    double z1 = (kp + 1) * Grid->dz;
-    
-    u = (Particle->x[1] - x0)/(x1 - x0);
-    v = (Particle->x[2] - y0)/(y1 - y0);
-    w = (Particle->x[3] - z0)/(z1 - z0);
-    
-    for(int i = 0; i < 3; i++){
-    E[i] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0] + i], Grid->E[gridIndizesNextNeighbours[1] + i], Grid->E[gridIndizesNextNeighbours[2] + i], Grid->E[gridIndizesNextNeighbours[3] + i], Grid->E[gridIndizesNextNeighbours[4] + i], Grid->E[gridIndizesNextNeighbours[5] + i], Grid->E[gridIndizesNextNeighbours[6] + i], Grid->E[gridIndizesNextNeighbours[7] + i], u, v, w);
-    B[i] = trilinearInterpolation(interpolationPoint, Grid->H[gridIndizesNextNeighbours[0] + i], Grid->H[gridIndizesNextNeighbours[1] + i], Grid->H[gridIndizesNextNeighbours[2] + i], Grid->H[gridIndizesNextNeighbours[3] + i], Grid->H[gridIndizesNextNeighbours[4] + i], Grid->H[gridIndizesNextNeighbours[5] + i], Grid->H[gridIndizesNextNeighbours[6] + i], Grid->H[gridIndizesNextNeighbours[7] + i], u, v, w);
+    if (ip < Grid->numberOfGridPointsInX - 1 && jp < Grid->numberOfGridPointsInY - 1 && kp < Grid->numberOfGridPointsInZ - 1 && ip > 0 && jp > 0 && kp > 0){
+        
+        calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+        
+        interpolationPoint[0] = Particle->x[1];
+        interpolationPoint[1] = Particle->x[2];
+        interpolationPoint[2] = Particle->x[3];
+        
+        double x0 = ip * Grid->dx;
+        double x1 = (ip + 1) * Grid->dx;
+        
+        double y0 = jp * Grid->dy;
+        double y1 = (jp + 1) * Grid->dy;
+        
+        double z0 = kp * Grid->dz;
+        double z1 = (kp + 1) * Grid->dz;
+        
+        u = (Particle->x[1] - x0)/(x1 - x0);
+        v = (Particle->x[2] - y0)/(y1 - y0);
+        w = (Particle->x[3] - z0)/(z1 - z0);
+        
+        for(int i = 0; i < 3; i++){
+            E[i] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0] + i], Grid->E[gridIndizesNextNeighbours[1] + i], Grid->E[gridIndizesNextNeighbours[2] + i], Grid->E[gridIndizesNextNeighbours[3] + i], Grid->E[gridIndizesNextNeighbours[4] + i], Grid->E[gridIndizesNextNeighbours[5] + i], Grid->E[gridIndizesNextNeighbours[6] + i], Grid->E[gridIndizesNextNeighbours[7] + i], u, v, w);
+            B[i] = trilinearInterpolation(interpolationPoint, Grid->H[gridIndizesNextNeighbours[0] + i], Grid->H[gridIndizesNextNeighbours[1] + i], Grid->H[gridIndizesNextNeighbours[2] + i], Grid->H[gridIndizesNextNeighbours[3] + i], Grid->H[gridIndizesNextNeighbours[4] + i], Grid->H[gridIndizesNextNeighbours[5] + i], Grid->H[gridIndizesNextNeighbours[6] + i], Grid->H[gridIndizesNextNeighbours[7] + i], u, v, w);
+        }
     }
 }
 

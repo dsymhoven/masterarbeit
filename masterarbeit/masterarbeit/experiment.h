@@ -22,4 +22,5 @@ void testNearFieldUpdate();
 void testMultipleParticles();
 void testHistoryBeforeSimulation();
 void testScattering();
+void extendHistoryAndCalcLWFieldsIndependantly();
 #endif /* experiment_h */

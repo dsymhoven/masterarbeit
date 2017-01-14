@@ -181,10 +181,10 @@ void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle){
 void addCurrentStateToParticleHistory(Particle *Particle,  int index){
     
     for (int i = 0; i < 4; i++){
-        Particle->xHistory[index][i] = Particle->x[i];
-        Particle->uHistory[index][i] = Particle->u[i];
-    }
-    Particle->currentHistoryLength = index;
+        Particle->xHistory[Particle->currentHistoryLength][i] = Particle->x[i];
+        Particle->uHistory[Particle->currentHistoryLength][i] = Particle->u[i];
+    }    
+    Particle->currentHistoryLength += 1;
 
 }
 
@@ -208,5 +208,15 @@ void writeSimulationInfoToFile(int numberOfParticles, int startTime){
     FILE *fid = fopen("simulationInfo.txt","w");
     fprintf(fid, "%d %d", numberOfParticles, startTime);
     fclose(fid);
+}
+
+bool particleIsInsideSimulationArea(Grid *Grid, Particle *Particle){
+    bool isInside = true;
+    
+    if(Particle->x[1] > Grid->lengthOfSimulationBoxInX || Particle->x[2] > Grid->lengthOfSimulationBoxInY || Particle->x[3] > Grid->lengthOfSimulationBoxInZ || Particle->x[1] < 0 || Particle->x[2] < 0 || Particle->x[3] < 0){
+        printf("WARNING: A particle is currently outside the simulation area!\n");
+        isInside = false;
+    }
+    return isInside;
 }
 
