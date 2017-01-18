@@ -23,8 +23,8 @@ int main(int argc, const char * argv[]) {
     //testNearFieldUpdate();
     //testMultipleParticles();
     //testHistoryBeforeSimulation();
-    //testScattering();
-    extendHistoryAndCalcLWFieldsIndependantly();
+    testScattering();
+    //extendHistoryAndCalcLWFieldsIndependantly();
     return 0;
 }   
 

@@ -847,12 +847,12 @@ void testScattering(){
     double dx = 0.125;
     double dy = 0.125;
     double dz = 0.125;
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    int numberOfGridPointsForBoxInX = 32;
+    int numberOfGridPointsForBoxInY = 32;
+    int numberOfGridPointsForBoxInZ = 32;
+    int numberOfBoxesInX = 9;
+    int numberOfBoxesInY = 9;
+    int numberOfBoxesInZ = 9;
     
     int numberOfParticles = 2;
     
@@ -861,8 +861,8 @@ void testScattering(){
     Particle *Particle2 = &Particles[1];
     
     double dt = 0.5 * dx;
-    double t = 10;
-    double tEnd = 24;
+    double t = 40;
+    double tEnd = 80;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -879,9 +879,9 @@ void testScattering(){
     Particle1->charge = 1;
     
     Particle1->x[0] = 0;
-    Particle1->x[1] = 14.1;
-    Particle1->x[2] = 10.10;
-    Particle1->x[3] = 11.401;
+    Particle1->x[1] = 26.1;
+    Particle1->x[2] = 18.10;
+    Particle1->x[3] = 16.401;
     
     Particle1->u[1] = -0.458;
     Particle1->u[2] = 0;
@@ -891,9 +891,9 @@ void testScattering(){
     Particle2->mass = 1;
     Particle2->charge = 1;
     Particle2->x[0] = 0;
-    Particle2->x[1] = 7.81;
-    Particle2->x[2] = 9.90;
-    Particle2->x[3] = 11.401;
+    Particle2->x[1] = 10.81;
+    Particle2->x[2] = 16.10;
+    Particle2->x[3] = 16.401;
     
     Particle2->u[1] = 0.458;
     Particle2->u[2] = 0;
@@ -913,10 +913,10 @@ void testScattering(){
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
-
+    
     extendParticleHistory(Particles, &Grid, numberOfParticles, Eextern, Bextern, dt, t);
     writeSimulationInfoToFile(numberOfParticles, t / dt);
-    if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern)){
+    if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, Eextern, Bextern)){
         calcFieldsOnGridWithoutNearField(Particles, &Grid, numberOfParticles, t);
         writeFieldsFromCompleteGridToFile(&Grid);
         writeInitialConditionsToFile(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern);
@@ -930,7 +930,7 @@ void testScattering(){
         
         pushEField(&Grid, Particles, numberOfParticles, t, dt);
         pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
-
+        
         for(int p = 0; p < numberOfParticles; p++){
             addCurrentStateToParticleHistory(&Particles[p], step);
             updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
@@ -943,7 +943,7 @@ void testScattering(){
     }
     clearFieldsFromGrid(&Grid);
     calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
-    writeFieldsToFile(&Grid, filename, 999999, planeForPlotting, true, false);
+    writeFieldsToFile(&Grid, filename, t, planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
@@ -1031,7 +1031,7 @@ void extendHistoryAndCalcLWFieldsIndependantly(){
     
     extendParticleHistory(Particles, &Grid, numberOfParticles, Eextern, Bextern, dt, t);
     writeSimulationInfoToFile(numberOfParticles, t / dt);
-    if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern)){
+    if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, Eextern, Bextern)){
         calcFieldsOnGridWithoutNearField(Particles, &Grid, numberOfParticles, t);
         writeFieldsFromCompleteGridToFile(&Grid);
         writeInitialConditionsToFile(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern);

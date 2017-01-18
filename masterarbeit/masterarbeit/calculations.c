@@ -1040,7 +1040,7 @@ void calcFieldsOnGridWithoutNearField(Particle *Particles, Grid *Grid, int numbe
 ///@param Bextern vector containing external B-Field components
 void writeInitialConditionsToFile(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double tEnd, double Eextern[3], double Bextern[3]){
     FILE *fid = fopen("initialConditions.txt","w");
-    fprintf(fid, "%f %f %f %d %d %d %d %d %d %d %f %f ", Grid->dx, Grid->dy, Grid->dz, Grid->numberOfGridPointsForBoxInX, Grid->numberOfGridPointsForBoxInY, Grid->numberOfGridPointsForBoxInZ, Grid->numberOfBoxesInX, Grid->numberOfBoxesInY, Grid->numberOfBoxesInZ, numberOfParticles, t, tEnd);
+    fprintf(fid, "%f %f %f %d %d %d %d %d %d %d %f ", Grid->dx, Grid->dy, Grid->dz, Grid->numberOfGridPointsForBoxInX, Grid->numberOfGridPointsForBoxInY, Grid->numberOfGridPointsForBoxInZ, Grid->numberOfBoxesInX, Grid->numberOfBoxesInY, Grid->numberOfBoxesInZ, numberOfParticles, t);
     for(int p = 0; p < numberOfParticles; p++){
         fprintf(fid, "%.16f %.16f %.16f %.16f %.16f %.16f %.16f %.16f ", Particles[p].x[0], Particles[p].x[1], Particles[p].x[2], Particles[p].x[3], Particles[p].u[0], Particles[p].u[1], Particles[p].u[2], Particles[p].u[3]);
     }
@@ -1057,7 +1057,7 @@ bool double_equals(double a, double b){
 }
 
 ///@brief checks if initalFields have already been calcualted and reads them into Grid struct if so. Changes working directory to "~/Desktop/Projects/masterarbeit/Analysis/initialFields/" and reads in "numberOfDirectories.txt". Loops through all those directories with name "0", "1", "2", ... reads in "initialConditions.txt" into coresponding variables and checks if they are equal. Check "writeInitialConditionsToFile()" for parameter ordering. If at any point one parameter doesn't match then break and immediately return false.
-bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double tEnd, double Eextern[3], double Bextern[3]){
+bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double Eextern[3], double Bextern[3]){
     
     double dx;
     double dy;
@@ -1070,7 +1070,6 @@ bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numbe
     int numberOfBoxesInZ;
     int numberOfParticlesTest;
     double tTest;
-    double tEndTest;
     double x0, u0;
     double x1, u1;
     double x2, u2;
@@ -1104,9 +1103,9 @@ bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numbe
         if (fid == NULL){
             continue;
         }
-        fscanf(fid, "%lf %lf %lf %d %d %d %d %d %d %d %lf %lf", &dx, &dy, &dz, &numberOfGridPointsForBoxInX, &numberOfGridPointsForBoxInY, &numberOfGridPointsForBoxInZ, &numberOfBoxesInX, &numberOfBoxesInY, &numberOfBoxesInZ, &numberOfParticlesTest, &tTest, &tEndTest);
+        fscanf(fid, "%lf %lf %lf %d %d %d %d %d %d %d %lf", &dx, &dy, &dz, &numberOfGridPointsForBoxInX, &numberOfGridPointsForBoxInY, &numberOfGridPointsForBoxInZ, &numberOfBoxesInX, &numberOfBoxesInY, &numberOfBoxesInZ, &numberOfParticlesTest, &tTest);
         
-        if (double_equals(Grid->dx, dx) && double_equals(Grid->dy, dy) && double_equals(Grid->dz, dz) && Grid->numberOfGridPointsForBoxInX == numberOfGridPointsForBoxInX && Grid->numberOfGridPointsForBoxInY == numberOfGridPointsForBoxInY && Grid->numberOfGridPointsForBoxInZ == numberOfGridPointsForBoxInZ && Grid->numberOfBoxesInX == numberOfBoxesInX && Grid->numberOfBoxesInY == numberOfBoxesInY && Grid->numberOfBoxesInZ == numberOfBoxesInZ && numberOfParticles == numberOfParticlesTest && double_equals(t, tTest) && double_equals(tEnd, tEndTest)){
+        if (double_equals(Grid->dx, dx) && double_equals(Grid->dy, dy) && double_equals(Grid->dz, dz) && Grid->numberOfGridPointsForBoxInX == numberOfGridPointsForBoxInX && Grid->numberOfGridPointsForBoxInY == numberOfGridPointsForBoxInY && Grid->numberOfGridPointsForBoxInZ == numberOfGridPointsForBoxInZ && Grid->numberOfBoxesInX == numberOfBoxesInX && Grid->numberOfBoxesInY == numberOfBoxesInY && Grid->numberOfBoxesInZ == numberOfBoxesInZ && numberOfParticles == numberOfParticlesTest && double_equals(t, tTest)){
             
             for(int p = 0; p < numberOfParticles; p++){
                 fscanf(fid, "%lf %lf %lf %lf %lf %lf %lf %lf", &x0, &x1, &x2, &x3, &u0, &u1, &u2, &u3);
