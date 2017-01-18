@@ -65,7 +65,7 @@ bibliography=totoc,
 %============================ new Definitions ============================
 \include{definitions}
 \include{newChapterDefinition}
-\include{titlepageDefinition}
+\include{titlePageDefinition}
 % =============================Titelseite ==================================
 
 \begin{document}
@@ -73,15 +73,16 @@ bibliography=totoc,
 \pagenumbering{roman}
 
   \LMUTitle
-      {Dies ist Titel der Masterarbeit \\
-       This is the title of the thesis}               % Titel der Arbeit
+      {FDTD Simulation von Elektronenstreuung an einer elektromagnetischen Welle}               % deutscher Titel der Arbeit
+      {FDTD Simulation of electron scattering in an electromagnetic wave}			% english title
       {David Symhoven}                       % Vor- und Nachname des Autors
       {Witten}                             % Geburtsort des Autors
       {Computational \& Plasma Physics}                         % Name des Lehrstuhls
       {München 2017}                          % Ort und Jahr der Erstellung
-      {30.06.2017}                            % Tag der Abgabe
+      {18.07.2017}                            % Tag der Abgabe
       {Prof.Dr.Hartmut Ruhl}                          % Name des Erstgutachters
       {Zweitgutachter}                         % Name des Zweitgutachters
+
 
 
 %======================== EINLEITUNG ========================
@@ -91,6 +92,7 @@ Now it's going loose ...  \cite{Allen}\\
 What is the goal of this thesis?\\
 What is Plasma, and where is it used ? \\
 Summary of all chapters\\
+%Literatur Fennel / King
 
 %================================= SYMBOLE UND KONTANTEN ================
 \include{symbols}
@@ -134,7 +136,7 @@ The Maxwell equations are the foundation of the classical electromagnetism and d
 \vec{H} &\coloneqq \frac{1}{\mu_0} \vec{B} - \vec{M},
 \eal
 \eeq
-where $\mu_0$ and $\epsilon_0$ are the vacuum permeability and the  permittivity respectively. The macroscopic Maxwell Equations than read
+where $\mu_0$ and $\epsilon_0$ are the vacuum permeability and permittivity respectively. The macroscopic Maxwell Equations than read
 \beq
 \label{eqn: maxwellEq}
 \label{eqn: maxwell1}
@@ -159,7 +161,7 @@ In the case of vacuum, the material equations \eqref{eqn: materialEquations} red
 %======================== Colomb and Lorentz Gauge ========================
 \section{Colomb and Lorentz Gauge}
 In the following section we consider the Maxwell Equations in vacuum.\\
-The electric and magnetic fields can also be described by scalar and a vector potential respectively. From \eqref{eqn: maxwell1} we can conclude that 
+The electric and magnetic fields can also be described by a scalar and a vector potential respectively. From \eqref{eqn: maxwell1} we can conclude that 
 \beq
 \label{eqn: vecA}
 \exists \vec{A} \in \mathbb{R}^3 \colon \vec{B} = \vec{\nabla} \times \vec{A},
@@ -172,8 +174,11 @@ where $\vec{A}$ is called the vector potential. Plugging in \eqref{eqn: vecA} in
 \eeq
 $\varphi$ is called scalar potential. Plugging in \eqref{eqn: varphi} into \eqref{eqn: maxwell2} and also \eqref{eqn: vecA} and \eqref{eqn: varphi} into \eqref{eqn: maxwell4} gives the potential equations
 \beq
-- \Delta \varphi - \vec{\nabla} \left(\frac{\del \vec{A}}{\del t}\right) &=& \frac{\rho}{\epsilon_0} \\
-\underbrace{\left(\Delta- \frac{1}{c^2}\frac{\del^2}{\del t^2}\right)}_{\coloneqq \hat\square} \vec{A} - \vec{\nabla} \left(\vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t}\right) &=& -\mu_0\vec{j},
+\bal
+\label{eqn: potentialEquations}
+- \Delta \varphi - \vec{\nabla} \left(\frac{\del \vec{A}}{\del t}\right) &= \frac{\rho}{\epsilon_0} \\
+\underbrace{\left(\Delta- \frac{1}{c^2}\frac{\del^2}{\del t^2}\right)}_{\coloneqq \hat\square} \vec{A} - \vec{\nabla} \left(\vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t}\right) &= -\mu_0\vec{j},
+\eal
 \eeq
 where we used the \textit{Graßmann Identity}: $\vec{\nabla} \times (\vec{\nabla} \times \vec{A}) = \vec{\nabla}(\vec{\nabla}\vec{A}) - \Delta \vec{A}$.\\
 The description of the fields by the aforementioned potentials $\varphi$ and $\vec{A}$ are not unique. This is called gauge freedom. The potentials can be specifically adjusted to the problem at hand. The gauge transformations look like
@@ -189,7 +194,14 @@ If we choose $\psi$ such that
 \beq
 \vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} = 0,
 \eeq
-then we call it \textit{Lorentz Gauge}.
+then we call it a \textit{Lorentz Gauge} and the potential Equations \eqref{eqn: potentialEquations} decouple into two separate wave equations
+\beq
+\bal
+\hat\square \varphi &= -\frac{\rho}{\epsilon_0} \\
+\hat\square \vec{A} &= -\mu_0\vec{j}.
+\eal
+\eeq
+
 \section{Liénard-Wiechert Potentials}
 \label{eqn: Liénard-Wiechert}
 The \textit{Liénard-Wiechert} Potentials describe the electric and magnetic fields of a moving electric particle. They are the generalization of the colomb poitential 
@@ -212,9 +224,9 @@ Following this, we also want to define and calculate the numerical complexity of
 
 %======================== Integration of equation of motion ========================
 %===========================================================
-\chapter{Integration of equation of motion}
+\chapter{Integration of Equation of Motion}
 %======================== Equations of Motion ========================
-\section{Equations of motion}
+\section{Equations of Motion}
 As we know from mechanics the dynamic of a particle is determined by the forces acting on it. In our case there is a force due to electro-magnetic fields. That can be external fields, but also fields due to moving particles, as we explained in section \ref{sec: lw-potentials}.\\
 The dynamics of our system is described by the \textit{Lorentz-Newton} equation
 \beq
@@ -411,11 +423,19 @@ Following the geometrical analysis in ~\cite{Birdsall} we find %MISSING:PIctures
 \end{figure}
 \noindent
 
+
+%======================== Nyström Scheme ========================
+\section{Nyström-Scheme}
+
+%======================== Adaptive Timestep control ========================
+\section{Adaptive Timestep Control}
+
+
 %======================== Interpolations ========================
 %===========================================================
 \chapter{Interpolations}
 
-%======================== {Linear interpolation of Trajectories ========================
+%======================== Linear interpolation of Trajectories ========================
 \section{Linear interpolation of Trajectories}
 \label{sec: Interpolation of Trajectories}
 The previously presented methods calculate the particle trajectory solely at discrete points in time $x_i^{\mu}(\tau)$. Calculating Liénard-Wiechert fields according to equation \eqref{eqn: Liénard-Wiechert} however, requires the intersection point of the trajectory with the backward lightcone of the observation point. 
@@ -464,12 +484,12 @@ One denotes the intersection point with the backward lightcone, the other one wi
 Plugging in $\lambda$ in \eqref{eqn: linInt} gives the desired intersection point.
 
 %======================== trilinear interpolation of fields ========================
-\section{trilinear interpolation of fields}
+\section{Trilinear Interpolation of Fields}
 
 
 %======================== Hybrid Fields ========================
 %===========================================================
-\chapter{Hybrid Fields}
+\chapter{FDTD}
 In this section we introduce the concept of hybrid fields and how this approach reduces the numerical complexity from $N^2$ to $N$.\\
 Usually the numerical complexity of multi particle simulation is $N^2$, due to the interaction between each particle. In our case we need $N$ push operations for the particles. One push for each particle. In order to do that, however, we need to solve equation \eqref{eqn: Lorentz-Newton} and therefore all Liénard-Wiechert fields from the other $N-1$ particles are needed. This results in $N(N-1)$ calculations for each time step, period. If we want to calculate the Liénard-Wiechert fields, we also need to store all positions from all particles, as explained in section \ref{sec: Interpolation of Trajectories}. For a few particles such simulations are effortlessly feasible. But with increasing particle numbers such simulations may not just require more and more memory capacity but also become so time consuming that at some point we simply can not do them anylonger. That's where the hybrid field model comes in. Instead of calculating the Liénard-Wiechert fields at every time step for all particles at all grid points we save them onto the grid and propagate them through the grid using Maxwell equations. How that works in detail is explained in the following sections. 
 
@@ -503,11 +523,16 @@ Figure \ref{fig: YeeBox} illustrates a so called Yee-Box and the components we n
 	\label{fig: YeeBox}
 \end{figure}
 
+\section{Numeric Dispersion Relation}
 
+\chapter{Hybrid Field Approach}
 %======================== Near and Far- Fields ========================
 \section{Near-and Farfields}
 
-
+\section{Particle Push and Nearfield Update}
+\section{Particle History}
+\section{Farfield Setup Before Simulation}
+\section{Electron Scattering in an electromagnetic wave}
 %======================== UPML ============================
 %===========================================================
 \chapter{Uniaxial Perfectly Matched Layer}
@@ -558,7 +583,9 @@ and
 \Longleftrightarrow \hat\square \vec{A} - \vec{\nabla} \left(\vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} \right) &= -\mu_0\vec{j}\nn\\
 \eal
 \eeq
-\appendix
+
+\chapter{Softwarestack}
+\chapter{Code Documentation}
 %============================= Abbildungsverzeichnis ===========================
 \listoffigures
 
