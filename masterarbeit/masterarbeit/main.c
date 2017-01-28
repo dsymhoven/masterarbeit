@@ -23,8 +23,9 @@ int main(int argc, const char * argv[]) {
     //testNearFieldUpdate();
     //testMultipleParticles();
     //testHistoryBeforeSimulation();
-    testScattering();
+    //testScattering();
     //extendHistoryAndCalcLWFieldsIndependantly();
+    electronScatteringInEMWave();
     return 0;
 }   
 

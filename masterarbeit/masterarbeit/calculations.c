@@ -481,7 +481,6 @@ void calcLWFieldsForPlane(Grid *Grid, Particle *Particles, int numberOfParticles
                 addLWField(Grid, &Particles[p], &Grid->E[gridIndexInBox + 1], xObserver, 1);
                 addLWField(Grid, &Particles[p], &Grid->E[gridIndexInBox + 2], xObserver, 2);
                 
-                
             }
         }
     }
@@ -1163,18 +1162,23 @@ bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numbe
     return doesExist;
 }
 
-void calcGridIndizesNextNeighbours(Grid *Grid, int particleIndexInX, int particleIndexInY, int particleIndexInZ, int gridIndizesNextNeighbours[8]){
+void calcGridIndizesNextNeighbours(Grid *Grid, int particleGridIndexInX, int particleGridIndexInY, int particleGridIndexInZ, int gridIndizesNextNeighbours[8]){
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
     
-    gridIndizesNextNeighbours[0] = particleIndexInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + particleIndexInY * numberOfGridPointsInZ * 3 + particleIndexInZ * 3;
-    gridIndizesNextNeighbours[1] = particleIndexInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (particleIndexInY + 1) * numberOfGridPointsInZ * 3 + particleIndexInZ * 3;
-    gridIndizesNextNeighbours[2] = particleIndexInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + particleIndexInY * numberOfGridPointsInZ * 3 + (particleIndexInZ + 1) * 3;
-    gridIndizesNextNeighbours[3] = particleIndexInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (particleIndexInY + 1) * numberOfGridPointsInZ * 3 + (particleIndexInZ + 1) * 3;
-    gridIndizesNextNeighbours[4] = (particleIndexInX + 1) * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + particleIndexInY * numberOfGridPointsInZ * 3 + particleIndexInZ * 3;
-    gridIndizesNextNeighbours[5] = (particleIndexInX + 1) * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (particleIndexInY + 1) * numberOfGridPointsInZ * 3 + particleIndexInZ * 3;
-    gridIndizesNextNeighbours[6] = (particleIndexInX + 1) * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + particleIndexInY * numberOfGridPointsInZ * 3 + (particleIndexInZ + 1) * 3;
-    gridIndizesNextNeighbours[7] = (particleIndexInX + 1) * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (particleIndexInY + 1) * numberOfGridPointsInZ * 3 + (particleIndexInZ + 1) * 3;
+    gridIndizesNextNeighbours[0] = particleGridIndexInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + particleGridIndexInY * numberOfGridPointsInZ * 3 + particleGridIndexInZ * 3;
+    gridIndizesNextNeighbours[1] = particleGridIndexInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (particleGridIndexInY + 1) * numberOfGridPointsInZ * 3 + particleGridIndexInZ * 3;
+    gridIndizesNextNeighbours[2] = particleGridIndexInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + particleGridIndexInY * numberOfGridPointsInZ * 3 + (particleGridIndexInZ + 1) * 3;
+    gridIndizesNextNeighbours[3] = particleGridIndexInX * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (particleGridIndexInY + 1) * numberOfGridPointsInZ * 3 + (particleGridIndexInZ + 1) * 3;
+    gridIndizesNextNeighbours[4] = (particleGridIndexInX + 1) * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + particleGridIndexInY * numberOfGridPointsInZ * 3 + particleGridIndexInZ * 3;
+    gridIndizesNextNeighbours[5] = (particleGridIndexInX + 1) * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (particleGridIndexInY + 1) * numberOfGridPointsInZ * 3 + particleGridIndexInZ * 3;
+    gridIndizesNextNeighbours[6] = (particleGridIndexInX + 1) * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + particleGridIndexInY * numberOfGridPointsInZ * 3 + (particleGridIndexInZ + 1) * 3;
+    gridIndizesNextNeighbours[7] = (particleGridIndexInX + 1) * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (particleGridIndexInY + 1) * numberOfGridPointsInZ * 3 + (particleGridIndexInZ + 1) * 3;
+}
+
+void interpolateEx(double E[3], double B[3]){
+
+    
 }
 
 double trilinearInterpolation(double interpolationPoint[3], double A, double B, double C, double D, double E, double F, double G, double H, double u, double v, double w){
@@ -1191,46 +1195,277 @@ double trilinearInterpolation(double interpolationPoint[3], double A, double B, 
     return Pu + w * ( Po - Pu);
     
 }
-void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3]){
+
+int getPartialBoxIndex(Particle *Particle, Grid *Grid){
     int ip, jp, kp;
-    double u,v,w;
-    int gridIndizesNextNeighbours[8];
-    double interpolationPoint[3];
+    int partialBoxIndex = -1;
     
     ip = Particle->x[1] / Grid->dx;
     jp = Particle->x[2] / Grid->dy;
     kp = Particle->x[3] / Grid->dz;
     
+    if(fmod(Particle->x[1], Grid->dx) <= 0.5 * Grid->dx && fmod(Particle->x[2], Grid->dy) <= 0.5 * Grid->dy && fmod(Particle->x[3], Grid->dz) <= 0.5 * Grid->dz){
+        partialBoxIndex = 0;
+    }
+    else if(fmod(Particle->x[1], Grid->dx) <= 0.5 * Grid->dx && fmod(Particle->x[2], Grid->dy) <= 0.5 * Grid->dy && fmod(Particle->x[3], Grid->dz) > 0.5 * Grid->dz){
+        partialBoxIndex = 1;
+    }
+    else if(fmod(Particle->x[1], Grid->dx) <= 0.5 * Grid->dx && fmod(Particle->x[2], Grid->dy) > 0.5 * Grid->dy && fmod(Particle->x[3], Grid->dz) <= 0.5 * Grid->dz){
+        partialBoxIndex = 2;
+    }
+    else if(fmod(Particle->x[1], Grid->dx) <= 0.5 * Grid->dx && fmod(Particle->x[2], Grid->dy) > 0.5 * Grid->dy && fmod(Particle->x[3], Grid->dz) > 0.5 * Grid->dz){
+        partialBoxIndex = 3;
+    }
+
+    else if(fmod(Particle->x[1], Grid->dx) > 0.5 * Grid->dx && fmod(Particle->x[2], Grid->dy) <= 0.5 * Grid->dy && fmod(Particle->x[3], Grid->dz) <= 0.5 * Grid->dz){
+        partialBoxIndex = 4;
+    }
+    else if(fmod(Particle->x[1], Grid->dx) > 0.5 * Grid->dx && fmod(Particle->x[2], Grid->dy) <= 0.5 * Grid->dy && fmod(Particle->x[3], Grid->dz) > 0.5 * Grid->dz){
+        partialBoxIndex = 5;
+    }
+    else if(fmod(Particle->x[1], Grid->dx) > 0.5 * Grid->dx && fmod(Particle->x[2], Grid->dy) > 0.5 * Grid->dy && fmod(Particle->x[3], Grid->dz) <= 0.5 * Grid->dz){
+        partialBoxIndex = 6;
+    }
+    else if(fmod(Particle->x[1], Grid->dx) > 0.5 * Grid->dx && fmod(Particle->x[2], Grid->dy) > 0.5 * Grid->dy && fmod(Particle->x[3], Grid->dz) > 0.5 * Grid->dz){
+        partialBoxIndex = 7;
+    }
+
+    return partialBoxIndex;
+    
+}
+
+
+void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3]){
+    int ip, jp, kp;
+    double u,v,w;
+    double x0,x1,y0,y1,z0,z1;
+    int gridIndizesNextNeighbours[8];
+    double interpolationPoint[3];
+    int partialBoxIndex;
+    
+    ip = Particle->x[1] / Grid->dx;
+    jp = Particle->x[2] / Grid->dy;
+    kp = Particle->x[3] / Grid->dz;
+
+    
     if (ip < Grid->numberOfGridPointsInX - 1 && jp < Grid->numberOfGridPointsInY - 1 && kp < Grid->numberOfGridPointsInZ - 1 && ip > 0 && jp > 0 && kp > 0){
-        
-        calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
         
         interpolationPoint[0] = Particle->x[1];
         interpolationPoint[1] = Particle->x[2];
         interpolationPoint[2] = Particle->x[3];
-        
-        double x0 = ip * Grid->dx;
-        double x1 = (ip + 1) * Grid->dx;
-        
-        double y0 = jp * Grid->dy;
-        double y1 = (jp + 1) * Grid->dy;
-        
-        double z0 = kp * Grid->dz;
-        double z1 = (kp + 1) * Grid->dz;
-        
+
+        partialBoxIndex = getPartialBoxIndex(Particle, Grid);
+
+        // MARK: Ex
+        switch (partialBoxIndex) {
+            case 0:
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp - 1, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
+                
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
+                break;
+            case 1:
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
+                
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
+                break;
+            case 2:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
+                
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
+                break;
+            case 3:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
+                
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
+                break;
+            case 4:
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp - 1, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
+                
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
+                break;
+            case 5:
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
+                
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
+                break;
+            case 6:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
+                
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
+                break;
+            case 7:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
+                
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
+                break;
+            default:
+                break;
+        }
+
         u = (Particle->x[1] - x0)/(x1 - x0);
         v = (Particle->x[2] - y0)/(y1 - y0);
         w = (Particle->x[3] - z0)/(z1 - z0);
         
-        for(int i = 0; i < 3; i++){
-            E[i] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0] + i], Grid->E[gridIndizesNextNeighbours[1] + i], Grid->E[gridIndizesNextNeighbours[2] + i], Grid->E[gridIndizesNextNeighbours[3] + i], Grid->E[gridIndizesNextNeighbours[4] + i], Grid->E[gridIndizesNextNeighbours[5] + i], Grid->E[gridIndizesNextNeighbours[6] + i], Grid->E[gridIndizesNextNeighbours[7] + i], u, v, w);
-            B[i] = trilinearInterpolation(interpolationPoint, Grid->H[gridIndizesNextNeighbours[0] + i], Grid->H[gridIndizesNextNeighbours[1] + i], Grid->H[gridIndizesNextNeighbours[2] + i], Grid->H[gridIndizesNextNeighbours[3] + i], Grid->H[gridIndizesNextNeighbours[4] + i], Grid->H[gridIndizesNextNeighbours[5] + i], Grid->H[gridIndizesNextNeighbours[6] + i], Grid->H[gridIndizesNextNeighbours[7] + i], u, v, w);
+        
+        E[0] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0]], Grid->E[gridIndizesNextNeighbours[1]], Grid->E[gridIndizesNextNeighbours[2]], Grid->E[gridIndizesNextNeighbours[3]], Grid->E[gridIndizesNextNeighbours[4]], Grid->E[gridIndizesNextNeighbours[5]], Grid->E[gridIndizesNextNeighbours[6]], Grid->E[gridIndizesNextNeighbours[7]], u, v, w);
+    
+        // MARK: Ey
+        switch (partialBoxIndex) {
+            case 0:
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
+                break;
+            case 1:
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
+                break;
+            case 2:
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
+                break;
+            case 3:
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
+                break;
+            case 4:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
+                break;
+            case 5:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
+                break;
+            case 6:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
+                break;
+            case 7:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
+                break;
+            default:
+                break;
         }
+        
+
+        u = (Particle->x[1] - x0)/(x1 - x0);
+        v = (Particle->x[2] - y0)/(y1 - y0);
+        w = (Particle->x[3] - z0)/(z1 - z0);
+        
+        
+        E[2] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0]], Grid->E[gridIndizesNextNeighbours[1]], Grid->E[gridIndizesNextNeighbours[2]], Grid->E[gridIndizesNextNeighbours[3]], Grid->E[gridIndizesNextNeighbours[4]], Grid->E[gridIndizesNextNeighbours[5]], Grid->E[gridIndizesNextNeighbours[6]], Grid->E[gridIndizesNextNeighbours[7]], u, v, w);
+
+    
     }
+    
+    
+
+
 }
-
-
-
 
 
 
