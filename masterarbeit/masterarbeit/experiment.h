@@ -14,7 +14,6 @@
 void testMaxwellPusher();
 void testBorisPusher();
 void testLWFieldCalculationForPlane();
-void testLWFieldCalculationForEachTimeStep();
 void testNearAndFarFields();
 void testUPML();
 void testNearFieldUpdate();

@@ -230,24 +230,24 @@ void testNearAndFarFields(){
     // ======================================================
     
     Grid Grid;
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
-    int numberOfGridPointsForBoxInX = 32;
-    int numberOfGridPointsForBoxInY = 32;
-    int numberOfGridPointsForBoxInZ = 32;
-    int numberOfBoxesInX = 5;
-    int numberOfBoxesInY = 5;
-    int numberOfBoxesInZ = 5;
+    double dx = 0.2;
+    double dy = 0.2;
+    double dz = 0.2;
+    int numberOfGridPointsForBoxInX = 20;
+    int numberOfGridPointsForBoxInY = 20;
+    int numberOfGridPointsForBoxInZ = 20;
+    int numberOfBoxesInX = 8;
+    int numberOfBoxesInY = 8;
+    int numberOfBoxesInZ = 8;
     
     int numberOfParticles = 1;
     
     Particle Particles[numberOfParticles];
-    Particle Particle = Particles[0];
+    Particle *Particle = &Particles[0];
     
     double dt = 0.5 * dx;
     double t = 0;
-    double tEnd = 25;
+    double tEnd = 10;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -256,20 +256,20 @@ void testNearAndFarFields(){
     
     initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
-    writeGridParametersToFile(&Grid);
-    initParticle(&Particle, arrayLength);
+    initParticles(Particles, numberOfParticles, arrayLength);
+    calcUPMLCoefficients(&Grid);
     
-    Particle.mass = 1;
-    Particle.charge = 1;
-    Particle.x[0] = 0;
-    Particle.x[1] = 10.21;
-    Particle.x[2] = 10.01;
-    Particle.x[3] = 10.401;
+    Particle->mass = 1;
+    Particle->charge = 1;
+    Particle->x[0] = 0;
+    Particle->x[1] = 14.21;
+    Particle->x[2] = 14.01;
+    Particle->x[3] = 14.401;
     
-    Particle.u[1] = 0.458;
-    Particle.u[2] = 0;
-    Particle.u[3] = 0;
-    Particle.u[0] = getGammaFromVelocityVector(Particle.u);
+    Particle->u[1] = 0.458;
+    Particle->u[2] = 0;
+    Particle->u[3] = 0;
+    Particle->u[0] = getGammaFromVelocityVector(Particle->u);
     
     Eextern[0] = 0;
     Eextern[1] = 0;
@@ -279,11 +279,13 @@ void testNearAndFarFields(){
     Bextern[1] = 0;
     Bextern[2] = 1;
     
-    int planeForPlotting = Particle.x[3] / dz;
+    int planeForPlotting = Particle->x[3] / dz;
     
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
+    writeSimulationInfoToFile(numberOfParticles, t);
+    
     for (int step = 0; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, arrayLength);
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
@@ -292,16 +294,21 @@ void testNearAndFarFields(){
         pushEField(&Grid, Particles, numberOfParticles, t, dt);
         pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
         
-        addCurrentStateToParticleHistory(&Particle, step);
-        updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, 1, Eextern, Bextern, dt);
-        updateLocation(&Particle, &Grid, dt);
-
+        for(int p = 0; p < numberOfParticles; p++){
+            addCurrentStateToParticleHistory(&Particles[p], step);
+            updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
+            updateLocation(&Particles[p], &Grid, dt);
+        }
+        
         pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
         pushEField(&Grid, Particles, numberOfParticles, t, dt);
         
         t += dt;
     }
-    
+    clearFieldsFromGrid(&Grid);
+    calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    writeFieldsToFile(&Grid, filename, (int)(tEnd/dt), planeForPlotting, true, false);
+    writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);

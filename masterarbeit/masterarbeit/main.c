@@ -16,8 +16,7 @@ int main(int argc, const char * argv[]) {
     //testMaxwellPusher();
     //testBorisPusher();
     //testLWFieldCalculationForPlane();
-    testLWFieldCalculationForEachTimeStep();
-    //testNearAndFarFields();
+    testNearAndFarFields();
     //testUPML();
     //testNearFieldUpdate();
     //testMultipleParticles();
