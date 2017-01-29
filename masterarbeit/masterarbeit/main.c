@@ -13,8 +13,8 @@
 
 int main(int argc, const char * argv[]) {
     
-    testMaxwellPusher();
-    //testBorisPusher();
+    //testMaxwellPusher();
+    testBorisPusher();
     //testNearFieldCalculation();
     //testLWFieldCalculationForPlane();
     //testLWFieldCalculationForEachTimeStep();

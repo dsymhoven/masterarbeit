@@ -81,7 +81,7 @@ void testBorisPusher(){
     int numberOfBoxesInY = 5;
     int numberOfBoxesInZ = 5;
     
-    double dt = 0.5 * 0.125;
+    double dt = 0.5 * dx;
     double t = 0;
     double tEnd = 3;
     
@@ -93,24 +93,24 @@ void testBorisPusher(){
     int numberOfParticles = 1;
     
     Particle Particles[numberOfParticles];
-    Particle Particle = Particles[0];
+    Particle *Particle = &Particles[0];
     
     initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     writeGridParametersToFile(&Grid);
-    initParticle(&Particle, arrayLength);
+    initParticles(Particles, numberOfParticles, arrayLength);
     
-    Particle.mass = 1;
-    Particle.charge = 1;
-    Particle.x[0] = 0;
-    Particle.x[1] = 11.21;
-    Particle.x[2] = 12.01;
-    Particle.x[3] = 14.401;
+    Particle->mass = 1;
+    Particle->charge = 1;
+    Particle->x[0] = 0;
+    Particle->x[1] = 11.21;
+    Particle->x[2] = 12.01;
+    Particle->x[3] = 14.401;
     
-    Particle.u[0] = 1.1;
-    Particle.u[1] = 0.458;
-    Particle.u[2] = 0;
-    Particle.u[3] = 0;
+    Particle->u[0] = 1.1;
+    Particle->u[1] = 0.458;
+    Particle->u[2] = 0;
+    Particle->u[3] = 0;
     
     Eextern[0] = 0;
     Eextern[1] = 0;
@@ -123,16 +123,20 @@ void testBorisPusher(){
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
+    writeSimulationInfoToFile(numberOfParticles, t);
     for (int step = 0; step < tEnd / dt; step++){
+        printf("step %d of %d\n", step, arrayLength);
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
-        updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, 1, Eextern, Bextern, dt);
-        //updateLocation(&Particle, &Grid, dt);
-        
+        for(int p = 0; p < numberOfParticles; p++){
+            updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
+            updateLocation(Particle, &Grid, dt);
+        }
         t += dt;
     }
-    printf("executin bash-script ...\n");
+    printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/borisPusherScript.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
+    freeMemoryOnGrid(&Grid);
 }
 
 void testNearFieldCalculation(){

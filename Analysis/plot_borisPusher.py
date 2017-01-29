@@ -1,35 +1,60 @@
 import numpy as np
 import glob
 import matplotlib.pyplot as plt
-from matplotlib.mlab import griddata
-from matplotlib import cm
-import scipy.interpolate
+import matplotlib.patches as patches
+import fnmatch
+import os
 
-N = 100
-files = glob.glob('Particles/*.txt')
+simulationInfo = np.genfromtxt('simulationInfo.txt')
+numberOfParticles = int(simulationInfo[0])
+startTime = int(simulationInfo[1])
+numberOfParticleFiles = len(fnmatch.filter(os.listdir('Particles/Particle0/'), '*.txt'))
+gridParameters = np.genfromtxt('gridParameters.txt')
 
-for file in files:
-	# read data from text and save it into array data
-	data = np.genfromtxt(file)
+lengthOfSimulationBoxInX = gridParameters[6]
+lengthOfSimulationBoxInY = gridParameters[7]
+lengthOfOneBoxInX = gridParameters[0] * gridParameters[3]
+lengthOfOneBoxInY = gridParameters[1] * gridParameters[4]
+numberOfBoxesInX =  lengthOfSimulationBoxInX / lengthOfOneBoxInX
+numberOfBoxesInY =  lengthOfSimulationBoxInY / lengthOfOneBoxInY
+
+X = np.zeros((numberOfParticles,1))
+Y = np.zeros((numberOfParticles,1))
+x = []
+y = []
+xnew = []
+ynew = []
+
+for i in range(startTime, startTime + numberOfParticleFiles):
 	# open figure
 	fig = plt.figure()
-	# creates contour plot of data array automatically. vmin and vamx sets values for colorbar
-	plt.plot(data[0][1], data[0][2], marker='o', color = 'r')
+	for p in range(numberOfParticles):
+		# read data from text and save it into array data
+		data = np.genfromtxt('Particles/Particle'+ str(p) +'/Particle' + str(p) + '_' + str(i) + '.txt')
+		# define variables
+		x.append(data[0][1])
+		y.append(data[0][2])
+	X = np.c_[X,x]
+	Y = np.c_[Y,y]
+	x=[]
+	y=[]
+	if i == startTime or len(X[0]) > 40:
+		X = np.delete(X,0,1)
+		Y = np.delete(Y,0,1)
+	for p in range(numberOfParticles):
+		# plot x and y value of particle as red dot
+		plt.plot(X[p], Y[p], color = 'r')
 	# set labels
 	plt.xlabel("X")
 	plt.ylabel("Y")
-	# set axis 
-	plt.xlim([0,32])
-	plt.ylim([0,32])
-	plt.xticks(np.arange(0,32 + 1,4))
-	plt.yticks(np.arange(0,32 + 1,4))
-	
-	plt.grid(linestyle='-', color='red')
+	# set axis
+	plt.xlim([0, lengthOfSimulationBoxInX])
+	plt.ylim([0, lengthOfSimulationBoxInY])
+	plt.xticks(np.arange(0, lengthOfSimulationBoxInX + 1, lengthOfOneBoxInX))
+	plt.yticks(np.arange(0, lengthOfSimulationBoxInY + 1, lengthOfOneBoxInY))
+	plt.grid(linestyle = "-", color='red')
 	# define filename for saving
-	filename = file.replace(".txt", "")
-	filename = filename.replace("Particles/", "")
+	filename = 'img' + str(i - startTime)
 	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight')
 	# close fig
 	plt.close(fig)
-	
-
