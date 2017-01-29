@@ -324,29 +324,20 @@ void initSamplePulseOnGrid(Grid *Grid){
     
     int ny = Grid->numberOfGridPointsInY;
     int nz = Grid->numberOfGridPointsInZ;
-    double mu = 128;
     
-    for (int i = 32*2; i < 32*6; i++){
-        for (int j = 32*2; j < 32*6; j++){
-            for (int k = 32*2; k < 32*6; k++){
-                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] =  exp(-(pow((i - mu) * Grid->dx, 2) + pow((j - mu) * Grid->dy, 2) + pow((k - mu) * Grid->dz, 2)));
-                Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] =  exp(-(pow((i - mu) * Grid->dx, 2) + pow((j - mu) * Grid->dy, 2) + pow((k - mu) * Grid->dz, 2)));
+        for (int i = 16 * 4; i < 16 * 5; i++)
+        {
+            for (int j = 1; j < ny; j++)
+            {
+                for (int l = 1; l < nz; l++)
+                {
+                    Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 2] = sin(i * 2 * M_PI / 32)*sin(M_PI*j/256);
+    
+                    Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 1] = sin(i * 2 * M_PI / 32)*sin(M_PI*j/256);
+                }
             }
+    
         }
-    }
-    //    for (int i = 16 * 4; i < 16 * 5; i++)
-    //    {
-    //        for (int j = 1; j < ny; j++)
-    //        {
-    //            for (int l = 1; l < nz; l++)
-    //            {
-    //                Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 2] = sin(i * 2 * M_PI / 32)*sin(M_PI*j/256);
-    //
-    //                Grid->B[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 1] = sin(i * 2 * M_PI / 32)*sin(M_PI*j/256);
-    //            }
-    //        }
-    //
-    //    }
 }
 
 ///@brief maxwellPusher for H field.
