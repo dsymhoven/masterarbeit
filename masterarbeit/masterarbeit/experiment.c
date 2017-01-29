@@ -208,7 +208,7 @@ void testLWFieldCalculationForPlane(){
         for(int p = 0; p < numberOfParticles; p++){
             addCurrentStateToParticleHistory(&Particles[p], step);
             updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
-            updateLocation(Particle, &Grid, dt);
+            updateLocation(&Particles[p], &Grid, dt);
         }
         
         t += dt;
@@ -223,84 +223,6 @@ void testLWFieldCalculationForPlane(){
     freeMemoryOnGrid(&Grid);
 }
 
-
-void testLWFieldCalculationForEachTimeStep(){
-    
-    // ======================================================
-#pragma mark: Initializations
-    // ======================================================
-    
-    Grid Grid;
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
-    int numberOfGridPointsForBoxInX = 32;
-    int numberOfGridPointsForBoxInY = 32;
-    int numberOfGridPointsForBoxInZ = 32;
-    int numberOfBoxesInX = 5;
-    int numberOfBoxesInY = 5;
-    int numberOfBoxesInZ = 5;
-    
-    int numberOfParticles = 1;
-    
-    Particle Particles[numberOfParticles];
-    Particle Particle = Particles[0];
-    
-    double dt = 0.5 * dx;
-    double t = 0;
-    double tEnd = 6;
-    
-    char filename[32] = "some";
-    double Eextern[3];
-    double Bextern[3];
-    int arrayLength = tEnd / dt;
-    
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    writeGridParametersToFile(&Grid);
-    initParticle(&Particle, arrayLength);
-    
-    Particle.mass = 1;
-    Particle.charge = 1;
-    Particle.x[0] = 0;
-    Particle.x[1] = 11.21;
-    Particle.x[2] = 12.01;
-    Particle.x[3] = 14.401;
-    
-    Particle.u[1] = 0.458;
-    Particle.u[2] = 0;
-    Particle.u[3] = 0;
-    Particle.u[0] = getGammaFromVelocityVector(Particle.u);
-    
-    Eextern[0] = 0;
-    Eextern[1] = 0;
-    Eextern[2] = 0;
-    
-    Bextern[0] = 0;
-    Bextern[1] = 0;
-    Bextern[2] = 1;
-    
-    int planeForPlotting = Particle.x[3] / dz;
-    
-    // ======================================================
-#pragma mark: Main Routine
-    // ======================================================
-    for (int step = 0; step < tEnd / dt; step++){
-        writeParticlesToFile(Particles, numberOfParticles, filename, step);
-        writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
-        addCurrentStateToParticleHistory(&Particle, step);
-        calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
-        updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, 1, Eextern, Bextern, dt);
-        updateLocation(&Particle, &Grid, dt);
-        t += dt;
-    }
-    
-    
-    printf("executing bash-script ...\n");
-    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
-    freeMemoryOnParticles(Particles, numberOfParticles);
-    freeMemoryOnGrid(&Grid);
-}
 
 void testNearAndFarFields(){
     // ======================================================
