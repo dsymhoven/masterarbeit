@@ -23,5 +23,6 @@ void testMultipleParticles();
 void testHistoryBeforeSimulation();
 void testScattering();
 void extendHistoryAndCalcLWFieldsIndependantly();
-void electronScatteringInEMWave();
+void electronScatteringSmallGrid_init9();
+void electronScatteringLargeGrid_init8();
 #endif /* experiment_h */

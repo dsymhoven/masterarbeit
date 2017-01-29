@@ -1176,10 +1176,6 @@ void calcGridIndizesNextNeighbours(Grid *Grid, int particleGridIndexInX, int par
     gridIndizesNextNeighbours[7] = (particleGridIndexInX + 1) * numberOfGridPointsInY * numberOfGridPointsInZ * 3 + (particleGridIndexInY + 1) * numberOfGridPointsInZ * 3 + (particleGridIndexInZ + 1) * 3;
 }
 
-void interpolateEx(double E[3], double B[3]){
-
-    
-}
 
 double trilinearInterpolation(double interpolationPoint[3], double A, double B, double C, double D, double E, double F, double G, double H, double u, double v, double w){
     double P1, P2, P3, P4, Pu, Po;
@@ -1234,7 +1230,7 @@ int getPartialBoxIndex(Particle *Particle, Grid *Grid){
     
 }
 
-
+///@brief trilinear interpolation of LW fields at particle position. In order to calculate the interaction of the particle with the far fields of other particles properly, we need to interpolate the field values. Field values only exist at the grid points, whereas the particle can be at any point on the grid. This method uses trilinear interpolation with the field values on the sorrounding eight grid points. We also consider the staggered grid. See Taflove page 59 Fig 3.1 for details and consider that we use another orientation of the coordinate system. Due to the staggered grid the eight grid points forming the box to interpolate in differ for all six components Ex, Ey, Ez, Hx, Hy, Hz.
 void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3]){
     int ip, jp, kp;
     double u,v,w;
