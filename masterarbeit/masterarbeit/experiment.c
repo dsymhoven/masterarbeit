@@ -160,7 +160,7 @@ void testLWFieldCalculationForPlane(){
     int numberOfParticles = 1;
     
     Particle Particles[numberOfParticles];
-    Particle Particle = Particles[0];;
+    Particle *Particle = &Particles[0];;
     
     double dt = 0.5 * dx;
     double t = 0;
@@ -174,19 +174,19 @@ void testLWFieldCalculationForPlane(){
     initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     writeGridParametersToFile(&Grid);
-    initParticle(&Particle, arrayLength);
+    initParticles(Particles, numberOfParticles, arrayLength);
 
-    Particle.mass = 1;
-    Particle.charge = 1;
-    Particle.x[0] = 0;
-    Particle.x[1] = 11.21;
-    Particle.x[2] = 12.01;
-    Particle.x[3] = 14.401;
+    Particle->mass = 1;
+    Particle->charge = 1;
+    Particle->x[0] = 0;
+    Particle->x[1] = 11.21;
+    Particle->x[2] = 12.01;
+    Particle->x[3] = 14.401;
     
-    Particle.u[1] = 0.458;
-    Particle.u[2] = 0;
-    Particle.u[3] = 0;
-    Particle.u[0] = getGammaFromVelocityVector(Particle.u);
+    Particle->u[1] = 0.458;
+    Particle->u[2] = 0;
+    Particle->u[3] = 0;
+    Particle->u[0] = getGammaFromVelocityVector(Particle->u);
     
     Eextern[0] = 0;
     Eextern[1] = 0;
@@ -196,17 +196,21 @@ void testLWFieldCalculationForPlane(){
     Bextern[1] = 0;
     Bextern[2] = 1;
     
-    int planeForPlotting = Particle.x[3] / dz;
+    int planeForPlotting = Particle->x[3] / dz;
     
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
+    writeSimulationInfoToFile(numberOfParticles, t);
     for (int step = 0; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, (int)(tEnd / dt));
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
-        addCurrentStateToParticleHistory(&Particle, step);
-        updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, 1, Eextern, Bextern, dt);
-        updateLocation(&Particle, &Grid, dt);
+        for(int p = 0; p < numberOfParticles; p++){
+            addCurrentStateToParticleHistory(&Particles[p], step);
+            updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
+            updateLocation(Particle, &Grid, dt);
+        }
+        
         t += dt;
     }
     
