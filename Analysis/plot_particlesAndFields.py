@@ -23,7 +23,7 @@ if gridParameters[9] < 0.1:
 	EMax = 0.05
 if gridParameters[9] > 10:
 	EMax = 0.5
-	
+
 X = np.zeros((numberOfParticles,1))
 Y = np.zeros((numberOfParticles,1))
 x = []
@@ -41,7 +41,7 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 		x.append(data[0][1])
 		y.append(data[0][2])
 	X = np.c_[X,x]
-	Y = np.c_[Y,y]	
+	Y = np.c_[Y,y]
 	x=[]
 	y=[]
 	if i == startTime or len(X[0]) > 40:
@@ -52,12 +52,12 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 		plt.plot(X[p], Y[p], color = 'r')
 	field = np.genfromtxt('E_fields/E_field'+ str(i) +'.txt')
 	# plot fields
-	plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.01)
+	plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.01)
 	plt.colorbar()
 	# set labels
 	plt.xlabel("X")
 	plt.ylabel("Y")
-	# set axis 
+	# set axis
 	plt.xlim([0, lengthOfSimulationBoxInX])
 	plt.ylim([0, lengthOfSimulationBoxInY])
 	plt.xticks(np.arange(0, lengthOfSimulationBoxInX + 1, lengthOfOneBoxInX))
@@ -68,7 +68,7 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight')
 	# close fig
 	plt.close(fig)
-	
+
 # open figure only once because we want to plot several particles in one figure
 fig = plt.figure()
 
@@ -95,7 +95,7 @@ plt.colorbar()
 # set labels
 plt.xlabel("X")
 plt.ylabel("Y")
-# set axis 
+# set axis
 plt.xlim([0, lengthOfSimulationBoxInX])
 plt.ylim([0, lengthOfSimulationBoxInY])
 plt.xticks(np.arange(0, lengthOfSimulationBoxInX + 1, lengthOfOneBoxInX))

@@ -28,6 +28,20 @@ for file in Particle*; do
 		mv $PATHTOEXECUTABLE/Particle*.txt $PATHTOANALYSIS/Particles
 	fi
 done
+for file in E_extern*; do
+	if [[ -f $file ]]; then
+		rm -rf $PATHTOANALYSIS/E_extern
+		mkdir -p $PATHTOANALYSIS/E_extern
+		mv $PATHTOEXECUTABLE/E_extern*.txt $PATHTOANALYSIS/E_extern
+	fi
+done
+for file in H_extern*; do
+	if [[ -f $file ]]; then
+		rm -rf $PATHTOANALYSIS/H_extern
+		mkdir -p $PATHTOANALYSIS/H_extern
+		mv $PATHTOEXECUTABLE/H_extern*.txt $PATHTOANALYSIS/H_extern
+	fi
+done
 if [ -e gridParameters.txt ]
 then
 	mv $PATHTOEXECUTABLE/gridParameters.txt $PATHTOANALYSIS/

@@ -41,4 +41,3 @@ cd $PATHTOANALYSIS
 # execute python script
 python2.7 sortParticleFiles.py
 python2.7 plot_particlesAndFieldsForPlane.py
-
