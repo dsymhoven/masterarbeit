@@ -324,6 +324,7 @@ void initSamplePulseOnGrid(Grid *Grid){
     
     int ny = Grid->numberOfGridPointsInY;
     int nz = Grid->numberOfGridPointsInZ;
+    int lengthInX = Grid->dx * Grid->numberOfGridPointsInX;
     
         for (int i = 16 * 4; i < 16 * 5; i++)
         {
@@ -331,9 +332,9 @@ void initSamplePulseOnGrid(Grid *Grid){
             {
                 for (int l = 1; l < nz; l++)
                 {
-                    Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 2] = sin(i * 2 * M_PI / 32)*sin(M_PI*j/256);
+                    Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 2] = sin(i * 2 * M_PI / lengthInX)*sin(M_PI*j/ny);
     
-                    Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 1] = sin(i * 2 * M_PI / 32)*sin(M_PI*j/256);
+                    Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (l) + 1] = sin(i * 2 * M_PI / lengthInX)*sin(M_PI*j/ny);
                 }
             }
     
