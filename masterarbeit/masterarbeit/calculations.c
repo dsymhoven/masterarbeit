@@ -472,6 +472,7 @@ void calcLWFieldsForPlane(Grid *Grid, Particle *Particles, int numberOfParticles
                 xObserver[3] = (k) * Grid->dz;
                 
                 int gridIndexInBox = 3 * ny * nz * i + 3 * nz * j + 3 * k;
+                printf("%d\n", gridIndexInBox);
                 
                 addLWField(Grid, &Particles[p], &Grid->H[gridIndexInBox], xObserver, 3);
                 addLWField(Grid, &Particles[p], &Grid->H[gridIndexInBox + 1], xObserver, 4);
@@ -1162,7 +1163,14 @@ bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numbe
     return doesExist;
 }
 
-void calcGridIndizesNextNeighbours(Grid *Grid, int particleGridIndexInX, int particleGridIndexInY, int particleGridIndexInZ, int gridIndizesNextNeighbours[8]){
+
+///@brief calcualtes the surrounding eigth grid points respective to the current particle location and saves them into gridIndizesNextNeighbours array.
+///@param Grid Pointer to Grid Struct
+///@param particleGridIndexInX number of grid point in x
+///@param particleGridIndexInY number of grid point in y
+///@param particleGridIndexInZ number of grid point in z
+///@param gridIndizesNextNeighbours array containing the next neighbour indizes
+void calcGridIndizesNextNeighbours(Grid *Grid, int const particleGridIndexInX, int const particleGridIndexInY, int const particleGridIndexInZ, int gridIndizesNextNeighbours[8]){
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
     
@@ -1177,9 +1185,25 @@ void calcGridIndizesNextNeighbours(Grid *Grid, int particleGridIndexInX, int par
 }
 
 
+///@brief performs trilinear interpolation of values A,B,C,D,E,F,G,H at interpolationPoint interpolation parameters u,v,w for each dimension respectively.
+///@param interpolationPoint vector containing the position you wants to interpolate at
+///@param A value at the lower left grid point in the front
+///@param B value at the upper left grid point in the front
+///@param C value at the lower left grid point in the back
+///@param D value at the upper left grid point in the back
+///@param E value at the lower right grid point in the front
+///@param F value at the upper right grid point in the front
+///@param G value at the lower right grid point in the back
+///@param H value at the upper right grid point in the back
+///@param u interpolation paramter for x in [0,1].
+///@param v interpolation paramter for y in [0,1].
+///@param w interpolation paramter for z in [0,1].
+///@code u = (x(Particle) - x(A))/(x(A) - x(E));
+/// v = (y(Particle) - y(A))/(y(A) - y(C));
+/// w = (z(Particle) - z(A))/(z(A) - z(B));
 double trilinearInterpolation(double interpolationPoint[3], double A, double B, double C, double D, double E, double F, double G, double H, double u, double v, double w){
     double P1, P2, P3, P4, Pu, Po;
-    
+
     P1 = A + u * ( B - A );
     P2 = C + u * ( D - C );
     Pu = P1 + v * ( P2 - P1 );
@@ -1192,6 +1216,10 @@ double trilinearInterpolation(double interpolationPoint[3], double A, double B, 
     
 }
 
+///@brief the particle is usually not located exactly at a grid point, but inbetween eight sourrounding grid points. Those eight sourrounding grid points are defined as box here. This box is divided in eight partial boxes where the index is built similiar to the big grid boxes. 0 is the lower left corner in the front and 7 is the upper right corner in the back where we first increase z, then y and finally x. The seperation is necessary for the staggered grid to apply properly, because the location of the respective field components which we want to interpolate from differ for all components.
+///@param Particle Pointer to Particle Struct
+///@param Grid Pointer to Grid Struct
+///returns partialBoxIndex index from 0 to 7 where 0 denotes the front lower left part of the box and 7 the back upper right part.
 int getPartialBoxIndex(Particle *Particle, Grid *Grid){
     int ip, jp, kp;
     int partialBoxIndex = -1;
@@ -1231,6 +1259,10 @@ int getPartialBoxIndex(Particle *Particle, Grid *Grid){
 }
 
 ///@brief trilinear interpolation of LW fields at particle position. In order to calculate the interaction of the particle with the far fields of other particles properly, we need to interpolate the field values. Field values only exist at the grid points, whereas the particle can be at any point on the grid. This method uses trilinear interpolation with the field values on the sorrounding eight grid points. We also consider the staggered grid. See Taflove page 59 Fig 3.1 for details and consider that we use another orientation of the coordinate system. Due to the staggered grid the eight grid points forming the box to interpolate in differ for all six components Ex, Ey, Ez, Hx, Hy, Hz.
+///@param Grid Pointer to Grid Struct
+///@param Particle Pointer to Particle Struct
+///@param E vector where interpolated E fields at particle position are stored
+///@param B vector where interpolated H fields at particle position are stored
 void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3]){
     int ip, jp, kp;
     double u,v,w;

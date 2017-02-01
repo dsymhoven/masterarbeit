@@ -196,7 +196,7 @@ void pushHFieldInsideBoxes(Grid *Grid, double dt){
     }
 }
 
-///@brief this methods loops through all boxes and stores all values of H in the plane left, infront and below of the current box.  As can be seen from the Yee Scheme only Hy and Hz are needed from the left plane. Hz and Hx are needed from the plane infront and Hy and Hx are needed from the plane below. If the current box is a box where te left to the left does not exist (ib = 0) then the respective values for H are set to 0.
+///@brief this methods loops through all boxes and stores all values of H in the plane left, infront and below of the current box.  As can be seen from the Yee Scheme only Hy and Hz are needed from the left plane. Hz and Hx are needed from the plane infront and Hy and Hx are needed from the plane below. If the current box is a box where to the left does not exist (ib = 0) then the respective values for H are set to 0.
 ///@remark Hz_im1 and all others are matrices. The first index denotes the boxIndex and the second Index the gridPoints in the plane.
 ///@param Grid pointer to Grid struct
 void setHFieldOnBorders(Grid *Grid){
@@ -397,7 +397,7 @@ void adjustHFields(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@param jb boxIndex in y direction
 ///@param kb boxIndex in z direction
 ///@param t current simulation time
-///@remark this method gets called over and over again from "adjustHFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexIm1 is not. Then we are at the left border of the near field. Since we want to push a value for the Efield inside the near field we need (among others) the value to the left. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the right border of the near field, i.e. current box is the not in near field but boxIndexIm1 is, then we push EField values from the far field. For this we need values to the left, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the E field value in the far field correctly.
+///@remark this method gets called over and over again from "adjustHFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexIm1 is not. Then we are at the left border of the near field. Since we want to push a value for the Efield inside the near field we need (among others) the value to the left. Since this point is in the far field, the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the right border of the near field, i.e. current box is the not in near field but boxIndexIm1 is, then we push EField values from the far field. For this we need values to the left, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the E field value in the far field correctly.
 void adjustHyz_im1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
     int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
     int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
@@ -1454,7 +1454,7 @@ void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
 ///@param B vector containg both external fields and those from other particles propagated into the near field region of the current particle
 void updateFieldsForParticlePush(Particle *Particle, Grid *Grid, double Eextern[3], double Bextern[3], double E[3], double B[3]){
     
-//    interpolateFields(Grid, Particle, E, B);
+    interpolateFields(Grid, Particle, E, B);
     for (int i = 0; i < 3; i++){
         E[i] = Eextern[i] + E[i];
         B[i] = Bextern[i] + B[i];
