@@ -24,12 +24,12 @@ void testMaxwellPusher(){
 #pragma mark: Initializations
     // ======================================================
     Grid Grid;
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
-    int numberOfGridPointsForBoxInX = 32;
-    int numberOfGridPointsForBoxInY = 32;
-    int numberOfGridPointsForBoxInZ = 32;
+    double dx = 0.2;
+    double dy = 0.2;
+    double dz = 0.2;
+    int numberOfGridPointsForBoxInX = 20;
+    int numberOfGridPointsForBoxInY = 20;
+    int numberOfGridPointsForBoxInZ = 20;
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -41,7 +41,7 @@ void testMaxwellPusher(){
     
     double dt = 0.5 * Grid.dx;
     double t = 0;
-    double tEnd = 3;
+    double tEnd = 10;
     char filename[32] = "some";
     int arrayLength = tEnd/dt;
 
@@ -147,15 +147,15 @@ void testLWFieldCalculationForPlane(){
     // ======================================================
     
     Grid Grid;
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
-    int numberOfGridPointsForBoxInX = 32;
-    int numberOfGridPointsForBoxInY = 32;
-    int numberOfGridPointsForBoxInZ = 32;
-    int numberOfBoxesInX = 5;
-    int numberOfBoxesInY = 5;
-    int numberOfBoxesInZ = 5;
+    double dx = 0.2;
+    double dy = 0.2;
+    double dz = 0.2;
+    int numberOfGridPointsForBoxInX = 20;
+    int numberOfGridPointsForBoxInY = 20;
+    int numberOfGridPointsForBoxInZ = 20;
+    int numberOfBoxesInX = 8;
+    int numberOfBoxesInY = 8;
+    int numberOfBoxesInZ = 8;
     
     int numberOfParticles = 1;
     
@@ -179,9 +179,9 @@ void testLWFieldCalculationForPlane(){
     Particle->mass = 1;
     Particle->charge = 1;
     Particle->x[0] = 0;
-    Particle->x[1] = 11.21;
-    Particle->x[2] = 12.01;
-    Particle->x[3] = 14.401;
+    Particle->x[1] = 14.1;
+    Particle->x[2] = 14.1;
+    Particle->x[3] = 14.1;
     
     Particle->u[1] = 0.458;
     Particle->u[2] = 0;
@@ -210,12 +210,12 @@ void testLWFieldCalculationForPlane(){
             updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
             updateLocation(&Particles[p], &Grid, dt);
         }
-        
+        calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
         t += dt;
     }
     
 
-    calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    //calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
     writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
@@ -512,9 +512,9 @@ void testMultipleParticles(){
     int numberOfGridPointsForBoxInX = 20;
     int numberOfGridPointsForBoxInY = 20;
     int numberOfGridPointsForBoxInZ = 20;
-    int numberOfBoxesInX = 5;
-    int numberOfBoxesInY = 5;
-    int numberOfBoxesInZ = 5;
+    int numberOfBoxesInX = 8;
+    int numberOfBoxesInY = 8;
+    int numberOfBoxesInZ = 8;
     
     int numberOfParticles = 2;
     
@@ -524,7 +524,7 @@ void testMultipleParticles(){
     
     double dt = 0.5 * dx;
     double t = 0;
-    double tEnd = 15;
+    double tEnd = 12;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -540,11 +540,11 @@ void testMultipleParticles(){
     Particle1->mass = 1;
     Particle1->charge = 1;
     Particle1->x[0] = 0;
-    Particle1->x[1] = 6.41;
-    Particle1->x[2] = 11.60;
+    Particle1->x[1] = 19.41;
+    Particle1->x[2] = 22.60;
     Particle1->x[3] = 11.401;
     
-    Particle1->u[1] = 1.0;
+    Particle1->u[1] = 0.458;
     Particle1->u[2] = 0;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
@@ -552,11 +552,11 @@ void testMultipleParticles(){
     Particle2->mass = 1;
     Particle2->charge = 1;
     Particle2->x[0] = 0;
-    Particle2->x[1] = 14.41;
-    Particle2->x[2] = 10.00;
+    Particle2->x[1] = 11.41;
+    Particle2->x[2] = 10.01;
     Particle2->x[3] = 11.401;
     
-    Particle2->u[1] = -1.0;
+    Particle2->u[1] = 0.458;
     Particle2->u[2] = 0;
     Particle2->u[3] = 0;
     Particle2->u[0] = getGammaFromVelocityVector(Particle2->u);
@@ -567,7 +567,7 @@ void testMultipleParticles(){
     
     Bextern[0] = 0;
     Bextern[1] = 0;
-    Bextern[2] = 0;
+    Bextern[2] = 1;
     
     int planeForPlotting = Particle1->x[3] / dz;
     
@@ -575,7 +575,7 @@ void testMultipleParticles(){
 #pragma mark: Main Routine
     // ======================================================
     
-    
+    writeSimulationInfoToFile(numberOfParticles, t);
     for (int step = 0; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, arrayLength);
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
@@ -595,8 +595,9 @@ void testMultipleParticles(){
         pushEField(&Grid, Particles, numberOfParticles, t, dt);
         t += dt;
     }
-    //calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
-    //writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
+    clearFieldsFromGrid(&Grid);
+    calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    writeFieldsToFile(&Grid, filename, (int)(tEnd/dt), planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");

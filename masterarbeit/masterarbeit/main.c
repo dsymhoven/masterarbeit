@@ -18,13 +18,13 @@ int main(int argc, const char * argv[]) {
     //testLWFieldCalculationForPlane();
     //testNearAndFarFields();
     //testUPML();
-    testNearFieldUpdate();
+    //testNearFieldUpdate();
     //testMultipleParticles();
     //testHistoryBeforeSimulation();
     //testScattering();
     //extendHistoryAndCalcLWFieldsIndependantly();
     //electronScatteringSmallGrid_init9();
-    //electronScatteringLargeGrid_init8();
+    electronScatteringLargeGrid_init8();
     return 0;
 }   
 

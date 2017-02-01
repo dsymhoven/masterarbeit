@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "masterarbeit/experiment.c"
-            timestampString = "507388821.001499"
+            filePath = "masterarbeit/lwFields.c"
+            timestampString = "507405131.858898"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
-            landmarkName = "testNearAndFarFields()"
+            startingLineNumber = "1334"
+            endingLineNumber = "1334"
+            landmarkName = "addLWField()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
