@@ -24,7 +24,8 @@ int main(int argc, const char * argv[]) {
     //testScattering();
     //extendHistoryAndCalcLWFieldsIndependantly();
     //electronScatteringSmallGrid_init9();
-    electronScatteringLargeGrid_init8();
+    //electronScatteringLargeGrid_init8();
+    testTimeDependentExternalFields();
     return 0;
 }   
 

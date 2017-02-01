@@ -23,4 +23,5 @@ void testScattering();
 void extendHistoryAndCalcLWFieldsIndependantly();
 void electronScatteringSmallGrid_init9();
 void electronScatteringLargeGrid_init8();
+void testTimeDependentExternalFields();
 #endif /* experiment_h */
