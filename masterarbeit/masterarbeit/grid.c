@@ -318,25 +318,31 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
     
 }
 
-void externalPlaneWave(const double xParticle[4], double Eextern[3], double Bextern[3]){
+///@brief sets external time dependent E and H field as plane wave.
+///@param x four vector containing actual position where you want to evaluate the external field
+///@param Eextern vector containing external E field components
+///@param Hextern vector containing external H field components
+void externalPlaneWave(const double x[4], double Eextern[3], double Hextern[3]){
     double E0 = 1;
+    double H0 = 1;
+    double factor = 1;
     
     Eextern[0] = 0;
-    if(xParticle[0] >= xParticle[1]){
-        Eextern[1] = E0 * sin(xParticle[0]-xParticle[1]);
+    if(x[0] >= x[1] / factor){
+        Eextern[1] = E0 * sin(x[0]-x[1]/factor);
     }
     else{
         Eextern[1] = 0;
     }
     Eextern[2] = 0;
     
-    Bextern[0] = 0;
-    Bextern[1] = 0;
-    if(xParticle[0] >= xParticle[1]){
-        Bextern[2] = E0 * sin(xParticle[0]-xParticle[1]);
+    Hextern[0] = 0;
+    Hextern[1] = 0;
+    if(x[0] >= x[1] / factor){
+        Hextern[2] = H0 * sin(x[0]-x[1]/factor);
     }
     else{
-        Bextern[2] = 0;
+        Hextern[2] = 0;
     }
     
     
@@ -479,20 +485,21 @@ void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3],
     else{
         int nx = Grid->numberOfGridPointsInX;
         int ny = Grid->numberOfGridPointsInY;
-        int nz = Grid->numberOfGridPointsInZ;
+
         int k = planeForPlotting;
-        double Ex, Ey, Ez, Hx, Hy, Hz, Esq, Bsq;
+        
+        double Ex, Ey, Ez, Hx, Hy, Hz, Esq, Hsq;
         double x[4]={0};
+        x[0] = t;
+        x[3] = k * Grid->dz;
         
         for (int j = 0; j < ny; j++)
         {
             for (int i = 0; i < nx; i++)
             {
-                x[0] = t;
                 x[1] = i * Grid->dx;
                 x[2] = j * Grid->dy;
-                x[3] = k * Grid->dz;
-                
+
                 externalPlaneWave(x, Eextern, Bextern);
                 Ex = Eextern[0];
                 Ey = Eextern[1];
@@ -508,8 +515,8 @@ void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3],
                     fprintf(fid, "%f\t", Esq);
                 }
                 if (plotB){
-                    Bsq = Hx * Hx + Hy * Hy + Hz * Hz;
-                    fprintf(fid2, "%f\t", Bsq);
+                    Hsq = Hx * Hx + Hy * Hy + Hz * Hz;
+                    fprintf(fid2, "%f\t", Hsq);
                 }
             }
             if(plotE){
