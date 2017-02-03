@@ -1,0 +1,12 @@
+<map id="scaleVector" name="scaleVector">
+<area shape="rect" id="node2" href="$calculations_8c.html#aaa3f91ed7132a457ca21ca23da463b59" title="performs a reverse Boris Push. Uses same methods like standard BorisPusher but uses &#45;E und &#45;B..." alt="" coords="155,123,281,149"/>
+<area shape="rect" id="node11" href="$calculations_8c.html#abdd8d12cce50e34e18817b5654e222e0" title="After a reverse borisBush was performed the initial conditions have to be reset in order to start the..." alt="" coords="145,173,291,200"/>
+<area shape="rect" id="node3" href="$calculations_8h.html#adbff8a7444a6b76f6ae268b1925506d0" title="extends and calculates particle history up to time t. Example: Let&#39;s say t = 8 and tEnd = 12 then the..." alt="" coords="339,148,487,175"/>
+<area shape="rect" id="node4" href="$experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="546,5,733,32"/>
+<area shape="rect" id="node5" href="$experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="587,56,691,83"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="535,107,744,149"/>
+<area shape="rect" id="node7" href="$experiment_8h.html#af35f4f27dfc0aab6ff2c4bf1dd1e9b4a" title="electronScatteringSmallGrid\l_init9" alt="" coords="545,173,733,214"/>
+<area shape="rect" id="node8" href="$experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="545,238,734,279"/>
+<area shape="rect" id="node9" href="$experiment_8h.html#aba97ca9ea25115ea974bfeb9c86f0720" title="scatteringInEMWave" alt="" coords="567,304,712,331"/>
+<area shape="rect" id="node10" href="$main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="792,304,843,331"/>
+</map>

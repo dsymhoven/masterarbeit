@@ -1,0 +1,11 @@
+<map id="calcBoxIndexKm1" name="calcBoxIndexKm1">
+<area shape="rect" id="node2" href="$lw_fields_8h.html#aefc1a6143e678da91f19584c826428cd" title="this method adjusts the H values on the top and bottom side border of the near field. " alt="" coords="183,132,296,159"/>
+<area shape="rect" id="node3" href="$lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="344,132,447,159"/>
+<area shape="rect" id="node4" href="$lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="495,132,584,159"/>
+<area shape="rect" id="node5" href="$experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="661,5,813,32"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="697,56,777,83"/>
+<area shape="rect" id="node7" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="665,107,809,133"/>
+<area shape="rect" id="node8" href="$experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="667,157,807,184"/>
+<area shape="rect" id="node9" href="$experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="643,208,830,235"/>
+<area shape="rect" id="node10" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="632,259,841,301"/>
+</map>

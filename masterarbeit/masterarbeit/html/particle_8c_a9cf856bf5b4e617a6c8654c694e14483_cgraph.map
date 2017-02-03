@@ -1,0 +1,4 @@
+<map id="initParticles" name="initParticles">
+<area shape="rect" id="node2" href="$particle_8c.html#a4af6858fe365aa6ad335ec2ebf08a2d3" title="initializes all properties of struct Particle. x and u are initilized with 0 " alt="" coords="144,5,228,32"/>
+<area shape="rect" id="node3" href="$particle_8c.html#a72e31b58254a02eda9a1a67300f19247" title="allocates memory for trajectroy and velocity history. " alt="" coords="276,5,440,32"/>
+</map>

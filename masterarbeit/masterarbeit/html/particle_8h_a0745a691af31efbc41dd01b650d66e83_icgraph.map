@@ -1,0 +1,16 @@
+<map id="addCurrentStateToParticleHistory" name="addCurrentStateToParticleHistory">
+<area shape="rect" id="node2" href="$calculations_8c.html#aaa3f91ed7132a457ca21ca23da463b59" title="performs a reverse Boris Push. Uses same methods like standard BorisPusher but uses &#45;E und &#45;B..." alt="" coords="259,167,386,194"/>
+<area shape="rect" id="node3" href="$calculations_8h.html#adbff8a7444a6b76f6ae268b1925506d0" title="extends and calculates particle history up to time t. Example: Let&#39;s say t = 8 and tEnd = 12 then the..." alt="" coords="460,149,608,175"/>
+<area shape="rect" id="node4" href="$experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="667,15,854,42"/>
+<area shape="rect" id="node5" href="$experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="709,69,813,95"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="656,188,865,229"/>
+<area shape="rect" id="node7" href="$experiment_8h.html#af35f4f27dfc0aab6ff2c4bf1dd1e9b4a" title="electronScatteringSmallGrid\l_init9" alt="" coords="667,253,855,295"/>
+<area shape="rect" id="node9" href="$experiment_8h.html#aba97ca9ea25115ea974bfeb9c86f0720" title="scatteringInEMWave" alt="" coords="688,319,833,346"/>
+<area shape="rect" id="node11" href="$experiment_8h.html#a93af21472ce6a2cf691bb5fb9a2555b5" title="testLWFieldCalculationFor\lPlane" alt="" coords="233,371,412,412"/>
+<area shape="rect" id="node12" href="$experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="247,437,399,463"/>
+<area shape="rect" id="node13" href="$experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="283,487,363,514"/>
+<area shape="rect" id="node14" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="251,538,395,565"/>
+<area shape="rect" id="node15" href="$experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="253,589,393,615"/>
+<area shape="rect" id="node8" href="$experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="666,123,855,164"/>
+<area shape="rect" id="node10" href="$main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="913,319,964,346"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="getEdgesOfNearFieldBox" name="getEdgesOfNearFieldBox">
+<area shape="rect" id="node2" href="$calculations_8h.html#a32c97a4eb1ac3f14484661bc2720ab10" title="calcLWFieldsForPlaneWith\lNearField" alt="" coords="227,99,409,141"/>
+<area shape="rect" id="node3" href="$experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="486,5,638,32"/>
+<area shape="rect" id="node4" href="$experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="522,56,602,83"/>
+<area shape="rect" id="node5" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="490,107,634,133"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="510,157,614,184"/>
+<area shape="rect" id="node7" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="457,209,667,250"/>
+</map>

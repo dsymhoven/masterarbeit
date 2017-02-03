@@ -1,0 +1,10 @@
+<map id="getCurrentBoxIndexArrayOfParticle" name="getCurrentBoxIndexArrayOfParticle">
+<area shape="rect" id="node2" href="$calculations_8c.html#a4f4cd75a90e54d0dccbb4ec202daa4b2" title="calcualtes the lower left grid index of the box the particle is currently located in..." alt="" coords="240,56,436,83"/>
+<area shape="rect" id="node3" href="$particle_8h.html#a9520f64dd4829563d757dd3b378f177e" title="saves min and max values of x,y and z of the near field box in edgesOfNearFieldArray of Particle stru..." alt="" coords="251,107,425,133"/>
+<area shape="rect" id="node4" href="$calculations_8h.html#a32c97a4eb1ac3f14484661bc2720ab10" title="calcLWFieldsForPlaneWith\lNearField" alt="" coords="484,99,667,141"/>
+<area shape="rect" id="node5" href="$experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="743,5,895,32"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="779,56,859,83"/>
+<area shape="rect" id="node7" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="747,107,891,133"/>
+<area shape="rect" id="node8" href="$experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="767,157,871,184"/>
+<area shape="rect" id="node9" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="715,209,924,250"/>
+</map>

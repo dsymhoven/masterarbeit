@@ -1,0 +1,6 @@
+<map id="externalPlaneWave" name="externalPlaneWave">
+<area shape="rect" id="node2" href="$experiment_8h.html#aba97ca9ea25115ea974bfeb9c86f0720" title="scatteringInEMWave" alt="" coords="204,8,349,35"/>
+<area shape="rect" id="node4" href="$grid_8h.html#aa980696e8c3354f9d9a083b729fa6c2f" title="loops through the specified grid plane and calcutes |B|^2 and |E|^2 of external fields. Values are stored in seperate files. File is structured similiar to the grid. " alt="" coords="191,60,363,87"/>
+<area shape="rect" id="node3" href="$main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="479,5,529,32"/>
+<area shape="rect" id="node5" href="$experiment_8h.html#ac8a28021af3a9a0a911397e0d95bed69" title="testTimeDependentExternal\lFields" alt="" coords="411,57,597,98"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="addLWFieldsInBox" name="addLWFieldsInBox">
+<area shape="rect" id="node2" href="$calculations_8h.html#a5d8ed902b351b331f64c2f2b10ce8488" title="calcualtes Liénard&#45;Wiechert Fields everywhere on the grid. Each point on the grid is considered to be..." alt="" coords="214,64,358,91"/>
+<area shape="rect" id="node3" href="$calculations_8h.html#a333f7c0ac8a981945502dbf30fab0b3a" title="updates the near field region of a particle. If the particle moves into another box the near field re..." alt="" coords="226,115,346,141"/>
+<area shape="rect" id="node8" href="$calculations_8h.html#a270dd08201ef3f6cd773222bd3ff06cf" title="calcualtes LW fields on complete grid by looping through all boxes. In the near field region of each ..." alt="" coords="187,166,385,207"/>
+<area shape="rect" id="node4" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="466,56,610,83"/>
+<area shape="rect" id="node5" href="$experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="468,5,608,32"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="445,173,631,200"/>
+<area shape="rect" id="node7" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="433,107,643,149"/>
+<area shape="rect" id="node9" href="$experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="443,225,633,266"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="double_equals" name="double_equals">
+<area shape="rect" id="node2" href="$calculations_8h.html#a532e124611705c07087e957f71fc1c73" title="checks if initalFields have already been calcualted and reads them into Grid struct if so..." alt="" coords="163,39,324,80"/>
+<area shape="rect" id="node3" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="372,5,581,47"/>
+<area shape="rect" id="node4" href="$experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="382,71,571,112"/>
+</map>

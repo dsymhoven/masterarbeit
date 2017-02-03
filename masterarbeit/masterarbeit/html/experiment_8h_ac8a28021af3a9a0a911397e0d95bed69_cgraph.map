@@ -1,0 +1,12 @@
+<map id="testTimeDependentExternalFields" name="testTimeDependentExternalFields">
+<area shape="rect" id="node2" href="$grid_8c.html#a26fd88a4385719442c501ced0a9bd38e" title="initializes all properties of struct Grid. " alt="" coords="299,5,363,32"/>
+<area shape="rect" id="node3" href="$grid_8c.html#a76e6ebe94eda1c9e1e213a601b57dca4" title="calls allocateFieldsOnGrid() and allocateFieldsOnBoxBorders(). For details see their documentation ..." alt="" coords="251,56,410,83"/>
+<area shape="rect" id="node7" href="$calculations_8c.html#a4473c6ae295e8c4cf4553918d0596dad" title="calculates the UPML Coefficients according to Taflove page 301. " alt="" coords="255,107,407,133"/>
+<area shape="rect" id="node8" href="$grid_8c.html#aa980696e8c3354f9d9a083b729fa6c2f" title="loops through the specified grid plane and calcutes |B|^2 and |E|^2 of external fields. Values are stored in seperate files. File is structured similiar to the grid. " alt="" coords="245,157,417,184"/>
+<area shape="rect" id="node10" href="$grid_8c.html#a9cb2befe835872c7ddf6168a593c4e83" title="writes Grid parameters to file, in order for python to use them as plot parameters ..." alt="" coords="240,208,421,235"/>
+<area shape="rect" id="node11" href="$grid_8c.html#aa0076382b987f1b1d5a5817716d3b062" title="method for releasing all previously allocated memory in struct Grid. Put all free() invokations in he..." alt="" coords="263,259,399,285"/>
+<area shape="rect" id="node4" href="$grid_8c.html#ae1a8c1626c471a6d76a7b1127d7ebc84" title="Allocation of E and B field array. Inits E and B with 0 by default. " alt="" coords="491,5,638,32"/>
+<area shape="rect" id="node5" href="$grid_8c.html#aba1ef3f97b8dd7eec0f26c361d2a742e" title="allocates memory for H and E fields on the planes at box borders " alt="" coords="469,56,660,83"/>
+<area shape="rect" id="node6" href="$grid_8c.html#a65975d28602dae50a6efc9397fd91b9f" title="allocates memeory for UPML coefficients " alt="" coords="477,107,652,133"/>
+<area shape="rect" id="node9" href="$grid_8c.html#a3ebe0e2b02a6cc8f02f18c4d338b3f83" title="sets external time dependent E and H field as plane wave. " alt="" coords="496,157,633,184"/>
+</map>

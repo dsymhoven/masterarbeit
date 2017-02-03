@@ -1,0 +1,9 @@
+<map id="pushEFieldAtBorders" name="pushEFieldAtBorders">
+<area shape="rect" id="node2" href="$lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="201,132,291,159"/>
+<area shape="rect" id="node3" href="$experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="367,5,519,32"/>
+<area shape="rect" id="node4" href="$experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="403,56,483,83"/>
+<area shape="rect" id="node5" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="371,107,515,133"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="373,157,513,184"/>
+<area shape="rect" id="node7" href="$experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="350,208,537,235"/>
+<area shape="rect" id="node8" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="339,259,548,301"/>
+</map>

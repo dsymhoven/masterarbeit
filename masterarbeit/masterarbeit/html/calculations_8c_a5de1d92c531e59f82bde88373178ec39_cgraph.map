@@ -1,0 +1,5 @@
+<map id="calculateIntersectionPoint" name="calculateIntersectionPoint">
+<area shape="rect" id="node2" href="$calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="227,23,407,65"/>
+<area shape="rect" id="node3" href="$calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="460,5,579,32"/>
+<area shape="rect" id="node4" href="$calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="455,56,584,83"/>
+</map>

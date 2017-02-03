@@ -1,0 +1,9 @@
+var searchData=
+[
+  ['scalevector',['scaleVector',['../calculations_8c.html#a01e94df694e64aec7a0b6b9257946933',1,'scaleVector(double x[3], double factor):&#160;calculations.c'],['../calculations_8h.html#a01e94df694e64aec7a0b6b9257946933',1,'scaleVector(double x[3], double factor):&#160;calculations.c']]],
+  ['scatteringinemwave',['scatteringInEMWave',['../experiment_8c.html#aba97ca9ea25115ea974bfeb9c86f0720',1,'scatteringInEMWave():&#160;experiment.c'],['../experiment_8h.html#aba97ca9ea25115ea974bfeb9c86f0720',1,'scatteringInEMWave():&#160;experiment.c']]],
+  ['setefieldonborders',['setEFieldOnBorders',['../lw_fields_8c.html#a46580d5ee2d7d0ae9277aee52395f565',1,'setEFieldOnBorders(Grid *Grid):&#160;lwFields.c'],['../lw_fields_8h.html#a46580d5ee2d7d0ae9277aee52395f565',1,'setEFieldOnBorders(Grid *Grid):&#160;lwFields.c']]],
+  ['sethfieldonborders',['setHFieldOnBorders',['../lw_fields_8c.html#a764fbbefccc598e48988dab3371f808b',1,'setHFieldOnBorders(Grid *Grid):&#160;lwFields.c'],['../lw_fields_8h.html#a764fbbefccc598e48988dab3371f808b',1,'setHFieldOnBorders(Grid *Grid):&#160;lwFields.c']]],
+  ['sublwfield',['subLWField',['../lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f',1,'subLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component):&#160;lwFields.c'],['../lw_fields_8h.html#a96197f1e2e5444c3f9f16b528a453f2f',1,'subLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component):&#160;lwFields.c']]],
+  ['sublwfieldsinbox',['subLWFieldsInBox',['../lw_fields_8c.html#a296507eaeaf163c36b80660b879cd330',1,'subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t):&#160;lwFields.c'],['../lw_fields_8h.html#a296507eaeaf163c36b80660b879cd330',1,'subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t):&#160;lwFields.c']]]
+];
