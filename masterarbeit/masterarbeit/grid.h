@@ -46,9 +46,6 @@ struct Grid {
     double *D;
     double *H;
     
-    double *Eextern;
-    double *Hextern;
-    
     double **Hz_im1;
     double **Hy_im1;
     double **Hx_jm1;
@@ -82,7 +79,7 @@ typedef struct Grid Grid;
 typedef struct Particle Particle;
 
 void initGrid(Grid *Grid, double dx, double dy, double dz, int numberOfGridPointsForBoxInX, int numberOfGridPointsForBoxInY, int numberOfGridPointsForBoxInZ, int numberOfBoxesInX, int numberOfBoxesInY, int numberOfBoxesInZ);
-//void allocateMemoryOnGrid(Grid *Grid);
+void allocateMemoryOnGrid(Grid *Grid);
 void freeMemoryOnGrid(Grid *Grid);
 void initSamplePulseOnGrid(Grid *Grid);
 void pushEFieldOnGrid(Grid *Grid, double dt);
@@ -90,7 +87,7 @@ void pushHFieldOnGrid(Grid *Grid, double dt);
 void writeGridParametersToFile(Grid *Grid);
 //void allocateFieldsOnBoxBorders(Grid *Grid);
 //void allocateUPMLCoefficients(Grid *Grid);
-void externalPlaneWave(const double xParticle[4], double Eextern[3], double Bextern[3]);
+void externalPlaneWave(const double xParticle[4], double tStart, double Eextern[3], double Bextern[3]);
 void clearFieldsFromGrid(Grid *Grid);
 void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3], double t, char *filename, int index, int planeForPlotting, bool plotE, bool plotB);
 #endif /* grid_h */

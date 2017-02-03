@@ -472,7 +472,6 @@ void calcLWFieldsForPlane(Grid *Grid, Particle *Particles, int numberOfParticles
                 xObserver[3] = (k) * Grid->dz;
                 
                 int gridIndexInBox = 3 * ny * nz * i + 3 * nz * j + 3 * k;
-                printf("%d\n", gridIndexInBox);
                 
                 addLWField(Grid, &Particles[p], &Grid->H[gridIndexInBox], xObserver, 3);
                 addLWField(Grid, &Particles[p], &Grid->H[gridIndexInBox + 1], xObserver, 4);
@@ -1485,7 +1484,7 @@ void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3])
         w = (Particle->x[3] - z0)/(z1 - z0);
         
         
-        E[2] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0] + 1], Grid->E[gridIndizesNextNeighbours[1] + 1], Grid->E[gridIndizesNextNeighbours[2] + 1], Grid->E[gridIndizesNextNeighbours[3] + 1], Grid->E[gridIndizesNextNeighbours[4] + 1], Grid->E[gridIndizesNextNeighbours[5] + 1], Grid->E[gridIndizesNextNeighbours[6] + 1], Grid->E[gridIndizesNextNeighbours[7] + 1], u, v, w);
+        E[1] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0] + 1], Grid->E[gridIndizesNextNeighbours[1] + 1], Grid->E[gridIndizesNextNeighbours[2] + 1], Grid->E[gridIndizesNextNeighbours[3] + 1], Grid->E[gridIndizesNextNeighbours[4] + 1], Grid->E[gridIndizesNextNeighbours[5] + 1], Grid->E[gridIndizesNextNeighbours[6] + 1], Grid->E[gridIndizesNextNeighbours[7] + 1], u, v, w);
         
         // MARK: Ez
         switch (partialBoxIndex) {
@@ -1587,7 +1586,7 @@ void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3])
         w = (Particle->x[3] - z0)/(z1 - z0);
         
         
-        E[3] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0] + 2], Grid->E[gridIndizesNextNeighbours[1] + 2], Grid->E[gridIndizesNextNeighbours[2] + 2], Grid->E[gridIndizesNextNeighbours[3] + 2], Grid->E[gridIndizesNextNeighbours[4] + 2], Grid->E[gridIndizesNextNeighbours[5] + 2], Grid->E[gridIndizesNextNeighbours[6] + 2], Grid->E[gridIndizesNextNeighbours[7] + 2], u, v, w);
+        E[2] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0] + 2], Grid->E[gridIndizesNextNeighbours[1] + 2], Grid->E[gridIndizesNextNeighbours[2] + 2], Grid->E[gridIndizesNextNeighbours[3] + 2], Grid->E[gridIndizesNextNeighbours[4] + 2], Grid->E[gridIndizesNextNeighbours[5] + 2], Grid->E[gridIndizesNextNeighbours[6] + 2], Grid->E[gridIndizesNextNeighbours[7] + 2], u, v, w);
 
     
         // MARK: Hx

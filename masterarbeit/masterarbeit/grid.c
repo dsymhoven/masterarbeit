@@ -162,6 +162,7 @@ void allocateUPMLCoefficients(Grid *Grid){
 ///@brief calls allocateFieldsOnGrid() and allocateFieldsOnBoxBorders(). For details see their documentation
 ///@param Grid pointer to Grid struct
 void allocateMemoryOnGrid(Grid *Grid){
+    allocateFieldsOnGrid(Grid);
     allocateFieldsOnBoxBorders(Grid);
     allocateUPMLCoefficients(Grid);
     
@@ -322,14 +323,14 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
 ///@param x four vector containing actual position where you want to evaluate the external field
 ///@param Eextern vector containing external E field components
 ///@param Hextern vector containing external H field components
-void externalPlaneWave(const double x[4], double Eextern[3], double Hextern[3]){
+void externalPlaneWave(const double x[4], double tStart, double Eextern[3], double Hextern[3]){
     double E0 = 1;
     double H0 = 1;
     double factor = 1;
     
     Eextern[0] = 0;
-    if(x[0] >= x[1] / factor){
-        Eextern[1] = E0 * sin(x[0]-x[1]/factor);
+    if(x[0] - tStart >= x[1] / factor){
+        Eextern[1] = E0 * sin(x[0] - tStart -x[1]/factor);
     }
     else{
         Eextern[1] = 0;
@@ -338,8 +339,8 @@ void externalPlaneWave(const double x[4], double Eextern[3], double Hextern[3]){
     
     Hextern[0] = 0;
     Hextern[1] = 0;
-    if(x[0] >= x[1] / factor){
-        Hextern[2] = H0 * sin(x[0]-x[1]/factor);
+    if(x[0] - tStart >= x[1] / factor){
+        Hextern[2] = H0 * sin(x[0] - tStart -x[1]/factor);
     }
     else{
         Hextern[2] = 0;
@@ -500,7 +501,7 @@ void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3],
                 x[1] = i * Grid->dx;
                 x[2] = j * Grid->dy;
 
-                externalPlaneWave(x, Eextern, Bextern);
+                externalPlaneWave(x, 0, Eextern, Bextern);
                 Ex = Eextern[0];
                 Ey = Eextern[1];
                 Ez = Eextern[2];
