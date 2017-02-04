@@ -330,7 +330,7 @@ void externalPlaneWave(const double x[4], double tStart, double Eextern[3], doub
     
     Eextern[0] = 0;
     if(x[0] - tStart >= x[1] / factor){
-        Eextern[1] = E0 * sin(x[0] - tStart -x[1]/factor);
+        Eextern[1] = E0 * cos(x[0] - tStart -x[1]/factor);
     }
     else{
         Eextern[1] = 0;
@@ -340,7 +340,7 @@ void externalPlaneWave(const double x[4], double tStart, double Eextern[3], doub
     Hextern[0] = 0;
     Hextern[1] = 0;
     if(x[0] - tStart >= x[1] / factor){
-        Hextern[2] = H0 * sin(x[0] - tStart -x[1]/factor);
+        Hextern[2] = H0 * cos(x[0] - tStart -x[1]/factor);
     }
     else{
         Hextern[2] = 0;
