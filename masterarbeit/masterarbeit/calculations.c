@@ -191,7 +191,7 @@ void updateVelocityWithBorisPusher(Particle *Particles, Grid *Grid, int numberOf
     double absoluteSquareValueOfT;
     double uModifiedForCrossProduct[3];
     double chargeOverMass = Particle->charge / Particle->mass;
-    
+        
     if (particleIsInsideSimulationArea(Grid, Particle)){
         updateFieldsForParticlePush(Particle, Grid, Eextern, Bextern, E, B);
         calcInteractionWithOtherParticles(Particles, Grid, numberOfParticles, particleIndex, E, B);
@@ -1257,7 +1257,7 @@ int getPartialBoxIndex(Particle *Particle, Grid *Grid){
     
 }
 
-///@brief trilinear interpolation of LW fields at particle position. In order to calculate the interaction of the particle with the far fields of other particles properly, we need to interpolate the field values. Field values only exist at the grid points, whereas the particle can be at any point on the grid. This method uses trilinear interpolation with the field values on the sorrounding eight grid points. We also consider the staggered grid. See Taflove page 59 Fig 3.1 for details and consider that we use another orientation of the coordinate system. Due to the staggered grid the eight grid points forming the box to interpolate in differ for all six components Ex, Ey, Ez, Hx, Hy, Hz.
+///@brief trilinear interpolation of LW fields at particle position. In order to calculate the interaction of the particle with the far fields of other particles properly, we need to interpolate the field values. Field values only exist at the grid points, whereas the particle can be at any point on the grid. This method uses trilinear interpolation with the field values on the sorrounding eight grid points. We also consider the staggered grid. See Taflove page 59 Fig 3.1 for details and consider that we use another orientation of the coordinate system. Due to the staggered grid, the eight grid points, forming the box to interpolate in, differ for all six components Ex, Ey, Ez, Hx, Hy, Hz.
 ///@param Grid Pointer to Grid Struct
 ///@param Particle Pointer to Particle Struct
 ///@param E vector where interpolated E fields at particle position are stored
@@ -1283,509 +1283,202 @@ void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3])
 
         partialBoxIndex = getPartialBoxIndex(Particle, Grid);
 
-        // MARK: Ex
-        switch (partialBoxIndex) {
-            case 0:
-                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp - 1, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
-                
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 0.5) * Grid->dy;
-                
-                z0 = (kp - 0.5) * Grid->dz;
-                z1 = (kp + 0.5) * Grid->dz;
-                break;
-            case 1:
-                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
-                
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 0.5) * Grid->dy;
-                
-                z0 = (kp + 0.5) * Grid->dz;
-                z1 = (kp + 1.5) * Grid->dz;
-                break;
-            case 2:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
-                
-                y0 = (jp + 0.5) * Grid->dy;
-                y1 = (jp + 1.5) * Grid->dy;
-                
-                z0 = (kp - 0.5) * Grid->dz;
-                z1 = (kp + 0.5) * Grid->dz;
-                break;
-            case 3:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
-                
-                y0 = (jp + 0.5) * Grid->dy;
-                y1 = (jp + 1.5) * Grid->dy;
-                
-                z0 = (kp + 0.5) * Grid->dz;
-                z1 = (kp + 1.5) * Grid->dz;
-                break;
-            case 4:
-                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp - 1, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
-                
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 0.5) * Grid->dy;
-                
-                z0 = (kp - 0.5) * Grid->dz;
-                z1 = (kp + 0.5) * Grid->dz;
-                break;
-            case 5:
-                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
-                
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 0.5) * Grid->dy;
-                
-                z0 = (kp + 0.5) * Grid->dz;
-                z1 = (kp + 1.5) * Grid->dz;
-                break;
-            case 6:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
-                
-                y0 = (jp + 0.5) * Grid->dy;
-                y1 = (jp + 1.5) * Grid->dy;
-                
-                z0 = (kp - 0.5) * Grid->dz;
-                z1 = (kp + 0.5) * Grid->dz;
-                break;
-            case 7:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
-                
-                y0 = (jp + 0.5) * Grid->dy;
-                y1 = (jp + 1.5) * Grid->dy;
-                
-                z0 = (kp + 0.5) * Grid->dz;
-                z1 = (kp + 1.5) * Grid->dz;
-                break;
-            default:
-                break;
-        }
-
-        u = (Particle->x[1] - x0)/(x1 - x0);
-        v = (Particle->x[2] - y0)/(y1 - y0);
-        w = (Particle->x[3] - z0)/(z1 - z0);
-        
-        
-        E[0] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0]], Grid->E[gridIndizesNextNeighbours[1]], Grid->E[gridIndizesNextNeighbours[2]], Grid->E[gridIndizesNextNeighbours[3]], Grid->E[gridIndizesNextNeighbours[4]], Grid->E[gridIndizesNextNeighbours[5]], Grid->E[gridIndizesNextNeighbours[6]], Grid->E[gridIndizesNextNeighbours[7]], u, v, w);
-    
-        // MARK: Ey
-        switch (partialBoxIndex) {
-            case 0:
-                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp - 1, gridIndizesNextNeighbours);
-                x0 = (ip - 0.5) * Grid->dx;
-                x1 = (ip + 0.5) * Grid->dx;
-                
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
-                
-                z0 = (kp - 0.5) * Grid->dz;
-                z1 = (kp + 0.5) * Grid->dz;
-                break;
-            case 1:
-                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip - 0.5) * Grid->dx;
-                x1 = (ip + 0.5) * Grid->dx;
-                
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
-                
-                z0 = (kp + 0.5) * Grid->dz;
-                z1 = (kp + 1.5) * Grid->dz;
-                break;
-            case 2:
-                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp - 1, gridIndizesNextNeighbours);
-                x0 = (ip - 0.5) * Grid->dx;
-                x1 = (ip + 0.5) * Grid->dx;
-                
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
-                
-                z0 = (kp - 0.5) * Grid->dz;
-                z1 = (kp + 0.5) * Grid->dz;
-                break;
-            case 3:
-                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip - 0.5) * Grid->dx;
-                x1 = (ip + 0.5) * Grid->dx;
-                
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
-                
-                z0 = (kp + 0.5) * Grid->dz;
-                z1 = (kp + 1.5) * Grid->dz;
-                break;
-            case 4:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
-                x0 = (ip + 0.5) * Grid->dx;
-                x1 = (ip + 1.5) * Grid->dx;
-                
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
-                
-                z0 = (kp - 0.5) * Grid->dz;
-                z1 = (kp + 0.5) * Grid->dz;
-                break;
-            case 5:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip + 0.5) * Grid->dx;
-                x1 = (ip + 1.5) * Grid->dx;
-                
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
-                
-                z0 = (kp + 0.5) * Grid->dz;
-                z1 = (kp + 1.5) * Grid->dz;
-                break;
-            case 6:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
-                x0 = (ip + 0.5) * Grid->dx;
-                x1 = (ip + 1.5) * Grid->dx;
-                
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
-                
-                z0 = (kp - 0.5) * Grid->dz;
-                z1 = (kp + 0.5) * Grid->dz;
-                break;
-            case 7:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip + 0.5) * Grid->dx;
-                x1 = (ip + 1.5) * Grid->dx;
-                
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
-                
-                z0 = (kp + 0.5) * Grid->dz;
-                z1 = (kp + 1.5) * Grid->dz;
-                break;
-            default:
-                break;
-        }
-        
-
-        u = (Particle->x[1] - x0)/(x1 - x0);
-        v = (Particle->x[2] - y0)/(y1 - y0);
-        w = (Particle->x[3] - z0)/(z1 - z0);
-        
-        
-        E[1] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0] + 1], Grid->E[gridIndizesNextNeighbours[1] + 1], Grid->E[gridIndizesNextNeighbours[2] + 1], Grid->E[gridIndizesNextNeighbours[3] + 1], Grid->E[gridIndizesNextNeighbours[4] + 1], Grid->E[gridIndizesNextNeighbours[5] + 1], Grid->E[gridIndizesNextNeighbours[6] + 1], Grid->E[gridIndizesNextNeighbours[7] + 1], u, v, w);
-        
-        // MARK: Ez
-        switch (partialBoxIndex) {
-            case 0:
-                calcGridIndizesNextNeighbours(Grid, ip - 1, jp - 1, kp, gridIndizesNextNeighbours);
-                x0 = (ip - 0.5) * Grid->dx;
-                x1 = (ip + 0.5) * Grid->dx;
-                
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 0.5) * Grid->dy;
-                
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
-                break;
-            case 1:
-                calcGridIndizesNextNeighbours(Grid, ip - 1, jp - 1, kp, gridIndizesNextNeighbours);
-                x0 = (ip - 0.5) * Grid->dx;
-                x1 = (ip + 0.5) * Grid->dx;
-                
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 0.5) * Grid->dy;
-                
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
-                break;
-            case 2:
-                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip - 0.5) * Grid->dx;
-                x1 = (ip + 0.5) * Grid->dx;
-                
-                y0 = (jp + 0.5) * Grid->dy;
-                y1 = (jp + 1.5) * Grid->dy;
-                
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
-                break;
-            case 3:
-                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip - 0.5) * Grid->dx;
-                x1 = (ip + 0.5) * Grid->dx;
-                
-                y0 = (jp + 0.5) * Grid->dy;
-                y1 = (jp + 1.5) * Grid->dy;
-                
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
-                break;
-            case 4:
-                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
-                x0 = (ip + 0.5) * Grid->dx;
-                x1 = (ip + 1.5) * Grid->dx;
-                
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 0.5) * Grid->dy;
-                
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
-                break;
-            case 5:
-                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
-                x0 = (ip + 0.5) * Grid->dx;
-                x1 = (ip + 1.5) * Grid->dx;
-                
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 0.5) * Grid->dy;
-                
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
-                break;
-            case 6:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip + 0.5) * Grid->dx;
-                x1 = (ip + 1.5) * Grid->dx;
-                
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 1.5) * Grid->dy;
-                
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
-                break;
-            case 7:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip + 0.5) * Grid->dx;
-                x1 = (ip + 1.5) * Grid->dx;
-                
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 1.5) * Grid->dy;
-                
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
-                break;
-            default:
-                break;
-        }
-        
-        
-        u = (Particle->x[1] - x0)/(x1 - x0);
-        v = (Particle->x[2] - y0)/(y1 - y0);
-        w = (Particle->x[3] - z0)/(z1 - z0);
-        
-        
-        E[2] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0] + 2], Grid->E[gridIndizesNextNeighbours[1] + 2], Grid->E[gridIndizesNextNeighbours[2] + 2], Grid->E[gridIndizesNextNeighbours[3] + 2], Grid->E[gridIndizesNextNeighbours[4] + 2], Grid->E[gridIndizesNextNeighbours[5] + 2], Grid->E[gridIndizesNextNeighbours[6] + 2], Grid->E[gridIndizesNextNeighbours[7] + 2], u, v, w);
-
-    
         // MARK: Hx
         switch (partialBoxIndex) {
             case 0:
-                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip - 0.5) * Grid->dx;
-                x1 = (ip + 0.5) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp - 1, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
                 
-                y0 = jp  * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
                 break;
             case 1:
-                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip - 0.5) * Grid->dx;
-                x1 = (ip + 0.5) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
                 
-                y0 = jp  * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
                 break;
             case 2:
-                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip - 0.5) * Grid->dx;
-                x1 = (ip + 0.5) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
                 
-                y0 = jp  * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
                 break;
             case 3:
-                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip - 0.5) * Grid->dx;
-                x1 = (ip + 0.5) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
                 
-                y0 = jp  * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
                 break;
             case 4:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip + 0.5) * Grid->dx;
-                x1 = (ip + 1.5) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp - 1, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
                 
-                y0 = jp  * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
                 break;
             case 5:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip + 0.5) * Grid->dx;
-                x1 = (ip + 1.5) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
                 
-                y0 = jp  * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
                 break;
             case 6:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip + 0.5) * Grid->dx;
-                x1 = (ip + 1.5) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
                 
-                y0 = jp  * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
                 break;
             case 7:
                 calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = (ip + 0.5) * Grid->dx;
-                x1 = (ip + 1.5) * Grid->dx;
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
                 
-                y0 = jp  * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
                 break;
             default:
                 break;
         }
-        
-        
+
         u = (Particle->x[1] - x0)/(x1 - x0);
         v = (Particle->x[2] - y0)/(y1 - y0);
         w = (Particle->x[3] - z0)/(z1 - z0);
         
         
         B[0] = trilinearInterpolation(interpolationPoint, Grid->H[gridIndizesNextNeighbours[0]], Grid->H[gridIndizesNextNeighbours[1]], Grid->H[gridIndizesNextNeighbours[2]], Grid->H[gridIndizesNextNeighbours[3]], Grid->H[gridIndizesNextNeighbours[4]], Grid->H[gridIndizesNextNeighbours[5]], Grid->H[gridIndizesNextNeighbours[6]], Grid->H[gridIndizesNextNeighbours[7]], u, v, w);
-        
+    
         // MARK: Hy
         switch (partialBoxIndex) {
             case 0:
-                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
                 
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 0.5) * Grid->dy;
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
                 break;
             case 1:
-                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
                 
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 0.5) * Grid->dy;
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
                 break;
             case 2:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
                 
-                y0 = (jp + 0.5) * Grid->dy;
-                y1 = (jp + 1.5) * Grid->dy;
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
                 break;
             case 3:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
                 
-                y0 = (jp + 0.5) * Grid->dy;
-                y1 = (jp + 1.5) * Grid->dy;
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
                 break;
             case 4:
-                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
                 
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 0.5) * Grid->dy;
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
                 break;
             case 5:
-                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
                 
-                y0 = (jp - 0.5) * Grid->dy;
-                y1 = (jp + 0.5) * Grid->dy;
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
                 break;
             case 6:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
                 
-                y0 = (jp + 0.5) * Grid->dy;
-                y1 = (jp + 1.5) * Grid->dy;
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
                 break;
             case 7:
                 calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
                 
-                y0 = (jp + 0.5) * Grid->dy;
-                y1 = (jp + 1.5) * Grid->dy;
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
                 
-                z0 = kp * Grid->dz;
-                z1 = (kp + 1) * Grid->dz;
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
                 break;
             default:
                 break;
         }
         
-        
+
         u = (Particle->x[1] - x0)/(x1 - x0);
         v = (Particle->x[2] - y0)/(y1 - y0);
         w = (Particle->x[3] - z0)/(z1 - z0);
@@ -1796,92 +1489,92 @@ void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3])
         // MARK: Hz
         switch (partialBoxIndex) {
             case 0:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp - 1, kp, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
                 
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
                 
-                z0 = (kp - 0.5) * Grid->dz;
-                z1 = (kp + 0.5) * Grid->dz;
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
                 break;
             case 1:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp - 1, kp, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
                 
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
                 
-                z0 = (kp + 0.5) * Grid->dz;
-                z1 = (kp + 1.5) * Grid->dz;
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
                 break;
             case 2:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
                 
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
                 
-                z0 = (kp - 0.5) * Grid->dz;
-                z1 = (kp + 0.5) * Grid->dz;
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
                 break;
             case 3:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
                 
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
                 
-                z0 = (kp + 0.5) * Grid->dz;
-                z1 = (kp + 1.5) * Grid->dz;
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
                 break;
             case 4:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
                 
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
                 
-                z0 = (kp - 0.5) * Grid->dz;
-                z1 = (kp + 0.5) * Grid->dz;
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
                 break;
             case 5:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
                 
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
                 
-                z0 = (kp + 0.5) * Grid->dz;
-                z1 = (kp + 1.5) * Grid->dz;
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
                 break;
             case 6:
-                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
                 
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
                 
-                z0 = (kp - 0.5) * Grid->dz;
-                z1 = (kp + 0.5) * Grid->dz;
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
                 break;
             case 7:
                 calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
-                x0 = ip * Grid->dx;
-                x1 = (ip + 1) * Grid->dx;
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
                 
-                y0 = jp * Grid->dy;
-                y1 = (jp + 1) * Grid->dy;
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
                 
-                z0 = (kp + 0.5) * Grid->dz;
-                z1 = (kp + 1.5) * Grid->dz;
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
                 break;
             default:
                 break;
@@ -1894,6 +1587,313 @@ void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3])
         
         
         B[2] = trilinearInterpolation(interpolationPoint, Grid->H[gridIndizesNextNeighbours[0] + 2], Grid->H[gridIndizesNextNeighbours[1] + 2], Grid->H[gridIndizesNextNeighbours[2] + 2], Grid->H[gridIndizesNextNeighbours[3] + 2], Grid->H[gridIndizesNextNeighbours[4] + 2], Grid->H[gridIndizesNextNeighbours[5] + 2], Grid->H[gridIndizesNextNeighbours[6] + 2], Grid->H[gridIndizesNextNeighbours[7] + 2], u, v, w);
+
+    
+        // MARK: Ex
+        switch (partialBoxIndex) {
+            case 0:
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
+                
+                y0 = jp  * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 1:
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
+                
+                y0 = jp  * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 2:
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
+                
+                y0 = jp  * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 3:
+                calcGridIndizesNextNeighbours(Grid, ip - 1, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip - 0.5) * Grid->dx;
+                x1 = (ip + 0.5) * Grid->dx;
+                
+                y0 = jp  * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 4:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
+                
+                y0 = jp  * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 5:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
+                
+                y0 = jp  * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 6:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
+                
+                y0 = jp  * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 7:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = (ip + 0.5) * Grid->dx;
+                x1 = (ip + 1.5) * Grid->dx;
+                
+                y0 = jp  * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            default:
+                break;
+        }
+        
+        
+        u = (Particle->x[1] - x0)/(x1 - x0);
+        v = (Particle->x[2] - y0)/(y1 - y0);
+        w = (Particle->x[3] - z0)/(z1 - z0);
+        
+        
+        E[0] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0]], Grid->E[gridIndizesNextNeighbours[1]], Grid->E[gridIndizesNextNeighbours[2]], Grid->E[gridIndizesNextNeighbours[3]], Grid->E[gridIndizesNextNeighbours[4]], Grid->E[gridIndizesNextNeighbours[5]], Grid->E[gridIndizesNextNeighbours[6]], Grid->E[gridIndizesNextNeighbours[7]], u, v, w);
+        
+        // MARK: Ey
+        switch (partialBoxIndex) {
+            case 0:
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 1:
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 2:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 3:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 4:
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 5:
+                calcGridIndizesNextNeighbours(Grid, ip, jp - 1, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp - 0.5) * Grid->dy;
+                y1 = (jp + 0.5) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 6:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            case 7:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = (jp + 0.5) * Grid->dy;
+                y1 = (jp + 1.5) * Grid->dy;
+                
+                z0 = kp * Grid->dz;
+                z1 = (kp + 1) * Grid->dz;
+                break;
+            default:
+                break;
+        }
+        
+        
+        u = (Particle->x[1] - x0)/(x1 - x0);
+        v = (Particle->x[2] - y0)/(y1 - y0);
+        w = (Particle->x[3] - z0)/(z1 - z0);
+        
+        
+        E[1] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0] + 1], Grid->E[gridIndizesNextNeighbours[1] + 1], Grid->E[gridIndizesNextNeighbours[2] + 1], Grid->E[gridIndizesNextNeighbours[3] + 1], Grid->E[gridIndizesNextNeighbours[4] + 1], Grid->E[gridIndizesNextNeighbours[5] + 1], Grid->E[gridIndizesNextNeighbours[6] + 1], Grid->E[gridIndizesNextNeighbours[7] + 1], u, v, w);
+        
+        // MARK: Ez
+        switch (partialBoxIndex) {
+            case 0:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
+                break;
+            case 1:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
+                break;
+            case 2:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
+                break;
+            case 3:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
+                break;
+            case 4:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
+                break;
+            case 5:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
+                break;
+            case 6:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp - 1, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp - 0.5) * Grid->dz;
+                z1 = (kp + 0.5) * Grid->dz;
+                break;
+            case 7:
+                calcGridIndizesNextNeighbours(Grid, ip, jp, kp, gridIndizesNextNeighbours);
+                x0 = ip * Grid->dx;
+                x1 = (ip + 1) * Grid->dx;
+                
+                y0 = jp * Grid->dy;
+                y1 = (jp + 1) * Grid->dy;
+                
+                z0 = (kp + 0.5) * Grid->dz;
+                z1 = (kp + 1.5) * Grid->dz;
+                break;
+            default:
+                break;
+        }
+        
+        
+        u = (Particle->x[1] - x0)/(x1 - x0);
+        v = (Particle->x[2] - y0)/(y1 - y0);
+        w = (Particle->x[3] - z0)/(z1 - z0);
+        
+        
+        E[2] = trilinearInterpolation(interpolationPoint, Grid->E[gridIndizesNextNeighbours[0] + 2], Grid->E[gridIndizesNextNeighbours[1] + 2], Grid->E[gridIndizesNextNeighbours[2] + 2], Grid->E[gridIndizesNextNeighbours[3] + 2], Grid->E[gridIndizesNextNeighbours[4] + 2], Grid->E[gridIndizesNextNeighbours[5] + 2], Grid->E[gridIndizesNextNeighbours[6] + 2], Grid->E[gridIndizesNextNeighbours[7] + 2], u, v, w);
     }
     
     

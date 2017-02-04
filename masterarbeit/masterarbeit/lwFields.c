@@ -1328,7 +1328,7 @@ void addLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
     for (int index = 0; index < currentHistoryLength - 1; index ++){
         if(isInsideBackwardLightcone(Particle->xHistory[index], xObserverCopy) && !isInsideBackwardLightcone(Particle->xHistory[index+1], xObserverCopy)){
             calculateIntersectionPoint(Particle->xHistory[index], Particle->xHistory[index+1], Particle->uHistory[index], Particle->uHistory[index+1], xObserverCopy, intersectionPoint, velocityAtIntersectionPoint);
-            calculateBeta(Particle->xHistory[index], Particle->xHistory[index+1], beta);
+//            calculateBeta(Particle->xHistory[index], Particle->xHistory[index+1], beta);
             calculateLienardWiechertParameters(intersectionPoint, xObserverCopy, velocityAtIntersectionPoint, &gamma_sq, &R_sq, &R, n, beta);
             calculateBetaDot(Particle->uHistory[index], Particle->uHistory[index+1], dt, betaDot);
             calcuateLienardWiechertFields(gamma_sq, R_sq, R, n, beta, betaDot, Particle->charge, E, B);
