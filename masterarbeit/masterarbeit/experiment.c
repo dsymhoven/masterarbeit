@@ -74,16 +74,16 @@ void testBorisPusher(){
     double dx = 0.2;
     double dy = 0.2;
     double dz = 0.2;
-    int numberOfGridPointsForBoxInX = 32;
-    int numberOfGridPointsForBoxInY = 32;
-    int numberOfGridPointsForBoxInZ = 32;
-    int numberOfBoxesInX = 5;
-    int numberOfBoxesInY = 5;
-    int numberOfBoxesInZ = 5;
+    int numberOfGridPointsForBoxInX = 20;
+    int numberOfGridPointsForBoxInY = 20;
+    int numberOfGridPointsForBoxInZ = 20;
+    int numberOfBoxesInX = 8;
+    int numberOfBoxesInY = 8;
+    int numberOfBoxesInZ = 8;
     
     double dt = 0.5 * dx;
     double t = 0;
-    double tEnd = 3;
+    double tEnd = 10;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -97,20 +97,19 @@ void testBorisPusher(){
     
     initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
-    writeGridParametersToFile(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
     Particle->mass = 1;
     Particle->charge = 1;
     Particle->x[0] = 0;
-    Particle->x[1] = 11.21;
-    Particle->x[2] = 12.01;
-    Particle->x[3] = 14.401;
+    Particle->x[1] = 14.1;
+    Particle->x[2] = 14.1;
+    Particle->x[3] = 14.1;
     
-    Particle->u[0] = 1.1;
-    Particle->u[1] = 0.458;
+    Particle->u[1] = 0.958;
     Particle->u[2] = 0;
     Particle->u[3] = 0;
+    Particle->u[0] = getGammaFromVelocityVector(Particle->u);
     
     Eextern[0] = 0;
     Eextern[1] = 0;
@@ -119,6 +118,8 @@ void testBorisPusher(){
     Bextern[0] = 0;
     Bextern[1] = 0;
     Bextern[2] = 1;
+    
+    int planeForPlotting = Particle->x[3] / dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -133,8 +134,10 @@ void testBorisPusher(){
         }
         t += dt;
     }
+    writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
+    writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
-    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/borisPusherScript.sh");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
 }
@@ -210,12 +213,12 @@ void testLWFieldCalculationForPlane(){
             updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
             updateLocation(&Particles[p], &Grid, dt);
         }
-        calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+//        calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
         t += dt;
     }
     
 
-    //calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
     writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
@@ -1067,15 +1070,15 @@ void electronScatteringLargeGrid_init8(){
     // ======================================================
     
     Grid Grid;
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
+    double dx = 0.1;
+    double dy = 0.1;
+    double dz = 0.1;
     int numberOfGridPointsForBoxInX = 32;
     int numberOfGridPointsForBoxInY = 32;
     int numberOfGridPointsForBoxInZ = 32;
-    int numberOfBoxesInX = 9;
-    int numberOfBoxesInY = 9;
-    int numberOfBoxesInZ = 9;
+    int numberOfBoxesInX = 8;
+    int numberOfBoxesInY = 8;
+    int numberOfBoxesInZ = 8;
     
     int numberOfParticles = 2;
     
@@ -1084,8 +1087,8 @@ void electronScatteringLargeGrid_init8(){
     Particle *Particle2 = &Particles[1];
     
     double dt = 0.5 * dx;
-    double t = 40;
-    double tEnd = 40;
+    double t = 30;
+    double tEnd = 35;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -1102,23 +1105,24 @@ void electronScatteringLargeGrid_init8(){
     Particle1->charge = 1;
     
     Particle1->x[0] = 0;
-    Particle1->x[1] = 26.1;
-    Particle1->x[2] = 18.1;
-    Particle1->x[3] = 16.401;
+    Particle1->x[1] = 7;
+    Particle1->x[2] = 11;
+    Particle1->x[3] = 12.8;
     
-    Particle1->u[1] = -0.458;
+    Particle1->u[1] = 0.979;
     Particle1->u[2] = 0;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
     
     Particle2->mass = 1;
     Particle2->charge = 1;
-    Particle2->x[0] = 0;
-    Particle2->x[1] = 10.81;
-    Particle2->x[2] = 16.1;
-    Particle2->x[3] = 16.401;
     
-    Particle2->u[1] = 0.458;
+    Particle2->x[0] = 0;
+    Particle2->x[1] = 20;
+    Particle2->x[2] = 12;
+    Particle2->x[3] = 12.8;
+    
+    Particle2->u[1] = -0.979;
     Particle2->u[2] = 0;
     Particle2->u[3] = 0;
     Particle2->u[0] = getGammaFromVelocityVector(Particle2->u);
@@ -1139,27 +1143,27 @@ void electronScatteringLargeGrid_init8(){
     
     extendParticleHistory(Particles, &Grid, numberOfParticles, Eextern, Bextern, dt, t);
     writeSimulationInfoToFile(numberOfParticles, t / dt);
-    if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, Eextern, Bextern)){
-        calcFieldsOnGridWithoutNearField(Particles, &Grid, numberOfParticles, t);
-        writeFieldsFromCompleteGridToFile(&Grid);
-        writeInitialConditionsToFile(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern);
-        system("python2.7 ~/Desktop/Projects/masterarbeit/Analysis/initialFields.py");
-    }
+//    if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, Eextern, Bextern)){
+//        calcFieldsOnGridWithoutNearField(Particles, &Grid, numberOfParticles, t);
+//        writeFieldsFromCompleteGridToFile(&Grid);
+//        writeInitialConditionsToFile(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern);
+//        system("python2.7 ~/Desktop/Projects/masterarbeit/Analysis/initialFields.py");
+//    }
     
     for (int step = t / dt; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, (int)(tEnd / dt));
-        //        writeParticlesToFile(Particles, numberOfParticles, filename, step);
-        //        writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
+                writeParticlesToFile(Particles, numberOfParticles, filename, step);
+//                writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
         //
         //        pushEField(&Grid, Particles, numberOfParticles, t, dt);
         //        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
         
-        //        for(int p = 0; p < numberOfParticles; p++){
-        //            addCurrentStateToParticleHistory(&Particles[p], step);
-        //            updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
-        //            updateLocation(&Particles[p], &Grid, dt);
-        //            updateNearField(&Grid, &Particles[p], t);
-        //       }
+                for(int p = 0; p < numberOfParticles; p++){
+                    addCurrentStateToParticleHistory(&Particles[p], step);
+                    updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
+                    updateLocation(&Particles[p], &Grid, dt);
+//                    updateNearField(&Grid, &Particles[p], t);
+               }
         //        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
         //        pushEField(&Grid, Particles, numberOfParticles, t, dt);
         
@@ -1167,7 +1171,7 @@ void electronScatteringLargeGrid_init8(){
         t += dt;
     }
     //clearFieldsFromGrid(&Grid);
-    //calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
     writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
@@ -1231,12 +1235,12 @@ void scatteringInEMWave(){
     // ======================================================
     
     Grid Grid;
-    double dx = 0.2;
-    double dy = 0.2;
-    double dz = 0.2;
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
+    double dx = 0.1;
+    double dy = 0.1;
+    double dz = 0.1;
+    int numberOfGridPointsForBoxInX = 32;
+    int numberOfGridPointsForBoxInY = 32;
+    int numberOfGridPointsForBoxInZ = 32;
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -1247,9 +1251,9 @@ void scatteringInEMWave(){
     Particle *Particle1 = &Particles[0];
     
     double dt = 0.5 * dx;
-    double t = 20;
+    double t = 40;
     double tStart = t;
-    double tEnd = 38;
+    double tEnd = 80;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -1265,12 +1269,12 @@ void scatteringInEMWave(){
     Particle1->charge = 1;
     
     Particle1->x[0] = 0;
-    Particle1->x[1] = 13.1;
-    Particle1->x[2] = 5.1;
+    Particle1->x[1] = 20;
+    Particle1->x[2] = 10.1;
     Particle1->x[3] = 16.401;
     
-    Particle1->u[1] = -0.458;
-    Particle1->u[2] = 0.458;
+    Particle1->u[1] = -0.204;
+    Particle1->u[2] = 0;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
     
@@ -1318,12 +1322,14 @@ void scatteringInEMWave(){
         
         t += dt;
     }
-    clearFieldsFromGrid(&Grid);
+//    clearFieldsFromGrid(&Grid);
     calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
     writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
+    writeExternalFieldsToFile(&Grid, Eextern, Bextern, t, filename, 0, planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
 

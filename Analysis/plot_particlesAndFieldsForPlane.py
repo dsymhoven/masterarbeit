@@ -40,9 +40,9 @@ for p in range(numberOfParticles):
 		# define variables
 		x.append(data[0][1])
 		y.append(data[0][2])
-		if len(x) > 40:
-			x.pop(0)
-			y.pop(0)
+		# if len(x) > 40:
+		# 	x.pop(0)
+		# 	y.pop(0)
 	# plot x and y value of particle as red dot
 	plt.plot(x, y, color = 'r')
 	# delete x,y array for next particle
@@ -50,7 +50,7 @@ for p in range(numberOfParticles):
 	y=[]
 
 # plot fields
-plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.001)
+plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.04)
 plt.colorbar()
 # set labels
 plt.xlabel("X")
@@ -63,6 +63,6 @@ plt.yticks(np.arange(0, lengthOfSimulationBoxInY + 1, lengthOfOneBoxInY))
 plt.grid(linestyle = "-", color='red')
 # define filename for saving
 filename = 'img'
-fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight')
+fig.savefig("png/" + "{}.png".format(filename),bbox_inches='tight',dpi=300)
 # close fig
 plt.close(fig)

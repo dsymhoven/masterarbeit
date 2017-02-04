@@ -38,7 +38,7 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 	Y = np.c_[Y,y]
 	x=[]
 	y=[]
-	if i == startTime or len(X[0]) > 40:
+	if i == startTime: #or len(X[0]) > 40:
 		X = np.delete(X,0,1)
 		Y = np.delete(Y,0,1)
 	for p in range(numberOfParticles):
@@ -55,6 +55,6 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 	plt.grid(linestyle = "-", color='red')
 	# define filename for saving
 	filename = 'img' + str(i - startTime)
-	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight')
+	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight', dpi=300)
 	# close fig
 	plt.close(fig)

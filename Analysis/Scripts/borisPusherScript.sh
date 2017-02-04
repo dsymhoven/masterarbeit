@@ -44,14 +44,14 @@ mkdir -p $PATHTOANALYSIS/png
 cd $PATHTOANALYSIS
 # execute python script
 python2.7 sortParticleFiles.py
-python2.7 plot_borisPusher.py
+python2.7 plot_borisPusherFinal.py
 
 # chane to png folder
-cd png/
+#cd png/
 # execute ffmpeg to create video file
-~/../../opt/local/bin/ffmpeg -framerate 4 -start_number 0 -i img%d.png -vf "scale=720:trunc(ow/a/2)*2" -c:v libx264 -r 30 -pix_fmt yuv420p borisPusher.mp4
+#~/../../opt/local/bin/ffmpeg -framerate 4 -start_number 0 -i img%d.png -vf "scale=720:trunc(ow/a/2)*2" -c:v libx264 -r 30 -pix_fmt yuv420p borisPusher.mp4
 # create new folder for Video file
-cd ../
-mkdir -p Movies/
+#cd ../
+#mkdir -p Movies/
 # copy video into new folder
-mv png/borisPusher.mp4 Movies
+#mv png/borisPusher.mp4 Movies

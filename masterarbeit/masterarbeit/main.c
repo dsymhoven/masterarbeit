@@ -14,8 +14,8 @@
 int main(int argc, const char * argv[]) {
     
     //testMaxwellPusher();
-    //testBorisPusher();
-    //testLWFieldCalculationForPlane();
+    testBorisPusher();
+//    testLWFieldCalculationForPlane();
     //testNearAndFarFields();
     //testUPML();
     //testNearFieldUpdate();
@@ -23,10 +23,10 @@ int main(int argc, const char * argv[]) {
     //testHistoryBeforeSimulation();
     //testScattering();
     //extendHistoryAndCalcLWFieldsIndependantly();
-    //electronScatteringSmallGrid_init9();
-    //electronScatteringLargeGrid_init8();
+//    electronScatteringSmallGrid_init9();
+//    electronScatteringLargeGrid_init8();
 //    testTimeDependentExternalFields();
-    scatteringInEMWave();
+//    scatteringInEMWave();
     return 0;
 }   
 
