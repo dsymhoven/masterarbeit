@@ -192,26 +192,85 @@ where $\psi \colon \mathbb{R}^3 \times \mathbb{R} \mapsto \mathbb{R}$. In append
 \newline
 If we choose $\psi$ such that 
 \beq
+\label{eqn: LaurentzGauge}
 \vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} = 0,
 \eeq
 then we call it a \textit{Lorentz Gauge} and the potential Equations \eqref{eqn: potentialEquations} decouple into two separate wave equations
 \beq
+\label{eqn: waveEquations}
 \bal
 \hat\square \varphi &= -\frac{\rho}{\epsilon_0} \\
 \hat\square \vec{A} &= -\mu_0\vec{j}.
 \eal
 \eeq
 
+%======================== Liénard-Wiechert Potentials ========================
 \section{Liénard-Wiechert Potentials}
-\label{eqn: Liénard-Wiechert}
-The \textit{Liénard-Wiechert} Potentials describe the electric and magnetic fields of a moving electric particle. They are the generalization of the colomb poitential 
+\label{sec: lw-potentials}
+The \textit{Liénard-Wiechert} Potentials are the solution of \eqref{eqn: waveEquations}. Following \cite{Nolting} we solve the general case
 \beq
+\label{eqn: generalWaveEquation}
+\hat\square \psi(\vec{r}, t) = f(\vec{r},t),
+\eeq
+where $\psi, f: \mathbb{R}^3 \times \mathbb{R} \mapsto \mathbb{R}$. $f$ is called source function and will be specified later. \eqref{eqn: generalWaveEquation} is a linear inhomgeneous partial differential equation. Those kind of equations are solved with the \textit{Green's function} approach. If we can find the Green's function G fulfilling
+\beq
+\label{eqn: Greens function}
+\hat\square G(\vec{r} - \vec{r}~', t - t') = - \delta(\vec{r} - \vec{r}~')\delta(t - t'),
+\eeq
+then we can calculate the solution of \eqref{eqn: generalWaveEquation} via
+\beq
+\label{eqn: WaveEquationSolution}
+\psi(\vec{r}, t) = \int \int G(\vec{r} - \vec{r}', t - t') f(\vec{r},t) \dm t ~\dm \vec{r}~'.
+\eeq
+To find G we use the following Fourier - Transformations 
+\beq
+\label{eqn: FourierTransforms}
+\bal
+G(\vec{r} - \vec{r}~', t - t') &= \frac{1}{4\pi^2} \int \int G(\vec{k}, \omega) \exp(i\vec{k}(\vec{r} - \vec{r}~'))\exp(-i\omega(t - t')) \dm \omega~\dm \vec{k}, \\
+\delta(\vec{r} - \vec{r}~') &= \frac{1}{4\pi^2} \int \exp(i\vec{k}(\vec{r} - \vec{r}~')) \dm \vec{k}, \\
+\delta(t - t') &= \frac{1}{4\pi^2} \int \exp(-i\omega(t - t')) \dm \omega.
+\eal
+\eeq
+Plugging in \eqref{eqn: FourierTransforms} into \eqref{eqn: Greens function} yields
+\beq
+\int \int \exp(i\vec{k}(\vec{r} - \vec{r}~'))\exp(-i\omega(t - t')) \left[ G(\vec{k}, \omega) \left( -k^2 + \frac{\omega^2}{c^2}\right) + \frac{1}{4\pi^2} \right] = 0, \nn
+\eeq
+which leaves us with
+\beq
+G(\vec{k}, \omega) = \frac{1}{4\pi^2} \frac{1}{k^2 - \frac{\omega^2}{c^2}}. \nn
+\eeq
+Using residue theorem we find the Fourier Back Transform of G to be
+\beq
+\label{eqn: Gret}
+G_{ret}(\vec{r} - \vec{r}~', t - t') = \frac{\delta(t' - t_{ret})}{4\pi |\vec{r} - \vec{r}~'|},
+\eeq 
+where 
+\beq
+t_{ret} \coloneqq t - \frac{|\vec{r} - \vec{r}~'|}{c} 
+\eeq
+is the retarded time. We also call $G_{ret}$ the \textit{retarded Green's function} in contrast to the \textit{advanced Green's function} $G_{av}$ with the advanced time
+\beq
+t_{av} \coloneqq t + \frac{|\vec{r} - \vec{r}~'|}{c}.
+\eeq
+The latter does not fulfill the causal principle of physics. We expect the reason for a change in our signal at $\vec{r}$ at time t, due to a perturbation, to be in the past, not the future. Because $t_{ret} < t$ the retarded Green's function is the one to work with. Plugging in \eqref{eqn: Gret} into \eqref{eqn: WaveEquationSolution} yields
+\beq
+\psi(\vec{r}, t) = \frac{1}{4\pi}\int \frac{f(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~',
+\eeq
+which finally leads to the retarded potential equations
+\beq
+\varphi(\vec{r},t) &=& \frac{1}{4\pi \epsilon_0} \int \frac{\rho(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~',\\
+\vec{A}(\vec{r},t) &=& \frac{\mu_0}{4\pi} \int \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~'.
+\eeq
+Lastly we show in Appendix \ref{appendix: Retarded Potential Equations Fulfill Laurentz Gauge} that they indeed fulfill the Laurentz Gauge \eqref{eqn: LaurentzGauge}
+The \textit{Liénard-Wiechert} Potentials describe the electric and magnetic fields of a moving electric particle. They are the generalization of the coulomb potential.
+\beq
+\label{eqn: Liénard-Wiechert}
 \bal
 E = E \\
 B = B 
 \eal
 \eeq
-\label{sec: lw-potentials}
+
 
 %======================== NUMERICS ========================
 %===========================================================
@@ -583,9 +642,56 @@ and
 \Longleftrightarrow \hat\square \vec{A} - \vec{\nabla} \left(\vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} \right) &= -\mu_0\vec{j}\nn\\
 \eal
 \eeq
-
+\chapter{Retarded Potential Equations Fulfill Laurentz Gauge}
+\label{appendix: Retarded Potential Equations Fulfill Laurentz Gauge}
+\noindent
+We show that the retarded potential equations 
+\beq
+\varphi(\vec{r},t) &=& \frac{1}{4\pi \epsilon_0} \int_{V} \frac{\rho(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~',\nn\\
+\vec{A}(\vec{r},t) &=& \frac{\mu_0}{4\pi} \int_{V} \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~'\nn
+\eeq
+with $t_{ret} \coloneqq t - \frac{|\vec{r} - \vec{r}~'|}{c}$ fulfill the Laurentz Gauge
+\beq
+\vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} = 0.\nn
+\eeq
+Plugging in yields
+\beq
+\label{eqn: step1}
+\bal
+\vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} &= \frac{\mu_0}{4\pi} \int_{V} \vec{\nabla}_{\vec{r}}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~' + \frac{1}{c^2}  \frac{1}{4\pi \epsilon_0} \int_{V} \frac{\del}{\del t}\frac{\rho(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~'\nn\\
+&=  \frac{\mu_0}{4\pi} \int_{V} \vec{\nabla}_{\vec{r}}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \frac{\del}{\del t}\frac{\rho(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~',\nn\\
+\eal
+\eeq
+where we used $c^2 = \frac{1}{\mu_0\epsilon_0}$. Now consider the first term in the integrand
+\beq
+\bal
+\vec{\nabla}_{\vec{r}}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} &= \vec{j}(\vec{r}~', t_{ret}) \vec{\nabla}_{\vec{r}} \left( \frac{1}{|\vec{r} - \vec{r}~'|}\right) + \frac{1}{|\vec{r} - \vec{r}~'|} \del_{t_{ret}}\vec{j}(\vec{r}~', t_{ret}) \vec{\nabla}_{\vec{r}}~ t_{ret}\nn \\
+&= -\vec{j}(\vec{r}~', t_{ret}) \frac{\vec{r} - \vec{r}~'}{|\vec{r} - \vec{r}~'|^3} - \frac{1}{c} \frac{\vec{r} - \vec{r}~'}{|\vec{r} - \vec{r}~'|^2} \del_{t_{ret}}\vec{j}(\vec{r}~', t_{ret})
+\eal
+\eeq
+On the other hand we also have
+\beq
+\bal
+\vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} &= \vec{j}(\vec{r}~', t_{ret}) \vec{\nabla}_{\vec{r}~'} \left( \frac{1}{|\vec{r} - \vec{r}~'|}\right) + \frac{1}{|\vec{r} - \vec{r}~'|} \left( \vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret})\Bigr |_{t_{ret}} + \del_{t_{ret}}\vec{j}(\vec{r}~', t_{ret}) \vec{\nabla}_{\vec{r}~'}~ t_{ret}\right)\nn \\
+&= \vec{j}(\vec{r}~', t_{ret}) \frac{\vec{r} - \vec{r}~'}{|\vec{r} - \vec{r}~'|^3} + \frac{1}{|\vec{r} - \vec{r}~'|} \left( \vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret}) \Bigr |_{t_{ret}}+ \frac{1}{c}  \frac{\vec{r} - \vec{r}~'}{|\vec{r} - \vec{r}~'|} \del_{t_{ret}}\vec{j}(\vec{r}~', t_{ret}) \right),
+\eal
+\eeq
+which means that we can write
+\beq
+\vec{\nabla}_{\vec{r}}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} + \vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} =  \frac{\vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret})\Bigr |_{t_{ret}}}{|\vec{r} - \vec{r}~'|}. \nn
+\eeq
+Plugging in this into \eqref{eqn: step1} yields
+\beq
+\vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} = \frac{\mu_0}{4\pi} \int_{V} - \vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} + \underbrace{ \frac{\vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret})\Bigr |_{t_{ret}}}{|\vec{r} - \vec{r}~'|} + \frac{\del}{\del t}\frac{\rho(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|}}_{= 0 \text{ due to continuity equation}} ~\dm \vec{r}~'. \nn 
+\eeq
+For the remaining first term we use \textit{Stokes Law}
+\beq
+\vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} = -\frac{\mu_0}{4\pi} \int_{V} \vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~' =  - \frac{\mu_0}{4\pi} \oint_{\del V}  \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{s} = 0, \nn
+\eeq
+because the current density vanishes at infinity. That's what we wanted to show.
 \chapter{Softwarestack}
 \chapter{Code Documentation}
+\chapter{Normalization}
 %============================= Abbildungsverzeichnis ===========================
 \listoffigures
 

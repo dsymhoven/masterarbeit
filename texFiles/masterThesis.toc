@@ -4,35 +4,37 @@
 \contentsline {section}{\numberline {1.1}Maxwell-Equations}{3}{section.1.1}
 \contentsline {section}{\numberline {1.2}Colomb and Lorentz Gauge}{4}{section.1.2}
 \contentsline {section}{\numberline {1.3}Li\'enard-Wiechert Potentials}{5}{section.1.3}
-\contentsline {part}{\numberline {II}Numerics}{6}{part.2}
-\contentsline {chapter}{\numberline {2}Integration of Equation of Motion}{8}{chapter.2}
-\contentsline {section}{\numberline {2.1}Equations of Motion}{8}{section.2.1}
-\contentsline {section}{\numberline {2.2}Euler-Scheme}{8}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Procedural Error and Order of Consistency}{10}{subsection.2.2.1}
-\contentsline {section}{\numberline {2.3}Leap-Frog-Scheme}{11}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Boris-Method}{12}{subsection.2.3.1}
-\contentsline {section}{\numberline {2.4}Nystr\"om-Scheme}{14}{section.2.4}
-\contentsline {section}{\numberline {2.5}Adaptive Timestep Control}{14}{section.2.5}
-\contentsline {chapter}{\numberline {3}Interpolations}{15}{chapter.3}
-\contentsline {section}{\numberline {3.1}Linear interpolation of Trajectories}{15}{section.3.1}
-\contentsline {section}{\numberline {3.2}Trilinear Interpolation of Fields}{17}{section.3.2}
-\contentsline {chapter}{\numberline {4}FDTD}{18}{chapter.4}
-\contentsline {section}{\numberline {4.1}Maxwell-Equations}{18}{section.4.1}
-\contentsline {section}{\numberline {4.2}The Yee-Scheme}{19}{section.4.2}
-\contentsline {section}{\numberline {4.3}Numeric Dispersion Relation}{20}{section.4.3}
-\contentsline {chapter}{\numberline {5}Hybrid Field Approach}{21}{chapter.5}
-\contentsline {section}{\numberline {5.1}Near-and Farfields}{21}{section.5.1}
-\contentsline {section}{\numberline {5.2}Particle Push and Nearfield Update}{21}{section.5.2}
-\contentsline {section}{\numberline {5.3}Particle History}{21}{section.5.3}
-\contentsline {section}{\numberline {5.4}Farfield Setup Before Simulation}{21}{section.5.4}
-\contentsline {section}{\numberline {5.5}Electron Scattering in an electromagnetic wave}{21}{section.5.5}
-\contentsline {chapter}{\numberline {6}Uniaxial Perfectly Matched Layer}{22}{chapter.6}
-\contentsline {part}{\numberline {III}Summary}{23}{part.3}
-\contentsline {part}{\numberline {IV}Appendix}{24}{part.4}
-\contentsline {chapter}{\numberline {A}Gauge Transformations}{25}{appendix.A}
-\contentsline {section}{\numberline {A.1}Invariance of Fields}{25}{section.A.1}
-\contentsline {section}{\numberline {A.2}Invariance of Potential Equations}{26}{section.A.2}
-\contentsline {chapter}{\numberline {B}Softwarestack}{27}{appendix.B}
-\contentsline {chapter}{\numberline {C}Code Documentation}{28}{appendix.C}
-\contentsline {chapter}{\nonumberline Bibliography}{30}{chapter*.5}
-\contentsline {chapter}{Declaration}{31}{chapter*.6}
+\contentsline {part}{\numberline {II}Numerics}{7}{part.2}
+\contentsline {chapter}{\numberline {2}Integration of Equation of Motion}{9}{chapter.2}
+\contentsline {section}{\numberline {2.1}Equations of Motion}{9}{section.2.1}
+\contentsline {section}{\numberline {2.2}Euler-Scheme}{9}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Procedural Error and Order of Consistency}{11}{subsection.2.2.1}
+\contentsline {section}{\numberline {2.3}Leap-Frog-Scheme}{12}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Boris-Method}{13}{subsection.2.3.1}
+\contentsline {section}{\numberline {2.4}Nystr\"om-Scheme}{15}{section.2.4}
+\contentsline {section}{\numberline {2.5}Adaptive Timestep Control}{15}{section.2.5}
+\contentsline {chapter}{\numberline {3}Interpolations}{16}{chapter.3}
+\contentsline {section}{\numberline {3.1}Linear interpolation of Trajectories}{16}{section.3.1}
+\contentsline {section}{\numberline {3.2}Trilinear Interpolation of Fields}{18}{section.3.2}
+\contentsline {chapter}{\numberline {4}FDTD}{19}{chapter.4}
+\contentsline {section}{\numberline {4.1}Maxwell-Equations}{19}{section.4.1}
+\contentsline {section}{\numberline {4.2}The Yee-Scheme}{20}{section.4.2}
+\contentsline {section}{\numberline {4.3}Numeric Dispersion Relation}{21}{section.4.3}
+\contentsline {chapter}{\numberline {5}Hybrid Field Approach}{22}{chapter.5}
+\contentsline {section}{\numberline {5.1}Near-and Farfields}{22}{section.5.1}
+\contentsline {section}{\numberline {5.2}Particle Push and Nearfield Update}{22}{section.5.2}
+\contentsline {section}{\numberline {5.3}Particle History}{22}{section.5.3}
+\contentsline {section}{\numberline {5.4}Farfield Setup Before Simulation}{22}{section.5.4}
+\contentsline {section}{\numberline {5.5}Electron Scattering in an electromagnetic wave}{22}{section.5.5}
+\contentsline {chapter}{\numberline {6}Uniaxial Perfectly Matched Layer}{23}{chapter.6}
+\contentsline {part}{\numberline {III}Summary}{24}{part.3}
+\contentsline {part}{\numberline {IV}Appendix}{25}{part.4}
+\contentsline {chapter}{\numberline {A}Gauge Transformations}{26}{appendix.A}
+\contentsline {section}{\numberline {A.1}Invariance of Fields}{26}{section.A.1}
+\contentsline {section}{\numberline {A.2}Invariance of Potential Equations}{27}{section.A.2}
+\contentsline {chapter}{\numberline {B}Retarded Potential Equations Fulfill Laurentz Gauge}{28}{appendix.B}
+\contentsline {chapter}{\numberline {C}Softwarestack}{30}{appendix.C}
+\contentsline {chapter}{\numberline {D}Code Documentation}{31}{appendix.D}
+\contentsline {chapter}{\numberline {E}Normalization}{32}{appendix.E}
+\contentsline {chapter}{\nonumberline Bibliography}{34}{chapter*.5}
+\contentsline {chapter}{Declaration}{35}{chapter*.6}
