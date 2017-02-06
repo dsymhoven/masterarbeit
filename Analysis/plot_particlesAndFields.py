@@ -52,7 +52,7 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 		plt.plot(X[p], Y[p], color = 'r')
 	field = np.genfromtxt('E_fields/E_field'+ str(i) +'.txt')
 	# plot fields
-	plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.01)
+	plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.04)
 	plt.colorbar()
 	# set labels
 	plt.xlabel("X")
@@ -65,7 +65,7 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 	plt.grid(linestyle = "-", color='red')
 	# define filename for saving
 	filename = 'img' + str(i - startTime)
-	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight')
+	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight', dpi=300)
 	# close fig
 	plt.close(fig)
 
@@ -90,7 +90,7 @@ for p in range(numberOfParticles):
 
 field = np.genfromtxt('E_fields/E_field'+ str(i+1) +'.txt')
 # plot fields
-plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.01)
+plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.04)
 plt.colorbar()
 # set labels
 plt.xlabel("X")
@@ -103,6 +103,6 @@ plt.yticks(np.arange(0, lengthOfSimulationBoxInY + 1, lengthOfOneBoxInY))
 plt.grid(linestyle = "-", color='red')
 # define filename for saving
 filename = 'img'
-fig.savefig("Pictures/" + "analyticSolution.png".format(filename), bbox_inches='tight')
+fig.savefig("Pictures/" + "analyticSolution.png".format(filename), bbox_inches='tight', dpi=300)
 # close fig
 plt.close(fig)
