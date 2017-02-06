@@ -244,6 +244,7 @@ void updateVelocityWithBorisPusher(Particle *Particles, Grid *Grid, int numberOf
 
 
 
+
 ///@brief updates location x for particle with velocity u using x = v * dt time component x[0] gets updated as well.
 ///@remark when particle is pushed the old and new box indeces are calculted. When this index changes the Paticle property "didChangeBox" is set accordingly.
 ///@param Particle instance of particle struct
@@ -254,9 +255,11 @@ void updateLocation(Particle *Particle, Grid *Grid, double dt){
     
     int oldBoxIndexOfParticle = calcCurrentBoxIndexOfParticle(Particle, Grid);
     calcBoxIndizesOfNextNeighbourBoxes(Grid, Particle, Particle->boxIndicesOfNearFieldBoxesBeforePush);
+    
     for(int i = 0; i < dimension; i++){
-        Particle->x[i+1] += Particle->u[i+1] * dt;
+        Particle->x[i+1] += (Particle->u[i+1] * dt) / Particle->u[0];
     }
+    
     int newBoxIndexOfParticle = calcCurrentBoxIndexOfParticle(Particle, Grid);
     calcBoxIndizesOfNextNeighbourBoxes(Grid, Particle, Particle->boxIndicesOfNearFieldBoxesAfterPush);
     
@@ -266,8 +269,8 @@ void updateLocation(Particle *Particle, Grid *Grid, double dt){
     else{
         Particle->didChangeBox = false;
     }
-    Particle->x[0] += dt;
     
+    Particle->x[0] += dt;
 }
 
 ///@brief updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as well.
