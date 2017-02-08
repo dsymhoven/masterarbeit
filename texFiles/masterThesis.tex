@@ -148,7 +148,7 @@ where $\mu_0$ and $\epsilon_0$ are the vacuum permeability and permittivity resp
 \label{eqn: maxwell4}
 \vec{\nabla} \times \vec{H} &=& \frac{\del \vec{D}}{\del t} + \vec{j},
 \eeq
-where $\rho$ denotes the current density of the electric source and $\vec{j}$ the electric current. \\
+where $\rho$ denotes the charge density of the electric source and $\vec{j}$ the electric current density. \\
 In the case of vacuum, the material equations \eqref{eqn: materialEquations} reduce to 
 \beq
 \bal
@@ -207,6 +207,7 @@ then we call it a \textit{Lorentz Gauge} and the potential Equations \eqref{eqn:
 %======================== Liénard-Wiechert Potentials ========================
 \section{Liénard-Wiechert Potentials}
 \label{sec: lw-potentials}
+\subsection{Solution of inhomogeneous wave equation}
 The \textit{Liénard-Wiechert} Potentials are the solution of \eqref{eqn: waveEquations}. Following \cite{Nolting} we solve the general case
 \beq
 \label{eqn: generalWaveEquation}
@@ -220,7 +221,7 @@ where $\psi, f: \mathbb{R}^3 \times \mathbb{R} \mapsto \mathbb{R}$. $f$ is calle
 then we can calculate the solution of \eqref{eqn: generalWaveEquation} via
 \beq
 \label{eqn: WaveEquationSolution}
-\psi(\vec{r}, t) = \int \int G(\vec{r} - \vec{r}', t - t') f(\vec{r},t) \dm t ~\dm \vec{r}~'.
+\psi(\vec{r}, t) = \int \int G(\vec{r} - \vec{r}', t - t') f(\vec{r},t) \dm t' ~\dm \vec{r}~'.
 \eeq
 To find G we use the following Fourier - Transformations 
 \beq
@@ -261,16 +262,84 @@ which finally leads to the retarded potential equations
 \varphi(\vec{r},t) &=& \frac{1}{4\pi \epsilon_0} \int \frac{\rho(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~',\\
 \vec{A}(\vec{r},t) &=& \frac{\mu_0}{4\pi} \int \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~'.
 \eeq
-Lastly we show in Appendix \ref{appendix: Retarded Potential Equations Fulfill Laurentz Gauge} that they indeed fulfill the Laurentz Gauge \eqref{eqn: LaurentzGauge}
-The \textit{Liénard-Wiechert} Potentials describe the electric and magnetic fields of a moving electric particle. They are the generalization of the coulomb potential.
+Lastly we show in Appendix \ref{appendix: Retarded Potential Equations Fulfill Laurentz Gauge} that they indeed fulfill the Laurentz Gauge \eqref{eqn: LaurentzGauge}.
+
+\subsection{Special Case: Moving point charge}
+Now we want to discuss the special case of a particle with charge q, moving along the trajectory $\vec{r}_p$ with velocity $\vec{v} \coloneqq \dot{\vec{r}}_p$, where the dot donates the time derivative. As mentioned before, we now define the source functions for our problem at hand. For the charge density we have
+\beq
+\rho(\vec{r}, t) = q\delta(\vec{r} - \vec{r}_p(t))
+\eeq
+and for the current density
+\beq
+\vec{j}(\vec{r}, t) = q\vec{v}\delta(\vec{r} - \vec{r}_p(t)).
+\eeq
+Identifying 
+\beq
+\bal
+\psi(\vec{r},t) &= \varphi(\vec{r},t)~\text{and}~f(\vec{r}~',t') = \frac{\rho(\vec{r}~',t')}{\epsilon_0}, \nn\\
+\vec{\psi}(\vec{r},t) &= \vec{A}(\vec{r},t)~\text{and}~\vec{f}(\vec{r}~',t') = \mu_0\vec{j}(\vec{r}~',t')
+\eal
+\eeq
+and using \eqref{eqn: WaveEquationSolution} with \eqref{eqn: Gret} yields after integrating over $\vec{r}~'$
+\beq
+\bal
+\varphi(\vec{r},t) &= \frac{1}{4\pi \epsilon_0} \int \frac{\delta\left(\frac{ |\vec{r} - \vec{r}_p|}{c} - t + t'\right)}{|\vec{r} - \vec{r}_p|} \dm t',\\
+\vec{A}(\vec{r},t) &= \frac{q \mu_0}{4\pi} \int \vec{v}(t')\frac{\delta\left(\frac{ |\vec{r} - \vec{r}_p|}{c} - t + t'\right)}{|\vec{r} - \vec{r}_p|} \dm t'.
+\eal
+\eeq
+For the $t'$ - integration we need the following property of the $\delta$ - distribution
+\beq
+\delta\left[g(t')\right] = \sum_{i = 1}^{n} \frac{\delta(t' - t_i)}{\left| \left( \frac{\dm g}{\dm t'}\right)\Bigr |_{t' = t_i} \right|},
+\eeq
+where 
+\beq
+\label{eqn: gDefinition}
+g(t') \coloneqq \frac{ |\vec{r} - \vec{r}_p|}{c} - t + t'
+\eeq
+ and $t_i$ are the roots of $g$. To find the roots of g, let's consider
+\beq
+\bal
+\frac{\dm g}{\dm t'} &= 1+ \frac{1}{c}\frac{\dm}{\dm t'}|\vec{r} - \vec{r}_p|  = 1 - \frac{\vec{v}(t')}{c} \underbrace{ \frac{\vec{r} - \vec{r}_p}{|\vec{r} - \vec{r}_p| }}_{ |\cdot| = 1 }\\
+&\Longrightarrow 1 - \frac{\vec{v}(t')}{c} \leq \frac{\dm g}{\dm t'} \leq 1 + \frac{\vec{v}(t')}{c} \\
+&\stackrel{v < c}{\Longrightarrow} \frac{\dm g}{\dm t'} > 0,
+ \eal
+\eeq
+which means that g is a monotonically increasing function and therefore has at most one root, which is $t' = t_{ret}$ as can be seen from \eqref{eqn: gDefinition}. In case that g has no roots at all, we can conclude that $\varphi \equiv 0$ and $\vec{A} \equiv 0$.\\
+With $t_{ret} \coloneqq t - \frac{|\vec{r} - \vec{r}_p|}{c} $ the integration over $t'$ yields
+\beq
+\bal
+\varphi(\vec{r},t) &= \frac{1}{4\pi \epsilon_0}\frac{q}{|\vec{r} - \vec{r}_p(t_{ret})| - \frac{\vec{v}(t_{ret})}{c}(\vec{r} - \vec{r}_p(t_{ret}))},\\
+\vec{A}(\vec{r},t) &= \frac{1 \mu_0}{4\pi} \frac{q\vec{v}(t_{ret})}{|\vec{r} - \vec{r}_p(t_{ret})| - \frac{\vec{v}(t_{ret})}{c}(\vec{r} - \vec{r}_p(t_{ret}))}
+\eal
+\eeq
+which are the \textit{Liénard-Wiechert} Potentials. Upon defining 
+\beq
+\bal
+\label{eqn: LWPotentials}
+\vec{\beta}(t) &\coloneqq \frac{\vec{v}(t)}{c},\\
+\vec{R}(t) &\coloneqq \vec{r} - \vec{r}_p(t),\\
+\vec{n}(t) &\coloneqq \frac{\vec{R}(t)}{R(t)}
+\eal
+\eeq
+we can rewrite the Liénard-Wiechert Potentials in a more compact and final form
+\beq
+\bal
+\varphi(\vec{r},t) &= \frac{1}{4\pi \epsilon_0}\frac{q}{(1 - \vec{\beta}(t) \cdot \vec{n}(t)) R(t)}\Biggr |_{t = t_{ret}},\\
+\vec{A}(\vec{r},t) &= \frac{\mu_0}{4\pi} \frac{q\vec{\beta}(t)}{(1 - \vec{\beta}(t) \cdot \vec{n}(t)) R(t)}\Biggr |_{t = t_{ret}}.
+\eal
+\eeq
+They are the generalization of the Coulomb Potential. With the help of \eqref{eqn: varphi} the electric and magnetic fields can be derived from the \textit{Liénard-Wiechert} Potentials \eqref{eqn: LWPotentials}. Since this is a quite longish calculation we refer to \cite{Nolting} and just present the final result 
 \beq
 \label{eqn: Liénard-Wiechert}
 \bal
-E = E \\
-B = B 
+\vec{E}(\vec{r}, t) &= \frac{1}{4\pi \epsilon_0} \left( \frac{\vec{n}(t) - \vec{\beta}(t)}{ \gamma^2(1 - \vec{\beta}(t) \cdot \vec{n}(t))^3 R(t)^2}+ \frac{1}{c} \frac{\vec{n}(t) \times (\vec{n}(t) - \vec{\beta}(t)) \times \dot{\vec{\beta}}(t)}{(1 - \vec{\beta}(t) \cdot \vec{n}(t))^3 R(t)}\right)\Biggr |_{t = t_{ret}}, \\
+\vec{B}(\vec{r}, t) &= \frac{1}{c} \left(\vec{n}(t) \times \vec{E}(\vec{r}, t)\right)\Biggr |_{t = t_{ret}}.
 \eal
 \eeq
+This is the electric and magnetic field of a moving charged particle. Due to the finite speed of light, the fields need time to travel from their source to the observation point. That means, that the fields at time $t$, were actually produced at a earlier time $t_{ret}$. As can be seen in figure
+\ref{fig: Interpolation}, the retarded time is determined by the intersection point of the particle trajectory with the backward lightcone of the observation point.\\
 
+\subsection{Energy emission}
 
 %======================== NUMERICS ========================
 %===========================================================
