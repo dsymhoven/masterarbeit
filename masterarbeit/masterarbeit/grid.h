@@ -78,16 +78,14 @@ struct Grid {
 typedef struct Grid Grid;
 typedef struct Particle Particle;
 
-void initGrid(Grid *Grid, double dx, double dy, double dz, int numberOfGridPointsForBoxInX, int numberOfGridPointsForBoxInY, int numberOfGridPointsForBoxInZ, int numberOfBoxesInX, int numberOfBoxesInY, int numberOfBoxesInZ);
+void initGrid(Grid *Grid, const double dx, const double dy, const double dz, const int numberOfGridPointsForBoxInX, const int numberOfGridPointsForBoxInY, const int numberOfGridPointsForBoxInZ, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ);
 void allocateMemoryOnGrid(Grid *Grid);
 void freeMemoryOnGrid(Grid *Grid);
 void initSamplePulseOnGrid(Grid *Grid);
-void pushEFieldOnGrid(Grid *Grid, double dt);
-void pushHFieldOnGrid(Grid *Grid, double dt);
+void pushEFieldOnGrid(Grid *Grid, const double dt);
+void pushHFieldOnGrid(Grid *Grid, const double dt);
 void writeGridParametersToFile(Grid *Grid);
-//void allocateFieldsOnBoxBorders(Grid *Grid);
-//void allocateUPMLCoefficients(Grid *Grid);
-void externalPlaneWave(const double xParticle[4], double tStart, double Eextern[3], double Bextern[3]);
+void externalPlaneWave(const double xParticle[4], const double tStart, double Eextern[3], double Bextern[3]);
 void clearFieldsFromGrid(Grid *Grid);
-void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3], double t, char *filename, int index, int planeForPlotting, bool plotE, bool plotB);
+void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3], const double t, char *filename, const int index, const int planeForPlotting, bool plotE, bool plotB);
 #endif /* grid_h */

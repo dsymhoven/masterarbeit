@@ -15,7 +15,7 @@
 
 
 /// @brief initializes all properties of struct Grid.
-void initGrid(Grid *Grid, double dx, double dy, double dz, int numberOfGridPointsForBoxInX, int numberOfGridPointsForBoxInY, int numberOfGridPointsForBoxInZ, int numberOfBoxesInX, int numberOfBoxesInY, int numberOfBoxesInZ){
+void initGrid(Grid *Grid, const double dx, const double dy, const double dz, const int numberOfGridPointsForBoxInX, const int numberOfGridPointsForBoxInY, const int numberOfGridPointsForBoxInZ, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ){
     
     printf("initializing Grid ...\n");
     Grid->dx = dx;
@@ -265,7 +265,7 @@ void freeMemoryOnGrid(Grid *Grid){
 ///@remark E field is calculated via negative curl. Therefore value of B on the left side of E on the grid is required. Thus start i,j,k with 1
 ///@param Grid pointer to Grid struct
 ///@param dt time increment
-void pushEFieldOnGrid(Grid *Grid, double dt){
+void pushEFieldOnGrid(Grid *Grid, const double dt){
     double Hx_ijk;
     double Hy_ijk;
     double Hz_ijk;
@@ -323,7 +323,7 @@ void pushEFieldOnGrid(Grid *Grid, double dt){
 ///@param x four vector containing actual position where you want to evaluate the external field
 ///@param Eextern vector containing external E field components
 ///@param Hextern vector containing external H field components
-void externalPlaneWave(const double x[4], double tStart, double Eextern[3], double Hextern[3]){
+void externalPlaneWave(const double x[4], const double tStart, double Eextern[3], double Hextern[3]){
     double E0 = 1;
     double H0 = 1;
     double factor = 1;
@@ -376,7 +376,7 @@ void initSamplePulseOnGrid(Grid *Grid){
 ///@remark H field is calculated via positive curl. Therefore value of E on the right side of H on the grid is required. Thus stop i,j,k with at n - 1 where n denotes the numberOfGridPoints
 ///@param Grid pointer to Grid struct
 ///@param dt time increment
-void pushHFieldOnGrid(Grid *Grid, double dt){
+void pushHFieldOnGrid(Grid *Grid, const double dt){
     double Ex_ijk;
     double Ey_ijk;
     double Ez_ijk;
@@ -461,7 +461,7 @@ void clearFieldsFromGrid(Grid *Grid){
 ///@param plotE set to true, if you want to write E-field to file
 ///@param plotB set to true, if you want to write B-field to file
 ///@throws ERROR: Could not open file for E or B field
-void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3], double t, char *filename, int index, int planeForPlotting, bool plotE, bool plotB){
+void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3], const double t, char *filename, const int index, const int planeForPlotting, bool plotE, bool plotB){
     printf("Writing external fields to file ...\n");
     FILE *fid = NULL;
     FILE *fid2 = NULL;
