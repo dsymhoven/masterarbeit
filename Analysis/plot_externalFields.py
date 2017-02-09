@@ -33,6 +33,6 @@ for i in range(numberOfFieldFiles):
 	plt.grid(linestyle = "-", color='red')
 	# define filename for saving
 	filename = 'img' + str(i)
-	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight')
+	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight',dpi=300)
 	# close fig
 	plt.close(fig)

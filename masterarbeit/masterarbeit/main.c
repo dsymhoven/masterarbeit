@@ -13,20 +13,20 @@
 
 int main(int argc, const char * argv[]) {
     
-    //testMaxwellPusher();
-    testBorisPusher();
+//    testMaxwellPusher();
+//    testBorisPusher();
 //    testLWFieldCalculationForPlane();
-    //testNearAndFarFields();
-    //testUPML();
-    //testNearFieldUpdate();
-    //testMultipleParticles();
-    //testHistoryBeforeSimulation();
-    //testScattering();
-    //extendHistoryAndCalcLWFieldsIndependantly();
+//    testNearAndFarFields();
+//    testUPML();
+//    testNearFieldUpdate();
+//    testMultipleParticles();
+//    testHistoryBeforeSimulation();
+//    testScattering();
+//    extendHistoryAndCalcLWFieldsIndependantly();
 //    electronScatteringSmallGrid_init9();
 //    electronScatteringLargeGrid_init8();
 //    testTimeDependentExternalFields();
-//    scatteringInEMWave();
+    scatteringInEMWave();
     return 0;
 }   
 

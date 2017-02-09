@@ -83,7 +83,7 @@ void testBorisPusher(){
     
     double dt = 0.5 * dx;
     double t = 0;
-    double tEnd = 10;
+    double tEnd = 40;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -101,9 +101,10 @@ void testBorisPusher(){
     
     Particle->mass = 1;
     Particle->charge = 1;
+    
     Particle->x[0] = 0;
     Particle->x[1] = 14.1;
-    Particle->x[2] = 14.1;
+    Particle->x[2] = 18.1;
     Particle->x[3] = 14.1;
     
     Particle->u[1] = 0.958;
@@ -117,7 +118,7 @@ void testBorisPusher(){
     
     Bextern[0] = 0;
     Bextern[1] = 0;
-    Bextern[2] = 1;
+    Bextern[2] = 0.2;
     
     int planeForPlotting = Particle->x[3] / dz;
     
@@ -167,7 +168,7 @@ void testLWFieldCalculationForPlane(){
     
     double dt = 0.5 * dx;
     double t = 0;
-    double tEnd = 6;
+    double tEnd = 5;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -182,11 +183,11 @@ void testLWFieldCalculationForPlane(){
     Particle->mass = 1;
     Particle->charge = 1;
     Particle->x[0] = 0;
-    Particle->x[1] = 14.1;
+    Particle->x[1] = 5.1;
     Particle->x[2] = 14.1;
     Particle->x[3] = 14.1;
     
-    Particle->u[1] = 0.458;
+    Particle->u[1] = 1.4;
     Particle->u[2] = 0;
     Particle->u[3] = 0;
     Particle->u[0] = getGammaFromVelocityVector(Particle->u);
@@ -197,7 +198,7 @@ void testLWFieldCalculationForPlane(){
     
     Bextern[0] = 0;
     Bextern[1] = 0;
-    Bextern[2] = 1;
+    Bextern[2] = 0;
     
     int planeForPlotting = Particle->x[3] / dz;
     
@@ -213,7 +214,7 @@ void testLWFieldCalculationForPlane(){
             updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
             updateLocation(&Particles[p], &Grid, dt);
         }
-//        calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+        
         t += dt;
     }
     
@@ -265,7 +266,7 @@ void testNearAndFarFields(){
     Particle->mass = 1;
     Particle->charge = 1;
     Particle->x[0] = 0;
-    Particle->x[1] = 14.21;
+    Particle->x[1] = 18.21;
     Particle->x[2] = 14.01;
     Particle->x[3] = 14.401;
     
@@ -433,7 +434,7 @@ void testNearFieldUpdate(){
     
     double dt = 0.5 * dx;
     double t = 0;
-    double tEnd = 20;
+    double tEnd = 40;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -448,22 +449,22 @@ void testNearFieldUpdate(){
     Particle->mass = 1;
     Particle->charge = 1;
     Particle->x[0] = 0;
-    Particle->x[1] = 11.41;
-    Particle->x[2] = 12.21;
+    Particle->x[1] = 18.41;
+    Particle->x[2] = 14.21;
     Particle->x[3] = 11.401;
     
-    Particle->u[1] = 0.458;
+    Particle->u[1] = 0.958;
     Particle->u[2] = 0;
     Particle->u[3] = 0;
     Particle->u[0] = getGammaFromVelocityVector(Particle->u);
     
     Eextern[0] = 0;
-    Eextern[1] = 0.2;
+    Eextern[1] = 0;
     Eextern[2] = 0;
     
     Bextern[0] = 0;
     Bextern[1] = 0;
-    Bextern[2] = 1;
+    Bextern[2] = 0.2;
     
     int planeForPlotting = Particle->x[3] / dz;
     
@@ -706,8 +707,9 @@ void testHistoryBeforeSimulation(){
         pushEField(&Grid, Particles, numberOfParticles, t, dt);
         t += dt;
    }
-//    calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
-//    writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
+    clearFieldsFromGrid(&Grid);
+    calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    writeFieldsToFile(&Grid, filename, (int)(tEnd/dt), planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
@@ -1088,7 +1090,7 @@ void electronScatteringLargeGrid_init8(){
     
     double dt = 0.5 * dx;
     double t = 30;
-    double tEnd = 35;
+    double tEnd = 50;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -1143,39 +1145,39 @@ void electronScatteringLargeGrid_init8(){
     
     extendParticleHistory(Particles, &Grid, numberOfParticles, Eextern, Bextern, dt, t);
     writeSimulationInfoToFile(numberOfParticles, t / dt);
-//    if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, Eextern, Bextern)){
-//        calcFieldsOnGridWithoutNearField(Particles, &Grid, numberOfParticles, t);
-//        writeFieldsFromCompleteGridToFile(&Grid);
-//        writeInitialConditionsToFile(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern);
-//        system("python2.7 ~/Desktop/Projects/masterarbeit/Analysis/initialFields.py");
-//    }
+    if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, Eextern, Bextern)){
+        calcFieldsOnGridWithoutNearField(Particles, &Grid, numberOfParticles, t);
+        writeFieldsFromCompleteGridToFile(&Grid);
+        writeInitialConditionsToFile(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern);
+        system("python2.7 ~/Desktop/Projects/masterarbeit/Analysis/initialFields.py");
+    }
     
     for (int step = t / dt; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, (int)(tEnd / dt));
                 writeParticlesToFile(Particles, numberOfParticles, filename, step);
-//                writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
-        //
-        //        pushEField(&Grid, Particles, numberOfParticles, t, dt);
-        //        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
+                writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
+        
+                pushEField(&Grid, Particles, numberOfParticles, t, dt);
+                pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
         
                 for(int p = 0; p < numberOfParticles; p++){
                     addCurrentStateToParticleHistory(&Particles[p], step);
                     updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
                     updateLocation(&Particles[p], &Grid, dt);
-//                    updateNearField(&Grid, &Particles[p], t);
+                    updateNearField(&Grid, &Particles[p], t);
                }
-        //        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
-        //        pushEField(&Grid, Particles, numberOfParticles, t, dt);
+                pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
+                pushEField(&Grid, Particles, numberOfParticles, t, dt);
         
         
         t += dt;
     }
-    //clearFieldsFromGrid(&Grid);
-    calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
-    writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
+    clearFieldsFromGrid(&Grid);
+    calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    writeFieldsToFile(&Grid, filename, (int)(tEnd / dt), planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
-    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
     
@@ -1253,7 +1255,7 @@ void scatteringInEMWave(){
     double dt = 0.5 * dx;
     double t = 40;
     double tStart = t;
-    double tEnd = 80;
+    double tEnd = 75;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -1270,10 +1272,10 @@ void scatteringInEMWave(){
     
     Particle1->x[0] = 0;
     Particle1->x[1] = 20;
-    Particle1->x[2] = 10.1;
+    Particle1->x[2] = 10;
     Particle1->x[3] = 16.401;
     
-    Particle1->u[1] = -0.204;
+    Particle1->u[1] = -0.458;
     Particle1->u[2] = 0;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
@@ -1304,10 +1306,10 @@ void scatteringInEMWave(){
     for (int step = t / dt; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, (int)(tEnd / dt));
                 writeParticlesToFile(Particles, numberOfParticles, filename, step);
-        //        writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
-        //
-        //        pushEField(&Grid, Particles, numberOfParticles, t, dt);
-        //        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
+//                writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
+//        
+//                pushEField(&Grid, Particles, numberOfParticles, t, dt);
+//                pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
         
                 for(int p = 0; p < numberOfParticles; p++){
                     addCurrentStateToParticleHistory(&Particles[p], step);
@@ -1316,20 +1318,20 @@ void scatteringInEMWave(){
                     updateLocation(&Particles[p], &Grid, dt);
 //                    updateNearField(&Grid, &Particles[p], t);
                }
-        //        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
-        //        pushEField(&Grid, Particles, numberOfParticles, t, dt);
+//                pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
+//                pushEField(&Grid, Particles, numberOfParticles, t, dt);
         
         
         t += dt;
     }
-//    clearFieldsFromGrid(&Grid);
+    clearFieldsFromGrid(&Grid);
     calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
     writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
-    writeExternalFieldsToFile(&Grid, Eextern, Bextern, t, filename, 0, planeForPlotting, true, false);
+//    writeExternalFieldsToFile(&Grid, Eextern, Bextern, t, filename, 0, planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
-    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
+//    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
 

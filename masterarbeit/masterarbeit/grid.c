@@ -501,7 +501,7 @@ void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3],
                 x[1] = i * Grid->dx;
                 x[2] = j * Grid->dy;
 
-                externalPlaneWave(x, 0, Eextern, Bextern);
+                externalPlaneWave(x, 40, Eextern, Bextern);
                 Ex = Eextern[0];
                 Ey = Eextern[1];
                 Ez = Eextern[2];
