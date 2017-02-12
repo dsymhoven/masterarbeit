@@ -315,32 +315,133 @@ With $t_{ret} \coloneqq t - \frac{|\vec{r} - \vec{r}_p|}{c} $ the integration ov
 which are the \textit{Liénard-Wiechert} Potentials. Upon defining 
 \beq
 \bal
-\label{eqn: LWPotentials}
 \vec{\beta}(t) &\coloneqq \frac{\vec{v}(t)}{c},\\
-\vec{R}(t) &\coloneqq \vec{r} - \vec{r}_p(t),\\
-\vec{n}(t) &\coloneqq \frac{\vec{R}(t)}{R(t)}
+\vec{R}(\vec{r},t) &\coloneqq \vec{r} - \vec{r}_p(t),\\
+\vec{n}(\vec{r},t) &\coloneqq \frac{\vec{R}(\vec{r},t)}{R(\vec{r},t)}
 \eal
 \eeq
 we can rewrite the Liénard-Wiechert Potentials in a more compact and final form
 \beq
 \bal
-\varphi(\vec{r},t) &= \frac{1}{4\pi \epsilon_0}\frac{q}{(1 - \vec{\beta}(t) \cdot \vec{n}(t)) R(t)}\Biggr |_{t = t_{ret}},\\
-\vec{A}(\vec{r},t) &= \frac{\mu_0}{4\pi} \frac{q\vec{\beta}(t)}{(1 - \vec{\beta}(t) \cdot \vec{n}(t)) R(t)}\Biggr |_{t = t_{ret}}.
+\label{eqn: LWPotentials}
+\varphi(\vec{r},t) &= \frac{1}{4\pi \epsilon_0}\frac{q}{(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')) R(\vec{r},t')}\Biggr |_{t' = t_{ret}},\\
+\vec{A}(\vec{r},t) &= \frac{\mu_0}{4\pi} \frac{q\vec{\beta}(t')}{(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')) R(\vec{r},t')}\Biggr |_{t' = t_{ret}}.
 \eal
 \eeq
 They are the generalization of the Coulomb Potential. With the help of \eqref{eqn: varphi} the electric and magnetic fields can be derived from the \textit{Liénard-Wiechert} Potentials \eqref{eqn: LWPotentials}. Since this is a quite longish calculation we refer to \cite{Nolting} and just present the final result 
 \beq
 \label{eqn: Liénard-Wiechert}
 \bal
-\vec{E}(\vec{r}, t) &= \frac{1}{4\pi \epsilon_0} \left( \frac{\vec{n}(t) - \vec{\beta}(t)}{ \gamma^2(1 - \vec{\beta}(t) \cdot \vec{n}(t))^3 R(t)^2}+ \frac{1}{c} \frac{\vec{n}(t) \times (\vec{n}(t) - \vec{\beta}(t)) \times \dot{\vec{\beta}}(t)}{(1 - \vec{\beta}(t) \cdot \vec{n}(t))^3 R(t)}\right)\Biggr |_{t = t_{ret}}, \\
-\vec{B}(\vec{r}, t) &= \frac{1}{c} \left(\vec{n}(t) \times \vec{E}(\vec{r}, t)\right)\Biggr |_{t = t_{ret}}.
+\vec{E}(\vec{r}, t) &= \frac{q}{4\pi \epsilon_0} \left( \frac{\vec{n}(\vec{r},t') - \vec{\beta}(t)}{ \gamma^2(1 - \vec{\beta}(t) \cdot \vec{n}(\vec{r},t'))^3 R^2(\vec{r},t')} \right. \\
+& \left. + \frac{1}{c} \frac{\vec{n}(\vec{r},t') \times (\vec{n}(\vec{r},t') - \vec{\beta}(t)) \times \dot{\vec{\beta}}(t)}{(1 - \vec{\beta}(t) \cdot \vec{n}(\vec{r},t'))^3 R(\vec{r},t')}\right)\Biggr |_{t' = t_{ret}}, \\
+\vec{B}(\vec{r}, t) &= \frac{1}{c} \left(\vec{n}(\vec{r},t') \times \vec{E}(\vec{r}, t)\right)\Biggr |_{t' = t_{ret}}.
 \eal
 \eeq
 This is the electric and magnetic field of a moving charged particle. Due to the finite speed of light, the fields need time to travel from their source to the observation point. That means, that the fields at time $t$, were actually produced at a earlier time $t_{ret}$. As can be seen in figure
 \ref{fig: Interpolation}, the retarded time is determined by the intersection point of the particle trajectory with the backward lightcone of the observation point.\\
 
 \subsection{Energy emission}
-
+Now we want to discuss the energy flow and emission. Therefore we need to analyze the Poynting Vector
+\beq
+\label{eqn: PoyntingVector}
+\vec{S} = \frac{1}{\mu_0}\vec{E} \times \vec{B} =  \frac{1}{\mu_0 c} \left[ \vec{n}_{ret} E^2  - \left(\vec{n}_{ret} \vec{E}\right) \vec{E}\right],
+\eeq
+where $\vec{n}_{ret} \coloneqq \vec{n}(\vec{r}, t_{ret})$. Taking a closer look at \eqref{eqn: Liénard-Wiechert} reveals that both $\vec{E}$ and $\vec{B}$ can be separated into two parts, one of which is not dependent on the particle acceleration 
+\beq
+\bal
+\label{eqn: Ev}
+\vec{E}_{(v)}(\vec{r}, t) &= \frac{q}{4\pi \epsilon_0} \frac{1}{ \gamma^2(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t'))^3 R^2(\vec{r},t')} \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right)\Biggr|_{t' = t_{ret}}\\
+\vec{B}_{(v)}(\vec{r}, t) &= \frac{q}{4\pi \epsilon_0 c} \frac{1}{ \gamma^2(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t'))^3 R^2(\vec{r},t')} \underbrace{\left[\vec{n} \times \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right)\right]}_{= \frac{1}{c}\left(\vec{v} \times \vec{n}\right)}\Biggr|_{t' = t_{ret}} 
+\eal
+\eeq
+whilst the other is through $\dot{\vec{\beta}}$
+\beq
+\bal
+\label{eqn: Ea}
+\vec{E}_{(a)}(\vec{r}, t) &= \frac{q}{4\pi \epsilon_0c}  \frac{\vec{n}(\vec{r},t') \times \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right) \times \dot{\vec{\beta}}(t')}{\left(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')\right)^3 R(\vec{r},t')}\Biggr |_{t' = t_{ret}}\\
+\vec{B}_{(a)}(\vec{r}, t) &= \frac{q}{4\pi \epsilon_0c^2} \frac{\vec{n}(\vec{r},t') \times \left[\vec{n}(\vec{r},t') \times \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right) \times \dot{\vec{\beta}}(t')\right]}{\left(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')\right)^3 R(\vec{r},t')}\Biggr |_{t' = t_{ret}}.
+\eal
+\eeq
+Since $E_{(v)} \propto \frac{1}{R^2}$ whereas $E_{(a)} \propto \frac{1}{R}$, its field contributions will dominate in the far field, i.e. for large distances from the source. Plugging in \eqref{eqn: Liénard-Wiechert} in \eqref{eqn: PoyntingVector} gives us several terms with different orders of $\frac{1}{R}$, namely
+\beq
+\bal
+\vec{S}_{vv} &\propto \left| \vec{E}_{(v)} \times \vec{B}_{(v)} \right| \propto \frac{1}{R^4},\\
+\vec{S}_{va} &\propto \left| \vec{E}_{(v)} \times \vec{B}_{(a)} \right| \propto \frac{1}{R^3},\\
+\vec{S}_{aa} &\propto \left| \vec{E}_{(a)} \times \vec{B}_{(a)} \right| \propto \frac{1}{R^2}. \nn
+\eal
+\eeq
+By evaluating the energy flux through an arbitrary surface with differential surface area $\dm\vec{\sigma}$, as illustrated in figure \ref{fig: PoyntingVector},
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.50\textwidth]{Pictures/PoyntingVector.png}
+	\caption[Illustration of how to calculate the energy emission of a moving particle with charge $q$.]{Illustration of how to calculate the energy emission of a moving particle with charge $q$. \cite{Nolting}}
+	\label{fig: PoyntingVector}
+\end{figure}
+\noindent
+we can see, that it will suffice to only consider the $\frac{1}{R^2}$ terms, because the $\frac{1}{R^3}$ or higher terms do not contribute to the energy emission, since
+\beq
+\oint \vec{S} \dm\vec{\sigma} \rightsquigarrow \oint \frac{1}{R^3} r^2 \dm\Omega \rightsquigarrow \oint \frac{1}{r} \dm\Omega \rightsquigarrow \frac{1}{r} \stackrel{r \rightarrow \infty}{\longrightarrow} 0,
+\eeq
+where $\dm\Omega \coloneqq \sin(\vartheta)\dm\vartheta\dm\varphi$. That means we can focus on $\eqref{eqn: Ea}$ when calculating $\eqref{eqn: PoyntingVector}$
+\beq
+\vec{S} =  \frac{1}{\mu_0 c} \frac{q^2}{16\pi^2 \epsilon_0^2 c^2}  \frac{\vec{n}(\vec{r},t') \left[\vec{n}(\vec{r},t') \times \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right) \times \dot{\vec{\beta}}(t')\right]^2}{\left(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')\right)^6 R^2(\vec{r},t')}\Biggr |_{t' = t_{ret}} + \mathcal{O}\left(\frac{1}{R^3}\right).
+\eeq
+The energy flux has the direction of $\vec{n}_{ret}$, i.e. it flows from the particle position $\vec{r}_p$ at time $t' = t_{ret}$ to the observation point $\vec{r}$. We can also see, that only accelerated particles ($\dot{\vec{\beta}} \neq 0$) loose energy through radiation, which leads to a reduction in kinetic energy. Although an uniformly moving particle produces E and B - fields, it does not loose energy through radiation.\\
+\newline
+Lastly we want to discuss the radiation power. The emitted energy per time $\dm t$ into the solid angle $\dm \Omega$ is described by
+\beq
+\frac{\dm W}{\dm \Omega} = \left( \vec{S} \cdot \vec{n}(\vec{r}, t') \right) R^2(\vec{r}, t')\Bigr |_{t' = t_{ret}}.
+\eeq
+Usually the observed amount of energy per unit time $\dm t$ is not the same as the emitted energy of the particle per unit time $\dm t_{ret}$. To learn more about the emission within the particles system, we want to express our equation in terms of $\dm t_{ret}$, which gives us
+\beq
+\frac{\dm W}{\dm \Omega} = \left( \vec{S} \cdot \vec{n}(\vec{r}, t') \right) R^2(\vec{r}, t') \left(\frac{\dm t}{\dm t'}\right)\Bigr |_{t' = t_{ret}}.
+\eeq
+From the definition of $t_{ret} \coloneqq t' - \frac{|\vec{r} - \vec{r}~'|}{c}$ we find
+\beq
+\left(\frac{\dm t}{\dm t'}\right)\Bigr |_{t' = t_{ret}} = \left(1 + \frac{1}{c} \frac{\dm}{\dm t'} |\vec{r} - \vec{r}_p(t')|\right)\Bigr |_{t' = t_{ret}} = \left(1 - \frac{1}{c} \vec{n}(\vec{r}, t')\vec{v}(t')\right)\Bigr |_{t' = t_{ret}}.
+\eeq
+Finally we obtain
+\beq
+\label{eqn: RadiationPower}
+\frac{\dm W}{\dm \Omega} =  \frac{q^2}{16\pi^2 \epsilon_0 c}  \frac{ \left[\vec{n}(\vec{r},t') \times \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right) \times \dot{\vec{\beta}}(t')\right]^2}{\left(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')\right)^5} \Biggr |_{t' = t_{ret}}.
+\eeq
+Now we can discuss two cases. The non relativistic case ($\beta \approx 0$) and the relativistic case ($\beta \approx 1$).\\
+\begin{description}
+\item[$\beta \approx 0$:] In this case \eqref{eqn: RadiationPower} simplifies to
+\beq
+\bal
+\frac{\dm W}{\dm \Omega} &=  \frac{q^2}{16\pi^2 \epsilon_0 c}   \left[\vec{n}(\vec{r},t') \times \left(\vec{n}(\vec{r},t') \times \dot{\vec{\beta}}(t')\right)\right]^2 \Biggr |_{t' = t_{ret}} \\
+&=  \frac{q^2}{16\pi^2 \epsilon_0 c}   \left[\underbrace{\left(\vec{n}(\vec{r},t') \cdot \dot{\vec{\beta}}(t') \right)}_{= \dot{\beta}n\cos(\vartheta)} \vec{n}(\vec{r},t') - \underbrace{\left(\vec{n}(\vec{r},t') \cdot \vec{n}(\vec{r},t')\right)}_{ |\cdot| = 1} \dot{\vec{\beta}}(t')\right]^2 \Biggr |_{t' = t_{ret}} \\
+& = \frac{q^2\dot{\beta}^2_{ret}}{16\pi^2 \epsilon_0 c}  \left(\cos^2(\vartheta) - 2\cos^2(\vartheta) + 1\right)\\
+&=  \frac{q^2 \dot{\beta}^2_{ret}}{16\pi^2 \epsilon_0 c} \sin^2(\vartheta) \nn,
+\eal
+\eeq 
+where $\vartheta$ is the angle between $\dot{\vec{\beta}}$ and $\vec{n}$. $\beta_{ret}$ means again the evaluation at $t' = t_{ret}$. We conclude, that the direction of maximum radiation is perpendicular to the particles direction of motion, in contrast to
+\item[$\beta \approx 1$:] where we will see shortly, that the maximum radiation will be primarily in the direction of motion of the particle. We will restrict ourselves to the simple case, where $\dot{\vec{\beta}} \parallel \vec{\beta}$. Following the same steps as above we obtain
+\beq
+\frac{\dm W}{\dm \Omega} = \frac{q^2 \dot{\beta}^2_{ret}}{16\pi^2 \epsilon_0 c} \frac{\sin^2(\vartheta)}{\left(1 - \beta(t')\cos(\vartheta)\right)^5}.
+\eeq
+The get the angle, where the radiation is maximal, we calculate
+\beq
+\bal
+\frac{\dm}{\dm(\cos(\vartheta))} &\left(\frac{\dm W}{\dm \Omega}\right) \stackrel{!}{=} 0 \\
+\Longleftrightarrow& -2\cos(\vartheta)\left(1-\beta_{ret}\cos(\vartheta)\right)^5 + 5\beta_{ret}(1-\cos^2(\vartheta))\left(1-\beta_{ret}\cos(\vartheta)\right)^4 \stackrel{!}{=} 0 \\
+\Longleftrightarrow& \left(1-\beta_{ret}\cos(\vartheta)\right)^4 \left[-2\cos(\vartheta)\left(1-\beta_{ret}\cos(\vartheta)\right) + 5\beta_{ret}(1-\cos^2(\vartheta))\right] \stackrel{!}{=} 0 \\
+\Longrightarrow& -2\cos(\vartheta)\left(1-\beta_{ret}\cos(\vartheta)\right) + 5\beta_{ret}(1-\cos^2(\vartheta)) \stackrel{!}{=} 0 \\
+\Longleftrightarrow& \cos^2(\vartheta) + \frac{2}{3\beta_{ret}}\cos(\vartheta) - \frac{5}{3} \stackrel{!}{=} 0\\
+\Longrightarrow& \cos(\vartheta)_{max} = \frac{1}{3\beta_{ret}}\left(\sqrt{1+15\beta_{ret}^2} -1\right).\nn
+\eal
+\eeq
+Obviously the angle decreases monotonically with increasing velocity, i.e. increasing $\beta_{ret}$. For $\beta_{ret} = 1$ we get $\cos(\vartheta) = 1$ or equivalently $\vartheta = 0$. In figure \ref{fig: radiationSummary} the results are summarized.
+ \begin{figure}[H]
+	\centering
+		\includegraphics[width=0.50\textwidth]{Pictures/RadiationSummary.png}
+	\caption[Radiation characteristics of an moving charged particle]{Radiation characteristics of an moving charged particle. \cite{Nolting}}
+	\label{fig: radiationSummary}
+\end{figure}
+\noindent
+\end{description}
+ 
 %======================== NUMERICS ========================
 %===========================================================
 \part{Numerics}
@@ -755,7 +856,7 @@ Plugging in this into \eqref{eqn: step1} yields
 \eeq
 For the remaining first term we use \textit{Stokes Law}
 \beq
-\vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} = -\frac{\mu_0}{4\pi} \int_{V} \vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~' =  - \frac{\mu_0}{4\pi} \oint_{\del V}  \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{s} = 0, \nn
+\vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} = -\frac{\mu_0}{4\pi} \int_{V} \vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~' =  - \frac{\mu_0}{4\pi} \oint_{\del V}  \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{\sigma} = 0, \nn
 \eeq
 because the current density vanishes at infinity. That's what we wanted to show.
 \chapter{Softwarestack}
