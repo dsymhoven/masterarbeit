@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  12 FEB 2017 14:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  15 FEB 2017 19:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -948,9 +948,6 @@ LaTeX Warning: Unused global option(s):
 
 (./masterThesis.aux (./symbols.aux)
 
-LaTeX Warning: Label `eqn: materialEquations' multiply defined.
-
-
 LaTeX Warning: Label `eqn: maxwellEq' multiply defined.
 
 (./declaration.aux))
@@ -1133,7 +1130,7 @@ Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)              on input line 123.
 [2
 
-]
+] [3]
 chapter 1.
 
 Class scrreprt Warning: \float@addtolists detected!
@@ -1152,101 +1149,108 @@ Class scrreprt Warning: \float@addtolists detected!
 
 
 LaTeX Font Warning: Font shape `T1/cmr/bx/n' in size <50> not available
-(Font)              size <35.83> substituted on input line 127.
+(Font)              size <35.83> substituted on input line 128.
 
-
-Underfull \vbox (badness 5939) has occurred while \output is active []
-
- [3
+[4
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 190--194
+Underfull \hbox (badness 10000) in paragraph at lines 189--193
 
  []
 
-[4] [5] [6pdfTeX warning (ext4): destination with the same identifier (name{equ
+[5] [6] [7pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.1.3.17}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.271 \eeq
+l.274 \eeq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.1.3.17}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.271 \eeq
-          ] [7pdfTeX warning (ext4): destination with the same identifier (name
+l.274 \eeq
+          ] [8pdfTeX warning (ext4): destination with the same identifier (name
 {equation.1.3.25}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.306 \eeq
-          ] [8]
-Underfull \hbox (badness 10000) in paragraph at lines 339--342
+l.308 \beq
+          ]
+Underfull \hbox (badness 10000) in paragraph at lines 338--341
 
  []
 
-
-Underfull \vbox (badness 3930) has occurred while \output is active []
-
- [9]
-<Pictures/PoyntingVector.png, id=381, 351.3125pt x 162.6075pt>
+[9] [10] <Pictures/PoyntingVector.png, id=386, 351.3125pt x 162.6075pt>
 File: Pictures/PoyntingVector.png Graphic file (type png)
 
 <use Pictures/PoyntingVector.png>
-Package pdftex.def Info: Pictures/PoyntingVector.png used on input line 376.
+Package pdftex.def Info: Pictures/PoyntingVector.png used on input line 375.
 (pdftex.def)             Requested size: 209.12686pt x 96.79855pt.
- [10pdfTeX warning (ext4): destination with the same identifier (name{figure.1.
-1}) has been already used, duplicate ignored
+
+Underfull \hbox (badness 10000) in paragraph at lines 387--391
+
+ []
+
+[11pdfTeX warning (ext4): destination with the same identifier (name{figure.1.1
+}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.388 \eeq
+l.391 \beq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.1.3.36}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.388 \eeq
+l.391 \beq
            <./Pictures/PoyntingVector.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 388--392
+Underfull \hbox (badness 10000) in paragraph at lines 406--408
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 407--409
-
- []
-
-[11]
-Overfull \hbox (14.1741pt too wide) in alignment at lines 425--434
+[12]pdfTeX warning (ext4): destination with the same identifier (name{equation.
+1.3.42}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.420 \beq
+          pdfTeX warning (ext4): destination with the same identifier (name{equ
+ation.1.3.42}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.420 \beq
+          pdfTeX warning (ext4): destination with the same identifier (name{equ
+ation.1.3.42}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.420 \beq
+          pdfTeX warning (ext4): destination with the same identifier (name{equ
+ation.1.3.42}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.420 \beq
+          
+Overfull \hbox (14.1741pt too wide) in alignment at lines 424--433
  [][][] []
  []
 
-<Pictures/RadiationSummary.png, id=412, 317.185pt x 173.64874pt>
+<Pictures/RadiationSummary.png, id=418, 317.185pt x 173.64874pt>
 File: Pictures/RadiationSummary.png Graphic file (type png)
 
 <use Pictures/RadiationSummary.png>
-Package pdftex.def Info: Pictures/RadiationSummary.png used on input line 438.
+Package pdftex.def Info: Pictures/RadiationSummary.png used on input line 437.
 (pdftex.def)             Requested size: 209.12686pt x 114.49458pt.
- [12pdfTeX warning (ext4): destination with the same identifier (name{equation.
-1.3.42}) has been already used, duplicate ignored
+ [13pdfTeX warning (ext4): destination with the same identifier (name{figure.1.
+2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.441 \end{figure}
-                  ] [13pdfTeX warning (ext4): destination with the same identif
-ier (name{figure.1.2}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.447 \part
+l.446 \part
            {Numerics} <./Pictures/RadiationSummary.png>]
 part II.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 447.
+(scrkbase)              on input line 446.
 [14
 
 ] [15]
@@ -1254,7 +1258,7 @@ chapter 2.
 [16
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 523--525
+Underfull \hbox (badness 10000) in paragraph at lines 522--524
 
  []
 
@@ -1264,221 +1268,224 @@ Underfull \hbox (badness 10000) in paragraph at lines 523--525
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.535 \eeq
+l.534 \eeq
           ] <Pictures/Verfahrensfehler.png, id=457, 701.62125pt x 503.8825pt>
 File: Pictures/Verfahrensfehler.png Graphic file (type png)
 
 <use Pictures/Verfahrensfehler.png>
-Package pdftex.def Info: Pictures/Verfahrensfehler.png used on input line 553.
+Package pdftex.def Info: Pictures/Verfahrensfehler.png used on input line 552.
 (pdftex.def)             Requested size: 209.12686pt x 150.18945pt.
  [18pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.563 \eeq
+l.562 \eeq
            <./Pictures/Verfahrensfehler.png>] [19] [20]
-<Pictures/borisRotation.png, id=506, 557.08125pt x 308.15125pt>
+<Pictures/borisRotation.png, id=509, 557.08125pt x 308.15125pt>
 File: Pictures/borisRotation.png Graphic file (type png)
 
 <use Pictures/borisRotation.png>
-Package pdftex.def Info: Pictures/borisRotation.png used on input line 641.
-(pdftex.def)             Requested size: 292.77632pt x 161.9511pt.
+Package pdftex.def Info: Pictures/borisRotation.png used on input line 661.
+(pdftex.def)             Requested size: 209.12686pt x 115.67868pt.
 
-<Pictures/borisProjection.png, id=507, 406.51875pt x 293.095pt>
+<Pictures/borisProjection.png, id=513, 406.51875pt x 293.095pt>
 File: Pictures/borisProjection.png Graphic file (type png)
 
 <use Pictures/borisProjection.png>
-Package pdftex.def Info: Pictures/borisProjection.png used on input line 649.
-(pdftex.def)             Requested size: 292.77632pt x 211.0953pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [21pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
-2}) has been already used, duplicate ignored
+Package pdftex.def Info: Pictures/borisProjection.png used on input line 669.
+(pdftex.def)             Requested size: 209.12686pt x 150.7779pt.
+ [21pdfTeX warning (ext4): destination with the same identifier (name{equation.
+2.3.21}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.653 \noindent
-                <./Pictures/borisRotation.png>] [22pdfTeX warning (ext4): desti
-nation with the same identifier (name{figure.2.3}) has been already used, dupli
-cate ignored
+l.672 \end{figure}
+                  pdfTeX warning (ext4): destination with the same identifier (
+name{figure.2.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.665 \chapter
-              {Interpolations} <./Pictures/borisProjection.png>]
+l.672 \end{figure}
+                   <./Pictures/borisRotation.png>] [22pdfTeX warning (ext4): de
+stination with the same identifier (name{figure.2.3}) has been already used, du
+plicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.701 \chapter
+              {Interpolations} <./Pictures/borisProjection.png>] [23]
 chapter 3.
-<Pictures/LightconeNew.pdf, id=524, 353.7309pt x 265.21068pt>
+<Pictures/LightconeNew.pdf, id=544, 353.7309pt x 265.21068pt>
 File: Pictures/LightconeNew.pdf Graphic file (type pdf)
 
 <use Pictures/LightconeNew.pdf>
-Package pdftex.def Info: Pictures/LightconeNew.pdf used on input line 675.
+Package pdftex.def Info: Pictures/LightconeNew.pdf used on input line 711.
 (pdftex.def)             Requested size: 334.60425pt x 250.87631pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [23
+ [24
 
 ]
-[24pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1
+[25pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.696 \end{multline}
-                     <./Pictures/LightconeNew.pdf>] [25pdfTeX warning (ext4): d
+l.732 \end{multline}
+                     <./Pictures/LightconeNew.pdf>] [26pdfTeX warning (ext4): d
 estination with the same identifier (name{equation.3.1.4}) has been already use
 d, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.721 \chapter
+l.757 \chapter
               {FDTD}pdfTeX warning (ext4): destination with the same identifier
  (name{equation.3.1.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.721 \chapter
+l.757 \chapter
               {FDTD}]
 chapter 4.
-[26
+[27
 
-] <Pictures/YeeBox.png, id=631, 761.84625pt x 622.325pt>
+] <Pictures/YeeBox.png, id=651, 761.84625pt x 622.325pt>
 File: Pictures/YeeBox.png Graphic file (type png)
 
 <use Pictures/YeeBox.png>
-Package pdftex.def Info: Pictures/YeeBox.png used on input line 750.
+Package pdftex.def Info: Pictures/YeeBox.png used on input line 786.
 (pdftex.def)             Requested size: 292.77632pt x 239.1543pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 744--753
+Underfull \hbox (badness 10000) in paragraph at lines 780--789
 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [27]
-[28pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
+ [28]
+[29pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.757 \chapter
+l.793 \chapter
               {Hybrid Field Approach} <./Pictures/YeeBox.png>]
 chapter 5.
-[29
+[30
 
 ]
 chapter 6.
-[30
+[31
 
 ]
 part III.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 769.
-[31
+(scrkbase)              on input line 805.
+[32
 
 ]
 part IV.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 770.
-[32
+(scrkbase)              on input line 806.
+[33
 
 ]
 chapter A.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [33
+ [34
 
 pdfTeX warning (ext4): destination with the same identifier (name{equation.A.1.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.804 \eeq
-          ] [34pdfTeX warning (ext4): destination with the same identifier (nam
+l.840 \eeq
+          ] [35pdfTeX warning (ext4): destination with the same identifier (nam
 e{equation.A.2.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.815 \chapter
+l.851 \chapter
               {Retarded Potential Equations Fulfill Laurentz Gauge}]
 chapter B.
 
-Overfull \hbox (84.39264pt too wide) in alignment at lines 843--848
+Overfull \hbox (84.39264pt too wide) in alignment at lines 879--884
  [][][] []
  []
 
-[35
+[36
 
 pdfTeX warning (ext4): destination with the same identifier (name{equation.B.0.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.852 \eeq
+l.888 \eeq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.B.0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.852 \eeq
+l.888 \eeq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.B.0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.852 \eeq
+l.888 \eeq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.B.0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.852 \eeq
+l.888 \eeq
           ]pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.854 \beq
+l.890 \beq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.854 \beq
+l.890 \beq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.854 \beq
+l.890 \beq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.854 \beq
+l.890 \beq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.858 \beq
+l.894 \beq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.858 \beq
+l.894 \beq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.858 \beq
+l.894 \beq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.858 \beq
+l.894 \beq
           
 
 Package Fancyhdr Warning: \headheight is too small (17.0pt): 
@@ -1486,33 +1493,33 @@ Package Fancyhdr Warning: \headheight is too small (17.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[36pdfTeX warning (ext4): destination with the same identifier (name{equation.B
+[37pdfTeX warning (ext4): destination with the same identifier (name{equation.B
 .0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.862 \chapter
+l.898 \chapter
               {Softwarestack}]
 chapter C.
-[37
-
-]
-chapter D.
 [38
 
 ]
-chapter E.
+chapter D.
 [39
+
+]
+chapter E.
+[40
 
 ] (./masterThesis.lof)
 \tf@lof=\write5
 \openout5 = `masterThesis.lof'.
 
- (./masterThesis.bbl [40
+ (./masterThesis.bbl [41
 
 ]
 chapter without number
-) [41
+) [42
 
 ]
 \openout2 = `declaration.aux'.
@@ -1527,15 +1534,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--12
 
  []
 
-) [42
+) [43
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 877.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 877.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 913.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 913.
  (./masterThesis.aux (./symbols.aux) (./declaration.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 877.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 877.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 913.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 913.
 Package rerunfilecheck Info: File `masterThesis.out' has not changed.
 (rerunfilecheck)             Checksum: 71C3CB3F10392380A5F1DD5B75167A54;2821.
 
@@ -1546,13 +1553,13 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 877.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 913.
  ) 
 Here is how much of TeX's memory you used:
- 23099 strings out of 493014
- 423835 string characters out of 6133350
- 580171 words of memory out of 5000000
- 26161 multiletter control sequences out of 15000+600000
+ 23110 strings out of 493014
+ 423972 string characters out of 6133350
+ 580368 words of memory out of 5000000
+ 26163 multiletter control sequences out of 15000+600000
  27544 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,25n,66p,10448b,890s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1585,10 +1592,10 @@ st/fonts/type1/public/cm-super/sfsx1095.pfb></usr/local/texlive/2016/texmf-dist
 onts/type1/public/cm-super/sfsx2074.pfb></usr/local/texlive/2016/texmf-dist/fon
 ts/type1/public/cm-super/sfsx2488.pfb></usr/local/texlive/2016/texmf-dist/fonts
 /type1/public/cm-super/sfti1095.pfb>
-Output written on masterThesis.pdf (49 pages, 800520 bytes).
+Output written on masterThesis.pdf (50 pages, 806697 bytes).
 PDF statistics:
- 848 PDF objects out of 1000 (max. 8388607)
- 704 compressed objects within 8 object streams
- 178 named destinations out of 1000 (max. 500000)
+ 871 PDF objects out of 1000 (max. 8388607)
+ 724 compressed objects within 8 object streams
+ 187 named destinations out of 1000 (max. 500000)
  377 words of extra memory for PDF output out of 10000 (max. 10000000)
 
