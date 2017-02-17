@@ -20,24 +20,23 @@
 \contentsline {section}{\numberline {3.1}Linear interpolation of Trajectories}{24}{section.3.1}
 \contentsline {section}{\numberline {3.2}Trilinear Interpolation of Fields}{26}{section.3.2}
 \contentsline {chapter}{\numberline {4}FDTD}{27}{chapter.4}
-\contentsline {section}{\numberline {4.1}Maxwell-Equations}{27}{section.4.1}
-\contentsline {section}{\numberline {4.2}The Yee-Scheme}{28}{section.4.2}
-\contentsline {section}{\numberline {4.3}Numeric Dispersion Relation}{29}{section.4.3}
-\contentsline {chapter}{\numberline {5}Hybrid Field Approach}{30}{chapter.5}
-\contentsline {section}{\numberline {5.1}Near-and Farfields}{30}{section.5.1}
-\contentsline {section}{\numberline {5.2}Particle Push and Nearfield Update}{30}{section.5.2}
-\contentsline {section}{\numberline {5.3}Particle History}{30}{section.5.3}
-\contentsline {section}{\numberline {5.4}Farfield Setup Before Simulation}{30}{section.5.4}
-\contentsline {section}{\numberline {5.5}Electron Scattering in an electromagnetic wave}{30}{section.5.5}
-\contentsline {chapter}{\numberline {6}Uniaxial Perfectly Matched Layer}{31}{chapter.6}
-\contentsline {part}{\numberline {III}Summary}{32}{part.3}
-\contentsline {part}{\numberline {IV}Appendix}{33}{part.4}
-\contentsline {chapter}{\numberline {A}Gauge Transformations}{34}{appendix.A}
-\contentsline {section}{\numberline {A.1}Invariance of Fields}{34}{section.A.1}
-\contentsline {section}{\numberline {A.2}Invariance of Potential Equations}{35}{section.A.2}
-\contentsline {chapter}{\numberline {B}Retarded Potential Equations Fulfill Laurentz Gauge}{36}{appendix.B}
-\contentsline {chapter}{\numberline {C}Softwarestack}{38}{appendix.C}
-\contentsline {chapter}{\numberline {D}Code Documentation}{39}{appendix.D}
-\contentsline {chapter}{\numberline {E}Normalization}{40}{appendix.E}
-\contentsline {chapter}{\nonumberline Bibliography}{42}{chapter*.5}
-\contentsline {chapter}{Declaration}{43}{chapter*.6}
+\contentsline {section}{\numberline {4.1}The Yee-Scheme}{27}{section.4.1}
+\contentsline {section}{\numberline {4.2}Numeric Dispersion Relation}{29}{section.4.2}
+\contentsline {chapter}{\numberline {5}Hybrid Field Approach}{31}{chapter.5}
+\contentsline {section}{\numberline {5.1}Near-and Farfields}{31}{section.5.1}
+\contentsline {section}{\numberline {5.2}Particle Push and Nearfield Update}{31}{section.5.2}
+\contentsline {section}{\numberline {5.3}Particle History}{31}{section.5.3}
+\contentsline {section}{\numberline {5.4}Farfield Setup Before Simulation}{31}{section.5.4}
+\contentsline {section}{\numberline {5.5}Electron Scattering in an electromagnetic wave}{31}{section.5.5}
+\contentsline {chapter}{\numberline {6}Uniaxial Perfectly Matched Layer}{32}{chapter.6}
+\contentsline {part}{\numberline {III}Summary}{33}{part.3}
+\contentsline {part}{\numberline {IV}Appendix}{34}{part.4}
+\contentsline {chapter}{\numberline {A}Gauge Transformations}{35}{appendix.A}
+\contentsline {section}{\numberline {A.1}Invariance of Fields}{35}{section.A.1}
+\contentsline {section}{\numberline {A.2}Invariance of Potential Equations}{36}{section.A.2}
+\contentsline {chapter}{\numberline {B}Retarded Potential Equations Fulfill Laurentz Gauge}{37}{appendix.B}
+\contentsline {chapter}{\numberline {C}Softwarestack}{39}{appendix.C}
+\contentsline {chapter}{\numberline {D}Code Documentation}{40}{appendix.D}
+\contentsline {chapter}{\numberline {E}Normalization}{41}{appendix.E}
+\contentsline {chapter}{\nonumberline Bibliography}{43}{chapter*.5}
+\contentsline {chapter}{Declaration}{44}{chapter*.6}

@@ -19,24 +19,23 @@
 \BOOKMARK [1][-]{section.3.1}{Linear interpolation of Trajectories}{chapter.3}% 19
 \BOOKMARK [1][-]{section.3.2}{Trilinear Interpolation of Fields}{chapter.3}% 20
 \BOOKMARK [0][-]{chapter.4}{FDTD}{part.2}% 21
-\BOOKMARK [1][-]{section.4.1}{Maxwell-Equations}{chapter.4}% 22
-\BOOKMARK [1][-]{section.4.2}{The Yee-Scheme}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.3}{Numeric Dispersion Relation}{chapter.4}% 24
-\BOOKMARK [0][-]{chapter.5}{Hybrid Field Approach}{part.2}% 25
-\BOOKMARK [1][-]{section.5.1}{Near-and Farfields}{chapter.5}% 26
-\BOOKMARK [1][-]{section.5.2}{Particle Push and Nearfield Update}{chapter.5}% 27
-\BOOKMARK [1][-]{section.5.3}{Particle History}{chapter.5}% 28
-\BOOKMARK [1][-]{section.5.4}{Farfield Setup Before Simulation}{chapter.5}% 29
-\BOOKMARK [1][-]{section.5.5}{Electron Scattering in an electromagnetic wave}{chapter.5}% 30
-\BOOKMARK [0][-]{chapter.6}{Uniaxial Perfectly Matched Layer}{part.2}% 31
-\BOOKMARK [-1][-]{part.3}{Summary}{}% 32
-\BOOKMARK [-1][-]{part.4}{Appendix}{}% 33
-\BOOKMARK [0][-]{appendix.A}{Gauge Transformations}{part.4}% 34
-\BOOKMARK [1][-]{section.A.1}{Invariance of Fields}{appendix.A}% 35
-\BOOKMARK [1][-]{section.A.2}{Invariance of Potential Equations}{appendix.A}% 36
-\BOOKMARK [0][-]{appendix.B}{Retarded Potential Equations Fulfill Laurentz Gauge}{part.4}% 37
-\BOOKMARK [0][-]{appendix.C}{Softwarestack}{part.4}% 38
-\BOOKMARK [0][-]{appendix.D}{Code Documentation}{part.4}% 39
-\BOOKMARK [0][-]{appendix.E}{Normalization}{part.4}% 40
-\BOOKMARK [0][-]{chapter*.5}{Bibliography}{part.4}% 41
-\BOOKMARK [0][-]{chapter*.6}{Declaration}{part.4}% 42
+\BOOKMARK [1][-]{section.4.1}{The Yee-Scheme}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.2}{Numeric Dispersion Relation}{chapter.4}% 23
+\BOOKMARK [0][-]{chapter.5}{Hybrid Field Approach}{part.2}% 24
+\BOOKMARK [1][-]{section.5.1}{Near-and Farfields}{chapter.5}% 25
+\BOOKMARK [1][-]{section.5.2}{Particle Push and Nearfield Update}{chapter.5}% 26
+\BOOKMARK [1][-]{section.5.3}{Particle History}{chapter.5}% 27
+\BOOKMARK [1][-]{section.5.4}{Farfield Setup Before Simulation}{chapter.5}% 28
+\BOOKMARK [1][-]{section.5.5}{Electron Scattering in an electromagnetic wave}{chapter.5}% 29
+\BOOKMARK [0][-]{chapter.6}{Uniaxial Perfectly Matched Layer}{part.2}% 30
+\BOOKMARK [-1][-]{part.3}{Summary}{}% 31
+\BOOKMARK [-1][-]{part.4}{Appendix}{}% 32
+\BOOKMARK [0][-]{appendix.A}{Gauge Transformations}{part.4}% 33
+\BOOKMARK [1][-]{section.A.1}{Invariance of Fields}{appendix.A}% 34
+\BOOKMARK [1][-]{section.A.2}{Invariance of Potential Equations}{appendix.A}% 35
+\BOOKMARK [0][-]{appendix.B}{Retarded Potential Equations Fulfill Laurentz Gauge}{part.4}% 36
+\BOOKMARK [0][-]{appendix.C}{Softwarestack}{part.4}% 37
+\BOOKMARK [0][-]{appendix.D}{Code Documentation}{part.4}% 38
+\BOOKMARK [0][-]{appendix.E}{Normalization}{part.4}% 39
+\BOOKMARK [0][-]{chapter*.5}{Bibliography}{part.4}% 40
+\BOOKMARK [0][-]{chapter*.6}{Declaration}{part.4}% 41
