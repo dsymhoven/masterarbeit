@@ -27,6 +27,7 @@ struct Particle {
     int boxIndicesOfNearFieldBoxesBeforePush[27];
     int boxIndicesOfNearFieldBoxesAfterPush[27];
     
+    
 };
 
 typedef struct Particle Particle;
