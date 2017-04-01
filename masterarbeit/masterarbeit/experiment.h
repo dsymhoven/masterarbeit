@@ -13,6 +13,7 @@
 
 void testMaxwellPusher();
 void testBorisPusher();
+void testNearFieldCalculation();
 void testLWFieldCalculationForPlane();
 void testNearAndFarFields();
 void testUPML();
