@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "stdbool.h"
 #include "particle.h"
+#include "resolution.h"
 
 
 struct Grid {
@@ -33,9 +34,10 @@ struct Grid {
     
     double upmlLayerWidth;
     
-    double dx;
-    double dy;
-    double dz;
+    Resolution Resolution;
+//    double dx;
+//    double dy;
+//    double dz;
     
     double EMax;
     double HMax;
@@ -78,7 +80,7 @@ struct Grid {
 typedef struct Grid Grid;
 typedef struct Particle Particle;
 
-void initGrid(Grid *Grid, const double dx, const double dy, const double dz, const int numberOfGridPointsForBoxInX, const int numberOfGridPointsForBoxInY, const int numberOfGridPointsForBoxInZ, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ);
+void initGrid(Grid *Grid, Resolution *Resolution, const int numberOfGridPointsForBoxInX, const int numberOfGridPointsForBoxInY, const int numberOfGridPointsForBoxInZ, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ);
 void allocateMemoryOnGrid(Grid *Grid);
 void freeMemoryOnGrid(Grid *Grid);
 void initSamplePulseOnGrid(Grid *Grid);

@@ -55,9 +55,9 @@ void pushEFieldInsideBoxes(Grid *Grid, double dt){
     double Hy_im1jk;
     double Hx_ijm1k;
     
-    double cnx = 0.5 * dt / Grid->dx;
-    double cny = 0.5 * dt / Grid->dy;
-    double cnz = 0.5 * dt / Grid->dz;
+    double cnx = 0.5 * dt / Grid->Resolution.dx;
+    double cny = 0.5 * dt / Grid->Resolution.dy;
+    double cnz = 0.5 * dt / Grid->Resolution.dz;
     
     double dOld;
     
@@ -87,18 +87,18 @@ void pushEFieldInsideBoxes(Grid *Grid, double dt){
                 if (useUPML){
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
                     
-                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2E[j] * ((Hz_ijk - Hz_ijm1k) / Grid->dy - (Hy_ijk - Hy_ijkm1) / Grid->dz);
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2E[j] * ((Hz_ijk - Hz_ijm1k) / Grid->Resolution.dy - (Hy_ijk - Hy_ijkm1) / Grid->Resolution.dz);
                     Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3E[k] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4E[k] * (Grid->upml5E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6E[i] * dOld);
                     
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
                     
-                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2E[k] * ((Hx_ijk - Hx_ijkm1) / Grid->dz - (Hz_ijk - Hz_im1jk) / Grid->dx);
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2E[k] * ((Hx_ijk - Hx_ijkm1) / Grid->Resolution.dz - (Hz_ijk - Hz_im1jk) / Grid->Resolution.dx);
                     
                     Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3E[i] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4E[i] * (Grid->upml5E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6E[j] * dOld);
                     
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
                     
-                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2E[i] * ((Hy_ijk - Hy_im1jk) / Grid->dx - (Hx_ijk - Hx_ijm1k) / Grid->dy);
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2E[i] * ((Hy_ijk - Hy_im1jk) / Grid->Resolution.dx - (Hx_ijk - Hx_ijm1k) / Grid->Resolution.dy);
                     
                     
                     Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3E[j] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4E[j] * (Grid->upml5E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6E[k] * dOld);
@@ -133,9 +133,9 @@ void pushHFieldInsideBoxes(Grid *Grid, double dt){
     double Ex_ijp1k;
     double Ey_ip1jk;
     
-    double cnx = 0.5 * dt / Grid->dx;
-    double cny = 0.5 * dt / Grid->dy;
-    double cnz = 0.5 * dt / Grid->dz;
+    double cnx = 0.5 * dt / Grid->Resolution.dx;
+    double cny = 0.5 * dt / Grid->Resolution.dy;
+    double cnz = 0.5 * dt / Grid->Resolution.dz;
     
     
     int numberOfGridPointsInX = Grid->numberOfGridPointsInX;
@@ -165,19 +165,19 @@ void pushHFieldInsideBoxes(Grid *Grid, double dt){
                     
                     bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
                     
-                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2H[j] * ((Ey_ijkp1 - Ey_ijk) / Grid->dz - (Ez_ijp1k - Ez_ijk) / Grid->dy);
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2H[j] * ((Ey_ijkp1 - Ey_ijk) / Grid->Resolution.dz - (Ez_ijp1k - Ez_ijk) / Grid->Resolution.dy);
                     
                     Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3H[k] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4H[k] * (Grid->upml5H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6E[i] * bOld);
                     
                     bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
                     
-                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2H[k] * ((Ez_ip1jk - Ez_ijk) / Grid->dx - (Ex_ijkp1 - Ex_ijk) / Grid->dz);
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2H[k] * ((Ez_ip1jk - Ez_ijk) / Grid->Resolution.dx - (Ex_ijkp1 - Ex_ijk) / Grid->Resolution.dz);
                     
                     Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3H[i] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4H[i] * (Grid->upml5H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6H[j] * bOld);
                     
                     bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
                     
-                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2H[i] * ((Ex_ijp1k - Ex_ijk) / Grid->dy - (Ey_ip1jk - Ey_ijk) / Grid->dx);
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2H[i] * ((Ex_ijp1k - Ex_ijk) / Grid->Resolution.dy - (Ey_ip1jk - Ey_ijk) / Grid->Resolution.dx);
                     
                     Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3H[j] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4H[j] * (Grid->upml5H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6H[k] * bOld);
                 }
@@ -413,9 +413,9 @@ void adjustHyz_im1(Grid *Grid, Particle *Particles, int numberOfParticles, const
                 for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
                     
                     xObserver[0] = t;
-                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX - 1);
-                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    xObserver[1] = (Grid->Resolution.dx) * (ib * numberOfGridPointsForBoxInX - 1);
+                    xObserver[2] = (Grid->Resolution.dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->Resolution.dz) * (kb * numberOfGridPointsForBoxInZ + kd);
                     
                     subLWField(Grid, &Particles[p], &Grid->Hy_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 4);
                     subLWField(Grid, &Particles[p], &Grid->Hz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 5);
@@ -429,9 +429,9 @@ void adjustHyz_im1(Grid *Grid, Particle *Particles, int numberOfParticles, const
                 for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
                     
                     xObserver[0] = t;
-                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX - 1);
-                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    xObserver[1] = (Grid->Resolution.dx) * (ib * numberOfGridPointsForBoxInX - 1);
+                    xObserver[2] = (Grid->Resolution.dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->Resolution.dz) * (kb * numberOfGridPointsForBoxInZ + kd);
                     
                     addLWField(Grid, &Particles[p], &(Grid->Hy_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 4);
                     addLWField(Grid, &Particles[p], &(Grid->Hz_im1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 5);
@@ -468,9 +468,9 @@ void adjustHxz_jm1(Grid *Grid, Particle *Particles, int numberOfParticles, const
                 for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
                     
                     xObserver[0] = t;
-                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY - 1);
-                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    xObserver[1] = (Grid->Resolution.dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->Resolution.dy) * (jb * numberOfGridPointsForBoxInY - 1);
+                    xObserver[3] = (Grid->Resolution.dz) * (kb * numberOfGridPointsForBoxInZ + kd);
                     
                     subLWField(Grid, &Particles[p], &Grid->Hx_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 3);
                     subLWField(Grid, &Particles[p], &Grid->Hz_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 5);
@@ -484,9 +484,9 @@ void adjustHxz_jm1(Grid *Grid, Particle *Particles, int numberOfParticles, const
                 for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
                     
                     xObserver[0] = t;
-                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY - 1);
-                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    xObserver[1] = (Grid->Resolution.dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->Resolution.dy) * (jb * numberOfGridPointsForBoxInY - 1);
+                    xObserver[3] = (Grid->Resolution.dz) * (kb * numberOfGridPointsForBoxInZ + kd);
                     
                     addLWField(Grid, &Particles[p], &(Grid->Hx_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 3);
                     addLWField(Grid, &Particles[p], &(Grid->Hz_jm1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 5);
@@ -524,9 +524,9 @@ void adjustHxy_km1(Grid *Grid, Particle *Particles, int numberOfParticles, const
                 for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
                     
                     xObserver[0] = t;
-                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ - 1);
+                    xObserver[1] = (Grid->Resolution.dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->Resolution.dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->Resolution.dz) * (kb * numberOfGridPointsForBoxInZ - 1);
                     
                     subLWField(Grid, &Particles[p], &Grid->Hx_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 3);
                     subLWField(Grid, &Particles[p], &Grid->Hy_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 4);
@@ -540,9 +540,9 @@ void adjustHxy_km1(Grid *Grid, Particle *Particles, int numberOfParticles, const
                 for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
                     
                     xObserver[0] = t;
-                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ - 1);
+                    xObserver[1] = (Grid->Resolution.dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->Resolution.dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->Resolution.dz) * (kb * numberOfGridPointsForBoxInZ - 1);
                     
                     addLWField(Grid, &Particles[p], &(Grid->Hx_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 3);
                     addLWField(Grid, &Particles[p], &(Grid->Hy_km1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 4);
@@ -612,9 +612,9 @@ void adjustEyz_ip1(Grid *Grid, Particle *Particles, int numberOfParticles, const
                 for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
                     
                     xObserver[0] = t;
-                    xObserver[1] = (Grid->dx) * ((ib + 1) * numberOfGridPointsForBoxInX);
-                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    xObserver[1] = (Grid->Resolution.dx) * ((ib + 1) * numberOfGridPointsForBoxInX);
+                    xObserver[2] = (Grid->Resolution.dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->Resolution.dz) * (kb * numberOfGridPointsForBoxInZ + kd);
                     
                     subLWField(Grid, &Particles[p], &Grid->Ey_ip1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 1);
                     subLWField(Grid, &Particles[p], &Grid->Ez_ip1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd], xObserver, 2);
@@ -628,9 +628,9 @@ void adjustEyz_ip1(Grid *Grid, Particle *Particles, int numberOfParticles, const
                 for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
                     
                     xObserver[0] = t;
-                    xObserver[1] = (Grid->dx) * ((ib + 1) * numberOfGridPointsForBoxInX);
-                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    xObserver[1] = (Grid->Resolution.dx) * ((ib + 1) * numberOfGridPointsForBoxInX);
+                    xObserver[2] = (Grid->Resolution.dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->Resolution.dz) * (kb * numberOfGridPointsForBoxInZ + kd);
                     
                     addLWField(Grid, &Particles[p], &(Grid->Ey_ip1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 1);
                     addLWField(Grid, &Particles[p], &(Grid->Ez_ip1[boxIndex][numberOfGridPointsForBoxInZ * jd + kd]), xObserver, 2);
@@ -667,9 +667,9 @@ void adjustExz_jp1(Grid *Grid, Particle *Particles, int numberOfParticles, const
                 for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
                     
                     xObserver[0] = t;
-                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                    xObserver[2] = (Grid->dy) * ((jb + 1) * numberOfGridPointsForBoxInY);
-                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    xObserver[1] = (Grid->Resolution.dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->Resolution.dy) * ((jb + 1) * numberOfGridPointsForBoxInY);
+                    xObserver[3] = (Grid->Resolution.dz) * (kb * numberOfGridPointsForBoxInZ + kd);
                     
                     subLWField(Grid, &Particles[p], &Grid->Ex_jp1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 0);
                     subLWField(Grid, &Particles[p], &Grid->Ez_jp1[boxIndex][numberOfGridPointsForBoxInZ * id + kd], xObserver, 2);
@@ -683,9 +683,9 @@ void adjustExz_jp1(Grid *Grid, Particle *Particles, int numberOfParticles, const
                 for (int kd = 0; kd < numberOfGridPointsForBoxInZ; kd++){
                     
                     xObserver[0] = t;
-                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                    xObserver[2] = (Grid->dy) * ((jb + 1) * numberOfGridPointsForBoxInY);
-                    xObserver[3] = (Grid->dz) * (kb * numberOfGridPointsForBoxInZ + kd);
+                    xObserver[1] = (Grid->Resolution.dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->Resolution.dy) * ((jb + 1) * numberOfGridPointsForBoxInY);
+                    xObserver[3] = (Grid->Resolution.dz) * (kb * numberOfGridPointsForBoxInZ + kd);
                     
                     addLWField(Grid, &Particles[p], &(Grid->Ex_jp1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 0);
                     addLWField(Grid, &Particles[p], &(Grid->Ez_jp1[boxIndex][numberOfGridPointsForBoxInZ * id + kd]), xObserver, 2);
@@ -722,9 +722,9 @@ void adjustExy_kp1(Grid *Grid, Particle *Particles, int numberOfParticles, const
                 for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
                     
                     xObserver[0] = t;
-                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                    xObserver[3] = (Grid->dz) * ((kb + 1) * numberOfGridPointsForBoxInZ);
+                    xObserver[1] = (Grid->Resolution.dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->Resolution.dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->Resolution.dz) * ((kb + 1) * numberOfGridPointsForBoxInZ);
                     
                     subLWField(Grid, &Particles[p], &Grid->Ex_kp1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 0);
                     subLWField(Grid, &Particles[p], &Grid->Ey_kp1[boxIndex][numberOfGridPointsForBoxInY * id + jd], xObserver, 1);
@@ -738,9 +738,9 @@ void adjustExy_kp1(Grid *Grid, Particle *Particles, int numberOfParticles, const
                 for (int jd = 0; jd < numberOfGridPointsForBoxInY; jd++){
                     
                     xObserver[0] = t;
-                    xObserver[1] = (Grid->dx) * (ib * numberOfGridPointsForBoxInX + id);
-                    xObserver[2] = (Grid->dy) * (jb * numberOfGridPointsForBoxInY + jd);
-                    xObserver[3] = (Grid->dz) * ((kb + 1) * numberOfGridPointsForBoxInZ);
+                    xObserver[1] = (Grid->Resolution.dx) * (ib * numberOfGridPointsForBoxInX + id);
+                    xObserver[2] = (Grid->Resolution.dy) * (jb * numberOfGridPointsForBoxInY + jd);
+                    xObserver[3] = (Grid->Resolution.dz) * ((kb + 1) * numberOfGridPointsForBoxInZ);
                     
                     addLWField(Grid, &Particles[p], &(Grid->Ex_kp1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 0);
                     addLWField(Grid, &Particles[p], &(Grid->Ey_kp1[boxIndex][numberOfGridPointsForBoxInY * id + jd]), xObserver, 1);
@@ -770,9 +770,9 @@ void pushEFieldAtBorders(Grid *Grid, double dt){
     
     double dOld;
     
-    double cnx = 0.5 * dt / Grid->dx;
-    double cny = 0.5 * dt / Grid->dy;
-    double cnz = 0.5 * dt / Grid->dz;
+    double cnx = 0.5 * dt / Grid->Resolution.dx;
+    double cny = 0.5 * dt / Grid->Resolution.dy;
+    double cnz = 0.5 * dt / Grid->Resolution.dz;
     
     int numberOfGridPointsInX = Grid->numberOfGridPointsInX;
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
@@ -836,19 +836,19 @@ void pushEFieldAtBorders(Grid *Grid, double dt){
                     
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
                     
-                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2E[j] * ((Hz_ijk - Hz_ijm1k) / Grid->dy - (Hy_ijk - Hy_ijkm1) / Grid->dz);
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2E[j] * ((Hz_ijk - Hz_ijm1k) / Grid->Resolution.dy - (Hy_ijk - Hy_ijkm1) / Grid->Resolution.dz);
                     
                     Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3E[k] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4E[k] * (Grid->upml5E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6E[i] * dOld);
                     
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
                     
-                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2E[k] * ((Hx_ijk - Hx_ijkm1) / Grid->dz - (Hz_ijk - Hz_im1jk) / Grid->dx);
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2E[k] * ((Hx_ijk - Hx_ijkm1) / Grid->Resolution.dz - (Hz_ijk - Hz_im1jk) / Grid->Resolution.dx);
                     
                     Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3E[i] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4E[i] * (Grid->upml5E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6E[j] * dOld);
                     
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
                     
-                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2E[i] * ((Hy_ijk - Hy_im1jk) / Grid->dx - (Hx_ijk - Hx_ijm1k) / Grid->dy);
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2E[i] * ((Hy_ijk - Hy_im1jk) / Grid->Resolution.dx - (Hx_ijk - Hx_ijm1k) / Grid->Resolution.dy);
                     
                     Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3E[j] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4E[j] * (Grid->upml5E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6E[k] * dOld);
                 }
@@ -885,9 +885,9 @@ void pushHFieldAtBorders(Grid *Grid, double dt){
     
     double bOld;
     
-    double cnx = 0.5 * dt / Grid->dx;
-    double cny = 0.5 * dt / Grid->dy;
-    double cnz = 0.5 * dt / Grid->dz;
+    double cnx = 0.5 * dt / Grid->Resolution.dx;
+    double cny = 0.5 * dt / Grid->Resolution.dy;
+    double cnz = 0.5 * dt / Grid->Resolution.dz;
     
     int numberOfGridPointsInX = Grid->numberOfGridPointsInX;
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
@@ -954,19 +954,19 @@ void pushHFieldAtBorders(Grid *Grid, double dt){
                     
                     bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
                     
-                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2H[j] * ((Ey_ijkp1 - Ey_ijk) / Grid->dz - (Ez_ijp1k - Ez_ijk) / Grid->dy);
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2H[j] * ((Ey_ijkp1 - Ey_ijk) / Grid->Resolution.dz - (Ez_ijp1k - Ez_ijk) / Grid->Resolution.dy);
                     
                     Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3H[k] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4H[k] * (Grid->upml5H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6E[i] * bOld);
                     
                     bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
                     
-                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2H[k] * ((Ez_ip1jk - Ez_ijk) / Grid->dx - (Ex_ijkp1 - Ex_ijk) / Grid->dz);
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2H[k] * ((Ez_ip1jk - Ez_ijk) / Grid->Resolution.dx - (Ex_ijkp1 - Ex_ijk) / Grid->Resolution.dz);
                     
                     Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3H[i] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4H[i] * (Grid->upml5H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6H[j] * bOld);
                     
                     bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
                     
-                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2H[i] * ((Ex_ijp1k - Ex_ijk) / Grid->dy - (Ey_ip1jk - Ey_ijk) / Grid->dx);
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2H[i] * ((Ex_ijp1k - Ex_ijk) / Grid->Resolution.dy - (Ey_ip1jk - Ey_ijk) / Grid->Resolution.dx);
                     
                     Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3H[j] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4H[j] * (Grid->upml5H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6H[k] * bOld);
                 }
@@ -1006,9 +1006,9 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
     
-    double dx = Grid->dx;
-    double dy = Grid->dy;
-    double dz = Grid->dz;
+    double dx = Grid->Resolution.dx;
+    double dy = Grid->Resolution.dy;
+    double dz = Grid->Resolution.dz;
     
     int adjustmentDueToUpmlInXRight = 0;
     int adjustmentDueToUpmlInXLeft = 0;
@@ -1100,9 +1100,9 @@ void subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
     
-    double dx = Grid->dx;
-    double dy = Grid->dy;
-    double dz = Grid->dz;
+    double dx = Grid->Resolution.dx;
+    double dy = Grid->Resolution.dy;
+    double dz = Grid->Resolution.dz;
     
     int adjustmentDueToUpmlInXRight = 0;
     int adjustmentDueToUpmlInXLeft = 0;
@@ -1189,25 +1189,25 @@ void addLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
     switch (component)
     {
         case 0:
-            xObserverCopy[1] += 0.5 * (Grid->dx);
+            xObserverCopy[1] += 0.5 * (Grid->Resolution.dx);
             break;
         case 1:
-            xObserverCopy[2] += 0.5 * (Grid->dy);
+            xObserverCopy[2] += 0.5 * (Grid->Resolution.dy);
             break;
         case 2:
-            xObserverCopy[3] += 0.5 * (Grid->dz);
+            xObserverCopy[3] += 0.5 * (Grid->Resolution.dz);
             break;
         case 3:
-            xObserverCopy[2] += 0.5 * (Grid->dy);
-            xObserverCopy[3] += 0.5 * (Grid->dz);
+            xObserverCopy[2] += 0.5 * (Grid->Resolution.dy);
+            xObserverCopy[3] += 0.5 * (Grid->Resolution.dz);
             break;
         case 4:
-            xObserverCopy[3] += 0.5 * (Grid->dz);
-            xObserverCopy[1] += 0.5 * (Grid->dx);
+            xObserverCopy[3] += 0.5 * (Grid->Resolution.dz);
+            xObserverCopy[1] += 0.5 * (Grid->Resolution.dx);
             break;
         case 5:
-            xObserverCopy[1] += 0.5 * (Grid->dx);
-            xObserverCopy[2] += 0.5 * (Grid->dy);
+            xObserverCopy[1] += 0.5 * (Grid->Resolution.dx);
+            xObserverCopy[2] += 0.5 * (Grid->Resolution.dy);
             break;
     }
     
@@ -1220,7 +1220,7 @@ void addLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
     double R;
     double n[3] = {0};
     double betaDot[3] = {0};
-    double dt = 0.5 * Grid->dx;
+    double dt = 0.5 * Grid->Resolution.dx;
     double E[3] = {0};
     double B[3] = {0};
     int currentHistoryLength = Particle->currentHistoryLength;
@@ -1272,25 +1272,25 @@ void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
     switch (component)
     {
         case 0:
-            xObserverCopy[1] += 0.5 * (Grid->dx);
+            xObserverCopy[1] += 0.5 * (Grid->Resolution.dx);
             break;
         case 1:
-            xObserverCopy[2] += 0.5 * (Grid->dy);
+            xObserverCopy[2] += 0.5 * (Grid->Resolution.dy);
             break;
         case 2:
-            xObserverCopy[3] += 0.5 * (Grid->dz);
+            xObserverCopy[3] += 0.5 * (Grid->Resolution.dz);
             break;
         case 3:
-            xObserverCopy[2] += 0.5 * (Grid->dy);
-            xObserverCopy[3] += 0.5 * (Grid->dz);
+            xObserverCopy[2] += 0.5 * (Grid->Resolution.dy);
+            xObserverCopy[3] += 0.5 * (Grid->Resolution.dz);
             break;
         case 4:
-            xObserverCopy[3] += 0.5 * (Grid->dz);
-            xObserverCopy[1] += 0.5 * (Grid->dx);
+            xObserverCopy[3] += 0.5 * (Grid->Resolution.dz);
+            xObserverCopy[1] += 0.5 * (Grid->Resolution.dx);
             break;
         case 5:
-            xObserverCopy[1] += 0.5 * (Grid->dx);
-            xObserverCopy[2] += 0.5 * (Grid->dy);
+            xObserverCopy[1] += 0.5 * (Grid->Resolution.dx);
+            xObserverCopy[2] += 0.5 * (Grid->Resolution.dy);
             break;
     }
     
@@ -1303,7 +1303,7 @@ void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
     double R;
     double n[3] = {0};
     double betaDot[3] = {0};
-    double dt = 0.5 * Grid->dx;
+    double dt = 0.5 * Grid->Resolution.dx;
     double E[3] = {0};
     double B[3] = {0};
     int currentHistoryLength = Particle->currentHistoryLength;

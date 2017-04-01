@@ -25,9 +25,13 @@ void testMaxwellPusher(){
 #pragma mark: Initializations
     // ======================================================
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.2;
     double dy = 0.2;
     double dz = 0.2;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 20;
     int numberOfGridPointsForBoxInY = 20;
     int numberOfGridPointsForBoxInZ = 20;
@@ -35,12 +39,12 @@ void testMaxwellPusher(){
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     initSamplePulseOnGrid(&Grid);
     writeGridParametersToFile(&Grid);
     
-    double dt = 0.5 * Grid.dx;
+    double dt = 0.5 * Grid.Resolution.dx;
     double t = 0;
     double tEnd = 10;
     char filename[32] = "some";
@@ -72,9 +76,13 @@ void testBorisPusher(){
 #pragma mark: Initializations
     // ======================================================
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.2;
     double dy = 0.2;
     double dz = 0.2;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 20;
     int numberOfGridPointsForBoxInY = 20;
     int numberOfGridPointsForBoxInZ = 20;
@@ -96,7 +104,7 @@ void testBorisPusher(){
     Particle Particles[numberOfParticles];
     Particle *Particle = &Particles[0];
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
@@ -151,9 +159,13 @@ void testNearFieldCalculation(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.2;
     double dy = 0.2;
     double dz = 0.2;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 20;
     int numberOfGridPointsForBoxInY = 20;
     int numberOfGridPointsForBoxInZ = 20;
@@ -176,7 +188,7 @@ void testNearFieldCalculation(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
@@ -247,9 +259,13 @@ void testLWFieldCalculationForPlane(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.2;
     double dy = 0.2;
     double dz = 0.2;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 20;
     int numberOfGridPointsForBoxInY = 20;
     int numberOfGridPointsForBoxInZ = 20;
@@ -271,7 +287,7 @@ void testLWFieldCalculationForPlane(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     writeGridParametersToFile(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -330,9 +346,13 @@ void testNearAndFarFields(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.2;
     double dy = 0.2;
     double dz = 0.2;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 20;
     int numberOfGridPointsForBoxInY = 20;
     int numberOfGridPointsForBoxInZ = 20;
@@ -354,7 +374,7 @@ void testNearAndFarFields(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     calcUPMLCoefficients(&Grid);
@@ -423,9 +443,13 @@ void testUPML(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.2;
     double dy = 0.2;
     double dz = 0.2;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 16;
     int numberOfGridPointsForBoxInY = 16;
     int numberOfGridPointsForBoxInZ = 16;
@@ -447,7 +471,7 @@ void testUPML(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -513,9 +537,13 @@ void testNearFieldUpdate(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.2;
     double dy = 0.2;
     double dz = 0.2;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 20;
     int numberOfGridPointsForBoxInY = 20;
     int numberOfGridPointsForBoxInZ = 20;
@@ -537,7 +565,7 @@ void testNearFieldUpdate(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -606,9 +634,13 @@ void testMultipleParticles(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.2;
     double dy = 0.2;
     double dz = 0.2;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 20;
     int numberOfGridPointsForBoxInY = 20;
     int numberOfGridPointsForBoxInZ = 20;
@@ -631,7 +663,7 @@ void testMultipleParticles(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -712,9 +744,13 @@ void testHistoryBeforeSimulation(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.125;
     double dy = 0.125;
     double dz = 0.125;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 24;
     int numberOfGridPointsForBoxInY = 24;
     int numberOfGridPointsForBoxInZ = 24;
@@ -737,7 +773,7 @@ void testHistoryBeforeSimulation(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -820,9 +856,13 @@ void testScattering(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.125;
     double dy = 0.125;
     double dz = 0.125;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 20;
     int numberOfGridPointsForBoxInY = 20;
     int numberOfGridPointsForBoxInZ = 20;
@@ -845,7 +885,7 @@ void testScattering(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -935,9 +975,13 @@ void extendHistoryAndCalcLWFieldsIndependantly(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.125;
     double dy = 0.125;
     double dz = 0.125;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 20;
     int numberOfGridPointsForBoxInY = 20;
     int numberOfGridPointsForBoxInZ = 20;
@@ -960,7 +1004,7 @@ void extendHistoryAndCalcLWFieldsIndependantly(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -1050,9 +1094,13 @@ void electronScatteringSmallGrid_init9(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.125;
     double dy = 0.125;
     double dz = 0.125;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 20;
     int numberOfGridPointsForBoxInY = 20;
     int numberOfGridPointsForBoxInZ = 20;
@@ -1075,7 +1123,7 @@ void electronScatteringSmallGrid_init9(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -1169,9 +1217,13 @@ void electronScatteringLargeGrid_init8(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.1;
     double dy = 0.1;
     double dz = 0.1;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 32;
     int numberOfGridPointsForBoxInY = 32;
     int numberOfGridPointsForBoxInZ = 32;
@@ -1194,7 +1246,7 @@ void electronScatteringLargeGrid_init8(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -1286,9 +1338,13 @@ void testTimeDependentExternalFields(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.125;
     double dy = 0.125;
     double dz = 0.125;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 32;
     int numberOfGridPointsForBoxInY = 32;
     int numberOfGridPointsForBoxInZ = 32;
@@ -1304,7 +1360,7 @@ void testTimeDependentExternalFields(){
     double Eextern[3];
     double Bextern[3];
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     
@@ -1333,9 +1389,13 @@ void scatteringInEMWave(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+   
     double dx = 0.1;
     double dy = 0.1;
     double dz = 0.1;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 32;
     int numberOfGridPointsForBoxInY = 32;
     int numberOfGridPointsForBoxInZ = 32;
@@ -1358,7 +1418,7 @@ void scatteringInEMWave(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -1444,9 +1504,13 @@ void testRadiationDampingVSLorentzForce(){
     // ======================================================
     
     Grid Grid;
+    Resolution Resolution;
+    
     double dx = 0.1;
     double dy = 0.1;
     double dz = 0.1;
+    initResolution(&Resolution, dx, dy, dz);
+    
     int numberOfGridPointsForBoxInX = 32;
     int numberOfGridPointsForBoxInY = 32;
     int numberOfGridPointsForBoxInZ = 32;
@@ -1469,7 +1533,7 @@ void testRadiationDampingVSLorentzForce(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, dx, dy, dz, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);

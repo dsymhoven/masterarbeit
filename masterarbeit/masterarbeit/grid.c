@@ -15,15 +15,15 @@
 
 
 /// @brief initializes all properties of struct Grid.
-void initGrid(Grid *Grid, const double dx, const double dy, const double dz, const int numberOfGridPointsForBoxInX, const int numberOfGridPointsForBoxInY, const int numberOfGridPointsForBoxInZ, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ){
+void initGrid(Grid *Grid, Resolution *Resolution, const int numberOfGridPointsForBoxInX, const int numberOfGridPointsForBoxInY, const int numberOfGridPointsForBoxInZ, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ){
     
     printf("initializing Grid ...\n");
-    Grid->dx = dx;
-    Grid->dy = dy;
-    Grid->dz = dz;
     
     Grid->EMax = 0;
     Grid->HMax = 0;
+    
+    Grid->Resolution = *Resolution;
+
     
     Grid->upmlLayerWidth = 10;
     
@@ -39,9 +39,9 @@ void initGrid(Grid *Grid, const double dx, const double dy, const double dz, con
     Grid->numberOfGridPointsInY = numberOfGridPointsForBoxInY * numberOfBoxesInY;
     Grid->numberOfGridPointsInZ = numberOfGridPointsForBoxInZ * numberOfBoxesInZ;
     
-    Grid->lengthOfSimulationBoxInX = Grid->numberOfGridPointsInX * dx;
-    Grid->lengthOfSimulationBoxInY = Grid->numberOfGridPointsInY * dy;
-    Grid->lengthOfSimulationBoxInZ = Grid->numberOfGridPointsInZ * dz;
+    Grid->lengthOfSimulationBoxInX = Grid->numberOfGridPointsInX * Resolution->dx;
+    Grid->lengthOfSimulationBoxInY = Grid->numberOfGridPointsInY * Resolution->dy;
+    Grid->lengthOfSimulationBoxInZ = Grid->numberOfGridPointsInZ * Resolution->dz;
 }
 /// @brief Allocation of E and B field array. Inits E and B with 0 by default
 /// @remark arrayLength = 3 * numberOfGridPointsInX * numberOfGridPointsInY * numberOfGridPointsInZ. Factor 3 because we need x,y and z components on each grid point
@@ -276,9 +276,9 @@ void pushEFieldOnGrid(Grid *Grid, const double dt){
     double Hy_im1jk;
     double Hx_ijm1k;
     
-    double cnx = 0.5 * dt / Grid->dx;
-    double cny = 0.5 * dt / Grid->dy;
-    double cnz = 0.5 * dt / Grid->dz;
+    double cnx = 0.5 * dt / Grid->Resolution.dx;
+    double cny = 0.5 * dt / Grid->Resolution.dy;
+    double cnz = 0.5 * dt / Grid->Resolution.dz;
     
     
     int nx = Grid->numberOfGridPointsInX;
@@ -355,7 +355,7 @@ void initSamplePulseOnGrid(Grid *Grid){
     
     int ny = Grid->numberOfGridPointsInY;
     int nz = Grid->numberOfGridPointsInZ;
-    int lengthInX = Grid->dx * Grid->numberOfGridPointsInX;
+    int lengthInX = Grid->Resolution.dx * Grid->numberOfGridPointsInX;
     
         for (int i = 16 * 4; i < 16 * 5; i++)
         {
@@ -387,9 +387,9 @@ void pushHFieldOnGrid(Grid *Grid, const double dt){
     double Ex_ijp1k;
     double Ey_ip1jk;
     
-    double cnx = 0.5 * dt / Grid->dx;
-    double cny = 0.5 * dt / Grid->dy;
-    double cnz = 0.5 * dt / Grid->dz;
+    double cnx = 0.5 * dt / Grid->Resolution.dx;
+    double cny = 0.5 * dt / Grid->Resolution.dy;
+    double cnz = 0.5 * dt / Grid->Resolution.dz;
     
     
     int nx = Grid->numberOfGridPointsInX;
