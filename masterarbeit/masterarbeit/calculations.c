@@ -1968,7 +1968,24 @@ void calcRadiationDamping(double Eextern[3], double Bextern[3], double u[4], dou
     contractTensorWithFourVector(fieldTensor, Fu, FFu);
     
     for (int i = 0; i < 4; i++){
-        dampingTerm[i] = FFu[i] + u[i] * minkowskiProduct(Fu, Fu);
+        dampingTerm[i] = 2. / 3. * (FFu[i] + u[i] * minkowskiProduct(Fu, Fu));
+    }
+    
+}
+
+void calculateLorentzForce(Particle *Particle, double Bextern[3], double lorentzForce[3]){
+    double chargeOverMass = Particle->charge / Particle->mass;
+    double u[3] = {0};
+    double uCrossB[3] = {0};
+    
+    for(int i = 0; i < 3; i++){
+        u[i] = Particle->u[i+1];
+    }
+    
+    crossProduct(u, Bextern, uCrossB);
+    
+    for(int i = 0; i < 3; i++){
+        lorentzForce[i] = uCrossB[i] * chargeOverMass;
     }
     
 }

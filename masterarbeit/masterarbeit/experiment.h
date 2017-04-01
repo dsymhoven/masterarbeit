@@ -26,4 +26,5 @@ void electronScatteringSmallGrid_init9();
 void electronScatteringLargeGrid_init8();
 void testTimeDependentExternalFields();
 void scatteringInEMWave();
+void testRadiationDampingVSLorentzForce();
 #endif /* experiment_h */

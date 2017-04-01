@@ -38,4 +38,5 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t);
 void subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t);
 void updateFieldsForParticlePush(Particle *Particle, Grid *Grid, double Eextern[3], double Bextern[3], double E[3], double B[3]);
 void writeFieldComponentsForFourierAnalysisToFile(Grid *Grid, char *filename, int index, int planeForPlotting, bool plotE, bool plotB);
+void writeForcesToFile(double dampingTerm[4], double lorentzForce[3], FILE *fid);
 #endif /* lwFields_h */

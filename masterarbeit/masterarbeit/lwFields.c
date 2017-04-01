@@ -1565,6 +1565,12 @@ void updateFieldsForParticlePush(Particle *Particle, Grid *Grid, double Eextern[
     }
 }
 
+void writeForcesToFile(double dampingTerm[4], double lorentzForce[3], FILE *fid){
+    double absDampingTerm = sqrt(dampingTerm[1]*dampingTerm[1] + dampingTerm[2]*dampingTerm[2] + dampingTerm[3]*dampingTerm[3]);
+    double absLorentzForce = sqrt(lorentzForce[0]*lorentzForce[0] + lorentzForce[1]*lorentzForce[1] + lorentzForce[2]*lorentzForce[2]);
+    
+    fprintf(fid, "%f %f %f\n",absDampingTerm, absLorentzForce, absDampingTerm / absLorentzForce);
+}
 
 
 
