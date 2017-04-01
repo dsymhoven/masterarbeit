@@ -1058,6 +1058,111 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
     fclose(fid2);
 }
 
+///@brief loops through the entire E and B array and writes Bx,By,Bz and (or) Ex,Ey,Ez to seperate files. File is structured similiar to the grid.
+///@param filename pointer to a char. Gets modified inside the method
+///@param index outer loop index. Is used to name the output file
+///@param plotE set to true, if you want to write E-field to file
+///@param plotB set to true, if you want to write B-field to file
+///@throws ERROR: Could not open file for E or B field
+void writeFieldComponentsForFourierAnalysisToFile(Grid *Grid, char *filename, int index, int planeForPlotting, bool plotE, bool plotB){
+    printf("Writing field components for Fourier Analysis to file ...\n");
+    FILE *fid_Ex = NULL;
+    FILE *fid_Ey = NULL;
+    FILE *fid_Ez = NULL;
+    FILE *fid_Hx = NULL;
+    FILE *fid_Hy = NULL;
+    FILE *fid_Hz = NULL;
+    
+    if (plotE){
+        sprintf(filename, "E_field_x%d", index);
+        strcat(filename, ".txt");
+        fid_Ex = fopen(filename,"w");
+        if (fid_Ex == NULL){
+            printf("ERROR: Could not open file E_field_x!");
+        }
+        sprintf(filename, "E_field_y%d", index);
+        strcat(filename, ".txt");
+        fid_Ey = fopen(filename,"w");
+        if (fid_Ey == NULL){
+            printf("ERROR: Could not open file E_field_y!");
+        }
+        sprintf(filename, "E_field_z%d", index);
+        strcat(filename, ".txt");
+        fid_Ez = fopen(filename,"w");
+        if (fid_Ez == NULL){
+            printf("ERROR: Could not open file E_field_z!");
+        }
+    }
+    if(plotB){
+        sprintf(filename, "B_field_x%d", index);
+        strcat(filename, ".txt");
+        fid_Hx = fopen(filename,"w");
+        if (fid_Hx == NULL){
+            printf("ERROR: Could not open file B_field_x!");
+        }
+        sprintf(filename, "B_field_y%d", index);
+        strcat(filename, ".txt");
+        fid_Hy = fopen(filename,"w");
+        if (fid_Hy == NULL){
+            printf("ERROR: Could not open file B_field_y!");
+        }
+        sprintf(filename, "B_field_z%d", index);
+        strcat(filename, ".txt");
+        fid_Hz = fopen(filename,"w");
+        if (fid_Hz == NULL){
+            printf("ERROR: Could not open file B_field_z!");
+        }
+    }
+    
+    else{
+        int nx = Grid->numberOfGridPointsInX;
+        int ny = Grid->numberOfGridPointsInY;
+        int nz = Grid->numberOfGridPointsInZ;
+        int k = planeForPlotting;
+        double Ex, Ey, Ez, Hx, Hy, Hz;
+        
+        for (int j = 0; j < ny; j++)
+        {
+            for (int i = 0; i < nx; i++)
+            {
+                Hx = Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
+                Hy = Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
+                Hz = Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
+                
+                Ex = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
+                Ey = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
+                Ez = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
+                if(plotE){
+                    fprintf(fid_Ex, "%f\t", Ex);
+                    fprintf(fid_Ey, "%f\t", Ey);
+                    fprintf(fid_Ez, "%f\t", Ez);
+                }
+                if (plotB){
+                    fprintf(fid_Hx, "%f\t", Hx);
+                    fprintf(fid_Hy, "%f\t", Hy);
+                    fprintf(fid_Hz, "%f\t", Hz);
+                }
+            }
+            if(plotE){
+                fprintf(fid_Ex,"\n");
+                fprintf(fid_Ey,"\n");
+                fprintf(fid_Ez,"\n");
+            }
+            if(plotB){
+                fprintf(fid_Hx,"\n");
+                fprintf(fid_Hy,"\n");
+                fprintf(fid_Hz,"\n");
+            }
+        }
+    }
+    fclose(fid_Ex);
+    fclose(fid_Ey);
+    fclose(fid_Ez);
+    fclose(fid_Hx);
+    fclose(fid_Hy);
+    fclose(fid_Hz);
+}
+
 
 
 ///@brief loops through the entire grid and writes respective E and B values to E_initalFields.txt and H_initialFields.txt respectively.

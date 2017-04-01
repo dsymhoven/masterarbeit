@@ -37,4 +37,5 @@ void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
 void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t);
 void subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t);
 void updateFieldsForParticlePush(Particle *Particle, Grid *Grid, double Eextern[3], double Bextern[3], double E[3], double B[3]);
+void writeFieldComponentsForFourierAnalysisToFile(Grid *Grid, char *filename, int index, int planeForPlotting, bool plotE, bool plotB);
 #endif /* lwFields_h */
