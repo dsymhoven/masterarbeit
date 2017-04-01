@@ -76,40 +76,6 @@ void allocateParticleHistories(Particle *Particle, int const arrayLength){
 }
 
 
-///@brief writes current position, velocity vectors and near field info to file. First line is four vector x. Second line is four vector u. Third line is xMin up to yMax of near field box
-///@param filename pointer to a char. Gets modified inside the method
-///@param index outer loop index. Is used to name the output file
-///@param Particles pointer to Particle struct containing all particles
-///@param numberOfParticles number of particles
-void writeParticlesToFile(Particle *Particles, int numberOfParticles, char *filename, int index){
-    for(int p = 0; p < numberOfParticles; p++){
-        
-        printf("Writing Particle%d to file ...\n", p);
-        FILE *fid = NULL;
-        sprintf(filename, "Particle%d_%d", p, index);
-        strcat(filename, ".txt");
-        fid = fopen(filename,"w");
-        if (fid == NULL){
-            printf("ERROR: Could not open file Particle!\n");
-        }
-        
-        for (int i = 0; i < 4; i++){
-            fprintf(fid, "%f\t", Particles[p].x[i]);
-        }
-        fprintf(fid, "\n");
-        
-        for (int i = 0; i < 4; i++){
-            fprintf(fid, "%f\t", Particles[p].u[i]);
-        }
-        fprintf(fid, "\n");
-        for (int i = 0; i < 4; i++){
-            fprintf(fid, "%f\t", Particles[p].edgesOfNearFieldBox[i]);
-        }
-        fprintf(fid, "\n");
-        fclose(fid);
-    }
-    
-}
 
 
 ///@brief method for releasing all previously allocated memory in struct Particle. Put all free() invokations in here
@@ -199,16 +165,6 @@ double getGammaFromVelocityVector(double u[4]){
     
 }
 
-///@brief writes numberOfParticles and startTime of simulation to file. This is needed for python scripts, if simulation does not start at t = 0.
-///@param numberOfParticles number of particles
-///@param startTime start time of simulation
-void writeSimulationInfoToFile(int numberOfParticles, int startTime){
-    printf("Writing simulationInfo to file ...\n");
-    
-    FILE *fid = fopen("simulationInfo.txt","w");
-    fprintf(fid, "%d %d", numberOfParticles, startTime);
-    fclose(fid);
-}
 
 bool particleIsInsideSimulationArea(Grid *Grid, Particle *Particle){
     bool isInside = true;

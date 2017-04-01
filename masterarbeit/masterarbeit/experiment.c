@@ -15,6 +15,7 @@
 #include "particle.h"
 #include "calculations.h"
 #include "lwFields.h"
+#include "serializers.h"
 
 
 void testMaxwellPusher(){

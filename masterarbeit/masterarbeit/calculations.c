@@ -1047,24 +1047,6 @@ void calcFieldsOnGridWithoutNearField(Particle *Particles, Grid *Grid, int numbe
     }
 }
 
-///@brief In order to have a unique characterization of each simulation all parameters are written into a file called "initialConditions.txt".
-///@param Particles struct containing all particles
-///@param Grid instance of a Grid struct
-///@param numberOfParticles number of particles
-///@param t current simulation time
-///@param tEnd time where simulation should end
-///@param Eextern vector containing external E-Field components
-///@param Bextern vector containing external B-Field components
-void writeInitialConditionsToFile(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double tEnd, double Eextern[3], double Bextern[3]){
-    FILE *fid = fopen("initialConditions.txt","w");
-    fprintf(fid, "%f %f %f %d %d %d %d %d %d %d %f ", Grid->dx, Grid->dy, Grid->dz, Grid->numberOfGridPointsForBoxInX, Grid->numberOfGridPointsForBoxInY, Grid->numberOfGridPointsForBoxInZ, Grid->numberOfBoxesInX, Grid->numberOfBoxesInY, Grid->numberOfBoxesInZ, numberOfParticles, t);
-    for(int p = 0; p < numberOfParticles; p++){
-        fprintf(fid, "%.16f %.16f %.16f %.16f %.16f %.16f %.16f %.16f ", Particles[p].x[0], Particles[p].x[1], Particles[p].x[2], Particles[p].x[3], Particles[p].u[0], Particles[p].u[1], Particles[p].u[2], Particles[p].u[3]);
-    }
-    fprintf(fid, "%f %f %f %f %f %f", Eextern[0], Eextern[1], Eextern[2], Bextern[0], Bextern[1], Bextern[2]);
-    fclose(fid);
-}
-
 ///@brief checks if two toubles are equal. Due to floating point arithmetic errors "==" is a very error prone way to go. If difference between two doubles is smaller then 10^-12 we consider them equal and true will be returned.
 ///@param a first double
 ///@param b second double

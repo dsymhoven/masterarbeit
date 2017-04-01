@@ -428,22 +428,6 @@ void pushHFieldOnGrid(Grid *Grid, const double dt){
     }
 }
 
-
-///@brief writes Grid parameters to file, in order for python to use them as plot parameters
-///@throws ERROR: Could not open file gridParameters.txt
-///@param Grid pointer to Grid struct
-void writeGridParametersToFile(Grid *Grid){
-    FILE *fid = fopen("gridParameters.txt", "w");
-    if (fid == NULL){
-        printf("ERROR: Could not open gridParameters.txt");
-    }
-    else{
-        printf("writing grid parameters to file\n");
-        fprintf(fid, "%f %f %f %d %d %d %f %f %f %f %f\n", Grid->dx, Grid->dy, Grid->dz, Grid->numberOfGridPointsForBoxInX, Grid->numberOfGridPointsForBoxInY, Grid->numberOfGridPointsForBoxInZ, Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ, Grid->EMax, Grid->HMax);
-    }
-    fclose(fid);
-}
-
 void clearFieldsFromGrid(Grid *Grid){
     printf("Clearing Fields from Grid ...\n");
     for(int i = 0; i < Grid->numberOfGridPointsInX * Grid->numberOfGridPointsInY * Grid->numberOfGridPointsInZ * 3; i++){
@@ -454,81 +438,4 @@ void clearFieldsFromGrid(Grid *Grid){
     }
 }
 
-
-///@brief loops through the specified grid plane and calcutes |B|^2 and |E|^2 of external fields. Values are stored in seperate files. File is structured similiar to the grid.
-///@param filename pointer to a char. Gets modified inside the method
-///@param index outer loop index. Is used to name the output file
-///@param plotE set to true, if you want to write E-field to file
-///@param plotB set to true, if you want to write B-field to file
-///@throws ERROR: Could not open file for E or B field
-void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3], const double t, char *filename, const int index, const int planeForPlotting, bool plotE, bool plotB){
-    printf("Writing external fields to file ...\n");
-    FILE *fid = NULL;
-    FILE *fid2 = NULL;
-    
-    if (plotE){
-        sprintf(filename, "E_extern%d", index);
-        strcat(filename, ".txt");
-        fid = fopen(filename,"w");
-        if (fid == NULL){
-            printf("ERROR: Could not open file E_extern!");
-        }
-    }
-    if(plotB){
-        sprintf(filename, "BH_extern%d", index);
-        strcat(filename, ".txt");
-        fid2 = fopen(filename,"w");
-        if (fid2 == NULL){
-            printf("ERROR: Could not open file H_extern!");
-        }
-    }
-    
-    else{
-        int nx = Grid->numberOfGridPointsInX;
-        int ny = Grid->numberOfGridPointsInY;
-
-        int k = planeForPlotting;
-        
-        double Ex, Ey, Ez, Hx, Hy, Hz, Esq, Hsq;
-        double x[4]={0};
-        x[0] = t;
-        x[3] = k * Grid->dz;
-        
-        for (int j = 0; j < ny; j++)
-        {
-            for (int i = 0; i < nx; i++)
-            {
-                x[1] = i * Grid->dx;
-                x[2] = j * Grid->dy;
-
-                externalPlaneWave(x, 0, Eextern, Bextern);
-                Ex = Eextern[0];
-                Ey = Eextern[1];
-                Ez = Eextern[2];
-                
-                
-                Hx = Bextern[0];
-                Hy = Bextern[1];
-                Hz = Bextern[2];
-                
-                if(plotE){
-                    Esq = Ex * Ex + Ey * Ey + Ez * Ez;
-                    fprintf(fid, "%f\t", Ey);
-                }
-                if (plotB){
-                    Hsq = Hx * Hx + Hy * Hy + Hz * Hz;
-                    fprintf(fid2, "%f\t", Hsq);
-                }
-            }
-            if(plotE){
-                fprintf(fid,"\n");
-            }
-            if(plotB){
-                fprintf(fid2,"\n");
-            }
-        }
-    }
-    fclose(fid);
-    fclose(fid2);
-}
 
