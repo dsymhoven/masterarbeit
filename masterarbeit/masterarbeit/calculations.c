@@ -87,7 +87,11 @@ void vectorDifference(double x[4], double y[4], double result[4]){
 
 
 /**
- returns the vector product in three dimensions.
+ @brief returns the spatial vector product in three dimensions of two four vectors
+ @param x first four vector
+ @param y second four vector
+ @returns x[1]*y[1] + x[2]*y[2] + x[3]*y[3]
+ 
  */
 double vectorProduct(double x[4], double y[4]){
     
@@ -95,6 +99,11 @@ double vectorProduct(double x[4], double y[4]){
 }
 
 
+/**
+ @brief scales a given vector x with factor
+ @param x three vector to be scaled
+ @param factor the factor to scale x with
+ */
 void scaleVector(double x[3], double factor){
     for (int i = 0; i < 3; i++){
         x[i] *= factor;
@@ -102,16 +111,22 @@ void scaleVector(double x[3], double factor){
 }
 
 /**
- returns the spatial distance between two four vectors.
+ @brief calculates the spatial distance between two four vectors.
+ @param x first four vector
+ @param y second four vector
+ @returns the spatial distance between two four vectors.
  */
-double calculateDistance(double *x, double *y){
+double calculateDistance(double x[4], double y[4]){
     double difference[4];
     vectorDifference(x, y, difference);
     return sqrt(difference[1]*difference[1] + difference[2]*difference[2] + difference[3]*difference[3]);
 }
 
 /**
- returns the minkowski product with metric (+,-,-,-)
+ @brief calculates the minkowski product with metric (+,-,-,-)
+ @param x first four vector
+ @param y second four vector
+ @returns minkowski product with metric (+,-,-,-)
  */
 double minkowskiProduct(double x[4], double y[4]){
     return x[0] * y[0] - x[1] * y[1] - x[2] * y[2] - x[3] * y[3];
@@ -1903,6 +1918,61 @@ void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3])
 
 
 }
+///@brief simple tensor - vector contraction. In this case it's similiar to a matrix - vector multiplication. Each tensor element of the first row is multiplied with the respective component of the vector you are contracting with.
+///@param tensor 4x4 tensor you want to contract
+///@param vector four vector you are contracing with
+///@param result four vector containing the result of the contraction
+void contractTensorWithFourVector(double tensor[4][4], double vector[4], double result[4]){
+    
+    for (int i = 0; i < 4; i++){
+        result[i] = minkowskiProduct(tensor[i], vector);
+    }
+    
+}
+
+///@brief sets the field values of field tensor. For simplicity reasons we use the mixed notation (one index up, one down)
+///@param tensor 4x4 tensor where the field values are getting stored in
+///@param Eextern vector containing components of external electric field
+///@param Bextern vector containing components of external magnetic field
+void updateFieldTensor(double tensor[4][4], double Eextern[3], double Bextern[3]){
+    tensor[0][0] = 0;
+    tensor[0][1] = Eextern[0];
+    tensor[0][2] = Eextern[1];
+    tensor[0][3] = Eextern[2];
+    tensor[1][0] = Eextern[1];
+    tensor[1][1] = 0;
+    tensor[1][2] = Bextern[2];
+    tensor[1][3] = -Bextern[1];
+    tensor[2][0] = Eextern[1];
+    tensor[2][1] = -Bextern[2];
+    tensor[2][2] = 0;
+    tensor[2][3] = Bextern[0];
+    tensor[3][0] = Eextern[2];
+    tensor[3][1] = Bextern[1];
+    tensor[3][2] = -Bextern[0];
+    tensor[3][3] = 0;
+}
+
+///@brief calculates radiation damping with Landau-Lifschitz-Equation. See equation D.15 in dissertation from Christian Herzing. For simplicity we use the mixed notation for the field tensor (one Index up, one down). First term of equation D.15 is neglectible, as was proven in "Radiation Reaction Effects on Radiation Pressure Acceleration".
+///@param Eextern vector containing components of external electric field
+///@param Bextern vector containing components of external magnetic field
+///@param u velocity vector
+///@param dampingTerm four vector containing the result of the calculation
+void calcRadiationDamping(double Eextern[3], double Bextern[3], double u[4], double dampingTerm[4]){
+    double fieldTensor[4][4] = {0};
+    double Fu[4] = {0};
+    double FFu[4] = {0};
+    
+    updateFieldTensor(fieldTensor, Eextern, Bextern);
+    contractTensorWithFourVector(fieldTensor, u, Fu);
+    contractTensorWithFourVector(fieldTensor, Fu, FFu);
+    
+    for (int i = 0; i < 4; i++){
+        dampingTerm[i] = FFu[i] + u[i] * minkowskiProduct(Fu, Fu);
+    }
+    
+}
+
 
 
 
