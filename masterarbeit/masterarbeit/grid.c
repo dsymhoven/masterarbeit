@@ -326,11 +326,11 @@ void pushEFieldOnGrid(Grid *Grid, const double dt){
 void externalPlaneWave(const double x[4], const double tStart, double Eextern[3], double Hextern[3]){
     double E0 = 1;
     double H0 = 1;
-    double factor = 1;
+    double frequency = 2*M_PI / 6;
     
     Eextern[0] = 0;
-    if(x[0] - tStart >= x[1] / factor){
-        Eextern[1] = E0 * cos(x[0] - tStart -x[1]/factor);
+    if(x[0] - tStart >= x[1]){
+        Eextern[1] = E0 * cos(frequency * (x[0] - tStart - x[1]));
     }
     else{
         Eextern[1] = 0;
@@ -339,8 +339,8 @@ void externalPlaneWave(const double x[4], const double tStart, double Eextern[3]
     
     Hextern[0] = 0;
     Hextern[1] = 0;
-    if(x[0] - tStart >= x[1] / factor){
-        Hextern[2] = H0 * cos(x[0] - tStart -x[1]/factor);
+    if(x[0] - tStart >= x[1]){
+        Hextern[2] = H0 * cos(frequency * (x[0] - tStart - x[1]));
     }
     else{
         Hextern[2] = 0;
@@ -501,7 +501,7 @@ void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3],
                 x[1] = i * Grid->dx;
                 x[2] = j * Grid->dy;
 
-                externalPlaneWave(x, 40, Eextern, Bextern);
+                externalPlaneWave(x, 0, Eextern, Bextern);
                 Ex = Eextern[0];
                 Ey = Eextern[1];
                 Ez = Eextern[2];
@@ -513,7 +513,7 @@ void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3],
                 
                 if(plotE){
                     Esq = Ex * Ex + Ey * Ey + Ez * Ez;
-                    fprintf(fid, "%f\t", Esq);
+                    fprintf(fid, "%f\t", Ey);
                 }
                 if (plotB){
                     Hsq = Hx * Hx + Hy * Hy + Hz * Hz;
