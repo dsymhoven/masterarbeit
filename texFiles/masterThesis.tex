@@ -777,6 +777,7 @@ Usually the numerical complexity of multi particle simulation is $N^2$, due to t
 
 %======================== Yee Scheme ========================
 \section{The Yee-Scheme}
+\label{sec: Yee-Scheme}
 In this section we talk about how to solve the Maxwell Equations \eqref{eqn: maxwellEq} and how to propagate the fields on a numerical grid. We thereby focus on the Maxwell Equations in vacuum, i.e. $\rho = \vec{j} = 0$. As can be seen in the Liénard-Wiechert formula \eqref{eqn: Liénard-Wiechert} there is a singularity for the field values at the particle position itself. Thus, we just want to propagate fields far away from the source, which is explained in more detail later.\\
 \newline 
 To push the fields on the grid. i.e solving for the fields at the next time step, we use the Yee - Scheme introduced by \textit{Kane Yee} in 1966 \cite{Yee66} to discretize the Maxwell Equations. Each point on the discretized grid is represented as a tuple $(i,j,k)$. One index for each dimension $(x,y,z)$. The distance between the grid points are $(\Delta x, \Delta y, \Delta z)$ respectively. $h$ denotes the time discretization as before. In order to have finite central differences rather than plain finite differences, the evaluation of $\vec{E}$ and $\vec{H}$ components are shifted in time about $\frac{h}{2}$ against each other. To have the same benefits for the rotation, the $\vec{E}$ and $\vec{H}$ components are shifted in space as well, as it's illustrated in figure \ref{fig: YeeBox}.
@@ -818,7 +819,9 @@ H_{z}\left[\left(i+\frac{1}{2}\right)\Delta x, \left(j+\frac{1}{2}\right)\Delta 
 \end{pmatrix}.
 \eal
 \eeq
+%======================== Dispersion Relation ========================
 \section{Numeric Dispersion Relation}
+\label{sec: DispersionRelation}
 By discretizing the numerical grid, the dispersion relation of light also changes. To study this effect we need to solve the discretized Maxwell Equations \eqref{eqn: discreteMaxwellEq}. Without loss of generality we choose the Ansatz of a TMz-mode, i.e. $H_z = 0$ and $E_z \neq 0$:
 \beq
 \bal
@@ -848,17 +851,72 @@ H_{y_0} &=& \frac{h E_{z_0}}{\Delta x} \frac{\sin\left(\frac{\tilde{k}_x \Delta 
 Plugging in \eqref{eqn: Hx0} and \eqref{eqn: Hy0} in \eqref{eqn: simplifiedMaxwellEq} we obtain the numerical dispersion relation
 \beq
 \bal
-\left[\frac{1}{h}\sin\left(\frac{\omega h}{2}\right)\right]^2 &= \left[\frac{1}{\Delta x}\sin\left(\frac{\tilde{k}_x \Delta x}{2}\right)\right]^2  + \left[\frac{1}{\Delta y}\sin\left(\frac{\tilde{k}_y \Delta y}{2}\right)\right]^2 \\
-\Longleftrightarrow \omega h &= 2\arcsin\left(\frac{\Delta t}{\Delta x} \sin\left(\frac{\tilde{k}_x \Delta x}{2}\right)\right),
+\label{eqn: dispersionRelation2D}
+\left[\frac{1}{h}\sin\left(\frac{\omega h}{2}\right)\right]^2 = \left[\frac{1}{\Delta x}\sin\left(\frac{\tilde{k}_x \Delta x}{2}\right)\right]^2  + \left[\frac{1}{\Delta y}\sin\left(\frac{\tilde{k}_y \Delta y}{2}\right)\right]^2 \\
 \eal
 \eeq
-which is quite more complicated than the analytic dispersion relation
+For the one dimensional case \eqref{eqn: dispersionRelation2D} reduces to 
 \beq
-\omega = k
+\label{eqn: dispersionRelation1D}
+\omega h = 2\arcsin\left(\frac{\Delta t}{\Delta x} \sin\left(\frac{\tilde{k}_x \Delta x}{2}\right)\right),
 \eeq
+which is still more complicated than the analytic dispersion relation
+\beq
+\omega = k.
+\eeq
+In figure \ref{fig: dispersionRelation} both the analytical and the numerical dispersion relation are plotted. Equation \eqref{eqn: dispersionRelation1D} has a maximum at 
+\beq
+\bal
+\tilde{k}_x^{max} &= \frac{\pi}{\Delta x}\\
+\Longleftrightarrow\lambda_x^{max} &= 2 \Delta x.
+\eal
+\eeq
+$\tilde{k}_x^{max}$ is the largest possible wavevector - also called \textit{Nyquist Limit} for a numerical grid with resolution $\Delta x$, or $\Delta y$, $\Delta z$ respectively. At this wavevector, the group velocity 
+\beq
+v_g = \frac{\del \tilde{k}_x}{\del \omega}\Bigr|_{\tilde{k} = \tilde{k}^{max}} = 0.
+\eeq
+vanishes, instead of propagating with speed of light. That means, that the Yee-Scheme is only valid for wavelength $\lambda \ll \lambda^{max}$.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.70\textwidth]{Pictures/dispersionRelation.png} 
+	\caption[Comparison of numerical and analytical dispersion relation of discretized Maxwell Equations with Yee Scheme]{Comparison of numerical and analytical dispersion relation of discretized Maxwell Equations with Yee Scheme. We used $c \equiv 1$ and $\frac{\Delta t}{\Delta x} \equiv \frac{1}{2}$.}
+	\label{fig: dispersionRelation}
+\end{figure}
+
+
+%============== Hybrid Field Approach ===================
+%================================================
+
 \chapter{Hybrid Field Approach}
+After having discussed the fundamentals, we now want to dive into practice. In section \ref{sec: Yee-Scheme} we learned how to store and propagate the fields on a numerical grid. In section \ref{sec: lw-potentials} we derived an analytical expression, of how to calculate the fields of a moving charged particle. We also observed that there is a singularity in \eqref{eqn: Liénard-Wiechert} at the particle position itself. That means, that the fields will vary strongly in  a vicinity of the particle and can not be resolved correctly on the grid, as discussed in section \ref{sec: DispersionRelation}. Hence, it seems plausible to separate the simulation area into appropriate Near - and Farfield areas. Within the Nearfield area of a particle, its fields will \textbf{not} be stored on the grid. We then do not need to worry about the singularity. Only Farfields from other particles, propagated into the Nearfield area will be further propagated and stored on the grid. Possible interactions with other particles within the Nearfield area will be caluclated analytically from \eqref{eqn: Liénard-Wiechert}. \\
+Farfields will be stored on the grid and propagated with the Yee-Scheme \eqref{eqn: discreteMaxwellEq}.
 %======================== Near and Far- Fields ========================
 \section{Near-and Farfields}
+Before we can separate the simulation area into Near - and Farfields, we need to initialize a grid. We divide the grid in \texttt{numberBoxesInX}, \texttt{numberBoxesInY} and \texttt{numberBoxesInZ} boxes, each of which has \texttt{numberOfGridPointsForBoxInX}, \texttt{numberOfGridPointsForBoxInY} and \texttt{numberOfGridPointsForBoxInZ} length, which leaves us with a total 
+\begin{lstlisting}
+numberOfGridPointsInX = numberOfGridPointsForBoxInX * numberOfBoxesInX;
+numberOfGridPointsInY = numberOfGridPointsForBoxInY * numberOfBoxesInY;
+numberOfGridPointsInZ = numberOfGridPointsForBoxInZ * numberOfBoxesInZ;
+\end{lstlisting}
+Upon defining the resolution \texttt{dx}, \texttt{dy}, \texttt{dz} the size of the simulation area is then given by 
+\begin{lstlisting}
+lengthOfSimulationBoxInX = numberOfGridPointsInX * dx;
+lengthOfSimulationBoxInY = numberOfGridPointsInY * dy;
+lengthOfSimulationBoxInZ = numberOfGridPointsInZ * dz;
+\end{lstlisting}
+The Nearfield is then defined as the $3 \cdot 3 \cdot 3 = 27$ boxes with the box, containing the particle, in the center. In figure \ref{fig: nearFields} the Nearfields of one and two particles are shown. The Nearfields can of course overlap. The Nearfield box at $(18,18)$ belongs to both particles.
+\begin{figure}
+\subfigure[]{\includegraphics[width=0.49\textwidth]{Pictures/nearFieldOneParticle.png}}\hfill
+\subfigure[]{\includegraphics[width=0.49\textwidth]{Pictures/nearFieldTwoParticles.png}}
+\caption[Nearfields of one and two particles]{Nearfields of one (a) and two (b) particles. The box at $(18,18)$ belongs to the Nearfield of both particles, marked with $e^{-}$. Notice the staggered red grid in the background. In this example we used 8 boxes, with 20 grid points each, and a spacing of 0.2 for each dimension. The plotted plane was chosen accordingly to the z - coordinate of the particle.}	
+\label{fig: nearFields}
+\end{figure}
+%Bild des simulationsbereichs mit boxen. Wie werden boxen gezählt. 
+%Bild 3D Box anhand dessen die einzelnen Schritte deutlich werden. 
+% - push inside boxes
+%1. set values on borders
+% adjust values on borders
+% push values on borders
 
 \section{Particle Push and Nearfield Update}
 \section{Particle History}
