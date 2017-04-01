@@ -6,7 +6,8 @@ PATHTOEXECUTABLE=~/Library/Developer/Xcode/DerivedData/masterarbeit-gqaflsvzotvz
 # check if file with name "B_field0.txt" exists in /Library/Developer/Xcode/DerivedData/masterarbeit-gqaflsvzotvzahddhxaxmsryswvq/Build/Products/Debug/
 # if so, create new folder "B_Fields" in Analysis folder of masterarbeit directory and copy all B_field files to that folder
 # analogue with E field and Particle files
-# if gridParameters were written out, copy them into Analysis folder. folder
+# if gridParameters were written out, copy them into Analysis folder.
+
 if [ -e B_field0.txt ]
 then
 	rm -rf $PATHTOANALYSIS/B_fields

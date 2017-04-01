@@ -50,7 +50,7 @@ for p in range(numberOfParticles):
 	y=[]
 
 # plot fields
-plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.04)
+plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.5)
 plt.colorbar()
 # set labels
 plt.xlabel("X")
