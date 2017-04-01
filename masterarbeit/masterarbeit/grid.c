@@ -15,7 +15,7 @@
 
 
 /// @brief initializes all properties of struct Grid.
-void initGrid(Grid *Grid, Resolution *Resolution, const int numberOfGridPointsForBoxInX, const int numberOfGridPointsForBoxInY, const int numberOfGridPointsForBoxInZ, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ){
+void initGrid(Grid *Grid, Resolution *Resolution, Box *Box, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ){
     
     printf("initializing Grid ...\n");
     
@@ -31,13 +31,11 @@ void initGrid(Grid *Grid, Resolution *Resolution, const int numberOfGridPointsFo
     Grid->numberOfBoxesInY = numberOfBoxesInY;
     Grid->numberOfBoxesInZ = numberOfBoxesInZ;
     
-    Grid->numberOfGridPointsForBoxInX = numberOfGridPointsForBoxInX;
-    Grid->numberOfGridPointsForBoxInY = numberOfGridPointsForBoxInY;
-    Grid->numberOfGridPointsForBoxInZ = numberOfGridPointsForBoxInZ;
+    Grid->Box = *Box;
     
-    Grid->numberOfGridPointsInX = numberOfGridPointsForBoxInX * numberOfBoxesInX;
-    Grid->numberOfGridPointsInY = numberOfGridPointsForBoxInY * numberOfBoxesInY;
-    Grid->numberOfGridPointsInZ = numberOfGridPointsForBoxInZ * numberOfBoxesInZ;
+    Grid->numberOfGridPointsInX = Box->numberOfGridPointsInX * numberOfBoxesInX;
+    Grid->numberOfGridPointsInY = Box->numberOfGridPointsInY * numberOfBoxesInY;
+    Grid->numberOfGridPointsInZ = Box->numberOfGridPointsInZ * numberOfBoxesInZ;
     
     Grid->lengthOfSimulationBoxInX = Grid->numberOfGridPointsInX * Resolution->dx;
     Grid->lengthOfSimulationBoxInY = Grid->numberOfGridPointsInY * Resolution->dy;
@@ -80,9 +78,9 @@ void allocateFieldsOnBoxBorders(Grid *Grid){
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
     
-    int numberOfGridPointsForBoxInX = Grid -> numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid -> numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid -> numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid -> Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid -> Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid -> Box.numberOfGridPointsInZ;
     
     Grid->Hz_im1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));
     Grid->Hy_im1 = (double**) malloc(numberOfBoxesInX * numberOfBoxesInY * numberOfBoxesInZ * sizeof(double*));

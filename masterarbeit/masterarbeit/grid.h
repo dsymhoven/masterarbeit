@@ -13,16 +13,15 @@
 #include "stdbool.h"
 #include "particle.h"
 #include "resolution.h"
-
+#include "box.h"
 
 struct Grid {
     int numberOfBoxesInX;
     int numberOfBoxesInY;
     int numberOfBoxesInZ;
-    
-    int numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ;
+
+    Box Box;
+    Resolution Resolution;
     
     int numberOfGridPointsInX;
     int numberOfGridPointsInY;
@@ -33,11 +32,6 @@ struct Grid {
     double lengthOfSimulationBoxInZ;
     
     double upmlLayerWidth;
-    
-    Resolution Resolution;
-//    double dx;
-//    double dy;
-//    double dz;
     
     double EMax;
     double HMax;
@@ -80,7 +74,7 @@ struct Grid {
 typedef struct Grid Grid;
 typedef struct Particle Particle;
 
-void initGrid(Grid *Grid, Resolution *Resolution, const int numberOfGridPointsForBoxInX, const int numberOfGridPointsForBoxInY, const int numberOfGridPointsForBoxInZ, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ);
+void initGrid(Grid *Grid, Resolution *Resolution, Box *Box, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ);
 void allocateMemoryOnGrid(Grid *Grid);
 void freeMemoryOnGrid(Grid *Grid);
 void initSamplePulseOnGrid(Grid *Grid);

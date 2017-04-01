@@ -104,9 +104,9 @@ void freeMemoryOnParticles(Particle *Particles, int numberOfParticles){
 ///@param Grid pointer to Grid struct
 ///@param Particle pointer to Particle struct
 void getCurrentBoxIndexArrayOfParticle(Grid *Grid, Particle *Particle){
-    Particle->currentBoxIndexArray[0] = Particle->x[1] / (Grid->Resolution.dx * Grid->numberOfGridPointsForBoxInX);
-    Particle->currentBoxIndexArray[1] = Particle->x[2] / (Grid->Resolution.dy * Grid->numberOfGridPointsForBoxInY);
-    Particle->currentBoxIndexArray[2] = Particle->x[3] / (Grid->Resolution.dz * Grid->numberOfGridPointsForBoxInZ);
+    Particle->currentBoxIndexArray[0] = Particle->x[1] / (Grid->Resolution.dx * Grid->Box.numberOfGridPointsInX);
+    Particle->currentBoxIndexArray[1] = Particle->x[2] / (Grid->Resolution.dy * Grid->Box.numberOfGridPointsInY);
+    Particle->currentBoxIndexArray[2] = Particle->x[3] / (Grid->Resolution.dz * Grid->Box.numberOfGridPointsInZ);
     
 }
 
@@ -124,12 +124,12 @@ void getCurrentBoxIndexArrayOfParticle(Grid *Grid, Particle *Particle){
 void getEdgesOfNearFieldBox(Grid *Grid, Particle *Particle){
     
     getCurrentBoxIndexArrayOfParticle(Grid, Particle);
-    double xMin = (Particle->currentBoxIndexArray[0] - 1) * (Grid->Resolution.dx * Grid->numberOfGridPointsForBoxInX);
-    double xMax = (Particle->currentBoxIndexArray[0] + 1 + 1) * (Grid->Resolution.dx * Grid->numberOfGridPointsForBoxInX);
-    double yMin = (Particle->currentBoxIndexArray[1] - 1) * (Grid->Resolution.dy * Grid->numberOfGridPointsForBoxInY);
-    double yMax = (Particle->currentBoxIndexArray[1] + 1 + 1) * (Grid->Resolution.dy * Grid->numberOfGridPointsForBoxInY);
-    double zMin = (Particle->currentBoxIndexArray[2] - 1) * (Grid->Resolution.dz * Grid->numberOfGridPointsForBoxInZ);
-    double zMax = (Particle->currentBoxIndexArray[2] + 1 + 1) * (Grid->Resolution.dz * Grid->numberOfGridPointsForBoxInZ);
+    double xMin = (Particle->currentBoxIndexArray[0] - 1) * (Grid->Resolution.dx * Grid->Box.numberOfGridPointsInX);
+    double xMax = (Particle->currentBoxIndexArray[0] + 1 + 1) * (Grid->Resolution.dx * Grid->Box.numberOfGridPointsInX);
+    double yMin = (Particle->currentBoxIndexArray[1] - 1) * (Grid->Resolution.dy * Grid->Box.numberOfGridPointsInY);
+    double yMax = (Particle->currentBoxIndexArray[1] + 1 + 1) * (Grid->Resolution.dy * Grid->Box.numberOfGridPointsInY);
+    double zMin = (Particle->currentBoxIndexArray[2] - 1) * (Grid->Resolution.dz * Grid->Box.numberOfGridPointsInZ);
+    double zMax = (Particle->currentBoxIndexArray[2] + 1 + 1) * (Grid->Resolution.dz * Grid->Box.numberOfGridPointsInZ);
     
     Particle->edgesOfNearFieldBox[0] = xMin;
     Particle->edgesOfNearFieldBox[1] = xMax;

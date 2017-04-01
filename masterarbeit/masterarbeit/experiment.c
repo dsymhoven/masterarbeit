@@ -25,26 +25,23 @@ void testMaxwellPusher(){
 #pragma mark: Initializations
     // ======================================================
     Grid Grid;
+    
     Resolution Resolution;
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
     
-    double dx = 0.2;
-    double dy = 0.2;
-    double dz = 0.2;
-    initResolution(&Resolution, dx, dy, dz);
+    Box Box;
+    initBox(&Box, 20, 20, 20);
     
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     initSamplePulseOnGrid(&Grid);
     writeGridParametersToFile(&Grid);
     
-    double dt = 0.5 * Grid.Resolution.dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 0;
     double tEnd = 10;
     char filename[32] = "some";
@@ -76,21 +73,18 @@ void testBorisPusher(){
 #pragma mark: Initializations
     // ======================================================
     Grid Grid;
+    
     Resolution Resolution;
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
     
-    double dx = 0.2;
-    double dy = 0.2;
-    double dz = 0.2;
-    initResolution(&Resolution, dx, dy, dz);
+    Box Box;
+    initBox(&Box, 20, 20, 20);
     
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 0;
     double tEnd = 40;
     
@@ -104,7 +98,7 @@ void testBorisPusher(){
     Particle Particles[numberOfParticles];
     Particle *Particle = &Particles[0];
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
@@ -129,7 +123,7 @@ void testBorisPusher(){
     Bextern[1] = 0;
     Bextern[2] = 0.2;
     
-    int planeForPlotting = Particle->x[3] / dz;
+    int planeForPlotting = Particle->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -160,15 +154,11 @@ void testNearFieldCalculation(){
     
     Grid Grid;
     Resolution Resolution;
+    Box Box;
     
-    double dx = 0.2;
-    double dy = 0.2;
-    double dz = 0.2;
-    initResolution(&Resolution, dx, dy, dz);
-    
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
+    initBox(&Box, 20, 20, 20);
+
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -188,7 +178,7 @@ void testNearFieldCalculation(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
@@ -225,7 +215,7 @@ void testNearFieldCalculation(){
     Bextern[1] = 0;
     Bextern[2] = 0.2;
     
-    int planeForPlotting = Particle1->x[3] / dz;
+    int planeForPlotting = Particle1->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -260,15 +250,11 @@ void testLWFieldCalculationForPlane(){
     
     Grid Grid;
     Resolution Resolution;
+    Box Box;
     
-    double dx = 0.2;
-    double dy = 0.2;
-    double dz = 0.2;
-    initResolution(&Resolution, dx, dy, dz);
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
+    initBox(&Box, 20, 20, 20);
     
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -278,7 +264,7 @@ void testLWFieldCalculationForPlane(){
     Particle Particles[numberOfParticles];
     Particle *Particle = &Particles[0];
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 0;
     double tEnd = 5;
     
@@ -287,7 +273,7 @@ void testLWFieldCalculationForPlane(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     writeGridParametersToFile(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -312,7 +298,7 @@ void testLWFieldCalculationForPlane(){
     Bextern[1] = 0;
     Bextern[2] = 0;
     
-    int planeForPlotting = Particle->x[3] / dz;
+    int planeForPlotting = Particle->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -347,15 +333,11 @@ void testNearAndFarFields(){
     
     Grid Grid;
     Resolution Resolution;
+    Box Box;
     
-    double dx = 0.2;
-    double dy = 0.2;
-    double dz = 0.2;
-    initResolution(&Resolution, dx, dy, dz);
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
+    initBox(&Box, 20, 20, 20);
     
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -365,7 +347,7 @@ void testNearAndFarFields(){
     Particle Particles[numberOfParticles];
     Particle *Particle = &Particles[0];
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 0;
     double tEnd = 10;
     
@@ -374,7 +356,7 @@ void testNearAndFarFields(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     calcUPMLCoefficients(&Grid);
@@ -399,7 +381,7 @@ void testNearAndFarFields(){
     Bextern[1] = 0;
     Bextern[2] = 1;
     
-    int planeForPlotting = Particle->x[3] / dz;
+    int planeForPlotting = Particle->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -443,16 +425,13 @@ void testUPML(){
     // ======================================================
     
     Grid Grid;
+    
     Resolution Resolution;
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
     
-    double dx = 0.2;
-    double dy = 0.2;
-    double dz = 0.2;
-    initResolution(&Resolution, dx, dy, dz);
+    Box Box;
+    initBox(&Box, 16, 16, 16);
     
-    int numberOfGridPointsForBoxInX = 16;
-    int numberOfGridPointsForBoxInY = 16;
-    int numberOfGridPointsForBoxInZ = 16;
     int numberOfBoxesInX = 5;
     int numberOfBoxesInY = 5;
     int numberOfBoxesInZ = 5;
@@ -462,7 +441,7 @@ void testUPML(){
     Particle Particles[numberOfParticles];
     Particle *Particle = &Particles[0];
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 0;
     double tEnd = 15;
     
@@ -471,7 +450,7 @@ void testUPML(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -496,7 +475,7 @@ void testUPML(){
     Bextern[1] = 0;
     Bextern[2] = 1;
     
-    int planeForPlotting = Particle->x[3] / dz;
+    int planeForPlotting = Particle->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -537,16 +516,13 @@ void testNearFieldUpdate(){
     // ======================================================
     
     Grid Grid;
+    
     Resolution Resolution;
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
     
-    double dx = 0.2;
-    double dy = 0.2;
-    double dz = 0.2;
-    initResolution(&Resolution, dx, dy, dz);
+    Box Box;
+    initBox(&Box, 20, 20, 20);
     
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -556,7 +532,7 @@ void testNearFieldUpdate(){
     Particle Particles[numberOfParticles];
     Particle *Particle = &Particles[0];
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 0;
     double tEnd = 40;
     
@@ -565,7 +541,7 @@ void testNearFieldUpdate(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -590,7 +566,7 @@ void testNearFieldUpdate(){
     Bextern[1] = 0;
     Bextern[2] = 0.2;
     
-    int planeForPlotting = Particle->x[3] / dz;
+    int planeForPlotting = Particle->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -641,9 +617,9 @@ void testMultipleParticles(){
     double dz = 0.2;
     initResolution(&Resolution, dx, dy, dz);
     
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
+    Box Box;
+    initBox(&Box, 20, 20, 20);
+    
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -654,7 +630,7 @@ void testMultipleParticles(){
     Particle *Particle1 = &Particles[0];
     Particle *Particle2 = &Particles[1];
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 0;
     double tEnd = 12;
     
@@ -663,7 +639,7 @@ void testMultipleParticles(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -701,7 +677,7 @@ void testMultipleParticles(){
     Bextern[1] = 0;
     Bextern[2] = 1;
     
-    int planeForPlotting = Particle1->x[3] / dz;
+    int planeForPlotting = Particle1->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -751,9 +727,9 @@ void testHistoryBeforeSimulation(){
     double dz = 0.125;
     initResolution(&Resolution, dx, dy, dz);
     
-    int numberOfGridPointsForBoxInX = 24;
-    int numberOfGridPointsForBoxInY = 24;
-    int numberOfGridPointsForBoxInZ = 24;
+    Box Box;
+    initBox(&Box, 24, 24, 24);
+    
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -764,7 +740,7 @@ void testHistoryBeforeSimulation(){
     Particle *Particle1 = &Particles[0];
     Particle *Particle2 = &Particles[1];
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 8;
     double tEnd = 12;
     
@@ -773,7 +749,7 @@ void testHistoryBeforeSimulation(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -812,7 +788,7 @@ void testHistoryBeforeSimulation(){
     Bextern[1] = 0;
     Bextern[2] = 1;
     
-    int planeForPlotting = Particle1->x[3] / dz;
+    int planeForPlotting = Particle1->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -856,16 +832,13 @@ void testScattering(){
     // ======================================================
     
     Grid Grid;
+    
     Resolution Resolution;
+    initResolution(&Resolution, 0.125, 0.125, 0.125);
     
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
-    initResolution(&Resolution, dx, dy, dz);
+    Box Box;
+    initBox(&Box, 20, 20, 20);
     
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -876,7 +849,7 @@ void testScattering(){
     Particle *Particle1 = &Particles[0];
     Particle *Particle2 = &Particles[1];
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 10;
     double tEnd = 24;
     
@@ -885,7 +858,7 @@ void testScattering(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -924,7 +897,7 @@ void testScattering(){
     Bextern[1] = 0;
     Bextern[2] = 0;
     
-    int planeForPlotting = Particle1->x[3] / dz;
+    int planeForPlotting = Particle1->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -975,16 +948,13 @@ void extendHistoryAndCalcLWFieldsIndependantly(){
     // ======================================================
     
     Grid Grid;
+    
     Resolution Resolution;
+    initResolution(&Resolution, 0.125, 0.125, 0.125);
     
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
-    initResolution(&Resolution, dx, dy, dz);
+    Box Box;
+    initBox(&Box, 20, 20, 20);
     
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -995,7 +965,7 @@ void extendHistoryAndCalcLWFieldsIndependantly(){
     Particle *Particle1 = &Particles[0];
     Particle *Particle2 = &Particles[1];
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 30;
     double tEnd = 44;
     
@@ -1004,7 +974,7 @@ void extendHistoryAndCalcLWFieldsIndependantly(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -1043,7 +1013,7 @@ void extendHistoryAndCalcLWFieldsIndependantly(){
     Bextern[1] = 0;
     Bextern[2] = 0;
     
-    int planeForPlotting = Particle1->x[3] / dz;
+    int planeForPlotting = Particle1->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -1094,16 +1064,13 @@ void electronScatteringSmallGrid_init9(){
     // ======================================================
     
     Grid Grid;
+    
     Resolution Resolution;
+    initResolution(&Resolution, 0.125, 0.125, 0.125);
     
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
-    initResolution(&Resolution, dx, dy, dz);
+    Box Box;
+    initBox(&Box, 20, 20, 20);
     
-    int numberOfGridPointsForBoxInX = 20;
-    int numberOfGridPointsForBoxInY = 20;
-    int numberOfGridPointsForBoxInZ = 20;
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -1114,7 +1081,7 @@ void electronScatteringSmallGrid_init9(){
     Particle *Particle1 = &Particles[0];
     Particle *Particle2 = &Particles[1];
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 20;
     double tEnd = 32;
     
@@ -1123,7 +1090,7 @@ void electronScatteringSmallGrid_init9(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -1163,7 +1130,7 @@ void electronScatteringSmallGrid_init9(){
     Bextern[1] = 0;
     Bextern[2] = 0;
     
-    int planeForPlotting = Particle1->x[3] / dz;
+    int planeForPlotting = Particle1->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -1217,16 +1184,13 @@ void electronScatteringLargeGrid_init8(){
     // ======================================================
     
     Grid Grid;
+    
     Resolution Resolution;
+    initResolution(&Resolution, 0.1, 0.1, 0.1);
     
-    double dx = 0.1;
-    double dy = 0.1;
-    double dz = 0.1;
-    initResolution(&Resolution, dx, dy, dz);
+    Box Box;
+    initBox(&Box, 32, 32, 32);
     
-    int numberOfGridPointsForBoxInX = 32;
-    int numberOfGridPointsForBoxInY = 32;
-    int numberOfGridPointsForBoxInZ = 32;
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -1237,7 +1201,7 @@ void electronScatteringLargeGrid_init8(){
     Particle *Particle1 = &Particles[0];
     Particle *Particle2 = &Particles[1];
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 30;
     double tEnd = 50;
     
@@ -1246,7 +1210,7 @@ void electronScatteringLargeGrid_init8(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -1286,7 +1250,7 @@ void electronScatteringLargeGrid_init8(){
     Bextern[1] = 0;
     Bextern[2] = 0;
     
-    int planeForPlotting = Particle1->x[3] / dz;
+    int planeForPlotting = Particle1->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -1338,21 +1302,18 @@ void testTimeDependentExternalFields(){
     // ======================================================
     
     Grid Grid;
+    
     Resolution Resolution;
+    initResolution(&Resolution, 0.125, 0.125, 0.125);
     
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
-    initResolution(&Resolution, dx, dy, dz);
+    Box Box;
+    initBox(&Box, 32, 32, 32);
     
-    int numberOfGridPointsForBoxInX = 32;
-    int numberOfGridPointsForBoxInY = 32;
-    int numberOfGridPointsForBoxInZ = 32;
     int numberOfBoxesInX = 9;
     int numberOfBoxesInY = 9;
     int numberOfBoxesInZ = 9;
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 0;
     double tEnd = 40;
     
@@ -1360,11 +1321,11 @@ void testTimeDependentExternalFields(){
     double Eextern[3];
     double Bextern[3];
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     
-    int planeForPlotting = Grid.numberOfGridPointsInZ * dx / 2;
+    int planeForPlotting = Grid.numberOfGridPointsInZ * Resolution.dx / 2;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -1389,16 +1350,13 @@ void scatteringInEMWave(){
     // ======================================================
     
     Grid Grid;
-    Resolution Resolution;
-   
-    double dx = 0.1;
-    double dy = 0.1;
-    double dz = 0.1;
-    initResolution(&Resolution, dx, dy, dz);
     
-    int numberOfGridPointsForBoxInX = 32;
-    int numberOfGridPointsForBoxInY = 32;
-    int numberOfGridPointsForBoxInZ = 32;
+    Resolution Resolution;
+    initResolution(&Resolution, 0.1, 0.1, 0.1);
+    
+    Box Box;
+    initBox(&Box, 32, 32, 32);
+    
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -1408,7 +1366,7 @@ void scatteringInEMWave(){
     Particle Particles[numberOfParticles];
     Particle *Particle1 = &Particles[0];
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 40;
     double tStart = t;
     double tEnd = 75;
@@ -1418,7 +1376,7 @@ void scatteringInEMWave(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -1446,7 +1404,7 @@ void scatteringInEMWave(){
     Bextern[1] = 0;
     Bextern[2] = 0;
     
-    int planeForPlotting = Particle1->x[3] / dz;
+    int planeForPlotting = Particle1->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
@@ -1504,16 +1462,13 @@ void testRadiationDampingVSLorentzForce(){
     // ======================================================
     
     Grid Grid;
+    
     Resolution Resolution;
+    initResolution(&Resolution, 0.1, 0.1, 0.1);
     
-    double dx = 0.1;
-    double dy = 0.1;
-    double dz = 0.1;
-    initResolution(&Resolution, dx, dy, dz);
-    
-    int numberOfGridPointsForBoxInX = 32;
-    int numberOfGridPointsForBoxInY = 32;
-    int numberOfGridPointsForBoxInZ = 32;
+    Box Box;
+    initBox(&Box, 32, 32, 32);
+
     int numberOfBoxesInX = 8;
     int numberOfBoxesInY = 8;
     int numberOfBoxesInZ = 8;
@@ -1523,7 +1478,7 @@ void testRadiationDampingVSLorentzForce(){
     Particle Particles[numberOfParticles];
     Particle *Particle1 = &Particles[0];
     
-    double dt = 0.5 * dx;
+    double dt = 0.5 * Resolution.dx;
     double t = 40;
     double tStart = t;
     double tEnd = 75;
@@ -1533,7 +1488,7 @@ void testRadiationDampingVSLorentzForce(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, numberOfGridPointsForBoxInX, numberOfGridPointsForBoxInY, numberOfGridPointsForBoxInZ, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
+    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
     allocateMemoryOnGrid(&Grid);
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
@@ -1561,7 +1516,7 @@ void testRadiationDampingVSLorentzForce(){
     Bextern[1] = 0;
     Bextern[2] = 0;
     
-    int planeForPlotting = Particle1->x[3] / dz;
+    int planeForPlotting = Particle1->x[3] / Resolution.dz;
     double dampingTerm[4];
     double lorentzForce[3];
     FILE *fid = fopen("dampingTermVSLorentzForce.txt","w");

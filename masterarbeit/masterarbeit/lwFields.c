@@ -70,7 +70,7 @@ void pushEFieldInsideBoxes(Grid *Grid, double dt){
         for (j = 1; j < numberOfGridPointsInY - 1; j++){
             for (k = 1; k < numberOfGridPointsInZ - 1; k++){
                 
-                if (i % Grid->numberOfGridPointsForBoxInX == 0 || j % Grid->numberOfGridPointsForBoxInY == 0 || k % Grid->numberOfGridPointsForBoxInZ == 0){
+                if (i % Grid->Box.numberOfGridPointsInX == 0 || j % Grid->Box.numberOfGridPointsInY == 0 || k % Grid->Box.numberOfGridPointsInZ == 0){
                     continue;
                 }
                 Hx_ijk = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
@@ -148,7 +148,7 @@ void pushHFieldInsideBoxes(Grid *Grid, double dt){
     for (i = 1; i < numberOfGridPointsInX - 1; i++){
         for (j = 1; j < numberOfGridPointsInY - 1; j++){
             for (k = 1; k < numberOfGridPointsInZ - 1; k++){
-                if ((i + 1) % Grid->numberOfGridPointsForBoxInX == 0 || (j + 1) % Grid->numberOfGridPointsForBoxInY == 0 || (k + 1) % Grid->numberOfGridPointsForBoxInZ == 0){
+                if ((i + 1) % Grid->Box.numberOfGridPointsInX == 0 || (j + 1) % Grid->Box.numberOfGridPointsInY == 0 || (k + 1) % Grid->Box.numberOfGridPointsInZ == 0){
                     continue;
                 }
                 Ey_ijkp1 = Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j) + 3 * (k + 1) + 1];
@@ -204,9 +204,9 @@ void setHFieldOnBorders(Grid *Grid){
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
     
-    int numberOfGridPointsForBoxInX = Grid -> numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid -> numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid -> numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
@@ -285,9 +285,9 @@ void setEFieldOnBorders(Grid *Grid){
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
     
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int ib, jb, kb;
     
@@ -399,9 +399,9 @@ void adjustHFields(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@param t current simulation time
 ///@remark this method gets called over and over again from "adjustHFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexIm1 is not. Then we are at the left border of the near field. Since we want to push a value for the Efield inside the near field we need (among others) the value to the left. Since this point is in the far field, the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the right border of the near field, i.e. current box is the not in near field but boxIndexIm1 is, then we push EField values from the far field. For this we need values to the left, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the E field value in the far field correctly.
 void adjustHyz_im1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int boxIndexIm1 = calcBoxIndexIm1(Grid, boxIndex);
     double xObserver[4];
@@ -454,9 +454,9 @@ void adjustHyz_im1(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@param t current simulation time
 ///@remark this method gets called over and over again from "adjustHFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexJm1 is not. Then we are at the facing border of the near field. Since we want to push a value for the Efield inside the near field we need (among others) the value infront. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the back border of the near field, i.e. current box is the not in near field but boxIndexJm1 is, then we push EField values from the far field. For this we need values infront, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the E field value in the far field correctly.
 void adjustHxz_jm1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int boxIndexJm1 = calcBoxIndexJm1(Grid, boxIndex);
     double xObserver[4];
@@ -509,9 +509,9 @@ void adjustHxz_jm1(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@param t current simulation time
 ///@remark this method gets called over and over again from "adjustHFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexKm1 is not. Then we are at bottom border of the near field. Since we want to push a value for the Efield inside the near field we need (among others) the value below. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the top border of the near field, i.e. current box is the not in near field but boxIndexKm1 is, then we push EField values from the far field. For this we need values below, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the E field value in the far field correctly.
 void adjustHxy_km1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int boxIndexKm1 = calcBoxIndexKm1(Grid, boxIndex);
     double xObserver[4];
@@ -598,9 +598,9 @@ void adjustEFields(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@param t current simulation time
 ///@remark this method gets called over and over again from "adjustEFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexIp1 is not. Then we are at the right border of the near field. Since we want to push a value for the Hfield inside the near field we need (among others) the E field value to the right. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the left border of the near field, i.e. current box is the not in near field but boxIndexIp1 is, then we push HField values from the far field. For this we need values to the rigth, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the H field value in the far field correctly.
 void adjustEyz_ip1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int boxIndexIp1 = calcBoxIndexIp1(Grid, boxIndex);
     double xObserver[4];
@@ -653,9 +653,9 @@ void adjustEyz_ip1(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@param t current simulation time
 ///@remark this method gets called over and over again from "adjustEFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexJp1 is not. Then we are at the back side border of the near field. Since we want to push a value for the Hfield inside the near field we need (among others) the E field value behind. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the front side border of the near field, i.e. current box is the not in near field but boxIndexJp1 is, then we push HField values from the far field. For this we need values infront, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the H field value in the far field correctly.
 void adjustExz_jp1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int boxIndexJp1 = calcBoxIndexJp1(Grid, boxIndex);
     double xObserver[4];
@@ -708,9 +708,9 @@ void adjustExz_jp1(Grid *Grid, Particle *Particles, int numberOfParticles, const
 ///@param t current simulation time
 ///@remark this method gets called over and over again from "adjustEFields()" method while looping through all boxes. We  check if the current box with boxIndex is in the near field of a particle and the box with boxIndexKp1 is not. Then we are at the top side border of the near field. Since we want to push a value for the Hfield inside the near field we need (among others) the E field value above. Since this point is in the far field the LW fields are already stored on that grid point. Therefore we need to substract the LW field to push the value inside the near field correctly. On the other hand, if we are on the bottom side border of the near field, i.e. current box is the not in near field but boxIndexKp1 is, then we push HField values from the far field. For this we need values above, i.e. in the near field. Since in the near field area no LW fields are stored, we need to calculate them and add them to push the H field value in the far field correctly.
 void adjustExy_kp1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t){
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int boxIndexKp1 = calcBoxIndexKp1(Grid, boxIndex);
     double xObserver[4];
@@ -778,9 +778,9 @@ void pushEFieldAtBorders(Grid *Grid, double dt){
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
     
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
@@ -893,9 +893,9 @@ void pushHFieldAtBorders(Grid *Grid, double dt){
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
     
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
@@ -996,9 +996,9 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     printf("adding LW fields in box %d\n", boxIndex);
     
     
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
@@ -1090,9 +1090,9 @@ void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
 ///@remark translate box index into number of box in x,y and z direction first (ib, jb, kb). Then calculate the gridIndex of the lower left corner of the current box and start looping through all grid points in that box. Each gridpoint is the current observation point, where fields shall be calcualted. Also grid index is updated each time the current grid point changes in the loop. Then sub Lw field at that point.
 void subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t){
     printf("subtracting LW fields in box %d\n", boxIndex);
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;

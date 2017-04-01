@@ -563,9 +563,9 @@ void calcLWFieldsForPlaneWithNearField(Grid *Grid, Particle *Particles, int numb
 ///@return index of box where particle is currenty located.
 ///@remark index for box is counted the same way as for E and B field array. First z component, then y and then x.
 int calcCurrentBoxIndexOfParticle(Particle *Particle, Grid *Grid){
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
@@ -636,9 +636,9 @@ bool boxIsInNearFieldOfParticle(Grid *Grid, Particle *Particle, int boxIndex){
 ///@Grid instance of Grid struct
 ///@Particle instance of Particle struct
 int calcLowerLeftGridIndexInBox(Grid *Grid, Particle *Particle){
-    int numberOfGridPointsForBoxInX = Grid->numberOfGridPointsForBoxInX;
-    int numberOfGridPointsForBoxInY = Grid->numberOfGridPointsForBoxInY;
-    int numberOfGridPointsForBoxInZ = Grid->numberOfGridPointsForBoxInZ;
+    int numberOfGridPointsForBoxInX = Grid->Box.numberOfGridPointsInX;
+    int numberOfGridPointsForBoxInY = Grid->Box.numberOfGridPointsInY;
+    int numberOfGridPointsForBoxInZ = Grid->Box.numberOfGridPointsInZ;
     
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
@@ -1104,7 +1104,7 @@ bool readInitialFieldFromFileIfExists(Grid *Grid, Particle *Particles, int numbe
         }
         fscanf(fid, "%lf %lf %lf %d %d %d %d %d %d %d %lf", &dx, &dy, &dz, &numberOfGridPointsForBoxInX, &numberOfGridPointsForBoxInY, &numberOfGridPointsForBoxInZ, &numberOfBoxesInX, &numberOfBoxesInY, &numberOfBoxesInZ, &numberOfParticlesTest, &tTest);
         
-        if (double_equals(Grid->Resolution.dx, dx) && double_equals(Grid->Resolution.dy, dy) && double_equals(Grid->Resolution.dz, dz) && Grid->numberOfGridPointsForBoxInX == numberOfGridPointsForBoxInX && Grid->numberOfGridPointsForBoxInY == numberOfGridPointsForBoxInY && Grid->numberOfGridPointsForBoxInZ == numberOfGridPointsForBoxInZ && Grid->numberOfBoxesInX == numberOfBoxesInX && Grid->numberOfBoxesInY == numberOfBoxesInY && Grid->numberOfBoxesInZ == numberOfBoxesInZ && numberOfParticles == numberOfParticlesTest && double_equals(t, tTest)){
+        if (double_equals(Grid->Resolution.dx, dx) && double_equals(Grid->Resolution.dy, dy) && double_equals(Grid->Resolution.dz, dz) && Grid->Box.numberOfGridPointsInX == numberOfGridPointsForBoxInX && Grid->Box.numberOfGridPointsInY == numberOfGridPointsForBoxInY && Grid->Box.numberOfGridPointsInZ == numberOfGridPointsForBoxInZ && Grid->numberOfBoxesInX == numberOfBoxesInX && Grid->numberOfBoxesInY == numberOfBoxesInY && Grid->numberOfBoxesInZ == numberOfBoxesInZ && numberOfParticles == numberOfParticlesTest && double_equals(t, tTest)){
             
             for(int p = 0; p < numberOfParticles; p++){
                 fscanf(fid, "%lf %lf %lf %lf %lf %lf %lf %lf", &x0, &x1, &x2, &x3, &u0, &u1, &u2, &u3);

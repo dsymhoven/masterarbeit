@@ -269,7 +269,7 @@ void writeGridParametersToFile(Grid *Grid){
     }
     else{
         printf("writing grid parameters to file\n");
-        fprintf(fid, "%f %f %f %d %d %d %f %f %f %f %f\n", Grid->Resolution.dx, Grid->Resolution.dy, Grid->Resolution.dz, Grid->numberOfGridPointsForBoxInX, Grid->numberOfGridPointsForBoxInY, Grid->numberOfGridPointsForBoxInZ, Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ, Grid->EMax, Grid->HMax);
+        fprintf(fid, "%f %f %f %d %d %d %f %f %f %f %f\n", Grid->Resolution.dx, Grid->Resolution.dy, Grid->Resolution.dz, Grid->Box.numberOfGridPointsInX, Grid->Box.numberOfGridPointsInY, Grid->Box.numberOfGridPointsInZ, Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ, Grid->EMax, Grid->HMax);
     }
     fclose(fid);
 }
@@ -373,7 +373,7 @@ void writeSimulationInfoToFile(int numberOfParticles, int startTime){
 ///@param Bextern vector containing external B-Field components
 void writeInitialConditionsToFile(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double tEnd, double Eextern[3], double Bextern[3]){
     FILE *fid = fopen("initialConditions.txt","w");
-    fprintf(fid, "%f %f %f %d %d %d %d %d %d %d %f ", Grid->Resolution.dx, Grid->Resolution.dy, Grid->Resolution.dz, Grid->numberOfGridPointsForBoxInX, Grid->numberOfGridPointsForBoxInY, Grid->numberOfGridPointsForBoxInZ, Grid->numberOfBoxesInX, Grid->numberOfBoxesInY, Grid->numberOfBoxesInZ, numberOfParticles, t);
+    fprintf(fid, "%f %f %f %d %d %d %d %d %d %d %f ", Grid->Resolution.dx, Grid->Resolution.dy, Grid->Resolution.dz, Grid->Box.numberOfGridPointsInX, Grid->Box.numberOfGridPointsInY, Grid->Box.numberOfGridPointsInZ, Grid->numberOfBoxesInX, Grid->numberOfBoxesInY, Grid->numberOfBoxesInZ, numberOfParticles, t);
     for(int p = 0; p < numberOfParticles; p++){
         fprintf(fid, "%.16f %.16f %.16f %.16f %.16f %.16f %.16f %.16f ", Particles[p].x[0], Particles[p].x[1], Particles[p].x[2], Particles[p].x[3], Particles[p].u[0], Particles[p].u[1], Particles[p].u[2], Particles[p].u[3]);
     }
