@@ -752,9 +752,41 @@ Plugging in $\lambda$ in \eqref{eqn: linInt} gives the desired intersection poin
 
 %======================== trilinear interpolation of fields ========================
 \section{Trilinear Interpolation of Fields}
-
-
-%======================== Hybrid Fields ========================
+Another interpolation method we are using is the trilinear interpolation to calculate the field values at the particle position more accurately. As is explained in more detail later (see chapter \ref{cha: HybridFieldApproach}), field values will either be stored on grid points or calculated analytically. However, if we want to consider interactions between multiple particles correctly, we need the field values at the particle position which does usually not coincide with the grid point where the field values are stored. Matters were complicated further by the fact that our grid will be staggered, due to numerical stability issues and is explained in more detail in section \ref{sec: Yee-Scheme}.\\
+So, let's assume we have a cube with the points A,B,C, ...,H, as is illustrated in the following figure \ref{fig: trilinearInterpolation}
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.50\textwidth]{Pictures/trilinearInterpolation.pdf} 
+	\caption[]{Blub}
+	\label{fig: trilinearInterpolation}
+\end{figure}
+\noindent
+Those eight points are part of the grid and contain the field values for both $\vec{E}$ and $\vec{H}$. To get the correct field values at the particle position \textcolor{red}{$P_f$} we need to interpolate in 3D. The trilinear interpolation simply consists out of seven linear interpolations. We first interpolate the $x$ - value along AE, CG, BF and DH to get the points \textcolor{blue}{$P_1$},  \textcolor{blue}{$P_2$},  \textcolor{blue}{$P_3$} and  \textcolor{blue}{$P_4$}. Thereto let $x_p \in \mathbb{R}$ be the particle's $x$ position and $x_0 \in \mathbb{R}$ and $x_1 \in \mathbb{R}$ be the corresponding $x$ - values at A and E respectively. Same holds for the aforementioned tuples as well. Then we can write
+\beq
+\bal
+u & \coloneqq \frac{x_p - x_0}{x_1 - x_0} \\
+\Longrightarrow  \textcolor{blue}{P_1} &= A + u (E - A) \\
+\Longrightarrow \textcolor{blue}{P_2} &= C + u (G - C) \\
+\Longrightarrow \textcolor{blue}{P_3} &= B + u (F - B) \\
+\Longrightarrow \textcolor{blue}{P_4} &= D + u (H - D).
+\eal
+\eeq
+In the next step, we interpolate along the $y$ - axis. Analogously we define $y_p$, $y_0$ and $y_1$. We conclude
+\beq
+\bal
+v &\coloneqq \frac{y_p - y_0}{y_1 - y_0} \\
+\Longrightarrow  \textcolor{green}{P_u} &= \textcolor{blue}{P_1} + v (\textcolor{blue}{P_2} - \textcolor{blue}{P_1}) \\
+\Longrightarrow  \textcolor{green}{P_o} &= \textcolor{blue}{P_3} + v (\textcolor{blue}{P_4} - \textcolor{blue}{P_3}).\\
+\eal
+\eeq
+And finally with $z_p$, $z_0$ and $z_1$ we get
+\beq
+\bal
+w &\coloneqq \frac{z_p - z_0}{z_1 - z_0} \\
+\Longrightarrow  \textcolor{red}{P_f} &= \textcolor{green}{P_u} + v (\textcolor{green}{P_o} - \textcolor{blue}{P_u}).
+\eal
+\eeq
+%======================== FDTD ========================
 %===========================================================
 \chapter{FDTD}
 In this section we introduce the concept of hybrid fields and how this approach reduces the numerical complexity from $N^2$ to $N$.\\
@@ -890,6 +922,7 @@ vanishes, instead of propagating with speed of light. That means, that the Yee-S
 %================================================
 
 \chapter{Hybrid Field Approach}
+\label{cha: HybridFieldApproach}
 After having discussed the fundamentals, we now want to dive into practice. In section \ref{sec: Yee-Scheme} we learned how to store and propagate the fields on a numerical grid. In section \ref{sec: lw-potentials} we derived an analytical expression, of how to calculate the fields of a moving charged particle. We also observed that there is a singularity in \eqref{eqn: Liénard-Wiechert} at the particle position itself. That means, that the fields will vary strongly in  a vicinity of the particle and can not be resolved correctly on the grid, as discussed in section \ref{sec: DispersionRelation}. Hence, it seems plausible to separate the simulation area into appropriate Near - and Farfield areas. Within the Nearfield area of a particle, its fields will \textbf{not} be stored on the grid. We then do not need to worry about the singularity. Only Farfields from other particles, propagated into the Nearfield area will be further propagated and stored on the grid. Possible interactions with other particles within the Nearfield area will be caluclated analytically from \eqref{eqn: Liénard-Wiechert}. \\
 Farfields will be stored on the grid and propagated with the Yee-Scheme \eqref{eqn: discreteMaxwellEq}.
 %======================== Near and Far- Fields ========================
