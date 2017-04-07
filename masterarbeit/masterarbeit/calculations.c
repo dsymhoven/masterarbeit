@@ -1940,7 +1940,7 @@ void updateFieldTensor(double tensor[4][4], double Eextern[3], double Bextern[3]
 ///@param Bextern vector containing components of external magnetic field
 ///@param u velocity vector
 ///@param dampingTerm four vector containing the result of the calculation
-void calcRadiationDamping(double Eextern[3], double Bextern[3], double u[4], double dampingTerm[4]){
+void calcRadiationDamping(double Eextern[3], double Bextern[3], double u[4], double dampingTerm[3]){
     double fieldTensor[4][4] = {0};
     double Fu[4] = {0};
     double FFu[4] = {0};
@@ -1949,8 +1949,8 @@ void calcRadiationDamping(double Eextern[3], double Bextern[3], double u[4], dou
     contractTensorWithFourVector(fieldTensor, u, Fu);
     contractTensorWithFourVector(fieldTensor, Fu, FFu);
     
-    for (int i = 0; i < 4; i++){
-        dampingTerm[i] = 2. / 3. * (FFu[i] + u[i] * minkowskiProduct(Fu, Fu));
+    for (int i = 0; i < 3; i++){
+        dampingTerm[i] = 2. / 3. * (FFu[i+1] + u[i+1] * minkowskiProduct(Fu, Fu));
     }
     
 }

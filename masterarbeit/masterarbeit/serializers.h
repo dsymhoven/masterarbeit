@@ -13,6 +13,7 @@
 #include "stdbool.h"
 #include "grid.h"
 #include "particle.h"
+#include "forces.h"
 
 #endif /* serializers_h */
 
@@ -21,7 +22,7 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
 void writeFieldComponentsForFourierAnalysisToFile(Grid *Grid, char *filename, int index, int planeForPlotting, bool plotE, bool plotB);
 void writeFieldsFromCompleteGridToFile(Grid *Grid);
 void writeParticlesToFile(Particle *Particles, int numberOfParticles, char *filename, int index);
-void writeForcesToFile(double dampingTerm[4], double lorentzForce[3], FILE *fid);
+void writeForcesToFile(Forces *Forces, double t);
 void writeGridParametersToFile(Grid *Grid);
 void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3], const double t, char *filename, const int index, const int planeForPlotting, bool plotE, bool plotB);
 void writeSimulationInfoToFile(int numberOfParticles, int startTime);

@@ -251,11 +251,14 @@ void writeParticlesToFile(Particle *Particles, int numberOfParticles, char *file
     
 }
 
-void writeForcesToFile(double dampingTerm[4], double lorentzForce[3], FILE *fid){
-    double absDampingTerm = sqrt(dampingTerm[1]*dampingTerm[1] + dampingTerm[2]*dampingTerm[2] + dampingTerm[3]*dampingTerm[3]);
-    double absLorentzForce = sqrt(lorentzForce[0]*lorentzForce[0] + lorentzForce[1]*lorentzForce[1] + lorentzForce[2]*lorentzForce[2]);
+void writeForcesToFile(Forces *Forces, double t){
+    FILE *fid2 = fopen("dampingTermVSLorentzForce.txt","a");
     
-    fprintf(fid, "%f %f %f\n",absDampingTerm, absLorentzForce, absDampingTerm / absLorentzForce);
+    double absDampingTerm = sqrt(Forces->damping[0]*Forces->damping[0] + Forces->damping[1]*Forces->damping[1] + Forces->damping[2]*Forces->damping[2]);
+    double absLorentzForce = sqrt(Forces->lorentz[0]*Forces->lorentz[0] + Forces->lorentz[1]*Forces->lorentz[1] + Forces->lorentz[2]*Forces->lorentz[2]);
+    
+    fprintf(fid2, "%f %f %f %f\n", t, absDampingTerm, absLorentzForce, absDampingTerm / absLorentzForce);
+    fclose(fid2);
 }
 
 

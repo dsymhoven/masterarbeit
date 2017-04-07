@@ -1493,7 +1493,8 @@ void testRadiationDampingVSLorentzForce(){
     calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
-    
+    Forces Forces;
+    initForces(&Forces);
     
     Particle1->mass = 1;
     Particle1->charge = 1;
@@ -1516,10 +1517,7 @@ void testRadiationDampingVSLorentzForce(){
     Bextern[1] = 0;
     Bextern[2] = 0;
     
-    int planeForPlotting = Particle1->x[3] / Resolution.dz;
-    double dampingTerm[4];
-    double lorentzForce[3];
-    FILE *fid = fopen("dampingTermVSLorentzForce.txt","w");
+//    int planeForPlotting = Particle1->x[3] / Resolution.dz;
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
@@ -1535,25 +1533,23 @@ void testRadiationDampingVSLorentzForce(){
     
     for (int step = t / dt; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, (int)(tEnd / dt));
-        writeParticlesToFile(Particles, numberOfParticles, filename, step);
-        //                writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
-        //
-        //                pushEField(&Grid, Particles, numberOfParticles, t, dt);
-        //                pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
+//        writeParticlesToFile(Particles, numberOfParticles, filename, step);
+//        writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
+//        
+//        pushEField(&Grid, Particles, numberOfParticles, t, dt);
+//        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
         
         
         for(int p = 0; p < numberOfParticles; p++){
-            calcRadiationDamping(Eextern, Bextern, Particles[p].u, dampingTerm);
-            calculateLorentzForce(&Particles[p], Bextern, lorentzForce);
-            writeForcesToFile(dampingTerm, lorentzForce, fid);
+            analyzeForces(&Particles[p], &Forces, Eextern, Bextern, t);
             addCurrentStateToParticleHistory(&Particles[p], step);
             externalPlaneWave(Particles[p].x, tStart, Eextern, Bextern);
             updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
             updateLocation(&Particles[p], &Grid, dt);
-            //                    updateNearField(&Grid, &Particles[p], t);
+//            updateNearField(&Grid, &Particles[p], t);
         }
-        //                pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
-        //                pushEField(&Grid, Particles, numberOfParticles, t, dt);
+//        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
+//        pushEField(&Grid, Particles, numberOfParticles, t, dt);
         
         
         t += dt;
@@ -1567,11 +1563,10 @@ void testRadiationDampingVSLorentzForce(){
 //    printf("executing bash-script ...\n");
 //    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/fourierAnalysis.sh");
 //    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/analyzeForces.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
-    fclose(fid);
-    
-    
+
 }
 
 

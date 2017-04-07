@@ -11,6 +11,7 @@
 		611BB7491D8D4D6200DDBF08 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 611BB7481D8D4D6200DDBF08 /* main.c */; };
 		61514EEE1DAF771D00BD0B90 /* grid.c in Sources */ = {isa = PBXBuildFile; fileRef = 61514EEC1DAF771D00BD0B90 /* grid.c */; };
 		61524C8B1E03EB3D0090EFCF /* lwFields.c in Sources */ = {isa = PBXBuildFile; fileRef = 61524C891E03EB3D0090EFCF /* lwFields.c */; };
+		617CCCC81E97AF3E00F85E1D /* forces.c in Sources */ = {isa = PBXBuildFile; fileRef = 617CCCC61E97AF3E00F85E1D /* forces.c */; };
 		619129211DA531BD00A848D1 /* calculations.c in Sources */ = {isa = PBXBuildFile; fileRef = 619129201DA531BD00A848D1 /* calculations.c */; };
 		61B3BF5C1DD4DF650092B42E /* particle.c in Sources */ = {isa = PBXBuildFile; fileRef = 61B3BF5A1DD4DF650092B42E /* particle.c */; };
 		61D5D4361E8FFA8000CC6179 /* serializers.c in Sources */ = {isa = PBXBuildFile; fileRef = 61D5D4341E8FFA8000CC6179 /* serializers.c */; };
@@ -39,6 +40,8 @@
 		61514EED1DAF771D00BD0B90 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grid.h; sourceTree = "<group>"; };
 		61524C891E03EB3D0090EFCF /* lwFields.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lwFields.c; sourceTree = "<group>"; };
 		61524C8A1E03EB3D0090EFCF /* lwFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lwFields.h; sourceTree = "<group>"; };
+		617CCCC61E97AF3E00F85E1D /* forces.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = forces.c; sourceTree = "<group>"; };
+		617CCCC71E97AF3E00F85E1D /* forces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forces.h; sourceTree = "<group>"; };
 		6191291D1DA530A700A848D1 /* calculations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = calculations.h; sourceTree = "<group>"; };
 		619129201DA531BD00A848D1 /* calculations.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = calculations.c; sourceTree = "<group>"; };
 		61B3BF5A1DD4DF650092B42E /* particle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = particle.c; sourceTree = "<group>"; };
@@ -93,6 +96,7 @@
 			children = (
 				6191291D1DA530A700A848D1 /* calculations.h */,
 				61D5D43B1E900A5700CC6179 /* box.h */,
+				617CCCC71E97AF3E00F85E1D /* forces.h */,
 				61D5D4381E9000BC00CC6179 /* resolution.h */,
 				61D5D4351E8FFA8000CC6179 /* serializers.h */,
 				61524C8A1E03EB3D0090EFCF /* lwFields.h */,
@@ -113,6 +117,7 @@
 				61D5D43A1E900A5700CC6179 /* box.c */,
 				61D5D4371E9000BC00CC6179 /* resolution.c */,
 				61B3BF5A1DD4DF650092B42E /* particle.c */,
+				617CCCC61E97AF3E00F85E1D /* forces.c */,
 				61D5D4341E8FFA8000CC6179 /* serializers.c */,
 			);
 			name = Implementations;
@@ -193,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61B3BF5C1DD4DF650092B42E /* particle.c in Sources */,
+				617CCCC81E97AF3E00F85E1D /* forces.c in Sources */,
 				61D5D4391E9000BC00CC6179 /* resolution.c in Sources */,
 				61524C8B1E03EB3D0090EFCF /* lwFields.c in Sources */,
 				61D5D4361E8FFA8000CC6179 /* serializers.c in Sources */,
