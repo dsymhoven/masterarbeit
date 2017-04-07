@@ -594,7 +594,7 @@ Thus the differential equation should be of the form
 \beq
 \frac{\dm^2 x^{\mu}}{\dm \tau^2} = \frac{\dm u^{\mu}}{\dm \tau} = f^{\mu}(x^{\nu}).
 \eeq
-As we already mentioned, the various methods discretize the differential operators differently
+As we already mentioned, the various methods discretize the differential operators differently.
 The Leap-Frog-Scheme uses
 \beq
 \bal
@@ -636,34 +636,15 @@ one can eliminate the electric field. Plugging in \eqref{eqn:vMinusAndPlus} into
 \Longrightarrow  |\vec{v}_{+} - \vec{v}_{-}| &= \frac{qh}{m} |\vec{v}_{+} + \vec{v}_{-}| B \underbrace{\sin(\vartheta)}_{= 1},
 \eal
 \eeq
-where $\vartheta$ is the angle between $\vec{B}$ and $\vec{v}$. Hence, the steps are
+where $\vartheta$ is the angle between $\vec{B}$ and $\vec{v}$. By splitting up the accelerating effect of the electric field in two parts with the rotational effect of the magnetic field in between, the accuracy is increased without having computational overhead.  Hence, the steps are
 \begin{enumerate}
 \item Obtain $\vec{v}_{-}$ by starting from $v_{i - \frac{1}{2}}$ and adding half electric impulse.
 \item Use rotation in \eqref{eqn: v+} to obtain $\vec{v}_{+}$ and finally
 \item obtain $v_{i + \frac{1}{2}}$ by adding yet another half electric impulse.
 \end{enumerate}
 \noindent
-We now want to do a quick error analysis. We expect the angle of rotation $\theta$ to be close to 
-\beq
-\omega_ch = \frac{2\pi h}{T} = \frac{qBh}{m},\nn
-\eeq
-where T is the period.\\
-Following the geometrical analysis in ~\cite{Birdsall} illustrated in \ref{fig: borisRotation} and using \eqref{eqn: v+} we find
-\beq
-\bal
-\left|\tan\left(\frac{\theta}{2}\right)\right| &= \frac{\frac{1}{2}|\vec{v}_{+} - \vec{v}_{-}|}{\frac{1}{2}|\vec{v}_{+} + \vec{v}_{-}|} = \frac{qB }{m} \frac{h}{2} = \frac{\omega_c h}{2}\\
-\Longrightarrow \theta &= 2\arctan\left(\frac{\omega_c h}{2}\right) = \omega_c h \left(1 - \frac{\omega^2_c h^2}{12} + \ldots \right).
-\eal
-\eeq
-For $\omega_ch < 0.35$ we get an error smaller than $1\%$.
-\begin{figure}[H]
-	\centering
-		\includegraphics[width=0.50\textwidth]{Pictures/borisRotation.png} 
-	\caption[Determination of $\left|\tan\left(\frac{\theta}{2}\right)\right|$ from boris roation]{Determination of $\left|\tan\left(\frac{\theta}{2}\right)\right|$ from boris rotation~\cite{Birdsall}}
-	\label{fig: borisRotation}
-\end{figure}
-\noindent
-Up to now one question remains unanswered. How do we calculate the rotation effectively? To answer this, we use figure \ref{fig: borisProjection}.
+In Code we use the slightly more sophisticated but relativistically correct form with $u = \gamma v$. \\
+Up to now one question remains unanswered. How do we solve for $\vec{v}_{+}$ in \eqref{eqn: v+}? To answer this, we use figure \ref{fig: borisProjection}.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/borisProjection.png} 
@@ -688,6 +669,27 @@ Hence
 \beq
 \vec{v}_{+}= \vec{v}_{-} + \vec{v}~' \times \vec{s}.
 \eeq
+Finally we want to do a quick error analysis. We expect the angle of rotation $\theta$ to be close to 
+\beq
+\omega_ch = \frac{2\pi h}{T} = \frac{qBh}{m},\nn
+\eeq
+where T is the period.\\
+Following the geometrical analysis in ~\cite{Birdsall} illustrated in \ref{fig: borisRotation} and using \eqref{eqn: v+} we find
+\beq
+\bal
+\left|\tan\left(\frac{\theta}{2}\right)\right| &= \frac{\frac{1}{2}|\vec{v}_{+} - \vec{v}_{-}|}{\frac{1}{2}|\vec{v}_{+} + \vec{v}_{-}|} = \frac{qB }{m} \frac{h}{2} = \frac{\omega_c h}{2}\\
+\Longrightarrow \theta &= 2\arctan\left(\frac{\omega_c h}{2}\right) = \omega_c h \left(1 - \frac{\omega^2_c h^2}{12} + \ldots \right).
+\eal
+\eeq
+For $\omega_ch < 0.35$ we get an error smaller than $1\%$.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.50\textwidth]{Pictures/borisRotation.png} 
+	\caption[Determination of $\left|\tan\left(\frac{\theta}{2}\right)\right|$ from boris roation]{Determination of $\left|\tan\left(\frac{\theta}{2}\right)\right|$ from boris rotation~\cite{Birdsall}}
+	\label{fig: borisRotation}
+\end{figure}
+\noindent
+
 
 %======================== Nyström Scheme ========================
 \section{Nyström-Scheme}
@@ -756,7 +758,7 @@ Plugging in $\lambda$ in \eqref{eqn: linInt} gives the desired intersection poin
 %===========================================================
 \chapter{FDTD}
 In this section we introduce the concept of hybrid fields and how this approach reduces the numerical complexity from $N^2$ to $N$.\\
-Usually the numerical complexity of multi particle simulation is $N^2$, due to the interaction between each particle. In our case we need $N$ push operations for the particles. One push for each particle. In order to do that, however, we need to solve equation \eqref{eqn: Lorentz-Newton} and therefore all Liénard-Wiechert fields from the other $N-1$ particles are needed. This results in $N(N-1)$ calculations for each time step, period. If we want to calculate the Liénard-Wiechert fields, we also need to store all positions from all particles, as explained in section \ref{sec: Interpolation of Trajectories}. For a few particles such simulations are effortlessly feasible. But with increasing particle numbers such simulations may not just require more and more memory capacity but also become so time consuming that at some point we simply can not do them anylonger. That's where the hybrid field model comes in. Instead of calculating the Liénard-Wiechert fields at every time step for all particles at all grid points we save them onto the grid and propagate them through the grid using Maxwell equations. How that works in detail is explained in the following sections. 
+Usually the numerical complexity of multi particle simulation is $N^2$, due to the interaction between each particle. In our case we need $N$ push operations for the particles. One push for each particle. In order to do that, however, we need to solve equation \eqref{eqn: Lorentz-Newton} and therefore all Liénard-Wiechert fields from the other $N-1$ particles are needed. This results in $N(N-1)$ calculations for each time step. If we want to calculate the Liénard-Wiechert fields, we also need to store all positions from all particles, as explained in section \ref{sec: Interpolation of Trajectories}. For a few particles such simulations are effortlessly feasible. But with increasing particle numbers such simulations may not just require more and more memory capacity but also become so time consuming that at some point we simply can not do them anylonger. That's where the hybrid field model comes in. Instead of calculating the Liénard-Wiechert fields at every time step for all particles at all grid points we save them onto the grid and propagate them through the grid using Maxwell equations. How that works in detail is explained in the following sections. 
 
 %%======================== Maxwell Equations ========================
 %\section{Maxwell-Equations}
@@ -908,7 +910,7 @@ The Nearfield is then defined as the $3 \cdot 3 \cdot 3 = 27$ boxes with the box
 \begin{figure}
 \subfigure[]{\includegraphics[width=0.49\textwidth]{Pictures/nearFieldOneParticle.png}}\hfill
 \subfigure[]{\includegraphics[width=0.49\textwidth]{Pictures/nearFieldTwoParticles.png}}
-\caption[Nearfields of one and two particles]{Nearfields of one (a) and two (b) particles. The box at $(18,18)$ belongs to the Nearfield of both particles, marked with $e^{-}$. Notice the staggered red grid in the background. In this example we used 8 boxes, with 20 grid points each, and a spacing of 0.2 for each dimension. The plotted plane was chosen accordingly to the z - coordinate of the particle.}	
+\caption[Nearfields of one and two particles]{Nearfields of one (a) and two (b) particles. The box at $(18,18)$ belongs to the Nearfield of both particles, marked with $e^{-}$. Notice the staggered red grid in the background. In this example we used 8 boxes, with 20 grid points each, and a resolution of $dx = dy = dz = 0.2$. The plotted plane was chosen accordingly to the z - coordinate of the particle.}	
 \label{fig: nearFields}
 \end{figure}
 %Bild des simulationsbereichs mit boxen. Wie werden boxen gezählt. 
