@@ -30,13 +30,9 @@ void pushHField(Grid *Grid, Particle *Particles, int numberOfParticles, double t
 void pushEField(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double dt);
 void pushEFieldInsideBoxes(Grid *Grid, double dt);
 void pushHFieldInsideBoxes(Grid *Grid, double dt);
-void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotting, bool plotE, bool plotB);
-void writeFieldsFromCompleteGridToFile(Grid *Grid);
 void addLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component);
 void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObserver[4], int component);
 void addLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t);
 void subLWFieldsInBox(Grid *Grid, Particle *Particle, int boxIndex, double t);
 void updateFieldsForParticlePush(Particle *Particle, Grid *Grid, double Eextern[3], double Bextern[3], double E[3], double B[3]);
-void writeFieldComponentsForFourierAnalysisToFile(Grid *Grid, char *filename, int index, int planeForPlotting, bool plotE, bool plotB);
-void writeForcesToFile(double dampingTerm[4], double lorentzForce[3], FILE *fid);
 #endif /* lwFields_h */

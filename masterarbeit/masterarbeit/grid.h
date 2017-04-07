@@ -80,8 +80,6 @@ void freeMemoryOnGrid(Grid *Grid);
 void initSamplePulseOnGrid(Grid *Grid);
 void pushEFieldOnGrid(Grid *Grid, const double dt);
 void pushHFieldOnGrid(Grid *Grid, const double dt);
-void writeGridParametersToFile(Grid *Grid);
 void externalPlaneWave(const double xParticle[4], const double tStart, double Eextern[3], double Bextern[3]);
 void clearFieldsFromGrid(Grid *Grid);
-void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3], const double t, char *filename, const int index, const int planeForPlotting, bool plotE, bool plotB);
 #endif /* grid_h */
