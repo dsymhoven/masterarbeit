@@ -971,7 +971,7 @@ $\vec{H}\Bigr|^{n+1}_{z (2,4,k)}$ is stored on a Farfield grid point. Its calcul
 \vec{H}\Bigr|^{n+1}_{z (2,4,k)} = \vec{H}\Bigr|^{n}_{z (2,4,k)} - h \left(\frac{\left(\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}} + \textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (3,4,k)}}\right) - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta x} - \frac{E\Bigr|^{n+\frac{1}{2}}_{x (2,5,k)} - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta y}\right).
 \eeq
 \noindent
-On the contrary, if we want to push the value for $H_z$ at $\textcolor{red}{(6,4,k)}$ we need to analytically calculate the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at $(7,4,k)$ $\textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (7,4,k)}}$ and subtract it from the field value already stored at this grid point. $(7,4,k)$ already contains the field contribution of the particle, since it is a Farfield grid point. And because $\textcolor{red}{(6,4,k)}$ is a Nearfield grid point we only want to take contributions from other particles into account, which are about to propagate into our Nearfield area. After subtracting our own contributions the correct push can be calculated via
+On the contrary, if we want to push the value for $H_z$ at $\textcolor{red}{(6,4,k)}$ we need to analytically calculate the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at $(7,4,k)$ $\textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (7,4,k)}}$ and subtract it from the field value already stored at this grid point. $(7,4,k)$ already contains the field contribution of the particle, since it is a Farfield grid point. And because $\textcolor{red}{(6,4,k)}$ is a Nearfield grid point we only want to take contributions from other particles into account, which are about to propagate into our Nearfield area. After subtracting the particles own contributions the correct push can be calculated via
 \beq
 \textcolor{red}{\vec{H}\Bigr|^{n+1}_{z (6,4,k)}} = \textcolor{red}{\vec{H}\Bigr|^{n}_{z (6,4,k)}} - h \left(\frac{\left(E\Bigr|^{n+\frac{1}{2}}_{y (7,4,k)} - \textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (7,4,k)}}\right) - \textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (6,4,k)}}}{\Delta x} - \frac{\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{x (6,5,k)}} - \textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (6,4,k)}}}{\Delta y}\right).
 \eeq
@@ -982,20 +982,57 @@ We now want to explain how this works out in Code. Figure \ref{fig: CodeRoutineB
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.70\textwidth]{Pictures/createdPictures/boxes.pdf} 
-	\caption[]{Section of a grid with three boxes, two of which are Nearfield boxes (NF) and one being a Farfield box (FF). The colored planes represent those grid points, where adjustments are necessary, as explained above. One H - Field push consists of four steps. or equivalently four subroutines in Code: 1. \texttt{pushHFieldInsideBoxes}, 2. \texttt{setEFieldOnBoarders}, 3. \texttt{adjustEFields}, 4 \texttt{.pushHFieldAtBorders}. For reasons of clarity we left out the grid points within the boxes. }
+	\caption[]{Section of a grid with three boxes, two of which are Nearfield boxes (NF) and one being a Farfield box (FF). The colored planes represent those grid points, where adjustments are necessary, as explained above. One $\vec{E}$ - Field push consists of four steps. or equivalently four subroutines in Code: 1. \texttt{pushEFieldInsideBoxes}, 2. \texttt{setHFieldOnBoarders}, 3. \texttt{adjustHFields}, 4 \texttt{pushEFieldAtBorders}. For reasons of clarity we left out the grid points within the boxes. }
 	\label{fig: CodeRoutineBoxes}
 \end{figure}
 \noindent
+One complete field push consists out of four steps. Even though the field pushes for $\vec{H}$ and $\vec{E}$ are conceptionally identical, they differ in the grid points they are accessing to calculate the rotations $\vec{\nabla}^{+}$ and $\vec{\nabla}^{-}$ in \eqref{eqn: discreteMaxwellEq}. The steps (subroutines) for one $\vec{E}$ - Field push are
+\begin{enumerate}
+\item \texttt{pushEFieldInsideBoxes()}
+\item \texttt{setHFieldOnBoarders()}
+\item \texttt{adjustHField()}
+\item \texttt{pushEFieldOnBoarders()}
+\end{enumerate}
+Since this is the core of the simulation, we will go over all of these steps in detail.
+\subsection{pushEFieldInsideBoxes()}
+In this routine we simply calculate the discretized Maxwell Equations \eqref{eqn: discreteMaxwellEq}. We loop through the entire grid and store the necessary field values
+but leave out those grid points which are on the left plane (yz - plane) of each box. In figure \ref{fig: CodeRoutineBoxes} marked with \textcolor{red}{red}.
+\newline 
+Now all $\vec{E}$ values in all boxes are pushed except those on the \textcolor{red}{red} plane. To push those we need to access the field values on the \textcolor{blue}{blue} and \textcolor{green}{green} plane, which are in the Farfield and therefore need to be adjusted. 
 
+\subsection{setHFieldOnBoarders()}
+In order to push $\vec{E}$ we need values of $\vec{H}$. Therefore this methods loops through all boxes and stores all values of $\vec{H}$ in the plane \textcolor{blue}{left}, in front and \textcolor{green}{below} of the current box (the plane in front is not shown for reasons of clarity). As can be seen from the Yee Scheme only Hy and Hz are needed from the left plane. Hz and Hx are needed from the plane in front and Hy and Hx are needed from the plane below. If the current box is a box where to the left does not exist then the respective values for H are set to zero.
 
-%Bild des simulationsbereichs mit boxen. Wie werden boxen gezählt. 
-%Bild 3D Box anhand dessen die einzelnen Schritte deutlich werden. 
-% - push inside boxes
-%1. set values on borders
-% adjust values on borders
-% push values on borders
+\subsection{adjustHField()}
+This routine consists of three subroutines \texttt{adjustHyz\_im1()}, \texttt{adjustHxz\_jm1()} and \\
+ \texttt{adjustHxy\_km1()}. The first adjusts Hy and Hz on plane to the \textcolor{blue}{left}, the second adjusts Hx and Hz on the plane in front (not shown) and the latter adjusts Hx and Hy on the plane \textcolor{green}{below}. All of those three subroutines do conceptionally the same. They loop through all boxes and check whether the current box is part of the Nearfield of the particle and the box to left is not. This is the situation shown in figure \ref{fig: CodeRoutineBoxes}. Then the respective Liénard - Wiechert fields get calculated on the \textcolor{blue}{blue} plane and subtracted from the values stored by \texttt{setHFieldOnBoarders()}. Notice that the \textcolor{red}{red} plane is part of a Nearfield box and the \textcolor{blue}{blue} plane is part of a Farfield box. Hence we need to subtract the field contributions of the particle on the blue plane.\\
+On the contrary, if we have the case that the current box is a Farfield box and the box to left is a Nearfield box, then the \textcolor{red}{red} plane is part of a Farfield box and the \textcolor{blue}{blue} plane is part of a Nearfield box. Hence we calculate the Liénard - Wiechert fields on the \textcolor{blue}{blue} plane and add them to the respective values stored by \texttt{setHFieldOnBoarders()}.
+
+\subsection{pushEFieldOnBoarders()}
+This method finally pushes the $\vec{E}$ - Field with the adjusted values. It also loops through the entire grid, but only gets active if the current grid point lies on the \textcolor{red}{red} plane. If so, then it gets the values stored by \texttt{setHFieldOnBoarders()} and adjusted by \texttt{adjustHField()} and uses them to calculate the discretized Maxwell Equation \eqref{eqn: discreteMaxwellEq}.\\
+
+The routines for pushing the $\vec{H}$ - Field are analogously:
+\begin{enumerate}
+\item \texttt{pushHFieldInsideBoxes()}
+\item \texttt{setEFieldOnBoarders()}
+\item \texttt{adjustEField()}
+\item \texttt{pushHFieldOnBoarders()}
+\end{enumerate}
+while using the planes to the right, behind and above. \\
+\newline
+As an example we simulate an electron with $\gamma = 1.1$ in a constant external $B_z$ field. Figure \ref{fig: gyration electron} shows the result
+\begin{figure}[H]
+\subfigure[t = 7]{\includegraphics[width=0.33\textwidth]{Pictures/nearFieldOneParticle.png}}\hfill
+\subfigure[t = 9]{\includegraphics[width=0.33\textwidth]{Pictures/nearFieldTwoParticles.png}}\hfill
+\subfigure[t = 11]{\includegraphics[width=0.33\textwidth]{Pictures/nearFieldTwoParticles.png}}
+\caption[]{Simulation of an electron with $\gamma = 1,1$ in a constant $B_z = 1$ field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3 = 9.40 \cdot 10^{-24}\si{\second}$}	
+\label{fig: gyration electron}
+\end{figure}
+The electron moves in a circular fashion in the $xy$ - plane. The red line in the center of the Nearfield area shows the particles trajectory. The initial conditions are chosen such that the particle does not leave its initial box. That means that the Nearfield does not change during runtime. The Liénard-Wiechert fields are only calculated at the border between Near - and Farfield and only if the retardation constraint $t_{ret} > 0$ is met. \\
+But what if the particle does leave its initial box ? 
 
 \section{Particle Push and Nearfield Update}
+In order to push the particle properly not just the external fields but also the field contributions from other particles propagated into the Nearfield region need to be taken into account. 
 \section{Particle History}
 \section{Farfield Setup Before Simulation}
 \section{Electron Scattering in an electromagnetic wave}
