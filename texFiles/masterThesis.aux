@@ -118,6 +118,7 @@
 \newlabel{eqn: constraint}{{3.2}{25}{Linear interpolation of Trajectories}{equation.3.1.2}{}}
 \newlabel{eqn: quadEq}{{3.3}{26}{Linear interpolation of Trajectories}{equation.3.1.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Trilinear Interpolation of Fields}{26}{section.3.2}}
+\newlabel{sec: trilinear Interpolation}{{3.2}{26}{Trilinear Interpolation of Fields}{section.3.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Cube with its eight corner points and interpolation point $P_f$.}}{27}{figure.3.2}}
 \newlabel{fig: trilinearInterpolation}{{3.2}{27}{Cube with its eight corner points and interpolation point $P_f$}{figure.3.2}{}}
 \citation{Yee66}
@@ -159,49 +160,60 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces One plane of a grid showing the Nearfield and Farfield of a particle. The Nearfield does not contain any field values of the particle}}{36}{figure.5.2}}
 \newlabel{fig: NearfieldFarfieldBorder}{{5.2}{36}{One plane of a grid showing the Nearfield and Farfield of a particle. The Nearfield does not contain any field values of the particle}{figure.5.2}{}}
 \citation{Herzing}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces }}{38}{figure.5.3}}
-\newlabel{fig: CodeRoutineBoxes}{{5.3}{38}{}{figure.5.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Section of a grid with three boxes, two of which are Nearfield boxes (NF) and one being a Farfield box (FF)}}{38}{figure.5.3}}
+\newlabel{fig: CodeRoutineBoxes}{{5.3}{38}{Section of a grid with three boxes, two of which are Nearfield boxes (NF) and one being a Farfield box (FF)}{figure.5.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}pushEFieldInsideBoxes()}{39}{subsection.5.2.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}setHFieldOnBoarders()}{39}{subsection.5.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}setHFieldOnBorders()}{39}{subsection.5.2.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}adjustHField()}{39}{subsection.5.2.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}pushEFieldOnBoarders()}{39}{subsection.5.2.4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces }}{40}{figure.5.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}pushEFieldOnBorders()}{39}{subsection.5.2.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Simulation of an electron with $\gamma = 1,1$ in a constant $B_z = 1$ field}}{40}{figure.5.4}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {t = 7}}}{40}{figure.5.4}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {t = 9}}}{40}{figure.5.4}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {t = 11}}}{40}{figure.5.4}}
-\newlabel{fig: gyration electron}{{5.4}{40}{}{figure.5.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Particle Push and Nearfield Update}{40}{section.5.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}Particle History}{40}{section.5.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}Farfield Setup Before Simulation}{40}{section.5.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.6}Electron Scattering in an electromagnetic wave}{40}{section.5.6}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Uniaxial Perfectly Matched Layer}{41}{chapter.6}}
+\newlabel{fig: gyration electron}{{5.4}{40}{Simulation of an electron with $\gamma = 1,1$ in a constant $B_z = 1$ field}{figure.5.4}{}}
+\citation{Herzing}
+\citation{Herzing}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Gyration of two electrons with $\gamma = 1,1$ each.}}{41}{figure.5.5}}
+\newlabel{fig: gyration two electrons}{{5.5}{41}{Gyration of two electrons with $\gamma = 1,1$ each}{figure.5.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Particle Push and Nearfield Update}{41}{section.5.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Particle push from time $t$ to $t + \dm t$. Since the particle changes its box the Nearfield region also changes}}{42}{figure.5.6}}
+\newlabel{fig: nearFieldUpdate}{{5.6}{42}{Particle push from time $t$ to $t + \dm t$. Since the particle changes its box the Nearfield region also changes}{figure.5.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Simulation of an electron with $\gamma = 1,2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2}}{43}{figure.5.7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {t = 5}}}{43}{figure.5.7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {t = 7}}}{43}{figure.5.7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {t = 9}}}{43}{figure.5.7}}
+\newlabel{fig: electronCrossedField}{{5.7}{43}{Simulation of an electron with $\gamma = 1,2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2}{figure.5.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Particle History}{43}{section.5.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}Farfield Setup Before Simulation}{43}{section.5.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}Electron Scattering in an electromagnetic wave}{43}{section.5.6}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Uniaxial Perfectly Matched Layer}{44}{chapter.6}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {part}{\numberline {III}Summary}{42}{part.3}}
-\@writefile{toc}{\contentsline {part}{\numberline {IV}Appendix}{43}{part.4}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Gauge Transformations}{44}{appendix.A}}
+\@writefile{toc}{\contentsline {part}{\numberline {III}Summary}{45}{part.3}}
+\@writefile{toc}{\contentsline {part}{\numberline {IV}Appendix}{46}{part.4}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Gauge Transformations}{47}{appendix.A}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}
-\newlabel{appendix: Gauge Transformations}{{A}{44}{Gauge Transformations}{appendix.A}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {A.1}Invariance of Fields}{44}{section.A.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {A.2}Invariance of Potential Equations}{45}{section.A.2}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {B}Retarded Potential Equations Fulfill Laurentz Gauge}{46}{appendix.B}}
+\newlabel{appendix: Gauge Transformations}{{A}{47}{Gauge Transformations}{appendix.A}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A.1}Invariance of Fields}{47}{section.A.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {A.2}Invariance of Potential Equations}{48}{section.A.2}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Retarded Potential Equations Fulfill Laurentz Gauge}{49}{appendix.B}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}
-\newlabel{appendix: Retarded Potential Equations Fulfill Laurentz Gauge}{{B}{46}{Retarded Potential Equations Fulfill Laurentz Gauge}{appendix.B}{}}
-\newlabel{eqn: step1}{{B.1}{46}{Retarded Potential Equations Fulfill Laurentz Gauge}{equation.B.0.1}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {C}Softwarestack}{48}{appendix.C}}
+\newlabel{appendix: Retarded Potential Equations Fulfill Laurentz Gauge}{{B}{49}{Retarded Potential Equations Fulfill Laurentz Gauge}{appendix.B}{}}
+\newlabel{eqn: step1}{{B.1}{49}{Retarded Potential Equations Fulfill Laurentz Gauge}{equation.B.0.1}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {C}Softwarestack}{51}{appendix.C}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {D}Code Documentation}{49}{appendix.D}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {D}Code Documentation}{52}{appendix.D}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {E}Normalization}{50}{appendix.E}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {E}Normalization}{53}{appendix.E}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}
@@ -215,7 +227,7 @@
 \bibcite{Taflove}{7}
 \bibcite{Yee66}{8}
 \bibstyle{plain}
-\@writefile{toc}{\contentsline {chapter}{\nonumberline Bibliography}{52}{chapter*.5}}
+\@writefile{toc}{\contentsline {chapter}{\nonumberline Bibliography}{55}{chapter*.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}

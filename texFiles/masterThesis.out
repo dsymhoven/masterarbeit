@@ -25,9 +25,9 @@
 \BOOKMARK [1][-]{section.5.1}{Near-and Farfields}{chapter.5}% 25
 \BOOKMARK [1][-]{section.5.2}{Field Push}{chapter.5}% 26
 \BOOKMARK [2][-]{subsection.5.2.1}{pushEFieldInsideBoxes\(\)}{section.5.2}% 27
-\BOOKMARK [2][-]{subsection.5.2.2}{setHFieldOnBoarders\(\)}{section.5.2}% 28
+\BOOKMARK [2][-]{subsection.5.2.2}{setHFieldOnBorders\(\)}{section.5.2}% 28
 \BOOKMARK [2][-]{subsection.5.2.3}{adjustHField\(\)}{section.5.2}% 29
-\BOOKMARK [2][-]{subsection.5.2.4}{pushEFieldOnBoarders\(\)}{section.5.2}% 30
+\BOOKMARK [2][-]{subsection.5.2.4}{pushEFieldOnBorders\(\)}{section.5.2}% 30
 \BOOKMARK [1][-]{section.5.3}{Particle Push and Nearfield Update}{chapter.5}% 31
 \BOOKMARK [1][-]{section.5.4}{Particle History}{chapter.5}% 32
 \BOOKMARK [1][-]{section.5.5}{Farfield Setup Before Simulation}{chapter.5}% 33
