@@ -757,7 +757,7 @@ So, let's assume we have a cube with the points A,B,C, ...,H, as is illustrated 
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/trilinearInterpolation.pdf} 
-	\caption[]{Blub}
+	\caption[Cube with its eight corner points and interpolation point $P_f$.]{Cube with its eight corner points and interpolation point \textcolor{red}{$P_f$}}
 	\label{fig: trilinearInterpolation}
 \end{figure}
 \noindent
@@ -946,6 +946,48 @@ The Nearfield is then defined as the $3 \cdot 3 \cdot 3 = 27$ boxes with the box
 \caption[Nearfields of one and two particles]{Nearfields of one (a) and two (b) particles. The box at $(18,18)$ belongs to the Nearfield of both particles, marked with $e^{-}$. Notice the staggered red grid in the background. In this example we used 8 boxes, with 20 grid points each, and a resolution of $dx = dy = dz = 0.2$. The plotted plane was chosen accordingly to the z - coordinate of the particle.}	
 \label{fig: nearFields}
 \end{figure}
+
+%======================== Near and Far- Fields ========================
+\section{Field Push}
+We now want to explain, how a field push actually works. Since we only propagate fields in the Farfield area as explained in section \label{sec: Yee-Scheme} special care needs to be taken at the boundaries between Farfield and Nearfield. To explain this, consider the following plane of a grid illustrated in figure \ref{fig: NearfieldFarfieldBorder}
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.50\textwidth]{Pictures/Grid.png} 
+	\caption[One plane of a grid showing the Nearfield and Farfield of a particle. The Nearfield does not contain any field values of the particle]{One plane of a grid showing the \textcolor{red}{Nearfield} and Farfield of a particle. The \textcolor{red}{Nearfield} does not contain any field values of the particle. \cite{Herzing}}
+	\label{fig: NearfieldFarfieldBorder}
+\end{figure}
+\noindent
+The \textcolor{red}{red} dots are considered to be the Nearfield area of a particle. The black dots are therefore the Farfield area. The grid points within the Nearfild does not contain any field values. We only store and propagate fields on the grid points in the Farfield. If we now want to push the value for $H_z$ at $(2,4,k)$ (recall that each grid point contains the field values for either $H_x$, $H_y$, $H_z$ or $E_x$, $E_y$, $E_z$ due to the staggered grid, explained in section \ref{sec: Yee-Scheme}), where $k \in (1, 2, 3, \ldots , \text{numberOfGridPointsInZ} - 1 )$, we need to solve 
+\beq
+\frac{\del H_z}{\del t} = - \left( \frac{\del E_y}{\del x} - \frac{\del E_x}{\del y} \right).
+\eeq
+Using the discretized Maxwell Equations \eqref{eqn: discreteMaxwellEq} we get
+\beq
+\vec{H}\Bigr|^{n+1}_{z (2,4,k)} = \vec{H}\Bigr|^{n}_{z (2,4,k)} - h \left(\frac{\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}} - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta x} - \frac{E\Bigr|^{n+\frac{1}{2}}_{x (2,5,k)} - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta y}\right).
+\eeq
+\noindent
+$\vec{H}\Bigr|^{n+1}_{z (2,4,k)}$ is stored on a Farfield grid point. Its calculation, however, requires a field value $\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}}$, which is stored on a Nearfield grid point and therefore contains no field values from the particle (it can however contain field values from other particles propagated from the outside into the Nearfield area). Hence we need to analytically calculate the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at $(3,4,k)$ $\textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (3,4,k)}}$ and add it to the field value already stored at this grid point. Finally the correct calculation is
+\beq
+\vec{H}\Bigr|^{n+1}_{z (2,4,k)} = \vec{H}\Bigr|^{n}_{z (2,4,k)} - h \left(\frac{\left(\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}} + \textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (3,4,k)}}\right) - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta x} - \frac{E\Bigr|^{n+\frac{1}{2}}_{x (2,5,k)} - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta y}\right).
+\eeq
+\noindent
+On the contrary, if we want to push the value for $H_z$ at $\textcolor{red}{(6,4,k)}$ we need to analytically calculate the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at $(7,4,k)$ $\textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (7,4,k)}}$ and subtract it from the field value already stored at this grid point. $(7,4,k)$ already contains the field contribution of the particle, since it is a Farfield grid point. And because $\textcolor{red}{(6,4,k)}$ is a Nearfield grid point we only want to take contributions from other particles into account, which are about to propagate into our Nearfield area. After subtracting our own contributions the correct push can be calculated via
+\beq
+\textcolor{red}{\vec{H}\Bigr|^{n+1}_{z (6,4,k)}} = \textcolor{red}{\vec{H}\Bigr|^{n}_{z (6,4,k)}} - h \left(\frac{\left(E\Bigr|^{n+\frac{1}{2}}_{y (7,4,k)} - \textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (7,4,k)}}\right) - \textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (6,4,k)}}}{\Delta x} - \frac{\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{x (6,5,k)}} - \textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (6,4,k)}}}{\Delta y}\right).
+\eeq
+\noindent
+This and more examples as well as a more detailed explanation can be found in \cite{Herzing}. All points along the boarder between Near - and Farfield need to be adjusted accordingly. \\
+\newline
+We now want to explain how this works out in Code. Figure \ref{fig: CodeRoutineBoxes} shows three boxes, two of which are Nearfield boxes and one is a Farfield box. For reasons of clarity we only show the grid points along the edges.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.70\textwidth]{Pictures/createdPictures/boxes.pdf} 
+	\caption[]{Section of a grid with three boxes, two of which are Nearfield boxes (NF) and one being a Farfield box (FF). The colored planes represent those grid points, where adjustments are necessary, as explained above. One H - Field push consists of four steps. or equivalently four subroutines in Code: 1. \texttt{pushHFieldInsideBoxes}, 2. \texttt{setEFieldOnBoarders}, 3. \texttt{adjustEFields}, 4 \texttt{.pushHFieldAtBorders}. For reasons of clarity we left out the grid points within the boxes. }
+	\label{fig: CodeRoutineBoxes}
+\end{figure}
+\noindent
+
+
 %Bild des simulationsbereichs mit boxen. Wie werden boxen gezählt. 
 %Bild 3D Box anhand dessen die einzelnen Schritte deutlich werden. 
 % - push inside boxes
