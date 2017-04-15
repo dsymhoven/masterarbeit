@@ -21,6 +21,7 @@
 /// @param Grid pointer to Grid struct
 void allocateFieldsOnGrid(Grid *Grid){
     printf("allocating Fields ... \n");
+    
     int numberOfGridPointsInX = Grid->numberOfGridPointsInX;
     int numberOfGridPointsInY = Grid->numberOfGridPointsInY;
     int numberOfGridPointsInZ = Grid->numberOfGridPointsInZ;
@@ -48,6 +49,8 @@ void allocateFieldsOnGrid(Grid *Grid){
 /// @brief allocates memory for H and E fields on the planes at box borders
 /// @param Grid pointer to Grid struct
 void allocateFieldsOnBoxBorders(Grid *Grid){
+    printf("allocating Fields on box borders... \n");
+    
     int numberOfBoxesInX = Grid->numberOfBoxesInX;
     int numberOfBoxesInY = Grid->numberOfBoxesInY;
     int numberOfBoxesInZ = Grid->numberOfBoxesInZ;
@@ -106,9 +109,11 @@ void allocateFieldsOnBoxBorders(Grid *Grid){
 }
 
 /// @brief allocates memeory for UPML coefficients
-/// @param UPML pointer to UPML struct
 /// @param Grid pointer to Grid struct
 void allocateUPMLCoefficients(Grid *Grid){
+    
+    printf("allocating UPML Coefficients ... \n");
+    
     Grid->upml1E = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
     Grid->upml2E = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
     Grid->upml3E = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
@@ -137,11 +142,21 @@ void allocateUPMLCoefficients(Grid *Grid){
 void allocateMemoryOnGrid(Grid *Grid){
     allocateFieldsOnGrid(Grid);
     allocateFieldsOnBoxBorders(Grid);
-    allocateUPMLCoefficients(Grid);
+    
+    if(Grid->useUPML){
+        allocateUPMLCoefficients(Grid);
+    }
     
 }
 
-/// @brief initializes all properties of struct Grid and allocates memory for all arrays
+///@brief initializes all properties of struct Grid and allocates memory for all arrays including UPML
+///@param Grid pointer to Grid struct
+///@param Resolution pointer to Resolution struct
+///@param Box pointer to Box struct
+///@param numberOfBoxesInX number of Boxes in x direction
+///@param numberOfBoxesInY number of Boxes in y direction
+///@param numberOfBoxesInZ number of Boxes in z direction
+///@param useUPML set this value to true and UPML will be used
 void initGrid(Grid *Grid, Resolution *Resolution, Box *Box, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ, bool useUPML){
     
     printf("initializing Grid ...\n");
@@ -171,12 +186,10 @@ void initGrid(Grid *Grid, Resolution *Resolution, Box *Box, const int numberOfBo
     allocateMemoryOnGrid(Grid);
 }
 
-
-
-///@brief method for releasing all previously allocated memory in struct Grid. Put all free() invokations in here
+///@brief Releases all allocated memory for fields.
 ///@param Grid pointer to Grid struct
-void freeMemoryOnGrid(Grid *Grid){
-    printf("releasing allocated memory in Grid...\n");
+void freeFieldsOnGrid(Grid *Grid){
+    printf("releasing allocated memory for fields...\n");
     free(Grid->B);
     Grid->B = NULL;
     free(Grid->E);
@@ -185,6 +198,12 @@ void freeMemoryOnGrid(Grid *Grid){
     Grid->D = NULL;
     free(Grid->H);
     Grid->H = NULL;
+}
+
+///@brief Releases all allocated memory for UPML Coefficients.
+///@param Grid pointer to Grid struct
+void freeUPMLCoefficients(Grid *Grid){
+    printf("releasing allocated memory for UPML Coefficients...\n");
     
     free(Grid->upml1E);
     Grid->upml1E = NULL;
@@ -210,6 +229,12 @@ void freeMemoryOnGrid(Grid *Grid){
     Grid->upml5H = NULL;
     free(Grid->upml6H);
     Grid->upml6H = NULL;
+}
+
+///@brief Releases all allocated memory for fields on box borders.
+///@param Grid pointer to Grid struct
+void freeFieldsOnBoxBorders(Grid *Grid){
+    printf("releasing allocated memory for fields on box borders...\n");
     
     for (int i = 0; i < Grid->numberOfBoxesInX * Grid->numberOfBoxesInY * Grid->numberOfBoxesInZ; i++)
     {
@@ -265,6 +290,18 @@ void freeMemoryOnGrid(Grid *Grid){
     Grid->Ex_kp1 = NULL;
     free(Grid->Ey_kp1);
     Grid->Ey_kp1 = NULL;
+}
+
+///@brief method for releasing all previously allocated memory in struct Grid. Put all free() invokations in here
+///@param Grid pointer to Grid struct
+void freeMemoryOnGrid(Grid *Grid){
+    freeFieldsOnGrid(Grid);
+    freeFieldsOnBoxBorders(Grid);
+    
+    if (Grid->useUPML){
+        freeUPMLCoefficients(Grid);
+    }
+
 }
 
 ///@brief maxwellPusher for E field. This method is only used for testing purposes. See pushEFieldInsideBoxes for the final version
