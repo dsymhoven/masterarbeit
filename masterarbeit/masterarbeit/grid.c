@@ -184,6 +184,10 @@ void initGrid(Grid *Grid, Resolution *Resolution, Box *Box, const int numberOfBo
     Grid->upmlLayerWidth = 10;
     
     allocateMemoryOnGrid(Grid);
+    
+    if (useUPML){
+        calcUPMLCoefficients(Grid);
+    }
 }
 
 ///@brief Releases all allocated memory for fields.

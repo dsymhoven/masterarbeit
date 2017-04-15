@@ -784,6 +784,7 @@ void calcUPMLCoefficients(Grid *Grid){
         }
         Grid->upml5H[i] = (2 * kappa + sigma * dt);
         Grid->upml6H[i] = (2 * kappa - sigma * dt);
+
         
     }
 }

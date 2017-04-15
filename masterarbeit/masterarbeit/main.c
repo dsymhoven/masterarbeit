@@ -18,10 +18,10 @@ int main(int argc, const char * argv[]) {
 //    testNearFieldCalculation();
 //    testLWFieldCalculationForPlane();
 //    testNearAndFarFields();
-//    testUPML();
+    testUPML();
 //    testNearFieldUpdate();
 //    testMultipleParticles();
-    testHistoryBeforeSimulation();
+//    testHistoryBeforeSimulation();
 //    testScattering();
 //    extendHistoryAndCalcLWFieldsIndependantly();
 //    electronScatteringSmallGrid_init9();

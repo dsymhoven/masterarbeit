@@ -414,7 +414,7 @@ void testUPML(){
     
     initResolution(&Resolution, 0.2, 0.2, 0.2);
     initBox(&Box, 16, 16, 16);
-    initGrid(&Grid, &Resolution, &Box, 5, 5, 5, false);
+    initGrid(&Grid, &Resolution, &Box, 5, 5, 5, true);
     
     
     int numberOfParticles = 1;
@@ -424,15 +424,12 @@ void testUPML(){
     
     double dt = 0.5 * Resolution.dx;
     double t = 0;
-    double tEnd = 15;
+    double tEnd = 8;
     
     char filename[32] = "some";
     double Eextern[3];
     double Bextern[3];
     int arrayLength = tEnd / dt;
-    
-
-     
     
     initParticles(Particles, numberOfParticles, arrayLength);
     

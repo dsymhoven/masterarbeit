@@ -83,7 +83,7 @@ void pushEFieldInsideBoxes(Grid *Grid, double dt){
                 Hy_im1jk = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i - 1) + 3 * numberOfGridPointsInZ * (j) + 3 * (k) + 1];
                 Hx_ijm1k = Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * (i) + 3 * numberOfGridPointsInZ * (j - 1) + 3 * (k) + 0];
                 
-                if ( Grid->useUPML){
+                if (Grid->useUPML){
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
                     
                     Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2E[j] * ((Hz_ijk - Hz_ijm1k) / Grid->Resolution.dy - (Hy_ijk - Hy_ijkm1) / Grid->Resolution.dz);
