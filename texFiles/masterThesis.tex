@@ -39,7 +39,7 @@ bibliography=totoc,
 \usepackage{float}
 \usepackage{listings}				% Programm-Code
 \usepackage{longtable}				% Tabellen über mehrere Seiten
-\usepackage{siunitx}				% Einheiten nach SI-Norm
+\usepackage[binary-units=true]{siunitx}				% Einheiten nach SI-Norm
 \usepackage{listings}                                    % Verwendung von Matlab-Code
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -708,7 +708,7 @@ For $\omega_ch < 0.35$ we get an error smaller than $1\%$.
 The previously presented methods calculate the particle trajectory solely at discrete points in time $x_i^{\mu}(\tau)$. Calculating Liénard-Wiechert fields according to equation \eqref{eqn: Liénard-Wiechert} however, requires the intersection point of the trajectory with the backward lightcone of the observation point. 
 In most cases the calculated points of the trajectory are not lying directly on the lightcone, so we need a procedure to calculate the intersection point exactly.\\
 The simplest solution is a linear interpolation between the last point inside and the first point outside the lightcone. Figure \ref{fig: Interpolation} illustrates the situation.
-\begin{figure}[H]
+\begin{figure}[t]
 	\centering
 		\includegraphics[width=0.80\textwidth]{Pictures/LightconeNew.pdf}
 	\caption[Interpolation of Trajectories]{Minkowski space showing the particle trajectory with starting point $x^{\mu}_0(t_0)$ and last point $x^{\mu}_N(t)$. The observation point $x^{\mu}_o(t)$ with its backward lightcone is also shown. If we want to calculate the Liénard-Wiechert fields at the observation point $x^{\mu}_o(t)$, we need the intersection point $x^{\mu}_c(t_{ret})$ of the trajectory with the backward lightcone. }
@@ -924,11 +924,11 @@ vanishes, instead of propagating with speed of light. That means, that the Yee-S
 
 \chapter{Hybrid Field Approach}
 \label{cha: HybridFieldApproach}
-After having discussed the fundamentals, we now want to dive into practice. In section \ref{sec: Yee-Scheme} we learned how to store and propagate the fields on a numerical grid. In section \ref{sec: lw-potentials} we derived an analytical expression, of how to calculate the fields of a moving charged particle. We also observed that there is a singularity in \eqref{eqn: Liénard-Wiechert} at the particle position itself. That means, that the fields will vary strongly in  a vicinity of the particle and can not be resolved correctly on the grid, as discussed in section \ref{sec: DispersionRelation}. Hence, it seems plausible to separate the simulation area into appropriate Near - and Farfield areas. Within the Nearfield area of a particle, its fields will \textbf{not} be stored on the grid. We then do not need to worry about the singularity. Only Farfields from other particles, propagated into the Nearfield area will be further propagated and stored on the grid. Possible interactions with other particles within the Nearfield area will be caluclated analytically from \eqref{eqn: Liénard-Wiechert}. \\
-Farfields will be stored on the grid and propagated with the Yee-Scheme \eqref{eqn: discreteMaxwellEq}.
+After having discussed the fundamentals, we now want to dive into practice. In section \ref{sec: Yee-Scheme} we learned how to store and propagate the fields on a numerical grid. In section \ref{sec: lw-potentials} we derived an analytical expression, of how to calculate the fields of a moving charged particle. We also observed that there is a singularity in \eqref{eqn: Liénard-Wiechert} at the particle position itself. That means, that the fields will vary strongly in  a vicinity of the particle and can not be resolved correctly on the grid, as discussed in section \ref{sec: DispersionRelation}. Hence, it seems plausible to separate the simulation area into appropriate Near - and far field areas. Within the near field area of a particle, its fields will \textbf{not} be stored on the grid. We then do not need to worry about the singularity. Only far fields from other particles, propagated into the near field area will be further propagated and stored on the grid. Possible interactions with other particles within the near field area will be caluclated analytically from \eqref{eqn: Liénard-Wiechert}. \\
+far fields will be stored on the grid and propagated with the Yee-Scheme \eqref{eqn: discreteMaxwellEq}.
 %======================== Near and Far- Fields ========================
-\section{Near-and Farfields}
-Before we can separate the simulation area into Near - and Farfields, we need to initialize a grid. We divide the grid in \texttt{numberBoxesInX}, \texttt{numberBoxesInY} and \texttt{numberBoxesInZ} boxes, each of which has \texttt{numberOfGridPointsForBoxInX}, \texttt{numberOfGridPointsForBoxInY} and \texttt{numberOfGridPointsForBoxInZ} length, which leaves us with a total 
+\section{Near-and far fields}
+Before we can separate the simulation area into Near - and far fields, we need to initialize a grid. We divide the grid in \texttt{numberBoxesInX}, \texttt{numberBoxesInY} and \texttt{numberBoxesInZ} boxes, each of which has \texttt{numberOfGridPointsForBoxInX}, \texttt{numberOfGridPointsForBoxInY} and \texttt{numberOfGridPointsForBoxInZ} length, which leaves us with a total 
 \begin{lstlisting}
 numberOfGridPointsInX = numberOfGridPointsForBoxInX * numberOfBoxesInX;
 numberOfGridPointsInY = numberOfGridPointsForBoxInY * numberOfBoxesInY;
@@ -940,25 +940,25 @@ lengthOfSimulationBoxInX = numberOfGridPointsInX * dx;
 lengthOfSimulationBoxInY = numberOfGridPointsInY * dy;
 lengthOfSimulationBoxInZ = numberOfGridPointsInZ * dz;
 \end{lstlisting}
-The Nearfield is then defined as the $3 \cdot 3 \cdot 3 = 27$ boxes with the box, containing the particle, in the center. In figure \ref{fig: nearFields} the Nearfields of one and two particles are shown. The Nearfields can of course overlap. The Nearfield box at $(18,18)$ belongs to both particles.
+The near field is then defined as the $3 \cdot 3 \cdot 3 = 27$ boxes with the box, containing the particle, in the center. In figure \ref{fig: near fields} the near fields of one and two particles are shown. The near fields can of course overlap. The near field box at $(18,18)$ belongs to both particles.
 \begin{figure}
 \subfigure[]{\includegraphics[width=0.49\textwidth]{Pictures/nearFieldOneParticle.png}}\hfill
 \subfigure[]{\includegraphics[width=0.49\textwidth]{Pictures/nearFieldTwoParticles.png}}
-\caption[Nearfields of one and two particles]{Nearfields of one (a) and two (b) particles. The box at $(18,18)$ belongs to the Nearfield of both particles, marked with $e^{-}$. Notice the staggered red grid in the background. In this example we used 8 boxes, with 20 grid points each, and a resolution of $dx = dy = dz = 0.2$. The plotted plane was chosen accordingly to the z - coordinate of the particle.}	
-\label{fig: nearFields}
+\caption[near fields of one and two particles]{near fields of one (a) and two (b) particles. The box at $(18,18)$ belongs to the near field of both particles, marked with $e^{-}$. Notice the staggered red grid in the background. In this example we used 8 boxes, with 20 grid points each, and a resolution of $dx = dy = dz = 0.2$. The plotted plane was chosen accordingly to the z - coordinate of the particle.}	
+\label{fig: near fields}
 \end{figure}
 
 %======================== Near and Far- Fields ========================
 \section{Field Push}
-We now want to explain, how a field push actually works. Since we only propagate fields in the Farfield area as explained in section \label{sec: Yee-Scheme} special care needs to be taken at the boundaries between Farfield and Nearfield. To explain this, consider the following plane of a grid illustrated in figure \ref{fig: NearfieldFarfieldBorder}
+We now want to explain, how a field push actually works. Since we only propagate fields in the far field area as explained in section \label{sec: Yee-Scheme} special care needs to be taken at the boundaries between far field and near field. To explain this, consider the following plane of a grid illustrated in figure \ref{fig: nearFieldFarFieldBorder}
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/Grid.png} 
-	\caption[One plane of a grid showing the Nearfield and Farfield of a particle. The Nearfield does not contain any field values of the particle]{One plane of a grid showing the \textcolor{red}{Nearfield} and Farfield of a particle. The \textcolor{red}{Nearfield} does not contain any field values of the particle. \cite{Herzing}}
-	\label{fig: NearfieldFarfieldBorder}
+	\caption[One plane of a grid showing the near field and far field of a particle. The near field does not contain any field values of the particle]{One plane of a grid showing the \textcolor{red}{near field} and far field of a particle. The \textcolor{red}{near field} does not contain any field values of the particle. \cite{Herzing}}
+	\label{fig: nearFieldFarFieldBorder}
 \end{figure}
 \noindent
-The \textcolor{red}{red} dots are considered to be the Nearfield area of a particle. The black dots are therefore the Farfield area. The grid points within the Nearfild does not contain any field values. We only store and propagate fields on the grid points in the Farfield. If we now want to push the value for $H_z$ at $(2,4,k)$ (recall that each grid point contains the field values for either $H_x$, $H_y$, $H_z$ or $E_x$, $E_y$, $E_z$ due to the staggered grid, explained in section \ref{sec: Yee-Scheme}), where $k \in (1, 2, 3, \ldots , \text{numberOfGridPointsInZ} - 1 )$, we need to solve 
+The \textcolor{red}{red} dots are considered to be the near field area of a particle. The black dots are therefore the far field area. The grid points within the Nearfild does not contain any field values. We only store and propagate fields on the grid points in the far field. If we now want to push the value for $H_z$ at $(2,4,k)$ (recall that each grid point contains the field values for either $H_x$, $H_y$, $H_z$ or $E_x$, $E_y$, $E_z$ due to the staggered grid, explained in section \ref{sec: Yee-Scheme}), where $k \in (1, 2, 3, \ldots , \text{numberOfGridPointsInZ} - 1 )$, we need to solve 
 \beq
 \frac{\del H_z}{\del t} = - \left( \frac{\del E_y}{\del x} - \frac{\del E_x}{\del y} \right).
 \eeq
@@ -967,23 +967,23 @@ Using the discretized Maxwell Equations \eqref{eqn: discreteMaxwellEq} we get
 \vec{H}\Bigr|^{n+1}_{z (2,4,k)} = \vec{H}\Bigr|^{n}_{z (2,4,k)} - h \left(\frac{\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}} - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta x} - \frac{E\Bigr|^{n+\frac{1}{2}}_{x (2,5,k)} - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta y}\right).
 \eeq
 \noindent
-$\vec{H}\Bigr|^{n+1}_{z (2,4,k)}$ is stored on a Farfield grid point. Its calculation, however, requires a field value $\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}}$, which is stored on a Nearfield grid point and therefore contains no field values from the particle (it can however contain field values from other particles propagated from the outside into the Nearfield area). Hence we need to analytically calculate the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at $(3,4,k)$ $\textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (3,4,k)}}$ and add it to the field value already stored at this grid point. Finally the correct calculation is
+$\vec{H}\Bigr|^{n+1}_{z (2,4,k)}$ is stored on a far field grid point. Its calculation, however, requires a field value $\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}}$, which is stored on a near field grid point and therefore contains no field values from the particle (it can however contain field values from other particles propagated from the outside into the near field area). Hence we need to analytically calculate the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at $(3,4,k)$ $\textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (3,4,k)}}$ and add it to the field value already stored at this grid point. Finally the correct calculation is
 \beq
 \vec{H}\Bigr|^{n+1}_{z (2,4,k)} = \vec{H}\Bigr|^{n}_{z (2,4,k)} - h \left(\frac{\left(\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}} + \textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (3,4,k)}}\right) - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta x} - \frac{E\Bigr|^{n+\frac{1}{2}}_{x (2,5,k)} - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta y}\right).
 \eeq
 \noindent
-On the contrary, if we want to push the value for $H_z$ at $\textcolor{red}{(6,4,k)}$ we need to analytically calculate the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at $(7,4,k)$ $\textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (7,4,k)}}$ and subtract it from the field value already stored at this grid point. $(7,4,k)$ already contains the field contribution of the particle, since it is a Farfield grid point. And because $\textcolor{red}{(6,4,k)}$ is a Nearfield grid point we only want to take contributions from other particles into account, which are about to propagate into our Nearfield area. After subtracting the particles own contributions the correct push can be calculated via
+On the contrary, if we want to push the value for $H_z$ at $\textcolor{red}{(6,4,k)}$ we need to analytically calculate the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at $(7,4,k)$ $\textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (7,4,k)}}$ and subtract it from the field value already stored at this grid point. $(7,4,k)$ already contains the field contribution of the particle, since it is a far field grid point. And because $\textcolor{red}{(6,4,k)}$ is a near field grid point we only want to take contributions from other particles into account, which are about to propagate into our near field area. After subtracting the particles own contributions the correct push can be calculated via
 \beq
 \textcolor{red}{\vec{H}\Bigr|^{n+1}_{z (6,4,k)}} = \textcolor{red}{\vec{H}\Bigr|^{n}_{z (6,4,k)}} - h \left(\frac{\left(E\Bigr|^{n+\frac{1}{2}}_{y (7,4,k)} - \textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (7,4,k)}}\right) - \textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (6,4,k)}}}{\Delta x} - \frac{\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{x (6,5,k)}} - \textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (6,4,k)}}}{\Delta y}\right).
 \eeq
 \noindent
-This and more examples as well as a more detailed explanation can be found in \cite{Herzing}. All points along the border between Near - and Farfield need to be adjusted accordingly. \\
+This and more examples as well as a more detailed explanation can be found in \cite{Herzing}. All points along the border between near - and far field need to be adjusted accordingly. \\
 \newline
-We now want to explain how this works out in Code. Figure \ref{fig: CodeRoutineBoxes} shows three boxes, two of which are Nearfield boxes and one is a Farfield box. For reasons of clarity we only show the grid points along the edges.
+We now want to explain how this works out in Code. Figure \ref{fig: CodeRoutineBoxes} shows three boxes, two of which are near field boxes and one is a far field box. For reasons of clarity we only show the grid points along the edges.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.70\textwidth]{Pictures/createdPictures/boxes.pdf} 
-	\caption[Section of a grid with three boxes, two of which are Nearfield boxes (NF) and one being a Farfield box (FF)]{Section of a grid with three boxes, two of which are Nearfield boxes (NF) and one being a Farfield box (FF). The colored planes represent those grid points, where adjustments are necessary, as explained above. One $\vec{E}$ - Field push consists of four steps. or equivalently four subroutines in Code: 1. \texttt{pushEFieldInsideBoxes}, 2. \texttt{setHFieldOnBorders}, 3. \texttt{adjustHFields}, 4 \texttt{pushEFieldAtBorders}. For reasons of clarity we left out the grid points within the boxes. }
+	\caption[Section of a grid with three boxes, two of which are near field boxes (NF) and one being a far field box (FF)]{Section of a grid with three boxes, two of which are near field boxes (NF) and one being a far field box (FF). The colored planes represent those grid points, where adjustments are necessary, as explained above. One $\vec{E}$ - Field push consists of four steps. or equivalently four subroutines in Code: 1. \texttt{pushEFieldInsideBoxes}, 2. \texttt{setHFieldOnBorders}, 3. \texttt{adjustHFields}, 4 \texttt{pushEFieldAtBorders}. For reasons of clarity we left out the grid points within the boxes. }
 	\label{fig: CodeRoutineBoxes}
 \end{figure}
 \noindent
@@ -999,15 +999,15 @@ Since this is the core of the simulation, we will go over all of these steps in 
 In this routine we simply calculate the discretized Maxwell Equations \eqref{eqn: discreteMaxwellEq}. We loop through the entire grid and store the necessary field values
 but leave out those grid points which are on the left plane (yz - plane) of each box. In figure \ref{fig: CodeRoutineBoxes} marked with \textcolor{red}{red}.
 \newline 
-Now all $\vec{E}$ values in all boxes are pushed except those on the \textcolor{red}{red} plane. To push those we need to access the field values on the \textcolor{blue}{blue} and \textcolor{green}{green} plane, which are in the Farfield and therefore need to be adjusted. 
+Now all $\vec{E}$ values in all boxes are pushed except those on the \textcolor{red}{red} plane. To push those we need to access the field values on the \textcolor{blue}{blue} and \textcolor{green}{green} plane, which are in the far field and therefore need to be adjusted. 
 
 \subsection{setHFieldOnBorders()}
 In order to push $\vec{E}$ we need values of $\vec{H}$. Therefore this methods loops through all boxes and stores all values of $\vec{H}$ in the plane \textcolor{blue}{left}, in front and \textcolor{green}{below} of the current box (the plane in front is not shown for reasons of clarity). As can be seen from the Yee Scheme only Hy and Hz are needed from the left plane. Hz and Hx are needed from the plane in front and Hy and Hx are needed from the plane below. If the current box is a box where to the left does not exist then the respective values for H are set to zero.
 
 \subsection{adjustHField()}
 This routine consists of three subroutines \texttt{adjustHyz\_im1()}, \texttt{adjustHxz\_jm1()} and \\
- \texttt{adjustHxy\_km1()}. The first adjusts Hy and Hz on plane to the \textcolor{blue}{left}, the second adjusts Hx and Hz on the plane in front (not shown) and the latter adjusts Hx and Hy on the plane \textcolor{green}{below}. All of those three subroutines do conceptionally the same. They loop through all boxes and check whether the current box is part of the Nearfield of the particle and the box to left is not. This is the situation shown in figure \ref{fig: CodeRoutineBoxes}. Then the respective Liénard - Wiechert fields get calculated on the \textcolor{blue}{blue} plane and subtracted from the values stored by \texttt{setHFieldOnBorders()}. Notice that the \textcolor{red}{red} plane is part of a Nearfield box and the \textcolor{blue}{blue} plane is part of a Farfield box. Hence we need to subtract the field contributions of the particle on the blue plane.\\
-On the contrary, if we have the case that the current box is a Farfield box and the box to left is a Nearfield box, then the \textcolor{red}{red} plane is part of a Farfield box and the \textcolor{blue}{blue} plane is part of a Nearfield box. Hence we calculate the Liénard - Wiechert fields on the \textcolor{blue}{blue} plane and add them to the respective values stored by \texttt{setHFieldOnBorders()}.
+ \texttt{adjustHxy\_km1()}. The first adjusts Hy and Hz on plane to the \textcolor{blue}{left}, the second adjusts Hx and Hz on the plane in front (not shown) and the latter adjusts Hx and Hy on the plane \textcolor{green}{below}. All of those three subroutines do conceptionally the same. They loop through all boxes and check whether the current box is part of the near field of the particle and the box to the left is not. This is the situation shown in figure \ref{fig: CodeRoutineBoxes}. Then the respective Liénard-Wiechert fields get calculated on the \textcolor{blue}{blue} plane and subtracted from the values stored by \texttt{setHFieldOnBorders()}. Notice that the \textcolor{red}{red} plane is part of a near field box and the \textcolor{blue}{blue} plane is part of a far field box. Hence we need to subtract the field contributions of the particle on the \textcolor{blue}{blue} plane.\\
+On the contrary, if we have the case that the current box is a far field box and the box to left is a near field box, then the \textcolor{red}{red} plane is part of a far field box and the \textcolor{blue}{blue} plane is part of a near field box. Hence we calculate the Liénard-Wiechert fields on the \textcolor{blue}{blue} plane and add them to the respective values stored by \texttt{setHFieldOnBorders()}.
 
 \subsection{pushEFieldOnBorders()}
 This method finally pushes the $\vec{E}$ - Field with the adjusted values. It also loops through the entire grid, but only gets active if the current grid point lies on the \textcolor{red}{red} plane. If so, then it gets the values stored by \texttt{setHFieldOnBorders()} and adjusted by \texttt{adjustHField()} and uses them to calculate the discretized Maxwell Equation \eqref{eqn: discreteMaxwellEq}.\\
@@ -1030,29 +1030,29 @@ As an example we simulate an electron with $\gamma = 1.1$ in a constant external
 \label{fig: gyration electron}
 \end{figure}
 \noindent
-The electron moves in a circular fashion in the $xy$ - plane. The red line in the center of the Nearfield area shows the particles trajectory. The initial conditions are chosen such that the particle does not leave its initial box. That means that the Nearfield does not change during runtime. The Liénard-Wiechert fields are only calculated at the border between Near - and Farfield and only if the retardation constraint $t_{ret} > 0$ is met. \\
-As we already mentioned before, figure \ref{fig: gyration two electrons} finally shows the expected behaviour of two particles far fields propagating into each others Nearfield regions. 
+The electron moves in a circular fashion in the $xy$ - plane. The red line in the center of the near field area shows the particles trajectory. The initial conditions are chosen such that the particle does not leave its initial box. That means that the near field does not change during runtime. The Liénard-Wiechert fields are only calculated at the border between near - and far field and only if the retardation constraint $t_{ret} > 0$ is met. \\
+As we already mentioned before, figure \ref{fig: gyration two electrons} finally shows the expected behaviour of two particles far fields propagating into each others near field regions. 
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/gyrationTwoParticles.png} 
-	\caption[Gyration of two electrons with $\gamma = 1,1$ each.]{Gyration of two electrons with $\gamma = 1,1$ each.  This shows the expected behaviour of two particles far fields propagating into each others Nearfield regions. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$ and length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$.}
+	\caption[Gyration of two electrons with $\gamma = 1,1$ each.]{Gyration of two electrons with $\gamma = 1,1$ each.  This shows the expected behaviour of two particles far fields propagating into each others near field regions. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$ and length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$.}
 	\label{fig: gyration two electrons}
 \end{figure}
 \noindent
 But what if the particle does leave its initial box ? 
 
-\section{Particle Push and Nearfield Update}
-In order to push the particle properly not just the external fields but also the field contributions from other particles propagated into the Nearfield region need to be taken into account. To get an even better result we use trilinear interpolation (see section \ref{sec: trilinear Interpolation}) to interpolate the field value at the particle position from the surrounding eight grid points. If, however, another particle2 enters the Nearfield region of the observed particle1 equation \eqref{eqn: Liénard-Wiechert} is used to calculate the field emitted by particle2 at the position of particle1 analytically. \\
+\section{Particle Push and near field Update}
+In order to push the particle properly not just the external fields but also the field contributions from other particles propagated into the near field region need to be taken into account. To get an even better result we use trilinear interpolation (see section \ref{sec: trilinear Interpolation}) to interpolate the field value at the particle position from the surrounding eight grid points. If, however, another particle2 enters the near field region of the observed particle1 equation \eqref{eqn: Liénard-Wiechert} is used to calculate the field emitted by particle2 at the position of particle1 analytically. \\
 \newline
-If a particle changes its box during one push from time $t$ to $t + \dm t$ the particles Nearfield changes as illustrated in figure \ref{fig: nearFieldUpdate}
+If a particle changes its box during one push from time $t$ to $t + \dm t$ the particles near field changes as illustrated in figure \ref{fig: nearFieldUpdate}
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.40\textwidth]{Pictures/nearFieldUpdate.png} 
-	\caption[Particle push from time $t$ to $t + \dm t$. Since the particle changes its box the Nearfield region also changes]{\textcolor{blue}{Particle} push from time $t$ to $t + \dm t$. Since the particle changes its box the Nearfield region also changes. The boxes marked with \includegraphics[height=12pt]{Pictures/nearFieldOldBoxes.png} do no longer belong to the Nearfield, whereas the boxes marked with \includegraphics[height=12pt]{Pictures/nearFieldNewBoxes.png} do now belong to the Nearfield area. Boxes illustrated as \includegraphics[height=12pt]{Pictures/nearFieldBoth.png} remain as Nearfield boxes. \cite{Herzing}}
+	\caption[Particle push from time $t$ to $t + \dm t$. Since the particle changes its box the near field region also changes]{\textcolor{blue}{Particle} push from time $t$ to $t + \dm t$. Since the particle changes its box the near field region also changes. The boxes marked with \includegraphics[height=12pt]{Pictures/nearFieldOldBoxes.png} do no longer belong to the near field, whereas the boxes marked with \includegraphics[height=12pt]{Pictures/nearFieldNewBoxes.png} do now belong to the near field area. Boxes illustrated as \includegraphics[height=12pt]{Pictures/nearFieldBoth.png} remain as near field boxes. \cite{Herzing}}
 	\label{fig: nearFieldUpdate}
 \end{figure}
 \noindent
-There are three situations we need to take care of. First the boxes which do not longer belong to the Nearfield area, marked with \includegraphics[height=12pt]{Pictures/nearFieldOldBoxes.png} in figure \ref{fig: nearFieldUpdate}. Since those boxes were part of the Nearfield they didn't contain any field contributions of the particle. But because they are no longer part of the Nearfield region those field contributions need to be added. The routine \texttt{addLWFieldsInBox()} calculates the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at all grid points in the specified box and adds them to the respective grid point. Second, all boxes marked with \includegraphics[height=12pt]{Pictures/nearFieldNewBoxes.png} are now part of the Nearfield region and therefore the Liénard-Wiechert field of the particle at all grid points in the specified box need to be subtracted. The routine \texttt{subLWFieldsInBox()} does exactly that. Lastly there are boxes which remain as part of the Nearfield area marked with \includegraphics[height=12pt]{Pictures/nearFieldBoth.png}. Nothing needs to be done here.\\
+There are three situations we need to take care of. First the boxes which do not longer belong to the near field area, marked with \includegraphics[height=12pt]{Pictures/nearFieldOldBoxes.png} in figure \ref{fig: nearFieldUpdate}. Since those boxes were part of the near field they didn't contain any field contributions of the particle. But because they are no longer part of the near field region those field contributions need to be added. The routine \texttt{addLWFieldsInBox()} calculates the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at all grid points in the specified box and adds them to the respective grid point. Second, all boxes marked with \includegraphics[height=12pt]{Pictures/nearFieldNewBoxes.png} are now part of the near field region and therefore the Liénard-Wiechert field of the particle at all grid points in the specified box need to be subtracted. The routine \texttt{subLWFieldsInBox()} does exactly that. Lastly there are boxes which remain as part of the near field area marked with \includegraphics[height=12pt]{Pictures/nearFieldBoth.png}. Nothing needs to be done here.\\
 As an example we simulate an electron with $\gamma = 1,2$ in a crossed $\vec{E}$ and $\vec{B}$ field. The results are shown in figure \ref{fig: electronCrossedField}
 \begin{figure}[H]
 \subfigure[t = 5]{\includegraphics[width=0.33\textwidth]{Pictures/crossedField_5.png}}\hfill
@@ -1064,7 +1064,20 @@ As an example we simulate an electron with $\gamma = 1,2$ in a crossed $\vec{E}$
 \noindent
 
 \section{Particle History}
-\section{Farfield Setup Before Simulation}
+In order to calculate the Liénard-Wiechert Field according to \eqref{eqn: Liénard-Wiechert} at an observation point, i.e. a grid point, the intersection point of the particles trajectory with the backward lightcone of that observation point is needed. For a more detailed explanation see section \ref{sec: Interpolation of Trajectories}. That means, that we first have to store all positions of the particle. Second we need to track them along the trajectory to check whether the backward lightcone was crossed or not. To store the entire trajectory of a few particles is not very memory consuming.  However, if we want to simulate $10^{10}$ or even $10^{20}$ particles we would need a huge amount of memory just to store the trajectories. Let's do a rough calculation:\\
+One position contains of four Doubles. One for time, three for spacial components. A Double has 8 \si{\byte}. That makes a total of 32 \si{\byte} memory for one particle position. If we want to simulate for $t = 10$ with a resolution of $dx = dy = dz = 0.1$ using Yee-Scheme we will have $\frac{10}{0.5 \cdot 0.1} = 200$ steps. That gives us $200 \cdot 32~\si{\byte} = 6.4~\si{\kilo\byte}$. For $10^10$ particles this sums up to 64 \si{\tera\byte}. This is not feasible! Not to mention that there is a lot more memory necessary to store all the calculated fields on the grid.\\
+\newline
+The problem is that we can't simply delete the positions we already used to find an intersection point, because the intersection point depends on the particles velocity. The faster the particle gets, the longer the history needs to be. We can see why that is in the following picture \ref{fig: particleHistory}
+\begin{figure}[H]
+\subfigure[$v = 0$]{\includegraphics[width=0.33\textwidth]{Pictures/createdPictures/historyLengthStill.pdf}}\hfill
+\subfigure[$v \approx 0.5 c$]{\includegraphics[width=0.33\textwidth]{Pictures/createdPictures/historyLengthHalfC.pdf}}\hfill
+\subfigure[$v \approx c$]{\includegraphics[width=0.33\textwidth]{Pictures/createdPictures/historyLengthAlmostC.pdf}}
+\caption[The faster the particle gets, the longer the history needs to be]{Observation point $x_o$ at time $ct$. The particle trajectory is shown in ocher. The intersection point is marked red. We can see that the faster the particle gets the longer the particle history needs to be in order to find the intersection point. At the speed of light there would be no intersection point, since the backward lightcone and the particle history would be parallel. }	
+\label{fig: particleHistory}
+\end{figure}
+\noindent
+
+\section{Far field Setup Before Simulation}
 \section{Electron Scattering in an electromagnetic wave}
 %======================== UPML ============================
 %===========================================================

@@ -8,26 +8,30 @@
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Determination of $\left |\qopname \relax o{tan}\left (\frac {\theta }{2}\right )\right |$ from boris roation}}{23}{figure.2.3}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Interpolation of Trajectories}}{25}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Cube with its eight corner points and interpolation point $P_f$.}}{27}{figure.3.2}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Cube with its eight corner points and interpolation point $P_f$.}}{26}{figure.3.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Yee-Box}}{30}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of numerical and analytical dispersion relation of discretized Maxwell Equations with Yee Scheme}}{33}{figure.4.2}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Yee-Box}}{29}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of numerical and analytical dispersion relation of discretized Maxwell Equations with Yee Scheme}}{32}{figure.4.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Nearfields of one and two particles}}{35}{figure.5.1}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{35}{figure.5.1}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{35}{figure.5.1}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces One plane of a grid showing the Nearfield and Farfield of a particle. The Nearfield does not contain any field values of the particle}}{36}{figure.5.2}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Section of a grid with three boxes, two of which are Nearfield boxes (NF) and one being a Farfield box (FF)}}{38}{figure.5.3}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Simulation of an electron with $\gamma = 1,1$ in a constant $B_z = 1$ field}}{40}{figure.5.4}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {t = 7}}}{40}{figure.5.4}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {t = 9}}}{40}{figure.5.4}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {t = 11}}}{40}{figure.5.4}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Gyration of two electrons with $\gamma = 1,1$ each.}}{41}{figure.5.5}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Particle push from time $t$ to $t + \dm t$. Since the particle changes its box the Nearfield region also changes}}{42}{figure.5.6}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Simulation of an electron with $\gamma = 1,2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2}}{43}{figure.5.7}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {t = 5}}}{43}{figure.5.7}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {t = 7}}}{43}{figure.5.7}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {t = 9}}}{43}{figure.5.7}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces near fields of one and two particles}}{34}{figure.5.1}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{34}{figure.5.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{34}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces One plane of a grid showing the near field and far field of a particle. The near field does not contain any field values of the particle}}{35}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Section of a grid with three boxes, two of which are near field boxes (NF) and one being a far field box (FF)}}{37}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Simulation of an electron with $\gamma = 1,1$ in a constant $B_z = 1$ field}}{39}{figure.5.4}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {t = 7}}}{39}{figure.5.4}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {t = 9}}}{39}{figure.5.4}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {t = 11}}}{39}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Gyration of two electrons with $\gamma = 1,1$ each.}}{40}{figure.5.5}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Particle push from time $t$ to $t + \dm t$. Since the particle changes its box the near field region also changes}}{41}{figure.5.6}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Simulation of an electron with $\gamma = 1,2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2}}{42}{figure.5.7}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {t = 5}}}{42}{figure.5.7}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {t = 7}}}{42}{figure.5.7}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {t = 9}}}{42}{figure.5.7}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces The faster the particle gets, the longer the history needs to be}}{43}{figure.5.8}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$v = 0$}}}{43}{figure.5.8}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$v \approx 0.5 c$}}}{43}{figure.5.8}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$v \approx c$}}}{43}{figure.5.8}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
