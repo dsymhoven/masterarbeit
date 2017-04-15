@@ -18,7 +18,7 @@ int main(int argc, const char * argv[]) {
 //    testNearFieldCalculation();
 //    testLWFieldCalculationForPlane();
 //    testNearAndFarFields();
-    testUPML();
+//    testUPML();
 //    testNearFieldUpdate();
 //    testMultipleParticles();
 //    testHistoryBeforeSimulation();
@@ -28,7 +28,7 @@ int main(int argc, const char * argv[]) {
 //    electronScatteringLargeGrid_init8();
 //    testTimeDependentExternalFields();
 //    scatteringInEMWave();
-//    testRadiationDampingVSLorentzForce();
+    testRadiationDampingVSLorentzForce();
     return 0;
 }   
 

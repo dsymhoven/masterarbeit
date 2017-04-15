@@ -1391,11 +1391,13 @@ void testRadiationDampingVSLorentzForce(){
     Grid Grid;
     Resolution Resolution;
     Box Box;
+    Forces Forces;
  
     
     initResolution(&Resolution, 0.1, 0.1, 0.1);
     initBox(&Box, 32, 32, 32);
     initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
+    initForces(&Forces);
     
     int numberOfParticles = 1;
     
@@ -1403,9 +1405,9 @@ void testRadiationDampingVSLorentzForce(){
     Particle *Particle1 = &Particles[0];
     
     double dt = 0.5 * Resolution.dx;
-    double t = 40;
+    double t = 0;
     double tStart = t;
-    double tEnd = 75;
+    double tEnd = 50;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -1414,18 +1416,15 @@ void testRadiationDampingVSLorentzForce(){
     
     initParticles(Particles, numberOfParticles, arrayLength);
     
-    Forces Forces;
-    initForces(&Forces);
-    
     Particle1->mass = 1;
     Particle1->charge = 1;
     
     Particle1->x[0] = 0;
-    Particle1->x[1] = 10;
-    Particle1->x[2] = 10;
-    Particle1->x[3] = 16.401;
+    Particle1->x[1] = 13;
+    Particle1->x[2] = 17;
+    Particle1->x[3] = 16;
     
-    Particle1->u[1] = 0.9;
+    Particle1->u[1] = 0.458;
     Particle1->u[2] = 0;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
@@ -1436,7 +1435,7 @@ void testRadiationDampingVSLorentzForce(){
     
     Bextern[0] = 0;
     Bextern[1] = 0;
-    Bextern[2] = 1;
+    Bextern[2] = 0.1;
     
     int planeForPlotting = Particle1->x[3] / Resolution.dz;
     // ======================================================
@@ -1476,7 +1475,7 @@ void testRadiationDampingVSLorentzForce(){
         t += dt;
     }
 //    clearFieldsFromGrid(&Grid);
-    calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
 //    writeFieldComponentsForFourierAnalysisToFile(&Grid, filename, 0, planeForPlotting, true, false);
     writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
 //    writeExternalFieldsToFile(&Grid, Eextern, Bextern, t, filename, 0, planeForPlotting, true, false);

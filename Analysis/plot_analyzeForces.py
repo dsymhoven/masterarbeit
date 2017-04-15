@@ -9,12 +9,12 @@ lorentzForce = data[:,2]
 ratio = data[:,3]
 
 fig = plt.figure()
-plt.plot(time, dampingForce, label = "dampingForce")
-plt.plot(time, lorentzForce, label = "lorentzForce")
-plt.plot(time, ratio, label = "ratio")
+# plt.plot(time, dampingForce, label = "dampingForce")
+# plt.plot(time, lorentzForce, label = "lorentzForce")
+plt.plot(time, ratio, label = r"$\frac{F_{damping}}{F_{lorentz}}$")
 plt.xlabel("Simulation time [s]")
 plt.ylabel("Force [factor * N]")
-plt.legend(loc = "upper left")
+plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 
 fig.savefig("Forces/dampingTermVSLorentzForce.png", bbox_inches='tight', dpi=300)
 

@@ -58,14 +58,14 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
                 Ez = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
                 if(plotE){
                     Esq = Ex * Ex + Ey * Ey + Ez * Ez;
-                    fprintf(fid, "%f\t", Esq);
+                    fprintf(fid, "%.12f\t", Esq);
                     if (Esq > Grid->EMax){
                         Grid->EMax = Esq;
                     }
                 }
                 if (plotB){
                     Bsq = Hx * Hx + Hy * Hy + Hz * Hz;
-                    fprintf(fid2, "%f\t", Bsq);
+                    fprintf(fid2, "%.12f\t", Bsq);
                     if (Bsq > Grid->HMax){
                         Grid->HMax = Bsq;
                     }
@@ -257,7 +257,7 @@ void writeForcesToFile(Forces *Forces, double t){
     double absDampingTerm = sqrt(Forces->damping[0]*Forces->damping[0] + Forces->damping[1]*Forces->damping[1] + Forces->damping[2]*Forces->damping[2]);
     double absLorentzForce = sqrt(Forces->lorentz[0]*Forces->lorentz[0] + Forces->lorentz[1]*Forces->lorentz[1] + Forces->lorentz[2]*Forces->lorentz[2]);
     
-    fprintf(fid2, "%f %f %f %f\n", t, absDampingTerm, absLorentzForce, absDampingTerm / absLorentzForce);
+    fprintf(fid2, "%f %.12f %.12f %.12f\n", t, absDampingTerm, absLorentzForce, absDampingTerm / absLorentzForce);
     fclose(fid2);
 }
 
@@ -272,7 +272,7 @@ void writeGridParametersToFile(Grid *Grid){
     }
     else{
         printf("writing grid parameters to file\n");
-        fprintf(fid, "%f %f %f %d %d %d %f %f %f %f %f\n", Grid->Resolution.dx, Grid->Resolution.dy, Grid->Resolution.dz, Grid->Box.numberOfGridPointsInX, Grid->Box.numberOfGridPointsInY, Grid->Box.numberOfGridPointsInZ, Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ, Grid->EMax, Grid->HMax);
+        fprintf(fid, "%f %f %f %d %d %d %f %f %f %.12f %.12f\n", Grid->Resolution.dx, Grid->Resolution.dy, Grid->Resolution.dz, Grid->Box.numberOfGridPointsInX, Grid->Box.numberOfGridPointsInY, Grid->Box.numberOfGridPointsInZ, Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ, Grid->EMax, Grid->HMax);
     }
     fclose(fid);
 }

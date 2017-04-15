@@ -1233,7 +1233,6 @@ void addLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
             break;
         }
     }
-    
     switch (component)
     {
         case 0:
