@@ -35,7 +35,6 @@ int calcBoxIndexKm1(Grid *Grid, const int boxIndex);
 int calcBoxIndexIp1(Grid *Grid, const int boxIndex);
 int calcBoxIndexJp1(Grid *Grid, const int boxIndex);
 int calcBoxIndexKp1(Grid *Grid, const int boxIndex);
-void calcUPMLCoefficients(Grid *Grid);
 void updateNearField(Grid *Grid, Particle *Particle, double t);
 void calcInteractionWithOtherParticles(Particle *Particles, Grid *Grid, int numberOfParticles, int particleIndex, double E[3], double B[3]);
 void calcFieldsOnGridWithoutNearField(Particle *Particles, Grid *Grid, int numberOfParticles, double t);
@@ -45,4 +44,5 @@ void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3])
 void calcGridIndizesNextNeighboursEx(Grid *Grid, Particle *Particle, int gridIndizesNextNeighbours[8]);
 void calculateLorentzForce(Particle *Particle, double Bextern[3], double lorentzForce[3]);
 void calcRadiationDamping(double Eextern[3], double Bextern[3], double u[4], double dampingTerm[4]);
+void calcUPMLCoefficients(Grid *Grid);
 #endif

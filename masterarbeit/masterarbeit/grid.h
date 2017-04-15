@@ -15,13 +15,15 @@
 #include "resolution.h"
 #include "box.h"
 
+
 struct Grid {
-    int numberOfBoxesInX;
-    int numberOfBoxesInY;
-    int numberOfBoxesInZ;
 
     Box Box;
     Resolution Resolution;
+    
+    int numberOfBoxesInX;
+    int numberOfBoxesInY;
+    int numberOfBoxesInZ;
     
     int numberOfGridPointsInX;
     int numberOfGridPointsInY;
@@ -30,8 +32,6 @@ struct Grid {
     double lengthOfSimulationBoxInX;
     double lengthOfSimulationBoxInY;
     double lengthOfSimulationBoxInZ;
-    
-    double upmlLayerWidth;
     
     double EMax;
     double HMax;
@@ -69,13 +69,17 @@ struct Grid {
     double *upml5H;
     double *upml6H;
     
+    double upmlLayerWidth;
+    
+    bool useUPML;
+    
+    
 };
 
 typedef struct Grid Grid;
 typedef struct Particle Particle;
 
-void initGrid(Grid *Grid, Resolution *Resolution, Box *Box, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ);
-void allocateMemoryOnGrid(Grid *Grid);
+void initGrid(Grid *Grid, Resolution *Resolution, Box *Box, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ, bool useUPML);
 void freeMemoryOnGrid(Grid *Grid);
 void initSamplePulseOnGrid(Grid *Grid);
 void pushEFieldOnGrid(Grid *Grid, const double dt);

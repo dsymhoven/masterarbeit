@@ -275,6 +275,7 @@ void updateLocation(Particle *Particle, Grid *Grid, double dt){
         Particle->x[i+1] += (Particle->u[i+1] * dt) / Particle->u[0];
     }
     
+    
     int newBoxIndexOfParticle = calcCurrentBoxIndexOfParticle(Particle, Grid);
     calcBoxIndizesOfNextNeighbourBoxes(Grid, Particle, Particle->boxIndicesOfNearFieldBoxesAfterPush);
     
@@ -398,59 +399,6 @@ void calcuateLienardWiechertFields(double gamma_sq, double R_sq, double R, doubl
     
     crossProduct(n, E, B);
 }
-///@brief calcualtes Liénard-Wiechert Fields everywhere on the grid. Each point on the grid is considered to be the observation point, where the zeroth component is the current simulation time and also the time at which we want to calculate the fields. Therefore loop through the particle xhistory vector up to the current simulation time and search for the pair of positions which fulfil the condition that the old position is inside and the new position is outside the backward lightcone of the observation point. Once that pair of positions is found the rest of the xHistory vector can be skipped because all following points will be outside as well.
-///@param timeStep outer loop index indicating the current simulation time
-//void calcLWFieldsEverywhereOnGrid(Grid *Grid, Particle *Particle, int timeStep){
-//    printf("Calculating LW Fields on grid\n");
-//    double xObserver[4] = {0};
-//    double beta[3] = {0};
-//    double intersectionPoint[4] = {0};
-//    double velocityAtIntersectionPoint[4] = {0};
-//    double gamma_sq;
-//    double R_sq;
-//    double R;
-//    double n[3] = {0};
-//    double betaDot[3] = {0};
-//    double dt = 0.5 * Grid->Resolution.dx;
-//    double E[3] = {0};
-//    double B[3] = {0};
-//    
-//    int nx = Grid->numberOfGridPointsInX;
-//    int ny = Grid->numberOfGridPointsInY;
-//    int nz = Grid->numberOfGridPointsInZ;
-//    
-//    for(int i = 0; i < nx; i++){
-//        for (int j = 0; j < ny; j++){
-//            for(int k = 115; k < nz; k++){
-//                
-//                xObserver[0] = timeStep * dt;
-//                xObserver[1] = (i + 0.5)* Grid->Resolution.dx;
-//                xObserver[2] = (j + 0.5) * Grid->Resolution.dy;
-//                xObserver[3] = (k + 0.5) * Grid->Resolution.dz;
-//                
-//                for (int index = 0; index < timeStep; index ++){
-//                    if(isInsideBackwardLightcone(Particle->xHistory[index], xObserver) && !isInsideBackwardLightcone(Particle->xHistory[index+1], xObserver)){
-//                        calculateIntersectionPoint(Particle->xHistory[index], Particle->xHistory[index+1], Particle->uHistory[index], Particle->uHistory[index+1], xObserver, intersectionPoint, velocityAtIntersectionPoint);
-//                        calculateBeta(Particle->xHistory[index], Particle->xHistory[index+1], beta);
-//                        calculateLienardWiechertParameters(intersectionPoint, xObserver, velocityAtIntersectionPoint, &gamma_sq, &R_sq, &R, n, beta);
-//                        calculateBetaDot(Particle->uHistory[index], Particle->uHistory[index+1], dt, betaDot);
-//                        calcuateLienardWiechertFields(gamma_sq, R_sq, R, n, beta, betaDot, Particle->charge, E, B);
-//                        Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] = E[0];
-//                        Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = E[1];
-//                        Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] = E[2];
-//                        Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0] = B[0];
-//                        Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1] = B[1];
-//                        Grid->H[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2] = B[2];
-//                        //printf("%d %d %d\n", i,j,k);
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//    }
-//    
-//    
-//}
 
 ///@brief calculates LW fields on complete grid by looping through every box and calculating LW fields in there.
 ///@param Grid pointer to an instance of a Grid struct.
@@ -929,7 +877,7 @@ void calcInteractionWithOtherParticles(Particle *Particles, Grid *Grid, int numb
 ///@param dt time increment
 ///@param t current simulation time
 void reverseBorisPush(Particle *Particles, Grid *Grid, int numberOfParticles, double Eextern[3], double Bextern[3], double dt, double t){
-    scaleVector(Eextern, -1.0);
+//    scaleVector(Eextern, -1.0);
     scaleVector(Bextern, -1.0);
     
     for (int p = 0; p < numberOfParticles; p++){
@@ -954,7 +902,7 @@ void reverseBorisPush(Particle *Particles, Grid *Grid, int numberOfParticles, do
 ///@param Eextern vector containing external E-Field components
 ///@param Bextern vector containing external B-Field components
 void resetInitialConditions(Particle *Particles, int numberOfParticles, double Eextern[3], double Bextern[3]){
-    scaleVector(Eextern, -1.0);
+//    scaleVector(Eextern, -1.0);
     scaleVector(Bextern, -1.0);
     
     for (int p = 0; p < numberOfParticles; p++){
@@ -1015,7 +963,6 @@ void extendParticleHistory(Particle *Particles, Grid *Grid, int numberOfParticle
     reallocateParticleHistory(Particles, numberOfParticles, dt, t);
     reverseBorisPush(Particles, Grid, numberOfParticles, Eextern, Bextern, dt, t);
     resetInitialConditions(Particles, numberOfParticles, Eextern, Bextern);
-    
     
     for (int step = 0; step < t / dt; step++){
         for(int p = 0; p < numberOfParticles; p++){

@@ -21,14 +21,14 @@ int main(int argc, const char * argv[]) {
 //    testUPML();
 //    testNearFieldUpdate();
 //    testMultipleParticles();
-//    testHistoryBeforeSimulation();
+    testHistoryBeforeSimulation();
 //    testScattering();
 //    extendHistoryAndCalcLWFieldsIndependantly();
 //    electronScatteringSmallGrid_init9();
 //    electronScatteringLargeGrid_init8();
 //    testTimeDependentExternalFields();
 //    scatteringInEMWave();
-    testRadiationDampingVSLorentzForce();
+//    testRadiationDampingVSLorentzForce();
     return 0;
 }   
 

@@ -14,33 +14,7 @@
 
 
 
-/// @brief initializes all properties of struct Grid.
-void initGrid(Grid *Grid, Resolution *Resolution, Box *Box, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ){
-    
-    printf("initializing Grid ...\n");
-    
-    Grid->EMax = 0;
-    Grid->HMax = 0;
-    
-    Grid->Resolution = *Resolution;
 
-    
-    Grid->upmlLayerWidth = 10;
-    
-    Grid->numberOfBoxesInX = numberOfBoxesInX;
-    Grid->numberOfBoxesInY = numberOfBoxesInY;
-    Grid->numberOfBoxesInZ = numberOfBoxesInZ;
-    
-    Grid->Box = *Box;
-    
-    Grid->numberOfGridPointsInX = Box->numberOfGridPointsInX * numberOfBoxesInX;
-    Grid->numberOfGridPointsInY = Box->numberOfGridPointsInY * numberOfBoxesInY;
-    Grid->numberOfGridPointsInZ = Box->numberOfGridPointsInZ * numberOfBoxesInZ;
-    
-    Grid->lengthOfSimulationBoxInX = Grid->numberOfGridPointsInX * Resolution->dx;
-    Grid->lengthOfSimulationBoxInY = Grid->numberOfGridPointsInY * Resolution->dy;
-    Grid->lengthOfSimulationBoxInZ = Grid->numberOfGridPointsInZ * Resolution->dz;
-}
 /// @brief Allocation of E and B field array. Inits E and B with 0 by default
 /// @remark arrayLength = 3 * numberOfGridPointsInX * numberOfGridPointsInY * numberOfGridPointsInZ. Factor 3 because we need x,y and z components on each grid point
 /// @throws ERROR: allocation for E and B failed! if memory couldn't be allocated
@@ -130,7 +104,9 @@ void allocateFieldsOnBoxBorders(Grid *Grid){
     }
     
 }
+
 /// @brief allocates memeory for UPML coefficients
+/// @param UPML pointer to UPML struct
 /// @param Grid pointer to Grid struct
 void allocateUPMLCoefficients(Grid *Grid){
     Grid->upml1E = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
@@ -156,7 +132,6 @@ void allocateUPMLCoefficients(Grid *Grid){
     }
 }
 
-
 ///@brief calls allocateFieldsOnGrid() and allocateFieldsOnBoxBorders(). For details see their documentation
 ///@param Grid pointer to Grid struct
 void allocateMemoryOnGrid(Grid *Grid){
@@ -165,6 +140,38 @@ void allocateMemoryOnGrid(Grid *Grid){
     allocateUPMLCoefficients(Grid);
     
 }
+
+/// @brief initializes all properties of struct Grid and allocates memory for all arrays
+void initGrid(Grid *Grid, Resolution *Resolution, Box *Box, const int numberOfBoxesInX, const int numberOfBoxesInY, const int numberOfBoxesInZ, bool useUPML){
+    
+    printf("initializing Grid ...\n");
+
+    Grid->EMax = 0;
+    Grid->HMax = 0;
+    
+    Grid->Resolution = *Resolution;
+    
+    Grid->numberOfBoxesInX = numberOfBoxesInX;
+    Grid->numberOfBoxesInY = numberOfBoxesInY;
+    Grid->numberOfBoxesInZ = numberOfBoxesInZ;
+    
+    Grid->Box = *Box;
+    
+    Grid->numberOfGridPointsInX = Box->numberOfGridPointsInX * numberOfBoxesInX;
+    Grid->numberOfGridPointsInY = Box->numberOfGridPointsInY * numberOfBoxesInY;
+    Grid->numberOfGridPointsInZ = Box->numberOfGridPointsInZ * numberOfBoxesInZ;
+    
+    Grid->lengthOfSimulationBoxInX = Grid->numberOfGridPointsInX * Resolution->dx;
+    Grid->lengthOfSimulationBoxInY = Grid->numberOfGridPointsInY * Resolution->dy;
+    Grid->lengthOfSimulationBoxInZ = Grid->numberOfGridPointsInZ * Resolution->dz;
+    
+    Grid->useUPML = useUPML;
+    Grid->upmlLayerWidth = 10;
+    
+    allocateMemoryOnGrid(Grid);
+}
+
+
 
 ///@brief method for releasing all previously allocated memory in struct Grid. Put all free() invokations in here
 ///@param Grid pointer to Grid struct
@@ -178,6 +185,7 @@ void freeMemoryOnGrid(Grid *Grid){
     Grid->D = NULL;
     free(Grid->H);
     Grid->H = NULL;
+    
     free(Grid->upml1E);
     Grid->upml1E = NULL;
     free(Grid->upml2E);

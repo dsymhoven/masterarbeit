@@ -25,19 +25,14 @@ void testMaxwellPusher(){
 #pragma mark: Initializations
     // ======================================================
     Grid Grid;
-    
     Resolution Resolution;
-    initResolution(&Resolution, 0.2, 0.2, 0.2);
-    
     Box Box;
+ 
+    
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
     initBox(&Box, 20, 20, 20);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, false);
     
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
-    
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
     initSamplePulseOnGrid(&Grid);
     writeGridParametersToFile(&Grid);
     
@@ -64,6 +59,7 @@ void testMaxwellPusher(){
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/maxwellPusherScript.sh");
     freeMemoryOnGrid(&Grid);
+     
 }
 
 
@@ -73,16 +69,14 @@ void testBorisPusher(){
 #pragma mark: Initializations
     // ======================================================
     Grid Grid;
-    
     Resolution Resolution;
-    initResolution(&Resolution, 0.2, 0.2, 0.2);
-    
     Box Box;
-    initBox(&Box, 20, 20, 20);
+ 
     
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
+    initBox(&Box, 20, 20, 20);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, false);
+    
     
     double dt = 0.5 * Resolution.dx;
     double t = 0;
@@ -98,8 +92,6 @@ void testBorisPusher(){
     Particle Particles[numberOfParticles];
     Particle *Particle = &Particles[0];
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
     Particle->mass = 1;
@@ -144,6 +136,7 @@ void testBorisPusher(){
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
 }
 
 void testNearFieldCalculation(){
@@ -155,13 +148,11 @@ void testNearFieldCalculation(){
     Grid Grid;
     Resolution Resolution;
     Box Box;
+ 
     
     initResolution(&Resolution, 0.2, 0.2, 0.2);
     initBox(&Box, 20, 20, 20);
-
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, false);
     
     int numberOfParticles = 2;
     
@@ -178,8 +169,6 @@ void testNearFieldCalculation(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
     
@@ -239,6 +228,7 @@ void testNearFieldCalculation(){
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/nearFieldScript.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
 }
 
 
@@ -251,13 +241,11 @@ void testLWFieldCalculationForPlane(){
     Grid Grid;
     Resolution Resolution;
     Box Box;
+ 
     
-    initResolution(&Resolution, 0.2, 0.2, 0.2);
-    initBox(&Box, 20, 20, 20);
-    
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    initResolution(&Resolution, 0.1, 0.1, 0.1);
+    initBox(&Box, 30, 30, 30);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, false);
     
     int numberOfParticles = 1;
     
@@ -266,37 +254,34 @@ void testLWFieldCalculationForPlane(){
     
     double dt = 0.5 * Resolution.dx;
     double t = 0;
-    double tEnd = 5;
+    double tEnd = 7;
     
     char filename[32] = "some";
     double Eextern[3];
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    writeGridParametersToFile(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
     Particle->mass = 1;
     Particle->charge = 1;
     Particle->x[0] = 0;
-    Particle->x[1] = 5.1;
-    Particle->x[2] = 14.1;
-    Particle->x[3] = 14.1;
+    Particle->x[1] = 11.1;
+    Particle->x[2] = 15.4;
+    Particle->x[3] = 10.1;
     
-    Particle->u[1] = 1.4;
+    Particle->u[1] = 0.658;
     Particle->u[2] = 0;
     Particle->u[3] = 0;
     Particle->u[0] = getGammaFromVelocityVector(Particle->u);
     
     Eextern[0] = 0;
-    Eextern[1] = 0;
+    Eextern[1] = 0.2;
     Eextern[2] = 0;
     
     Bextern[0] = 0;
     Bextern[1] = 0;
-    Bextern[2] = 0;
+    Bextern[2] = 1;
     
     int planeForPlotting = Particle->x[3] / Resolution.dz;
     
@@ -304,6 +289,7 @@ void testLWFieldCalculationForPlane(){
 #pragma mark: Main Routine
     // ======================================================
     writeSimulationInfoToFile(numberOfParticles, t);
+    writeGridParametersToFile(&Grid);
     for (int step = 0; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, (int)(tEnd / dt));
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
@@ -317,7 +303,7 @@ void testLWFieldCalculationForPlane(){
     }
     
     
-    calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
     writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
@@ -334,13 +320,12 @@ void testNearAndFarFields(){
     Grid Grid;
     Resolution Resolution;
     Box Box;
+ 
+
     
-    initResolution(&Resolution, 0.2, 0.2, 0.2);
-    initBox(&Box, 20, 20, 20);
-    
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    initResolution(&Resolution, 0.1, 0.1, 0.1);
+    initBox(&Box, 30, 30, 30);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, false);
     
     int numberOfParticles = 1;
     
@@ -349,22 +334,19 @@ void testNearAndFarFields(){
     
     double dt = 0.5 * Resolution.dx;
     double t = 0;
-    double tEnd = 10;
+    double tEnd = 12;
     
     char filename[32] = "some";
     double Eextern[3];
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
-    calcUPMLCoefficients(&Grid);
     
     Particle->mass = 1;
     Particle->charge = 1;
     Particle->x[0] = 0;
-    Particle->x[1] = 18.21;
+    Particle->x[1] = 10.21;
     Particle->x[2] = 14.01;
     Particle->x[3] = 14.401;
     
@@ -415,6 +397,7 @@ void testNearAndFarFields(){
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
     
 }
 
@@ -425,16 +408,14 @@ void testUPML(){
     // ======================================================
     
     Grid Grid;
-    
     Resolution Resolution;
-    initResolution(&Resolution, 0.2, 0.2, 0.2);
-    
     Box Box;
-    initBox(&Box, 16, 16, 16);
+ 
     
-    int numberOfBoxesInX = 5;
-    int numberOfBoxesInY = 5;
-    int numberOfBoxesInZ = 5;
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
+    initBox(&Box, 16, 16, 16);
+    initGrid(&Grid, &Resolution, &Box, 5, 5, 5, false);
+    
     
     int numberOfParticles = 1;
     
@@ -450,9 +431,9 @@ void testUPML(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    calcUPMLCoefficients(&Grid);
+
+     
+    
     initParticles(Particles, numberOfParticles, arrayLength);
     
     Particle->mass = 1;
@@ -507,6 +488,7 @@ void testUPML(){
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
     
 }
 
@@ -516,16 +498,15 @@ void testNearFieldUpdate(){
     // ======================================================
     
     Grid Grid;
-    
     Resolution Resolution;
-    initResolution(&Resolution, 0.2, 0.2, 0.2);
-    
     Box Box;
-    initBox(&Box, 20, 20, 20);
+ 
     
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    initResolution(&Resolution, 0.1, 0.1, 0.1);
+    initBox(&Box, 30, 30, 30);
+      
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
+     
     
     int numberOfParticles = 1;
     
@@ -534,37 +515,34 @@ void testNearFieldUpdate(){
     
     double dt = 0.5 * Resolution.dx;
     double t = 0;
-    double tEnd = 40;
+    double tEnd = 12;
     
     char filename[32] = "some";
     double Eextern[3];
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
     Particle->mass = 1;
     Particle->charge = 1;
     Particle->x[0] = 0;
-    Particle->x[1] = 18.41;
-    Particle->x[2] = 14.21;
-    Particle->x[3] = 11.401;
+    Particle->x[1] = 11.1;
+    Particle->x[2] = 15.5;
+    Particle->x[3] = 10.1;
     
-    Particle->u[1] = 0.958;
+    Particle->u[1] = 0.658;
     Particle->u[2] = 0;
     Particle->u[3] = 0;
     Particle->u[0] = getGammaFromVelocityVector(Particle->u);
     
     Eextern[0] = 0;
-    Eextern[1] = 0;
+    Eextern[1] = 0.2;
     Eextern[2] = 0;
     
     Bextern[0] = 0;
     Bextern[1] = 0;
-    Bextern[2] = 0.2;
+    Bextern[2] = 1;
     
     int planeForPlotting = Particle->x[3] / Resolution.dz;
     
@@ -600,6 +578,7 @@ void testNearFieldUpdate(){
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
     
 }
 
@@ -611,18 +590,13 @@ void testMultipleParticles(){
     
     Grid Grid;
     Resolution Resolution;
-    
-    double dx = 0.2;
-    double dy = 0.2;
-    double dz = 0.2;
-    initResolution(&Resolution, dx, dy, dz);
-    
     Box Box;
-    initBox(&Box, 20, 20, 20);
+ 
     
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
+    initBox(&Box, 20, 20, 20);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
+     
     
     int numberOfParticles = 2;
     
@@ -639,9 +613,6 @@ void testMultipleParticles(){
     double Bextern[3];
     int arrayLength = tEnd / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
     
@@ -711,6 +682,7 @@ void testMultipleParticles(){
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
     
 }
 
@@ -721,81 +693,64 @@ void testHistoryBeforeSimulation(){
     
     Grid Grid;
     Resolution Resolution;
-    
-    double dx = 0.125;
-    double dy = 0.125;
-    double dz = 0.125;
-    initResolution(&Resolution, dx, dy, dz);
-    
     Box Box;
-    initBox(&Box, 24, 24, 24);
+ 
     
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+
+    initResolution(&Resolution, 0.1, 0.1, 0.1);
+    initBox(&Box, 30, 30, 30);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
     
-    int numberOfParticles = 2;
+    int numberOfParticles = 1;
     
     Particle Particles[numberOfParticles];
-    Particle *Particle1 = &Particles[0];
-    Particle *Particle2 = &Particles[1];
+    Particle *Particle = &Particles[0];
     
     double dt = 0.5 * Resolution.dx;
-    double t = 8;
-    double tEnd = 12;
+    double t = 20;
+    double tEnd = 27;
     
     char filename[32] = "some";
     double Eextern[3];
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
     
-    Particle1->mass = 1;
-    Particle1->charge = 1;
+    Particle->mass = 1;
+    Particle->charge = 1;
+    Particle->x[0] = 0;
+    Particle->x[1] = 11.1;
+    Particle->x[2] = 15.5;
+    Particle->x[3] = 10.1;
     
-    Particle1->x[0] = 0;
-    Particle1->x[1] = 16.81;
-    Particle1->x[2] = 16.20;
-    Particle1->x[3] = 11.401;
-    
-    Particle1->u[1] = 0.458;
-    Particle1->u[2] = 0;
-    Particle1->u[3] = 0;
-    Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
-    
-    Particle2->mass = 1;
-    Particle2->charge = 1;
-    Particle2->x[0] = 0;
-    Particle2->x[1] = 8.81;
-    Particle2->x[2] = 7.20;
-    Particle2->x[3] = 11.401;
-    
-    Particle2->u[1] = 0.458;
-    Particle2->u[2] = 0;
-    Particle2->u[3] = 0;
-    Particle2->u[0] = getGammaFromVelocityVector(Particle2->u);
+    Particle->u[1] = 0.658;
+    Particle->u[2] = 0;
+    Particle->u[3] = 0;
+    Particle->u[0] = getGammaFromVelocityVector(Particle->u);
     
     Eextern[0] = 0;
-    Eextern[1] = 0;
+    Eextern[1] = 0.2;
     Eextern[2] = 0;
     
     Bextern[0] = 0;
     Bextern[1] = 0;
     Bextern[2] = 1;
     
-    int planeForPlotting = Particle1->x[3] / Resolution.dz;
+    int planeForPlotting = Particle->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
     extendParticleHistory(Particles, &Grid, numberOfParticles, Eextern, Bextern, dt, t);
-    calcFieldsOnGridWithoutNearField(Particles, &Grid, numberOfParticles, t);
     writeSimulationInfoToFile(numberOfParticles, t / dt);
+    if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, Eextern, Bextern)){
+        calcFieldsOnGridWithoutNearField(Particles, &Grid, numberOfParticles, t);
+        writeFieldsFromCompleteGridToFile(&Grid);
+        writeInitialConditionsToFile(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern);
+        system("python2.7 ~/Desktop/Projects/masterarbeit/Analysis/initialFields.py");
+    }
     for (int step = t / dt; step < tEnd / dt; step++){
         printf("step %d of %f\n", step, tEnd / dt);
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
@@ -823,6 +778,7 @@ void testHistoryBeforeSimulation(){
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
     
 }
 
@@ -832,16 +788,14 @@ void testScattering(){
     // ======================================================
     
     Grid Grid;
-    
     Resolution Resolution;
-    initResolution(&Resolution, 0.125, 0.125, 0.125);
-    
     Box Box;
-    initBox(&Box, 20, 20, 20);
+ 
     
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    initResolution(&Resolution, 0.125, 0.125, 0.125);
+    initBox(&Box, 20, 20, 20);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
+     
     
     int numberOfParticles = 2;
     
@@ -858,9 +812,6 @@ void testScattering(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
     
@@ -938,6 +889,7 @@ void testScattering(){
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
     
     
 }
@@ -948,16 +900,14 @@ void extendHistoryAndCalcLWFieldsIndependantly(){
     // ======================================================
     
     Grid Grid;
-    
     Resolution Resolution;
-    initResolution(&Resolution, 0.125, 0.125, 0.125);
-    
     Box Box;
-    initBox(&Box, 20, 20, 20);
+ 
     
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    initResolution(&Resolution, 0.125, 0.125, 0.125);
+    initBox(&Box, 20, 20, 20);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
+     
     
     int numberOfParticles = 2;
     
@@ -974,9 +924,6 @@ void extendHistoryAndCalcLWFieldsIndependantly(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
     
@@ -1054,6 +1001,7 @@ void extendHistoryAndCalcLWFieldsIndependantly(){
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
     
 }
 
@@ -1064,16 +1012,14 @@ void electronScatteringSmallGrid_init9(){
     // ======================================================
     
     Grid Grid;
-    
     Resolution Resolution;
-    initResolution(&Resolution, 0.125, 0.125, 0.125);
-    
     Box Box;
-    initBox(&Box, 20, 20, 20);
+ 
     
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    initResolution(&Resolution, 0.125, 0.125, 0.125);
+    initBox(&Box, 20, 20, 20);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
+     
     
     int numberOfParticles = 2;
     
@@ -1090,9 +1036,6 @@ void electronScatteringSmallGrid_init9(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
     
@@ -1174,6 +1117,7 @@ void electronScatteringSmallGrid_init9(){
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
     
     
 }
@@ -1184,16 +1128,14 @@ void electronScatteringLargeGrid_init8(){
     // ======================================================
     
     Grid Grid;
-    
     Resolution Resolution;
-    initResolution(&Resolution, 0.1, 0.1, 0.1);
-    
     Box Box;
-    initBox(&Box, 32, 32, 32);
+ 
     
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    initResolution(&Resolution, 0.1, 0.1, 0.1);
+    initBox(&Box, 32, 32, 32);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
+     
     
     int numberOfParticles = 2;
     
@@ -1210,9 +1152,6 @@ void electronScatteringLargeGrid_init8(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
     
@@ -1293,6 +1232,7 @@ void electronScatteringLargeGrid_init8(){
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
     
 }
 
@@ -1302,16 +1242,15 @@ void testTimeDependentExternalFields(){
     // ======================================================
     
     Grid Grid;
-    
     Resolution Resolution;
-    initResolution(&Resolution, 0.125, 0.125, 0.125);
-    
     Box Box;
-    initBox(&Box, 32, 32, 32);
+ 
     
-    int numberOfBoxesInX = 9;
-    int numberOfBoxesInY = 9;
-    int numberOfBoxesInZ = 9;
+    initResolution(&Resolution, 0.125, 0.125, 0.125);
+    initBox(&Box, 32, 32, 32);
+    initGrid(&Grid, &Resolution, &Box, 9, 9, 9, true);
+     
+    
     
     double dt = 0.5 * Resolution.dx;
     double t = 0;
@@ -1320,10 +1259,6 @@ void testTimeDependentExternalFields(){
     char filename[32] = "some";
     double Eextern[3];
     double Bextern[3];
-    
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    calcUPMLCoefficients(&Grid);
     
     int planeForPlotting = Grid.numberOfGridPointsInZ * Resolution.dx / 2;
     
@@ -1341,6 +1276,7 @@ void testTimeDependentExternalFields(){
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
     freeMemoryOnGrid(&Grid);
+     
     
 }
 
@@ -1350,16 +1286,13 @@ void scatteringInEMWave(){
     // ======================================================
     
     Grid Grid;
-    
     Resolution Resolution;
-    initResolution(&Resolution, 0.1, 0.1, 0.1);
-    
     Box Box;
-    initBox(&Box, 32, 32, 32);
+ 
     
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    initResolution(&Resolution, 0.1, 0.1, 0.1);
+    initBox(&Box, 32, 32, 32);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
     
     int numberOfParticles = 1;
     
@@ -1376,11 +1309,7 @@ void scatteringInEMWave(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
-    
     
     
     Particle1->mass = 1;
@@ -1452,6 +1381,7 @@ void scatteringInEMWave(){
     //    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
     
     
 }
@@ -1462,16 +1392,13 @@ void testRadiationDampingVSLorentzForce(){
     // ======================================================
     
     Grid Grid;
-    
     Resolution Resolution;
-    initResolution(&Resolution, 0.1, 0.1, 0.1);
-    
     Box Box;
+ 
+    
+    initResolution(&Resolution, 0.1, 0.1, 0.1);
     initBox(&Box, 32, 32, 32);
-
-    int numberOfBoxesInX = 8;
-    int numberOfBoxesInY = 8;
-    int numberOfBoxesInZ = 8;
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
     
     int numberOfParticles = 1;
     
@@ -1488,9 +1415,6 @@ void testRadiationDampingVSLorentzForce(){
     double Bextern[3];
     int arrayLength = (tEnd - t) / dt;
     
-    initGrid(&Grid, &Resolution, &Box, numberOfBoxesInX, numberOfBoxesInY, numberOfBoxesInZ);
-    allocateMemoryOnGrid(&Grid);
-    calcUPMLCoefficients(&Grid);
     initParticles(Particles, numberOfParticles, arrayLength);
     
     Forces Forces;
@@ -1500,12 +1424,12 @@ void testRadiationDampingVSLorentzForce(){
     Particle1->charge = 1;
     
     Particle1->x[0] = 0;
-    Particle1->x[1] = 19;
-    Particle1->x[2] = 1;
+    Particle1->x[1] = 10;
+    Particle1->x[2] = 10;
     Particle1->x[3] = 16.401;
     
-    Particle1->u[1] = -0.4;
-    Particle1->u[2] = 0.4;
+    Particle1->u[1] = 0.9;
+    Particle1->u[2] = 0;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
     
@@ -1515,9 +1439,9 @@ void testRadiationDampingVSLorentzForce(){
     
     Bextern[0] = 0;
     Bextern[1] = 0;
-    Bextern[2] = 0;
+    Bextern[2] = 1;
     
-//    int planeForPlotting = Particle1->x[3] / Resolution.dz;
+    int planeForPlotting = Particle1->x[3] / Resolution.dz;
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
@@ -1533,7 +1457,7 @@ void testRadiationDampingVSLorentzForce(){
     
     for (int step = t / dt; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, (int)(tEnd / dt));
-//        writeParticlesToFile(Particles, numberOfParticles, filename, step);
+        writeParticlesToFile(Particles, numberOfParticles, filename, step);
 //        writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
 //        
 //        pushEField(&Grid, Particles, numberOfParticles, t, dt);
@@ -1543,7 +1467,7 @@ void testRadiationDampingVSLorentzForce(){
         for(int p = 0; p < numberOfParticles; p++){
             analyzeForces(&Particles[p], &Forces, Eextern, Bextern, t);
             addCurrentStateToParticleHistory(&Particles[p], step);
-            externalPlaneWave(Particles[p].x, tStart, Eextern, Bextern);
+//            externalPlaneWave(Particles[p].x, tStart, Eextern, Bextern);
             updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
             updateLocation(&Particles[p], &Grid, dt);
 //            updateNearField(&Grid, &Particles[p], t);
@@ -1555,17 +1479,19 @@ void testRadiationDampingVSLorentzForce(){
         t += dt;
     }
 //    clearFieldsFromGrid(&Grid);
-//    calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
 //    writeFieldComponentsForFourierAnalysisToFile(&Grid, filename, 0, planeForPlotting, true, false);
-//    writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
+    writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
 //    writeExternalFieldsToFile(&Grid, Eextern, Bextern, t, filename, 0, planeForPlotting, true, false);
-//    writeGridParametersToFile(&Grid);
-//    printf("executing bash-script ...\n");
+    writeGridParametersToFile(&Grid);
+    printf("executing bash-script ...\n");
 //    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/fourierAnalysis.sh");
 //    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/analyzeForces.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
+     
 
 }
 
