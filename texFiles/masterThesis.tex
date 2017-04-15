@@ -340,6 +340,7 @@ This is the electric and magnetic field of a moving charged particle. Due to the
 \ref{fig: Interpolation}, the retarded time is determined by the intersection point of the particle trajectory with the backward lightcone of the observation point.\\
 
 \subsection{Energy emission}
+\label{sec: Energy emission}
 Now we want to discuss the energy flow and emission. Therefore we need to analyze the Poynting Vector
 \beq
 \label{eqn: PoyntingVector}
@@ -1076,7 +1077,9 @@ The problem is that we can't simply delete the positions we already used to find
 \label{fig: particleHistory}
 \end{figure}
 \noindent
-
+We see an observation point $x_o$ and its backward lightcone in a Minkowsky Space. The ocher line illustrates the particles trajectory, crossing the backward lightcone at an intersection point, marked as red dot. With increasing velocity the trajectory tends more and more towards a $45^\circ$ angle. At $v = c$ the trajectory would be parallel to the backward lightcone and thus an intersection would be impossible. Therefore we can conclude that a plausible criteria for finding the position after which all following positions could be neglected has to be velocity dependent. Due to the aforementioned arguments we can moreover conclude that the dependence would be proportional to $\frac{1}{1 - \beta}$. \\
+But this is not good enough. Since the velocity can change during runtime, we need an a priori approach to reduce the memory consumption. As discussed in section \ref{sec: Energy emission} we know that the intensity declines with a $\frac{1}{r^2}$ dependance.
+This allows us to define a distance over which the emitted fields would be attenuate so much, that they could be neglected. Unfortunately we were not able to develop a concrete formulation of that idea. So we have not implemented and tested it so far.   
 \section{Far field Setup Before Simulation}
 \section{Electron Scattering in an electromagnetic wave}
 %======================== UPML ============================
