@@ -1213,7 +1213,7 @@ int getPartialBoxIndex(Particle *Particle, Grid *Grid){
 void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3]){
     int ip, jp, kp;
     double u,v,w;
-    double x0,x1,y0,y1,z0,z1;
+    double x0=0.0,x1=0.0,y0=0.0,y1=0.0,z0=0.0,z1=0.0;
     int gridIndizesNextNeighbours[8];
     double interpolationPoint[3];
     int partialBoxIndex;
