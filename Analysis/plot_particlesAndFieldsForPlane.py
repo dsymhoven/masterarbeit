@@ -20,12 +20,13 @@ lengthOfOneBoxInX = gridParameters[0] * gridParameters[3]
 lengthOfOneBoxInY = gridParameters[1] * gridParameters[4]
 numberOfBoxesInX =  lengthOfSimulationBoxInX / lengthOfOneBoxInX
 numberOfBoxesInY =  lengthOfSimulationBoxInY / lengthOfOneBoxInY
-if gridParameters[9] >= 0.1:
-	EMax = round(gridParameters[9],1)
-if gridParameters[9] < 0.1:
-	EMax = 0.05
-if gridParameters[9] > 10:
-	EMax = 0.5
+EMax = gridParameters[9]
+# if gridParameters[9] >= 0.1:
+# 	EMax = round(gridParameters[9],1)
+# if gridParameters[9] < 0.1:
+# 	EMax = 0.05
+# if gridParameters[9] > 10:
+# 	EMax = 0.5
 
 x=[]
 y=[]
@@ -50,7 +51,7 @@ for p in range(numberOfParticles):
 	y=[]
 
 # plot fields
-plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.5)
+plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=EMax)
 plt.colorbar()
 # set labels
 plt.xlabel("X")
