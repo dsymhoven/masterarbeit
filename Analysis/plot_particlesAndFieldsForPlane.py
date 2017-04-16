@@ -2,6 +2,7 @@ import numpy as np
 import glob
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+import matplotlib.ticker as mtick
 import fnmatch
 import os
 
@@ -13,14 +14,14 @@ numberOfParticleFiles = len(fnmatch.filter(os.listdir('Particles/Particle0/'), '
 files = glob.glob('Particles/*.txt')
 gridParameters = np.genfromtxt('gridParameters.txt')
 field = np.genfromtxt('E_fields/E_field0.txt')
-
+EMax = field.max()
 lengthOfSimulationBoxInX = gridParameters[6]
 lengthOfSimulationBoxInY = gridParameters[7]
 lengthOfOneBoxInX = gridParameters[0] * gridParameters[3]
 lengthOfOneBoxInY = gridParameters[1] * gridParameters[4]
 numberOfBoxesInX =  lengthOfSimulationBoxInX / lengthOfOneBoxInX
 numberOfBoxesInY =  lengthOfSimulationBoxInY / lengthOfOneBoxInY
-EMax = gridParameters[9]
+
 # if gridParameters[9] >= 0.1:
 # 	EMax = round(gridParameters[9],1)
 # if gridParameters[9] < 0.1:

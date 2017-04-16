@@ -158,14 +158,14 @@ void writeFieldComponentsForFourierAnalysisToFile(Grid *Grid, char *filename, in
                 Ey = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
                 Ez = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
                 if(plotE){
-                    fprintf(fid_Ex, "%f\t", Ex);
-                    fprintf(fid_Ey, "%f\t", Ey);
-                    fprintf(fid_Ez, "%f\t", Ez);
+                    fprintf(fid_Ex, "%.12f\t", Ex);
+                    fprintf(fid_Ey, "%.12f\t", Ey);
+                    fprintf(fid_Ez, "%.12f\t", Ez);
                 }
                 if (plotB){
-                    fprintf(fid_Hx, "%f\t", Hx);
-                    fprintf(fid_Hy, "%f\t", Hy);
-                    fprintf(fid_Hz, "%f\t", Hz);
+                    fprintf(fid_Hx, "%.12f\t", Hx);
+                    fprintf(fid_Hy, "%.12f\t", Hy);
+                    fprintf(fid_Hz, "%.12f\t", Hz);
                 }
             }
             if(plotE){
@@ -208,8 +208,8 @@ void writeFieldsFromCompleteGridToFile(Grid *Grid){
     int nz = Grid->numberOfGridPointsInZ;
     
     for(int i = 0; i < nx * ny * nz * 3; i++){
-        fprintf(fid,"%f\n", Grid->E[i]);
-        fprintf(fid2,"%f\n", Grid->H[i]);
+        fprintf(fid,"%.12f\n", Grid->E[i]);
+        fprintf(fid2,"%.12f\n", Grid->H[i]);
     }
     fclose(fid);
     fclose(fid2);
@@ -283,7 +283,7 @@ void writeGridParametersToFile(Grid *Grid){
 ///@param plotE set to true, if you want to write E-field to file
 ///@param plotB set to true, if you want to write B-field to file
 ///@throws ERROR: Could not open file for E or B field
-void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3], const double t, char *filename, const int index, const int planeForPlotting, bool plotE, bool plotB){
+void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3], const double t, const double tStart, char *filename, const int index, const int planeForPlotting, bool plotE, bool plotB){
     printf("Writing external fields to file ...\n");
     FILE *fid = NULL;
     FILE *fid2 = NULL;
@@ -323,7 +323,7 @@ void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3],
                 x[1] = i * Grid->Resolution.dx;
                 x[2] = j * Grid->Resolution.dy;
                 
-                externalPlaneWave(x, 0, Eextern, Bextern);
+                externalPlaneWave(x, tStart, Eextern, Bextern);
                 Ex = Eextern[0];
                 Ey = Eextern[1];
                 Ez = Eextern[2];
@@ -335,11 +335,11 @@ void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3],
                 
                 if(plotE){
                     Esq = Ex * Ex + Ey * Ey + Ez * Ez;
-                    fprintf(fid, "%f\t", Ey);
+                    fprintf(fid, "%.12f\t", Ey);
                 }
                 if (plotB){
                     Hsq = Hx * Hx + Hy * Hy + Hz * Hz;
-                    fprintf(fid2, "%f\t", Hsq);
+                    fprintf(fid2, "%.12f\t", Hsq);
                 }
             }
             if(plotE){

@@ -4,7 +4,7 @@ import matplotlib.cm as cm
 import numpy as np
 import math
 
-colorbarLimit = 0.5
+
 
 gridParameters = np.genfromtxt('gridParameters.txt')
 lengthOfSimulationBoxInX = gridParameters[6]
@@ -28,6 +28,9 @@ Yx = np.fft.fft2(Ex)
 Yy = np.fft.fft2(Ey)
 Yz = np.fft.fft2(Ez)
 N = len(Yx)/2+1
+ExMax = Ex.max()
+EyMax = Ey.max()
+EzMax = Ez.max()
 
 fig = plt.figure(figsize=(12, 6))
 # plt.subplot(231)
@@ -38,29 +41,29 @@ fig = plt.figure(figsize=(12, 6))
 # plt.title('$|E|^2$')
 
 plt.subplot(231)
-axp = plt.imshow(Ex, aspect='equal', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=-colorbarLimit, vmax=colorbarLimit)
-plt.colorbar()
+axp = plt.imshow(Ex, aspect='equal', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=-ExMax, vmax=ExMax)
+plt.colorbar(format='%.0e')
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.title('$E_x$')
 
 plt.subplot(232)
-axp = plt.imshow(Ey, aspect='equal', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=-colorbarLimit, vmax=colorbarLimit)
-plt.colorbar()
+axp = plt.imshow(Ey, aspect='equal', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=-EyMax, vmax=EyMax)
+plt.colorbar(format='%.0e')
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.title('$E_y$')
 
 plt.subplot(233)
-axp = plt.imshow(Ez, aspect='equal', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=-colorbarLimit, vmax=colorbarLimit)
-plt.colorbar()
+axp = plt.imshow(Ez, aspect='equal', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=-EzMax, vmax=EzMax)
+plt.colorbar(format='%.0e')
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.title('$E_z$')
 
 plt.subplot(234)
 plt.imshow(2 * np.abs(Yx[:N,:N]) / N, aspect='equal', origin='lower', cmap = 'jet', extent=(0,nyquistFrequency,0,nyquistFrequency))
-plt.colorbar()
+plt.colorbar(format='%.0e')
 plt.xlabel('Frequency in x [Hz]')
 plt.ylabel('Frequency in y [Hz]')
 plt.title('FFT $E_x$')
@@ -69,7 +72,7 @@ plt.title('FFT $E_x$')
 
 plt.subplot(235)
 plt.imshow(2 * np.abs(Yy[:N,:N]) / N, aspect='equal', origin='lower', cmap = 'jet', extent=(0,nyquistFrequency,0,nyquistFrequency))
-plt.colorbar()
+plt.colorbar(format='%.0e')
 plt.xlabel('Frequency in x [Hz]')
 plt.ylabel('Frequency in y [Hz]')
 plt.title('FFT $E_y$')
@@ -78,7 +81,7 @@ plt.title('FFT $E_y$')
 
 plt.subplot(236)
 plt.imshow(2 * np.abs(Yz[:N,:N]) / N, aspect='equal', origin='lower', cmap = 'jet', extent=(0,nyquistFrequency,0,nyquistFrequency))
-plt.colorbar()
+plt.colorbar(format='%.0e')
 plt.xlabel('Frequency in x [Hz]')
 plt.ylabel('Frequency in y [Hz]')
 plt.title('FFT $E_z$')

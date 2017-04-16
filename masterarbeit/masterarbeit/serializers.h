@@ -24,6 +24,6 @@ void writeFieldsFromCompleteGridToFile(Grid *Grid);
 void writeParticlesToFile(Particle *Particles, int numberOfParticles, char *filename, int index);
 void writeForcesToFile(Forces *Forces, double t);
 void writeGridParametersToFile(Grid *Grid);
-void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3], const double t, char *filename, const int index, const int planeForPlotting, bool plotE, bool plotB);
+void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3], const double t, const double tStart, char *filename, const int index, const int planeForPlotting, bool plotE, bool plotB);
 void writeSimulationInfoToFile(int numberOfParticles, int startTime);
 void writeInitialConditionsToFile(Grid *Grid, Particle *Particles, int numberOfParticles, double t, double tEnd, double Eextern[3], double Bextern[3]);
