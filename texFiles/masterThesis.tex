@@ -614,6 +614,7 @@ u^{\mu}_{i+\frac{1}{2}} &= u^{\mu}_{i-\frac{1}{2}} + h f^{\mu}(x^{\nu}_i).
 As we can see, position and velocity are calculated at different times. They are shifted against each other in time by $h = \frac{1}{2}$. \\
 But what if we have a system in which the force depends on the velocity ? Are we stuck with expensive implicit methods ? Fortunately not. We can use the \textit{Boris} - Method.
 \subsection{Boris-Method}
+\label{sec: Boris-Method}
 This method was invented in 1970 by J.P. Boris \cite{boris} and is the standard method for pushing particles in plasma simulations today. We want to solve the Lorentz-Newton equation
 \beq
 \label{eqn: LorentzNewton}
@@ -928,7 +929,7 @@ vanishes, instead of propagating with speed of light. That means, that the Yee-S
 After having discussed the fundamentals, we now want to dive into practice. In section \ref{sec: Yee-Scheme} we learned how to store and propagate the fields on a numerical grid. In section \ref{sec: lw-potentials} we derived an analytical expression, of how to calculate the fields of a moving charged particle. We also observed that there is a singularity in \eqref{eqn: Liénard-Wiechert} at the particle position itself. That means, that the fields will vary strongly in  a vicinity of the particle and can not be resolved correctly on the grid, as discussed in section \ref{sec: DispersionRelation}. Hence, it seems plausible to separate the simulation area into appropriate Near - and far field areas. Within the near field area of a particle, its fields will \textbf{not} be stored on the grid. We then do not need to worry about the singularity. Only far fields from other particles, propagated into the near field area will be further propagated and stored on the grid. Possible interactions with other particles within the near field area will be caluclated analytically from \eqref{eqn: Liénard-Wiechert}. \\
 far fields will be stored on the grid and propagated with the Yee-Scheme \eqref{eqn: discreteMaxwellEq}.
 %======================== Near and Far- Fields ========================
-\section{Near-and far fields}
+\section{Near-and Far Fields}
 Before we can separate the simulation area into Near - and far fields, we need to initialize a grid. We divide the grid in \texttt{numberBoxesInX}, \texttt{numberBoxesInY} and \texttt{numberBoxesInZ} boxes, each of which has \texttt{numberOfGridPointsForBoxInX}, \texttt{numberOfGridPointsForBoxInY} and \texttt{numberOfGridPointsForBoxInZ} length, which leaves us with a total 
 \begin{lstlisting}
 numberOfGridPointsInX = numberOfGridPointsForBoxInX * numberOfBoxesInX;
@@ -1027,7 +1028,7 @@ As an example we simulate an electron with $\gamma = 1.1$ in a constant external
 \subfigure[t = 7]{\includegraphics[width=0.33\textwidth]{Pictures/gyration_7.png}}\hfill
 \subfigure[t = 9]{\includegraphics[width=0.33\textwidth]{Pictures/gyration_9.png}}\hfill
 \subfigure[t = 11]{\includegraphics[width=0.33\textwidth]{Pictures/gyration_11.png}}
-\caption[Simulation of an electron with $\gamma = 1,1$ in a constant $B_z = 1$ field]{Simulation of an electron with $\gamma = 1,1$ in a constant $B_z = 1$ field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3 = 9.40 \cdot 10^{-24}\si{\second}$}	
+\caption[Simulation of an electron with $\gamma = 1,1$ in a constant $B_z = 1$ field]{Simulation of an electron with $\gamma = 1,1$ in a constant $B_z = 1$ field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3 = 9.40 \cdot 10^{-24}\si{\second}$}	
 \label{fig: gyration electron}
 \end{figure}
 \noindent
@@ -1036,13 +1037,14 @@ As we already mentioned before, figure \ref{fig: gyration two electrons} finally
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/gyrationTwoParticles.png} 
-	\caption[Gyration of two electrons with $\gamma = 1,1$ each.]{Gyration of two electrons with $\gamma = 1,1$ each.  This shows the expected behaviour of two particles far fields propagating into each others near field regions. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$ and length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$.}
+	\caption[Gyration of two electrons with $\gamma = 1,1$ each.]{Gyration of two electrons with $\gamma = 1,1$ each.  This shows the expected behaviour of two particles far fields propagating into each others near field regions. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$ and length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$.}
 	\label{fig: gyration two electrons}
 \end{figure}
 \noindent
 But what if the particle does leave its initial box ? 
 
-\section{Particle Push and near field Update}
+%======================== Particle Push and near field update ========================
+\section{Particle Push and Near Field Update}
 In order to push the particle properly not just the external fields but also the field contributions from other particles propagated into the near field region need to be taken into account. To get an even better result we use trilinear interpolation (see section \ref{sec: trilinear Interpolation}) to interpolate the field value at the particle position from the surrounding eight grid points. If, however, another particle2 enters the near field region of the observed particle1 equation \eqref{eqn: Liénard-Wiechert} is used to calculate the field emitted by particle2 at the position of particle1 analytically. \\
 \newline
 If a particle changes its box during one push from time $t$ to $t + \dm t$ the particles near field changes as illustrated in figure \ref{fig: nearFieldUpdate}
@@ -1059,11 +1061,12 @@ As an example we simulate an electron with $\gamma = 1,2$ in a crossed $\vec{E}$
 \subfigure[t = 5]{\includegraphics[width=0.33\textwidth]{Pictures/crossedField_5.png}}\hfill
 \subfigure[t = 7]{\includegraphics[width=0.33\textwidth]{Pictures/crossedField_7.png}}\hfill
 \subfigure[t = 9]{\includegraphics[width=0.33\textwidth]{Pictures/crossedField_9.png}}
-\caption[Simulation of an electron with $\gamma = 1,2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2]{Simulation of an electron with $\gamma = 1,2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3 = 9.40 \cdot 10^{-24}\si{\second}$}	
+\caption[Simulation of an electron with $\gamma = 1,2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2]{Simulation of an electron with $\gamma = 1,2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3 = 9.40 \cdot 10^{-24}\si{\second}$}	
 \label{fig: electronCrossedField}
 \end{figure}
 \noindent
 
+%======================== Particle History ========================
 \section{Particle History}
 In order to calculate the Liénard-Wiechert Field according to \eqref{eqn: Liénard-Wiechert} at an observation point, i.e. a grid point, the intersection point of the particles trajectory with the backward lightcone of that observation point is needed. For a more detailed explanation see section \ref{sec: Interpolation of Trajectories}. That means, that we first have to store all positions of the particle. Second we need to track them along the trajectory to check whether the backward lightcone was crossed or not. To store the entire trajectory of a few particles is not very memory consuming.  However, if we want to simulate $10^{10}$ or even $10^{20}$ particles we would need a huge amount of memory just to store the trajectories. Let's do a rough calculation:\\
 One position contains of four Doubles. One for time, three for spacial components. A Double has 8 \si{\byte}. That makes a total of 32 \si{\byte} memory for one particle position. If we want to simulate for $t = 10$ with a resolution of $dx = dy = dz = 0.1$ using Yee-Scheme we will have $\frac{10}{0.5 \cdot 0.1} = 200$ steps. That gives us $200 \cdot 32~\si{\byte} = 6.4~\si{\kilo\byte}$. For $10^10$ particles this sums up to 64 \si{\tera\byte}. This is not feasible! Not to mention that there is a lot more memory necessary to store all the calculated fields on the grid.\\
@@ -1079,8 +1082,31 @@ The problem is that we can't simply delete the positions we already used to find
 \noindent
 We see an observation point $x_o$ and its backward lightcone in a Minkowsky Space. The ocher line illustrates the particles trajectory, crossing the backward lightcone at an intersection point, marked as red dot. With increasing velocity the trajectory tends more and more towards a $45^\circ$ angle. At $v = c$ the trajectory would be parallel to the backward lightcone and thus an intersection would be impossible. Therefore we can conclude that a plausible criteria for finding the position after which all following positions could be neglected has to be velocity dependent. Due to the aforementioned arguments we can moreover conclude that the dependence would be proportional to $\frac{1}{1 - \beta}$. \\
 But this is not good enough. Since the velocity can change during runtime, we need an a priori approach to reduce the memory consumption. As discussed in section \ref{sec: Energy emission} we know that the intensity declines with a $\frac{1}{r^2}$ dependance.
-This allows us to define a distance over which the emitted fields would be attenuate so much, that they could be neglected. Unfortunately we were not able to develop a concrete formulation of that idea. So we have not implemented and tested it so far.   
-\section{Far field Setup Before Simulation}
+This allows us to define a distance over which the emitted fields would be attenuate so much, that they could be neglected. Unfortunately we were not able to develop a concrete formulation of that idea, yet. So we have not implemented and tested it so far.   
+
+%======================== Far field Setup Before Simulation ========================
+\section{Far Field Setup Before Simulation}
+So far we can initialize a particle (or multiple particles) and let them move on the grid according to the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} without damping. If there are external fields or interaction forces between multiple particles they get accelerated and start to radiate Liénard-Wiechert fields. As soon as the retardation constraint is met ($t_{ret} > 0$) the fields will appear at the border between near - and far field region and get propagated via \eqref{eqn: discreteMaxwellEq}. This works fine, but unfortunately this initial setup is far from realistic. The particles were not created the second the simulation starts. We are not interested in simulating the creational process but the emitted fields due to interactions between particles which do already exist. Therefore the particles will already have a long trajectory history and some kind of Liénard-Wiechert fields coming with them. So, the question is: How do we setup the fields on the grid before the simulation starts ? 
+\begin{figure}[H]
+\subfigure[$\texttt{t} = 8$, $\texttt{tEnd} = 9$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields8.png}}\hfill
+\subfigure[$\texttt{t} = 10$, $\texttt{tEnd} = 11$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields10.png}}\hfill
+\subfigure[$\texttt{t} = 12$, $\texttt{tEnd} = 13$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields12.png}}
+\caption[]{Initial fields for different values of simulation parameter $\texttt{t}$. If $\texttt{t} > 0$ the history gets extended with a reverse Boris Push such that the initial conditions are still met at the beginning of the simulation. The Liénard-Wiechert fields are calculated from the extended particle history.\\ 
+The electron has an energy of $\gamma = 1,2$. We used a constant $B_z = 1$ as external field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3 = 9.40 \cdot 10^{-24}\si{\second}$}	
+\label{fig: particleHistoryExamples}
+\end{figure}
+\noindent
+We use the following approach:\\
+We use the Boris-Pusher (see section \ref{sec: Boris-Method}) to push the particles from $t$ to $t + \dm t$, starting with the initial conditions, given prior to the simulation. This algorithm can also be used to push backwards in time, since it is symplectic and therefore time reversible. By selecting the simulation parameter $\texttt{t} = t_0 > 0$ the trajectory will be calculated backwards in time for $t_0$ time units. This can be achieved by reversing the external fields and the initial velocity vector of the particle. Once we got $t_0$ back in time, we reverse the external fields and the velocity vector again, set the particles proper time to zero and start pushing the particle from there. In order to store all new trajectory points in the history, it needs to be extended by $\frac{t_0}{\dm t}$ elements first. With this approach the simulation starts with the particle being at the specified initial conditions by the user, but the particle will already have a trajectory history, from which the initial Liénard-Wiechert fields can be calculated with \eqref{eqn: Liénard-Wiechert}. The flow chart in figure \ref{fig: particleHistoryFlowChart} shows which functions get called when the user sets $t = t_0 > 0$.
+In figure \ref{fig: particleHistoryExamples} some examples of initial fields for different times are shown. Notice that in all cases the simulation starts with the particle being at the initial position ( $\texttt{Particle->x[1]} = 11.1$, $\texttt{Particle->x[2]} = 15.5$) the user entered prior to the simulation. Only the distance over which the fields are initialized differ due to different particle history length.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.5\textwidth]{Pictures/createdPictures/particleHistoryFlowChart.pdf} 
+	\caption[Flow Chart showing the relevant function calls when the user sets $t = t_0 > 0$]{Flow Chart showing the relevant function calls when the user sets $t = t_0 > 0$. If $t = t_0 = 0$ the simulation starts right away.}
+	\label{fig: particleHistoryFlowChart}
+\end{figure}
+\noindent
+
 \section{Electron Scattering in an electromagnetic wave}
 %======================== UPML ============================
 %===========================================================

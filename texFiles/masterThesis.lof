@@ -32,6 +32,11 @@
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$v = 0$}}}{43}{figure.5.8}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$v \approx 0.5 c$}}}{43}{figure.5.8}
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$v \approx c$}}}{43}{figure.5.8}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces }}{44}{figure.5.9}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$\texttt {t} = 8$, $\texttt {tEnd} = 9$}}}{44}{figure.5.9}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$\texttt {t} = 10$, $\texttt {tEnd} = 11$}}}{44}{figure.5.9}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\texttt {t} = 12$, $\texttt {tEnd} = 13$}}}{44}{figure.5.9}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Flow Chart showing the relevant function calls when the user sets $t = t_0 > 0$}}{45}{figure.5.10}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
