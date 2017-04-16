@@ -789,11 +789,12 @@ w &\coloneqq \frac{z_p - z_0}{z_1 - z_0} \\
 \Longrightarrow  \textcolor{red}{P_f} &= \textcolor{green}{P_u} + v (\textcolor{green}{P_o} - \textcolor{blue}{P_u}).
 \eal
 \eeq
-%======================== FDTD ========================
+%======================== Hybrid Field Approach ========================
 %===========================================================
-\chapter{FDTD}
-In this section we introduce the concept of hybrid fields and how this approach reduces the numerical complexity from $N^2$ to $N$.\\
-Usually the numerical complexity of multi particle simulation is $N^2$, due to the interaction between each particle. In our case we need $N$ push operations for the particles. One push for each particle. In order to do that, however, we need to solve equation \eqref{eqn: Lorentz-Newton} and therefore all Liénard-Wiechert fields from the other $N-1$ particles are needed. This results in $N(N-1)$ calculations for each time step. If we want to calculate the Liénard-Wiechert fields, we also need to store all positions from all particles, as explained in section \ref{sec: Interpolation of Trajectories}. For a few particles such simulations are effortlessly feasible. But with increasing particle numbers such simulations may not just require more and more memory capacity but also become so time consuming that at some point we simply can not do them anylonger. That's where the hybrid field model comes in. Instead of calculating the Liénard-Wiechert fields at every time step for all particles at all grid points we save them onto the grid and propagate them through the grid using Maxwell equations. How that works in detail is explained in the following sections. 
+\chapter{Hybrid Field Approach}
+\label{cha: HybridFieldApproach}
+In this section we introduce the concept of hybrid fields. Christian Herzing developed this concept in his dissertation \cite{Herzing} and showed how this approach reduces the numerical complexity from $N^2$ to $N$. 
+Usually the numerical complexity of multi particle simulation is $N^2$, due to the interaction between each particle. In our case we need $N$ push operations for the particles. One push for each particle. In order to do that, however, we need to solve equation \eqref{eqn: Lorentz-Newton} and therefore all Liénard-Wiechert fields from the other $N-1$ particles are needed. This results in $N(N-1)$ calculations for each time step. If we want to calculate the Liénard-Wiechert fields, we also need to store all positions from all particles, as explained in section \ref{sec: Interpolation of Trajectories}. For a few particles such simulations are effortlessly feasible. But with increasing particle numbers such simulations may not just require more and more memory capacity but also become so time consuming that at some point we simply can not do them any longer. That's where the hybrid field model comes in. Instead of calculating the Liénard-Wiechert fields at every time step for all particles at all grid points we save them onto the grid and propagate them through the grid using Maxwell equations. How that works in detail is explained in the following sections. 
 
 %%======================== Maxwell Equations ========================
 %\section{Maxwell-Equations}
@@ -813,11 +814,11 @@ Usually the numerical complexity of multi particle simulation is $N^2$, due to t
 %To solve the Maxwell equations numerically we need to discretize them first. The most robust and reliable way of doing this is with the \textit{Yee-Algorithm}. 
 
 %======================== Yee Scheme ========================
-\section{The Yee-Scheme}
+\section{FDTD}
 \label{sec: Yee-Scheme}
 In this section we talk about how to solve the Maxwell Equations \eqref{eqn: maxwellEq} and how to propagate the fields on a numerical grid. We thereby focus on the Maxwell Equations in vacuum, i.e. $\rho = \vec{j} = 0$. As can be seen in the Liénard-Wiechert formula \eqref{eqn: Liénard-Wiechert} there is a singularity for the field values at the particle position itself. Thus, we just want to propagate fields far away from the source, which is explained in more detail later.\\
 \newline 
-To push the fields on the grid. i.e solving for the fields at the next time step, we use the Yee - Scheme introduced by \textit{Kane Yee} in 1966 \cite{Yee66} to discretize the Maxwell Equations. Each point on the discretized grid is represented as a tuple $(i,j,k)$. One index for each dimension $(x,y,z)$. The distance between the grid points are $(\Delta x, \Delta y, \Delta z)$ respectively. $h$ denotes the time discretization as before. In order to have finite central differences rather than plain finite differences, the evaluation of $\vec{E}$ and $\vec{H}$ components are shifted in time about $\frac{h}{2}$ against each other. To have the same benefits for the rotation, the $\vec{E}$ and $\vec{H}$ components are shifted in space as well, as it's illustrated in figure \ref{fig: YeeBox}.
+To push the fields on the grid. i.e solving for the fields at the next time step, we use the Yee - Scheme introduced by \textit{Kane Yee} in 1966 \cite{Yee66} or equivalently \textit{Finite Difference Time Domain Method} to discretize the Maxwell Equations. Each point on the discretized grid is represented as a tuple $(i,j,k)$. One index for each dimension $(x,y,z)$. The distance between the grid points are $(\Delta x, \Delta y, \Delta z)$ respectively. $h$ denotes the time discretization as before. In order to have finite central differences rather than plain finite differences, the evaluation of $\vec{E}$ and $\vec{H}$ components are shifted in time about $\frac{h}{2}$ against each other. To have the same benefits for the rotation, the $\vec{E}$ and $\vec{H}$ components are shifted in space as well, as it's illustrated in figure \ref{fig: YeeBox}.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.70\textwidth]{Pictures/YeeBox.png} 
@@ -919,13 +920,8 @@ vanishes, instead of propagating with speed of light. That means, that the Yee-S
 	\caption[Comparison of numerical and analytical dispersion relation of discretized Maxwell Equations with Yee Scheme]{Comparison of numerical and analytical dispersion relation of discretized Maxwell Equations with Yee Scheme. We used $c \equiv 1$ and $\frac{\Delta t}{\Delta x} \equiv \frac{1}{2}$.}
 	\label{fig: dispersionRelation}
 \end{figure}
+\noindent
 
-
-%============== Hybrid Field Approach ===================
-%================================================
-
-\chapter{Hybrid Field Approach}
-\label{cha: HybridFieldApproach}
 After having discussed the fundamentals, we now want to dive into practice. In section \ref{sec: Yee-Scheme} we learned how to store and propagate the fields on a numerical grid. In section \ref{sec: lw-potentials} we derived an analytical expression, of how to calculate the fields of a moving charged particle. We also observed that there is a singularity in \eqref{eqn: Liénard-Wiechert} at the particle position itself. That means, that the fields will vary strongly in  a vicinity of the particle and can not be resolved correctly on the grid, as discussed in section \ref{sec: DispersionRelation}. Hence, it seems plausible to separate the simulation area into appropriate Near - and far field areas. Within the near field area of a particle, its fields will \textbf{not} be stored on the grid. We then do not need to worry about the singularity. Only far fields from other particles, propagated into the near field area will be further propagated and stored on the grid. Possible interactions with other particles within the near field area will be caluclated analytically from \eqref{eqn: Liénard-Wiechert}. \\
 far fields will be stored on the grid and propagated with the Yee-Scheme \eqref{eqn: discreteMaxwellEq}.
 %======================== Near and Far- Fields ========================
@@ -943,17 +939,19 @@ lengthOfSimulationBoxInY = numberOfGridPointsInY * dy;
 lengthOfSimulationBoxInZ = numberOfGridPointsInZ * dz;
 \end{lstlisting}
 The near field is then defined as the $3 \cdot 3 \cdot 3 = 27$ boxes with the box, containing the particle, in the center. In figure \ref{fig: near fields} the near fields of one and two particles are shown. The near fields can of course overlap. The near field box at $(18,18)$ belongs to both particles.
-\begin{figure}
+\begin{figure}[t]
 \subfigure[]{\includegraphics[width=0.49\textwidth]{Pictures/nearFieldOneParticle.png}}\hfill
 \subfigure[]{\includegraphics[width=0.49\textwidth]{Pictures/nearFieldTwoParticles.png}}
 \caption[near fields of one and two particles]{near fields of one (a) and two (b) particles. The box at $(18,18)$ belongs to the near field of both particles, marked with $e^{-}$. Notice the staggered red grid in the background. In this example we used 8 boxes, with 20 grid points each, and a resolution of $dx = dy = dz = 0.2$. The plotted plane was chosen accordingly to the z - coordinate of the particle.}	
 \label{fig: near fields}
 \end{figure}
+\noindent
 
-%======================== Near and Far- Fields ========================
+%======================== Field Push ========================
+\newpage
 \section{Field Push}
-We now want to explain, how a field push actually works. Since we only propagate fields in the far field area as explained in section \label{sec: Yee-Scheme} special care needs to be taken at the boundaries between far field and near field. To explain this, consider the following plane of a grid illustrated in figure \ref{fig: nearFieldFarFieldBorder}
-\begin{figure}[H]
+We now want to explain, how a field push actually works. Since we only propagate fields in the far field area as explained in section \label{sec: Yee-Scheme} special care needs to be taken at the boundaries between far field and near field. To explain this, consider the following plane of a grid illustrated in figure \ref{fig: nearFieldFarFieldBorder}.
+\begin{figure}[t]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/Grid.png} 
 	\caption[One plane of a grid showing the near field and far field of a particle. The near field does not contain any field values of the particle]{One plane of a grid showing the \textcolor{red}{near field} and far field of a particle. The \textcolor{red}{near field} does not contain any field values of the particle. \cite{Herzing}}
@@ -970,14 +968,14 @@ Using the discretized Maxwell Equations \eqref{eqn: discreteMaxwellEq} we get
 \eeq
 \noindent
 $\vec{H}\Bigr|^{n+1}_{z (2,4,k)}$ is stored on a far field grid point. Its calculation, however, requires a field value $\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}}$, which is stored on a near field grid point and therefore contains no field values from the particle (it can however contain field values from other particles propagated from the outside into the near field area). Hence we need to analytically calculate the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at $(3,4,k)$ $\textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (3,4,k)}}$ and add it to the field value already stored at this grid point. Finally the correct calculation is
-\beq
-\vec{H}\Bigr|^{n+1}_{z (2,4,k)} = \vec{H}\Bigr|^{n}_{z (2,4,k)} - h \left(\frac{\left(\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}} + \textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (3,4,k)}}\right) - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta x} - \frac{E\Bigr|^{n+\frac{1}{2}}_{x (2,5,k)} - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta y}\right).
-\eeq
+\begin{multline}
+\vec{H}\Bigr|^{n+1}_{z (2,4,k)} = \vec{H}\Bigr|^{n}_{z (2,4,k)} \\ - h \left(\frac{\left(\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}} + \textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (3,4,k)}}\right) - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta x} - \frac{E\Bigr|^{n+\frac{1}{2}}_{x (2,5,k)} - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta y}\right).
+\end{multline}
 \noindent
 On the contrary, if we want to push the value for $H_z$ at $\textcolor{red}{(6,4,k)}$ we need to analytically calculate the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at $(7,4,k)$ $\textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (7,4,k)}}$ and subtract it from the field value already stored at this grid point. $(7,4,k)$ already contains the field contribution of the particle, since it is a far field grid point. And because $\textcolor{red}{(6,4,k)}$ is a near field grid point we only want to take contributions from other particles into account, which are about to propagate into our near field area. After subtracting the particles own contributions the correct push can be calculated via
-\beq
-\textcolor{red}{\vec{H}\Bigr|^{n+1}_{z (6,4,k)}} = \textcolor{red}{\vec{H}\Bigr|^{n}_{z (6,4,k)}} - h \left(\frac{\left(E\Bigr|^{n+\frac{1}{2}}_{y (7,4,k)} - \textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (7,4,k)}}\right) - \textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (6,4,k)}}}{\Delta x} - \frac{\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{x (6,5,k)}} - \textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (6,4,k)}}}{\Delta y}\right).
-\eeq
+\begin{multline}
+\textcolor{red}{\vec{H}\Bigr|^{n+1}_{z (6,4,k)}} = \textcolor{red}{\vec{H}\Bigr|^{n}_{z (6,4,k)}} \\ - h \left(\frac{\left(E\Bigr|^{n+\frac{1}{2}}_{y (7,4,k)} - \textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (7,4,k)}}\right) - \textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (6,4,k)}}}{\Delta x} - \frac{\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{x (6,5,k)}} - \textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (6,4,k)}}}{\Delta y}\right).
+\end{multline}
 \noindent
 This and more examples as well as a more detailed explanation can be found in \cite{Herzing}. All points along the border between near - and far field need to be adjusted accordingly. \\
 \newline
@@ -1069,7 +1067,7 @@ As an example we simulate an electron with $\gamma = 1,2$ in a crossed $\vec{E}$
 %======================== Particle History ========================
 \section{Particle History}
 In order to calculate the Liénard-Wiechert Field according to \eqref{eqn: Liénard-Wiechert} at an observation point, i.e. a grid point, the intersection point of the particles trajectory with the backward lightcone of that observation point is needed. For a more detailed explanation see section \ref{sec: Interpolation of Trajectories}. That means, that we first have to store all positions of the particle. Second we need to track them along the trajectory to check whether the backward lightcone was crossed or not. To store the entire trajectory of a few particles is not very memory consuming.  However, if we want to simulate $10^{10}$ or even $10^{20}$ particles we would need a huge amount of memory just to store the trajectories. Let's do a rough calculation:\\
-One position contains of four Doubles. One for time, three for spacial components. A Double has 8 \si{\byte}. That makes a total of 32 \si{\byte} memory for one particle position. If we want to simulate for $t = 10$ with a resolution of $dx = dy = dz = 0.1$ using Yee-Scheme we will have $\frac{10}{0.5 \cdot 0.1} = 200$ steps. That gives us $200 \cdot 32~\si{\byte} = 6.4~\si{\kilo\byte}$. For $10^10$ particles this sums up to 64 \si{\tera\byte}. This is not feasible! Not to mention that there is a lot more memory necessary to store all the calculated fields on the grid.\\
+One position contains of four Doubles. One for time, three for spacial components. A Double has 8 \si{\byte}. That makes a total of 32 \si{\byte} memory for one particle position. If we want to simulate for $t = 10$ with a resolution of $dx = dy = dz = 0.1$ using Yee-Scheme we will have $\frac{10}{0.5 \cdot 0.1} = 200$ steps. That gives us $200 \cdot 32~\si{\byte} = 6.4~\si{\kilo\byte}$. For $10^{10}$ particles this sums up to 64 \si{\tera\byte}. This is not feasible! Not to mention that there is a lot more memory necessary to store all the calculated fields on the grid.\\
 \newline
 The problem is that we can't simply delete the positions we already used to find an intersection point, because the intersection point depends on the particles velocity. The faster the particle gets, the longer the history needs to be. We can see why that is in the following picture \ref{fig: particleHistory}
 \begin{figure}[H]
@@ -1094,7 +1092,7 @@ In figure \ref{fig: particleHistoryExamples} some examples of initial fields for
 \subfigure[$\texttt{t} = 8$, $\texttt{tEnd} = 9$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields8.png}}\hfill
 \subfigure[$\texttt{t} = 10$, $\texttt{tEnd} = 11$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields10.png}}\hfill
 \subfigure[$\texttt{t} = 12$, $\texttt{tEnd} = 13$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields12.png}}
-\caption[]{Initial fields for different values of simulation parameter $\texttt{t}$. If $\texttt{t} > 0$ the history gets extended with a reverse Boris Push such that the initial conditions are still met at the beginning of the simulation. The Liénard-Wiechert fields are calculated from the extended particle history.\\ 
+\caption[Initial fields for different values of simulation parameter $\texttt{t}$]{Initial fields for different values of simulation parameter $\texttt{t}$. If $\texttt{t} > 0$ the history gets extended with a reverse Boris Push such that the initial conditions are still met at the beginning of the simulation. The Liénard-Wiechert fields are calculated from the extended particle history.\\ 
 The electron has an energy of $\gamma = 1,2$. We used a constant $B_z = 1$ as external field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$}	
 \label{fig: particleHistoryExamples}
 \end{figure}
