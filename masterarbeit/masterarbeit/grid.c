@@ -371,9 +371,9 @@ void pushEFieldOnGrid(Grid *Grid, const double dt){
 ///@param Eextern vector containing external E field components
 ///@param Hextern vector containing external H field components
 void externalPlaneWave(const double x[4], const double tStart, double Eextern[3], double Hextern[3]){
-    double E0 = 1;
-    double H0 = 1;
-    double frequency = 2*M_PI / 6;
+    double E0 = 0.01;
+    double H0 = 0.01;
+    double frequency = 2*M_PI / 600;
     
     Eextern[0] = 0;
     if(x[0] - tStart >= x[1]){

@@ -20,7 +20,7 @@ for i in range(numberOfFieldFiles):
 	fig = plt.figure()
 	field = np.genfromtxt('E_extern/E_extern'+ str(i) +'.txt')
 	# plot fields
-	plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=1)
+	plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.01)
 	plt.colorbar()
 	# set labels
 	plt.xlabel("X")

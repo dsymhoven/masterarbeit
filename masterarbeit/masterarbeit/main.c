@@ -27,8 +27,9 @@ int main(int argc, const char * argv[]) {
 //    electronScatteringSmallGrid_init9();
 //    electronScatteringLargeGrid_init8();
 //    testTimeDependentExternalFields();
-//    scatteringInEMWave();
-    testRadiationDampingVSLorentzForce();
+    scatteringInEMWave_analytic();
+//    scatteringInEMWave_simulation()
+//    testRadiationDampingVSLorentzForce();
     return 0;
 }   
 

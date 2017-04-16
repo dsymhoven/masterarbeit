@@ -25,6 +25,7 @@ void extendHistoryAndCalcLWFieldsIndependantly();
 void electronScatteringSmallGrid_init9();
 void electronScatteringLargeGrid_init8();
 void testTimeDependentExternalFields();
-void scatteringInEMWave();
+void scatteringInEMWave_analytic();
+void scatteringInEMWave_simulation();
 void testRadiationDampingVSLorentzForce();
 #endif /* experiment_h */
