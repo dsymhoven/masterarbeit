@@ -1,9 +1,15 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Allen}
 M.~P. Allen and D.~J. Tildesley.
 \newblock {\em Computer Simulation of Liquids}.
 \newblock Clarendon Press, New York, NY, USA, 1989.
+
+\bibitem{Berenger}
+Jean-Pierre Berenger.
+\newblock A perfectly matched layer for the absorption of electromagnetic
+  waves.
+\newblock {\em J. Comput. Phys.}, 114(2):185--200, October 1994.
 
 \bibitem{boris}
 J.~P. Boris.
@@ -15,6 +21,12 @@ J.~P. Boris.
 A.Bruce~Langdon Charles K.~Birdsall.
 \newblock {\em Plasma physics via computer simulation}.
 \newblock IOP, 1991.
+
+\bibitem{Chew}
+Weng~Cho Chew and William~H. Weedon.
+\newblock A 3-d perfectly matched medium from modified maxwell's equations with
+  stretched coordinates.
+\newblock {\em Microwave Opt. Tech. Lett}, 7:599--604, 1994.
 
 \bibitem{Herzing}
 C.~Herzing.
@@ -32,11 +44,29 @@ W.~Nolting.
 \newblock {\em Grundkurs Theoretische Physik 3:}.
 \newblock Grundkurs Theoretische Physik / Wolfgang Nolting. Springer, 2004.
 
+\bibitem{Rappaport}
+C.~M. Rappaport.
+\newblock Perfectly matched absorbing boundary conditions based on anisotropic
+  lossy mapping of space.
+\newblock {\em IEEE Microwave and Guided Wave Letters}, 5(3):90--92, Mar 1995.
+
+\bibitem{CEM}
+Raymond Rumpf.
+\newblock Electromagnetic analysis using finite-difference time-domain.
+\newblock University Lecture, 2014.
+
 \bibitem{Taflove}
 A.~Taflove and S.C. Hagness.
 \newblock {\em Computational Electrodynamics: The Finite-difference Time-domain
   Method}.
 \newblock Artech House antennas and propagation library. Artech House, 2005.
+
+\bibitem{Teixeira}
+F.~L. Teixeira and W.~C. Chew.
+\newblock General closed-form pml constitutive tensors to match arbitrary
+  bianisotropic and dispersive linear media.
+\newblock {\em IEEE Microwave and Guided Wave Letters}, 8(6):223--225, Jun
+  1998.
 
 \bibitem{Yee66}
 Kane~S. Yee.
