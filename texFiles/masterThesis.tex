@@ -1110,11 +1110,44 @@ The electron has an energy of $\gamma = 1,2$. We used a constant $B_z = 1$ as ex
 %======================== UPML ============================
 %===========================================================
 \chapter{Uniaxial Perfectly Matched Layer}
+\section{Introduction}
 In this chapter we want to discuss an important topic: Boundary Conditions. \\
 Boundary Conditions apply at the edge of the numerical grid and dictate how the solution is treated, when approaching the edge. The Dirichlet boundary condition sets the solution to zero, leading to reflections \footnote{It's like a rope with a fixed connection to a wall. Since the energy can not be transferred to the wall, all energy is reflected, causing the incident wave to move back. }. Periodic boundary conditions extend the grid by setting one edge on top of the opposite one. Solutions leaving the grid to the right enter the simulation area to the left again. \\ 
 When solving differential equations numerically one always has to think about which boundary conditions apply best for the problem at hand. The most commonly used ones are the two aforementioned ones. Dirichlet boundary conditions apply for physical problems involving fast decaying solutions in space so that truncation does not matter, as long as the numerical grid is large enough. Other problems, like periodic structures, can be simulated with periodic boundary conditions. However, one of the most challenging problems to truncate involve wave equations, like in our case, since their solution only decays slowly \footnote{Energy conservation requires the energy flux $|S| \propto |E|^2$ to decay inversly proportional to the surface area $\sim r^2$ in three dimensions. Therefore $|E| \propto \frac{1}{r}$.}. Using periodic, Dirichlet or Neumann boundary conditions will lead to unacceptable artifacts from boundary reflections. One approach is the \textit{absorbing boundary condition} \cite{Taflove}. It turns out that this approach works just fine for the one dimensional case, i.e. waves traveling in only one direction. However, most problems - like ours - include three dimensions. So, we are left where we started. Fortunately in 1994 Berenger came up with a new idea and presented it in his seminal paper \cite{Berenger}. Instead of having an absorbing boundary condition he rather proposed an absorbing boundary layer. The layer is part of the grid and has a specified width. When a wave enters the layer, it is attenuated by the absorption and decays exponentially. Now the problems remains, that the absorbing layer represents and interface where the impedance change, which in turn causes reflection and transmission. Berenger, however, showed that it's possible to construct a medium which does not reflect any incident wave, independent of angle, polarization and frequency. A so called PML - \textit{Perfectly Matched Layer}. Aside from Berenger's  original formulation -the \textit{split field} PML -  some equivalent descriptions of PML came up over the years. For one there are the \textit{uniaxial} PML (UPML) which we use in this thesis and dive into more detail below. The most elegant and general description is the \textit{stretched coordinate} PML \cite{Chew, Rappaport, Teixeira}, which is based upon an analytic continuation of Maxwell`s equations into complex spatial coordinates. Both the split field PML and the UPML can be derived from this approach.\\
-\newline
-The most common formulation is the UPML. Following \cite{Taflove, CEM} we will present an overview of the most important steps to understand how an anisotropic medium acting as absorbing layer solves our problem and how to implement it. 
+
+\section{Derivation}
+The most common formulation is the UPML. Following \cite{Taflove, CEM} we will present an overview of the most important steps to understand how an anisotropic medium acting as absorbing layer solves our problem and how to implement it. \\
+First we start off with the reflection and transmission of an incident wave at a lossy surface. Let $n$ be the ordinary refractive index and $\kappa$ the extinction coefficient. then the complex refractive index is
+\beq
+N = n + j\kappa,
+\eeq
+where $j$ denotes the imaginary unit. From Optics we know, that the reflection $R$ can be expressed as
+\beq
+R = \frac{(1-n)^2 + \kappa^2}{(1+n)^2 + \kappa^2}.
+\eeq
+Notice, that not the refractive index alone, but also the loss contributes to reflection. In the case of a wave with arbitrary polarization and angle of incidence, as illustrated in figure \ref{fig: Fresnel}, we need \textit{Fresnel} equations \eqref{eqn: Fresnel} to describe transmission and reflection:
+\begin{figure}[t]
+	\centering
+		\includegraphics[width=0.5\textwidth]{Pictures/Fresnel.png} 
+	\caption[Wave with wavevector $\vec{k}$, arbitrary polarization and angle of incidence $\theta$ at a surface with impedance $\eta_i$ and refractive index $n_i$]{Wave with wavevector $\vec{k}$, arbitrary polarization and angle of incidence $\theta$ at a surface with impedance $\eta_i$ and refractive index $n_i$ \cite{CEM}.}
+	\label{fig: Fresnel}
+\end{figure}
+\noindent
+\beq
+\bal
+\label{eqn: Fresnel}
+r_{TE} &= \frac{\eta_2 \cos(\theta_1) - \eta_1\cos(\theta_2)}{\eta_2 \cos(\theta_1) + \eta_1\cos(\theta_2)}, \\
+t_{TE} &= \frac{2\eta_2 \cos(\theta_1)}{\eta_2 \cos(\theta_1) + \eta_1\cos(\theta_2)}, \\
+r_{TM} &= \frac{\eta_2 \cos(\theta_2) - \eta_1\cos(\theta_1)}{\eta_1 \cos(\theta_1) + \eta_2\cos(\theta_2)}, \\
+t_{TM} &= \frac{2\eta_1 \cos(\theta_1)}{\eta_1 \cos(\theta_1) + \eta_2\cos(\theta_2)},
+\eal
+\eeq
+where $\eta_i$ is the impedance in region $i$ with refractive index $n_i$, $\theta_1$ the angle of incidence and $\theta_2$ the angle of transmission. These two are connected via Snell's Law
+\beq
+n_1\sin(\theta_1) = n_2\sin{\theta_2}.
+\eeq
+From \eqref{eqn: Fresnel} we see that the reflection is a consequence of a change in impedance and also critically angle dependent. Our is goal now is to develop a medium which causes no reflections at all independent of the angle of incidence, frequency and polarization. It will turn out that we will need an anisotropic medium to achieve this.  
+\section{Implementation of UPML in FDTD}
 \part{Summary}
 \part{Appendix}
 \appendix
