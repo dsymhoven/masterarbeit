@@ -1137,7 +1137,7 @@ a & 0 & 0  \\
 0 & 0 & c 
 \end{bmatrix}$.\\
 It is also possible to always choose a coordinate system such that the tensor becomes diagonal.}. 
-The Maxwell's Curl Equations then read
+The time harmonic Maxwell's Curl equations then read
 \beq
 \bal
 \vec{\nabla} \times \vec{E} &= -j\omega\mu_0\left[\mu_r\right]\vec{H}, \\
@@ -1202,13 +1202,30 @@ Now we need to talk about reflection and transmission at a surface.
 %R = \frac{(1-n)^2 + \kappa^2}{(1+n)^2 + \kappa^2}.
 %\eeq
 %Notice, that not the refractive index alone, but also the loss contributes to reflection. 
-In the case of a wave with arbitrary polarization and angle of incidence, as illustrated in figure \ref{fig: Fresnel}, we can use \textit{Fresnel} equations. For doubly anisotropic media, i.e 
-$ \left[\epsilon_r\right] = \left[\mu_r\right] = 
+In the case of a wave with arbitrary polarization and angle of incidence, as illustrated in figure \ref{fig: Fresnel}, we can use \textit{Fresnel} equations. \footnote{
+\beq
+\bal
+r_{TE} &= \frac{\eta_2 \cos(\theta_1) - \eta_1\cos(\theta_2)}{\eta_2 \cos(\theta_1) + \eta_1\cos(\theta_2)}, \\
+t_{TE} &= \frac{2\eta_2 \cos(\theta_1)}{\eta_2 \cos(\theta_1) + \eta_1\cos(\theta_2)}, \\
+r_{TM} &= \frac{\eta_2 \cos(\theta_2) - \eta_1\cos(\theta_1)}{\eta_1 \cos(\theta_1) + \eta_2\cos(\theta_2)}, \\
+t_{TM} &= \frac{2\eta_1 \cos(\theta_1)}{\eta_1 \cos(\theta_1) + \eta_2\cos(\theta_2)},
+\eal
+\eeq
+where $\eta_i$ is the impedance in region $i$ with refractive index $n_i$, $\theta_1$ the angle of incidence and $\theta_2$ the angle of transmission.}
+We see that the reflection is a consequence of a change in impedance and also critically angle dependent. It's only possible to match the impedances at one specific angle. However, by introducing anisotropy we can solve this problem. We know that the impedance is given by
+\beq
+\eta = \sqrt{\frac{\mu}{\epsilon}}.
+\eeq
+Thus, to keep the impedances matched throughout the entire grid, including the absorbing layer, we need $\left[\epsilon_r\right] = \left[\mu_r\right]$. This is called an doubly anisotropic media. For convenience let's define
+\beq
+\left[s\right] \coloneqq \left[\epsilon_r\right] = \left[\mu_r\right] = 
 \begin{bmatrix}
 a & 0 & 0  \\
 0 & b &0  \\
 0 & 0 & c 
-\end{bmatrix}$ with $a, b, c \in \mathbb{R}$ they read 
+\end{bmatrix},
+\eeq
+with $a, b, c \in \mathbb{R}$. Considering anisotropy the Fresnel Equations change, For example for an incident wave traveling along z-axis, the Fresnel Equations read
 \begin{figure}[t]
 	\centering
 		\includegraphics[width=0.5\textwidth]{Pictures/Fresnel.png} 
@@ -1229,7 +1246,55 @@ where $\theta_1$ the angle of incidence and $\theta_2$ the angle of transmission
 \beq
 \sin(\theta_1) = \sqrt{bc}\sin{\theta_2}.
 \eeq
-From the original Fresnel equations we know that the reflection is a consequence of a change in impedance and also critically angle dependent.  
+We now need to find conditions for $a,b,c \in \mathbb{R}$ to make the Fresnel equations \eqref{eqn: Fresnel} independent of angle and simultaneously let the reflection parameter vanish. \\
+If we choose $\sqrt{bc} = 1$ Snell's Law simplifies to $\theta_1 = \theta_2$. Thus the reflection parameters reduce to
+\beq
+\bal
+r_{TE} &= \frac{\sqrt{a} - \sqrt{b}}{\sqrt{a} + \sqrt{b}}, \\
+r_{TM} &= \frac{-\sqrt{a} + \sqrt{b}}{\sqrt{a} + \sqrt{b}}.
+\eal
+\eeq
+With this choice we made the reflection independent of angle! Furthermore, if we require $r_{TE} \stackrel{!}{=} 0$ and $r_{TM} \stackrel{!}{=} 0$ we get $a \stackrel{!}{=} b$. To sum it up, $a, b, c$ need to fulfill 
+\beq
+a = b = \frac{1}{c}.
+\eeq
+Therefore our tensor $\left[s_z\right]$ needs to look like this
+\beq
+\left[s_z\right] = 
+\begin{bmatrix}
+s_z & 0 & 0  \\
+0 & s_z &0  \\
+0 & 0 & \frac{1}{s_z} 
+\end{bmatrix}.
+\eeq
+Recall that this is an uniaxial tensor. This is the reason why this approach is called Uniaxial Perfectly Matched Layer. \\
+Analogously one gets
+\beq
+\bal
+\left[s_y\right] = 
+\begin{bmatrix}
+s_y & 0 & 0  \\
+0 & \frac{1}{s_z} &0  \\
+0 & 0 & s_y 
+\end{bmatrix}~
+\text{and}~
+\left[s_x\right] = 
+\begin{bmatrix}
+\frac{1}{s_z} & 0 & 0  \\
+0 & s_x &0  \\
+0 & 0 & s_x 
+\end{bmatrix},
+\eal
+\eeq
+for waves traveling in $y$ and $x$ direction respectively. These can be combined in a single tensor \cite{Taflove}
+\beq
+\left[s\right] \coloneqq \left[s_x\right] \left[s_y\right] \left[s_z\right] = 
+\begin{bmatrix}
+\frac{s_ys_z}{s_x} & 0 & 0  \\
+0 & \frac{s_xs_z}{s_y} &0  \\
+0 & 0 & \frac{s_xs_y}{s_z} 
+\end{bmatrix}.
+\eeq
 \section{Implementation of UPML in FDTD}
 \part{Summary}
 \part{Appendix}
