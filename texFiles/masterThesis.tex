@@ -1414,12 +1414,32 @@ As we can see, the update equation for $E_x\Bigr|_{(i+\frac{1}{2},j,k)}^{n+1}$ c
 H_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{3}{2}}= \left(\frac{2\epsilon_0\kappa_z - \sigma^{'}_z h}{2\epsilon_0\kappa_z + \sigma^{'}_z h}\right) H_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{1}{2}} + \left(\frac{1}{(2\epsilon_0\kappa_z + \sigma^{'}_z h) \mu}\right) \\
  \left( (2\epsilon_0\kappa_x + \sigma^{'}_x h) \textcolor{blue}{B_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{3}{2}}} - (2\epsilon_0\kappa_x - \sigma^{'}_x h) B_x\Bigr|_{i,j+\frac{1}{2},k+\frac{1}{2}}^{n+\frac{1}{2}}\right).
 \end{multline}
-Notice that if we turn off the PML, i.e. $\sigma^{'} = 0$ and $\kappa = 1$ the prefactors simplify drastically. Plugging in \ref{eqn: updateD} into \ref{eqn: updateE} and also \ref{eqn: updateB} into \ref{eqn: updateH} result in the discretized Maxwell Equations, as we derived them in \eqref{eqn: discreteMaxwellEq}. Of course, the update equations of the other field components can be derived analogously. 
+Notice that if we turn off the PML, i.e. $\sigma^{'} = 0$ and $\kappa = 1$ the prefactors simplify drastically. Plugging in \eqref{eqn: updateD} into \eqref{eqn: updateE} and also \eqref{eqn: updateB} into \eqref{eqn: updateH} result in the discretized Maxwell Equations, as we derived them in \eqref{eqn: discreteMaxwellEq}. Of course, the update equations of the other field components can be derived analogously. 
 
 %======================== Implementation of UPML in FDTD ============================
 \section{Implementation of UPML in FDTD}
-
-
+Finally, we want to show, how to implement UPML into an existing FDTD simulation. Since all the prefactors are constants, it's advisable to calculate them beforehand. Here is a snippet of the code
+\begin{lstlisting}
+Grid->upml1E[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+Grid->upml2E[j] = (2 * dt) / (2 * kappa + sigma * dt);
+Grid->upml3E[k] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+Grid->upml4E[k] = 1.0 / (2 * kappa + sigma * dt);
+Grid->upml5E[i] = (2 * kappa + sigma * dt);
+Grid->upml6E[i] = (2 * kappa - sigma * dt);
+\end{lstlisting}
+The same applies for the H components. \\
+From a theoretical point of view, a reflectionless PML is possible. In practice, however, numerical artifacts arise, due to finite spatial sampling \cite{Taflove}. The change from $\sigma$ in the interior to $\sigma^{'}$ in the PML is effectively a local discontinuity and thus causes reflections. For best performance, Berenger proposed that the PML losses $\sigma^{'}$ shall gradually rise from zero at $x = 0$ to $\sigma_{max}$ at $x = d$, where $d$ is the PML layer width \cite{Berenger}
+\beq
+\bal
+\sigma_x(x) &= \left(\frac{x}{d}\right)^{m} \sigma_{x,max} \\
+\kappa_x(x) &= 1+ \left(\kappa_{x,max} - 1\right)  \left(\frac{x}{d}\right)^{m}.
+\eal
+\eeq
+m defines the grading and is typically $3 \le m \le 4$ in FDTD simulations. We chose $m = 3.5$. Through a lot of testing and experimenting, $\sigma_{max}$ was found to be \cite{Taflove}
+\beq
+\sigma_x^{opt} = \frac{0.8 (m+1)}{\eta \Delta x},
+\eeq
+where $\eta = \sqrt{\frac{\mu}{\epsilon}}$. This of course also applies for the other components of $\sigma$.
 %======================== Summary ============================
 %===========================================================
 \part{Summary}
