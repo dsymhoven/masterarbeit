@@ -1439,7 +1439,18 @@ m defines the grading and is typically $3 \le m \le 4$ in FDTD simulations. We c
 \beq
 \sigma_x^{opt} = \frac{0.8 (m+1)}{\eta \Delta x},
 \eeq
-where $\eta = \sqrt{\frac{\mu}{\epsilon}}$. This of course also applies for the other components of $\sigma$.
+where $\eta = \sqrt{\frac{\mu}{\epsilon}}$. This of course also applies for the other components of $\sigma$. \\
+Figure \ref{fig: upml} shows how a simulation with UPML looks like
+
+\begin{figure}[H]
+\subfigure[$\texttt{t} = 11$]{\includegraphics[width=0.33\textwidth]{Pictures/upml_11.png}}\hfill
+\subfigure[$\texttt{t} = 15.75$]{\includegraphics[width=0.33\textwidth]{Pictures/upml_15_75.png}}\hfill
+\subfigure[$\texttt{t} = 18$]{\includegraphics[width=0.33\textwidth]{Pictures/upml_18.png}}
+\caption[Simulation using UPML]{Simulation using UPML.\\  
+The electron has an energy of $\gamma = 1,2$. We used a constant $B_z = 1$ as external field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$}	
+\label{fig: upml}
+\end{figure}
+\noindent
 %======================== Summary ============================
 %===========================================================
 \part{Summary}
