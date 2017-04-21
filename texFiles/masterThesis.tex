@@ -1112,7 +1112,7 @@ The electron has an energy of $\gamma = 1,2$. We used a constant $B_z = 1$ as ex
 \chapter{Uniaxial Perfectly Matched Layer}
 \section{Introduction}
 In this chapter we want to discuss an important topic: Boundary Conditions. \\
-Boundary Conditions apply at the edge of the numerical grid and dictate how the solution is treated, when approaching the edge. The Dirichlet boundary condition sets the solution to zero, leading to reflections \footnote{It's like a rope with a fixed connection to a wall. Since the energy can not be transferred to the wall, all energy is reflected, causing the incident wave to move back. }. Periodic boundary conditions extend the grid by setting one edge on top of the opposite one. Solutions leaving the grid to the right enter the simulation area to the left again. \\ 
+Boundary Conditions apply at the edge of the numerical grid and dictate how the solution is treated, when approaching the edge. The Dirichlet boundary condition, for instance, sets the solution to zero, leading to reflections \footnote{It's like a rope with a fixed connection to a wall. Since the energy can not be transferred to the wall, all energy is reflected, causing the incident wave to move back. }. Periodic boundary conditions extend the grid by setting one edge on top of the opposite one. Solutions leaving the grid to the right enter the simulation area to the left again. \\ 
 When solving differential equations numerically one always has to think about which boundary conditions apply best for the problem at hand. The most commonly used ones are the two aforementioned ones. Dirichlet boundary conditions apply for physical problems involving fast decaying solutions in space so that truncation does not matter, as long as the numerical grid is large enough. Other problems, like periodic structures, can be simulated with periodic boundary conditions. However, one of the most challenging problems to truncate involve wave equations, like in our case, since their solution only decays slowly \footnote{Energy conservation requires the energy flux $|S| \propto |E|^2$ to decay inversly proportional to the surface area $\sim r^2$ in three dimensions. Therefore $|E| \propto \frac{1}{r}$.}. Using periodic, Dirichlet or Neumann boundary conditions will lead to unacceptable artifacts from boundary reflections. One approach is the \textit{absorbing boundary condition} \cite{Taflove}. It turns out that this approach works just fine for the one dimensional case, i.e. waves traveling in only one direction. However, most problems - like ours - include three dimensions. So, we are left where we started. Fortunately in 1994 Berenger came up with a new idea and presented it in his seminal paper \cite{Berenger}. Instead of having an absorbing boundary condition he rather proposed an absorbing boundary layer. The layer is part of the grid and has a specified width. When a wave enters the layer, it is attenuated by the absorption and decays exponentially. Now the problems remains, that the absorbing layer represents and interface where the impedance change, which in turn causes reflection and transmission. Berenger, however, showed that it's possible to construct a medium which does not reflect any incident wave, independent of angle, polarization and frequency. A so called PML - \textit{Perfectly Matched Layer}. Aside from Berenger's  original formulation -the \textit{split field} PML -  some equivalent descriptions of PML came up over the years. For one there are the \textit{uniaxial} PML (UPML) which we use in this thesis and dive into more detail below. The most elegant and general description is the \textit{stretched coordinate} PML \cite{Chew, Rappaport, Teixeira}, which is based upon an analytic continuation of Maxwell`s equations into complex spatial coordinates. Both the split field PML and the UPML can be derived from this approach.\\
 
 \section{Derivation}
@@ -1140,56 +1140,57 @@ It is also possible to always choose a coordinate system such that the tensor be
 The time harmonic Maxwell's Curl equations then read
 \beq
 \bal
-\vec{\nabla} \times \vec{E} &= -j\omega\mu_0\left[\mu_r\right]\vec{H}, \\
-\vec{\nabla} \times \vec{H} &= j\omega\epsilon_0\left[\epsilon_r\right]\vec{E}.
+\label{eqn: frequencyDomainMaxwellEquations}
+\vec{\nabla} \times \vec{E}(\omega) &= -j\omega\mu_0\left[\mu_r\right]\vec{H}(\omega), \\
+\vec{\nabla} \times \vec{H}(\omega) &= \sigma \vec{E}(\omega) + j\omega\vec{D}(\omega),
 \eal
 \eeq
-When incorporating loss into Maxwell Equations we have two possibilities. We can either choose a complex permittivity, which makes it easier to work in frequency domain or we can choose to have reel permittivity $\epsilon_r$ and reel conductivity $\sigma$. We will use the latter, since we work in a time domain model. We end up with
+with the relation $\vec{D}(\omega) = \epsilon_0\left[\epsilon_r\right]\vec{E}$ and conductivity $\sigma$. As usual, $\epsilon_0$ and $\epsilon_r$ are the vacuum and relative permittivity respectively. We start in the frequency domain, because PML is a frequency domain concept and thus it's easier to work with in frequency domain. We will, however, transform back to time domain later in order to get the update equations, which we will need to implement. So, \eqref{eqn: frequencyDomainMaxwellEquations} can be rewritten as
 \beq
 \bal
-\begin{bmatrix}
+\begin{pmatrix}
 0 & - \frac{\del}{\del z} & \frac{\del}{\del y}  \\
 \frac{\del}{\del z} & 0 & -\frac{\del}{\del x}  \\
 - \frac{\del}{\del y} & \frac{\del}{\del x} & 0
-\end{bmatrix}
-\begin{bmatrix}
+\end{pmatrix}
+\begin{pmatrix}
 H_x \\ 
 H_y \\
 H_z
-\end{bmatrix}
+\end{pmatrix}
 &= j\omega\epsilon_0 
 \begin{bmatrix}
 \epsilon_x + \frac{\sigma^E_x}{j\omega} & 0 & 0  \\
 0 & \epsilon_y + \frac{\sigma^E_y}{j\omega}  & 0 \\
 0 & 0 & \epsilon_z + \frac{\sigma^E_z}{j\omega} 
 \end{bmatrix}
-\begin{bmatrix}
+\begin{pmatrix}
 E_x \\ 
 E_y \\
 E_z
-\end{bmatrix} 
+\end{pmatrix} 
 \\
-\begin{bmatrix}
+\begin{pmatrix}
 0 & - \frac{\del}{\del z} & \frac{\del}{\del y}  \\
 \frac{\del}{\del z} & 0 & -\frac{\del}{\del x}  \\
 - \frac{\del}{\del y} & \frac{\del}{\del x} & 0
-\end{bmatrix}
-\begin{bmatrix}
+\end{pmatrix}
+\begin{pmatrix}
 E_x \\ 
 E_y \\
 E_z
-\end{bmatrix}
+\end{pmatrix}
 &= - j\omega\mu_0 
 \begin{bmatrix}
 \mu_x + \frac{\sigma^H_x}{j\omega} & 0 & 0  \\
 0 & \mu_y + \frac{\sigma^H_y}{j\omega}  & 0 \\
 0 & 0 & \mu_z + \frac{\sigma^H_z}{j\omega} 
 \end{bmatrix}
-\begin{bmatrix}
+\begin{pmatrix}
 H_x \\ 
 H_y \\
 H_z
-\end{bmatrix} 
+\end{pmatrix} 
 \eal
 \eeq
 Now we need to talk about reflection and transmission at a surface. 
@@ -1225,7 +1226,7 @@ a & 0 & 0  \\
 0 & 0 & c 
 \end{bmatrix},
 \eeq
-with $a, b, c \in \mathbb{R}$. Considering anisotropy the Fresnel Equations change, For example for an incident wave traveling along z-axis, the Fresnel Equations read
+with $a, b, c$ to be determined. Considering anisotropy the Fresnel Equations change. For example for an incident wave traveling along z-axis, the Fresnel Equations read
 \begin{figure}[t]
 	\centering
 		\includegraphics[width=0.5\textwidth]{Pictures/Fresnel.png} 
@@ -1246,7 +1247,7 @@ where $\theta_1$ the angle of incidence and $\theta_2$ the angle of transmission
 \beq
 \sin(\theta_1) = \sqrt{bc}\sin{\theta_2}.
 \eeq
-We now need to find conditions for $a,b,c \in \mathbb{R}$ to make the Fresnel equations \eqref{eqn: Fresnel} independent of angle and simultaneously let the reflection parameter vanish. \\
+We now need to find conditions for $a,b,c$ to make the Fresnel equations \eqref{eqn: Fresnel} independent of angle and simultaneously let the reflection parameter vanish. \\
 If we choose $\sqrt{bc} = 1$ Snell's Law simplifies to $\theta_1 = \theta_2$. Thus the reflection parameters reduce to
 \beq
 \bal
@@ -1293,10 +1294,114 @@ for waves traveling in $y$ and $x$ direction respectively. These can be combined
 \frac{s_ys_z}{s_x} & 0 & 0  \\
 0 & \frac{s_xs_z}{s_y} &0  \\
 0 & 0 & \frac{s_xs_y}{s_z} 
-\end{bmatrix}.
+\end{bmatrix},
 \eeq
+where 
+\beq
+\bal
+\label{eqn: s-factors}
+s_x(x) = \kappa_x + \frac{\sigma^{'}_x(x)}{j\omega_0\epsilon_0} \\
+s_y(y) = \kappa_y + \frac{\sigma^{'}_y(y)}{j\omega_0\epsilon_0}\\
+s_z(z) = \kappa_z + \frac{\sigma^{'}_z(z)}{j\omega_0\epsilon_0}.
+\eal
+\eeq
+We will specify $\sigma^{'}$ and $\kappa$ later. Having this, the Maxwell Equations \eqref{eqn: frequencyDomainMaxwellEquations} now read
+\beq
+\bal
+\label{eqn: frequencyDomainMaxwellEquationsWithPML}
+\vec{\nabla} \times \vec{E}(\omega) &= -j\omega\mu_0\left[\mu_r\right]\left[s\right]\vec{H}(\omega), \\
+\vec{\nabla} \times \vec{H}(\omega) &= \sigma \vec{E}(\omega) + j\omega\left[s\right]\vec{D}(\omega).
+\eal
+\eeq
+Before we start to derive the update equations, we normalize our electric field as follows
+\beq
+\bal
+\vec{\tilde{E}} = \sqrt{\frac{\epsilon_0}{\mu_0}} \vec{E} = \frac{1}{\eta_0} \vec{E} \\
+\vec{\tilde{D}} = \frac{1}{\sqrt{\mu_0\epsilon_0}}\vec{E} = c_0\vec{E},
+\eal
+\eeq
+which yields 
+\beq
+\bal
+\label{eqn: frequencyDomainMaxwellEquationsWithPML}
+\vec{\nabla} \times \vec{\tilde{E}}(\omega) &= -j\omega\mu_0\frac{\left[\mu_r\right]}{c_0}\left[s\right]\vec{H}(\omega), \\
+\vec{\nabla} \times \vec{H}(\omega) &= \eta_0\sigma \vec{\tilde{E}}(\omega) + \frac{j\omega}{c_0}\left[s\right]\vec{\tilde{D}}(\omega).
+\eal
+\eeq
+\section{Update Equations}
+We now want to derive the update equations from \eqref{eqn: frequencyDomainMaxwellEquationsWithPML}. For simplicity we focus on Ampere's Law and consider the case, where the interior of our simulation area has no loss ($\sigma = 0$). Only the PML will have loss ($\sigma^{'} \neq 0$).
+Ampere's Law rewritten in matrix form then simplifies to
+\beq
+\label{eqn: Ampere's Law}
+\begin{pmatrix}
+\frac{\del H_z}{\del y} - \frac{\del H_y}{\del z}   \\
+\frac{\del H_x}{\del z} - \frac{\del H_z}{\del x}   \\
+\frac{\del H_y}{\del x} - \frac{\del H_x}{\del y}
+\end{pmatrix}
+=
+j\omega 
+\begin{bmatrix}
+s_x & 0 & 0  \\
+0 & s_y &0  \\
+0 & 0 & s_z
+\end{bmatrix}
+\begin{pmatrix}
+\tilde{Dx} \\
+\tilde{Dy} \\
+\tilde{Dz} 
+\end{pmatrix}.
+\eeq
+Substituting \eqref{eqn: s-factors} into \eqref{eqn: Ampere's Law} and using the fourier identity 
+\beq
+\mathcal{F}\left\{\frac{\del^n}{\del t^n} g(t)\right\} = (j\omega)^n G(\omega),
+\eeq
+where $g$ is a piecewise $\mathcal{C}^{1}$ function and $g \in \mathcal{L}^{1}(\mathbb{R})$ yields the following system of time domain equations
+\beq
+\label{eqn: Ampere's Law in time domain}
+\begin{pmatrix}
+\frac{\del H_z}{\del y} - \frac{\del H_y}{\del z}   \\
+\frac{\del H_x}{\del z} - \frac{\del H_z}{\del x}   \\
+\frac{\del H_y}{\del x} - \frac{\del H_x}{\del y}
+\end{pmatrix}
+=
+\frac{\del}{\del t}
+\begin{bmatrix}
+\kappa_x & 0 & 0  \\
+0 & \kappa_y &0  \\
+0 & 0 & \kappa_z
+\end{bmatrix}
+\begin{pmatrix}
+\tilde{Dx} \\
+\tilde{Dy} \\
+\tilde{Dz} 
+\end{pmatrix}
++
+\frac{1}{\epsilon_0}
+\begin{bmatrix}
+\sigma_x & 0 & 0  \\
+0 & \sigma_y &0  \\
+0 & 0 & \sigma_z
+\end{bmatrix}
+\begin{pmatrix}
+\tilde{Dx} \\
+\tilde{Dy} \\
+\tilde{Dz} 
+\end{pmatrix}.
+\eeq
+The system \eqref{eqn: Ampere's Law in time domain} can be discretized with Yee-Scheme, as explained in section \ref{sec: Yee-Scheme} and using central differences. Because it's quite longish and a lot's of Algebra we ommitt it here and refer to literature instead (see \cite{Taflove, CEM}). For instance, the $D_x$ update is given by
+\begin{multline}
+D_x\Bigr|_{(i,j+\frac{1}{2},k)}^{n+1} = \left(\frac{2\epsilon_0\kappa_y - \sigma_y h}{2\epsilon_0\kappa_y + \sigma_y h}\right) D_x\Bigr|_{i+\frac{1}{2},j,k}^{n} + \left(\frac{2\epsilon_0 h}{2\epsilon_0\kappa_y + \sigma_y h}\right) \\
+ \left( \frac{H_z\Bigr|^{n+\frac{1}{2}}_{(i+\frac{1}{2},j+\frac{1}{2},k)} - H_z\Bigr|^{n+\frac{1}{2}}_{(i+\frac{1}{2},j-\frac{1}{2},k)}}{\Delta y} - \frac{H_y\Bigr|^{n+\frac{1}{2}}_{(i+\frac{1}{2},j,k+\frac{1}{2})} - H_y\Bigr|^{n+\frac{1}{2}}_{(i+\frac{1}{2},j,k-\frac{1}{2})}}{\Delta z}\right)
+\end{multline}
+
 \section{Implementation of UPML in FDTD}
+
+%======================== Summary ============================
+%===========================================================
 \part{Summary}
+
+%======================== Appendix ============================
+%===========================================================
 \part{Appendix}
 \appendix
 \chapter{Gauge Transformations}
