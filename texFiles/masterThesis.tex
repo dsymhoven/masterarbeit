@@ -456,6 +456,7 @@ Following this, we also want to define and calculate the numerical complexity of
 \chapter{Integration of Equation of Motion}
 %======================== Equations of Motion ========================
 \section{Equations of Motion}
+\label{sec: Equations of Motion}
 As we know from mechanics the dynamic of a particle is determined by the forces acting on it. In our case there is a force due to electro-magnetic fields. That can be external fields, but also fields due to moving particles, as we explained in section \ref{sec: lw-potentials}.\\
 The dynamics of our system is described by the \textit{Lorentz-Newton} equation
 \beq
@@ -1563,8 +1564,50 @@ because the current density vanishes at infinity. That's what we wanted to show.
 
 %======================== Normalization ============================
 \chapter{Normalization}
-In this chapter we show how we can make the basic equations from section \ref{sec: } dimensionless. Even though it's not necessary, it's always advisable in numerics to have a dimensionless systems for reasons of simplicity and clarity. In addition to the transformation equations we will also present the dimensionless Lorentz-Newton equation \eqref{eqn: Lorentz-Newton}, the damping term, i.e. Landau-Lifschitz equation \eqref{eqn: Landau-Lifschitz} and of course the Linard-Wiéchart equations \eqref{eqn: Liénard-Wiechert}.
-
+In this chapter we show how we can make the basic equations from section \ref{sec: Equations of Motion} dimensionless. Even though it's not necessary, it's always advisable in numerics to have a dimensionless systems for reasons of simplicity and clarity. In addition to the transformation equations we will also present the dimensionless Lorentz-Newton equation \eqref{eqn: Lorentz-Newton}, the damping term, i.e. Landau-Lifschitz equation \eqref{eqn: Landau-Lifschitz} and of course the Liénard-Wiechart equations \eqref{eqn: Liénard-Wiechert}.\\
+\newline
+To make the physical entities dimensionless we introduce a characteristic frequency $\omega$. Dimensionless parameters are denoted with a tilde. \\
+With the following transformations
+\beq
+\bal
+t &= \frac{1}{\omega}\tilde{t}, \\
+\vec{r} &= \frac{c}{\omega}\tilde{\vec{r}}, \\
+R &= \frac{c}{\omega}\tilde{R}, \\
+\dm \tau &= \frac{1}{\omega}\dm\tilde{s}, \\
+F^{\mu\nu} &= \frac{\omega m_e}{q}\tilde{F}^{\mu\nu}, \\
+F^{\mu\nu}_{\quad\text{ext}} &= \frac{\omega m_e}{e}\tilde{F}^{\mu\nu}_{\quad\text{ext}}, \\
+F^{\mu\nu}_{\quad\text{lw}} &= \frac{q}{4\pi\epsilon_0}\frac{\omega^2}{c^3}\tilde{F}^{\mu\nu}_{\quad\text{lw}}, \\
+F^{\mu\nu}&= F^{\mu\nu}_{\quad\text{ext}} + \frac{q^2}{4\pi\epsilon_0}\frac{\omega^2}{c^3}\tilde{F}^{\mu\nu}_{\quad\text{lw}}
+\eal
+\eeq
+the aforementioned equations become dimensionless, where $F^{\mu\nu}_{\quad\text{ext}}$ denotes the external fields, $F^{\mu\nu}_{\quad\text{lw}}$ the Liénard-Wiechert fields and $F^{\mu\nu}$ the total fields. If we define the characteristic frequency $\omega$ such, that 
+\beq
+\bal
+\frac{q^2}{4\pi\epsilon_0}\frac{\omega^2}{c^3} &\stackrel{!}{=} 1 \\
+\Longrightarrow \omega &= 4\pi\epsilon_0 \frac{m_ec^3}{q^2},
+\eal
+\eeq
+both the external and the Liénard-Wiechert fields have the same units
+\beq
+\frac{\omega m_e}{q} = 4\pi\epsilon_0 \frac{m^2_ec^3}{q^3}.
+\eeq
+In the following we present the basic equations from section \ref{sec: Equations of Motion} in dimensionless form: \\
+The dimensionless Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} reads
+\beq
+\frac{\dm u^{\mu}}{\dm\tilde{s}} = \biggl( \tilde{F}^{\mu\nu}_{\quad\text{lw}}(x^{\mu}) + \tilde{F}^{\mu\nu}_{\quad\text{ext}}(x^{\mu})\biggr) u^{\nu} + \tilde{g}^{\mu}.
+\eeq
+The Landau-Lifschitz equation \eqref{eqn: Landau-Lifschitz} becomes
+\beq
+\tilde{g}^{\mu} = \frac{2}{3}\biggl(\frac{\del \tilde{F}^{\mu\nu}}{\del \tilde{x}^{\xi}}u^{\nu}u^{\xi} - \tilde{F}^{\mu\xi}\tilde{F}_{\nu\xi}u^{\nu} + (\tilde{F}_{\nu\xi}u^{\xi})(\tilde{F}^{\nu\pi}u_{\pi})u^{\mu}\biggr),
+\eeq
+and finally the Liénard-Wiechart equations \eqref{eqn: Liénard-Wiechert}
+\beq
+\bal
+\vec{\tilde{E}}(\vec{\tilde{r}}, \tilde{t}) &= \left( \frac{\vec{n}(\vec{\tilde{r}},\tilde{t}') - \vec{\beta}(\tilde{t})}{ \gamma^2(1 - \vec{\beta}(\tilde{t}) \cdot \vec{n}(\vec{\tilde{r}},\tilde{t}'))^3 \tilde{R}^2(\vec{\tilde{r}},\tilde{t}')} \right. \\
+& \left. + \frac{\vec{n}(\vec{\tilde{r}},\tilde{t}') \times (\vec{n}(\vec{\tilde{r}},\tilde{t}') - \vec{\beta}(\tilde{t})) \times \dot{\vec{\beta}}(\tilde{t})}{(1 - \vec{\beta}(\tilde{t}) \cdot \vec{n}(\vec{\tilde{r}},\tilde{t}'))^3 \tilde{R}(\vec{\tilde{r}},\tilde{t}')}\right)\Biggr |_{\tilde{t}' = \tilde{t}_{ret}}, \\
+\vec{B}(\vec{\tilde{r}}, \tilde{t}) &= \left(\vec{n}(\vec{\tilde{r}},\tilde{t}') \times \vec{E}(\vec{\tilde{r}}, \tilde{t})\right)\Biggr |_{\tilde{t}' = \tilde{t}_{ret}}.
+\eal
+\eeq
 %============================= Abbildungsverzeichnis ===========================
 \listoffigures
 

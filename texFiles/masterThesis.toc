@@ -45,5 +45,5 @@
 \contentsline {chapter}{\numberline {B}Retarded Potential Equations Fulfill Laurentz Gauge}{61}{appendix.B}
 \contentsline {chapter}{\numberline {C}Softwarestack and Documentation}{63}{appendix.C}
 \contentsline {chapter}{\numberline {D}Normalization}{64}{appendix.D}
-\contentsline {chapter}{\nonumberline Bibliography}{66}{chapter*.5}
-\contentsline {chapter}{Declaration}{68}{chapter*.6}
+\contentsline {chapter}{\nonumberline Bibliography}{67}{chapter*.5}
+\contentsline {chapter}{Declaration}{69}{chapter*.6}
