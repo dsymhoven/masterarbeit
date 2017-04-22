@@ -28,6 +28,12 @@ Weng~Cho Chew and William~H. Weedon.
   stretched coordinates.
 \newblock {\em Microwave Opt. Tech. Lett}, 7:599--604, 1994.
 
+\bibitem{Dirac}
+P.~A.~M. Dirac.
+\newblock The quantum theory of the electron.
+\newblock {\em Proceedings of the Royal Society of London A: Mathematical,
+  Physical and Engineering Sciences}, 117(778):610--624, 1928.
+
 \bibitem{Herzing}
 C.~Herzing.
 \newblock {\em Die molekulardynamische Simulation strahlender Plasmen}.
@@ -38,6 +44,12 @@ Christian Kanzow.
 \newblock {\em Numerische Mathematik II}.
 \newblock 2005.
 \newblock [Online; accessed 13-Oktober-2016].
+
+\bibitem{Landau}
+E.M.Lifschitz L.D.Landau.
+\newblock {\em Lehrbuch der klassischen Phyisk}, volume~2 of {\em Klassische
+  Feldtheorie}.
+\newblock Harri (Deutsch), 12 edition, 1997.
 
 \bibitem{Nolting}
 W.~Nolting.

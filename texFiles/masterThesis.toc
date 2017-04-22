@@ -10,10 +10,10 @@
 \contentsline {part}{\numberline {II}Numerics}{14}{part.2}
 \contentsline {chapter}{\numberline {2}Integration of Equation of Motion}{16}{chapter.2}
 \contentsline {section}{\numberline {2.1}Equations of Motion}{16}{section.2.1}
-\contentsline {section}{\numberline {2.2}Euler-Scheme}{16}{section.2.2}
+\contentsline {section}{\numberline {2.2}Euler-Scheme}{17}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Procedural Error and Order of Consistency}{18}{subsection.2.2.1}
-\contentsline {section}{\numberline {2.3}Leap-Frog-Scheme}{19}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Boris-Method}{20}{subsection.2.3.1}
+\contentsline {section}{\numberline {2.3}Leap-Frog-Scheme}{20}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Boris-Method}{21}{subsection.2.3.1}
 \contentsline {section}{\numberline {2.4}Nystr\"om-Scheme}{23}{section.2.4}
 \contentsline {section}{\numberline {2.5}Adaptive Timestep Control}{23}{section.2.5}
 \contentsline {chapter}{\numberline {3}Interpolations}{24}{chapter.3}
@@ -43,8 +43,7 @@
 \contentsline {section}{\numberline {A.1}Invariance of Fields}{59}{section.A.1}
 \contentsline {section}{\numberline {A.2}Invariance of Potential Equations}{60}{section.A.2}
 \contentsline {chapter}{\numberline {B}Retarded Potential Equations Fulfill Laurentz Gauge}{61}{appendix.B}
-\contentsline {chapter}{\numberline {C}Softwarestack}{63}{appendix.C}
-\contentsline {chapter}{\numberline {D}Code Documentation}{64}{appendix.D}
-\contentsline {chapter}{\numberline {E}Normalization}{65}{appendix.E}
-\contentsline {chapter}{\nonumberline Bibliography}{67}{chapter*.5}
-\contentsline {chapter}{Declaration}{69}{chapter*.6}
+\contentsline {chapter}{\numberline {C}Softwarestack and Documentation}{63}{appendix.C}
+\contentsline {chapter}{\numberline {D}Normalization}{64}{appendix.D}
+\contentsline {chapter}{\nonumberline Bibliography}{66}{chapter*.5}
+\contentsline {chapter}{Declaration}{68}{chapter*.6}

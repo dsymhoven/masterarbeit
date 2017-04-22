@@ -478,8 +478,12 @@ E_z & B_y & -B_x & 0
 .
 \eeq
 The damping term $g^{\mu}$ considers the fact that charged particles radiate fields when they are moving which leads to a loss in their kinetic energy. Within the context of classical electrodynamics Max \textit{Abraham} and Hendrick \textit{Lorentz} discussed radiation damping in their same-named equation first.
-In 1938 \textit{Dirac} generalized the equation whilst taking special relativity into account. \\% MISSING: Cites
-% MISSING: Details. Historisches. Abraham, Lorentz, Dirac Landau Lifschitz Gleichung usw.
+In 1938 \textit{Dirac} generalized the equation whilst taking special relativity into account \cite{Dirac}. It turned out, however, that this equation has unphysical solutions, which violate the causality principle. \textit{Landau} and \textit{Lifschitz} solved this problem using perturbation theory \cite{Landau}. The Landau-Lifschitz equation reads
+\begin{multline}
+\label{eqn: Landau-Lifschitz}
+g^{\mu} = \frac{\mu_0e^2}{6\pi c}\biggl(\frac{e}{m_e}\frac{\del F^{\mu\nu}_{\quad \text{ext}}}{\del x^{\xi}}u^{\nu}u^{\xi} - \frac{e^2}{m^{2}_e}F^{\mu\xi}_{\quad \text{ext}}F_{\nu\xi~\text{ext}}u^{\nu} \\
++\frac{e^2}{m^{2}_ec^2}(F_{\nu\xi~\text{ext}}u^{\xi})(F^{\nu\pi}_{\quad \text{ext}}u_{\pi})u^{\mu}\biggr).
+\end{multline}
 We now want to deal with how to solve the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} numerically.
 
 %======================== Euler Scheme ========================
@@ -1459,6 +1463,8 @@ The electron has an energy of $\gamma = 1,2$. We used a constant $B_z = 1$ as ex
 %===========================================================
 \part{Appendix}
 \appendix
+
+%======================== Gauge Transformations ============================
 \chapter{Gauge Transformations}
 \label{appendix: Gauge Transformations}
 \noindent
@@ -1482,6 +1488,8 @@ and
 &= \vec{B}.
 \eal
 \eeq
+
+%======================== Invariance of Potential Equations ============================
 \section{Invariance of Potential Equations}
 Now we want to show the invariance of the potential equations. Therefore consider
 \beq
@@ -1549,9 +1557,14 @@ For the remaining first term we use \textit{Stokes Law}
 \vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} = -\frac{\mu_0}{4\pi} \int_{V} \vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~' =  - \frac{\mu_0}{4\pi} \oint_{\del V}  \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{\sigma} = 0, \nn
 \eeq
 because the current density vanishes at infinity. That's what we wanted to show.
-\chapter{Softwarestack}
-\chapter{Code Documentation}
+
+%======================== Softwarestack and Documentation ============================
+\chapter{Softwarestack and Documentation}
+
+%======================== Normalization ============================
 \chapter{Normalization}
+In this chapter we show how we can make the basic equations from section \ref{sec: } dimensionless. Even though it's not necessary, it's always advisable in numerics to have a dimensionless systems for reasons of simplicity and clarity. In addition to the transformation equations we will also present the dimensionless Lorentz-Newton equation \eqref{eqn: Lorentz-Newton}, the damping term, i.e. Landau-Lifschitz equation \eqref{eqn: Landau-Lifschitz} and of course the Linard-Wiéchart equations \eqref{eqn: Liénard-Wiechert}.
+
 %============================= Abbildungsverzeichnis ===========================
 \listoffigures
 
