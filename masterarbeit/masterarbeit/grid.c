@@ -371,13 +371,22 @@ void pushEFieldOnGrid(Grid *Grid, const double dt){
 ///@param Eextern vector containing external E field components
 ///@param Hextern vector containing external H field components
 void externalPlaneWave(const double x[4], const double tStart, double Eextern[3], double Hextern[3]){
-    double E0 = 0.01;
-    double H0 = 0.01;
-    double frequency = 2*M_PI / 600;
+    double E0 = 1.77 * pow(10, -6.0);
+    double H0 = 1.77 * pow(10, -6.0);;
+    double frequency = 1.77 * pow(10, -8);
+    double a = 1 * pow(10, -9);
+
+//    Eextern[0] = 0;
+//    Eextern[1] = E0 * sin(frequency * (x[1] - x[0])) * sin(M_PI * x[1] / pow(8*32*10, 7));
+//    Eextern[2] = 0;
+//    
+//    Hextern[0] = 0;
+//    Hextern[1] = 0;
+//    Hextern[2] = H0 * sin(frequency * (x[1] - x[0])) * sin(M_PI * x[1] / pow(8*32*10, 7));
     
     Eextern[0] = 0;
-    if(x[0] - tStart >= x[1]){
-        Eextern[1] = E0 * cos(frequency * (x[0] - tStart - x[1]));
+    if(x[0] - tStart >= x[1] && x[2] > (2 * 32 * pow(10, 7)) && x[2] < (6 * 32 * pow(10, 7))){
+        Eextern[1] = E0 * sin(frequency * (x[0] - tStart - x[1])) * sin(M_PI * (x[2] - 2 * 32 * pow(10, 7)) / (4 * 32 * pow(10, 7))) * sin(M_PI * (x[0] - tStart - x[1]) / (8 * 32 * pow(10, 7)));
     }
     else{
         Eextern[1] = 0;
@@ -386,8 +395,8 @@ void externalPlaneWave(const double x[4], const double tStart, double Eextern[3]
     
     Hextern[0] = 0;
     Hextern[1] = 0;
-    if(x[0] - tStart >= x[1]){
-        Hextern[2] = H0 * cos(frequency * (x[0] - tStart - x[1]));
+    if(x[0] - tStart >= x[1] && x[2] > (2 * 32 * pow(10, 7)) && x[2] < (6 * 32 * pow(10, 7))){
+        Hextern[2] = H0 * sin(frequency * (x[0] - tStart - x[1])) * sin(M_PI * (x[2] - 2 * 32 * pow(10, 7)) / (4 * 32 * pow(10, 7))) * sin(M_PI * (x[0] - tStart - x[1]) / (8 * 32 * pow(10, 7))) ;
     }
     else{
         Hextern[2] = 0;

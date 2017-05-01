@@ -647,9 +647,10 @@ int calcBoxIndexKp1(Grid *Grid, const int boxIndex){
 void calcUPMLCoefficients(Grid *Grid){
     printf("calculating UPML coefficients ...\n");
     
-    double sigmaMax = 18.0;
-    double kappaMax = 1.0;
     double m = 3.5;
+    double sigmaMax = 0.8 * (m + 1) / Grid->Resolution.dx;
+    double kappaMax = 1.0;
+    
     int upmlLayerWidth = Grid->upmlLayerWidth;
     
     double sigma = 0.0;

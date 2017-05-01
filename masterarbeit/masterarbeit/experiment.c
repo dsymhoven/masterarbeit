@@ -414,7 +414,7 @@ void testUPML(){
     
     initResolution(&Resolution, 0.2, 0.2, 0.2);
     initBox(&Box, 16, 16, 16);
-    initGrid(&Grid, &Resolution, &Box, 5, 5, 5, true);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
     
     
     int numberOfParticles = 1;
@@ -424,7 +424,7 @@ void testUPML(){
     
     double dt = 0.5 * Resolution.dx;
     double t = 0;
-    double tEnd = 8;
+    double tEnd = 20;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -436,9 +436,9 @@ void testUPML(){
     Particle->mass = 1;
     Particle->charge = 1;
     Particle->x[0] = 0;
-    Particle->x[1] = 8.1;
-    Particle->x[2] = 8.1;
-    Particle->x[3] = 8.1;
+    Particle->x[1] = 7.0;
+    Particle->x[2] = 11.0;
+    Particle->x[3] = 14.8;
     
     Particle->u[1] = 0.458;
     Particle->u[2] = 0;
@@ -591,7 +591,7 @@ void testMultipleParticles(){
  
     
     initResolution(&Resolution, 0.2, 0.2, 0.2);
-    initBox(&Box, 20, 20, 20);
+    initBox(&Box, 16, 16, 16);
     initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
      
     
@@ -603,7 +603,7 @@ void testMultipleParticles(){
     
     double dt = 0.5 * Resolution.dx;
     double t = 0;
-    double tEnd = 12;
+    double tEnd = 30;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -616,11 +616,11 @@ void testMultipleParticles(){
     Particle1->mass = 1;
     Particle1->charge = 1;
     Particle1->x[0] = 0;
-    Particle1->x[1] = 19.41;
-    Particle1->x[2] = 22.60;
-    Particle1->x[3] = 11.401;
+    Particle1->x[1] = 24.0;
+    Particle1->x[2] = 12.5;
+    Particle1->x[3] = 14.8;
     
-    Particle1->u[1] = 0.458;
+    Particle1->u[1] = -0.958;
     Particle1->u[2] = 0;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
@@ -628,11 +628,11 @@ void testMultipleParticles(){
     Particle2->mass = 1;
     Particle2->charge = 1;
     Particle2->x[0] = 0;
-    Particle2->x[1] = 11.41;
-    Particle2->x[2] = 10.01;
-    Particle2->x[3] = 11.401;
+    Particle2->x[1] = 2.5;
+    Particle2->x[2] = 11.0;
+    Particle2->x[3] = 14.8;
     
-    Particle2->u[1] = 0.458;
+    Particle2->u[1] = 0.958;
     Particle2->u[2] = 0;
     Particle2->u[3] = 0;
     Particle2->u[0] = getGammaFromVelocityVector(Particle2->u);
@@ -643,14 +643,13 @@ void testMultipleParticles(){
     
     Bextern[0] = 0;
     Bextern[1] = 0;
-    Bextern[2] = 1;
+    Bextern[2] = 0;
     
     int planeForPlotting = Particle1->x[3] / Resolution.dz;
     
     // ======================================================
 #pragma mark: Main Routine
     // ======================================================
-    
     writeSimulationInfoToFile(numberOfParticles, t);
     for (int step = 0; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, arrayLength);
@@ -672,7 +671,7 @@ void testMultipleParticles(){
         t += dt;
     }
     clearFieldsFromGrid(&Grid);
-    calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
     writeFieldsToFile(&Grid, filename, (int)(tEnd/dt), planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
@@ -790,8 +789,8 @@ void testScattering(){
     Box Box;
  
     
-    initResolution(&Resolution, 0.125, 0.125, 0.125);
-    initBox(&Box, 20, 20, 20);
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
+    initBox(&Box, 16, 16, 16);
     initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
      
     
@@ -802,8 +801,8 @@ void testScattering(){
     Particle *Particle2 = &Particles[1];
     
     double dt = 0.5 * Resolution.dx;
-    double t = 10;
-    double tEnd = 24;
+    double t = 0;
+    double tEnd = 30;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -817,11 +816,11 @@ void testScattering(){
     Particle1->charge = 1;
     
     Particle1->x[0] = 0;
-    Particle1->x[1] = 14.1;
-    Particle1->x[2] = 10.10;
-    Particle1->x[3] = 11.401;
+    Particle1->x[1] = 7.0;
+    Particle1->x[2] = 11.0;
+    Particle1->x[3] = 14.8;
     
-    Particle1->u[1] = -0.458;
+    Particle1->u[1] = 0.458;
     Particle1->u[2] = 0;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
@@ -829,11 +828,11 @@ void testScattering(){
     Particle2->mass = 1;
     Particle2->charge = 1;
     Particle2->x[0] = 0;
-    Particle2->x[1] = 7.81;
-    Particle2->x[2] = 9.90;
-    Particle2->x[3] = 11.401;
+    Particle2->x[1] = 20.0;
+    Particle2->x[2] = 12.0;
+    Particle2->x[3] = 14.8;
     
-    Particle2->u[1] = 0.458;
+    Particle2->u[1] = -0.458;
     Particle2->u[2] = 0;
     Particle2->u[3] = 0;
     Particle2->u[0] = getGammaFromVelocityVector(Particle2->u);
@@ -854,37 +853,37 @@ void testScattering(){
     
     extendParticleHistory(Particles, &Grid, numberOfParticles, Eextern, Bextern, dt, t);
     writeSimulationInfoToFile(numberOfParticles, t / dt);
-    //    if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, Eextern, Bextern)){
-    //        calcFieldsOnGridWithoutNearField(Particles, &Grid, numberOfParticles, t);
-    //        writeFieldsFromCompleteGridToFile(&Grid);
-    //        writeInitialConditionsToFile(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern);
-    //        system("python2.7 ~/Desktop/Projects/masterarbeit/Analysis/initialFields.py");
-    //    }
+        if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, Eextern, Bextern)){
+            calcFieldsOnGridWithoutNearField(Particles, &Grid, numberOfParticles, t);
+            writeFieldsFromCompleteGridToFile(&Grid);
+            writeInitialConditionsToFile(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern);
+            system("python2.7 ~/Desktop/Projects/masterarbeit/Analysis/initialFields.py");
+        }
     
     for (int step = t / dt; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, (int)(tEnd / dt));
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
-        //        writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
-        //
-        //        pushEField(&Grid, Particles, numberOfParticles, t, dt);
-        //        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
+        writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
+
+        pushEField(&Grid, Particles, numberOfParticles, t, dt);
+        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
         
         for(int p = 0; p < numberOfParticles; p++){
             addCurrentStateToParticleHistory(&Particles[p], step);
             updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
             updateLocation(&Particles[p], &Grid, dt);
-            //            updateNearField(&Grid, &Particles[p], t);
+            updateNearField(&Grid, &Particles[p], t);
         }
-        //        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
-        //        pushEField(&Grid, Particles, numberOfParticles, t, dt);
+        pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
+        pushEField(&Grid, Particles, numberOfParticles, t, dt);
         t += dt;
     }
-    //    clearFieldsFromGrid(&Grid);
+    clearFieldsFromGrid(&Grid);
     calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
-    writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
+    writeFieldsToFile(&Grid, filename, (int)(tEnd/dt), planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
-    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
      
@@ -1244,16 +1243,16 @@ void testTimeDependentExternalFields(){
     Box Box;
  
     
-    initResolution(&Resolution, 0.125, 0.125, 0.125);
+    initResolution(&Resolution, pow(10, 7), pow(10, 7), pow(10, 7));
     initBox(&Box, 32, 32, 32);
-    initGrid(&Grid, &Resolution, &Box, 9, 9, 9, true);
+    initGrid(&Grid, &Resolution, &Box, 12, 12, 12, true);
      
     
     
     double dt = 0.5 * Resolution.dx;
     double t = 0;
     double tStart = t;
-    double tEnd = 40;
+    double tEnd = 200 * pow(10, 7);
     
     char filename[32] = "some";
     double Eextern[3];
