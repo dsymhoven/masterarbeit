@@ -1,15 +1,20 @@
 \begin{thebibliography}{10}
 
-\bibitem{Allen}
-M.~P. Allen and D.~J. Tildesley.
-\newblock {\em Computer Simulation of Liquids}.
-\newblock Clarendon Press, New York, NY, USA, 1989.
+\bibitem{Barnes}
+J.~{Barnes} and P.~{Hut}.
+\newblock {A hierarchical O(N log N) force-calculation algorithm}.
+\newblock {\em nature}, 324:446--449, December 1986.
 
 \bibitem{Berenger}
 Jean-Pierre Berenger.
 \newblock A perfectly matched layer for the absorption of electromagnetic
   waves.
 \newblock {\em J. Comput. Phys.}, 114(2):185--200, October 1994.
+
+\bibitem{Bonitz}
+M.~Bonitz and D.~Semkat.
+\newblock {\em Introduction to Computational Methods in Many Body Physics}.
+\newblock Rinton Press, 2006.
 
 \bibitem{boris}
 J.~P. Boris.
@@ -28,16 +33,35 @@ Weng~Cho Chew and William~H. Weedon.
   stretched coordinates.
 \newblock {\em Microwave Opt. Tech. Lett}, 7:599--604, 1994.
 
+\bibitem{Cohen}
+B.~I. {Cohen}, M.~A. {Mostrom}, D.~R. {Nicholson}, A.~N. {Kaufman}, C.~E.
+  {Max}, and A.~B. {Langdon}.
+\newblock {Simulation of laser beat heating of a plasma}.
+\newblock {\em Physics of Fluids}, 18:470--474, April 1975.
+
+\bibitem{Dawson}
+John~M. Dawson.
+\newblock Particle simulation of plasmas.
+\newblock {\em Rev. Mod. Phys.}, 55:403--447, Apr 1983.
+
 \bibitem{Dirac}
 P.~A.~M. Dirac.
 \newblock The quantum theory of the electron.
 \newblock {\em Proceedings of the Royal Society of London A: Mathematical,
   Physical and Engineering Sciences}, 117(778):610--624, 1928.
 
+\bibitem{Fonseca}
+R.~A. Fonseca, L.~O. Silva, F.~S. Tsung, V.~K. Decyk, W.~Lu, C.~Ren, W.~B.
+  Mori, S.~Deng, S.~Lee, T.~Katsouleas, and J.~C. Adam.
+\newblock {\em OSIRIS: A Three-Dimensional, Fully Relativistic Particle in Cell
+  Code for Modeling Plasma Based Accelerators}.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2002.
+
 \bibitem{Herzing}
 C.~Herzing.
-\newblock {\em Die molekulardynamische Simulation strahlender Plasmen}.
-\newblock 2016.
+\newblock {\em {Die molekulardynamische Simulation strahlender Plasmen}}.
+\newblock PhD thesis, Ludwig Maximilians Universit{\"a}t M{\"u}nchen, Lehrstuhl
+  f{\"u} Plasma \& Computational Physics, 2016.
 
 \bibitem{NumerikSkript}
 Christian Kanzow.
@@ -56,11 +80,23 @@ W.~Nolting.
 \newblock {\em Grundkurs Theoretische Physik 3:}.
 \newblock Grundkurs Theoretische Physik / Wolfgang Nolting. Springer, 2004.
 
+\bibitem{Pukhov}
+A.~Pukhov.
+\newblock {Three-dimensional electromagnetic relativistic particle-in-cell code
+  VLPL (Virtual Laser Plasma Lab)}.
+\newblock {\em Journal of Plasma Physics}, 61(03):425--433, April 1999.
+
 \bibitem{Rappaport}
 C.~M. Rappaport.
 \newblock Perfectly matched absorbing boundary conditions based on anisotropic
   lossy mapping of space.
 \newblock {\em IEEE Microwave and Guided Wave Letters}, 5(3):90--92, Mar 1995.
+
+\bibitem{Ren}
+Chuang Ren.
+\newblock {\em Introduction to Particle-in-Cell Methods in Plasma Simulations}.
+\newblock 2011.
+\newblock [Online; accessed 14-Mai-2017].
 
 \bibitem{CEM}
 Raymond Rumpf.

@@ -5,51 +5,48 @@ A level-1 auxiliary file: symbols.aux
 The style file: plain.bst
 A level-1 auxiliary file: declaration.aux
 Database file #1: reference.bib
-Repeated entry---line 133 of file reference.bib
- : @phdthesis{Herzing
- :                   ,
-I'm skipping whatever remains of this entry
-Warning--empty publisher in Herzing
+Warning--can't use both author and editor fields in Fonseca
 Warning--empty publisher in NumerikSkript
-You've used 15 entries,
+Warning--empty publisher in Ren
+You've used 21 entries,
             2118 wiz_defined-function locations,
-            609 strings with 6235 characters,
-and the built_in function-call counts, 3992 in all, are:
-= -- 393
-> -- 129
+            661 strings with 7676 characters,
+and the built_in function-call counts, 6090 in all, are:
+= -- 592
+> -- 254
 < -- 2
-+ -- 56
-- -- 38
-* -- 234
-:= -- 680
-add.period$ -- 48
-call.type$ -- 15
-change.case$ -- 58
++ -- 106
+- -- 82
+* -- 405
+:= -- 1050
+add.period$ -- 67
+call.type$ -- 21
+change.case$ -- 96
 chr.to.int$ -- 0
-cite$ -- 17
-duplicate$ -- 177
-empty$ -- 359
-format.name$ -- 38
-if$ -- 842
+cite$ -- 24
+duplicate$ -- 242
+empty$ -- 500
+format.name$ -- 82
+if$ -- 1255
 int.to.chr$ -- 0
-int.to.str$ -- 15
-missing$ -- 21
-newline$ -- 79
-num.names$ -- 30
-pop$ -- 80
+int.to.str$ -- 21
+missing$ -- 27
+newline$ -- 110
+num.names$ -- 42
+pop$ -- 113
 preamble$ -- 1
-purify$ -- 49
+purify$ -- 83
 quote$ -- 0
-skip$ -- 113
+skip$ -- 154
 stack$ -- 0
-substring$ -- 221
-swap$ -- 26
+substring$ -- 343
+swap$ -- 33
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 46
-warning$ -- 2
-while$ -- 41
-width$ -- 17
-write$ -- 163
-(There was 1 error message)
+type$ -- 68
+warning$ -- 3
+while$ -- 59
+width$ -- 23
+write$ -- 230
+(There were 3 warnings)
