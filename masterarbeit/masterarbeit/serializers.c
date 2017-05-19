@@ -9,6 +9,7 @@
 #include "serializers.h"
 #include "string.h"
 #include "math.h"
+#include "calculations.h"
 
 ///@brief loops through the entire E and B array and writes |B|^2 and |E|^2 to seperate files. File is structured similiar to the grid.
 ///@param filename pointer to a char. Gets modified inside the method
@@ -20,6 +21,11 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
     printf("Writing fields to file ...\n");
     FILE *fid = NULL;
     FILE *fid2 = NULL;
+    FILE *PoyntingX = fopen("Sx.txt", "w");
+    FILE *PoyntingY = fopen("Sy.txt", "w");;
+    FILE *PoyntingZ = fopen("Sz.txt", "w");;
+    
+    double Sx, Sy, Sz;
     
     if (plotE){
         sprintf(filename, "E_field%d", index);
@@ -56,21 +62,33 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
                 Ex = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 0];
                 Ey = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
                 Ez = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
+                
+                Sx = Ey * Hz - Ez * Hy;
+                Sy = Ez * Hx - Ex * Hz;
+                Sz = Ex * Hy - Ey * Hx;
+                
+                fprintf(PoyntingX, "%.18f\t", Sx);
+                fprintf(PoyntingY, "%.18f\t", Sy);
+                fprintf(PoyntingZ, "%.18f\t", Sz);
+                
                 if(plotE){
                     Esq = Ex * Ex + Ey * Ey + Ez * Ez;
-                    fprintf(fid, "%.12f\t", Esq);
+                    fprintf(fid, "%.18f\t", Esq);
                     if (Esq > Grid->EMax){
                         Grid->EMax = Esq;
                     }
                 }
                 if (plotB){
                     Bsq = Hx * Hx + Hy * Hy + Hz * Hz;
-                    fprintf(fid2, "%.12f\t", Bsq);
+                    fprintf(fid2, "%.18f\t", Bsq);
                     if (Bsq > Grid->HMax){
                         Grid->HMax = Bsq;
                     }
                 }
             }
+            fprintf(PoyntingX, "\n");
+            fprintf(PoyntingY, "\n");
+            fprintf(PoyntingZ, "\n");
             if(plotE){
                 fprintf(fid,"\n");
             }
@@ -81,6 +99,9 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
     }
     fclose(fid);
     fclose(fid2);
+    fclose(PoyntingX);
+    fclose(PoyntingY);
+    fclose(PoyntingZ);
 }
 
 ///@brief loops through the entire E and B array and writes Bx,By,Bz and (or) Ex,Ey,Ez to seperate files. File is structured similiar to the grid.
@@ -158,14 +179,14 @@ void writeFieldComponentsForFourierAnalysisToFile(Grid *Grid, char *filename, in
                 Ey = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 1];
                 Ez = Grid->E[3 * nz * ny * (i) + 3 * nz * (j) + 3 * (k) + 2];
                 if(plotE){
-                    fprintf(fid_Ex, "%.12f\t", Ex);
-                    fprintf(fid_Ey, "%.12f\t", Ey);
-                    fprintf(fid_Ez, "%.12f\t", Ez);
+                    fprintf(fid_Ex, "%.18f\t", Ex);
+                    fprintf(fid_Ey, "%.18f\t", Ey);
+                    fprintf(fid_Ez, "%.18f\t", Ez);
                 }
                 if (plotB){
-                    fprintf(fid_Hx, "%.12f\t", Hx);
-                    fprintf(fid_Hy, "%.12f\t", Hy);
-                    fprintf(fid_Hz, "%.12f\t", Hz);
+                    fprintf(fid_Hx, "%.18f\t", Hx);
+                    fprintf(fid_Hy, "%.18f\t", Hy);
+                    fprintf(fid_Hz, "%.18f\t", Hz);
                 }
             }
             if(plotE){
@@ -208,8 +229,8 @@ void writeFieldsFromCompleteGridToFile(Grid *Grid){
     int nz = Grid->numberOfGridPointsInZ;
     
     for(int i = 0; i < nx * ny * nz * 3; i++){
-        fprintf(fid,"%.12f\n", Grid->E[i]);
-        fprintf(fid2,"%.12f\n", Grid->H[i]);
+        fprintf(fid,"%.18f\n", Grid->E[i]);
+        fprintf(fid2,"%.18f\n", Grid->H[i]);
     }
     fclose(fid);
     fclose(fid2);
@@ -257,7 +278,7 @@ void writeForcesToFile(Forces *Forces, double t){
     double absDampingTerm = sqrt(Forces->damping[0]*Forces->damping[0] + Forces->damping[1]*Forces->damping[1] + Forces->damping[2]*Forces->damping[2]);
     double absLorentzForce = sqrt(Forces->lorentz[0]*Forces->lorentz[0] + Forces->lorentz[1]*Forces->lorentz[1] + Forces->lorentz[2]*Forces->lorentz[2]);
     
-    fprintf(fid2, "%f %.12f %.12f %.12f\n", t, absDampingTerm, absLorentzForce, absDampingTerm / absLorentzForce);
+    fprintf(fid2, "%f %.18f %.18f %.18f\n", t, absDampingTerm, absLorentzForce, absDampingTerm / absLorentzForce);
     fclose(fid2);
 }
 
@@ -272,7 +293,7 @@ void writeGridParametersToFile(Grid *Grid){
     }
     else{
         printf("writing grid parameters to file\n");
-        fprintf(fid, "%f %f %f %d %d %d %f %f %f %.12f %.12f\n", Grid->Resolution.dx, Grid->Resolution.dy, Grid->Resolution.dz, Grid->Box.numberOfGridPointsInX, Grid->Box.numberOfGridPointsInY, Grid->Box.numberOfGridPointsInZ, Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ, Grid->EMax, Grid->HMax);
+        fprintf(fid, "%f %f %f %d %d %d %f %f %f %.18f %.18f\n", Grid->Resolution.dx, Grid->Resolution.dy, Grid->Resolution.dz, Grid->Box.numberOfGridPointsInX, Grid->Box.numberOfGridPointsInY, Grid->Box.numberOfGridPointsInZ, Grid->lengthOfSimulationBoxInX, Grid->lengthOfSimulationBoxInY, Grid->lengthOfSimulationBoxInZ, Grid->EMax, Grid->HMax);
     }
     fclose(fid);
 }
@@ -323,7 +344,7 @@ void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3],
                 x[1] = i * Grid->Resolution.dx;
                 x[2] = j * Grid->Resolution.dy;
                 
-                externalPlaneWave(x, tStart, Eextern, Bextern);
+                externalPulse(x, tStart, Eextern, Bextern, Grid);
                 Ex = Eextern[0];
                 Ey = Eextern[1];
                 Ez = Eextern[2];
@@ -335,11 +356,11 @@ void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3],
                 
                 if(plotE){
                     Esq = Ex * Ex + Ey * Ey + Ez * Ez;
-                    fprintf(fid, "%.12f\t", Ey);
+                    fprintf(fid, "%.18f\t", Ey);
                 }
                 if (plotB){
                     Hsq = Hx * Hx + Hy * Hy + Hz * Hz;
-                    fprintf(fid2, "%.12f\t", Hsq);
+                    fprintf(fid2, "%.18f\t", Hsq);
                 }
             }
             if(plotE){

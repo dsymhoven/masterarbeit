@@ -34,6 +34,13 @@ then
 	mv $PATHTOEXECUTABLE/E_field_y*.txt $PATHTOANALYSIS/FourierAnalysis/Ey
 	mv $PATHTOEXECUTABLE/E_field_z*.txt $PATHTOANALYSIS/FourierAnalysis/Ez
 fi
+if [ -e Sx.txt ]
+then
+	mkdir -p $PATHTOANALYSIS/FourierAnalysis
+	mv $PATHTOEXECUTABLE/Sx.txt $PATHTOANALYSIS/FourierAnalysis
+	mv $PATHTOEXECUTABLE/Sy.txt $PATHTOANALYSIS/FourierAnalysis
+	mv $PATHTOEXECUTABLE/Sz.txt $PATHTOANALYSIS/FourierAnalysis
+fi
 if [ -e B_field0.txt ]
 then
 	rm -rf $PATHTOANALYSIS/B_fields
@@ -69,3 +76,4 @@ cd $PATHTOANALYSIS
 python2.7 sortParticleFiles.py
 python2.7 plot_particlesAndFieldsForPlane.py
 python2.7 plot_fourierAnalysis.py
+python2.7 plot_fourierAnalysisPoynting.py
