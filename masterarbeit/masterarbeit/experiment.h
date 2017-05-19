@@ -28,4 +28,5 @@ void testTimeDependentExternalFields();
 void scatteringInEMWave_analytic();
 void scatteringInEMWave_simulation();
 void testRadiationDampingVSLorentzForce();
+void scatteringInEMWave_analytic_largeScale();
 #endif /* experiment_h */

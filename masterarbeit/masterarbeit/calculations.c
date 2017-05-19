@@ -1222,7 +1222,7 @@ void interpolateFields(Grid *Grid, Particle *Particle, double E[3], double B[3])
     ip = Particle->x[1] / Grid->Resolution.dx;
     jp = Particle->x[2] / Grid->Resolution.dy;
     kp = Particle->x[3] / Grid->Resolution.dz;
-
+    
     
     if (ip < Grid->numberOfGridPointsInX - 1 && jp < Grid->numberOfGridPointsInY - 1 && kp < Grid->numberOfGridPointsInZ - 1 && ip > 0 && jp > 0 && kp > 0){
         
@@ -1920,6 +1920,7 @@ void calculateLorentzForce(Particle *Particle, double Bextern[3], double lorentz
     }
     
 }
+
 
 
 

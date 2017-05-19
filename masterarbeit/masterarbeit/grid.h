@@ -85,5 +85,6 @@ void initSamplePulseOnGrid(Grid *Grid);
 void pushEFieldOnGrid(Grid *Grid, const double dt);
 void pushHFieldOnGrid(Grid *Grid, const double dt);
 void externalPlaneWave(const double xParticle[4], const double tStart, double Eextern[3], double Bextern[3]);
+void externalPulse(const double x[4], const double tStart, double Eextern[3], double Hextern[3], Grid *Grid);
 void clearFieldsFromGrid(Grid *Grid);
 #endif /* grid_h */

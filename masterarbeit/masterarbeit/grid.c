@@ -371,22 +371,13 @@ void pushEFieldOnGrid(Grid *Grid, const double dt){
 ///@param Eextern vector containing external E field components
 ///@param Hextern vector containing external H field components
 void externalPlaneWave(const double x[4], const double tStart, double Eextern[3], double Hextern[3]){
-    double E0 = 1.77 * pow(10, -6.0);
-    double H0 = 1.77 * pow(10, -6.0);;
-    double frequency = 1.77 * pow(10, -8);
-    double a = 1 * pow(10, -9);
-
-//    Eextern[0] = 0;
-//    Eextern[1] = E0 * sin(frequency * (x[1] - x[0])) * sin(M_PI * x[1] / pow(8*32*10, 7));
-//    Eextern[2] = 0;
-//    
-//    Hextern[0] = 0;
-//    Hextern[1] = 0;
-//    Hextern[2] = H0 * sin(frequency * (x[1] - x[0])) * sin(M_PI * x[1] / pow(8*32*10, 7));
+    double E0 = 0.01;
+    double H0 = 0.01;
+    double frequency = 2 * M_PI / 600;
     
     Eextern[0] = 0;
-    if(x[0] - tStart >= x[1] && x[2] > (2 * 32 * pow(10, 7)) && x[2] < (6 * 32 * pow(10, 7))){
-        Eextern[1] = E0 * sin(frequency * (x[0] - tStart - x[1])) * sin(M_PI * (x[2] - 2 * 32 * pow(10, 7)) / (4 * 32 * pow(10, 7))) * sin(M_PI * (x[0] - tStart - x[1]) / (8 * 32 * pow(10, 7)));
+    if(x[0] - tStart >= x[1]){
+        Eextern[1] = E0 * cos(frequency * (x[0] - tStart - x[1]));
     }
     else{
         Eextern[1] = 0;
@@ -395,8 +386,44 @@ void externalPlaneWave(const double x[4], const double tStart, double Eextern[3]
     
     Hextern[0] = 0;
     Hextern[1] = 0;
-    if(x[0] - tStart >= x[1] && x[2] > (2 * 32 * pow(10, 7)) && x[2] < (6 * 32 * pow(10, 7))){
-        Hextern[2] = H0 * sin(frequency * (x[0] - tStart - x[1])) * sin(M_PI * (x[2] - 2 * 32 * pow(10, 7)) / (4 * 32 * pow(10, 7))) * sin(M_PI * (x[0] - tStart - x[1]) / (8 * 32 * pow(10, 7))) ;
+    if(x[0] - tStart >= x[1]){
+        Hextern[2] = H0 * cos(frequency * (x[0] - tStart - x[1]));
+    }
+    else{
+        Hextern[2] = 0;
+    }
+    
+    
+}
+
+///@brief sets external time dependent E and H field as plane wave.
+///@param x four vector containing actual position where you want to evaluate the external field
+///@param Eextern vector containing external E field components
+///@param Hextern vector containing external H field components
+void externalPulse(const double x[4], const double tStart, double Eextern[3], double Hextern[3], Grid *Grid){
+    double E0 = 1.77 * pow(10, -8.0);
+    double H0 = 1.77 * pow(10, -8.0);;
+    double frequency = 1.77 * pow(10, -8);
+    double lengthOfSimulationBoxInX = Grid->lengthOfSimulationBoxInX;
+    double lengthOfSimulationBoxInY = Grid->lengthOfSimulationBoxInY;
+    double startOfPulseInY = 3./8. * lengthOfSimulationBoxInY;
+    double endOfPulseInY = 5./8. * lengthOfSimulationBoxInY;
+    double widthOfPulseInY = endOfPulseInY - startOfPulseInY;
+    double widthOfPulseInX = 0.5 * lengthOfSimulationBoxInX;
+    
+    Eextern[0] = 0;
+    if(x[0] - tStart >= x[1] && x[2] >= startOfPulseInY && x[2] <= endOfPulseInY){
+        Eextern[1] = E0 * cos(frequency * (x[0] - tStart - x[1])) * sin(M_PI * (x[2] - startOfPulseInY) / widthOfPulseInY) * sin(M_PI * (x[0] - tStart - x[1]) / widthOfPulseInX);
+    }
+    else{
+        Eextern[1] = 0;
+    }
+    Eextern[2] = 0;
+    
+    Hextern[0] = 0;
+    Hextern[1] = 0;
+    if(x[0] - tStart >= x[1] && x[2] >= startOfPulseInY && x[2] <= endOfPulseInY){
+        Hextern[2] = H0 * cos(frequency * (x[0] - tStart - x[1])) * sin(M_PI * (x[2] - startOfPulseInY) / widthOfPulseInY) * sin(M_PI * (x[0] - tStart - x[1]) / widthOfPulseInX);
     }
     else{
         Hextern[2] = 0;
