@@ -1245,14 +1245,14 @@ void testTimeDependentExternalFields(){
     
     initResolution(&Resolution, pow(10, 7), pow(10, 7), pow(10, 7));
     initBox(&Box, 32, 32, 32);
-    initGrid(&Grid, &Resolution, &Box, 22, 22, 22, true);
+    initGrid(&Grid, &Resolution, &Box, 22, 10, 10, true);
      
     
     
     double dt = 0.5 * Resolution.dx;
     double t = 0;
     double tStart = t;
-    double tEnd = 400 * pow(10, 7);
+    double tEnd = 600 * pow(10, 7);
     
     char filename[32] = "some";
     double Eextern[3];
@@ -1640,8 +1640,8 @@ void scatteringInEMWave_analytic_largeScale(){
     initParticles(Particles, numberOfParticles, arrayLength);
     
     
-    Particle1->mass = pow(10, 9);
-    Particle1->charge = pow(10, 9);
+    Particle1->mass = pow(10, 10);
+    Particle1->charge = pow(10, 10);
     
     Particle1->x[0] = 0;
     Particle1->x[1] = 6.0 * pow(10, 9);
@@ -1649,7 +1649,7 @@ void scatteringInEMWave_analytic_largeScale(){
     Particle1->x[3] = 1.6 * pow(10, 9);
     
     Particle1->u[1] = -0.2;
-    Particle1->u[2] = 0.01;
+    Particle1->u[2] = 0.1;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
     

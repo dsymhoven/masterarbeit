@@ -20,13 +20,13 @@ int main(int argc, const char * argv[]) {
 //    testNearAndFarFields();
 //    testUPML();
 //    testNearFieldUpdate();
-    testMultipleParticles();
+//    testMultipleParticles();
 //    testHistoryBeforeSimulation();
 //    testScattering();
 //    extendHistoryAndCalcLWFieldsIndependantly();
 //    electronScatteringSmallGrid_init9();
 //    electronScatteringLargeGrid_init8();
-//    testTimeDependentExternalFields();
+    testTimeDependentExternalFields();
 //    scatteringInEMWave_analytic();
 //    scatteringInEMWave_simulation()
 //    testRadiationDampingVSLorentzForce();
