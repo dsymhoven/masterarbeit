@@ -15,6 +15,8 @@ files = glob.glob('Particles/*.txt')
 gridParameters = np.genfromtxt('gridParameters.txt')
 field = np.genfromtxt('E_fields/E_field0.txt')
 EMax = field.max()
+# EMax = 9 * pow(10,-14)
+
 lengthOfSimulationBoxInX = gridParameters[6]
 lengthOfSimulationBoxInY = gridParameters[7]
 lengthOfOneBoxInX = gridParameters[0] * gridParameters[3]
@@ -22,19 +24,12 @@ lengthOfOneBoxInY = gridParameters[1] * gridParameters[4]
 numberOfBoxesInX =  lengthOfSimulationBoxInX / lengthOfOneBoxInX
 numberOfBoxesInY =  lengthOfSimulationBoxInY / lengthOfOneBoxInY
 
-# if gridParameters[9] >= 0.1:
-# 	EMax = round(gridParameters[9],1)
-# if gridParameters[9] < 0.1:
-# 	EMax = 0.05
-# if gridParameters[9] > 10:
-# 	EMax = 0.5
-
 x=[]
 y=[]
 
 # open figure only once because we want to plot several particles in one figure
 fig = plt.figure()
-
+ax = fig.gca()
 for p in range(numberOfParticles):
 	for i in range(startTime, startTime + numberOfParticleFiles):
 		# read data from text and save it into array data
@@ -63,6 +58,10 @@ plt.ylim([0, lengthOfSimulationBoxInY])
 plt.xticks(np.arange(0, lengthOfSimulationBoxInX + 1, lengthOfOneBoxInX))
 plt.yticks(np.arange(0, lengthOfSimulationBoxInY + 1, lengthOfOneBoxInY))
 plt.grid(linestyle = "-", color='red')
+for index, label in enumerate(ax.xaxis.get_ticklabels()):
+		if index % 3 != 0:
+			label.set_visible(False)
+
 # define filename for saving
 filename = 'img'
 fig.savefig("png/" + "{}.png".format(filename),bbox_inches='tight',dpi=300)

@@ -26,11 +26,13 @@ int main(int argc, const char * argv[]) {
 //    extendHistoryAndCalcLWFieldsIndependantly();
 //    electronScatteringSmallGrid_init9();
 //    electronScatteringLargeGrid_init8();
-    testTimeDependentExternalFields();
+//    testTimeDependentExternalFields();
 //    scatteringInEMWave_analytic();
 //    scatteringInEMWave_simulation()
 //    testRadiationDampingVSLorentzForce();
-//    scatteringInEMWave_analytic_largeScale();
+    scatteringInEMWave_analytic_largeScale();
+//    scatteringInEMWave_simulation_largeScale();
+    
     return 0;
 }   
 
