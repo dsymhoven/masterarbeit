@@ -45,4 +45,5 @@ void calcGridIndizesNextNeighboursEx(Grid *Grid, Particle *Particle, int gridInd
 void calculateLorentzForce(Particle *Particle, double Bextern[3], double lorentzForce[3]);
 void calcRadiationDamping(double Eextern[3], double Bextern[3], double u[4], double dampingTerm[4]);
 void calcUPMLCoefficients(Grid *Grid);
+void calcLWFieldsForPlaneInNearFieldRegion(Grid *Grid, Particle *Particles, int numberOfParticles, double t, int planeForPlotting);
 #endif

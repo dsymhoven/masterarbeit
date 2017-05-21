@@ -505,6 +505,56 @@ void calcLWFieldsForPlaneWithNearField(Grid *Grid, Particle *Particles, int numb
     
 }
 
+///@remark calcuates LW fields at simulation time t only on specyfied plane with index "planeForPlotting" and only within the near field region
+///@param Grid pointer to an instance of a Grid struct.
+///@param Particles pointer to  Particle struct array
+///@param numberOfParticles number of particles
+///@param t time at which the fields shall be calcualted. This is also the zeroth component of xObserver
+///@param planeForPlotting number of the plane in which fields shall be calcualted. planeForPlotting = x[3] / dz
+void calcLWFieldsForPlaneInNearFieldRegion(Grid *Grid, Particle *Particles, int numberOfParticles, double t, int planeForPlotting){
+    
+    for (int p = 0; p < numberOfParticles; p++){
+        printf("Calculating LW Fields on plane %d, heigth:%f\n", planeForPlotting, planeForPlotting * Grid->Resolution.dz);
+        Particle *Particle = &Particles[p];
+        
+        double xObserver[4];
+        int k = planeForPlotting;
+        
+        int nx = Grid->numberOfGridPointsInX;
+        int ny = Grid->numberOfGridPointsInY;
+        int nz = Grid->numberOfGridPointsInZ;
+        
+        getEdgesOfNearFieldBox(Grid, Particle);
+        
+        for(int i = 0; i < nx; i++){
+            for (int j = 0; j < ny; j++){
+                
+                
+                xObserver[0] = t;
+                xObserver[1] = (i) * Grid->Resolution.dx;
+                xObserver[2] = (j) * Grid->Resolution.dy;
+                xObserver[3] = (k) * Grid->Resolution.dz;
+                
+                if(xObserver[1] >= Particle->edgesOfNearFieldBox[0] && xObserver[1] < Particle->edgesOfNearFieldBox[1] && xObserver[2] >= Particle->edgesOfNearFieldBox[2] && xObserver[2] < Particle->edgesOfNearFieldBox[3] && xObserver[3] >= Particle->edgesOfNearFieldBox[4] && xObserver[3] < Particle->edgesOfNearFieldBox[5]){
+                    int gridIndexInBox = 3 * ny * nz * i + 3 * nz * j + 3 * k;
+                    
+                    addLWField(Grid, Particle, &Grid->H[gridIndexInBox], xObserver, 3);
+                    addLWField(Grid, Particle, &Grid->H[gridIndexInBox + 1], xObserver, 4);
+                    addLWField(Grid, Particle, &Grid->H[gridIndexInBox + 2], xObserver, 5);
+                    
+                    addLWField(Grid, Particle, &Grid->E[gridIndexInBox], xObserver, 0);
+                    addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 1], xObserver, 1);
+                    addLWField(Grid, Particle, &Grid->E[gridIndexInBox + 2], xObserver, 2);
+                }
+                else{
+                    continue;
+                }
+            }
+        }
+    }
+}
+
+
 ///@brief calcualtes the box index in which the particle is currently located.
 ///@param Grid pointer to an instance of a Grid struct.
 ///@param Particle pointer to an instance of a Particle struct

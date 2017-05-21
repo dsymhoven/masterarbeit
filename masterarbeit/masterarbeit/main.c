@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
 //    testBorisPusher();
 //    testNearFieldCalculation();
 //    testLWFieldCalculationForPlane();
-//    testNearAndFarFields();
+    testNearAndFarFields();
 //    testUPML();
 //    testNearFieldUpdate();
 //    testMultipleParticles();
@@ -30,7 +30,7 @@ int main(int argc, const char * argv[]) {
 //    scatteringInEMWave_analytic();
 //    scatteringInEMWave_simulation()
 //    testRadiationDampingVSLorentzForce();
-    scatteringInEMWave_analytic_largeScale();
+//    scatteringInEMWave_analytic_largeScale();
 //    scatteringInEMWave_simulation_largeScale();
     
     return 0;

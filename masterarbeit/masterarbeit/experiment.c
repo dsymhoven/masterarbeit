@@ -347,7 +347,7 @@ void testNearAndFarFields(){
     Particle->charge = 1;
     Particle->x[0] = 0;
     Particle->x[1] = 16.21;
-    Particle->x[2] = 14.01;
+    Particle->x[2] = 15.01;
     Particle->x[3] = 14.401;
     
     Particle->u[1] = 0.458;
@@ -373,6 +373,9 @@ void testNearAndFarFields(){
     for (int step = 0; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, arrayLength);
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
+        if(step == tEnd / dt - 1){
+            calcLWFieldsForPlaneInNearFieldRegion(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+        }
         writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
         
         pushEField(&Grid, Particles, numberOfParticles, t, dt);
@@ -1648,7 +1651,7 @@ void scatteringInEMWave_analytic_largeScale(){
     Particle1->x[2] = 1.6 * pow(10, 9);;
     Particle1->x[3] = 1.6 * pow(10, 9);
     
-    Particle1->u[1] = -0.46;
+    Particle1->u[1] = -0.98;
     Particle1->u[2] = 0.01;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
