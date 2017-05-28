@@ -55,19 +55,47 @@ struct Grid {
     double **Ex_kp1;
     double **Ey_kp1;
     
-    double *upml1E;
-    double *upml2E;
-    double *upml3E;
-    double *upml4E;
-    double *upml5E;
-    double *upml6E;
+    double *upml1Ex;
+    double *upml2Ex;
+    double *upml3Ex;
+    double *upml4Ex;
+    double *upml5Ex;
+    double *upml6Ex;
     
-    double *upml1H;
-    double *upml2H;
-    double *upml3H;
-    double *upml4H;
-    double *upml5H;
-    double *upml6H;
+    double *upml1Ey;
+    double *upml2Ey;
+    double *upml3Ey;
+    double *upml4Ey;
+    double *upml5Ey;
+    double *upml6Ey;
+    
+    double *upml1Ez;
+    double *upml2Ez;
+    double *upml3Ez;
+    double *upml4Ez;
+    double *upml5Ez;
+    double *upml6Ez;
+    
+    double *upml1Hx;
+    double *upml2Hx;
+    double *upml3Hx;
+    double *upml4Hx;
+    double *upml5Hx;
+    double *upml6Hx;
+    
+    double *upml1Hy;
+    double *upml2Hy;
+    double *upml3Hy;
+    double *upml4Hy;
+    double *upml5Hy;
+    double *upml6Hy;
+    
+    double *upml1Hz;
+    double *upml2Hz;
+    double *upml3Hz;
+    double *upml4Hz;
+    double *upml5Hz;
+    double *upml6Hz;
     
     double upmlLayerWidth;
     

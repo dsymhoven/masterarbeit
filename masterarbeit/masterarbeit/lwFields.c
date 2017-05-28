@@ -86,21 +86,21 @@ void pushEFieldInsideBoxes(Grid *Grid, double dt){
                 if (Grid->useUPML){
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
                     
-                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2E[j] * ((Hz_ijk - Hz_ijm1k) / Grid->Resolution.dy - (Hy_ijk - Hy_ijkm1) / Grid->Resolution.dz);
-                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3E[k] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4E[k] * (Grid->upml5E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6E[i] * dOld);
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1Ex[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2Ex[j] * ((Hz_ijk - Hz_ijm1k) / Grid->Resolution.dy - (Hy_ijk - Hy_ijkm1) / Grid->Resolution.dz);
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3Ex[k] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4Ex[k] * (Grid->upml5Ex[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6Ex[i] * dOld);
                     
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
                     
-                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2E[k] * ((Hx_ijk - Hx_ijkm1) / Grid->Resolution.dz - (Hz_ijk - Hz_im1jk) / Grid->Resolution.dx);
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1Ey[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2Ey[k] * ((Hx_ijk - Hx_ijkm1) / Grid->Resolution.dz - (Hz_ijk - Hz_im1jk) / Grid->Resolution.dx);
                     
-                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3E[i] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4E[i] * (Grid->upml5E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6E[j] * dOld);
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3Ey[i] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4Ey[i] * (Grid->upml5Ey[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6Ey[j] * dOld);
                     
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
                     
-                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2E[i] * ((Hy_ijk - Hy_im1jk) / Grid->Resolution.dx - (Hx_ijk - Hx_ijm1k) / Grid->Resolution.dy);
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1Ez[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2Ez[i] * ((Hy_ijk - Hy_im1jk) / Grid->Resolution.dx - (Hx_ijk - Hx_ijm1k) / Grid->Resolution.dy);
                     
                     
-                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3E[j] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4E[j] * (Grid->upml5E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6E[k] * dOld);
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3Ez[j] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4Ez[j] * (Grid->upml5Ez[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6Ez[k] * dOld);
                     
                 }
                 else{
@@ -164,21 +164,21 @@ void pushHFieldInsideBoxes(Grid *Grid, double dt){
                     
                     bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
                     
-                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2H[j] * ((Ey_ijkp1 - Ey_ijk) / Grid->Resolution.dz - (Ez_ijp1k - Ez_ijk) / Grid->Resolution.dy);
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1Hx[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2Hx[j] * ((Ey_ijkp1 - Ey_ijk) / Grid->Resolution.dz - (Ez_ijp1k - Ez_ijk) / Grid->Resolution.dy);
                     
-                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3H[k] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4H[k] * (Grid->upml5H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6E[i] * bOld);
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3Hx[k] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4Hx[k] * (Grid->upml5Hx[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6Ex[i] * bOld);
                     
                     bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
                     
-                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2H[k] * ((Ez_ip1jk - Ez_ijk) / Grid->Resolution.dx - (Ex_ijkp1 - Ex_ijk) / Grid->Resolution.dz);
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1Hy[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2Hy[k] * ((Ez_ip1jk - Ez_ijk) / Grid->Resolution.dx - (Ex_ijkp1 - Ex_ijk) / Grid->Resolution.dz);
                     
-                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3H[i] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4H[i] * (Grid->upml5H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6H[j] * bOld);
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3Hy[i] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4Hy[i] * (Grid->upml5Hy[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6Hy[j] * bOld);
                     
                     bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
                     
-                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2H[i] * ((Ex_ijp1k - Ex_ijk) / Grid->Resolution.dy - (Ey_ip1jk - Ey_ijk) / Grid->Resolution.dx);
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1Hz[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2Hz[i] * ((Ex_ijp1k - Ex_ijk) / Grid->Resolution.dy - (Ey_ip1jk - Ey_ijk) / Grid->Resolution.dx);
                     
-                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3H[j] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4H[j] * (Grid->upml5H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6H[k] * bOld);
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3Hz[j] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4Hz[j] * (Grid->upml5Hz[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6Hz[k] * bOld);
                 }
                 else{
                     
@@ -835,21 +835,21 @@ void pushEFieldAtBorders(Grid *Grid, double dt){
                     
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
                     
-                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2E[j] * ((Hz_ijk - Hz_ijm1k) / Grid->Resolution.dy - (Hy_ijk - Hy_ijkm1) / Grid->Resolution.dz);
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1Ex[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2Ex[j] * ((Hz_ijk - Hz_ijm1k) / Grid->Resolution.dy - (Hy_ijk - Hy_ijkm1) / Grid->Resolution.dz);
                     
-                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3E[k] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4E[k] * (Grid->upml5E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6E[i] * dOld);
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3Ex[k] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4Ex[k] * (Grid->upml5Ex[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6Ex[i] * dOld);
                     
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
                     
-                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2E[k] * ((Hx_ijk - Hx_ijkm1) / Grid->Resolution.dz - (Hz_ijk - Hz_im1jk) / Grid->Resolution.dx);
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1Ey[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2Ey[k] * ((Hx_ijk - Hx_ijkm1) / Grid->Resolution.dz - (Hz_ijk - Hz_im1jk) / Grid->Resolution.dx);
                     
-                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3E[i] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4E[i] * (Grid->upml5E[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6E[j] * dOld);
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3Ey[i] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4Ey[i] * (Grid->upml5Ey[j] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6Ey[j] * dOld);
                     
                     dOld = Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
                     
-                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1E[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2E[i] * ((Hy_ijk - Hy_im1jk) / Grid->Resolution.dx - (Hx_ijk - Hx_ijm1k) / Grid->Resolution.dy);
+                    Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1Ez[i] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2Ez[i] * ((Hy_ijk - Hy_im1jk) / Grid->Resolution.dx - (Hx_ijk - Hx_ijm1k) / Grid->Resolution.dy);
                     
-                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3E[j] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4E[j] * (Grid->upml5E[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6E[k] * dOld);
+                    Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3Ez[j] * Grid->E[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4Ez[j] * (Grid->upml5Ez[k] * Grid->D[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6Ez[k] * dOld);
                 }
                 else{
                     double val_x = cny * (Hz_ijk - Hz_ijm1k) - cnz * (Hy_ijk - Hy_ijkm1);
@@ -953,21 +953,21 @@ void pushHFieldAtBorders(Grid *Grid, double dt){
                     
                     bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0];
                     
-                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2H[j] * ((Ey_ijkp1 - Ey_ijk) / Grid->Resolution.dz - (Ez_ijp1k - Ez_ijk) / Grid->Resolution.dy);
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml1Hx[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml2Hx[j] * ((Ey_ijkp1 - Ey_ijk) / Grid->Resolution.dz - (Ez_ijp1k - Ez_ijk) / Grid->Resolution.dy);
                     
-                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3H[k] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4H[k] * (Grid->upml5H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6E[i] * bOld);
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] = Grid->upml3Hx[k] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] + Grid->upml4Hx[k] * (Grid->upml5Hx[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 0] - Grid->upml6Hx[i] * bOld);
                     
                     bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1];
                     
-                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2H[k] * ((Ez_ip1jk - Ez_ijk) / Grid->Resolution.dx - (Ex_ijkp1 - Ex_ijk) / Grid->Resolution.dz);
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml1Hy[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml2Hy[k] * ((Ez_ip1jk - Ez_ijk) / Grid->Resolution.dx - (Ex_ijkp1 - Ex_ijk) / Grid->Resolution.dz);
                     
-                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3H[i] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4H[i] * (Grid->upml5H[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6H[j] * bOld);
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] = Grid->upml3Hy[i] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] + Grid->upml4Hy[i] * (Grid->upml5Hy[j] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 1] - Grid->upml6Hy[j] * bOld);
                     
                     bOld = Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2];
                     
-                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1H[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2H[i] * ((Ex_ijp1k - Ex_ijk) / Grid->Resolution.dy - (Ey_ip1jk - Ey_ijk) / Grid->Resolution.dx);
+                    Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml1Hz[i] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml2Hz[i] * ((Ex_ijp1k - Ex_ijk) / Grid->Resolution.dy - (Ey_ip1jk - Ey_ijk) / Grid->Resolution.dx);
                     
-                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3H[j] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4H[j] * (Grid->upml5H[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6H[k] * bOld);
+                    Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] = Grid->upml3Hz[j] * Grid->H[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] + Grid->upml4Hz[j] * (Grid->upml5Hz[k] * Grid->B[3 * numberOfGridPointsInZ * numberOfGridPointsInY * i + 3 * numberOfGridPointsInZ * j + 3 * k + 2] - Grid->upml6Hz[k] * bOld);
                 }
                 else{
                     

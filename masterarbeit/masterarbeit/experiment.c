@@ -415,8 +415,8 @@ void testUPML(){
     Box Box;
  
     
-    initResolution(&Resolution, 0.1, 0.1, 0.1);
-    initBox(&Box, 30, 30, 30);
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
+    initBox(&Box, 16, 16, 16);
     initGrid(&Grid, &Resolution, &Box, 12, 4, 4, true);
     
     

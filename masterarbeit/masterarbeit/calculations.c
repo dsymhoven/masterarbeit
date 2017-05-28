@@ -728,8 +728,8 @@ void calcUPMLCoefficients(Grid *Grid){
             sigma = 0.0;
             kappa = 1.0;
         }
-        Grid->upml1E[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
-        Grid->upml2E[j] = (2 * dt) / (2 * kappa + sigma * dt);
+        Grid->upml1Ex[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+        Grid->upml2Ex[j] = (2 * dt) / (2 * kappa + sigma * dt);
     }
     
     for (int k = 0; k < numberOfGridPointsInZ; k++){
@@ -748,8 +748,88 @@ void calcUPMLCoefficients(Grid *Grid){
             sigma = 0.0;
             kappa = 1.0;
         }
-        Grid->upml3E[k] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
-        Grid->upml4E[k] = 1.0 / (2 * kappa + sigma * dt);
+        Grid->upml1Ey[k] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+        Grid->upml2Ey[k] = (2 * dt) / (2 * kappa + sigma * dt);
+    }
+    
+    for (int i = 0; i < numberOfGridPointsInX; i++){
+        if(i < upmlLayerWidth){
+            depth = upmlLayerWidth - i;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        
+        else if(i >= numberOfGridPointsInX - upmlLayerWidth - 1){
+            depth = i - numberOfGridPointsInX + upmlLayerWidth + 1;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        else{
+            sigma = 0.0;
+            kappa = 1.0;
+        }
+        Grid->upml1Ez[i] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+        Grid->upml2Ez[i] = (2 * dt) / (2 * kappa + sigma * dt);
+    }
+    
+    for (int k = 0; k < numberOfGridPointsInZ; k++){
+        if(k < upmlLayerWidth){
+            depth = upmlLayerWidth - k;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        
+        else if(k >= numberOfGridPointsInZ - upmlLayerWidth - 1){
+            depth = k - numberOfGridPointsInZ + upmlLayerWidth + 1;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        else{
+            sigma = 0.0;
+            kappa = 1.0;
+        }
+        Grid->upml3Ex[k] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+        Grid->upml4Ex[k] = 1.0 / (2 * kappa + sigma * dt);
+    }
+    
+    for (int i = 0; i < numberOfGridPointsInX; i++){
+        if(i < upmlLayerWidth){
+            depth = upmlLayerWidth - i;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        
+        else if(i >= numberOfGridPointsInX - upmlLayerWidth - 1){
+            depth = i - numberOfGridPointsInX + upmlLayerWidth + 1;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        else{
+            sigma = 0.0;
+            kappa = 1.0;
+        }
+        Grid->upml3Ey[i] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+        Grid->upml4Ey[i] = 1.0 / (2 * kappa + sigma * dt);
+    }
+    
+    for (int j = 0; j < numberOfGridPointsInY; j++){
+        if(j < upmlLayerWidth){
+            depth = upmlLayerWidth - j;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        
+        else if(j >= numberOfGridPointsInY - upmlLayerWidth - 1){
+            depth = j - numberOfGridPointsInY + upmlLayerWidth + 1;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        else{
+            sigma = 0.0;
+            kappa = 1.0;
+        }
+        Grid->upml3Ez[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+        Grid->upml4Ez[j] = 1.0 / (2 * kappa + sigma * dt);
     }
     
     for (int i = 0; i < numberOfGridPointsInX; i++){
@@ -768,8 +848,8 @@ void calcUPMLCoefficients(Grid *Grid){
             sigma = 0.0;
             kappa = 1.0;
         }
-        Grid->upml5E[i] = (2 * kappa + sigma * dt);
-        Grid->upml6E[i] = (2 * kappa - sigma * dt);
+        Grid->upml5Ex[i] = (2 * kappa + sigma * dt);
+        Grid->upml6Ex[i] = (2 * kappa - sigma * dt);
     }
     
     for (int j = 0; j < numberOfGridPointsInY; j++){
@@ -788,8 +868,8 @@ void calcUPMLCoefficients(Grid *Grid){
             sigma = 0.0;
             kappa = 1.0;
         }
-        Grid->upml1H[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
-        Grid->upml2H[j] = (2 * dt) / (2 * kappa + sigma * dt);
+        Grid->upml5Ey[j] = (2 * kappa + sigma * dt);
+        Grid->upml6Ey[j] = (2 * kappa - sigma * dt);
     }
     
     for (int k = 0; k < numberOfGridPointsInZ; k++){
@@ -808,8 +888,128 @@ void calcUPMLCoefficients(Grid *Grid){
             sigma = 0.0;
             kappa = 1.0;
         }
-        Grid->upml3H[k] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
-        Grid->upml4H[k] = 1.0 / (2 * kappa + sigma * dt);
+        Grid->upml5Ez[k] = (2 * kappa + sigma * dt);
+        Grid->upml6Ez[k] = (2 * kappa - sigma * dt);
+    }
+    
+    for (int j = 0; j < numberOfGridPointsInY; j++){
+        if(j < upmlLayerWidth){
+            depth = upmlLayerWidth - j - 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        
+        else if(j >= numberOfGridPointsInY - upmlLayerWidth){
+            depth = j - numberOfGridPointsInY + upmlLayerWidth + 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        else{
+            sigma = 0.0;
+            kappa = 1.0;
+        }
+        Grid->upml1Hx[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+        Grid->upml2Hx[j] = (2 * dt) / (2 * kappa + sigma * dt);
+    }
+    
+    for (int k = 0; k < numberOfGridPointsInZ; k++){
+        if(k < upmlLayerWidth){
+            depth = upmlLayerWidth - k - 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        
+        else if(k >= numberOfGridPointsInZ - upmlLayerWidth){
+            depth = k - numberOfGridPointsInZ + upmlLayerWidth + 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        else{
+            sigma = 0.0;
+            kappa = 1.0;
+        }
+        Grid->upml1Hy[k] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+        Grid->upml2Hy[k] = (2 * dt) / (2 * kappa + sigma * dt);
+    }
+    
+    for (int i = 0; i < numberOfGridPointsInX; i++){
+        if(i < upmlLayerWidth){
+            depth = upmlLayerWidth - i - 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        
+        else if(i >= numberOfGridPointsInX - upmlLayerWidth){
+            depth = i - numberOfGridPointsInX + upmlLayerWidth + 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        else{
+            sigma = 0.0;
+            kappa = 1.0;
+        }
+        Grid->upml1Hz[i] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+        Grid->upml2Hz[i] = (2 * dt) / (2 * kappa + sigma * dt);
+    }
+    
+    for (int k = 0; k < numberOfGridPointsInZ; k++){
+        if(k < upmlLayerWidth){
+            depth = upmlLayerWidth - k - 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        
+        else if(k >= numberOfGridPointsInZ - upmlLayerWidth){
+            depth = k - numberOfGridPointsInZ + upmlLayerWidth + 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        else{
+            sigma = 0.0;
+            kappa = 1.0;
+        }
+        Grid->upml3Hx[k] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+        Grid->upml4Hx[k] = 1.0 / (2 * kappa + sigma * dt);
+    }
+    
+    for (int i = 0; i < numberOfGridPointsInX; i++){
+        if(i < upmlLayerWidth){
+            depth = upmlLayerWidth - i - 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        
+        else if(i >= numberOfGridPointsInX - upmlLayerWidth){
+            depth = i - numberOfGridPointsInX + upmlLayerWidth + 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        else{
+            sigma = 0.0;
+            kappa = 1.0;
+        }
+        Grid->upml3Hy[i] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+        Grid->upml4Hy[i] = 1.0 / (2 * kappa + sigma * dt);
+    }
+    
+    for (int j = 0; j < numberOfGridPointsInY; j++){
+        if(j < upmlLayerWidth){
+            depth = upmlLayerWidth - j - 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        
+        else if(j >= numberOfGridPointsInY - upmlLayerWidth){
+            depth = j - numberOfGridPointsInY + upmlLayerWidth + 0.5;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        else{
+            sigma = 0.0;
+            kappa = 1.0;
+        }
+        Grid->upml3Hz[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
+        Grid->upml4Hz[j] = 1.0 / (2 * kappa + sigma * dt);
     }
     
     
@@ -829,8 +1029,48 @@ void calcUPMLCoefficients(Grid *Grid){
             sigma = 0.0;
             kappa = 1.0;
         }
-        Grid->upml5H[i] = (2 * kappa + sigma * dt);
-        Grid->upml6H[i] = (2 * kappa - sigma * dt);
+        Grid->upml5Hx[i] = (2 * kappa + sigma * dt);
+        Grid->upml6Hx[i] = (2 * kappa - sigma * dt);
+    }
+    
+    for (int j = 0; j < numberOfGridPointsInY; j++){
+        if(j < upmlLayerWidth){
+            depth = upmlLayerWidth - j;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        
+        else if(j >= numberOfGridPointsInY - upmlLayerWidth - 1){
+            depth = j - numberOfGridPointsInY + upmlLayerWidth + 1;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        else{
+            sigma = 0.0;
+            kappa = 1.0;
+        }
+        Grid->upml5Hy[j] = (2 * kappa + sigma * dt);
+        Grid->upml6Hy[j] = (2 * kappa - sigma * dt);
+    }
+    
+    for (int k = 0; k < numberOfGridPointsInZ; k++){
+        if(k < upmlLayerWidth){
+            depth = upmlLayerWidth - k;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        
+        else if(k >= numberOfGridPointsInZ - upmlLayerWidth - 1){
+            depth = k - numberOfGridPointsInZ + upmlLayerWidth + 1;
+            sigma = pow(depth / upmlLayerWidth, m) * sigmaMax;
+            kappa = 1 + (kappaMax - 1) * pow(depth / upmlLayerWidth, m);
+        }
+        else{
+            sigma = 0.0;
+            kappa = 1.0;
+        }
+        Grid->upml5Hz[k] = (2 * kappa + sigma * dt);
+        Grid->upml6Hz[k] = (2 * kappa - sigma * dt);
     }
 }
 

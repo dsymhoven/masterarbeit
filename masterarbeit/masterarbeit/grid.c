@@ -114,26 +114,70 @@ void allocateUPMLCoefficients(Grid *Grid){
     
     printf("allocating UPML Coefficients ... \n");
     
-    Grid->upml1E = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
-    Grid->upml2E = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
-    Grid->upml3E = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
-    Grid->upml4E = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
-    Grid->upml5E = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
-    Grid->upml6E = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml1Ex = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml2Ex = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml3Ex = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml4Ex = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml5Ex = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml6Ex = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
     
-    if(Grid->upml1E == NULL || Grid->upml2E == NULL || Grid->upml3E == NULL || Grid->upml4E == NULL || Grid->upml5E == NULL || Grid->upml6E == NULL){
-        printf("ERROR: Could not allocate memory for UPML coefficients for E field!");
+    if(Grid->upml1Ex == NULL || Grid->upml2Ex == NULL || Grid->upml3Ex == NULL || Grid->upml4Ex == NULL || Grid->upml5Ex == NULL || Grid->upml6Ex == NULL){
+        printf("ERROR: Could not allocate memory for UPML coefficients for Ex field!");
     }
     
-    Grid->upml1H = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
-    Grid->upml2H = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
-    Grid->upml3H = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
-    Grid->upml4H = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
-    Grid->upml5H = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
-    Grid->upml6H = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml1Ey = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml2Ey = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml3Ey = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml4Ey = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml5Ey = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml6Ey = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
     
-    if(Grid->upml1H == NULL || Grid->upml2H == NULL || Grid->upml3H == NULL || Grid->upml4H == NULL || Grid->upml5H == NULL || Grid->upml6H == NULL){
-        printf("ERROR: Could not allocate memory for UPML coefficients for H field!");
+    if(Grid->upml1Ey == NULL || Grid->upml2Ey == NULL || Grid->upml3Ey == NULL || Grid->upml4Ey == NULL || Grid->upml5Ey == NULL || Grid->upml6Ey == NULL){
+        printf("ERROR: Could not allocate memory for UPML coefficients for Ey field!");
+    }
+    
+    Grid->upml1Ez = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml2Ez = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml3Ez = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml4Ez = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml5Ez = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml6Ez = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    
+    if(Grid->upml1Ez == NULL || Grid->upml2Ez == NULL || Grid->upml3Ez == NULL || Grid->upml4Ez == NULL || Grid->upml5Ez == NULL || Grid->upml6Ez == NULL){
+        printf("ERROR: Could not allocate memory for UPML coefficients for Ez field!");
+    }
+    
+    Grid->upml1Hx = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml2Hx = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml3Hx = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml4Hx = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml5Hx = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml6Hx = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    
+    if(Grid->upml1Hx == NULL || Grid->upml2Hx == NULL || Grid->upml3Hx == NULL || Grid->upml4Hx == NULL || Grid->upml5Hx == NULL || Grid->upml6Hx == NULL){
+        printf("ERROR: Could not allocate memory for UPML coefficients for Hx field!");
+    }
+    
+    Grid->upml1Hy = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml2Hy = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml3Hy = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml4Hy = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml5Hy = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml6Hy = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    
+    if(Grid->upml1Hy == NULL || Grid->upml2Hy == NULL || Grid->upml3Hy == NULL || Grid->upml4Hy == NULL || Grid->upml5Hy == NULL || Grid->upml6Hy == NULL){
+        printf("ERROR: Could not allocate memory for UPML coefficients for Hy field!");
+    }
+    
+    Grid->upml1Hz = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml2Hz = (double *) malloc(Grid->numberOfGridPointsInX * sizeof(double));
+    Grid->upml3Hz = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml4Hz = (double *) malloc(Grid->numberOfGridPointsInY * sizeof(double));
+    Grid->upml5Hz = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    Grid->upml6Hz = (double *) malloc(Grid->numberOfGridPointsInZ * sizeof(double));
+    
+    if(Grid->upml1Hz == NULL || Grid->upml2Hz == NULL || Grid->upml3Hz == NULL || Grid->upml4Hz == NULL || Grid->upml5Hz == NULL || Grid->upml6Hz == NULL){
+        printf("ERROR: Could not allocate memory for UPML coefficients for Hz field!");
     }
 }
 
@@ -209,30 +253,80 @@ void freeFieldsOnGrid(Grid *Grid){
 void freeUPMLCoefficients(Grid *Grid){
     printf("releasing allocated memory for UPML Coefficients...\n");
     
-    free(Grid->upml1E);
-    Grid->upml1E = NULL;
-    free(Grid->upml2E);
-    Grid->upml2E = NULL;
-    free(Grid->upml3E);
-    Grid->upml3E = NULL;
-    free(Grid->upml4E);
-    Grid->upml4E = NULL;
-    free(Grid->upml5E);
-    Grid->upml5E = NULL;
-    free(Grid->upml6E);
-    Grid->upml6E = NULL;
-    free(Grid->upml1H);
-    Grid->upml1H = NULL;
-    free(Grid->upml2H);
-    Grid->upml2H = NULL;
-    free(Grid->upml3H);
-    Grid->upml3H = NULL;
-    free(Grid->upml4H);
-    Grid->upml4H = NULL;
-    free(Grid->upml5H);
-    Grid->upml5H = NULL;
-    free(Grid->upml6H);
-    Grid->upml6H = NULL;
+    free(Grid->upml1Ex);
+    Grid->upml1Ex = NULL;
+    free(Grid->upml2Ex);
+    Grid->upml2Ex = NULL;
+    free(Grid->upml3Ex);
+    Grid->upml3Ex = NULL;
+    free(Grid->upml4Ex);
+    Grid->upml4Ex = NULL;
+    free(Grid->upml5Ex);
+    Grid->upml5Ex = NULL;
+    free(Grid->upml6Ex);
+    Grid->upml6Ex = NULL;
+    free(Grid->upml1Hx);
+    Grid->upml1Hx = NULL;
+    free(Grid->upml2Hx);
+    Grid->upml2Hx = NULL;
+    free(Grid->upml3Hx);
+    Grid->upml3Hx = NULL;
+    free(Grid->upml4Hx);
+    Grid->upml4Hx = NULL;
+    free(Grid->upml5Hx);
+    Grid->upml5Hx = NULL;
+    free(Grid->upml6Hx);
+    Grid->upml6Hx = NULL;
+    
+    free(Grid->upml1Ey);
+    Grid->upml1Ey = NULL;
+    free(Grid->upml2Ey);
+    Grid->upml2Ey = NULL;
+    free(Grid->upml3Ey);
+    Grid->upml3Ey = NULL;
+    free(Grid->upml4Ey);
+    Grid->upml4Ey = NULL;
+    free(Grid->upml5Ey);
+    Grid->upml5Ey = NULL;
+    free(Grid->upml6Ey);
+    Grid->upml6Ey = NULL;
+    free(Grid->upml1Hy);
+    Grid->upml1Hy = NULL;
+    free(Grid->upml2Hy);
+    Grid->upml2Hy = NULL;
+    free(Grid->upml3Hy);
+    Grid->upml3Hy = NULL;
+    free(Grid->upml4Hy);
+    Grid->upml4Hy = NULL;
+    free(Grid->upml5Hy);
+    Grid->upml5Hy = NULL;
+    free(Grid->upml6Hy);
+    Grid->upml6Hy = NULL;
+    
+    free(Grid->upml1Ez);
+    Grid->upml1Ez = NULL;
+    free(Grid->upml2Ez);
+    Grid->upml2Ez = NULL;
+    free(Grid->upml3Ez);
+    Grid->upml3Ez = NULL;
+    free(Grid->upml4Ez);
+    Grid->upml4Ez = NULL;
+    free(Grid->upml5Ez);
+    Grid->upml5Ez = NULL;
+    free(Grid->upml6Ez);
+    Grid->upml6Ez = NULL;
+    free(Grid->upml1Hz);
+    Grid->upml1Hz = NULL;
+    free(Grid->upml2Hz);
+    Grid->upml2Hz = NULL;
+    free(Grid->upml3Hz);
+    Grid->upml3Hz = NULL;
+    free(Grid->upml4Hz);
+    Grid->upml4Hz = NULL;
+    free(Grid->upml5Hz);
+    Grid->upml5Hz = NULL;
+    free(Grid->upml6Hz);
+    Grid->upml6Hz = NULL;
 }
 
 ///@brief Releases all allocated memory for fields on box borders.
