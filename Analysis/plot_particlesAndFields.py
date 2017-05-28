@@ -17,12 +17,8 @@ lengthOfOneBoxInX = gridParameters[0] * gridParameters[3]
 lengthOfOneBoxInY = gridParameters[1] * gridParameters[4]
 numberOfBoxesInX =  lengthOfSimulationBoxInX / lengthOfOneBoxInX
 numberOfBoxesInY =  lengthOfSimulationBoxInY / lengthOfOneBoxInY
-if gridParameters[9] >= 0.1:
-	EMax = round(gridParameters[9],1)
-if gridParameters[9] < 0.1:
-	EMax = 0.05
-if gridParameters[9] > 10:
-	EMax = 0.5
+EMax = 0.04
+#EMax = 9 * pow(10,-14)
 
 X = np.zeros((numberOfParticles,1))
 Y = np.zeros((numberOfParticles,1))
@@ -34,6 +30,7 @@ ynew = []
 for i in range(startTime, startTime + numberOfParticleFiles):
 	# open figure
 	fig = plt.figure()
+	ax = fig.gca()
 	for p in range(numberOfParticles):
 		# read data from text and save it into array data
 		data = np.genfromtxt('Particles/Particle'+ str(p) +'/Particle' + str(p) + '_' + str(i) + '.txt')
@@ -52,7 +49,7 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 		plt.plot(X[p], Y[p], color = 'r')
 	field = np.genfromtxt('E_fields/E_field'+ str(i) +'.txt')
 	# plot fields
-	plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.04)
+	plt.imshow(field, origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=EMax)
 	plt.colorbar()
 	# set labels
 	plt.xlabel("X")
@@ -63,6 +60,9 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 	plt.xticks(np.arange(0, lengthOfSimulationBoxInX + 1, lengthOfOneBoxInX))
 	plt.yticks(np.arange(0, lengthOfSimulationBoxInY + 1, lengthOfOneBoxInY))
 	plt.grid(linestyle = "-", color='red')
+	for index, label in enumerate(ax.xaxis.get_ticklabels()):
+			if index % 3 != 0:
+				label.set_visible(False)
 	# define filename for saving
 	filename = 'img' + str(i - startTime)
 	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight', dpi=300)
@@ -71,7 +71,7 @@ for i in range(startTime, startTime + numberOfParticleFiles):
 
 # open figure only once because we want to plot several particles in one figure
 fig = plt.figure()
-
+ax = fig.gca()
 for p in range(numberOfParticles):
 	for i in range(startTime, startTime + numberOfParticleFiles):
 		# read data from text and save it into array data
@@ -90,7 +90,7 @@ for p in range(numberOfParticles):
 
 field = np.genfromtxt('E_fields/E_field'+ str(i+1) +'.txt')
 # plot fields
-plt.imshow(field, aspect='auto', origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=0.04)
+plt.imshow(field, origin='lower', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=EMax)
 plt.colorbar()
 # set labels
 plt.xlabel("X")
@@ -101,6 +101,9 @@ plt.ylim([0, lengthOfSimulationBoxInY])
 plt.xticks(np.arange(0, lengthOfSimulationBoxInX + 1, lengthOfOneBoxInX))
 plt.yticks(np.arange(0, lengthOfSimulationBoxInY + 1, lengthOfOneBoxInY))
 plt.grid(linestyle = "-", color='red')
+for index, label in enumerate(ax.xaxis.get_ticklabels()):
+		if index % 3 != 0:
+			label.set_visible(False)
 # define filename for saving
 filename = 'img'
 fig.savefig("Pictures/" + "analyticSolution.png".format(filename), bbox_inches='tight', dpi=300)

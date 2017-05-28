@@ -73,6 +73,7 @@ void writeFieldsToFile(Grid *Grid, char *filename, int index, int planeForPlotti
                 
                 if(plotE){
                     Esq = Ex * Ex + Ey * Ey + Ez * Ez;
+                    
                     fprintf(fid, "%.18f\t", Esq);
                     if (Esq > Grid->EMax){
                         Grid->EMax = Esq;

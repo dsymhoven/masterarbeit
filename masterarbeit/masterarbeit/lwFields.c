@@ -1351,7 +1351,7 @@ void subLWField(Grid *Grid, Particle *Particle, double *destination, double xObs
 ///@param B vector containg both external fields and those from other particles propagated into the near field region of the current particle
 void updateFieldsForParticlePush(Particle *Particle, Grid *Grid, double Eextern[3], double Bextern[3], double E[3], double B[3]){
     
-//    interpolateFields(Grid, Particle, E, B);
+    interpolateFields(Grid, Particle, E, B);
     for (int i = 0; i < 3; i++){
         E[i] = Eextern[i] + E[i];
         B[i] = Bextern[i] + B[i];

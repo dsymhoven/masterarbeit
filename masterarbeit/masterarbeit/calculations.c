@@ -730,7 +730,6 @@ void calcUPMLCoefficients(Grid *Grid){
         }
         Grid->upml1E[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
         Grid->upml2E[j] = (2 * dt) / (2 * kappa + sigma * dt);
-        
     }
     
     for (int k = 0; k < numberOfGridPointsInZ; k++){
@@ -751,7 +750,6 @@ void calcUPMLCoefficients(Grid *Grid){
         }
         Grid->upml3E[k] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
         Grid->upml4E[k] = 1.0 / (2 * kappa + sigma * dt);
-        
     }
     
     for (int i = 0; i < numberOfGridPointsInX; i++){
@@ -792,7 +790,6 @@ void calcUPMLCoefficients(Grid *Grid){
         }
         Grid->upml1H[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
         Grid->upml2H[j] = (2 * dt) / (2 * kappa + sigma * dt);
-        
     }
     
     for (int k = 0; k < numberOfGridPointsInZ; k++){
@@ -813,7 +810,6 @@ void calcUPMLCoefficients(Grid *Grid){
         }
         Grid->upml3H[k] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
         Grid->upml4H[k] = 1.0 / (2 * kappa + sigma * dt);
-        
     }
     
     
@@ -835,8 +831,6 @@ void calcUPMLCoefficients(Grid *Grid){
         }
         Grid->upml5H[i] = (2 * kappa + sigma * dt);
         Grid->upml6H[i] = (2 * kappa - sigma * dt);
-
-        
     }
 }
 

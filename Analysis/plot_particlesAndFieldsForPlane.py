@@ -15,7 +15,7 @@ files = glob.glob('Particles/*.txt')
 gridParameters = np.genfromtxt('gridParameters.txt')
 field = np.genfromtxt('E_fields/E_field0.txt')
 EMax = field.max()
-# EMax = 9 * pow(10,-14)
+#EMax = 4.5 * pow(10,-13)
 
 lengthOfSimulationBoxInX = gridParameters[6]
 lengthOfSimulationBoxInY = gridParameters[7]
@@ -47,7 +47,7 @@ for p in range(numberOfParticles):
 	y=[]
 
 # plot fields
-plt.imshow(field, aspect='auto', origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=EMax)
+plt.imshow(field, origin='lower', cmap = 'jet', extent=(0,lengthOfSimulationBoxInX,0,lengthOfSimulationBoxInY), vmin=0, vmax=EMax)
 plt.colorbar()
 # set labels
 plt.xlabel("X")

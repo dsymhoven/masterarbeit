@@ -402,7 +402,7 @@ void externalPlaneWave(const double x[4], const double tStart, double Eextern[3]
 ///@param Hextern vector containing external H field components
 void externalPulse(const double x[4], const double tStart, double Eextern[3], double Hextern[3], Grid *Grid){
     double E0 = 1.77 * pow(10, -8.0);
-    double H0 = 1.77 * pow(10, -8.0);;
+    double H0 = 1.77 * pow(10, -8.0);
     double frequency = 1.77 * pow(10, -8);
     double lengthOfSimulationBoxInX = Grid->lengthOfSimulationBoxInX;
     double lengthOfSimulationBoxInY = Grid->lengthOfSimulationBoxInY;

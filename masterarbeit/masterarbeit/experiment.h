@@ -30,4 +30,5 @@ void scatteringInEMWave_simulation();
 void testRadiationDampingVSLorentzForce();
 void scatteringInEMWave_analytic_largeScale();
 void scatteringInEMWave_simulation_largeScale();
+void test_largeScale();
 #endif /* experiment_h */
