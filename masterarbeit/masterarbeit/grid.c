@@ -504,7 +504,7 @@ void externalPulse(const double x[4], const double tStart, double Eextern[3], do
     double widthOfPulseInX = 0.5 * lengthOfSimulationBoxInX;
     
     Eextern[0] = 0;
-    if(x[0] - tStart >= x[1] && x[1] > x[0] - widthOfPulseInX){
+    if(x[0] - tStart >= x[1] && x[1] > x[0] - tStart - widthOfPulseInX){
         Eextern[1] = E0 * cos(frequency * (x[0] - tStart - x[1])) * pow(sin(0.05 * frequency * (x[0] - tStart - x[1])),2) * exp(-pow(0.14 * frequency * (x[2] - widthOfPulseInY),2));
     }
 
@@ -512,7 +512,7 @@ void externalPulse(const double x[4], const double tStart, double Eextern[3], do
     
     Hextern[0] = 0;
     Hextern[1] = 0;
-    if(x[0] - tStart >= x[1] && x[1] > x[0] - widthOfPulseInX){
+    if(x[0] - tStart >= x[1] && x[1] > x[0] - tStart - widthOfPulseInX){
         Hextern[2] = H0 * cos(frequency * (x[0] - tStart - x[1])) * pow(sin(0.05 * frequency * (x[0] - tStart - x[1])),2) * exp(-pow(0.14 * frequency * (x[2] - widthOfPulseInY),2));
     }
 }

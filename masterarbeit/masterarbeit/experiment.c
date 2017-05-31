@@ -1251,9 +1251,9 @@ void testTimeDependentExternalFields(){
     
     
     double dt = 0.5 * Resolution.dx;
-    double t = 0;
+    double t = 400 * pow(10, 7);;
     double tStart = t;
-    double tEnd = 600 * pow(10, 7);
+    double tEnd = 1100 * pow(10, 7);
     
     char filename[32] = "some";
     double Eextern[3];
@@ -1629,9 +1629,9 @@ void scatteringInEMWave_analytic_largeScale(){
     Particle *Particle1 = &Particles[0];
     
     double dt = 0.5 * Resolution.dx;
-    double t = 0;
+    double t = 400 * pow(10, 7);;
     double tStart = t;
-    double tEnd = 700 * pow(10, 7);
+    double tEnd = 1100 * pow(10, 7);
     
     char filename[32] = "some";
     double Eextern[3];
@@ -1649,7 +1649,7 @@ void scatteringInEMWave_analytic_largeScale(){
     Particle1->x[2] = 1.6 * pow(10, 9);;
     Particle1->x[3] = 1.6 * pow(10, 9);
     
-    Particle1->u[1] = -1.12;
+    Particle1->u[1] = -0.1;
     Particle1->u[2] = 0.01;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
