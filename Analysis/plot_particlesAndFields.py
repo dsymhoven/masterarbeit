@@ -17,8 +17,8 @@ lengthOfOneBoxInX = gridParameters[0] * gridParameters[3]
 lengthOfOneBoxInY = gridParameters[1] * gridParameters[4]
 numberOfBoxesInX =  lengthOfSimulationBoxInX / lengthOfOneBoxInX
 numberOfBoxesInY =  lengthOfSimulationBoxInY / lengthOfOneBoxInY
-EMax = 0.04
-#EMax = 9 * pow(10,-14)
+#EMax = 0.04
+EMax = 9 * pow(10,-14)
 
 X = np.zeros((numberOfParticles,1))
 Y = np.zeros((numberOfParticles,1))
