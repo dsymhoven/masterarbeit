@@ -5,7 +5,7 @@
 \contentsline {section}{\numberline {1.1}Maxwell-Equations}{4}{section.1.1}
 \contentsline {section}{\numberline {1.2}Colomb and Lorentz Gauge}{5}{section.1.2}
 \contentsline {section}{\numberline {1.3}Li\'enard-Wiechert Potentials}{6}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}Solution of inhomogeneous wave equation}{6}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.1}Solution of the inhomogeneous wave equation}{6}{subsection.1.3.1}
 \contentsline {subsection}{\numberline {1.3.2}Special Case: Moving point charge}{7}{subsection.1.3.2}
 \contentsline {subsection}{\numberline {1.3.3}Energy emission}{10}{subsection.1.3.3}
 \contentsline {part}{\numberline {II}Numerics}{14}{part.2}

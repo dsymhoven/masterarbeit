@@ -46,7 +46,7 @@ bibliography=totoc,
 \usepackage{mathtools}
 \usepackage[tight]{subfigure}
 \usepackage{empheq}
-\usepackage{overcite}
+\usepackage{cite}
 \usepackage{url}
 \usepackage{framed}
 \usepackage{pdfpages}
@@ -98,13 +98,12 @@ where $\vec{F}_{ij}$ is the interaction force of particle $i$ with particle $j$.
 PIC is the standard simulation framework for Plasma Physics today. It was \textit{Bunemann}, \textit{Dawson}, \textit{Hockney}, \textit{Birdsall} and \textit{Langdon} who promoted the development of PIC the most in the 1950's and 60's \cite{Dawson, Birdsall, Cohen}. Whereas first simulations were limited by computational power to one dimensional problems, nowadays even three dimensional simulations are feasible \cite{Fonseca, Pukhov, Bonitz}.\\
 For instance, a modern super computer can achieve 100 TFLOP/s. A common simulation with $10^{8}$ particles for 10000 time steps would require about three years. The same simulation using PIC with $64 \times 64 \times 64$ cells only requires three seconds \cite{Ren}.\\
 \newline
-Christian Herzing developed in his phd-thesis an hybrid field approach to improve PIC even further \cite{Herzing}. By introducing near and far fields he could reduce the numeric complexity to almost $\mathcal{O}(N)$. His framework is written in \texttt{C++}. Unfortunately this is not compatible with the \textit{Leibnitz-Rechenzentrum} (lrz) infrastructure, which requires \texttt{C} code. So, the goal of this work is first to translate the framework into \texttt{C} and second to build a solid and well documented code base others can build upon. In order to show that the framework is still working, a real world use case, that is the scattering of an electron in a electromagnetic wave - is simulated. \\
+Christian Herzing developed in his PhD-thesis an hybrid field approach to improve PIC even further \cite{Herzing}. By introducing near and far fields he could reduce the numeric complexity to almost $\mathcal{O}(N)$. His framework is written in \texttt{C++}. Unfortunately this is not compatible with the \textit{Leibnitz-Rechenzentrum} (lrz) infrastructure, which requires \texttt{C} code input. So, the goal of this work is first to translate the framework into \texttt{C} and second, to build a solid and well documented code base others can build upon. To show that the framework is applicable, a real world use case, that is the scattering of an electron in a electromagnetic wave - is simulated. \\
 \newline
-The thesis is structured in three parts. \\
-The first part deals with the fundamentals. We present the steps of how to derive the inhomogeneous wave equation with the help of the potential equations and solve it afterwards using greens function approach.\\
+The thesis is structured in three parts. The first part deals with the fundamentals. We present the steps of how to derive the inhomogeneous wave equation with the help of the potential equations and solve it afterwards using greens function approach.\\
 In the second part the necessary numeric background is presented. We will present the underlying equations of motion and how to solve them numerically. Thereto several integration schemes are presented. We then continue to explain the hybrid field approach from Christian Herzing and the \textit{Finite Difference Time Domain} (FDTD) method, which is used to solve Maxwell Equations on a discretized grid. We then close the second part with the theory and implementation of \glqq Uniaxial Perfectly Matched Layer\grqq~which deals with the behavior of incident waves at the simulation boundary. \\
 A summary and outlook is given in the third part. \\
-Lastly there is also an Appendix where some additional calculations and topics like normalization and the used software stack are covered.
+Lastly, there is also an Appendix where some additional calculations and topics like normalization and the used software stack are covered.
 
 %Literatur Fennel / King
 
@@ -139,12 +138,12 @@ Lastly there is also an Appendix where some additional calculations and topics l
 %===========================================================
 \part{Fundamentals}
 \noindent
-In this first part we present the theoretical basics this thesis is build upon. We start with the foundation of electromagnetism - the Maxwell Equations - followed by the corresponding potential equations. Introducing Lorentz-Gauge will lead us to the inhomogeneous wave equation, which we will solve using Greens-function approach. This will lead us to the Liénard-Wiechert potentials, which are key in this thesis. Lastly we discuss both the non relativistic and relativistic phenomenon of energy radiation, where we restrict ourselves to the simple case where a particle is accelerated parallel to its direction of motion.
+In this first part we present the theoretical basics this thesis is build upon. We start with the foundation of electromagnetism - the Maxwell Equations - followed by the corresponding potential equations. Introducing Lorentz-Gauge will lead us to the inhomogeneous wave equation, which we will solve using Greens-function approach. This will lead us to the Liénard-Wiechert potentials, which are key for this thesis. Lastly, we discuss both, the non relativistic and relativistic phenomenon of energy radiation, where we restrict ourselves to the simple case where a particle is accelerated parallel to its direction of motion.
 %======================== Electromagnetic radiation ========================
 %===========================================================
 \chapter{Electromagnetic radiation}
 \section{Maxwell-Equations}
-The Maxwell equations are the foundation of the classical electromagnetism and describe how the electric field strength $\vec{E} \in \mathbb{R}^3$ and the magnetic field strength $\vec{H} \in \mathbb{R}^3$ are generated by charges and currents respectively and how they evolve over time in space in presence of one another. In presence of matter, however, the interaction of the fields with the material need to be taken into account. The effect of microscopic dipols, formed by bound charge carriers, are summarized in macroscopic entities called Polarisation $\vec{P} \in \mathbb{R}^3$ and Magnetization $\vec{M} \in \mathbb{R}^3$. These dipols align in the external field such that the resulting electric and magnetic field are described by
+The Maxwell equations are the foundation of the classical electromagnetism theory. They describe how the electric field strength $\vec{E} \in \mathbb{R}^3$ and the magnetic field strength $\vec{H} \in \mathbb{R}^3$ are generated by charges and currents respectively and how they evolve over time in space in presence of one another. In presence of matter, however, the interaction of the fields with the material need to be taken into account. The effect of microscopic dipols, formed by bound charge carriers, are summarized in macroscopic entities called Polarisation $\vec{P} \in \mathbb{R}^3$ and Magnetization $\vec{M} \in \mathbb{R}^3$. These dipols align in the external field such that the resulting electric and magnetic field are described by
 \beq
 \bal
 \label{eqn: materialEquationsFull}
@@ -176,8 +175,7 @@ In the case of vacuum, the material equations \eqref{eqn: materialEquationsFull}
 
 %======================== Colomb and Lorentz Gauge ========================
 \section{Colomb and Lorentz Gauge}
-In the following section we consider the Maxwell Equations in vacuum.\\
-The electric and magnetic fields can also be described by a scalar and a vector potential respectively. From \eqref{eqn: maxwell1} we can conclude that 
+In the following section we consider the Maxwell Equations in vacuum. The electric and magnetic fields can also be described by a scalar and a vector potential respectively. From \eqref{eqn: maxwell1} we can conclude that 
 \beq
 \label{eqn: vecA}
 \exists \vec{A} \in \mathbb{R}^3 \colon \vec{B} = \vec{\nabla} \times \vec{A},
@@ -204,7 +202,7 @@ The description of the fields by the aforementioned potentials $\varphi$ and $\v
 \varphi \mapsto \varphi' = \varphi - \frac{\del \psi}{\del t},
 \eal
 \eeq
-where $\psi \colon \mathbb{R}^3 \times \mathbb{R} \mapsto \mathbb{R}$. In appendix \ref{appendix: Gauge Transformations} we show, that $\psi$ does indeed not change the physics.\\
+where $\psi \colon \mathbb{R}^3 \times \mathbb{R} \mapsto \mathbb{R}$. In Appendix \ref{appendix: Gauge Transformations} we show, that $\psi$ does indeed not change the physics.\\
 \newline
 If we choose $\psi$ such that 
 \beq
@@ -223,8 +221,8 @@ then we call it a \textit{Lorentz Gauge} and the potential Equations \eqref{eqn:
 %======================== Liénard-Wiechert Potentials ========================
 \section{Liénard-Wiechert Potentials}
 \label{sec: lw-potentials}
-\subsection{Solution of inhomogeneous wave equation}
-The \textit{Liénard-Wiechert} Potentials are the solution of \eqref{eqn: waveEquations}. Following \cite{Nolting} we solve the general case
+\subsection{Solution of the inhomogeneous wave equation}
+The \textit{Liénard-Wiechert} Potentials are the solution of equation \eqref{eqn: waveEquations}. Following \cite{Nolting} we solve the general case
 \beq
 \label{eqn: generalWaveEquation}
 \hat\square \psi(\vec{r}, t) = f(\vec{r},t),
@@ -278,7 +276,7 @@ which finally leads to the retarded potential equations
 \varphi(\vec{r},t) &=& \frac{1}{4\pi \epsilon_0} \int \frac{\rho(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~',\\
 \vec{A}(\vec{r},t) &=& \frac{\mu_0}{4\pi} \int \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~'.
 \eeq
-Lastly we show in Appendix \ref{appendix: Retarded Potential Equations Fulfill Laurentz Gauge} that they indeed fulfill the Laurentz Gauge \eqref{eqn: LaurentzGauge}.
+Lastly, we show in Appendix \ref{appendix: Retarded Potential Equations Fulfill Laurentz Gauge} that they indeed fulfill the Laurentz Gauge \eqref{eqn: LaurentzGauge}.
 
 \subsection{Special Case: Moving point charge}
 Now we want to discuss the special case of a particle with charge q, moving along the trajectory $\vec{r}_p$ with velocity $\vec{v} \coloneqq \dot{\vec{r}}_p$, where the dot donates the time derivative. As mentioned before, we now define the source functions for our problem at hand. For the charge density we have
@@ -320,7 +318,7 @@ g(t') \coloneqq \frac{ |\vec{r} - \vec{r}_p|}{c} - t + t'
 &\stackrel{v < c}{\Longrightarrow} \frac{\dm g}{\dm t'} > 0,
  \eal
 \eeq
-which means that g is a monotonically increasing function and therefore has at most one root, which is $t' = t_{ret}$ as can be seen from \eqref{eqn: gDefinition}. In case that g has no roots at all, we can conclude that $\varphi \equiv 0$ and $\vec{A} \equiv 0$.\\
+which means that $g$ is a monotonically increasing function and therefore has at most one root, which is $t' = t_{ret}$ as can be seen from \eqref{eqn: gDefinition}. In case that g has no roots at all, we can conclude that $\varphi \equiv 0$ and $\vec{A} \equiv 0$.\\
 With $t_{ret} \coloneqq t - \frac{|\vec{r} - \vec{r}_p|}{c} $ the integration over $t'$ yields
 \beq
 \bal
@@ -344,7 +342,7 @@ we can rewrite the Liénard-Wiechert Potentials in a more compact and final form
 \vec{A}(\vec{r},t) &= \frac{\mu_0}{4\pi} \frac{q\vec{\beta}(t')}{(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')) R(\vec{r},t')}\Biggr |_{t' = t_{ret}}.
 \eal
 \eeq
-They are the generalization of the Coulomb Potential. With the help of \eqref{eqn: varphi} the electric and magnetic fields can be derived from the \textit{Liénard-Wiechert} Potentials \eqref{eqn: LWPotentials}. Since this is a quite longish calculation we refer to \cite{Nolting} and just present the final result 
+The latter potentials are the generalization of the Coulomb Potential. With the help of \eqref{eqn: varphi} the electric and magnetic fields can be derived from the \textit{Liénard-Wiechert} Potentials \eqref{eqn: LWPotentials}. Since this is a quite longish calculation it is refered to \cite{Nolting} and just present the final result 
 \beq
 \label{eqn: Liénard-Wiechert}
 \bal
@@ -353,8 +351,7 @@ They are the generalization of the Coulomb Potential. With the help of \eqref{eq
 \vec{B}(\vec{r}, t) &= \frac{1}{c} \left(\vec{n}(\vec{r},t') \times \vec{E}(\vec{r}, t)\right)\Biggr |_{t' = t_{ret}}.
 \eal
 \eeq
-This is the electric and magnetic field of a moving charged particle. Due to the finite speed of light, the fields need time to travel from their source to the observation point. That means, that the fields at time $t$, were actually produced at a earlier time $t_{ret}$. As can be seen in figure
-\ref{fig: Interpolation}, the retarded time is determined by the intersection point of the particle trajectory with the backward lightcone of the observation point.\\
+This is the electric and magnetic field of a moving charged particle. Due to the finite speed of light, the fields need time to travel from their source to the observation point. That means, that the fields at time $t$, were actually produced at a earlier time $t_{ret}$. As can be seen in Figure \ref{fig: Interpolation}, the retarded time is determined by the intersection point of the particle trajectory with the backward lightcone of the observation point.\\
 
 \subsection{Energy emission}
 \label{sec: Energy emission}
@@ -387,7 +384,7 @@ Since $E_{(v)} \propto \frac{1}{R^2}$ whereas $E_{(a)} \propto \frac{1}{R}$, its
 \vec{S}_{aa} &\propto \left| \vec{E}_{(a)} \times \vec{B}_{(a)} \right| \propto \frac{1}{R^2}. \nn
 \eal
 \eeq
-By evaluating the energy flux through an arbitrary surface with differential surface area $\dm\vec{\sigma}$, as illustrated in figure \ref{fig: PoyntingVector},
+By evaluating the energy flux through an arbitrary surface with differential surface area $\dm\vec{\sigma}$, as illustrated in Figure \ref{fig: PoyntingVector},
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/PoyntingVector.png}
@@ -405,7 +402,7 @@ where $\dm\Omega \coloneqq \sin(\vartheta)\dm\vartheta\dm\varphi$. That means we
 \eeq
 The energy flux has the direction of $\vec{n}_{ret}$, i.e. it flows from the particle position $\vec{r}_p$ at time $t' = t_{ret}$ to the observation point $\vec{r}$. We can also see, that only accelerated particles ($\dot{\vec{\beta}} \neq 0$) loose energy through radiation, which leads to a reduction in kinetic energy. Although an uniformly moving particle produces E and B - fields, it does not loose energy through radiation.\\
 \newline
-Lastly we want to discuss the radiation power. The emitted energy per time $\dm t$ into the solid angle $\dm \Omega$ is described by
+Lastly, we want to discuss the radiation power. The emitted energy per time $\dm t$ into the solid angle $\dm \Omega$ is described by
 \beq
 \frac{\dm W}{\dm \Omega} = \left( \vec{S} \cdot \vec{n}(\vec{r}, t') \right) R^2(\vec{r}, t')\Bigr |_{t' = t_{ret}}.
 \eeq
@@ -417,7 +414,7 @@ From the definition of $t_{ret} \coloneqq t' - \frac{|\vec{r} - \vec{r}~'|}{c}$ 
 \beq
 \left(\frac{\dm t}{\dm t'}\right)\Bigr |_{t' = t_{ret}} = \left(1 + \frac{1}{c} \frac{\dm}{\dm t'} |\vec{r} - \vec{r}_p(t')|\right)\Bigr |_{t' = t_{ret}} = \left(1 - \frac{1}{c} \vec{n}(\vec{r}, t')\vec{v}(t')\right)\Bigr |_{t' = t_{ret}}.
 \eeq
-Finally we obtain
+Finally, we obtain
 \beq
 \label{eqn: RadiationPower}
 \frac{\dm W}{\dm \Omega} =  \frac{q^2}{16\pi^2 \epsilon_0 c}  \frac{ \left[\vec{n}(\vec{r},t') \times \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right) \times \dot{\vec{\beta}}(t')\right]^2}{\left(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')\right)^5} \Biggr |_{t' = t_{ret}}.
@@ -433,12 +430,12 @@ Now we can discuss two cases. The non relativistic case ($\beta \approx 0$) and 
 &=  \frac{q^2 \dot{\beta}^2_{ret}}{16\pi^2 \epsilon_0 c} \sin^2(\vartheta) \nn,
 \eal
 \eeq 
-where $\vartheta$ is the angle between $\dot{\vec{\beta}}$ and $\vec{n}$. $\beta_{ret}$ means again the evaluation at $t' = t_{ret}$. We conclude, that the direction of maximum radiation is perpendicular to the particles direction of motion, in contrast to
-\item[$\beta \approx 1$:] where we will see shortly, that the maximum radiation will be primarily in the direction of motion of the particle. We will restrict ourselves to the simple case, where $\dot{\vec{\beta}} \parallel \vec{\beta}$. Following the same steps as above we obtain
+where $\vartheta$ is the angle between $\dot{\vec{\beta}}$ and $\vec{n}$. $\beta_{ret}$ means again the evaluation at $t' = t_{ret}$. We conclude that the direction of maximum radiation is perpendicular to the particles direction of motion, in contrast to
+\item[$\beta \approx 1$:] where we will see shortly that the maximum radiation will be primarily in the direction of motion of the particle. We will restrict ourselves to the simple case, where $\dot{\vec{\beta}} \parallel \vec{\beta}$. Following the same steps as above we obtain
 \beq
 \frac{\dm W}{\dm \Omega} = \frac{q^2 \dot{\beta}^2_{ret}}{16\pi^2 \epsilon_0 c} \frac{\sin^2(\vartheta)}{\left(1 - \beta(t')\cos(\vartheta)\right)^5}.
 \eeq
-The get the angle, where the radiation is maximal, we calculate
+To get the angle, where the radiation is maximal, we calculate
 \beq
 \bal
 \frac{\dm}{\dm(\cos(\vartheta))} &\left(\frac{\dm W}{\dm \Omega}\right) \stackrel{!}{=} 0 \\
@@ -449,7 +446,7 @@ The get the angle, where the radiation is maximal, we calculate
 \Longrightarrow& \cos(\vartheta)_{max} = \frac{1}{3\beta_{ret}}\left(\sqrt{1+15\beta_{ret}^2} -1\right).\nn
 \eal
 \eeq
-Obviously the angle decreases monotonically with increasing velocity, i.e. increasing $\beta_{ret}$. For $\beta_{ret} = 1$ we get $\cos(\vartheta) = 1$ or equivalently $\vartheta = 0$. In figure \ref{fig: radiationSummary} the results are summarized.
+Obviously the angle decreases monotonically with increasing velocity, i.e. increasing $\beta_{ret}$. For $\beta_{ret} = 1$ we get $\cos(\vartheta) = 1$ or equivalently $\vartheta = 0$. In Figure \ref{fig: radiationSummary} the results are summarized.
  \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/RadiationSummary.png}
@@ -463,7 +460,7 @@ Obviously the angle decreases monotonically with increasing velocity, i.e. incre
 %===========================================================
 \part{Numerics}
 \noindent
-The following section deals with the numeric aspects of this thesis. We explain the underlying equation of motions and their history. After that, we go into several methods with which we can solve differential equations. Over the course of the last decades numerous methods were invented each of which has its own strength and weaknesses. 
+The following section deals with the numeric aspects of this thesis. We explain the underlying equation of motions and their history. After that, we go into several methods with which we can solve differential equations. Over the course of the last decades numerous methods were invented each of which has its own strengths and weaknesses. 
 Some of them are very easy to implement, which in turn usually leads to unprecise results. Others are quite complicated and sophisticated to implement, but very accurate.
 Therefore one should always consider which method is best for the problem and what it is one want to achieve.\\
 Following this, we also want to define and calculate the numerical complexity of some chosen algorithms. 
@@ -474,16 +471,15 @@ Following this, we also want to define and calculate the numerical complexity of
 %======================== Equations of Motion ========================
 \section{Equations of Motion}
 \label{sec: Equations of Motion}
-As we know from mechanics the dynamic of a particle is determined by the forces acting on it. In our case there is a force due to electro-magnetic fields. That can be external fields, but also fields due to moving particles, as we explained in section \ref{sec: lw-potentials}.\\
-The dynamics of our system is described by the \textit{Lorentz-Newton} equation
+As we know from mechanics the dynamics of particles is determined by the forces acting on them. In our case there is a force due to electro-magnetic fields. That can be external fields, but also fields due to moving particles, as we explained in section \ref{sec: lw-potentials}.\\
+The dynamics of our system is described by the \textit{Lorentz-Newton} equations
 \beq
 \label{eqn: Lorentz-Newton}
 \bal
 \frac{\dm x^{\mu}}{\dm \tau} &= u^{\mu}\\
-\frac{\dm u^{\mu}}{\dm \tau} &= F^{\mu}_{~\nu}~u^{\nu} + g^{\mu},
+\frac{\dm u^{\mu}}{\dm \tau} &= F^{\mu}_{~\nu}~u^{\nu} + g^{\mu}.
 \eal
 \eeq
-which derivation is quite longish, why we want to refer to literature. \\%MISSING: cite
 The term $F^{\mu}_{~\nu}$ describes the electromagnetic field strength tensor
 \beq
 F^{\mu}_{~\nu} = 
@@ -502,7 +498,7 @@ In 1938 \textit{Dirac} generalized the equation whilst taking special relativity
 g^{\mu} = \frac{\mu_0q^2}{6\pi c}\biggl(\frac{q}{m_e}\frac{\del F^{\mu\nu}_{\quad \text{ext}}}{\del x^{\xi}}u^{\nu}u^{\xi} - \frac{e^2}{m^{2}_e}F^{\mu\xi}_{\quad \text{ext}}F_{\nu\xi~\text{ext}}u^{\nu} \\
 +\frac{q^2}{m^{2}_ec^2}(F_{\nu\xi~\text{ext}}u^{\xi})(F^{\nu\pi}_{\quad \text{ext}}u_{\pi})u^{\mu}\biggr).
 \end{multline}
-We now want to deal with how to solve the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} numerically.
+We now want to present different methods of how to solve the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} numerically.
 
 %======================== Euler Scheme ========================
 \section{Euler-Scheme}
@@ -611,7 +607,7 @@ $\mathcal{D}(u^{\mu})$ denotes the domain of $u^{\mu}$. Therefore, the Euler-Sch
 %======================== Leap Frog Scheme ========================
 \section{Leap-Frog-Scheme}
 A definitely better method is the so called \textit{Leap-Frog}-Scheme. One can easily proof that it has an Order of Consistency of two. \\
-In contrast to the explicit Euler-Scheme this method has several advantages. For one it is time reversible, i.e. it is possible to reach any previous point in time from every point later in the trajectory. On the other hand the Leap-Frog-Scheme is symplectic, meaning it conserves the phase space volume from which energy and momentum conservation follows. \\
+In contrast to the explicit Euler-Scheme this method has several advantages. For one, it is time reversible, i.e. it is possible to reach any previous point in time from every point later in the trajectory. On the other hand, the Leap-Frog-Scheme is symplectic, meaning it conserves the phase space volume from which energy and momentum conservation follows. \\
 However, one disadvantage is that it's only suited for systems in which the acting force exclusively depends on the current position, but not on the velocity of the particle. This would lead to an implicit equation system which is numerically way more expensive to solve. \\
 Thus the differential equation should be of the form
 \beq
@@ -634,7 +630,7 @@ u^{\mu}_{i+\frac{1}{2}} &= u^{\mu}_{i-\frac{1}{2}} + h f^{\mu}(x^{\nu}_i).
 \eeq
 \noindent
 As we can see, position and velocity are calculated at different times. They are shifted against each other in time by $h = \frac{1}{2}$. \\
-But what if we have a system in which the force depends on the velocity ? Are we stuck with expensive implicit methods ? Fortunately not. We can use the \textit{Boris} - Method.
+But what if we have a system in which the force depends on the velocity? Are we stuck with expensive implicit methods? Fortunately not. We can use the \textit{Boris} - Method.
 \subsection{Boris-Method}
 \label{sec: Boris-Method}
 This method was invented in 1970 by J.P. Boris \cite{boris} and is the standard method for pushing particles in plasma simulations today. We want to solve the Lorentz-Newton equation
@@ -667,8 +663,8 @@ where $\vartheta$ is the angle between $\vec{B}$ and $\vec{v}$. By splitting up 
 \item obtain $v_{i + \frac{1}{2}}$ by adding yet another half electric impulse.
 \end{enumerate}
 \noindent
-In Code we use the slightly more sophisticated but relativistically correct form with $u = \gamma v$. \\
-Up to now one question remains unanswered. How do we solve for $\vec{v}_{+}$ in \eqref{eqn: v+}? To answer this, we use figure \ref{fig: borisProjection}.
+In the code used in this master thesis, the slightly more sophisticated but relativistically correct form with $u = \gamma v$ is used. \\
+Up to now one question remains unanswered. How do we solve for $\vec{v}_{+}$ in \eqref{eqn: v+}? To answer this, we use Figure \ref{fig: borisProjection}.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/borisProjection.png} 
@@ -685,7 +681,7 @@ we obtain $\vec{v}~'$ from
 \beq
 \vec{v}~' = \vec{v}_{-} + \vec{v}_{-} \times \vec{t}.
 \eeq
-Now $\vec{v}~' $ is perpendicular to  $\vec{v}_{+} - \vec{v}_{-}$. Finally we need a vector $\vec{s} \propto \vec{B}$ wich magnitude is determined by the constraint $|\vec{v}_{+}|= |\vec{v}_{-}|$. Using half angle formulas we find 
+Now $\vec{v}~' $ is perpendicular to  $\vec{v}_{+} - \vec{v}_{-}$. Finally, we need a vector $\vec{s} \propto \vec{B}$ wich magnitude is determined by the constraint $|\vec{v}_{+}|= |\vec{v}_{-}|$. Using half angle formulas we find 
 \beq
 \vec{s} = \frac{2\vec{t}}{1+t^2}.
 \eeq
@@ -693,7 +689,7 @@ Hence
 \beq
 \vec{v}_{+}= \vec{v}_{-} + \vec{v}~' \times \vec{s}.
 \eeq
-Finally we want to do a quick error analysis. We expect the angle of rotation $\theta$ to be close to 
+Finally, we want to do a quick error analysis. We expect the angle of rotation $\theta$ to be close to 
 \beq
 \omega_ch = \frac{2\pi h}{T} = \frac{qBh}{m},\nn
 \eeq
@@ -760,7 +756,7 @@ In general the quadratic equation \eqref{eqn: quadEq} in $\lambda$ has two solut
 \beq
 \lambda_{1/2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}. \nn
 \eeq
-One denotes the intersection point with the backward lightcone, the other one with the forward lightcone. Since  $\lambda \in [0,1]$ we are only interested in the larger one. 
+One solution denotes the intersection point with the backward lightcone, the other one with the forward lightcone. Since  $\lambda \in [0,1]$ we are only interested in the larger one. 
 \beq
 \lambda_{1/2} = \frac{-b + \sqrt{b^2 - 4ac}}{2a}. \nn
 \eeq
@@ -769,16 +765,16 @@ Plugging in $\lambda$ in \eqref{eqn: linInt} gives the desired intersection poin
 %======================== trilinear interpolation of fields ========================
 \section{Trilinear Interpolation of Fields}
 \label{sec: trilinear Interpolation}
-Another interpolation method we are using is the trilinear interpolation to calculate the field values at the particle position more accurately. As is explained in more detail later (see chapter \ref{cha: HybridFieldApproach}), field values will either be stored on grid points or calculated analytically. However, if we want to consider interactions between multiple particles correctly, we need the field values at the particle position which does usually not coincide with the grid point where the field values are stored. Matters were complicated further by the fact that our grid will be staggered, due to numerical stability issues and is explained in more detail in section \ref{sec: Yee-Scheme}.\\
-So, let's assume we have a cube with the points A,B,C, ...,H, as is illustrated in the following figure \ref{fig: trilinearInterpolation}
+Another interpolation method we are using is the trilinear interpolation to calculate the field values at the particle position more accurately. As is explained in more detail later (see Chapter \ref{cha: HybridFieldApproach}), field values will either be stored on grid points or calculated analytically. However, if we want to consider interactions between multiple particles correctly, we need the field values at the particle position which does usually not coincide with the grid point where the field values are stored. Matters were complicated further by the fact that our grid will be staggered, due to numerical stability issues and is explained in more detail in section \ref{sec: Yee-Scheme}.\\
+Let's assume we have a cube with the points A, B, C, ..., H, as is illustrated in the following Figure \ref{fig: trilinearInterpolation}
 \begin{figure}[H]
 	\centering
-		\includegraphics[width=0.50\textwidth]{Pictures/trilinearInterpolation.pdf} 
-	\caption[Cube with its eight corner points and interpolation point $P_f$.]{Cube with its eight corner points and interpolation point \textcolor{red}{$P_f$}}
+		\includegraphics[width=0.40\textwidth]{Pictures/trilinearInterpolation.pdf} 
+	\caption[Cube with its eight corner points A, B, C, ..., H and interpolation point $P_f$.]{Cube with its eight corner points A, B, C, ..., H and interpolation point \textcolor{red}{$P_f$}. The points \textcolor{blue}{$P_1$},  \textcolor{blue}{$P_2$},  \textcolor{blue}{$P_3$} and \textcolor{blue}{$P_4$} are the result of an interpolation along x direction of the lines $\overline{AE}$, $\overline{CG}$, $\overline{BF}$ and $\overline{DH}$.  \textcolor{green}{$P_u$} and \textcolor{green}{$P_o$} are obtained by interpolating along y - axis of the lines $\overline{P_1P_2}$ and $\overline{P_3P_4}$. Finally, \textcolor{red}{$P_f$} can be obtained by interpolating along z direction of the line $\overline{P_uP_o}$.}
 	\label{fig: trilinearInterpolation}
 \end{figure}
 \noindent
-Those eight points are part of the grid and contain the field values for both $\vec{E}$ and $\vec{H}$. To get the correct field values at the particle position \textcolor{red}{$P_f$} we need to interpolate in 3D. The trilinear interpolation simply consists out of seven linear interpolations. We first interpolate the $x$ - value along AE, CG, BF and DH to get the points \textcolor{blue}{$P_1$},  \textcolor{blue}{$P_2$},  \textcolor{blue}{$P_3$} and  \textcolor{blue}{$P_4$}. Thereto let $x_p \in \mathbb{R}$ be the particle's $x$ position and $x_0 \in \mathbb{R}$ and $x_1 \in \mathbb{R}$ be the corresponding $x$ - values at A and E respectively. Same holds for the aforementioned tuples as well. Then we can write
+Those eight points are part of the grid and contain the field values for both $\vec{E}$ and $\vec{H}$. To get the correct field values at the particle position \textcolor{red}{$P_f$} we need to interpolate in 3D. The trilinear interpolation simply consists out of seven linear interpolations. We first interpolate the $x$ - value along $\overline{AE}$, $\overline{CG}$, $\overline{BF}$ and $\overline{DH}$ to get the points \textcolor{blue}{$P_1$},  \textcolor{blue}{$P_2$},  \textcolor{blue}{$P_3$} and  \textcolor{blue}{$P_4$}. Thereto let $x_p \in \mathbb{R}$ be the particle's $x$ position and $x_0 \in \mathbb{R}$ and $x_1 \in \mathbb{R}$ be the corresponding $x$ - values at A and E respectively. Same holds for the aforementioned tuples as well. Then we can write
 \beq
 \bal
 u & \coloneqq \frac{x_p - x_0}{x_1 - x_0} \\
@@ -832,7 +828,7 @@ Usually the numerical complexity of multi particle simulation is $N^2$, due to t
 \label{sec: Yee-Scheme}
 In this section we talk about how to solve the Maxwell Equations \eqref{eqn: maxwellEq} and how to propagate the fields on a numerical grid. We thereby focus on the Maxwell Equations in vacuum, i.e. $\rho = \vec{j} = 0$. As can be seen in the Liénard-Wiechert formula \eqref{eqn: Liénard-Wiechert} there is a singularity for the field values at the particle position itself. Thus, we just want to propagate fields far away from the source, which is explained in more detail later.\\
 \newline 
-To push the fields on the grid. i.e solving for the fields at the next time step, we use the Yee - Scheme introduced by \textit{Kane Yee} in 1966 \cite{Yee66} or equivalently \textit{Finite Difference Time Domain Method} to discretize the Maxwell Equations. Each point on the discretized grid is represented as a tuple $(i,j,k)$. One index for each dimension $(x,y,z)$. The distance between the grid points are $(\Delta x, \Delta y, \Delta z)$ respectively. $h$ denotes the time discretization as before. In order to have finite central differences rather than plain finite differences, the evaluation of $\vec{E}$ and $\vec{H}$ components are shifted in time about $\frac{h}{2}$ against each other. To have the same benefits for the rotation, the $\vec{E}$ and $\vec{H}$ components are shifted in space as well, as it's illustrated in figure \ref{fig: YeeBox}.
+To push the fields on the grid. i.e solving for the fields at the next time step, we use the Yee - Scheme introduced by \textit{Kane Yee} in 1966 \cite{Yee66} or equivalently \textit{Finite Difference Time Domain Method} to discretize the Maxwell Equations. Each point on the discretized grid is represented as a tuple $(i,j,k)$. One index for each dimension $(x,y,z)$. The distance between the grid points are $(\Delta x, \Delta y, \Delta z)$ respectively. $h$ denotes the time discretization as before. In order to have finite central differences rather than plain finite differences, the evaluation of $\vec{E}$ and $\vec{H}$ components are shifted in time about $\frac{h}{2}$ against each other. To have the same benefits for the rotation, the $\vec{E}$ and $\vec{H}$ components are shifted in space as well, as it's illustrated in Figure \ref{fig: YeeBox}.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.70\textwidth]{Pictures/YeeBox.png} 
@@ -916,7 +912,7 @@ which is still more complicated than the analytic dispersion relation
 \beq
 \omega = k.
 \eeq
-In figure \ref{fig: dispersionRelation} both the analytical and the numerical dispersion relation are plotted. Equation \eqref{eqn: dispersionRelation1D} has a maximum at 
+In Figure \ref{fig: dispersionRelation} both the analytical and the numerical dispersion relation are plotted. Equation \eqref{eqn: dispersionRelation1D} has a maximum at 
 \beq
 \bal
 \tilde{k}_x^{max} &= \frac{\pi}{\Delta x}\\
@@ -952,7 +948,7 @@ lengthOfSimulationBoxInX = numberOfGridPointsInX * dx;
 lengthOfSimulationBoxInY = numberOfGridPointsInY * dy;
 lengthOfSimulationBoxInZ = numberOfGridPointsInZ * dz;
 \end{lstlisting}
-The near field is then defined as the $3 \cdot 3 \cdot 3 = 27$ boxes with the box, containing the particle, in the center. In figure \ref{fig: near fields} the near fields of one and two particles are shown. The near fields can of course overlap. The near field box at $(18,18)$ belongs to both particles.
+The near field is then defined as the $3 \cdot 3 \cdot 3 = 27$ boxes with the box, containing the particle, in the center. In Figure \ref{fig: near fields} the near fields of one and two particles are shown. The near fields can of course overlap. The near field box at $(18,18)$ belongs to both particles.
 \begin{figure}[t]
 \subfigure[]{\includegraphics[width=0.49\textwidth]{Pictures/nearFieldOneParticle.png}}\hfill
 \subfigure[]{\includegraphics[width=0.49\textwidth]{Pictures/nearFieldTwoParticles.png}}
@@ -964,7 +960,7 @@ The near field is then defined as the $3 \cdot 3 \cdot 3 = 27$ boxes with the bo
 %======================== Field Push ========================
 \newpage
 \section{Field Push}
-We now want to explain, how a field push actually works. Since we only propagate fields in the far field area as explained in section \label{sec: Yee-Scheme} special care needs to be taken at the boundaries between far field and near field. To explain this, consider the following plane of a grid illustrated in figure \ref{fig: nearFieldFarFieldBorder}.
+We now want to explain, how a field push actually works. Since we only propagate fields in the far field area as explained in section \label{sec: Yee-Scheme} special care needs to be taken at the boundaries between far field and near field. To explain this, consider the following plane of a grid illustrated in Figure \ref{fig: nearFieldFarFieldBorder}.
 \begin{figure}[t]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/createdPictures/grid.pdf} 
@@ -981,7 +977,7 @@ Using the discretized Maxwell Equations \eqref{eqn: discreteMaxwellEq} we get
 \vec{H}\Bigr|^{n+1}_{z (2,4,k)} = \vec{H}\Bigr|^{n}_{z (2,4,k)} - h \left(\frac{\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}} - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta x} - \frac{E\Bigr|^{n+\frac{1}{2}}_{x (2,5,k)} - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta y}\right).
 \eeq
 \noindent
-$\vec{H}\Bigr|^{n+1}_{z (2,4,k)}$ is stored on a far field grid point. Its calculation, however, requires a field value $\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}}$, which is stored on a near field grid point and therefore contains no field values from the particle (it can however contain field values from other particles propagated from the outside into the near field area). Hence we need to analytically calculate the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at $(3,4,k)$ $\textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (3,4,k)}}$ and add it to the field value already stored at this grid point. Finally the correct calculation is
+$\vec{H}\Bigr|^{n+1}_{z (2,4,k)}$ is stored on a far field grid point. Its calculation, however, requires a field value $\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}}$, which is stored on a near field grid point and therefore contains no field values from the particle (it can, however contain field values from other particles propagated from the outside into the near field area). Hence we need to analytically calculate the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at $(3,4,k)$ $\textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (3,4,k)}}$ and add it to the field value already stored at this grid point. Finally, the correct calculation is
 \begin{multline}
 \vec{H}\Bigr|^{n+1}_{z (2,4,k)} = \vec{H}\Bigr|^{n}_{z (2,4,k)} \\ - h \left(\frac{\left(\textcolor{red}{E\Bigr|^{n+\frac{1}{2}}_{y (3,4,k)}} + \textcolor{blue}{E\Bigr|^{n+\frac{1}{2}}_{yp (3,4,k)}}\right) - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta x} - \frac{E\Bigr|^{n+\frac{1}{2}}_{x (2,5,k)} - E\Bigr|^{n+\frac{1}{2}}_{y (2,4,k)}}{\Delta y}\right).
 \end{multline}
@@ -1011,7 +1007,7 @@ One complete field push consists out of four steps. Even though the field pushes
 Since this is the core of the simulation, we will go over all of these steps in detail.
 \subsection{pushEFieldInsideBoxes()}
 In this routine we simply calculate the discretized Maxwell Equations \eqref{eqn: discreteMaxwellEq}. We loop through the entire grid and store the necessary field values
-but leave out those grid points which are on the left plane (yz - plane) of each box. In figure \ref{fig: CodeRoutineBoxes} marked with \textcolor{red}{red}.
+but leave out those grid points which are on the left plane (yz - plane) of each box. In Figure \ref{fig: CodeRoutineBoxes} marked with \textcolor{red}{red}.
 \newline 
 Now all $\vec{E}$ values in all boxes are pushed except those on the \textcolor{red}{red} plane. To push those we need to access the field values on the \textcolor{blue}{blue} and \textcolor{green}{green} plane, which are in the far field and therefore need to be adjusted. 
 
@@ -1020,7 +1016,7 @@ In order to push $\vec{E}$ we need values of $\vec{H}$. Therefore this methods l
 
 \subsection{adjustHField()}
 This routine consists of three subroutines \texttt{adjustHyz\_im1()}, \texttt{adjustHxz\_jm1()} and \\
- \texttt{adjustHxy\_km1()}. The first adjusts Hy and Hz on plane to the \textcolor{blue}{left}, the second adjusts Hx and Hz on the plane in front (not shown) and the latter adjusts Hx and Hy on the plane \textcolor{green}{below}. All of those three subroutines do conceptionally the same. They loop through all boxes and check whether the current box is part of the near field of the particle and the box to the left is not. This is the situation shown in figure \ref{fig: CodeRoutineBoxes}. Then the respective Liénard-Wiechert fields get calculated on the \textcolor{blue}{blue} plane and subtracted from the values stored by \texttt{setHFieldOnBorders()}. Notice that the \textcolor{red}{red} plane is part of a near field box and the \textcolor{blue}{blue} plane is part of a far field box. Hence we need to subtract the field contributions of the particle on the \textcolor{blue}{blue} plane.\\
+ \texttt{adjustHxy\_km1()}. The first adjusts Hy and Hz on plane to the \textcolor{blue}{left}, the second adjusts Hx and Hz on the plane in front (not shown) and the latter adjusts Hx and Hy on the plane \textcolor{green}{below}. All of those three subroutines do conceptionally the same. They loop through all boxes and check whether the current box is part of the near field of the particle and the box to the left is not. This is the situation shown in Figure \ref{fig: CodeRoutineBoxes}. Then the respective Liénard-Wiechert fields get calculated on the \textcolor{blue}{blue} plane and subtracted from the values stored by \texttt{setHFieldOnBorders()}. Notice that the \textcolor{red}{red} plane is part of a near field box and the \textcolor{blue}{blue} plane is part of a far field box. Hence we need to subtract the field contributions of the particle on the \textcolor{blue}{blue} plane.\\
 On the contrary, if we have the case that the current box is a far field box and the box to left is a near field box, then the \textcolor{red}{red} plane is part of a far field box and the \textcolor{blue}{blue} plane is part of a near field box. Hence we calculate the Liénard-Wiechert fields on the \textcolor{blue}{blue} plane and add them to the respective values stored by \texttt{setHFieldOnBorders()}.
 
 \subsection{pushEFieldOnBorders()}
@@ -1045,7 +1041,7 @@ As an example we simulate an electron with $\gamma = 1.1$ in a constant external
 \end{figure}
 \noindent
 The electron moves in a circular fashion in the $xy$ - plane. The red line in the center of the near field area shows the particles trajectory. The initial conditions are chosen such that the particle does not leave its initial box. That means that the near field does not change during runtime. The Liénard-Wiechert fields are only calculated at the border between near - and far field and only if the retardation constraint $t_{ret} > 0$ is met. \\
-As we already mentioned before, figure \ref{fig: gyration two electrons} finally shows the expected behaviour of two particles far fields propagating into each others near field regions. 
+As we already mentioned before, Figure \ref{fig: gyration two electrons} finally shows the expected behaviour of two particles far fields propagating into each others near field regions. 
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/gyrationTwoParticles.png} 
@@ -1059,7 +1055,7 @@ But what if the particle does leave its initial box ?
 \section{Particle Push and Near Field Update}
 In order to push the particle properly not just the external fields but also the field contributions from other particles propagated into the near field region need to be taken into account. To get an even better result we use trilinear interpolation (see section \ref{sec: trilinear Interpolation}) to interpolate the field value at the particle position from the surrounding eight grid points. If, however, another particle2 enters the near field region of the observed particle1 equation \eqref{eqn: Liénard-Wiechert} is used to calculate the field emitted by particle2 at the position of particle1 analytically. \\
 \newline
-If a particle changes its box during one push from time $t$ to $t + \dm t$ the particles near field changes as illustrated in figure \ref{fig: nearFieldUpdate}
+If a particle changes its box during one push from time $t$ to $t + \dm t$ the particles near field changes as illustrated in Figure \ref{fig: nearFieldUpdate}
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.40\textwidth]{Pictures/nearFieldUpdate.png} 
@@ -1067,8 +1063,8 @@ If a particle changes its box during one push from time $t$ to $t + \dm t$ the p
 	\label{fig: nearFieldUpdate}
 \end{figure}
 \noindent
-There are three situations we need to take care of. First the boxes which do not longer belong to the near field area, marked with \includegraphics[height=12pt]{Pictures/nearFieldOldBoxes.png} in figure \ref{fig: nearFieldUpdate}. Since those boxes were part of the near field they didn't contain any field contributions of the particle. But because they are no longer part of the near field region those field contributions need to be added. The routine \texttt{addLWFieldsInBox()} calculates the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at all grid points in the specified box and adds them to the respective grid point. Second, all boxes marked with \includegraphics[height=12pt]{Pictures/nearFieldNewBoxes.png} are now part of the near field region and therefore the Liénard-Wiechert field of the particle at all grid points in the specified box need to be subtracted. The routine \texttt{subLWFieldsInBox()} does exactly that. Lastly there are boxes which remain as part of the near field area marked with \includegraphics[height=12pt]{Pictures/nearFieldBoth.png}. Nothing needs to be done here.\\
-As an example we simulate an electron with $\gamma = 1,2$ in a crossed $\vec{E}$ and $\vec{B}$ field. The results are shown in figure \ref{fig: electronCrossedField}
+There are three situations we need to take care of. First the boxes which do not longer belong to the near field area, marked with \includegraphics[height=12pt]{Pictures/nearFieldOldBoxes.png} in Figure \ref{fig: nearFieldUpdate}. Since those boxes were part of the near field they didn't contain any field contributions of the particle. But because they are no longer part of the near field region those field contributions need to be added. The routine \texttt{addLWFieldsInBox()} calculates the Liénard-Wiechert field \eqref{eqn: Liénard-Wiechert} of the particle at all grid points in the specified box and adds them to the respective grid point. Second, all boxes marked with \includegraphics[height=12pt]{Pictures/nearFieldNewBoxes.png} are now part of the near field region and therefore the Liénard-Wiechert field of the particle at all grid points in the specified box need to be subtracted. The routine \texttt{subLWFieldsInBox()} does exactly that. Lastly, there are boxes which remain as part of the near field area marked with \includegraphics[height=12pt]{Pictures/nearFieldBoth.png}. Nothing needs to be done here.\\
+As an example we simulate an electron with $\gamma = 1,2$ in a crossed $\vec{E}$ and $\vec{B}$ field. The results are shown in Figure \ref{fig: electronCrossedField}
 \begin{figure}[H]
 \subfigure[t = 5]{\includegraphics[width=0.33\textwidth]{Pictures/crossedField_5.png}}\hfill
 \subfigure[t = 7]{\includegraphics[width=0.33\textwidth]{Pictures/crossedField_7.png}}\hfill
@@ -1100,8 +1096,8 @@ This allows us to define a distance over which the emitted fields would be atten
 \newpage
 \section{Far Field Setup Before Simulation}
 So far we can initialize a particle (or multiple particles) and let them move on the grid according to the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} without damping. If there are external fields or interaction forces between multiple particles they get accelerated and start to radiate Liénard-Wiechert fields. As soon as the retardation constraint is met ($t_{ret} > 0$) the fields will appear at the border between near - and far field region and get propagated via \eqref{eqn: discreteMaxwellEq}. This works fine, but unfortunately this initial setup is far from realistic. The particles were not created the second the simulation starts. We are not interested in simulating the creational process but the emitted fields due to interactions between particles which do already exist. Therefore the particles will already have a long trajectory history and some kind of Liénard-Wiechert fields coming with them. So, the question is: How do we setup the fields on the grid before the simulation starts ? We use the following approach:\\
-We use the Boris-Pusher (see section \ref{sec: Boris-Method}) to push the particles from $t$ to $t + \dm t$, starting with the initial conditions, given prior to the simulation. This algorithm can also be used to push backwards in time, since it is symplectic and therefore time reversible. By selecting the simulation parameter $\texttt{t} = t_0 > 0$ the trajectory will be calculated backwards in time for $t_0$ time units. This can be achieved by reversing the external fields and the initial velocity vector of the particle. Once we got $t_0$ back in time, we reverse the external fields and the velocity vector again, set the particles proper time to zero and start pushing the particle from there. In order to store all new trajectory points in the history, it needs to be extended by $\frac{t_0}{\dm t}$ elements first. With this approach the simulation starts with the particle being at the specified initial conditions by the user, but the particle will already have a trajectory history, from which the initial Liénard-Wiechert fields can be calculated with \eqref{eqn: Liénard-Wiechert} in all far field boxes of the grid. This, however, is computationally quite expensive. We therefore developed a routine which serializes the initial conditions of the simulation in a file and only calculates the fields if they were not calculated and stored before. The flow chart in figure \ref{fig: particleHistoryFlowChart} shows which functions get called when the user sets $t = t_0 > 0$.
-In figure \ref{fig: particleHistoryExamples} some examples of initial fields for different times are shown. Notice that in all cases the simulation starts with the particle being at the initial position \footnote{$\texttt{Particle->x[1]} = 11.1$\\ $\texttt{Particle->x[2]} = 15.5$} the user entered prior to the simulation. Only the distance over which the fields are initialized differ due to different particle history length.
+We use the Boris-Pusher (see section \ref{sec: Boris-Method}) to push the particles from $t$ to $t + \dm t$, starting with the initial conditions, given prior to the simulation. This algorithm can also be used to push backwards in time, since it is symplectic and therefore time reversible. By selecting the simulation parameter $\texttt{t} = t_0 > 0$ the trajectory will be calculated backwards in time for $t_0$ time units. This can be achieved by reversing the external fields and the initial velocity vector of the particle. Once we got $t_0$ back in time, we reverse the external fields and the velocity vector again, set the particles proper time to zero and start pushing the particle from there. In order to store all new trajectory points in the history, it needs to be extended by $\frac{t_0}{\dm t}$ elements first. With this approach the simulation starts with the particle being at the specified initial conditions by the user, but the particle will already have a trajectory history, from which the initial Liénard-Wiechert fields can be calculated with \eqref{eqn: Liénard-Wiechert} in all far field boxes of the grid. This, however, is computationally quite expensive. We therefore developed a routine which serializes the initial conditions of the simulation in a file and only calculates the fields if they were not calculated and stored before. The flow chart in Figure \ref{fig: particleHistoryFlowChart} shows which functions get called when the user sets $t = t_0 > 0$.
+In Figure \ref{fig: particleHistoryExamples} some examples of initial fields for different times are shown. Notice that in all cases the simulation starts with the particle being at the initial position \footnote{$\texttt{Particle->x[1]} = 11.1$\\ $\texttt{Particle->x[2]} = 15.5$} the user entered prior to the simulation. Only the distance over which the fields are initialized differ due to different particle history length.
 \begin{figure}[H]
 \subfigure[$\texttt{t} = 8$, $\texttt{tEnd} = 9$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields8.png}}\hfill
 \subfigure[$\texttt{t} = 10$, $\texttt{tEnd} = 11$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields10.png}}\hfill
@@ -1218,7 +1214,7 @@ Now we need to talk about reflection and transmission at a surface.
 %R = \frac{(1-n)^2 + \kappa^2}{(1+n)^2 + \kappa^2}.
 %\eeq
 %Notice, that not the refractive index alone, but also the loss contributes to reflection. 
-In the case of a wave with arbitrary polarization and angle of incidence, as illustrated in figure \ref{fig: Fresnel}, we can use \textit{Fresnel} equations. \footnote{
+In the case of a wave with arbitrary polarization and angle of incidence, as illustrated in Figure \ref{fig: Fresnel}, we can use \textit{Fresnel} equations. \footnote{
 \beq
 \bal
 r_{TE} &= \frac{\eta_2 \cos(\theta_1) - \eta_1\cos(\theta_2)}{\eta_2 \cos(\theta_1) + \eta_1\cos(\theta_2)}, \\
