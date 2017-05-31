@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  31 MAY 2017 17:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  31 MAY 2017 18:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -944,9 +944,6 @@ LaTeX Warning: Unused global option(s):
 
 (./masterThesis.aux (./acknowledgments.aux) (./symbols.aux)
 
-LaTeX Warning: Label `sec: Yee-Scheme' multiply defined.
-
-
 LaTeX Warning: Label `eqn: frequencyDomainMaxwellEquationsWithPML' multiply def
 ined.
 
@@ -1437,7 +1434,7 @@ File: Pictures/dispersionRelation.png Graphic file (type png)
 <use Pictures/dispersionRelation.png>
 Package pdftex.def Info: Pictures/dispersionRelation.png used on input line 929
 .
-(pdftex.def)             Requested size: 292.77632pt x 223.92317pt.
+(pdftex.def)             Requested size: 250.95477pt x 191.93756pt.
  [32pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 2}) has been already used, duplicate ignored
 
@@ -1488,7 +1485,7 @@ Package pdftex.def Info: Pictures/nearFieldTwoParticles.png used on input line
 954.
 (pdftex.def)             Requested size: 204.94661pt x 171.7743pt.
  [33]
-<Pictures/createdPictures/grid.pdf, id=819, 421.06825pt x 425.98564pt>
+<Pictures/createdPictures/grid.pdf, id=820, 421.06825pt x 425.98564pt>
 File: Pictures/createdPictures/grid.pdf Graphic file (type pdf)
 
 <use Pictures/createdPictures/grid.pdf>
@@ -1506,7 +1503,7 @@ Underfull \vbox (badness 4967) has occurred while \output is active []
 l.978 \eeq
            <./Pictures/nearFieldOneParticle.png> <./Pictures/nearFieldTwoPartic
 les.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 5133) has occurred while \output is active []
 
  [35pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 4}) has been already used, duplicate ignored
@@ -1515,7 +1512,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
                                                   \fi \fi 
 l.983 \end{multline}
                      <./Pictures/createdPictures/grid.pdf>]
-<Pictures/createdPictures/boxes.pdf, id=878, 274.42258pt x 201.76733pt>
+<Pictures/createdPictures/boxes.pdf, id=879, 274.42258pt x 201.76733pt>
 File: Pictures/createdPictures/boxes.pdf Graphic file (type pdf)
 
 <use Pictures/createdPictures/boxes.pdf>
@@ -1549,21 +1546,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 1023--1024
 
  []
 
-[38] <Pictures/gyration_7.png, id=940, 483.9681pt x 399.1713pt>
+[38] <Pictures/gyration_7.png, id=941, 483.9681pt x 399.1713pt>
 File: Pictures/gyration_7.png Graphic file (type png)
 
 <use Pictures/gyration_7.png>
 Package pdftex.def Info: Pictures/gyration_7.png used on input line 1036.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-<Pictures/gyration_9.png, id=941, 483.9681pt x 399.1713pt>
+<Pictures/gyration_9.png, id=942, 483.9681pt x 399.1713pt>
 File: Pictures/gyration_9.png Graphic file (type png)
 
 <use Pictures/gyration_9.png>
 Package pdftex.def Info: Pictures/gyration_9.png used on input line 1037.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-<Pictures/gyration_11.png, id=942, 483.9681pt x 399.1713pt>
+<Pictures/gyration_11.png, id=943, 483.9681pt x 399.1713pt>
 File: Pictures/gyration_11.png Graphic file (type png)
 
 <use Pictures/gyration_11.png>
@@ -1574,7 +1571,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1032--1041
 
  []
 
-<Pictures/gyrationTwoParticles.png, id=944, 484.9317pt x 402.5439pt>
+<Pictures/gyrationTwoParticles.png, id=945, 484.9317pt x 402.5439pt>
 File: Pictures/gyrationTwoParticles.png Graphic file (type png)
 
 <use Pictures/gyrationTwoParticles.png>
@@ -1589,14 +1586,14 @@ Package pdftex.def Info: Pictures/gyrationTwoParticles.png used on input line 1
 l.1051 \noindent
                  <./Pictures/gyration_7.png> <./Pictures/gyration_9.png> <./Pic
 tures/gyration_11.png>]
-<Pictures/nearFieldUpdate.png, id=963, 316.18124pt x 300.12125pt>
+<Pictures/nearFieldUpdate.png, id=964, 316.18124pt x 300.12125pt>
 File: Pictures/nearFieldUpdate.png Graphic file (type png)
 
 <use Pictures/nearFieldUpdate.png>
 Package pdftex.def Info: Pictures/nearFieldUpdate.png used on input line 1061.
 (pdftex.def)             Requested size: 167.29893pt x 158.80247pt.
 
-<Pictures/nearFieldOldBoxes.png, id=964, 106.3975pt x 98.3675pt>
+<Pictures/nearFieldOldBoxes.png, id=965, 106.3975pt x 98.3675pt>
 File: Pictures/nearFieldOldBoxes.png Graphic file (type png)
 
 <use Pictures/nearFieldOldBoxes.png>
@@ -1604,7 +1601,7 @@ Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1062
 .
 (pdftex.def)             Requested size: 12.9782pt x 12.0pt.
 
-<Pictures/nearFieldNewBoxes.png, id=965, 94.3525pt x 99.37125pt>
+<Pictures/nearFieldNewBoxes.png, id=966, 94.3525pt x 99.37125pt>
 File: Pictures/nearFieldNewBoxes.png Graphic file (type png)
 
 <use Pictures/nearFieldNewBoxes.png>
@@ -1612,7 +1609,7 @@ Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1062
 .
 (pdftex.def)             Requested size: 11.39378pt x 12.0pt.
 
-<Pictures/nearFieldBoth.png, id=966, 59.22125pt x 57.21375pt>
+<Pictures/nearFieldBoth.png, id=967, 59.22125pt x 57.21375pt>
 File: Pictures/nearFieldBoth.png Graphic file (type png)
 
 <use Pictures/nearFieldBoth.png>
@@ -1665,21 +1662,21 @@ File: Pictures/nearFieldBoth.png Graphic file (type png)
 Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1066.
 (pdftex.def)             Requested size: 12.42055pt x 12.0pt.
 
-<Pictures/crossedField_5.png, id=980, 483.9681pt x 399.1713pt>
+<Pictures/crossedField_5.png, id=981, 483.9681pt x 399.1713pt>
 File: Pictures/crossedField_5.png Graphic file (type png)
 
 <use Pictures/crossedField_5.png>
 Package pdftex.def Info: Pictures/crossedField_5.png used on input line 1069.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-<Pictures/crossedField_7.png, id=981, 483.9681pt x 399.1713pt>
+<Pictures/crossedField_7.png, id=982, 483.9681pt x 399.1713pt>
 File: Pictures/crossedField_7.png Graphic file (type png)
 
 <use Pictures/crossedField_7.png>
 Package pdftex.def Info: Pictures/crossedField_7.png used on input line 1070.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-<Pictures/crossedField_9.png, id=982, 483.9681pt x 399.1713pt>
+<Pictures/crossedField_9.png, id=983, 483.9681pt x 399.1713pt>
 File: Pictures/crossedField_9.png Graphic file (type png)
 
 <use Pictures/crossedField_9.png>
@@ -1696,7 +1693,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 l.1075 \noindent
                  <./Pictures/nearFieldUpdate.png> <./Pictures/nearFieldOldBoxes
 .png> <./Pictures/nearFieldNewBoxes.png> <./Pictures/nearFieldBoth.png>]
-<Pictures/createdPictures/historyLengthStill.pdf, id=995, 362.62129pt x 263.704
+<Pictures/createdPictures/historyLengthStill.pdf, id=996, 362.62129pt x 263.704
 01pt>
 File: Pictures/createdPictures/historyLengthStill.pdf Graphic file (type pdf)
  <use Pictures/createdPictures/historyLengthStill.pdf>
@@ -1704,7 +1701,7 @@ Package pdftex.def Info: Pictures/createdPictures/historyLengthStill.pdf used o
 n input line 1084.
 (pdftex.def)             Requested size: 138.02449pt x 100.37354pt.
 
-<Pictures/createdPictures/historyLengthHalfC.pdf, id=996, 359.46664pt x 263.704
+<Pictures/createdPictures/historyLengthHalfC.pdf, id=997, 359.46664pt x 263.704
 01pt>
 File: Pictures/createdPictures/historyLengthHalfC.pdf Graphic file (type pdf)
  <use Pictures/createdPictures/historyLengthHalfC.pdf>
@@ -1712,7 +1709,7 @@ Package pdftex.def Info: Pictures/createdPictures/historyLengthHalfC.pdf used o
 n input line 1085.
 (pdftex.def)             Requested size: 138.02449pt x 101.25475pt.
 
-<Pictures/createdPictures/historyLengthAlmostC.pdf, id=997, 343.53629pt x 261.2
+<Pictures/createdPictures/historyLengthAlmostC.pdf, id=998, 343.53629pt x 261.2
 1928pt>
 File: Pictures/createdPictures/historyLengthAlmostC.pdf Graphic file (type pdf)
 
@@ -1751,7 +1748,7 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Pictures/createdPictures/h
 istoryLengthAlmostC.pdf): PDF inclusion: multiple pdfs with page group included
  in a single page
 >]
-<Pictures/particleHistoryInitialFields8.png, id=1106, 476.2593pt x 399.1713pt>
+<Pictures/particleHistoryInitialFields8.png, id=1107, 476.2593pt x 399.1713pt>
 File: Pictures/particleHistoryInitialFields8.png Graphic file (type png)
 
 <use Pictures/particleHistoryInitialFields8.png>
@@ -1759,14 +1756,14 @@ Package pdftex.def Info: Pictures/particleHistoryInitialFields8.png used on inp
 ut line 1102.
 (pdftex.def)             Requested size: 138.02449pt x 115.68361pt.
 
-<Pictures/particleHistoryInitialFields10.png, id=1107, 476.2593pt x 399.1713pt>
+<Pictures/particleHistoryInitialFields10.png, id=1108, 476.2593pt x 399.1713pt>
 File: Pictures/particleHistoryInitialFields10.png Graphic file (type png)
 <use Pictures/particleHistoryInitialFields10.png>
 Package pdftex.def Info: Pictures/particleHistoryInitialFields10.png used on in
 put line 1103.
 (pdftex.def)             Requested size: 138.02449pt x 115.68361pt.
 
-<Pictures/particleHistoryInitialFields12.png, id=1108, 476.2593pt x 399.1713pt>
+<Pictures/particleHistoryInitialFields12.png, id=1109, 476.2593pt x 399.1713pt>
 File: Pictures/particleHistoryInitialFields12.png Graphic file (type png)
 <use Pictures/particleHistoryInitialFields12.png>
 Package pdftex.def Info: Pictures/particleHistoryInitialFields12.png used on in
@@ -1776,7 +1773,7 @@ put line 1104.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [44]
-<Pictures/createdPictures/particleHistoryFlowChart.pdf, id=1118, 547.04375pt x 
+<Pictures/createdPictures/particleHistoryFlowChart.pdf, id=1119, 547.04375pt x 
 1064.97874pt>
 File: Pictures/createdPictures/particleHistoryFlowChart.pdf Graphic file (type 
 pdf)
@@ -1819,7 +1816,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1124--1127
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [49]
-<Pictures/Fresnel.png, id=1188, 443.6575pt x 449.68pt>
+<Pictures/Fresnel.png, id=1189, 443.6575pt x 449.68pt>
 File: Pictures/Fresnel.png Graphic file (type png)
 
 <use Pictures/Fresnel.png>
@@ -1843,21 +1840,21 @@ Overfull \hbox (39.04166pt too wide) in paragraph at lines 1435--1436
 ][][][] 
  []
 
-[55] <Pictures/upml_11.png, id=1267, 483.9681pt x 399.1713pt>
+[55] <Pictures/upml_11.png, id=1268, 483.9681pt x 399.1713pt>
 File: Pictures/upml_11.png Graphic file (type png)
 
 <use Pictures/upml_11.png>
 Package pdftex.def Info: Pictures/upml_11.png used on input line 1456.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-<Pictures/upml_15_75.png, id=1268, 483.9681pt x 399.1713pt>
+<Pictures/upml_15_75.png, id=1269, 483.9681pt x 399.1713pt>
 File: Pictures/upml_15_75.png Graphic file (type png)
 
 <use Pictures/upml_15_75.png>
 Package pdftex.def Info: Pictures/upml_15_75.png used on input line 1457.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-<Pictures/upml_18.png, id=1269, 483.9681pt x 399.1713pt>
+<Pictures/upml_18.png, id=1270, 483.9681pt x 399.1713pt>
 File: Pictures/upml_18.png Graphic file (type png)
 
 <use Pictures/upml_18.png>
@@ -2051,7 +2048,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1628.
 Here is how much of TeX's memory you used:
  23824 strings out of 493014
  435673 string characters out of 6133350
- 587451 words of memory out of 5000000
+ 587445 words of memory out of 5000000
  26669 multiletter control sequences out of 15000+600000
  31893 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2093,10 +2090,10 @@ e1/public/cm-super/sfsx2074.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
 ublic/cm-super/sfti1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
 lic/cm-super/sftt0900.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
 c/cm-super/sftt1095.pfb>
-Output written on masterThesis.pdf (78 pages, 8281888 bytes).
+Output written on masterThesis.pdf (78 pages, 8286528 bytes).
 PDF statistics:
- 1569 PDF objects out of 1728 (max. 8388607)
- 1260 compressed objects within 13 object streams
+ 1570 PDF objects out of 1728 (max. 8388607)
+ 1261 compressed objects within 13 object streams
  343 named destinations out of 1000 (max. 500000)
  557 words of extra memory for PDF output out of 10000 (max. 10000000)
 
