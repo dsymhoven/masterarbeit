@@ -38,7 +38,7 @@ for i in range(numberOfFieldFiles):
 				label.set_visible(False)
 
 	# define filename for saving
-	filename = 'img' + str(i)
+	filename = 'extern' + str(i)
 	fig.savefig("png/" + "{}.png".format(filename), bbox_inches='tight',dpi=300)
 	# close fig
 	plt.close(fig)
