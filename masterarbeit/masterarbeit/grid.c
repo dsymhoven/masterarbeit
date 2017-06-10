@@ -498,6 +498,7 @@ void externalPulse(const double x[4], const double tStart, double Eextern[3], do
     double E0 = 1.77 * pow(10, -8.0);
     double H0 = 1.77 * pow(10, -8.0);
     double frequency = 1.77 * pow(10, -8);
+    
     double lengthOfSimulationBoxInX = Grid->lengthOfSimulationBoxInX;
     double lengthOfSimulationBoxInY = Grid->lengthOfSimulationBoxInY;
     double widthOfPulseInY = 0.5 * lengthOfSimulationBoxInY;

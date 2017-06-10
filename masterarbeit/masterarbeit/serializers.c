@@ -346,6 +346,7 @@ void writeExternalFieldsToFile(Grid *Grid, double Eextern[3], double Bextern[3],
                 x[2] = j * Grid->Resolution.dy;
                 
                 externalPulse(x, tStart, Eextern, Bextern, Grid);
+//                externalPlaneWave(x, tStart, Eextern, Bextern);
                 Ex = Eextern[0];
                 Ey = Eextern[1];
                 Ez = Eextern[2];

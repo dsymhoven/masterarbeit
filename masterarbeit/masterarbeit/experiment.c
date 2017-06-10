@@ -1290,9 +1290,9 @@ void scatteringInEMWave_analytic(){
     Forces Forces;
  
     
-    initResolution(&Resolution, 10, 10, 10);
+    initResolution(&Resolution, 0.2, 0.2, 0.2);
     initBox(&Box, 20, 20, 20);
-    initGrid(&Grid, &Resolution, &Box, 25, 25, 25, true);
+    initGrid(&Grid, &Resolution, &Box, 8, 8, 8, true);
     initForces(&Forces);
     
     int numberOfParticles = 1;
@@ -1301,9 +1301,9 @@ void scatteringInEMWave_analytic(){
     Particle *Particle1 = &Particles[0];
     
     double dt = 0.5 * Resolution.dx;
-    double t = 4000;
+    double t = 0;
     double tStart = t;
-    double tEnd = 7500;
+    double tEnd = 30;
     
     char filename[32] = "some";
     double Eextern[3];
@@ -1317,12 +1317,12 @@ void scatteringInEMWave_analytic(){
     Particle1->charge = 1;
     
     Particle1->x[0] = 0;
-    Particle1->x[1] = 3600;
-    Particle1->x[2] = 100;
-    Particle1->x[3] = 1600;
+    Particle1->x[1] = 25.1;
+    Particle1->x[2] = 14.1;
+    Particle1->x[3] = 16.1;
     
-    Particle1->u[1] = -1.6;
-    Particle1->u[2] = 1.6;
+    Particle1->u[1] = -0.2;
+    Particle1->u[2] = 0.01;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
     
@@ -1342,34 +1342,19 @@ void scatteringInEMWave_analytic(){
     
     extendParticleHistory(Particles, &Grid, numberOfParticles, Eextern, Bextern, dt, t);
     writeSimulationInfoToFile(numberOfParticles, t / dt);
-    //    if(!readInitialFieldFromFileIfExists(&Grid, Particles, numberOfParticles, t, Eextern, Bextern)){
-    //        calcFieldsOnGridWithoutNearField(Particles, &Grid, numberOfParticles, t);
-    //        writeFieldsFromCompleteGridToFile(&Grid);
-    //        writeInitialConditionsToFile(&Grid, Particles, numberOfParticles, t, tEnd, Eextern, Bextern);
-    //        system("python2.7 ~/Desktop/Projects/masterarbeit/Analysis/initialFields.py");
-    //    }
     
     for (int step = t / dt; step < tEnd / dt; step++){
         printf("step %d of %d\n", step, (int)(tEnd / dt));
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
-        //                writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
-        //
-        //                pushEField(&Grid, Particles, numberOfParticles, t, dt);
-        //                pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
-        
-        
+
         for(int p = 0; p < numberOfParticles; p++){
             analyzeForces(&Particles[p], &Forces, Eextern, Bextern, t);
             addCurrentStateToParticleHistory(&Particles[p], step);
-            externalPlaneWave(Particles[p].x, tStart, Eextern, Bextern);
+            externalPulse(Particles[p].x, tStart, Eextern, Bextern, &Grid);
             updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
             updateLocation(&Particles[p], &Grid, dt);
-            //                    updateNearField(&Grid, &Particles[p], t);
         }
-        //                pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
-        //                pushEField(&Grid, Particles, numberOfParticles, t, dt);
-        
-        
+
         t += dt;
     }
     clearFieldsFromGrid(&Grid);
@@ -1618,9 +1603,9 @@ void scatteringInEMWave_analytic_largeScale(){
     Forces Forces;
     
     
-    initResolution(&Resolution, pow(10, 7), pow(10, 7), pow(10, 7));
-    initBox(&Box, 32, 32, 32);
-    initGrid(&Grid, &Resolution, &Box, 22, 10, 10, true);
+    initResolution(&Resolution, 2 * pow(10, 7), 2 * pow(10, 7), 2 * pow(10, 7));
+    initBox(&Box, 16, 16, 16);
+    initGrid(&Grid, &Resolution, &Box, 10, 6, 6, true);
     initForces(&Forces);
     
     int numberOfParticles = 1;
@@ -1629,9 +1614,9 @@ void scatteringInEMWave_analytic_largeScale(){
     Particle *Particle1 = &Particles[0];
     
     double dt = 0.5 * Resolution.dx;
-    double t = 400 * pow(10, 7);;
+    double t = 0 * pow(10, 7);;
     double tStart = t;
-    double tEnd = 1100 * pow(10, 7);
+    double tEnd = 300 * pow(10, 7);
     
     char filename[32] = "some";
     double Eextern[3];
@@ -1645,9 +1630,9 @@ void scatteringInEMWave_analytic_largeScale(){
     Particle1->charge = pow(10, 10);
     
     Particle1->x[0] = 0;
-    Particle1->x[1] = 6.0 * pow(10, 9);
-    Particle1->x[2] = 1.6 * pow(10, 9);;
-    Particle1->x[3] = 1.6 * pow(10, 9);
+    Particle1->x[1] = 1.6 * pow(10, 9);
+    Particle1->x[2] = 0.96 * pow(10, 9);;
+    Particle1->x[3] = 0.96 * pow(10, 9);
     
     Particle1->u[1] = -0.1;
     Particle1->u[2] = 0.01;
@@ -1676,7 +1661,7 @@ void scatteringInEMWave_analytic_largeScale(){
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
     
         for(int p = 0; p < numberOfParticles; p++){
-            analyzeForces(&Particles[p], &Forces, Eextern, Bextern, t);
+//            analyzeForces(&Particles[p], &Forces, Eextern, Bextern, t);
             addCurrentStateToParticleHistory(&Particles[p], step);
             externalPulse(Particles[p].x, tStart, Eextern, Bextern, &Grid);
             updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
@@ -1687,14 +1672,14 @@ void scatteringInEMWave_analytic_largeScale(){
     }
     clearFieldsFromGrid(&Grid);
     calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
-    writeFieldComponentsForFourierAnalysisToFile(&Grid, filename, 0, planeForPlotting, true, false);
+//    writeFieldComponentsForFourierAnalysisToFile(&Grid, filename, 0, planeForPlotting, true, false);
     writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
     writeExternalFieldsToFile(&Grid, Eextern, Bextern, t, tStart, filename, 0, planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
-    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/fourierAnalysis.sh");
+//    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/fourierAnalysis.sh");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
-    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/analyzeForces.sh");
+//    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/analyzeForces.sh");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
     
     freeMemoryOnParticles(Particles, numberOfParticles);
@@ -1822,9 +1807,9 @@ void test_largeScale(){
     Box Box;
     Forces Forces;
     
-    initResolution(&Resolution, pow(10, 7), pow(10, 7), pow(10, 7));
-    initBox(&Box, 32, 32, 32);
-    initGrid(&Grid, &Resolution, &Box, 12, 4, 4, true);
+    initResolution(&Resolution, 2 * pow(10, 7), 2 * pow(10, 7), 2 * pow(10, 7));
+    initBox(&Box, 16, 16, 16);
+    initGrid(&Grid, &Resolution, &Box, 22, 10, 10, true);
     initForces(&Forces);
     
     int numberOfParticles = 1;
@@ -1833,9 +1818,9 @@ void test_largeScale(){
     Particle *Particle1 = &Particles[0];
     
     double dt = 0.5 * Resolution.dx;
-    double t = 0 * pow(10, 7);;
+    double t = 400 * pow(10, 7);
     double tStart = t;
-    double tEnd = 60 * pow(10, 7);
+    double tEnd = 1100 * pow(10, 7);
     
     char filename[32] = "some";
     double Eextern[3];
@@ -1848,12 +1833,12 @@ void test_largeScale(){
     Particle1->charge = pow(10, 10);
     
     Particle1->x[0] = 0;
-    Particle1->x[1] = 1.5 * pow(10, 9);
-    Particle1->x[2] = 0.5 * pow(10, 9);;
-    Particle1->x[3] = 0.5 * pow(10, 9);
+    Particle1->x[1] = 6.0 * pow(10, 9);
+    Particle1->x[2] = 0.96 * pow(10, 9);;
+    Particle1->x[3] = 0.96 * pow(10, 9);
     
-    Particle1->u[1] = 0.458;
-    Particle1->u[2] = 0;
+    Particle1->u[1] = -0.1;
+    Particle1->u[2] = 0.01;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
     
@@ -1863,7 +1848,7 @@ void test_largeScale(){
     
     Bextern[0] = 0;
     Bextern[1] = 0;
-    Bextern[2] = 1.77 * pow(10, -8.0);
+    Bextern[2] = 0;
     
     int planeForPlotting = Particle1->x[3] / Resolution.dz;
     
@@ -1887,7 +1872,6 @@ void test_largeScale(){
             calcLWFieldsForPlaneInNearFieldRegion(&Grid, Particles, numberOfParticles, t, planeForPlotting);
         }
         writeFieldsToFile(&Grid, filename, step, planeForPlotting, true, false);
-        
         pushEField(&Grid, Particles, numberOfParticles, t, dt);
         pushHField(&Grid, Particles, numberOfParticles, t + dt / 2., dt);
         
@@ -1895,7 +1879,7 @@ void test_largeScale(){
         for(int p = 0; p < numberOfParticles; p++){
 //            analyzeForces(&Particles[p], &Forces, Eextern, Bextern, t);
             addCurrentStateToParticleHistory(&Particles[p], step);
-//            externalPulse(Particles[p].x, tStart, Eextern, Bextern, &Grid);
+            externalPulse(Particles[p].x, tStart, Eextern, Bextern, &Grid);
             updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
             updateLocation(&Particles[p], &Grid, dt);
             updateNearField(&Grid, &Particles[p], t);
@@ -1907,13 +1891,13 @@ void test_largeScale(){
     }
 //    writeFieldComponentsForFourierAnalysisToFile(&Grid, filename, 0, planeForPlotting, true, false);
     clearFieldsFromGrid(&Grid);
-    calcLWFieldsForPlane(&Grid, Particles, numberOfParticles, t, planeForPlotting);
+    calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
     writeFieldsToFile(&Grid, filename, (int)(tEnd / dt), planeForPlotting, true, false);
-//    writeExternalFieldsToFile(&Grid, Eextern, Bextern, t, tStart, filename, 0, planeForPlotting, true, false);
+    writeExternalFieldsToFile(&Grid, Eextern, Bextern, t, tStart, filename, 0, planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
 //    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/fourierAnalysis.sh");
-//    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
 //    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/analyzeForces.sh");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFields.sh");
     
