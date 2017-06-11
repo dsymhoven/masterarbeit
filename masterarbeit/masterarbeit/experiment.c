@@ -1603,9 +1603,9 @@ void scatteringInEMWave_analytic_largeScale(){
     Forces Forces;
     
     
-    initResolution(&Resolution, 2 * pow(10, 7), 2 * pow(10, 7), 2 * pow(10, 7));
-    initBox(&Box, 16, 16, 16);
-    initGrid(&Grid, &Resolution, &Box, 10, 6, 6, true);
+    initResolution(&Resolution, pow(10, 7), pow(10, 7), pow(10, 7));
+    initBox(&Box, 32, 32, 32);
+    initGrid(&Grid, &Resolution, &Box, 22, 10, 10, true);
     initForces(&Forces);
     
     int numberOfParticles = 1;
@@ -1616,7 +1616,7 @@ void scatteringInEMWave_analytic_largeScale(){
     double dt = 0.5 * Resolution.dx;
     double t = 0 * pow(10, 7);;
     double tStart = t;
-    double tEnd = 300 * pow(10, 7);
+    double tEnd = 700 * pow(10, 7);
     
     char filename[32] = "some";
     double Eextern[3];
@@ -1630,9 +1630,9 @@ void scatteringInEMWave_analytic_largeScale(){
     Particle1->charge = pow(10, 10);
     
     Particle1->x[0] = 0;
-    Particle1->x[1] = 1.6 * pow(10, 9);
-    Particle1->x[2] = 0.96 * pow(10, 9);;
-    Particle1->x[3] = 0.96 * pow(10, 9);
+    Particle1->x[1] = 6.0 * pow(10, 9);
+    Particle1->x[2] = 1.6 * pow(10, 9);;
+    Particle1->x[3] = 1.6 * pow(10, 9);
     
     Particle1->u[1] = -0.1;
     Particle1->u[2] = 0.01;
@@ -1661,7 +1661,7 @@ void scatteringInEMWave_analytic_largeScale(){
         writeParticlesToFile(Particles, numberOfParticles, filename, step);
     
         for(int p = 0; p < numberOfParticles; p++){
-//            analyzeForces(&Particles[p], &Forces, Eextern, Bextern, t);
+            analyzeForces(&Particles[p], &Forces, Eextern, Bextern, t);
             addCurrentStateToParticleHistory(&Particles[p], step);
             externalPulse(Particles[p].x, tStart, Eextern, Bextern, &Grid);
             updateVelocityWithBorisPusher(Particles, &Grid, numberOfParticles, p, Eextern, Bextern, dt);
@@ -1679,7 +1679,7 @@ void scatteringInEMWave_analytic_largeScale(){
     printf("executing bash-script ...\n");
 //    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/fourierAnalysis.sh");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
-//    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/analyzeForces.sh");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/analyzeForces.sh");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
     
     freeMemoryOnParticles(Particles, numberOfParticles);
