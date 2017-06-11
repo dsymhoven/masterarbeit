@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  31 MAY 2017 18:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  11 JUN 2017 13:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1294,72 +1294,68 @@ chapter 2.
 [16
 
 ] [17pdfTeX warning (ext4): destination with the same identifier (name{equation
-.2.2.5}) has been already used, duplicate ignored
+.2.2.6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.541 \eeq
+l.540 \eeq
           ]
-Underfull \hbox (badness 10000) in paragraph at lines 541--543
+Underfull \hbox (badness 10000) in paragraph at lines 547--549
 
  []
 
 \c@env_definition=\count198
-<Pictures/Verfahrensfehler.png, id=512, 701.62125pt x 503.8825pt>
+<Pictures/Verfahrensfehler.png, id=516, 701.62125pt x 503.8825pt>
 File: Pictures/Verfahrensfehler.png Graphic file (type png)
 
 <use Pictures/Verfahrensfehler.png>
-Package pdftex.def Info: Pictures/Verfahrensfehler.png used on input line 571.
+Package pdftex.def Info: Pictures/Verfahrensfehler.png used on input line 577.
 (pdftex.def)             Requested size: 209.12686pt x 150.18945pt.
-
-Underfull \vbox (badness 1442) has occurred while \output is active []
-
- [18]
-[19pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
-}) has been already used, duplicate ignored
+ [18] [19pdfTeX warning (ext4): destination with the same identifier (name{figu
+re.2.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.603 \eeq
+l.609 \eeq
            <./Pictures/Verfahrensfehler.png>] [20]
-<Pictures/borisProjection.png, id=561, 406.51875pt x 293.095pt>
+<Pictures/borisProjection.png, id=566, 406.51875pt x 293.095pt>
 File: Pictures/borisProjection.png Graphic file (type png)
 
 <use Pictures/borisProjection.png>
-Package pdftex.def Info: Pictures/borisProjection.png used on input line 670.
+Package pdftex.def Info: Pictures/borisProjection.png used on input line 676.
 (pdftex.def)             Requested size: 209.12686pt x 150.7779pt.
  [21] [22pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.2.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.703 \eeq
+l.709 \eeq
            <./Pictures/borisProjection.png>]
-<Pictures/borisRotation.png, id=590, 557.08125pt x 308.15125pt>
+<Pictures/borisRotation.png, id=596, 557.08125pt x 308.15125pt>
 File: Pictures/borisRotation.png Graphic file (type png)
 
 <use Pictures/borisRotation.png>
-Package pdftex.def Info: Pictures/borisRotation.png used on input line 707.
+Package pdftex.def Info: Pictures/borisRotation.png used on input line 713.
 (pdftex.def)             Requested size: 209.12686pt x 115.67868pt.
  [23pdfTeX warning (ext4): destination with the same identifier (name{equation.
-2.3.26}) has been already used, duplicate ignored
+2.3.27}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.715 \chapter
+l.721 \chapter
               {Interpolations}pdfTeX warning (ext4): destination with the same 
 identifier (name{figure.2.3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.715 \chapter
+l.721 \chapter
               {Interpolations} <./Pictures/borisRotation.png>]
 chapter 3.
-<Pictures/LightconeNew.pdf, id=602, 353.7309pt x 265.21068pt>
+<Pictures/LightconeNew.pdf, id=607, 353.7309pt x 265.21068pt>
 File: Pictures/LightconeNew.pdf Graphic file (type pdf)
 
 <use Pictures/LightconeNew.pdf>
-Package pdftex.def Info: Pictures/LightconeNew.pdf used on input line 725.
+Package pdftex.def Info: Pictures/LightconeNew.pdf used on input line 731.
 (pdftex.def)             Requested size: 334.60425pt x 250.87631pt.
  [24
 
@@ -1371,50 +1367,50 @@ Underfull \vbox (badness 1888) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.762 \eeq
+l.768 \eeq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.3.1.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.762 \eeq
+l.768 \eeq
            <./Pictures/LightconeNew.pdf>]
-<Pictures/trilinearInterpolation.pdf, id=694, 415.55869pt x 416.55934pt>
+<Pictures/trilinearInterpolation.pdf, id=699, 415.55869pt x 416.55934pt>
 File: Pictures/trilinearInterpolation.pdf Graphic file (type pdf)
 
 <use Pictures/trilinearInterpolation.pdf>
 Package pdftex.def Info: Pictures/trilinearInterpolation.pdf used on input line
- 772.
+ 778.
 (pdftex.def)             Requested size: 167.29893pt x 167.70132pt.
  [26pdfTeX warning (ext4): destination with the same identifier (name{equation.
 3.1.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.778 \beq
+l.784 \beq
           pdfTeX warning (ext4): destination with the same identifier (name{fig
 ure.3.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.778 \beq
+l.784 \beq
            <./Pictures/trilinearInterpolation.pdf>] [27]
 chapter 4.
-<Pictures/YeeBox.png, id=744, 761.84625pt x 622.325pt>
+<Pictures/YeeBox.png, id=749, 761.84625pt x 622.325pt>
 File: Pictures/YeeBox.png Graphic file (type png)
 
 <use Pictures/YeeBox.png>
-Package pdftex.def Info: Pictures/YeeBox.png used on input line 834.
+Package pdftex.def Info: Pictures/YeeBox.png used on input line 840.
 (pdftex.def)             Requested size: 292.77632pt x 239.1543pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 829--837
+Underfull \hbox (badness 10000) in paragraph at lines 835--843
 
  []
 
 [28
 
 ]
-Overfull \hbox (6.80202pt too wide) in alignment at lines 848--852
+Overfull \hbox (6.80202pt too wide) in alignment at lines 854--858
  [][][] []
  []
 
@@ -1423,16 +1419,16 @@ Overfull \hbox (6.80202pt too wide) in alignment at lines 848--852
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.852 \eeq
+l.858 \eeq
            <./Pictures/YeeBox.png>]
 Underfull \vbox (badness 3396) has occurred while \output is active []
 
  [30]
-[31] <Pictures/dispersionRelation.png, id=786, 410.7345pt x 314.1336pt>
+[31] <Pictures/dispersionRelation.png, id=791, 410.7345pt x 314.1336pt>
 File: Pictures/dispersionRelation.png Graphic file (type png)
 
 <use Pictures/dispersionRelation.png>
-Package pdftex.def Info: Pictures/dispersionRelation.png used on input line 929
+Package pdftex.def Info: Pictures/dispersionRelation.png used on input line 935
 .
 (pdftex.def)             Requested size: 250.95477pt x 191.93756pt.
  [32pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
@@ -1440,57 +1436,57 @@ Package pdftex.def Info: Pictures/dispersionRelation.png used on input line 929
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.938 \section{Near-and Far Fields}
+l.944 \section{Near-and Far Fields}
                                     <./Pictures/dispersionRelation.png>]
-Overfull \hbox (7.44633pt too wide) in paragraph at lines 939--940
+Overfull \hbox (7.44633pt too wide) in paragraph at lines 945--946
 \T1/cmr/m/n/10.95 boxes, each of which has \T1/cmtt/m/n/10.95 numberOfGridPoint
 sForBoxInX\T1/cmr/m/n/10.95 , \T1/cmtt/m/n/10.95 numberOfGridPointsForBoxInY
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 941.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 947.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 941.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 947.
 
-Overfull \hbox (45.57445pt too wide) in paragraph at lines 941--942
+Overfull \hbox (45.57445pt too wide) in paragraph at lines 947--948
 [][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (45.57445pt too wide) in paragraph at lines 942--943
+Overfull \hbox (45.57445pt too wide) in paragraph at lines 948--949
 [][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (45.57445pt too wide) in paragraph at lines 943--944
+Overfull \hbox (45.57445pt too wide) in paragraph at lines 949--950
 [][][][][][][][][][][][][] 
  []
 
-<Pictures/nearFieldOneParticle.png, id=803, 476.2593pt x 399.1713pt>
+<Pictures/nearFieldOneParticle.png, id=808, 476.2593pt x 399.1713pt>
 File: Pictures/nearFieldOneParticle.png Graphic file (type png)
 
 <use Pictures/nearFieldOneParticle.png>
 Package pdftex.def Info: Pictures/nearFieldOneParticle.png used on input line 9
-53.
+59.
 (pdftex.def)             Requested size: 204.94661pt x 171.7743pt.
 
-<Pictures/nearFieldTwoParticles.png, id=804, 476.2593pt x 399.1713pt>
+<Pictures/nearFieldTwoParticles.png, id=809, 476.2593pt x 399.1713pt>
 File: Pictures/nearFieldTwoParticles.png Graphic file (type png)
 
 <use Pictures/nearFieldTwoParticles.png>
 Package pdftex.def Info: Pictures/nearFieldTwoParticles.png used on input line 
-954.
+960.
 (pdftex.def)             Requested size: 204.94661pt x 171.7743pt.
  [33]
-<Pictures/createdPictures/grid.pdf, id=820, 421.06825pt x 425.98564pt>
+<Pictures/createdPictures/grid.pdf, id=825, 421.06825pt x 425.98564pt>
 File: Pictures/createdPictures/grid.pdf Graphic file (type pdf)
 
 <use Pictures/createdPictures/grid.pdf>
 Package pdftex.def Info: Pictures/createdPictures/grid.pdf used on input line 9
-66.
+72.
 (pdftex.def)             Requested size: 209.12686pt x 211.56879pt.
 
 Underfull \vbox (badness 4967) has occurred while \output is active []
@@ -1500,7 +1496,7 @@ Underfull \vbox (badness 4967) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.978 \eeq
+l.984 \eeq
            <./Pictures/nearFieldOneParticle.png> <./Pictures/nearFieldTwoPartic
 les.png>]
 Underfull \vbox (badness 5133) has occurred while \output is active []
@@ -1510,17 +1506,17 @@ Underfull \vbox (badness 5133) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.983 \end{multline}
+l.989 \end{multline}
                      <./Pictures/createdPictures/grid.pdf>]
-<Pictures/createdPictures/boxes.pdf, id=879, 274.42258pt x 201.76733pt>
+<Pictures/createdPictures/boxes.pdf, id=884, 274.42258pt x 201.76733pt>
 File: Pictures/createdPictures/boxes.pdf Graphic file (type pdf)
 
 <use Pictures/createdPictures/boxes.pdf>
 Package pdftex.def Info: Pictures/createdPictures/boxes.pdf used on input line 
-995.
+1001.
 (pdftex.def)             Requested size: 292.77632pt x 215.27316pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 988--998
+Underfull \hbox (badness 10000) in paragraph at lines 994--1004
 
  []
 
@@ -1533,105 +1529,105 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1013 
+l.1019 
         <./Pictures/createdPictures/boxes.pdf>]
-Overfull \hbox (2.14514pt too wide) in paragraph at lines 1023--1024
+Overfull \hbox (2.14514pt too wide) in paragraph at lines 1029--1030
 \T1/cmr/m/n/10.95 then it gets the val-ues stored by \T1/cmtt/m/n/10.95 setHFie
 ldOnBorders() \T1/cmr/m/n/10.95 and ad-justed by \T1/cmtt/m/n/10.95 adjustHFiel
 d()
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1023--1024
+Underfull \hbox (badness 10000) in paragraph at lines 1029--1030
 
  []
 
-[38] <Pictures/gyration_7.png, id=941, 483.9681pt x 399.1713pt>
+[38] <Pictures/gyration_7.png, id=946, 483.9681pt x 399.1713pt>
 File: Pictures/gyration_7.png Graphic file (type png)
 
 <use Pictures/gyration_7.png>
-Package pdftex.def Info: Pictures/gyration_7.png used on input line 1036.
+Package pdftex.def Info: Pictures/gyration_7.png used on input line 1042.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-<Pictures/gyration_9.png, id=942, 483.9681pt x 399.1713pt>
+<Pictures/gyration_9.png, id=947, 483.9681pt x 399.1713pt>
 File: Pictures/gyration_9.png Graphic file (type png)
 
 <use Pictures/gyration_9.png>
-Package pdftex.def Info: Pictures/gyration_9.png used on input line 1037.
+Package pdftex.def Info: Pictures/gyration_9.png used on input line 1043.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-<Pictures/gyration_11.png, id=943, 483.9681pt x 399.1713pt>
+<Pictures/gyration_11.png, id=948, 483.9681pt x 399.1713pt>
 File: Pictures/gyration_11.png Graphic file (type png)
 
 <use Pictures/gyration_11.png>
-Package pdftex.def Info: Pictures/gyration_11.png used on input line 1038.
+Package pdftex.def Info: Pictures/gyration_11.png used on input line 1044.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1032--1041
+Underfull \hbox (badness 10000) in paragraph at lines 1038--1047
 
  []
 
-<Pictures/gyrationTwoParticles.png, id=945, 484.9317pt x 402.5439pt>
+<Pictures/gyrationTwoParticles.png, id=950, 484.9317pt x 402.5439pt>
 File: Pictures/gyrationTwoParticles.png Graphic file (type png)
 
 <use Pictures/gyrationTwoParticles.png>
 Package pdftex.def Info: Pictures/gyrationTwoParticles.png used on input line 1
-047.
+053.
 (pdftex.def)             Requested size: 209.12686pt x 173.59416pt.
  [39pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1051 \noindent
+l.1057 \noindent
                  <./Pictures/gyration_7.png> <./Pictures/gyration_9.png> <./Pic
 tures/gyration_11.png>]
-<Pictures/nearFieldUpdate.png, id=964, 316.18124pt x 300.12125pt>
+<Pictures/nearFieldUpdate.png, id=969, 316.18124pt x 300.12125pt>
 File: Pictures/nearFieldUpdate.png Graphic file (type png)
 
 <use Pictures/nearFieldUpdate.png>
-Package pdftex.def Info: Pictures/nearFieldUpdate.png used on input line 1061.
+Package pdftex.def Info: Pictures/nearFieldUpdate.png used on input line 1067.
 (pdftex.def)             Requested size: 167.29893pt x 158.80247pt.
 
-<Pictures/nearFieldOldBoxes.png, id=965, 106.3975pt x 98.3675pt>
+<Pictures/nearFieldOldBoxes.png, id=970, 106.3975pt x 98.3675pt>
 File: Pictures/nearFieldOldBoxes.png Graphic file (type png)
 
 <use Pictures/nearFieldOldBoxes.png>
-Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1062
+Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1068
 .
 (pdftex.def)             Requested size: 12.9782pt x 12.0pt.
 
-<Pictures/nearFieldNewBoxes.png, id=966, 94.3525pt x 99.37125pt>
+<Pictures/nearFieldNewBoxes.png, id=971, 94.3525pt x 99.37125pt>
 File: Pictures/nearFieldNewBoxes.png Graphic file (type png)
 
 <use Pictures/nearFieldNewBoxes.png>
-Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1062
+Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1068
 .
 (pdftex.def)             Requested size: 11.39378pt x 12.0pt.
 
-<Pictures/nearFieldBoth.png, id=967, 59.22125pt x 57.21375pt>
+<Pictures/nearFieldBoth.png, id=972, 59.22125pt x 57.21375pt>
 File: Pictures/nearFieldBoth.png Graphic file (type png)
 
 <use Pictures/nearFieldBoth.png>
-Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1062.
+Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1068.
 (pdftex.def)             Requested size: 12.42055pt x 12.0pt.
 File: Pictures/nearFieldOldBoxes.png Graphic file (type png)
  <use Pictures/nearFieldOldBoxes.png>
-Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1062
+Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1068
 .
 (pdftex.def)             Requested size: 12.9782pt x 12.0pt.
 File: Pictures/nearFieldNewBoxes.png Graphic file (type png)
 
 <use Pictures/nearFieldNewBoxes.png>
-Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1062
+Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1068
 .
 (pdftex.def)             Requested size: 11.39378pt x 12.0pt.
 File: Pictures/nearFieldBoth.png Graphic file (type png)
  <use Pictures/nearFieldBoth.png>
-Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1062.
+Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1068.
 (pdftex.def)             Requested size: 12.42055pt x 12.0pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1056--1064
+Underfull \hbox (badness 10000) in paragraph at lines 1062--1070
 
  []
 
@@ -1643,44 +1639,44 @@ Underfull \vbox (badness 1533) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1065 \noindent
+l.1071 \noindent
                  <./Pictures/gyrationTwoParticles.png>]
 File: Pictures/nearFieldOldBoxes.png Graphic file (type png)
 
 <use Pictures/nearFieldOldBoxes.png>
-Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1066
+Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1072
 .
 (pdftex.def)             Requested size: 12.9782pt x 12.0pt.
 File: Pictures/nearFieldNewBoxes.png Graphic file (type png)
  <use Pictures/nearFieldNewBoxes.png>
-Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1066
+Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1072
 .
 (pdftex.def)             Requested size: 11.39378pt x 12.0pt.
 File: Pictures/nearFieldBoth.png Graphic file (type png)
 
 <use Pictures/nearFieldBoth.png>
-Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1066.
+Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1072.
 (pdftex.def)             Requested size: 12.42055pt x 12.0pt.
 
-<Pictures/crossedField_5.png, id=981, 483.9681pt x 399.1713pt>
+<Pictures/crossedField_5.png, id=986, 483.9681pt x 399.1713pt>
 File: Pictures/crossedField_5.png Graphic file (type png)
 
 <use Pictures/crossedField_5.png>
-Package pdftex.def Info: Pictures/crossedField_5.png used on input line 1069.
+Package pdftex.def Info: Pictures/crossedField_5.png used on input line 1075.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-<Pictures/crossedField_7.png, id=982, 483.9681pt x 399.1713pt>
+<Pictures/crossedField_7.png, id=987, 483.9681pt x 399.1713pt>
 File: Pictures/crossedField_7.png Graphic file (type png)
 
 <use Pictures/crossedField_7.png>
-Package pdftex.def Info: Pictures/crossedField_7.png used on input line 1070.
+Package pdftex.def Info: Pictures/crossedField_7.png used on input line 1076.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-<Pictures/crossedField_9.png, id=983, 483.9681pt x 399.1713pt>
+<Pictures/crossedField_9.png, id=988, 483.9681pt x 399.1713pt>
 File: Pictures/crossedField_9.png Graphic file (type png)
 
 <use Pictures/crossedField_9.png>
-Package pdftex.def Info: Pictures/crossedField_9.png used on input line 1071.
+Package pdftex.def Info: Pictures/crossedField_9.png used on input line 1077.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1690,35 +1686,35 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1075 \noindent
+l.1081 \noindent
                  <./Pictures/nearFieldUpdate.png> <./Pictures/nearFieldOldBoxes
 .png> <./Pictures/nearFieldNewBoxes.png> <./Pictures/nearFieldBoth.png>]
-<Pictures/createdPictures/historyLengthStill.pdf, id=996, 362.62129pt x 263.704
-01pt>
+<Pictures/createdPictures/historyLengthStill.pdf, id=1001, 362.62129pt x 263.70
+401pt>
 File: Pictures/createdPictures/historyLengthStill.pdf Graphic file (type pdf)
  <use Pictures/createdPictures/historyLengthStill.pdf>
 Package pdftex.def Info: Pictures/createdPictures/historyLengthStill.pdf used o
-n input line 1084.
+n input line 1090.
 (pdftex.def)             Requested size: 138.02449pt x 100.37354pt.
 
-<Pictures/createdPictures/historyLengthHalfC.pdf, id=997, 359.46664pt x 263.704
-01pt>
+<Pictures/createdPictures/historyLengthHalfC.pdf, id=1002, 359.46664pt x 263.70
+401pt>
 File: Pictures/createdPictures/historyLengthHalfC.pdf Graphic file (type pdf)
  <use Pictures/createdPictures/historyLengthHalfC.pdf>
 Package pdftex.def Info: Pictures/createdPictures/historyLengthHalfC.pdf used o
-n input line 1085.
+n input line 1091.
 (pdftex.def)             Requested size: 138.02449pt x 101.25475pt.
 
-<Pictures/createdPictures/historyLengthAlmostC.pdf, id=998, 343.53629pt x 261.2
-1928pt>
+<Pictures/createdPictures/historyLengthAlmostC.pdf, id=1003, 343.53629pt x 261.
+21928pt>
 File: Pictures/createdPictures/historyLengthAlmostC.pdf Graphic file (type pdf)
 
  <use Pictures/createdPictures/historyLengthAlmostC.pdf>
 Package pdftex.def Info: Pictures/createdPictures/historyLengthAlmostC.pdf used
- on input line 1086.
+ on input line 1092.
 (pdftex.def)             Requested size: 138.02449pt x 104.95221pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1079--1089
+Underfull \hbox (badness 10000) in paragraph at lines 1085--1095
 
  []
 
@@ -1727,7 +1723,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1079--1089
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1090 \noindent
+l.1096 \noindent
                  <./Pictures/crossedField_5.png> <./Pictures/crossedField_7.png
 > <./Pictures/crossedField_9.png>] [43pdfTeX warning (ext4): destination with t
 he same identifier (name{figure.4.10}) has been already used, duplicate ignored
@@ -1735,7 +1731,7 @@ he same identifier (name{figure.4.10}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1096 \newpage
+l.1102 \newpage
                 <./Pictures/createdPictures/historyLengthStill.pdf> <./Pictures
 /createdPictures/historyLengthHalfC.pdf
 
@@ -1748,38 +1744,38 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Pictures/createdPictures/h
 istoryLengthAlmostC.pdf): PDF inclusion: multiple pdfs with page group included
  in a single page
 >]
-<Pictures/particleHistoryInitialFields8.png, id=1107, 476.2593pt x 399.1713pt>
+<Pictures/particleHistoryInitialFields8.png, id=1112, 476.2593pt x 399.1713pt>
 File: Pictures/particleHistoryInitialFields8.png Graphic file (type png)
 
 <use Pictures/particleHistoryInitialFields8.png>
 Package pdftex.def Info: Pictures/particleHistoryInitialFields8.png used on inp
-ut line 1102.
+ut line 1108.
 (pdftex.def)             Requested size: 138.02449pt x 115.68361pt.
 
-<Pictures/particleHistoryInitialFields10.png, id=1108, 476.2593pt x 399.1713pt>
+<Pictures/particleHistoryInitialFields10.png, id=1113, 476.2593pt x 399.1713pt>
 File: Pictures/particleHistoryInitialFields10.png Graphic file (type png)
 <use Pictures/particleHistoryInitialFields10.png>
 Package pdftex.def Info: Pictures/particleHistoryInitialFields10.png used on in
-put line 1103.
+put line 1109.
 (pdftex.def)             Requested size: 138.02449pt x 115.68361pt.
 
-<Pictures/particleHistoryInitialFields12.png, id=1109, 476.2593pt x 399.1713pt>
+<Pictures/particleHistoryInitialFields12.png, id=1114, 476.2593pt x 399.1713pt>
 File: Pictures/particleHistoryInitialFields12.png Graphic file (type png)
 <use Pictures/particleHistoryInitialFields12.png>
 Package pdftex.def Info: Pictures/particleHistoryInitialFields12.png used on in
-put line 1104.
+put line 1110.
 (pdftex.def)             Requested size: 138.02449pt x 115.68361pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [44]
-<Pictures/createdPictures/particleHistoryFlowChart.pdf, id=1119, 547.04375pt x 
+<Pictures/createdPictures/particleHistoryFlowChart.pdf, id=1124, 547.04375pt x 
 1064.97874pt>
 File: Pictures/createdPictures/particleHistoryFlowChart.pdf Graphic file (type 
 pdf)
  <use Pictures/createdPictures/particleHistoryFlowChart.pdf>
 Package pdftex.def Info: Pictures/createdPictures/particleHistoryFlowChart.pdf 
-used on input line 1113.
+used on input line 1119.
 (pdftex.def)             Requested size: 292.77632pt x 569.97739pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1789,7 +1785,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1117 \noindent
+l.1123 \noindent
                  <./Pictures/particleHistoryInitialFields8.png> <./Pictures/par
 ticleHistoryInitialFields10.png> <./Pictures/particleHistoryInitialFields12.png
 >]
@@ -1801,178 +1797,186 @@ Overfull \vbox (104.72717pt too high) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1117 \noindent
+l.1123 \noindent
                  <./Pictures/createdPictures/particleHistoryFlowChart.pdf>]
-[47]
-chapter 5.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1124--1127
+Underfull \hbox (badness 10000) in paragraph at lines 1128--1131
 
  []
 
-[48
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 1137
+.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+) [47] [48]
+chapter 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1175--1178
+
+ []
+
+[49
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [49]
-<Pictures/Fresnel.png, id=1189, 443.6575pt x 449.68pt>
+ [50]
+<Pictures/Fresnel.png, id=1212, 443.6575pt x 449.68pt>
 File: Pictures/Fresnel.png Graphic file (type png)
 
 <use Pictures/Fresnel.png>
-Package pdftex.def Info: Pictures/Fresnel.png used on input line 1243.
+Package pdftex.def Info: Pictures/Fresnel.png used on input line 1294.
 (pdftex.def)             Requested size: 209.12686pt x 211.9603pt.
- [50] [51pdfTeX warning (ext4): destination with the same identifier (name{figu
+ [51] [52pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.5.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1263 \beq
-            <./Pictures/Fresnel.png>] [52] [53] [54]
-Overfull \hbox (39.04166pt too wide) in paragraph at lines 1433--1434
+l.1314 \beq
+            <./Pictures/Fresnel.png>] [53] [54] [55]
+Overfull \hbox (39.04166pt too wide) in paragraph at lines 1484--1485
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][] 
  []
 
 
-Overfull \hbox (39.04166pt too wide) in paragraph at lines 1435--1436
+Overfull \hbox (39.04166pt too wide) in paragraph at lines 1486--1487
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][] 
  []
 
-[55] <Pictures/upml_11.png, id=1268, 483.9681pt x 399.1713pt>
+[56] <Pictures/upml_11.png, id=1292, 483.9681pt x 399.1713pt>
 File: Pictures/upml_11.png Graphic file (type png)
 
 <use Pictures/upml_11.png>
-Package pdftex.def Info: Pictures/upml_11.png used on input line 1456.
+Package pdftex.def Info: Pictures/upml_11.png used on input line 1507.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-<Pictures/upml_15_75.png, id=1269, 483.9681pt x 399.1713pt>
+<Pictures/upml_15_75.png, id=1293, 483.9681pt x 399.1713pt>
 File: Pictures/upml_15_75.png Graphic file (type png)
 
 <use Pictures/upml_15_75.png>
-Package pdftex.def Info: Pictures/upml_15_75.png used on input line 1457.
+Package pdftex.def Info: Pictures/upml_15_75.png used on input line 1508.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
 
-<Pictures/upml_18.png, id=1270, 483.9681pt x 399.1713pt>
+<Pictures/upml_18.png, id=1294, 483.9681pt x 399.1713pt>
 File: Pictures/upml_18.png Graphic file (type png)
 
 <use Pictures/upml_18.png>
-Package pdftex.def Info: Pictures/upml_18.png used on input line 1458.
+Package pdftex.def Info: Pictures/upml_18.png used on input line 1509.
 (pdftex.def)             Requested size: 138.02449pt x 113.84418pt.
- [56pdfTeX warning (ext4): destination with the same identifier (name{figure.5.
+ [57pdfTeX warning (ext4): destination with the same identifier (name{figure.5.
 2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1466 \part
+l.1517 \part
             {Summary} <./Pictures/upml_11.png> <./Pictures/upml_15_75.png> <./P
 ictures/upml_18.png>]
 part III.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 1466.
-[57
+(scrkbase)              on input line 1517.
+[58
 
 ]
 part IV.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 1470.
-[58
+(scrkbase)              on input line 1521.
+[59
 
 ]
 chapter A.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [59
+ [60
 
 pdfTeX warning (ext4): destination with the same identifier (name{equation.A.1.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1508 \eeq
-           ] [60pdfTeX warning (ext4): destination with the same identifier (na
+l.1559 \eeq
+           ] [61pdfTeX warning (ext4): destination with the same identifier (na
 me{equation.A.2.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1519 \chapter
+l.1570 \chapter
                {Retarded Potential Equations Fulfill Laurentz Gauge}]
 chapter B.
 
-Overfull \hbox (84.39264pt too wide) in alignment at lines 1547--1552
+Overfull \hbox (84.39264pt too wide) in alignment at lines 1598--1603
  [][][] []
  []
 
-[61
+[62
 
 pdfTeX warning (ext4): destination with the same identifier (name{equation.B.0.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1556 \eeq
+l.1607 \eeq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1556 \eeq
+l.1607 \eeq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1556 \eeq
+l.1607 \eeq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1556 \eeq
+l.1607 \eeq
            ]pdfTeX warning (ext4): destination with the same identifier (name{e
 quation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1558 \beq
+l.1609 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1558 \beq
+l.1609 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1558 \beq
+l.1609 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1558 \beq
+l.1609 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1562 \beq
+l.1613 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1562 \beq
+l.1613 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1562 \beq
+l.1613 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1562 \beq
+l.1613 \beq
            
 
 Package Fancyhdr Warning: \headheight is too small (17.0pt): 
@@ -1980,36 +1984,36 @@ Package Fancyhdr Warning: \headheight is too small (17.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[62pdfTeX warning (ext4): destination with the same identifier (name{equation.B
+[63pdfTeX warning (ext4): destination with the same identifier (name{equation.B
 .0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1568 \chapter
+l.1619 \chapter
                {Softwarestack and Documentation}]
 chapter C.
-[63
+[64
 
 ]
 chapter D.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1572--1576
+Underfull \hbox (badness 10000) in paragraph at lines 1624--1628
 
  []
 
-[64
+[65
 
-] [65] (./masterThesis.lof)
+] [66] (./masterThesis.lof)
 \tf@lof=\write5
 \openout5 = `masterThesis.lof'.
 
- (./masterThesis.bbl [66
+ (./masterThesis.bbl [67
 
 ]
 chapter without number
-[67
+[68
 
-]) [68]
+] [69]) [70]
 \openout2 = `declaration.aux'.
 
  (./declaration.tex
@@ -2022,16 +2026,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--12
 
  []
 
-) [69
+) [71
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1628.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1628.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1680.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1680.
  (./masterThesis.aux (./acknowledgments.aux) (./symbols.aux)
 (./declaration.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1628.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1628.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1680.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1680.
 
 Package rerunfilecheck Info: File `masterThesis.out' has not changed.
 (rerunfilecheck)             Checksum: ED24C6327F06BCFD601FD3237251366B;3200.
@@ -2043,57 +2047,58 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1628.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1680.
  ) 
 Here is how much of TeX's memory you used:
- 23824 strings out of 493014
- 435673 string characters out of 6133350
- 587445 words of memory out of 5000000
- 26669 multiletter control sequences out of 15000+600000
- 31893 words of font info for 79 fonts, out of 8000000 for 9000
+ 23874 strings out of 493014
+ 436970 string characters out of 6133350
+ 587716 words of memory out of 5000000
+ 26701 multiletter control sequences out of 15000+600000
+ 33250 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,25n,66p,10448b,1234s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pf
-b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
-ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive
-/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/201
-6/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive
-/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texli
-ve/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive
-/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/public/cm-super/sfbx3583.pfb></usr/local/texlive/201
-6/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2016/
-texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2016/texm
-f-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2016/texmf-
-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2016/texmf-di
-st/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2016/texmf-dist
-/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2016/texmf-dist/f
-onts/type1/public/cm-super/sfso1095.pfb></usr/local/texlive/2016/texmf-dist/fon
-ts/type1/public/cm-super/sfss1728.pfb></usr/local/texlive/2016/texmf-dist/fonts
-/type1/public/cm-super/sfsx1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
-ype1/public/cm-super/sfsx1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
-e1/public/cm-super/sfsx2074.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
-/public/cm-super/sfsx2488.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
-ublic/cm-super/sfti1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
-lic/cm-super/sftt0900.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
-c/cm-super/sftt1095.pfb>
-Output written on masterThesis.pdf (78 pages, 8286528 bytes).
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
+}{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}<
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2016
+/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/cm-super/sfbx3583.pfb></usr/local/texlive/2016
+/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2016/texmf
+-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2016/texmf-d
+ist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2016/texmf-dist/fo
+nts/type1/public/cm-super/sfso1095.pfb></usr/local/texlive/2016/texmf-dist/font
+s/type1/public/cm-super/sfss1728.pfb></usr/local/texlive/2016/texmf-dist/fonts/
+type1/public/cm-super/sfsx1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
+pe1/public/cm-super/sfsx1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
+1/public/cm-super/sfsx2074.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
+public/cm-super/sfsx2488.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
+blic/cm-super/sfti1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
+ic/cm-super/sftt0900.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
+/cm-super/sftt1095.pfb>
+Output written on masterThesis.pdf (80 pages, 8287423 bytes).
 PDF statistics:
- 1570 PDF objects out of 1728 (max. 8388607)
- 1261 compressed objects within 13 object streams
- 343 named destinations out of 1000 (max. 500000)
+ 1601 PDF objects out of 1728 (max. 8388607)
+ 1287 compressed objects within 13 object streams
+ 354 named destinations out of 1000 (max. 500000)
  557 words of extra memory for PDF output out of 10000 (max. 10000000)
 

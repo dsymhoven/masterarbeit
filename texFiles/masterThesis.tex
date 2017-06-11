@@ -498,6 +498,12 @@ In 1938 \textit{Dirac} generalized the equation whilst taking special relativity
 g^{\mu} = \frac{\mu_0q^2}{6\pi c}\biggl(\frac{q}{m_e}\frac{\del F^{\mu\nu}_{\quad \text{ext}}}{\del x^{\xi}}u^{\nu}u^{\xi} - \frac{e^2}{m^{2}_e}F^{\mu\xi}_{\quad \text{ext}}F_{\nu\xi~\text{ext}}u^{\nu} \\
 +\frac{q^2}{m^{2}_ec^2}(F_{\nu\xi~\text{ext}}u^{\xi})(F^{\nu\pi}_{\quad \text{ext}}u_{\pi})u^{\mu}\biggr).
 \end{multline}
+In this thesis the damping term $g^{\mu}$ is neglected. In \cite{Jackson} a rough estimation shows that radiation damping of an electron gyrating in a constant $B$ field with frequency $\omega_0$ can be neglected if 
+\beq
+\label{eqn: damping estimation}
+\omega_0 \Delta \tilde{t} \ll 1
+\eeq
+holds. $\Delta \tilde{t} = \frac{q^2}{4\pi\epsilon_0m_ec^3} = 9.40 \cdot 10^{-24}\si{\second}$ is the normalized time. In Section \ref{sec: electron scattering} we show, that equation \eqref{eqn: damping estimation} is indeed fulfilled in our simulations. \\
 We now want to present different methods of how to solve the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} numerically.
 
 %======================== Euler Scheme ========================
@@ -1103,7 +1109,7 @@ In Figure \ref{fig: particleHistoryExamples} some examples of initial fields for
 \subfigure[$\texttt{t} = 10$, $\texttt{tEnd} = 11$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields10.png}}\hfill
 \subfigure[$\texttt{t} = 12$, $\texttt{tEnd} = 13$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields12.png}}
 \caption[Initial fields for different values of simulation parameter $\texttt{t}$]{Initial fields for different values of simulation parameter $\texttt{t}$. If $\texttt{t} > 0$ the history gets extended with a reverse Boris Push such that the initial conditions are still met at the beginning of the simulation. The Liénard-Wiechert fields are calculated from the extended particle history.\\ 
-The electron has an energy of $\gamma = 1,2$. We used a constant $B_z = 1$ as external field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$}	
+The electron has an energy of $\gamma = 1.2$. We used a constant $B_z = 1$ as external field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$}	
 \label{fig: particleHistoryExamples}
 \end{figure}
 \noindent
@@ -1116,7 +1122,52 @@ The electron has an energy of $\gamma = 1,2$. We used a constant $B_z = 1$ as ex
 \end{figure}
 \noindent
 
+%======================== Electron Scattering in an electromagnetic wave ========================
 \section{Electron Scattering in an electromagnetic wave}
+\label{sec: electron scattering}
+Finally, to proof the framework's proper functionality, an electron scattering process with a laser pulse shall be simulated, which could be reproduced in the lab. Due to the normalization (see Appendix \ref{app: Normalization}) the scales need to be adapted in order to have realistic scales. For instance, the ratio of the normalized characteristic frequency $\omega$ to the laser frequency $\omega_L$ needs to be calculated first. We also need to find the ratio of the normalized electric field amplitude $E_0$ to the laser electric field amplitude $E_{0L}$ and also a proper time resolution. In the following we present a rough estimate of the aforementioned quantities.\\
+\newline
+In order to find $\frac{\omega_L}{\omega}$ we start with the laser amplitude $a_0$, which us usually of the order
+\beq
+a_0 = \frac{eE_{0L}}{m_e\omega_Lc} = 100.
+\eeq
+Typical laser wavelengths are of the order 
+\beq
+\bal
+\lambda_L &= 10^{-6} \si{\meter} = 1 \si{\micro\meter} \\
+\Longrightarrow \nu_L &= \frac{c}{\lambda_L} \approx 3 \cdot 10^{14} \si{\per\second} \\
+\Longrightarrow \omega_L &= 2\pi\nu_L = 1.88 \cdot 10^{15}\si{\per\second}.
+\eal
+\eeq
+Since
+\beq
+\omega = \frac{4\pi\epsilon_0m_ec^3}{q^2} = 1.06 \cdot 10^{23} \si{\per\second} 
+\eeq
+we find
+\beq
+\label{eqn: ratio omega}
+\frac{\omega_L}{\omega} = 1.77 \cdot 10^{-8} \si{\per\second}. 
+\eeq
+Using the relationship between $\omega_L$ and $\omega$ we can find 
+\beq
+\bal
+E_{0L} &\equiv \frac{a_0m_e\omega_Lc}{q} \\
+&= 100 \frac{m_ec}{q} \cdot 1.77 \cdot 10^{-8}  \frac{4\pi\epsilon_0m_ec^3}{q^2} \\
+& = 1.77 \cdot 10^{-6}  \frac{4\pi\epsilon_0m^2_ec^4}{q^3} \\
+& = 1.77 \cdot 10^{-6} E_0.
+\eal
+\eeq
+The same holds for $B_{0L}$. Finally, we need to determine the grid resolution $dx$ and therefore $dt$. In order to resolve the fields properly on the grid, the time resolution needs to be so small, that 
+\beq
+\Delta t_L \omega_L \ll 1
+\eeq
+holds. Plugging in yields
+\beq
+\bal
+\Delta t_L &\ll \frac{1}{\omega_L} \stackrel{\eqref{eqn: ratio omega}}{=} \frac{1}{1.77 \cdot 10^{-8} \omega} = 1.77 \cdot 10^{8} t.
+\eal
+\eeq
+Since $dt = 0.5 dx$ (see Section \ref{sec: Yee-Scheme}) choosing $dx = 10^{7}$ is sufficiently small.
 %======================== UPML ============================
 %===========================================================
 \chapter{Uniaxial Perfectly Matched Layer}
@@ -1569,6 +1620,7 @@ because the current density vanishes at infinity. That's what we wanted to show.
 
 %======================== Normalization ============================
 \chapter{Normalization}
+\label{app: Normalization}
 In this chapter we show how we can make the basic equations from Section \ref{sec: Equations of Motion} dimensionless. Even though it's not necessary, it's always advisable in numerics to have a dimensionless systems for reasons of simplicity and clarity. In addition to the transformation equations we will also present the dimensionless Lorentz-Newton equation \eqref{eqn: Lorentz-Newton}, the damping term, i.e. Landau-Lifschitz equation \eqref{eqn: Landau-Lifschitz} and of course the Liénard-Wiechart equations \eqref{eqn: Liénard-Wiechert}.\\
 \newline
 To make the physical entities dimensionless we introduce a characteristic frequency $\omega$. Dimensionless parameters are denoted with a tilde. \\

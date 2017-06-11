@@ -1,52 +1,55 @@
 This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: masterThesis.aux
+A level-1 auxiliary file: acknowledgments.aux
 A level-1 auxiliary file: symbols.aux
 The style file: plain.bst
 A level-1 auxiliary file: declaration.aux
 Database file #1: reference.bib
+Warning--to sort, need author or key in Jackson
+Warning--empty author in Jackson
 Warning--can't use both author and editor fields in Fonseca
 Warning--empty publisher in NumerikSkript
 Warning--empty publisher in Ren
-You've used 21 entries,
+You've used 22 entries,
             2118 wiz_defined-function locations,
-            661 strings with 7676 characters,
-and the built_in function-call counts, 6090 in all, are:
-= -- 592
-> -- 254
+            670 strings with 7952 characters,
+and the built_in function-call counts, 6329 in all, are:
+= -- 618
+> -- 255
 < -- 2
-+ -- 106
++ -- 107
 - -- 82
-* -- 405
-:= -- 1050
-add.period$ -- 67
-call.type$ -- 21
-change.case$ -- 96
+* -- 428
+:= -- 1080
+add.period$ -- 69
+call.type$ -- 22
+change.case$ -- 99
 chr.to.int$ -- 0
-cite$ -- 24
-duplicate$ -- 242
-empty$ -- 500
+cite$ -- 27
+duplicate$ -- 253
+empty$ -- 526
 format.name$ -- 82
-if$ -- 1255
+if$ -- 1307
 int.to.chr$ -- 0
-int.to.str$ -- 21
-missing$ -- 27
-newline$ -- 110
+int.to.str$ -- 22
+missing$ -- 28
+newline$ -- 114
 num.names$ -- 42
-pop$ -- 113
+pop$ -- 115
 preamble$ -- 1
-purify$ -- 83
+purify$ -- 85
 quote$ -- 0
-skip$ -- 154
+skip$ -- 161
 stack$ -- 0
-substring$ -- 343
-swap$ -- 33
+substring$ -- 367
+swap$ -- 34
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 68
-warning$ -- 3
-while$ -- 59
-width$ -- 23
-write$ -- 230
-(There were 3 warnings)
+type$ -- 72
+warning$ -- 5
+while$ -- 61
+width$ -- 24
+write$ -- 239
+(There were 5 warnings)
