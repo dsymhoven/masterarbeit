@@ -6,50 +6,48 @@ A level-1 auxiliary file: symbols.aux
 The style file: plain.bst
 A level-1 auxiliary file: declaration.aux
 Database file #1: reference.bib
-Warning--to sort, need author or key in Jackson
-Warning--empty author in Jackson
 Warning--can't use both author and editor fields in Fonseca
 Warning--empty publisher in NumerikSkript
 Warning--empty publisher in Ren
 You've used 22 entries,
             2118 wiz_defined-function locations,
-            670 strings with 7952 characters,
-and the built_in function-call counts, 6329 in all, are:
-= -- 618
-> -- 255
+            669 strings with 7779 characters,
+and the built_in function-call counts, 6317 in all, are:
+= -- 614
+> -- 261
 < -- 2
-+ -- 107
-- -- 82
-* -- 428
-:= -- 1080
-add.period$ -- 69
++ -- 109
+- -- 84
+* -- 416
+:= -- 1090
+add.period$ -- 70
 call.type$ -- 22
-change.case$ -- 99
+change.case$ -- 100
 chr.to.int$ -- 0
-cite$ -- 27
-duplicate$ -- 253
-empty$ -- 526
-format.name$ -- 82
-if$ -- 1307
+cite$ -- 25
+duplicate$ -- 254
+empty$ -- 522
+format.name$ -- 84
+if$ -- 1304
 int.to.chr$ -- 0
 int.to.str$ -- 22
-missing$ -- 28
-newline$ -- 114
-num.names$ -- 42
-pop$ -- 115
+missing$ -- 29
+newline$ -- 115
+num.names$ -- 44
+pop$ -- 119
 preamble$ -- 1
-purify$ -- 85
+purify$ -- 86
 quote$ -- 0
-skip$ -- 161
+skip$ -- 160
 stack$ -- 0
-substring$ -- 367
+substring$ -- 348
 swap$ -- 34
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 72
-warning$ -- 5
+type$ -- 70
+warning$ -- 3
 while$ -- 61
 width$ -- 24
-write$ -- 239
-(There were 5 warnings)
+write$ -- 242
+(There were 3 warnings)
