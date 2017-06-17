@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  17 JUN 2017 20:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  17 JUN 2017 22:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1256,7 +1256,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 354--356
 
  []
 
-[9] [10] <Pictures/PoyntingVector.png, id=437, 351.3125pt x 162.6075pt>
+[9] [10] <Pictures/PoyntingVector.png, id=438, 351.3125pt x 162.6075pt>
 File: Pictures/PoyntingVector.png Graphic file (type png)
 
 <use Pictures/PoyntingVector.png>
@@ -1309,7 +1309,7 @@ Overfull \hbox (14.1741pt too wide) in alignment at lines 440--449
  [][][] []
  []
 
-<Pictures/RadiationSummary.png, id=469, 317.185pt x 173.64874pt>
+<Pictures/RadiationSummary.png, id=470, 317.185pt x 173.64874pt>
 File: Pictures/RadiationSummary.png Graphic file (type png)
 
 <use Pictures/RadiationSummary.png>
@@ -1344,7 +1344,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 548--550
  []
 
 \c@env_definition=\count199
-<Pictures/Verfahrensfehler.png, id=516, 701.62125pt x 503.8825pt>
+<Pictures/Verfahrensfehler.png, id=517, 701.62125pt x 503.8825pt>
 File: Pictures/Verfahrensfehler.png Graphic file (type png)
 
 <use Pictures/Verfahrensfehler.png>
@@ -1357,7 +1357,7 @@ re.2.1}) has been already used, duplicate ignored
                                                   \fi \fi 
 l.610 \eeq
            <./Pictures/Verfahrensfehler.png>] [20]
-<Pictures/borisProjection.png, id=566, 406.51875pt x 293.095pt>
+<Pictures/borisProjection.png, id=567, 406.51875pt x 293.095pt>
 File: Pictures/borisProjection.png Graphic file (type png)
 
 <use Pictures/borisProjection.png>
@@ -1370,7 +1370,7 @@ re.2.2}) has been already used, duplicate ignored
                                                   \fi \fi 
 l.710 \eeq
            <./Pictures/borisProjection.png>]
-<Pictures/borisRotation.png, id=596, 557.08125pt x 308.15125pt>
+<Pictures/borisRotation.png, id=597, 557.08125pt x 308.15125pt>
 File: Pictures/borisRotation.png Graphic file (type png)
 
 <use Pictures/borisRotation.png>
@@ -1390,7 +1390,7 @@ identifier (name{figure.2.3}) has been already used, duplicate ignored
 l.722 \chapter
               {Interpolations} <./Pictures/borisRotation.png>]
 chapter 3.
-<Pictures/LightconeNew.pdf, id=607, 353.7309pt x 265.21068pt>
+<Pictures/LightconeNew.pdf, id=608, 353.7309pt x 265.21068pt>
 File: Pictures/LightconeNew.pdf Graphic file (type pdf)
 
 <use Pictures/LightconeNew.pdf>
@@ -1414,7 +1414,7 @@ ation.3.1.4}) has been already used, duplicate ignored
                                                   \fi \fi 
 l.769 \eeq
            <./Pictures/LightconeNew.pdf>]
-<Pictures/trilinearInterpolation.pdf, id=699, 415.55869pt x 416.55934pt>
+<Pictures/trilinearInterpolation.pdf, id=700, 415.55869pt x 416.55934pt>
 File: Pictures/trilinearInterpolation.pdf Graphic file (type pdf)
 
 <use Pictures/trilinearInterpolation.pdf>
@@ -1435,7 +1435,7 @@ ure.3.2}) has been already used, duplicate ignored
 l.785 \beq
            <./Pictures/trilinearInterpolation.pdf>] [27]
 chapter 4.
-<Pictures/YeeBox.png, id=749, 761.84625pt x 622.325pt>
+<Pictures/YeeBox.png, id=750, 761.84625pt x 622.325pt>
 File: Pictures/YeeBox.png Graphic file (type png)
 
 <use Pictures/YeeBox.png>
@@ -1463,7 +1463,7 @@ l.859 \eeq
 Underfull \vbox (badness 3396) has occurred while \output is active []
 
  [30]
-[31] <Pictures/dispersionRelation.png, id=791, 410.7345pt x 314.1336pt>
+[31] <Pictures/dispersionRelation.png, id=792, 410.7345pt x 314.1336pt>
 File: Pictures/dispersionRelation.png Graphic file (type png)
 
 <use Pictures/dispersionRelation.png>
@@ -1504,7 +1504,7 @@ Overfull \hbox (45.57445pt too wide) in paragraph at lines 950--951
 [][][][][][][][][][][][][] 
  []
 
-<Pictures/nearFieldOneParticle.png, id=808, 476.5002pt x 399.4122pt>
+<Pictures/nearFieldOneParticle.png, id=809, 476.5002pt x 399.4122pt>
 File: Pictures/nearFieldOneParticle.png Graphic file (type png)
 
 <use Pictures/nearFieldOneParticle.png>
@@ -1512,7 +1512,7 @@ Package pdftex.def Info: Pictures/nearFieldOneParticle.png used on input line 9
 60.
 (pdftex.def)             Requested size: 204.94661pt x 171.79265pt.
 
-<Pictures/nearFieldTwoParticles.png, id=809, 476.5002pt x 399.4122pt>
+<Pictures/nearFieldTwoParticles.png, id=810, 476.5002pt x 399.4122pt>
 File: Pictures/nearFieldTwoParticles.png Graphic file (type png)
 
 <use Pictures/nearFieldTwoParticles.png>
@@ -1520,7 +1520,7 @@ Package pdftex.def Info: Pictures/nearFieldTwoParticles.png used on input line
 961.
 (pdftex.def)             Requested size: 204.94661pt x 171.79265pt.
  [33]
-<Pictures/createdPictures/grid.pdf, id=825, 421.06825pt x 425.98564pt>
+<Pictures/createdPictures/grid.pdf, id=826, 421.06825pt x 425.98564pt>
 File: Pictures/createdPictures/grid.pdf Graphic file (type pdf)
 
 <use Pictures/createdPictures/grid.pdf>
@@ -1547,7 +1547,7 @@ Underfull \vbox (badness 5133) has occurred while \output is active []
                                                   \fi \fi 
 l.990 \end{multline}
                      <./Pictures/createdPictures/grid.pdf>]
-<Pictures/createdPictures/boxes.pdf, id=884, 274.42258pt x 201.76733pt>
+<Pictures/createdPictures/boxes.pdf, id=885, 274.42258pt x 201.76733pt>
 File: Pictures/createdPictures/boxes.pdf Graphic file (type pdf)
 
 <use Pictures/createdPictures/boxes.pdf>
@@ -1581,21 +1581,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 1030--1031
 
  []
 
-[38] <Pictures/gyration_7.png, id=946, 484.209pt x 399.4122pt>
+[38] <Pictures/gyration_7.png, id=947, 484.209pt x 399.4122pt>
 File: Pictures/gyration_7.png Graphic file (type png)
 
 <use Pictures/gyration_7.png>
 Package pdftex.def Info: Pictures/gyration_7.png used on input line 1043.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-<Pictures/gyration_9.png, id=947, 484.209pt x 399.4122pt>
+<Pictures/gyration_9.png, id=948, 484.209pt x 399.4122pt>
 File: Pictures/gyration_9.png Graphic file (type png)
 
 <use Pictures/gyration_9.png>
 Package pdftex.def Info: Pictures/gyration_9.png used on input line 1044.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-<Pictures/gyration_11.png, id=948, 484.209pt x 399.4122pt>
+<Pictures/gyration_11.png, id=949, 484.209pt x 399.4122pt>
 File: Pictures/gyration_11.png Graphic file (type png)
 
 <use Pictures/gyration_11.png>
@@ -1606,7 +1606,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1039--1048
 
  []
 
-<Pictures/gyrationTwoParticles.png, id=950, 484.9317pt x 402.5439pt>
+<Pictures/gyrationTwoParticles.png, id=951, 484.9317pt x 402.5439pt>
 File: Pictures/gyrationTwoParticles.png Graphic file (type png)
 
 <use Pictures/gyrationTwoParticles.png>
@@ -1621,14 +1621,14 @@ Package pdftex.def Info: Pictures/gyrationTwoParticles.png used on input line 1
 l.1058 \noindent
                  <./Pictures/gyration_7.png> <./Pictures/gyration_9.png> <./Pic
 tures/gyration_11.png>]
-<Pictures/nearFieldUpdate.png, id=969, 316.18124pt x 300.12125pt>
+<Pictures/nearFieldUpdate.png, id=970, 316.18124pt x 300.12125pt>
 File: Pictures/nearFieldUpdate.png Graphic file (type png)
 
 <use Pictures/nearFieldUpdate.png>
 Package pdftex.def Info: Pictures/nearFieldUpdate.png used on input line 1068.
 (pdftex.def)             Requested size: 167.29893pt x 158.80247pt.
 
-<Pictures/nearFieldOldBoxes.png, id=970, 106.3975pt x 98.3675pt>
+<Pictures/nearFieldOldBoxes.png, id=971, 106.3975pt x 98.3675pt>
 File: Pictures/nearFieldOldBoxes.png Graphic file (type png)
 
 <use Pictures/nearFieldOldBoxes.png>
@@ -1636,7 +1636,7 @@ Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1069
 .
 (pdftex.def)             Requested size: 12.9782pt x 12.0pt.
 
-<Pictures/nearFieldNewBoxes.png, id=971, 94.3525pt x 99.37125pt>
+<Pictures/nearFieldNewBoxes.png, id=972, 94.3525pt x 99.37125pt>
 File: Pictures/nearFieldNewBoxes.png Graphic file (type png)
 
 <use Pictures/nearFieldNewBoxes.png>
@@ -1644,7 +1644,7 @@ Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1069
 .
 (pdftex.def)             Requested size: 11.39378pt x 12.0pt.
 
-<Pictures/nearFieldBoth.png, id=972, 59.22125pt x 57.21375pt>
+<Pictures/nearFieldBoth.png, id=973, 59.22125pt x 57.21375pt>
 File: Pictures/nearFieldBoth.png Graphic file (type png)
 
 <use Pictures/nearFieldBoth.png>
@@ -1697,21 +1697,21 @@ File: Pictures/nearFieldBoth.png Graphic file (type png)
 Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1073.
 (pdftex.def)             Requested size: 12.42055pt x 12.0pt.
 
-<Pictures/crossedField_5.png, id=986, 484.209pt x 399.4122pt>
+<Pictures/crossedField_5.png, id=987, 484.209pt x 399.4122pt>
 File: Pictures/crossedField_5.png Graphic file (type png)
 
 <use Pictures/crossedField_5.png>
 Package pdftex.def Info: Pictures/crossedField_5.png used on input line 1076.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-<Pictures/crossedField_7.png, id=987, 484.209pt x 399.4122pt>
+<Pictures/crossedField_7.png, id=988, 484.209pt x 399.4122pt>
 File: Pictures/crossedField_7.png Graphic file (type png)
 
 <use Pictures/crossedField_7.png>
 Package pdftex.def Info: Pictures/crossedField_7.png used on input line 1077.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-<Pictures/crossedField_9.png, id=988, 484.209pt x 399.4122pt>
+<Pictures/crossedField_9.png, id=989, 484.209pt x 399.4122pt>
 File: Pictures/crossedField_9.png Graphic file (type png)
 
 <use Pictures/crossedField_9.png>
@@ -1728,7 +1728,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 l.1082 \noindent
                  <./Pictures/nearFieldUpdate.png> <./Pictures/nearFieldOldBoxes
 .png> <./Pictures/nearFieldNewBoxes.png> <./Pictures/nearFieldBoth.png>]
-<Pictures/createdPictures/historyLengthStill.pdf, id=1001, 362.62129pt x 263.70
+<Pictures/createdPictures/historyLengthStill.pdf, id=1002, 362.62129pt x 263.70
 401pt>
 File: Pictures/createdPictures/historyLengthStill.pdf Graphic file (type pdf)
  <use Pictures/createdPictures/historyLengthStill.pdf>
@@ -1736,7 +1736,7 @@ Package pdftex.def Info: Pictures/createdPictures/historyLengthStill.pdf used o
 n input line 1092.
 (pdftex.def)             Requested size: 138.02449pt x 100.37354pt.
 
-<Pictures/createdPictures/historyLengthHalfC.pdf, id=1002, 359.46664pt x 263.70
+<Pictures/createdPictures/historyLengthHalfC.pdf, id=1003, 359.46664pt x 263.70
 401pt>
 File: Pictures/createdPictures/historyLengthHalfC.pdf Graphic file (type pdf)
  <use Pictures/createdPictures/historyLengthHalfC.pdf>
@@ -1744,7 +1744,7 @@ Package pdftex.def Info: Pictures/createdPictures/historyLengthHalfC.pdf used o
 n input line 1093.
 (pdftex.def)             Requested size: 138.02449pt x 101.25475pt.
 
-<Pictures/createdPictures/historyLengthAlmostC.pdf, id=1003, 343.53629pt x 261.
+<Pictures/createdPictures/historyLengthAlmostC.pdf, id=1004, 343.53629pt x 261.
 21928pt>
 File: Pictures/createdPictures/historyLengthAlmostC.pdf Graphic file (type pdf)
 
@@ -1783,7 +1783,7 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Pictures/createdPictures/h
 istoryLengthAlmostC.pdf): PDF inclusion: multiple pdfs with page group included
  in a single page
 >]
-<Pictures/particleHistoryInitialFields8.png, id=1112, 476.5002pt x 399.4122pt>
+<Pictures/particleHistoryInitialFields8.png, id=1113, 476.5002pt x 399.4122pt>
 File: Pictures/particleHistoryInitialFields8.png Graphic file (type png)
 
 <use Pictures/particleHistoryInitialFields8.png>
@@ -1791,14 +1791,14 @@ Package pdftex.def Info: Pictures/particleHistoryInitialFields8.png used on inp
 ut line 1110.
 (pdftex.def)             Requested size: 138.02449pt x 115.69249pt.
 
-<Pictures/particleHistoryInitialFields10.png, id=1113, 476.5002pt x 399.4122pt>
+<Pictures/particleHistoryInitialFields10.png, id=1114, 476.5002pt x 399.4122pt>
 File: Pictures/particleHistoryInitialFields10.png Graphic file (type png)
 <use Pictures/particleHistoryInitialFields10.png>
 Package pdftex.def Info: Pictures/particleHistoryInitialFields10.png used on in
 put line 1111.
 (pdftex.def)             Requested size: 138.02449pt x 115.69249pt.
 
-<Pictures/particleHistoryInitialFields12.png, id=1114, 476.5002pt x 399.4122pt>
+<Pictures/particleHistoryInitialFields12.png, id=1115, 476.5002pt x 399.4122pt>
 File: Pictures/particleHistoryInitialFields12.png Graphic file (type png)
 <use Pictures/particleHistoryInitialFields12.png>
 Package pdftex.def Info: Pictures/particleHistoryInitialFields12.png used on in
@@ -1808,7 +1808,7 @@ put line 1112.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [44]
-<Pictures/createdPictures/particleHistoryFlowChart.pdf, id=1124, 547.04375pt x 
+<Pictures/createdPictures/particleHistoryFlowChart.pdf, id=1125, 547.04375pt x 
 1064.97874pt>
 File: Pictures/createdPictures/particleHistoryFlowChart.pdf Graphic file (type 
 pdf)
@@ -1851,7 +1851,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1171--1175
 
  []
 
-[48] <Pictures/externalPulse_700.png, id=1208, 480.3546pt x 379.1766pt>
+[48] <Pictures/externalPulse_700.png, id=1209, 480.3546pt x 379.1766pt>
 File: Pictures/externalPulse_700.png Graphic file (type png)
 
 <use Pictures/externalPulse_700.png>
@@ -1859,7 +1859,7 @@ Package pdftex.def Info: Pictures/externalPulse_700.png used on input line 1206
 .
 (pdftex.def)             Requested size: 292.77632pt x 231.11224pt.
 
-<Pictures/results/0.1_0.01_gamma1.0/plain.png, id=1211, 479.6319pt x 379.1766pt
+<Pictures/results/0.1_0.01_gamma1.0/plain.png, id=1212, 479.6319pt x 379.1766pt
 >
 File: Pictures/results/0.1_0.01_gamma1.0/plain.png Graphic file (type png)
  <use Pictures/results/0.1_0.01_gamma1.0/plain.png>
@@ -1867,7 +1867,7 @@ Package pdftex.def Info: Pictures/results/0.1_0.01_gamma1.0/plain.png used on i
 nput line 1215.
 (pdftex.def)             Requested size: 204.94661pt x 162.01868pt.
 
-<Pictures/results/0.1_0.01_gamma1.0/plain_nearField.png, id=1212, 479.6319pt x 
+<Pictures/results/0.1_0.01_gamma1.0/plain_nearField.png, id=1213, 479.6319pt x 
 379.1766pt>
 File: Pictures/results/0.1_0.01_gamma1.0/plain_nearField.png Graphic file (type
  png)
@@ -1885,7 +1885,7 @@ Underfull \vbox (badness 5667) has occurred while \output is active []
                                                   \fi \fi 
 l.1221 \noindent
                  <./Pictures/externalPulse_700.png>]
-<Pictures/results/0.1_0.01_gamma1.0/dampingTermVSLorentzForce.png, id=1221, 577
+<Pictures/results/0.1_0.01_gamma1.0/dampingTermVSLorentzForce.png, id=1222, 577
 .9191pt x 409.7709pt>
 File: Pictures/results/0.1_0.01_gamma1.0/dampingTermVSLorentzForce.png Graphic 
 file (type png)
@@ -1895,7 +1895,7 @@ Package pdftex.def Info: Pictures/results/0.1_0.01_gamma1.0/dampingTermVSLorent
 zForce.png used on input line 1225.
 (pdftex.def)             Requested size: 200.64331pt x 142.26378pt.
 
-<Pictures/results/0.46_0.01_gamma1.1/plain.png, id=1224, 480.3546pt x 379.1766p
+<Pictures/results/0.46_0.01_gamma1.1/plain.png, id=1225, 480.3546pt x 379.1766p
 t>
 File: Pictures/results/0.46_0.01_gamma1.1/plain.png Graphic file (type png)
  <use Pictures/results/0.46_0.01_gamma1.1/plain.png>
@@ -1903,7 +1903,7 @@ Package pdftex.def Info: Pictures/results/0.46_0.01_gamma1.1/plain.png used on
 input line 1234.
 (pdftex.def)             Requested size: 204.94661pt x 161.78146pt.
 
-<Pictures/results/0.46_0.01_gamma1.1/plain_nearField.png, id=1225, 480.3546pt x
+<Pictures/results/0.46_0.01_gamma1.1/plain_nearField.png, id=1226, 480.3546pt x
  379.1766pt>
 File: Pictures/results/0.46_0.01_gamma1.1/plain_nearField.png Graphic file (typ
 e png)
@@ -1927,7 +1927,7 @@ l.1240 \noindent
                  <./Pictures/results/0.1_0.01_gamma1.0/plain.png> <./Pictures/r
 esults/0.1_0.01_gamma1.0/plain_nearField.png> <./Pictures/results/0.1_0.01_gamm
 a1.0/dampingTermVSLorentzForce.png>]
-<Pictures/results/0.46_0.01_gamma1.1/dampingTermVSLorentzForce.png, id=1236, 56
+<Pictures/results/0.46_0.01_gamma1.1/dampingTermVSLorentzForce.png, id=1237, 56
 6.3559pt x 405.6756pt>
 File: Pictures/results/0.46_0.01_gamma1.1/dampingTermVSLorentzForce.png Graphic
  file (type png)
@@ -1937,7 +1937,7 @@ Package pdftex.def Info: Pictures/results/0.46_0.01_gamma1.1/dampingTermVSLoren
 tzForce.png used on input line 1244.
 (pdftex.def)             Requested size: 198.60777pt x 142.26378pt.
 
-<Pictures/results/0.67_0.01_gamma1.2/plain.png, id=1239, 480.3546pt x 379.1766p
+<Pictures/results/0.67_0.01_gamma1.2/plain.png, id=1240, 480.3546pt x 379.1766p
 t>
 File: Pictures/results/0.67_0.01_gamma1.2/plain.png Graphic file (type png)
  <use Pictures/results/0.67_0.01_gamma1.2/plain.png>
@@ -1945,7 +1945,7 @@ Package pdftex.def Info: Pictures/results/0.67_0.01_gamma1.2/plain.png used on
 input line 1253.
 (pdftex.def)             Requested size: 204.94661pt x 161.78146pt.
 
-<Pictures/results/0.67_0.01_gamma1.2/plain_nearField.png, id=1240, 480.3546pt x
+<Pictures/results/0.67_0.01_gamma1.2/plain_nearField.png, id=1241, 480.3546pt x
  379.1766pt>
 File: Pictures/results/0.67_0.01_gamma1.2/plain_nearField.png Graphic file (typ
 e png)
@@ -1969,7 +1969,7 @@ l.1259 \noindent
                  <./Pictures/results/0.46_0.01_gamma1.1/plain.png> <./Pictures/
 results/0.46_0.01_gamma1.1/plain_nearField.png> <./Pictures/results/0.46_0.01_g
 amma1.1/dampingTermVSLorentzForce.png>]
-<Pictures/results/0.67_0.01_gamma1.2/dampingTermVSLorentzForce.png, id=1252, 56
+<Pictures/results/0.67_0.01_gamma1.2/dampingTermVSLorentzForce.png, id=1253, 56
 6.3559pt x 405.6756pt>
 File: Pictures/results/0.67_0.01_gamma1.2/dampingTermVSLorentzForce.png Graphic
  file (type png)
@@ -1979,7 +1979,7 @@ Package pdftex.def Info: Pictures/results/0.67_0.01_gamma1.2/dampingTermVSLoren
 tzForce.png used on input line 1263.
 (pdftex.def)             Requested size: 198.60777pt x 142.26378pt.
 
-<Pictures/results/0.84_0.01_gamma1.3/plain.png, id=1255, 480.3546pt x 379.1766p
+<Pictures/results/0.84_0.01_gamma1.3/plain.png, id=1256, 480.3546pt x 379.1766p
 t>
 File: Pictures/results/0.84_0.01_gamma1.3/plain.png Graphic file (type png)
  <use Pictures/results/0.84_0.01_gamma1.3/plain.png>
@@ -1987,7 +1987,7 @@ Package pdftex.def Info: Pictures/results/0.84_0.01_gamma1.3/plain.png used on
 input line 1272.
 (pdftex.def)             Requested size: 204.94661pt x 161.78146pt.
 
-<Pictures/results/0.84_0.01_gamma1.3/plain_nearField.png, id=1256, 480.3546pt x
+<Pictures/results/0.84_0.01_gamma1.3/plain_nearField.png, id=1257, 480.3546pt x
  379.1766pt>
 File: Pictures/results/0.84_0.01_gamma1.3/plain_nearField.png Graphic file (typ
 e png)
@@ -2011,7 +2011,7 @@ l.1278 \noindent
                  <./Pictures/results/0.67_0.01_gamma1.2/plain.png> <./Pictures/
 results/0.67_0.01_gamma1.2/plain_nearField.png> <./Pictures/results/0.67_0.01_g
 amma1.2/dampingTermVSLorentzForce.png>]
-<Pictures/results/0.84_0.01_gamma1.3/dampingTermVSLorentzForce.png, id=1269, 56
+<Pictures/results/0.84_0.01_gamma1.3/dampingTermVSLorentzForce.png, id=1270, 56
 6.3559pt x 405.6756pt>
 File: Pictures/results/0.84_0.01_gamma1.3/dampingTermVSLorentzForce.png Graphic
  file (type png)
@@ -2021,7 +2021,7 @@ Package pdftex.def Info: Pictures/results/0.84_0.01_gamma1.3/dampingTermVSLoren
 tzForce.png used on input line 1282.
 (pdftex.def)             Requested size: 198.60777pt x 142.26378pt.
 
-<Pictures/results/0.98_0.01_gamma1.4/plain.png, id=1272, 487.8225pt x 379.1766p
+<Pictures/results/0.98_0.01_gamma1.4/plain.png, id=1273, 487.8225pt x 379.1766p
 t>
 File: Pictures/results/0.98_0.01_gamma1.4/plain.png Graphic file (type png)
  <use Pictures/results/0.98_0.01_gamma1.4/plain.png>
@@ -2029,7 +2029,7 @@ Package pdftex.def Info: Pictures/results/0.98_0.01_gamma1.4/plain.png used on
 input line 1292.
 (pdftex.def)             Requested size: 204.94661pt x 159.29936pt.
 
-<Pictures/results/0.98_0.01_gamma1.4/plain_nearField.png, id=1273, 487.8225pt x
+<Pictures/results/0.98_0.01_gamma1.4/plain_nearField.png, id=1274, 487.8225pt x
  379.1766pt>
 File: Pictures/results/0.98_0.01_gamma1.4/plain_nearField.png Graphic file (typ
 e png)
@@ -2053,7 +2053,7 @@ l.1298 \noindent
                  <./Pictures/results/0.84_0.01_gamma1.3/plain.png> <./Pictures/
 results/0.84_0.01_gamma1.3/plain_nearField.png> <./Pictures/results/0.84_0.01_g
 amma1.3/dampingTermVSLorentzForce.png>]
-<Pictures/results/0.98_0.01_gamma1.4/dampingTermVSLorentzForce.png, id=1285, 56
+<Pictures/results/0.98_0.01_gamma1.4/dampingTermVSLorentzForce.png, id=1286, 56
 6.3559pt x 405.6756pt>
 File: Pictures/results/0.98_0.01_gamma1.4/dampingTermVSLorentzForce.png Graphic
  file (type png)
@@ -2063,7 +2063,7 @@ Package pdftex.def Info: Pictures/results/0.98_0.01_gamma1.4/dampingTermVSLoren
 tzForce.png used on input line 1302.
 (pdftex.def)             Requested size: 198.60777pt x 142.26378pt.
 
-<Pictures/results/1.12_0.01_gamma1.5/plain.png, id=1288, 487.8225pt x 379.1766p
+<Pictures/results/1.12_0.01_gamma1.5/plain.png, id=1289, 487.8225pt x 379.1766p
 t>
 File: Pictures/results/1.12_0.01_gamma1.5/plain.png Graphic file (type png)
  <use Pictures/results/1.12_0.01_gamma1.5/plain.png>
@@ -2071,7 +2071,7 @@ Package pdftex.def Info: Pictures/results/1.12_0.01_gamma1.5/plain.png used on
 input line 1311.
 (pdftex.def)             Requested size: 204.94661pt x 159.29936pt.
 
-<Pictures/results/1.12_0.01_gamma1.5/plain_nearField.png, id=1289, 487.8225pt x
+<Pictures/results/1.12_0.01_gamma1.5/plain_nearField.png, id=1290, 487.8225pt x
  379.1766pt>
 File: Pictures/results/1.12_0.01_gamma1.5/plain_nearField.png Graphic file (typ
 e png)
@@ -2097,7 +2097,7 @@ l.1317 \noindent
                  <./Pictures/results/0.98_0.01_gamma1.4/plain.png> <./Pictures/
 results/0.98_0.01_gamma1.4/plain_nearField.png> <./Pictures/results/0.98_0.01_g
 amma1.4/dampingTermVSLorentzForce.png>]
-<Pictures/results/1.12_0.01_gamma1.5/dampingTermVSLorentzForce.png, id=1301, 56
+<Pictures/results/1.12_0.01_gamma1.5/dampingTermVSLorentzForce.png, id=1302, 56
 6.3559pt x 405.6756pt>
 File: Pictures/results/1.12_0.01_gamma1.5/dampingTermVSLorentzForce.png Graphic
  file (type png)
@@ -2124,7 +2124,7 @@ l.1328
         <./Pictures/results/1.12_0.01_gamma1.5/plain.png> <./Pictures/results/1
 .12_0.01_gamma1.5/plain_nearField.png> <./Pictures/results/1.12_0.01_gamma1.5/d
 ampingTermVSLorentzForce.png>]
-<Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.png, id=1316, 852.3042pt 
+<Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.png, id=1317, 852.3042pt 
 x 421.0932pt>
 File: Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.png Graphic file (ty
 pe png)
@@ -2133,7 +2133,7 @@ Package pdftex.def Info: Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.p
 ng used on input line 1332.
 (pdftex.def)             Requested size: 334.60425pt x 165.318pt.
 
-<Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoynting2D.png, id=1317, 853
+<Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoynting2D.png, id=1318, 853
 .2678pt x 423.984pt>
 File: Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoynting2D.png Graphic 
 file (type png)
@@ -2143,7 +2143,7 @@ Package pdftex.def Info: Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoyn
 ting2D.png used on input line 1333.
 (pdftex.def)             Requested size: 334.60425pt x 166.26527pt.
 
-<Pictures/results/0.46_0.01_gamma1.1/fourierAnalysis2D.png, id=1318, 852.3042pt
+<Pictures/results/0.46_0.01_gamma1.1/fourierAnalysis2D.png, id=1319, 852.3042pt
  x 421.0932pt>
 File: Pictures/results/0.46_0.01_gamma1.1/fourierAnalysis2D.png Graphic file (t
 ype png)
@@ -2152,7 +2152,7 @@ Package pdftex.def Info: Pictures/results/0.46_0.01_gamma1.1/fourierAnalysis2D.
 png used on input line 1342.
 (pdftex.def)             Requested size: 376.4258pt x 185.98193pt.
 
-<Pictures/results/0.46_0.01_gamma1.1/fourierAnalysisPoynting2D.png, id=1319, 85
+<Pictures/results/0.46_0.01_gamma1.1/fourierAnalysisPoynting2D.png, id=1320, 85
 3.2678pt x 423.984pt>
 File: Pictures/results/0.46_0.01_gamma1.1/fourierAnalysisPoynting2D.png Graphic
  file (type png)
@@ -2172,7 +2172,7 @@ Underfull \vbox (badness 5161) has occurred while \output is active []
 l.1347 \noindent
                  <./Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.png> <
 ./Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoynting2D.png>]
-<Pictures/results/0.67_0.01_gamma1.2/fourierAnalysis2D.png, id=1331, 852.3042pt
+<Pictures/results/0.67_0.01_gamma1.2/fourierAnalysis2D.png, id=1332, 852.3042pt
  x 420.1296pt>
 File: Pictures/results/0.67_0.01_gamma1.2/fourierAnalysis2D.png Graphic file (t
 ype png)
@@ -2181,7 +2181,7 @@ Package pdftex.def Info: Pictures/results/0.67_0.01_gamma1.2/fourierAnalysis2D.
 png used on input line 1352.
 (pdftex.def)             Requested size: 376.4258pt x 185.55635pt.
 
-<Pictures/results/0.67_0.01_gamma1.2/fourierAnalysisPoynting2D.png, id=1332, 85
+<Pictures/results/0.67_0.01_gamma1.2/fourierAnalysisPoynting2D.png, id=1333, 85
 3.2678pt x 423.0204pt>
 File: Pictures/results/0.67_0.01_gamma1.2/fourierAnalysisPoynting2D.png Graphic
  file (type png)
@@ -2201,7 +2201,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 l.1357 \noindent
                  <./Pictures/results/0.46_0.01_gamma1.1/fourierAnalysis2D.png> 
 <./Pictures/results/0.46_0.01_gamma1.1/fourierAnalysisPoynting2D.png>]
-<Pictures/results/0.84_0.01_gamma1.3/fourierAnalysis2D.png, id=1342, 852.3042pt
+<Pictures/results/0.84_0.01_gamma1.3/fourierAnalysis2D.png, id=1343, 852.3042pt
  x 419.166pt>
 File: Pictures/results/0.84_0.01_gamma1.3/fourierAnalysis2D.png Graphic file (t
 ype png)
@@ -2210,7 +2210,7 @@ Package pdftex.def Info: Pictures/results/0.84_0.01_gamma1.3/fourierAnalysis2D.
 png used on input line 1362.
 (pdftex.def)             Requested size: 376.4258pt x 185.13077pt.
 
-<Pictures/results/0.84_0.01_gamma1.3/fourierAnalysisPoynting2D.png, id=1343, 85
+<Pictures/results/0.84_0.01_gamma1.3/fourierAnalysisPoynting2D.png, id=1344, 85
 3.2678pt x 422.0568pt>
 File: Pictures/results/0.84_0.01_gamma1.3/fourierAnalysisPoynting2D.png Graphic
  file (type png)
@@ -2230,7 +2230,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 l.1367 \noindent
                  <./Pictures/results/0.67_0.01_gamma1.2/fourierAnalysis2D.png> 
 <./Pictures/results/0.67_0.01_gamma1.2/fourierAnalysisPoynting2D.png>]
-<Pictures/results/0.98_0.01_gamma1.4/fourierAnalysis2D.png, id=1354, 852.3042pt
+<Pictures/results/0.98_0.01_gamma1.4/fourierAnalysis2D.png, id=1355, 852.3042pt
  x 419.6478pt>
 File: Pictures/results/0.98_0.01_gamma1.4/fourierAnalysis2D.png Graphic file (t
 ype png)
@@ -2239,7 +2239,7 @@ Package pdftex.def Info: Pictures/results/0.98_0.01_gamma1.4/fourierAnalysis2D.
 png used on input line 1372.
 (pdftex.def)             Requested size: 376.4258pt x 185.34355pt.
 
-<Pictures/results/0.98_0.01_gamma1.4/fourierAnalysisPoynting2D.png, id=1355, 85
+<Pictures/results/0.98_0.01_gamma1.4/fourierAnalysisPoynting2D.png, id=1356, 85
 3.2678pt x 422.0568pt>
 File: Pictures/results/0.98_0.01_gamma1.4/fourierAnalysisPoynting2D.png Graphic
  file (type png)
@@ -2259,7 +2259,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 l.1377 \noindent
                  <./Pictures/results/0.84_0.01_gamma1.3/fourierAnalysis2D.png> 
 <./Pictures/results/0.84_0.01_gamma1.3/fourierAnalysisPoynting2D.png>]
-<Pictures/results/1.12_0.01_gamma1.5/fourierAnalysis2D.png, id=1365, 852.3042pt
+<Pictures/results/1.12_0.01_gamma1.5/fourierAnalysis2D.png, id=1366, 852.3042pt
  x 421.0932pt>
 File: Pictures/results/1.12_0.01_gamma1.5/fourierAnalysis2D.png Graphic file (t
 ype png)
@@ -2268,7 +2268,7 @@ Package pdftex.def Info: Pictures/results/1.12_0.01_gamma1.5/fourierAnalysis2D.
 png used on input line 1382.
 (pdftex.def)             Requested size: 376.4258pt x 185.98193pt.
 
-<Pictures/results/1.12_0.01_gamma1.5/fourierAnalysisPoynting2D.png, id=1366, 85
+<Pictures/results/1.12_0.01_gamma1.5/fourierAnalysisPoynting2D.png, id=1367, 85
 3.2678pt x 423.984pt>
 File: Pictures/results/1.12_0.01_gamma1.5/fourierAnalysisPoynting2D.png Graphic
  file (type png)
@@ -2311,7 +2311,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1393--1396
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [64]
-<Pictures/Fresnel.png, id=1423, 443.6575pt x 449.68pt>
+<Pictures/Fresnel.png, id=1424, 443.6575pt x 449.68pt>
 File: Pictures/Fresnel.png Graphic file (type png)
 
 <use Pictures/Fresnel.png>
@@ -2335,21 +2335,21 @@ Overfull \hbox (39.04166pt too wide) in paragraph at lines 1704--1705
 ][][][] 
  []
 
-[70] <Pictures/upml_11.png, id=1503, 484.209pt x 399.4122pt>
+[70] <Pictures/upml_11.png, id=1504, 484.209pt x 399.4122pt>
 File: Pictures/upml_11.png Graphic file (type png)
 
 <use Pictures/upml_11.png>
 Package pdftex.def Info: Pictures/upml_11.png used on input line 1726.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-<Pictures/upml_15_75.png, id=1504, 484.209pt x 399.4122pt>
+<Pictures/upml_15_75.png, id=1505, 484.209pt x 399.4122pt>
 File: Pictures/upml_15_75.png Graphic file (type png)
 
 <use Pictures/upml_15_75.png>
 Package pdftex.def Info: Pictures/upml_15_75.png used on input line 1727.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-<Pictures/upml_18.png, id=1505, 484.209pt x 399.4122pt>
+<Pictures/upml_18.png, id=1506, 484.209pt x 399.4122pt>
 File: Pictures/upml_18.png Graphic file (type png)
 
 <use Pictures/upml_18.png>
@@ -2603,10 +2603,10 @@ public/cm-super/sfsx2488.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
 blic/cm-super/sfti1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
 ic/cm-super/sftt0900.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
 /cm-super/sftt1095.pfb>
-Output written on masterThesis.pdf (96 pages, 16699640 bytes).
+Output written on masterThesis.pdf (96 pages, 16711231 bytes).
 PDF statistics:
- 1870 PDF objects out of 2073 (max. 8388607)
- 1470 compressed objects within 15 object streams
+ 1871 PDF objects out of 2073 (max. 8388607)
+ 1471 compressed objects within 15 object streams
  439 named destinations out of 1000 (max. 500000)
  712 words of extra memory for PDF output out of 10000 (max. 10000000)
 
