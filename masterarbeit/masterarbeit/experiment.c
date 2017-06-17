@@ -1614,7 +1614,7 @@ void scatteringInEMWave_analytic_largeScale(){
     Particle *Particle1 = &Particles[0];
     
     double dt = 0.5 * Resolution.dx;
-    double t = 0 * pow(10, 7);;
+    double t = 0 * pow(10, 7);
     double tStart = t;
     double tEnd = 700 * pow(10, 7);
     
@@ -1634,7 +1634,7 @@ void scatteringInEMWave_analytic_largeScale(){
     Particle1->x[2] = 1.6 * pow(10, 9);;
     Particle1->x[3] = 1.6 * pow(10, 9);
     
-    Particle1->u[1] = -0.1;
+    Particle1->u[1] = -1.12;
     Particle1->u[2] = 0.01;
     Particle1->u[3] = 0;
     Particle1->u[0] = getGammaFromVelocityVector(Particle1->u);
@@ -1672,15 +1672,15 @@ void scatteringInEMWave_analytic_largeScale(){
     }
     clearFieldsFromGrid(&Grid);
     calcLWFieldsForPlaneWithNearField(&Grid, Particles, numberOfParticles, t, planeForPlotting);
-//    writeFieldComponentsForFourierAnalysisToFile(&Grid, filename, 0, planeForPlotting, true, false);
+    writeFieldComponentsForFourierAnalysisToFile(&Grid, filename, 0, planeForPlotting, true, false);
     writeFieldsToFile(&Grid, filename, 0, planeForPlotting, true, false);
-    writeExternalFieldsToFile(&Grid, Eextern, Bextern, t, tStart, filename, 0, planeForPlotting, true, false);
+//    writeExternalFieldsToFile(&Grid, Eextern, Bextern, t, tStart, filename, 0, planeForPlotting, true, false);
     writeGridParametersToFile(&Grid);
     printf("executing bash-script ...\n");
-//    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/fourierAnalysis.sh");
-    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
-    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/analyzeForces.sh");
-    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/fourierAnalysis.sh");
+//    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
+//    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/analyzeForces.sh");
+//    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
     
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
