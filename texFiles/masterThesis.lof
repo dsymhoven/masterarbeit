@@ -36,7 +36,7 @@
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$\texttt {t} = 10$, $\texttt {tEnd} = 11$}}}{45}{figure.4.11}
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\texttt {t} = 12$, $\texttt {tEnd} = 13$}}}{45}{figure.4.11}
 \contentsline {figure}{\numberline {4.12}{\ignorespaces Flow Chart showing the relevant function calls when the user sets $t = t_0 > 0$}}{46}{figure.4.12}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces External laser pulse at $t = 700$}}{49}{figure.4.13}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces External laser pulse at \texttt {t = 700 * pow(10, 7)}}}{49}{figure.4.13}
 \contentsline {figure}{\numberline {4.14}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 0.1$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{50}{figure.4.14}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{50}{figure.4.14}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{50}{figure.4.14}

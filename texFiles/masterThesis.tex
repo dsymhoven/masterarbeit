@@ -1083,6 +1083,7 @@ As an example we simulate an electron with $\gamma = 1.2$ in a crossed $\vec{E}$
 
 %======================== Particle History ========================
 \section{Particle History}
+\label{sec: Particle History}
 In order to calculate the Liénard-Wiechert Field according to \eqref{eqn: Liénard-Wiechert} at an observation point, i.e. a grid point, the intersection point of the particles trajectory with the backward lightcone of that observation point is needed. For a more detailed explanation see Section \ref{sec: Interpolation of Trajectories}. That means, that we first have to store all positions of the particle. Second we need to track them along the trajectory to check whether the backward lightcone was crossed or not. To store the entire trajectory of a few particles is not very memory consuming.  However, if we want to simulate $10^{10}$ or even $10^{20}$ particles we would need a huge amount of memory just to store the trajectories. Let's do a rough calculation:\\
 One position contains of four Doubles. One for time, three for spacial components. A Double has 8 \si{\byte}. That makes a total of 32 \si{\byte} memory for one particle position. If we want to simulate for $t = 10$ with a resolution of $dx = dy = dz = 0.1$ using Yee-Scheme we will have $\frac{10}{0.5 \cdot 0.1} = 200$ steps. That gives us $200 \cdot 32~\si{\byte} = 6.4~\si{\kilo\byte}$. For $10^{10}$ particles this sums up to 64 \si{\tera\byte}. This is not feasible! Not to mention that there is a lot more memory necessary to store all the calculated fields on the grid.\\
 \newline
@@ -1203,7 +1204,7 @@ For the external laser pulse we modulated a cosine function with a sin squared f
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.7\textwidth]{Pictures/externalPulse_700.png} 
-	\caption[External laser pulse at $t = 700$]{External laser pulse at $t = 700$. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$.}
+	\caption[External laser pulse at \texttt{t = 700 * pow(10, 7)}]{External laser pulse at \texttt{t = 700 * pow(10, 7)}. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$.}
 	\label{fig: external Pulse}
 \end{figure}
 \noindent
@@ -1715,6 +1716,7 @@ From a theoretical point of view, a reflectionless PML is possible. In practice,
 \eeq
 m defines the grading and is typically $3 \le m \le 4$ in FDTD simulations. We chose $m = 3.5$. Through a lot of testing and experimenting, $\sigma_{max}$ was found to be \cite{Taflove}
 \beq
+\label{eqn: sigmaMaxOpt}
 \sigma_x^{opt} = \frac{0.8 (m+1)}{\eta \Delta x},
 \eeq
 where $\eta = \sqrt{\frac{\mu}{\epsilon}}$. This of course also applies for the other components of $\sigma$. \\
@@ -1731,8 +1733,12 @@ The electron has an energy of $\gamma = 1.2$. We used a constant $B_z = 1$ as ex
 \noindent
 %======================== Summary ============================
 %===========================================================
-\part{Summary}
-Now we have the salad.
+\part{Summary \& Outlook}
+This thesis was build upon the Hybrid Field Approach from \cite{Herzing}. The framework, written in \texttt{C++}, was entirely rewritten in \texttt{C} and furthermore extended with new features, like a reverse Boris Push to extend the particle history before the simulation, trilinear Interpolation of fields at the particle position, effective storage of precalculated fields, due to extended particle history and UPML. A stable code base was produced, including Doxygen documentation allowing others to use and extend the code more easily. In order to ensure the proper functionality of the framework, a scattering process of an electron in an electromagnetic wave was simulated. Considering realistic scales made it possible to compare the results with real world experiments. By analyzing the Fourier components of the electric field and the Poynting vector, we could show that with increasing energy $\gamma$ of the electron the radiation frequency increased and the radiation of Liénard Wiechert fields became more directed. \\
+\newline
+As already outlined in Section \ref{sec: Particle History} the storage of particle positions can be optimized. A plausible criteria for finding the particle position after which all following positions can be neglected has to be velocity dependent. An even better approach would be to define a cutoff distance at which the emitted fields would be attenuated so much, that they be could be neglected. To make large simulations with more than $10^{10}$ particles possible, an effective memory management is absolutely necessary, which makes this point worth looking into.\\
+Another point which can be optimized is UPML. Problems occur when Liénard Wiechert fields are calculated from the extended particle history prior to the simulation. If field values are set into the UPML region, the they stay there or even worse, they diverge, causing strange artefacts to occur at the boundaries. One should definitely exclude the UPML layer from the field initialization. Regarding memory consumption, UPMLs can be optimized as well. Arrays are used to store the values for the conductivity $\sigma$ and the extinction coefficient $\kappa$ throughout the grid. Problem being that $\sigma$ and $\kappa$ are constant inside the simulation area or equivalently outside the defined UPML layer width. Having a large number of grid points, this way of storing $\sigma$ and $\kappa$ is highly unfavorable. There is a solution for that problem, as discussed in \cite{Taflove}, at the cost of more complex code. Yet, another problem is to find optimal values for $\sigma_{max}$ and $\kappa_{max}$. Even though there are suggestions for $\sigma$ like equation \eqref{eqn: sigmaMaxOpt}, there are no suggestions for $\kappa$ and still there is a lot of try and error to find the best values.\\
+
 %======================== Appendix ============================
 %===========================================================
 \part{Appendix}
