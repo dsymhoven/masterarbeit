@@ -138,7 +138,7 @@ Lastly, there is also an Appendix where some additional calculations and topics 
 %===========================================================
 \part{Fundamentals}
 \noindent
-Besides the numerical aspect of this thesis, the scattering of an electron in an electromagnetic wave also requires an understanding in electromagnetism. In this first part the theoretical basics this thesis is build upon are presented. Starting with the foundation of electromagnetism - the Maxwell Equations - the corresponding potential equations will be addressed afterwards. Introducing Lorentz-Gauge will lead to the inhomogeneous wave equation, which will be solved using Greens-function approach. This will lead to the Liénard-Wiechert potentials, which are a key aspect of this thesis. Lastly a discussion about both, the non relativistic and relativistic phenomenon of energy radiation follows, where we restrict ourselves to the simple case where a particle is accelerated parallel to its direction of motion.
+Besides the numerical aspect of this thesis, the scattering of an electron in an electromagnetic wave also requires an understanding in electromagnetism. In this first part the theoretical basics this thesis is build upon are presented. Starting with the foundation of electromagnetism - the Maxwell Equations - the corresponding potential equations are addressed afterwards. Introducing Lorentz-Gauge leads to the inhomogeneous wave equation, which is solved using Greens-function approach. This leads to the Liénard-Wiechert potentials, which are a key aspect of this thesis. Lastly a discussion about both, the non relativistic and relativistic phenomenon of energy radiation follows, where we restrict ourselves to the simple case where a particle is accelerated parallel to its direction of motion.
 %======================== Electromagnetic radiation ========================
 %===========================================================
 \chapter{Electromagnetic radiation}
@@ -280,7 +280,7 @@ Lastly, we show in Appendix \ref{appendix: Retarded Potential Equations Fulfill 
 
 % ================= Moving point charge ======================
 \subsection{Special Case: Moving point charge}
-Now we want to discuss the special case of a particle with charge q, moving along the trajectory $\vec{r}_p$ with velocity $\vec{v} \coloneqq \dot{\vec{r}}_p$, where the dot donates the time derivative. As mentioned before, we now define the source functions for our problem at hand. For the charge density we have
+Now we discuss the special case of a particle with charge q, moving along the trajectory $\vec{r}_p$ with velocity $\vec{v} \coloneqq \dot{\vec{r}}_p$, where the dot donates the time derivative. As mentioned before, we now define the source functions for our problem at hand. For the charge density we have
 \beq
 \rho(\vec{r}, t) = q\delta(\vec{r} - \vec{r}_p(t))
 \eeq
@@ -507,7 +507,7 @@ In this thesis the damping term $g^{\mu}$ is neglected. In \cite{Jackson} a roug
 \omega_0 \Delta \tilde{t} \ll 1
 \eeq
 holds. $\Delta \tilde{t} = \frac{q^2}{4\pi\epsilon_0m_ec^3} = 9.40 \cdot 10^{-24}\si{\second}$ is the normalized time. In Section \ref{sec: electron scattering} we show, that equation \eqref{eqn: damping estimation} is indeed fulfilled in our simulations. \\
-We now want to present different methods of how to solve the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} numerically.
+We now present different methods of how to solve the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} numerically.
 
 %======================== Euler Scheme ========================
 \section{Euler-Scheme}
@@ -549,11 +549,10 @@ u^{\mu}_{i+1} &= u^{\mu}_i + h~f^{\mu}(x^{\nu}_i,u^{\nu}_i).
 \eal
 \eeq
 In order for us to calculate the goodness of this approximation we need to introduce the \textit{Procedural Error} and the \textit{Order of Consistency} \cite{NumerikSkript}.\\
-\subsection{Procedural Error  and Order of Consistency}
 \newtheorem{env_definition}{Definition}[section]
 \begin{env_definition}[Procedural Error  and Order of Consistency]
 \label{def: Procedural Error}
-Let $I \subseteq \mathbb{R}$ be a interval, $f : I \times \mathbb{R}^d \to \mathbb{R}^d$, $y : I \to \mathbb{R}^{d}$ a solution of the initial value problem
+Let $I \subseteq \mathbb{R}$ be an interval, $f : I \times \mathbb{R}^d \to \mathbb{R}^d$, $y : I \to \mathbb{R}^{d}$ a solution of the initial value problem
 \beq
 \bal
 \frac{\dm}{\dm \tau}y(\tau) &= f(\tau,y(\tau)),\\
@@ -566,7 +565,7 @@ y(\tau_0) &= y_0.
 \eta(\tau,h) \coloneqq y(\tau) + h f(\tau, y(\tau)) - y(\tau+h)\quad \text{for}~\tau \in I,~ 0 < h \le b - \tau
 \eeq
 is called local Procedural Error of the One-Step-Scheme at $\tau$ for the increment h.
-\item[(b)] The One-Step-Scheme has an Order of Consistency $p \ge 1$, if the local Procedural Error fulfils
+\item[(b)] The One-Step-Scheme has an Order of Consistency $p \ge 1$, if the local Procedural Error fulfills
 \beq
 ||\eta(\tau,h) || \le Ch^{p+1}\quad \text{for}~\tau \in I,~ 0 < h \le b - \tau,
 \eeq 
@@ -582,7 +581,7 @@ Figure \ref{fig: Procedural Error} illustrates the situation.
 	\label{fig: Procedural Error}
 \end{figure}
 \noindent
-We now want to use the definitions \ref{def: Procedural Error} to calculate the Order of Consistency of the Euler-Scheme.\\
+We now use the definitions \ref{def: Procedural Error} to calculate the Order of Consistency of the Euler-Scheme.\\
 Starting point is the system \eqref{eqn: Lorentz-Newton}. Thereby we focus on the equation for $u^{\mu}$, since $x^{\mu}$ can be easily integrated from $u^{\mu}$.
 Following Definition \ref{def: Procedural Error} we have
 \beq
@@ -610,8 +609,7 @@ since $\frac{\dm u^{\mu}}{\dm \tau} = f^{\mu}(x^{\nu}, u^{\nu})$ holds for the E
 \beq
 |\eta(\tau, h)| \le C h^2 \quad \text{with}~C \coloneqq \frac{1}{2} \max_{\tau \in \mathcal{D}(u^{\mu})}\left| \frac{\dm^2 u^{\mu}}{\dm \tau^2}\right|.
 \eeq
-$\mathcal{D}(u^{\mu})$ denotes the domain of $u^{\mu}$. Therefore, the Euler-Scheme has an Order of Consistency of one.
-
+$\mathcal{D}(u^{\mu})$ denotes the domain of $u^{\mu}$. Therefore, the Euler-Scheme has an Order of Consistency of one, which is the lowest possible value. The higher the Order of Consistency is, the better the algorithm. 
 
 %======================== Leap Frog Scheme ========================
 \section{Leap-Frog-Scheme}
@@ -640,16 +638,17 @@ u^{\mu}_{i+\frac{1}{2}} &= u^{\mu}_{i-\frac{1}{2}} + h f^{\mu}(x^{\nu}_i).
 \noindent
 As we can see, position and velocity are calculated at different times. They are shifted against each other in time by $h = \frac{1}{2}$. \\
 But what if we have a system in which the force depends on the velocity? Are we stuck with expensive implicit methods? Fortunately not. We can use the \textit{Boris} - Method.
-\subsection{Boris-Method}
+
+\section{Boris-Method}
 \label{sec: Boris-Method}
-This method was invented in 1970 by J.P. Boris \cite{boris} and is the standard method for pushing particles in plasma simulations today. We want to solve the Lorentz-Newton equation
+This method was invented in 1970 by J.P. Boris \cite{boris} and is the standard method for pushing particles in plasma simulations today. Goal is to solve the Lorentz-Newton equation
 \beq
 \label{eqn: LorentzNewton}
 \bal
 \frac{v_{i+\frac{1}{2}} - v_{i - \frac{1}{2}}}{h} &= \frac{q}{m}\left(\vec{E} + \frac{v_{i+\frac{1}{2}} + v_{i - \frac{1}{2}}}{2} \times \vec{B}\right)
 \eal
 \eeq
-Boris noticed, that upon defining
+Boris noticed that upon defining
 \beq
 \label{eqn:vMinusAndPlus}
 \bal
@@ -690,7 +689,7 @@ we obtain $\vec{v}~'$ from
 \beq
 \vec{v}~' = \vec{v}_{-} + \vec{v}_{-} \times \vec{t}.
 \eeq
-Now $\vec{v}~' $ is perpendicular to  $\vec{v}_{+} - \vec{v}_{-}$. Finally, we need a vector $\vec{s} \propto \vec{B}$ wich magnitude is determined by the constraint $|\vec{v}_{+}|= |\vec{v}_{-}|$. Using half angle formulas we find 
+Now $\vec{v}~' $ is perpendicular to  $\vec{v}_{+} - \vec{v}_{-}$. Finally, we need a vector $\vec{s} \propto \vec{B}$ which magnitude is determined by the constraint $|\vec{v}_{+}|= |\vec{v}_{-}|$. Using half angle formulas we find 
 \beq
 \vec{s} = \frac{2\vec{t}}{1+t^2}.
 \eeq
@@ -698,19 +697,19 @@ Hence,
 \beq
 \vec{v}_{+}= \vec{v}_{-} + \vec{v}~' \times \vec{s}.
 \eeq
-Finally, we want to do a quick error analysis. We expect the angle of rotation $\theta$ to be close to 
+Finally, we do a quick error analysis. We expect the angle of rotation $\theta$ to be close to 
 \beq
 \omega_ch = \frac{2\pi h}{T} = \frac{qBh}{m},\nn
 \eeq
 where T is the period.\\
-Following the geometrical analysis in ~\cite{Birdsall} illustrated in \ref{fig: borisRotation} and using \eqref{eqn: v+} we find
+Following the geometrical analysis in ~\cite{Birdsall} illustrated in \ref{fig: borisRotation} and using \eqref{eqn: v+} one finds
 \beq
 \bal
 \left|\tan\left(\frac{\theta}{2}\right)\right| &= \frac{\frac{1}{2}|\vec{v}_{+} - \vec{v}_{-}|}{\frac{1}{2}|\vec{v}_{+} + \vec{v}_{-}|} = \frac{qB }{m} \frac{h}{2} = \frac{\omega_c h}{2}\\
 \Longrightarrow \theta &= 2\arctan\left(\frac{\omega_c h}{2}\right) = \omega_c h \left(1 - \frac{\omega^2_c h^2}{12} + \ldots \right).
 \eal
 \eeq
-For $\omega_ch < 0.35$ we get an error smaller than $1\%$.
+For $\omega_ch < 0.35$ the error is smaller than $1\%$.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/borisRotation.png} 
@@ -718,7 +717,7 @@ For $\omega_ch < 0.35$ we get an error smaller than $1\%$.
 	\label{fig: borisRotation}
 \end{figure}
 \noindent
-
+To sum it up equation \ref{eqn: Liénard-Wiechert} allows the calculation of Liénard-Wiechert fields at a given observation point. With the Boris-Scheme an effective and precise pushing of particles in an electromagnetic field is possible. The next step is to combine those two and present a way of how to set up a simulation.
 %======================== Interpolations ========================
 %===========================================================
 \chapter{Interpolations}
@@ -726,8 +725,8 @@ For $\omega_ch < 0.35$ we get an error smaller than $1\%$.
 %======================== Linear interpolation of Trajectories ========================
 \section{Linear interpolation of Trajectories}
 \label{sec: Interpolation of Trajectories}
-The previously presented methods calculate the particle trajectory solely at discrete points in time $x_i^{\mu}(\tau)$. Calculating Liénard-Wiechert fields according to equation \eqref{eqn: Liénard-Wiechert} , however, requires the intersection point of the trajectory with the backward lightcone of the observation point. 
-In most cases the calculated points of the trajectory are not lying directly on the lightcone, so we need a procedure to calculate the intersection point exactly.\\
+The previously presented methods calculate the particle trajectory solely at discrete points in time $x_i^{\mu}(\tau)$. Calculating Liénard-Wiechert fields according to equation \eqref{eqn: Liénard-Wiechert}, however, requires the intersection point of the trajectory with the backward lightcone of the observation point. 
+In most cases the calculated points of the trajectory are not lying directly on the lightcone, so a procedure to calculate the intersection point exactly is required.\\
 The simplest solution is a linear interpolation between the last point inside and the first point outside the lightcone. Figure \ref{fig: Interpolation} illustrates the situation.
 \begin{figure}[t]
 	\centering
@@ -941,7 +940,7 @@ vanishes, instead of propagating with speed of light. That means, that the Yee-S
 \end{figure}
 \noindent
 
-After having discussed the fundamentals, we now want to dive into practice. In Section \ref{sec: Yee-Scheme} we learned how to store and propagate the fields on a numerical grid. In Section \ref{sec: lw-potentials} we derived an analytical expression, of how to calculate the fields of a moving charged particle. We also observed that there is a singularity in \eqref{eqn: Liénard-Wiechert} at the particle position itself. That means, that the fields will vary strongly in  a vicinity of the particle and can not be resolved correctly on the grid, as discussed in Section \ref{sec: DispersionRelation}. Hence, it seems plausible to separate the simulation area into appropriate Near - and far field areas. Within the near field area of a particle, its fields will \textbf{not} be stored on the grid. We then do not need to worry about the singularity. Only far fields from other particles, propagated into the near field area will be further propagated and stored on the grid. Possible interactions with other particles within the near field area will be caluclated analytically from \eqref{eqn: Liénard-Wiechert}. \\
+After having discussed the fundamentals, we now dive into practice. In Section \ref{sec: Yee-Scheme} we learned how to store and propagate the fields on a numerical grid. In Section \ref{sec: lw-potentials} we derived an analytical expression, of how to calculate the fields of a moving charged particle. We also observed that there is a singularity in \eqref{eqn: Liénard-Wiechert} at the particle position itself. That means, that the fields will vary strongly in  a vicinity of the particle and can not be resolved correctly on the grid, as discussed in Section \ref{sec: DispersionRelation}. Hence, it seems plausible to separate the simulation area into appropriate Near - and far field areas. Within the near field area of a particle, its fields will \textbf{not} be stored on the grid. We then do not need to worry about the singularity. Only far fields from other particles, propagated into the near field area will be further propagated and stored on the grid. Possible interactions with other particles within the near field area will be caluclated analytically from \eqref{eqn: Liénard-Wiechert}. \\
 far fields will be stored on the grid and propagated with the Yee-Scheme \eqref{eqn: discreteMaxwellEq}.
 %======================== Near and Far- Fields ========================
 \section{Near-and Far Fields}
@@ -969,7 +968,7 @@ The near field is then defined as the $3 \cdot 3 \cdot 3 = 27$ boxes with the bo
 %======================== Field Push ========================
 \newpage
 \section{Field Push}
-We now want to explain, how a field push actually works. Since we only propagate fields in the far field area as explained in Section \ref{sec: Yee-Scheme} special care needs to be taken at the boundaries between far field and near field. To explain this, consider the following plane of a grid illustrated in Figure \ref{fig: nearFieldFarFieldBorder}.
+We now explain, how a field push actually works. Since we only propagate fields in the far field area as explained in Section \ref{sec: Yee-Scheme} special care needs to be taken at the boundaries between far field and near field. To explain this, consider the following plane of a grid illustrated in Figure \ref{fig: nearFieldFarFieldBorder}.
 \begin{figure}[t]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/createdPictures/grid.pdf} 
@@ -998,7 +997,7 @@ On the contrary, if we want to push the value for $H_z$ at $\textcolor{red}{(6,4
 \noindent
 This and more examples as well as a more detailed explanation can be found in \cite{Herzing}. All points along the border between near - and far field need to be adjusted accordingly. \\
 \newline
-We now want to explain how this works out in code. Figure \ref{fig: CodeRoutineBoxes} shows three boxes, two of which are near field boxes and one is a far field box. For reasons of clarity we only show the grid points along the edges.
+We now explain how this works out in code. Figure \ref{fig: CodeRoutineBoxes} shows three boxes, two of which are near field boxes and one is a far field box. For reasons of clarity we only show the grid points along the edges.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.70\textwidth]{Pictures/createdPictures/boxes.pdf} 
@@ -1392,7 +1391,7 @@ From the Fourier Analysis of the electric field components, especially from the 
 %===========================================================
 \chapter{Uniaxial Perfectly Matched Layer}
 \section{Introduction}
-In this chapter we want to discuss an important topic: Boundary Conditions. \\
+In this chapter we discuss an important topic: Boundary Conditions. \\
 Boundary Conditions apply at the edge of the numerical grid and dictate how the solution is treated, when approaching the edge. The Dirichlet boundary condition, for instance, sets the solution to zero, leading to reflections \footnote{It's like a rope with a fixed connection to a wall. Since the energy can not be transferred to the wall, all energy is reflected, causing the incident wave to move back. }. Periodic boundary conditions extend the grid by setting one edge on top of the opposite one. Solutions leaving the grid to the right enter the simulation area to the left again. \\ 
 When solving differential equations numerically one always has to think about which boundary conditions apply best for the problem at hand. The most commonly used ones are the two aforementioned ones. Dirichlet boundary conditions apply for physical problems involving fast decaying solutions in space so that truncation does not matter, as long as the numerical grid is large enough. Other problems, like periodic structures, can be simulated with periodic boundary conditions. However, one of the most challenging problems to truncate involve wave equations, like in our case, since their solution only decays slowly \footnote{Energy conservation requires the energy flux $|S| \propto |E|^2$ to decay inversly proportional to the surface area $\sim r^2$ in three dimensions. Therefore, $|E| \propto \frac{1}{r}$.}. Using periodic, Dirichlet or Neumann boundary conditions will lead to unacceptable artifacts from boundary reflections. One approach is the \textit{absorbing boundary condition} \cite{Taflove}. It turns out that this approach works just fine for the one dimensional case, i.e. waves traveling in only one direction. However, most problems - like ours - include three dimensions. So, we are left where we started. Fortunately in 1994 Berenger came up with a new idea and presented it in his seminal paper \cite{Berenger}. Instead of having an absorbing boundary condition he rather proposed an absorbing boundary layer. The layer is part of the grid and has a specified width. When a wave enters the layer, it is attenuated by the absorption and decays exponentially. Now the problems remains, that the absorbing layer represents and interface where the impedance change, which in turn causes reflection and transmission. Berenger, however, showed that it's possible to construct a medium which does not reflect any incident wave, independent of angle, polarization and frequency. A so called PML - \textit{Perfectly Matched Layer}. Aside from Berenger's  original formulation -the \textit{split field} PML -  some equivalent descriptions of PML came up over the years. For one there are the \textit{uniaxial} PML (UPML) which we use in this thesis and dive into more detail below. The most elegant and general description is the \textit{stretched coordinate} PML \cite{Chew, Rappaport, Teixeira}, which is based upon an analytic continuation of Maxwell`s equations into complex spatial coordinates. Both the split field PML and the UPML can be derived from this approach.\\
 
@@ -1613,7 +1612,7 @@ which yields
 
 %======================== Update Equations ============================
 \section{Update Equations}
-We now want to derive the update equations from \eqref{eqn: frequencyDomainMaxwellEquationsWithPML}. For simplicity we focus on Ampere's Law and consider the case, where the interior of our simulation area has no loss ($\sigma = 0$). Only the PML will have loss ($\sigma^{'} \neq 0$).
+We now derive the update equations from \eqref{eqn: frequencyDomainMaxwellEquationsWithPML}. For simplicity we focus on Ampere's Law and consider the case, where the interior of our simulation area has no loss ($\sigma = 0$). Only the PML will have loss ($\sigma^{'} \neq 0$).
 Ampere's Law rewritten in matrix form then simplifies to
 \beq
 \label{eqn: Ampere's Law}
@@ -1699,7 +1698,7 @@ Notice that if we turn off the PML, i.e. $\sigma^{'} = 0$ and $\kappa = 1$ the p
 
 %======================== Implementation of UPML in FDTD ============================
 \section{Implementation of UPML in FDTD}
-Finally, we want to show, how to implement UPML into an existing FDTD simulation. Since all the prefactors are constants, it's advisable to calculate them beforehand. Here is a snippet of the code
+Finally, we show how to implement UPML into an existing FDTD simulation. Since all the prefactors are constants, it's advisable to calculate them beforehand. Here is a snippet of the code
 \begin{lstlisting}
 Grid->upml1E[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
 Grid->upml2E[j] = (2 * dt) / (2 * kappa + sigma * dt);
@@ -1750,9 +1749,9 @@ Another point which can be optimized is UPML. Problems occur when Liénard-Wieche
 \chapter{Gauge Transformations}
 \label{appendix: Gauge Transformations}
 \noindent
-In this chapter we want to show, that the gauge fields leave both the electric and magnetic fields and the corresponding potential equations invariant.
+In this chapter we show that the gauge fields leave both the electric and magnetic fields and the corresponding potential equations invariant.
 \section{Invariance of Fields}
-We want to show that $\vec{E}' = \vec{E}$ and $\vec{B}' = \vec{B}$.
+We show that $\vec{E}' = \vec{E}$ and $\vec{B}' = \vec{B}$.
 \beq
 \bal
 \vec{E}' &= -\vec{\nabla} \varphi' - \frac{\del \vec{A}'}{\del t} \nn \\
@@ -1773,7 +1772,7 @@ and
 
 %======================== Invariance of Potential Equations ============================
 \section{Invariance of Potential Equations}
-Now we want to show the invariance of the potential equations. Therefore, consider
+Now we show the invariance of the potential equations. Therefore, consider
 \beq
 \bal
 -\Delta \varphi' - \vec{\nabla}\left(\frac{\del \vec{A}'}{\del t}\right) &= \frac{\rho}{\epsilon_0} \nn\\

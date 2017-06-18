@@ -12,9 +12,8 @@
 \contentsline {chapter}{\numberline {2}Integration of Equation of Motion}{17}{chapter.2}
 \contentsline {section}{\numberline {2.1}Equations of Motion}{17}{section.2.1}
 \contentsline {section}{\numberline {2.2}Euler-Scheme}{18}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Procedural Error and Order of Consistency}{19}{subsection.2.2.1}
 \contentsline {section}{\numberline {2.3}Leap-Frog-Scheme}{21}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Boris-Method}{22}{subsection.2.3.1}
+\contentsline {section}{\numberline {2.4}Boris-Method}{22}{section.2.4}
 \contentsline {chapter}{\numberline {3}Interpolations}{25}{chapter.3}
 \contentsline {section}{\numberline {3.1}Linear interpolation of Trajectories}{25}{section.3.1}
 \contentsline {section}{\numberline {3.2}Trilinear Interpolation of Fields}{27}{section.3.2}
