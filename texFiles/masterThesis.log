@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  18 JUN 2017 16:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  18 JUN 2017 17:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2295,22 +2295,22 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: Pictures/Fresnel.png Graphic file (type png)
 
 <use Pictures/Fresnel.png>
-Package pdftex.def Info: Pictures/Fresnel.png used on input line 1497.
+Package pdftex.def Info: Pictures/Fresnel.png used on input line 1488.
 (pdftex.def)             Requested size: 209.12686pt x 211.9603pt.
  [66] [67pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.5.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1517 \beq
+l.1508 \beq
             <./Pictures/Fresnel.png>] [68] [69] [70]
-Overfull \hbox (39.04166pt too wide) in paragraph at lines 1687--1688
+Overfull \hbox (39.04166pt too wide) in paragraph at lines 1678--1679
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][] 
  []
 
 
-Overfull \hbox (39.04166pt too wide) in paragraph at lines 1689--1690
+Overfull \hbox (39.04166pt too wide) in paragraph at lines 1680--1681
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][] 
  []
@@ -2319,43 +2319,43 @@ Overfull \hbox (39.04166pt too wide) in paragraph at lines 1689--1690
 File: Pictures/upml_11.png Graphic file (type png)
 
 <use Pictures/upml_11.png>
-Package pdftex.def Info: Pictures/upml_11.png used on input line 1711.
+Package pdftex.def Info: Pictures/upml_11.png used on input line 1702.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
 <Pictures/upml_15_75.png, id=1507, 484.209pt x 399.4122pt>
 File: Pictures/upml_15_75.png Graphic file (type png)
 
 <use Pictures/upml_15_75.png>
-Package pdftex.def Info: Pictures/upml_15_75.png used on input line 1712.
+Package pdftex.def Info: Pictures/upml_15_75.png used on input line 1703.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
 <Pictures/upml_18.png, id=1508, 484.209pt x 399.4122pt>
 File: Pictures/upml_18.png Graphic file (type png)
 
 <use Pictures/upml_18.png>
-Package pdftex.def Info: Pictures/upml_18.png used on input line 1713.
+Package pdftex.def Info: Pictures/upml_18.png used on input line 1704.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
  [72pdfTeX warning (ext4): destination with the same identifier (name{figure.5.
 2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1721 \part
+l.1712 \part
             {Summary \& Outlook} <./Pictures/upml_11.png> <./Pictures/upml_15_7
 5.png> <./Pictures/upml_18.png>]
 part III.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 1721.
+(scrkbase)              on input line 1712.
 [73
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1722--1726
+Underfull \hbox (badness 10000) in paragraph at lines 1713--1717
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1722--1726
+Underfull \hbox (badness 10000) in paragraph at lines 1713--1717
 
  []
 
@@ -2363,7 +2363,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1722--1726
 part IV.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 1729.
+(scrkbase)              on input line 1720.
 [75
 
 ]
@@ -2378,17 +2378,17 @@ pdfTeX warning (ext4): destination with the same identifier (name{equation.A.1.
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1767 \eeq
+l.1758 \eeq
            ] [77pdfTeX warning (ext4): destination with the same identifier (na
 me{equation.A.2.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1778 \chapter
+l.1769 \chapter
                {Retarded Potential Equations Fulfill Laurentz Gauge}]
 chapter B.
 
-Overfull \hbox (84.39264pt too wide) in alignment at lines 1806--1811
+Overfull \hbox (84.39264pt too wide) in alignment at lines 1797--1802
  [][][] []
  []
 
@@ -2399,65 +2399,65 @@ pdfTeX warning (ext4): destination with the same identifier (name{equation.B.0.
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1815 \eeq
+l.1806 \eeq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1815 \eeq
+l.1806 \eeq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1815 \eeq
+l.1806 \eeq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1815 \eeq
+l.1806 \eeq
            ]pdfTeX warning (ext4): destination with the same identifier (name{e
 quation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1817 \beq
+l.1808 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1817 \beq
+l.1808 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1817 \beq
+l.1808 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1817 \beq
+l.1808 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1821 \beq
+l.1812 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1821 \beq
+l.1812 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1821 \beq
+l.1812 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1821 \beq
+l.1812 \beq
            
 
 Package Fancyhdr Warning: \headheight is too small (17.0pt): 
@@ -2470,7 +2470,7 @@ Package Fancyhdr Warning: \headheight is too small (17.0pt):
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1827 \chapter
+l.1818 \chapter
                {Softwarestack and Documentation}]
 chapter C.
 [80
@@ -2478,13 +2478,12 @@ chapter C.
 ]
 chapter D.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1844--1848
+Underfull \vbox (badness 1609) has occurred while \output is active []
 
- []
+ [81
 
-[81
-
-] [82] (./masterThesis.lof
+]
+[82] (./masterThesis.lof
 Underfull \vbox (badness 1845) has occurred while \output is active []
 
  [83
@@ -2518,12 +2517,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--12
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1900.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1900.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1890.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1890.
  (./masterThesis.aux (./acknowledgments.aux) (./symbols.aux)
 (./declaration.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1900.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1900.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1890.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1890.
 
 Package rerunfilecheck Info: File `masterThesis.out' has not changed.
 (rerunfilecheck)             Checksum: B9645E12FCB556155550DF69A782FAC3;3112.
@@ -2535,7 +2534,7 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1900.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1890.
  ) 
 Here is how much of TeX's memory you used:
  24298 strings out of 493014
@@ -2583,7 +2582,7 @@ public/cm-super/sfsx2488.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
 blic/cm-super/sfti1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
 ic/cm-super/sftt0900.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
 /cm-super/sftt1095.pfb>
-Output written on masterThesis.pdf (97 pages, 16699617 bytes).
+Output written on masterThesis.pdf (97 pages, 16711838 bytes).
 PDF statistics:
  1874 PDF objects out of 2073 (max. 8388607)
  1473 compressed objects within 15 object streams

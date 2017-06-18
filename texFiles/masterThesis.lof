@@ -81,7 +81,7 @@
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{62}{figure.4.31}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Wave with wavevector $\mathaccentV {vec}17E{k}$, arbitrary polarization and angle of incidence $\theta $ at a surface with impedance $\eta _i$ and refractive index $n_i$}}{67}{figure.5.1}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Simulation using UPML}}{72}{figure.5.2}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Simulation of an electron in constant $B_z$ field using UPML}}{72}{figure.5.2}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$\texttt {t} = 11$}}}{72}{figure.5.2}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$\texttt {t} = 15.75$}}}{72}{figure.5.2}
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\texttt {t} = 18$}}}{72}{figure.5.2}

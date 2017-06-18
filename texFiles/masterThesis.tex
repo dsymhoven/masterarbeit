@@ -1130,12 +1130,12 @@ Since
 \beq
 \omega = \frac{4\pi\epsilon_0m_ec^3}{q^2} = 1.06 \cdot 10^{23} \si{\per\second} 
 \eeq
-we find
+one finds
 \beq
 \label{eqn: ratio omega}
 \frac{\omega_L}{\omega} = 1.77 \cdot 10^{-8} \si{\per\second}. 
 \eeq
-Using the relationship between $\omega_L$ and $\omega$ we can find 
+Using the relationship between $\omega_L$ and $\omega$ one can find 
 \beq
 \bal
 E_{0L} &\equiv \frac{a_0m_e\omega_Lc}{q} \\
@@ -1144,7 +1144,7 @@ E_{0L} &\equiv \frac{a_0m_e\omega_Lc}{q} \\
 & = 1.77 \cdot 10^{-6} E_0.
 \eal
 \eeq
-The same holds for $B_{0L}$. Finally, we need to determine the grid resolution $dx$ and therefore $dt$. In order to resolve the fields properly on the grid, the time resolution needs to be so small that 
+The same holds for $B_{0L}$. Finally, the grid resolution $dx$ needs to be determined and therefore $dt$. In order to resolve the fields properly on the grid, the time resolution needs to be so small that 
 \beq
 \Delta t_L \omega_L \ll 1
 \eeq
@@ -1184,7 +1184,7 @@ Particle1->x[1] = 6.0 * pow(10, 9);
 Particle1->x[2] = 1.6 * pow(10, 9);
 Particle1->x[3] = 1.6 * pow(10, 9);
 \end{lstlisting}
-For the external laser pulse we modulated a cosine function with a sin squared function in x direction and a gaussian in y direction. Figure \ref{fig: external Pulse} shows the external pulse. 
+For the external laser pulse a cosine function is modulated with a sin squared function in x direction and a gaussian in y direction. Figure \ref{fig: external Pulse} shows the external pulse. 
 
 \begin{figure}[H]
 	\centering
@@ -1193,7 +1193,7 @@ For the external laser pulse we modulated a cosine function with a sin squared f
 	\label{fig: external Pulse}
 \end{figure}
 \noindent
-The idea is to slowly increase $\gamma$ while maintaining a small angle between the particle and the incoming external laser pulse. With increasing $\gamma$ the direction of the radiated Liénard-Wiechert field should become more more directed. Similarly, the radiation  frequency should increase as well. Using increments of $\Delta \gamma = 0.1$ we increased $\gamma$ from $\gamma = 1.0$ up to $\gamma = 1.5$. To analyze the radiation direction and radiation frequency we made a Fourier Analysis of the electric field components $\vec{E}$ and of the components of the Poynting vector $\vec{S}$. Figures \ref{fig: plain result gamma1.0} - \ref{fig: ratio gamma1.5} show the plain simulation results, both with and without the near field region of the particle. The ratio of damping Force $g^{\mu}$ and Lorentz force was also calculated at each time step. This way it is easy to show that the damping term $g^{\mu}$ can be neglected.
+The idea is to slowly increase $\gamma$ while maintaining a small angle between the particle and the incoming external laser pulse. With increasing $\gamma$ the direction of the radiated Liénard-Wiechert field should become more more directed. Similarly, the radiation  frequency should increase as well. Using increments of $\Delta \gamma = 0.1$ $\gamma$ is increased from $\gamma = 1.0$ up to $\gamma = 1.5$. To analyze the radiation direction and radiation frequency a Fourier Analysis of the electric field components $\vec{E}$ is made and of the components of the Poynting vector $\vec{S}$. Figures \ref{fig: plain result gamma1.0} - \ref{fig: ratio gamma1.5} show the plain simulation results, both with and without the near field region of the particle. The ratio of damping Force $g^{\mu}$ and Lorentz force was also calculated at each time step. This way it is easy to show that the damping term $g^{\mu}$ can be neglected.
 
 % plain gamma = 1.0
 \begin{figure}[H]
@@ -1370,19 +1370,19 @@ In the next step the electric field components $\vec{E}$ as well as the Poynting
 	\label{fig: E fourier gamma1.5}
 \end{figure}
 \noindent
-From the Fourier Analysis of the electric field components, especially from the $E_y$ component, in the figures \ref{fig: E fourier gamma1.0} - \ref{fig: E fourier gamma1.5} one can clearly see an increase in frequency of the radiated fields. There is a main peak moving from low frequencies to high frequencies along the $\omega_x$-axis as $\gamma$ is increasing. This behavior is as expected from Section \ref{sec: Energy emission}. The particle is first directed into x-direction. While interacting with the laser pulse the particle changes its trajectory and is therefore accelerated, causing Liénard-Wiechert fields to be radiated parallel to the direction of acceleration. Whereas at low energies the trajectory of the particle tends more towards y-direction the trajectory tends more towards x-direction at higher energies. This is because the  time the particle interacts with the laser pulse decreases with higher values of $\gamma$. The less time the particle interacts with the laser pulse, the less it gets deflected in y-direction.Therefore, $\omega_y$ frequencies appear more often at lower than at higher values of $\gamma$. The same argumentation holds for the Fourier Analysis of the Poynting vector $\vec{S}$. As the Liénard-Wiechert fields become more and more directed into x-direction with increasing $\gamma$, the energy flux $\vec{S}$ becomes also more directed. 
+From the Fourier Analysis of the electric field components, especially from the $E_y$ component, in the figures \ref{fig: E fourier gamma1.0} - \ref{fig: E fourier gamma1.5} one can clearly see an increase in frequency of the radiated fields. There is a main peak moving from low frequencies to high frequencies along the $\omega_x$-axis as $\gamma$ is increasing. This behavior is as expected from Section \ref{sec: Energy emission}. The particle is first directed into x-direction. While interacting with the laser pulse the particle changes its trajectory and is therefore accelerated, causing Liénard-Wiechert fields to be radiated parallel to the direction of acceleration. Whereas at low energies the trajectory of the particle tends more towards y-direction the trajectory tends more towards x-direction at higher energies. This is because the  time the particle interacts with the laser pulse decreases with higher values of $\gamma$. The less time the particle interacts with the laser pulse, the less it gets deflected in y-direction. Therefore, $\omega_y$ frequencies appear more often at lower than at higher values of $\gamma$. The same argumentation holds for the Fourier Analysis of the Poynting vector $\vec{S}$. As the Liénard-Wiechert fields become more and more directed into x-direction with increasing $\gamma$, the energy flux $\vec{S}$ becomes also more directed. 
 %======================== UPML ============================
 %===========================================================
 \chapter{Uniaxial Perfectly Matched Layer}
 \section{Introduction}
-In this chapter we discuss an important topic: Boundary Conditions. \\
-Boundary Conditions apply at the edge of the numerical grid and dictate how the solution is treated, when approaching the edge. The Dirichlet boundary condition, for instance, sets the solution to zero, leading to reflections \footnote{It's like a rope with a fixed connection to a wall. Since the energy can not be transferred to the wall, all energy is reflected, causing the incident wave to move back. }. Periodic boundary conditions extend the grid by setting one edge on top of the opposite one. Solutions leaving the grid to the right enter the simulation area to the left again. \\ 
-When solving differential equations numerically one always has to think about which boundary conditions apply best for the problem at hand. The most commonly used ones are the two aforementioned ones. Dirichlet boundary conditions apply for physical problems involving fast decaying solutions in space so that truncation does not matter, as long as the numerical grid is large enough. Other problems, like periodic structures, can be simulated with periodic boundary conditions. However, one of the most challenging problems to truncate involve wave equations, like in our case, since their solution only decays slowly \footnote{Energy conservation requires the energy flux $|S| \propto |E|^2$ to decay inversly proportional to the surface area $\sim r^2$ in three dimensions. Therefore, $|E| \propto \frac{1}{r}$.}. Using periodic, Dirichlet or Neumann boundary conditions will lead to unacceptable artifacts from boundary reflections. One approach is the \textit{absorbing boundary condition} \cite{Taflove}. It turns out that this approach works just fine for the one dimensional case, i.e. waves traveling in only one direction. However, most problems - like ours - include three dimensions. So, we are left where we started. Fortunately in 1994 Berenger came up with a new idea and presented it in his seminal paper \cite{Berenger}. Instead of having an absorbing boundary condition he rather proposed an absorbing boundary layer. The layer is part of the grid and has a specified width. When a wave enters the layer, it is attenuated by the absorption and decays exponentially. Now the problems remains, that the absorbing layer represents and interface where the impedance change, which in turn causes reflection and transmission. Berenger, however, showed that it's possible to construct a medium which does not reflect any incident wave, independent of angle, polarization and frequency. A so called PML - \textit{Perfectly Matched Layer}. Aside from Berenger's  original formulation -the \textit{split field} PML -  some equivalent descriptions of PML came up over the years. For one there are the \textit{uniaxial} PML (UPML) which we use in this thesis and dive into more detail below. The most elegant and general description is the \textit{stretched coordinate} PML \cite{Chew, Rappaport, Teixeira}, which is based upon an analytic continuation of Maxwell`s equations into complex spatial coordinates. Both the split field PML and the UPML can be derived from this approach.\\
+With all simulations there is the topic about Boundary Conditions. This chapter deals with that important aspect. \\
+Boundary Conditions apply at the edge of the numerical grid and dictate how the solution is treated, when approaching the edge. The Dirichlet boundary condition, for instance, sets the solution to zero, leading to reflections \footnote{It's like a rope with a fixed connection to a wall. Since the energy cannot be transferred to the wall, all energy is reflected, causing the incident wave to move back. }. Periodic boundary conditions extend the grid by setting one edge on top of the opposite one. Solutions leaving the grid to the right enter the simulation area to the left again. \\ 
+When solving differential equations numerically one always has to think about which boundary conditions apply best for the problem at hand. The most commonly used ones are the two aforementioned ones. Dirichlet boundary conditions apply for physical problems involving fast decaying solutions in space so that truncation does not matter, as long as the numerical grid is large enough. Other problems, like periodic structures, can be simulated with periodic boundary conditions. However, one of the most challenging problems to truncate involve wave equations, like in our case, since their solution only decays slowly \footnote{Energy conservation requires the energy flux $|S| \propto |E|^2$ to decay inversely proportional to the surface area $\sim r^2$ in three dimensions. Therefore, $|E| \propto \frac{1}{r}$.}. Using periodic, Dirichlet or Neumann boundary conditions will lead to unacceptable artifacts from boundary reflections. One approach is the \textit{absorbing boundary condition} \cite{Taflove}. It turns out that this approach works just fine for the one dimensional case, i.e. waves traveling in only one direction. However, most problems - like ours - include three dimensions. So, we are left where we started. Fortunately in 1994 Berenger came up with a new idea and presented it in his seminal paper \cite{Berenger}. Instead of having an absorbing boundary condition he rather proposed an absorbing boundary layer. The layer is part of the grid and has a specified width. When a wave enters the layer, it is attenuated by the absorption and decays exponentially. Now the problems remains, that the absorbing layer represents an interface where the impedance change, which in turn causes reflection and transmission. Berenger, however, showed that it's possible to construct a medium which does not reflect any incident wave, independent of angle, polarization and frequency. A so called PML - \textit{Perfectly Matched Layer}. Aside from Berenger's  original formulation -the \textit{split field} PML -  some equivalent descriptions of PML came up over the years. For one there are the \textit{uniaxial} PML (UPML) which are used in this thesis and are explained in more detail below. The most elegant and general description is the \textit{stretched coordinate} PML \cite{Chew, Rappaport, Teixeira}, which is based upon an analytic continuation of Maxwell`s equations into complex spatial coordinates. Both the split field PML and the UPML can be derived from this approach.\\
 
 %======================== Derivation ============================
 \section{Derivation}
-The most common formulation is the UPML. Following \cite{Taflove, CEM} we will present an overview of the most important steps to understand why UPML works and how to implement it. \\
-It will turn out that the medium inside our PML needs to be anisotropic. We will see why later. Being able to describe anisotropic phenomenon we need to incorporate anisotropy into Maxwell Equations. We can do this by making the permittivity $\epsilon_r$ and permeability $\mu_r$ tensors \footnote{There are three types of anisotropic media: \\
+The most common formulation is the UPML. Following \cite{Taflove, CEM} an overview of the most important steps is presented to understand why UPML works and how to implement it. \\
+It will turn out that the medium inside our PML needs to be anisotropic. Why that is can be seen later. Being able to describe anisotropic phenomenon one needs to incorporate anisotropy into Maxwell Equations. One can do this by making the permittivity $\epsilon_r$ and permeability $\mu_r$ tensors \footnote{There are three types of anisotropic media: \\
 isotropic:
 $ \begin{bmatrix}
 a & 0 & 0  \\
@@ -1410,7 +1410,7 @@ The time harmonic Maxwell's Curl equations then read
 \vec{\nabla} \times \vec{H}(\omega) &= \sigma \vec{E}(\omega) + j\omega\vec{D}(\omega),
 \eal
 \eeq
-with the relation $\vec{D}(\omega) = \epsilon_0\left[\epsilon_r\right]\vec{E}$ and conductivity $\sigma$. As usual, $\epsilon_0$ and $\epsilon_r$ are the vacuum and relative permittivity respectively. We start in the frequency domain, because PML is a frequency domain concept and thus it's easier to work with in frequency domain. We will, however, transform back to time domain later in order to get the update equations, which we will need to implement. So, \eqref{eqn: frequencyDomainMaxwellEquations} can be rewritten as
+with the relation $\vec{D}(\omega) = \epsilon_0\left[\epsilon_r\right]\vec{E}$ and conductivity $\sigma$. As usual, $\epsilon_0$ and $\epsilon_r$ are the vacuum and relative permittivity respectively. One starts in the frequency domain, because PML is a frequency domain concept and thus it's easier to work with in frequency domain. However, to get the update equations, a back transform to time domain is required. The update equations then need to be implement. Equation \eqref{eqn: frequencyDomainMaxwellEquations} can be rewritten as
 \beq
 \bal
 \begin{pmatrix}
@@ -1459,16 +1459,7 @@ H_z
 \eal
 \eeq
 Now we need to talk about reflection and transmission at a surface. 
-%First we start off with the reflection and transmission of an incident wave at a lossy surface. Let $n$ be the ordinary refractive index and $\kappa$ the extinction coefficient. then the complex refractive index is
-%\beq
-%N = n + j\kappa,
-%\eeq
-%where $j$ denotes the imaginary unit. From Optics we know, that the reflection $R$ can be expressed as
-%\beq
-%R = \frac{(1-n)^2 + \kappa^2}{(1+n)^2 + \kappa^2}.
-%\eeq
-%Notice, that not the refractive index alone, but also the loss contributes to reflection. 
-In the case of a wave with arbitrary polarization and angle of incidence, as illustrated in Figure \ref{fig: Fresnel}, we can use \textit{Fresnel} equations. \footnote{
+In the case of a wave with arbitrary polarization and angle of incidence, as illustrated in Figure \ref{fig: Fresnel}, one can use \textit{Fresnel} equations. \footnote{
 \beq
 \bal
 r_{TE} &= \frac{\eta_2 \cos(\theta_1) - \eta_1\cos(\theta_2)}{\eta_2 \cos(\theta_1) + \eta_1\cos(\theta_2)}, \\
@@ -1478,11 +1469,11 @@ t_{TM} &= \frac{2\eta_1 \cos(\theta_1)}{\eta_1 \cos(\theta_1) + \eta_2\cos(\thet
 \eal
 \eeq
 where $\eta_i$ is the impedance in region $i$ with refractive index $n_i$, $\theta_1$ the angle of incidence and $\theta_2$ the angle of transmission.}
-We see that the reflection is a consequence of a change in impedance and also critically angle dependent. It's only possible to match the impedances at one specific angle. However, by introducing anisotropy we can solve this problem. We know that the impedance is given by
+It can be seen that the reflection is a consequence of a change in impedance and also critically angle dependent. It's only possible to match the impedances at one specific angle. However, by introducing anisotropy one can solve this problem. It is known that the impedance is given by
 \beq
 \eta = \sqrt{\frac{\mu}{\epsilon}}.
 \eeq
-Thus, to keep the impedances matched throughout the entire grid, including the absorbing layer, we need $\left[\epsilon_r\right] = \left[\mu_r\right]$. This is called an doubly anisotropic media. For convenience let's define
+Thus, to keep the impedances matched throughout the entire grid, including the absorbing layer, one needs $\left[\epsilon_r\right] = \left[\mu_r\right]$. This is called an doubly anisotropic media. For convenience one defines
 \beq
 \left[s\right] \coloneqq \left[\epsilon_r\right] = \left[\mu_r\right] = 
 \begin{bmatrix}
@@ -1512,19 +1503,19 @@ where $\theta_1$ the angle of incidence and $\theta_2$ the angle of transmission
 \beq
 \sin(\theta_1) = \sqrt{bc}\sin{\theta_2}.
 \eeq
-We now need to find conditions for $a,b,c$ to make the Fresnel equations \eqref{eqn: Fresnel} independent of angle and simultaneously let the reflection parameter vanish. \\
-If we choose $\sqrt{bc} = 1$ Snell's Law simplifies to $\theta_1 = \theta_2$. Thus the reflection parameters reduce to
+Now conditions need to be found for $a,b,c$ to make the Fresnel equations \eqref{eqn: Fresnel} independent of angle and simultaneously let the reflection parameter vanish. \\
+By choosing $\sqrt{bc} = 1$ Snell's Law simplifies to $\theta_1 = \theta_2$. Thus the reflection parameters reduce to
 \beq
 \bal
 r_{TE} &= \frac{\sqrt{a} - \sqrt{b}}{\sqrt{a} + \sqrt{b}}, \\
 r_{TM} &= \frac{-\sqrt{a} + \sqrt{b}}{\sqrt{a} + \sqrt{b}}.
 \eal
 \eeq
-With this choice we made the reflection independent of angle! Furthermore, if we require $r_{TE} \stackrel{!}{=} 0$ and $r_{TM} \stackrel{!}{=} 0$ we get $a \stackrel{!}{=} b$. To sum it up, $a, b, c$ need to fulfill 
+With this choice the reflection is independent of angle. Furthermore, if we require $r_{TE} \stackrel{!}{=} 0$ and $r_{TM} \stackrel{!}{=} 0$, we get $a \stackrel{!}{=} b$. To sum it up, $a, b, c$ need to fulfill 
 \beq
 a = b = \frac{1}{c}.
 \eeq
-Therefore, our tensor $\left[s_z\right]$ needs to look like this
+Therefore, the tensor $\left[s_z\right]$ needs to look like this
 \beq
 \left[s_z\right] = 
 \begin{bmatrix}
@@ -1570,7 +1561,7 @@ s_y(y) = \kappa_y + \frac{\sigma^{'}_y(y)}{j\omega_0\epsilon_0}\\
 s_z(z) = \kappa_z + \frac{\sigma^{'}_z(z)}{j\omega_0\epsilon_0}.
 \eal
 \eeq
-We will specify $\sigma^{'}$ and $\kappa$ later. Having this, the Maxwell Equations \eqref{eqn: frequencyDomainMaxwellEquations} now read
+$\sigma^{'}$ and $\kappa$ will be specified later. Having this, the Maxwell Equations \eqref{eqn: frequencyDomainMaxwellEquations} now read
 \beq
 \bal
 \label{eqn: frequencyDomainMaxwellEquationsWithPML}
@@ -1578,7 +1569,7 @@ We will specify $\sigma^{'}$ and $\kappa$ later. Having this, the Maxwell Equati
 \vec{\nabla} \times \vec{H}(\omega) &= \sigma \vec{E}(\omega) + j\omega\left[s\right]\vec{D}(\omega).
 \eal
 \eeq
-Before we start to derive the update equations, we normalize our electric field as follows
+Before deriving the update equations, the electric field is normalized as follows
 \beq
 \bal
 \vec{\tilde{E}} = \sqrt{\frac{\epsilon_0}{\mu_0}} \vec{E} = \frac{1}{\eta_0} \vec{E} \\
@@ -1596,7 +1587,7 @@ which yields
 
 %======================== Update Equations ============================
 \section{Update Equations}
-We now derive the update equations from \eqref{eqn: frequencyDomainMaxwellEquationsWithPML}. For simplicity we focus on Ampere's Law and consider the case, where the interior of our simulation area has no loss ($\sigma = 0$). Only the PML will have loss ($\sigma^{'} \neq 0$).
+The update equations are now derived from \eqref{eqn: frequencyDomainMaxwellEquationsWithPML}. For simplicity we focus on Ampere's Law and consider the case, where the interior of the simulation area has no loss ($\sigma = 0$). Only the PML will have loss ($\sigma^{'} \neq 0$).
 Ampere's Law rewritten in matrix form then simplifies to
 \beq
 \label{eqn: Ampere's Law}
@@ -1618,7 +1609,7 @@ s_x & 0 & 0  \\
 \tilde{Dz} 
 \end{pmatrix}.
 \eeq
-Substituting \eqref{eqn: s-factors} into \eqref{eqn: Ampere's Law} and using the fourier identity 
+Substituting \eqref{eqn: s-factors} into \eqref{eqn: Ampere's Law} and using the Fourier identity 
 \beq
 \mathcal{F}\left\{\frac{\del^n}{\del t^n} g(t)\right\} = (j\omega)^n G(\omega),
 \eeq
@@ -1655,7 +1646,7 @@ where $g$ is a piecewise $\mathcal{C}^{1}$ function and $g \in \mathcal{L}^{1}(\
 \tilde{Dz} 
 \end{pmatrix}.
 \eeq
-The system \eqref{eqn: Ampere's Law in time domain} can be discretized with Yee-Scheme, as explained in Section \ref{sec: Yee-Scheme} and using central differences. Because it's quite longish and a lot's of Algebra we ommitt it here and refer to literature instead (see \cite{Taflove, CEM}). For instance, the $D_x$ update is given by
+The system \eqref{eqn: Ampere's Law in time domain} can be discretized with Yee-Scheme, as explained in Section \ref{sec: Yee-Scheme} and using central differences. Because it's quite longish and a lot's of Algebra it is omitted here and instead referred to literature (see \cite{Taflove, CEM}). For instance, the $D_x$ update is given by
 \begin{multline}
 \label{eqn: updateD}
 \textcolor{red}{D_x\Bigr|_{(i+\frac{1}{2},j,k)}^{n+1}} = \left(\frac{2\epsilon_0\kappa_y - \sigma^{'}_y h}{2\epsilon_0\kappa_y + \sigma^{'}_y h}\right) D_x\Bigr|_{i+\frac{1}{2},j,k}^{n} + \left(\frac{2\epsilon_0 h}{2\epsilon_0\kappa_y + \sigma^{'}_y h}\right) \\
@@ -1667,7 +1658,7 @@ From $\vec{D}(\omega) = \epsilon_0\left[\epsilon_r\right]\vec{E}$ the update equ
 E_x\Bigr|_{(i+\frac{1}{2},j,k)}^{n+1} = \left(\frac{2\epsilon_0\kappa_z - \sigma^{'}_z h}{2\epsilon_0\kappa_z + \sigma^{'}_z h}\right) E_x\Bigr|_{i+\frac{1}{2},j,k}^{n} + \left(\frac{1}{(2\epsilon_0\kappa_z + \sigma^{'}_z h) \epsilon}\right) \\
  \left( (2\epsilon_0\kappa_x + \sigma^{'}_x h) \textcolor{red}{D_x\Bigr|_{i+\frac{1}{2},j,k}^{n+1}} - (2\epsilon_0\kappa_x - \sigma^{'}_x h) D_x\Bigr|_{i+\frac{1}{2},j,k}^{n}\right).
 \end{multline}
-As we can see, the update equation for $E_x\Bigr|_{(i+\frac{1}{2},j,k)}^{n+1}$ contains the term $\textcolor{red}{D_x\Bigr|_{i+\frac{1}{2},j,k}^{n+1}}$. Consequently the update process of $E_x$ requires an update of $D_x$ first. So, we first calculate $D_x$ for the next time step and use this result to update $E_x$. The same procedure applies for the update equations of $B_x$ and $H_x$
+As one can see, the update equation for $E_x\Bigr|_{(i+\frac{1}{2},j,k)}^{n+1}$ contains the term $\textcolor{red}{D_x\Bigr|_{i+\frac{1}{2},j,k}^{n+1}}$. Consequently the update process of $E_x$ requires an update of $D_x$ first. Meaning, $D_x$ is calculated for the next time step first and then this result is used to update $E_x$. The same procedure applies for the update equations of $B_x$ and $H_x$
 \begin{multline}
 \label{eqn: updateB}
 \textcolor{blue}{B_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{3}{2}}} = \left(\frac{2\epsilon_0\kappa_y - \sigma^{'}_y h}{2\epsilon_0\kappa_y + \sigma^{'}_y h}\right) B_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{1}{2}} + \left(\frac{2\epsilon_0 h}{2\epsilon_0\kappa_y + \sigma^{'}_y h}\right) \\
@@ -1678,11 +1669,11 @@ As we can see, the update equation for $E_x\Bigr|_{(i+\frac{1}{2},j,k)}^{n+1}$ c
 H_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{3}{2}}= \left(\frac{2\epsilon_0\kappa_z - \sigma^{'}_z h}{2\epsilon_0\kappa_z + \sigma^{'}_z h}\right) H_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{1}{2}} + \left(\frac{1}{(2\epsilon_0\kappa_z + \sigma^{'}_z h) \mu}\right) \\
  \left( (2\epsilon_0\kappa_x + \sigma^{'}_x h) \textcolor{blue}{B_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{3}{2}}} - (2\epsilon_0\kappa_x - \sigma^{'}_x h) B_x\Bigr|_{i,j+\frac{1}{2},k+\frac{1}{2}}^{n+\frac{1}{2}}\right).
 \end{multline}
-Notice that if we turn off the PML, i.e. $\sigma^{'} = 0$ and $\kappa = 1$ the prefactors simplify drastically. Plugging in \eqref{eqn: updateD} into \eqref{eqn: updateE} and also \eqref{eqn: updateB} into \eqref{eqn: updateH} result in the discretized Maxwell Equations, as we derived them in \eqref{eqn: discreteMaxwellEq}. Of course, the update equations of the other field components can be derived analogously. 
+Notice that if the PML is turned off, i.e. $\sigma^{'} = 0$ and $\kappa = 1$ the prefactors simplify drastically. Plugging in \eqref{eqn: updateD} into \eqref{eqn: updateE} and also \eqref{eqn: updateB} into \eqref{eqn: updateH} result in the discretized Maxwell Equations, as derived in \eqref{eqn: discreteMaxwellEq}. Of course, the update equations of the other field components can be derived analogously. 
 
 %======================== Implementation of UPML in FDTD ============================
 \section{Implementation of UPML in FDTD}
-Finally, we show how to implement UPML into an existing FDTD simulation. Since all the prefactors are constants, it's advisable to calculate them beforehand. Here is a snippet of the code
+Finally, this Section shows how to implement UPML into an existing FDTD simulation. Since all the prefactors are constants, it's advisable to calculate them beforehand. Here is a snippet of the code
 \begin{lstlisting}
 Grid->upml1E[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
 Grid->upml2E[j] = (2 * dt) / (2 * kappa + sigma * dt);
@@ -1711,7 +1702,7 @@ Figure \ref{fig: upml} shows how a simulation with UPML looks like
 \subfigure[$\texttt{t} = 11$]{\includegraphics[width=0.33\textwidth]{Pictures/upml_11.png}}\hfill
 \subfigure[$\texttt{t} = 15.75$]{\includegraphics[width=0.33\textwidth]{Pictures/upml_15_75.png}}\hfill
 \subfigure[$\texttt{t} = 18$]{\includegraphics[width=0.33\textwidth]{Pictures/upml_18.png}}
-\caption[Simulation using UPML]{Simulation using UPML.\\  
+\caption[Simulation of an electron in constant $B_z$ field using UPML]{Simulation of an electron in constant $B_z$ field using UPML.\\  
 The electron has an energy of $\gamma = 1.2$. We used a constant $B_z = 1$ as external field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$}	
 \label{fig: upml}
 \end{figure}
@@ -1719,10 +1710,10 @@ The electron has an energy of $\gamma = 1.2$. We used a constant $B_z = 1$ as ex
 %======================== Summary ============================
 %===========================================================
 \part{Summary \& Outlook}
-This thesis was build upon the Hybrid Field Approach from \cite{Herzing}. The framework, written in \texttt{C++}, was entirely rewritten in \texttt{C} and furthermore extended with new features, like a reverse Boris Push to extend the particle history before the simulation, trilinear Interpolation of fields at the particle position, effective storage of precalculated fields, due to extended particle history and UPML. A stable code base was produced, including Doxygen documentation allowing others to use and extend the code more easily. In order to ensure the proper functionality of the framework, a scattering process of an electron in an electromagnetic wave was simulated. Considering realistic scales made it possible to compare the results with real world experiments. By analyzing the Fourier components of the electric field and the Poynting vector, we could show that with increasing energy $\gamma$ of the electron the radiation frequency increased and the radiation of Liénard-Wiechert fields became more directed. \\
+This thesis was build upon the Hybrid Field Approach from \cite{Herzing}. The framework, written in \texttt{C++}, was entirely rewritten in \texttt{C} and furthermore extended with new features, like a reverse Boris Push to extend the particle history before the simulation, trilinear Interpolation of fields at the particle position, effective storage of precalculated fields, due to extended particle history and UPML. A stable code base was produced, including Doxygen documentation allowing others to use and extend the code more easily. In order to ensure the proper functionality of the framework, a scattering process of an electron in an electromagnetic wave was simulated. Considering realistic scales made it possible to compare the results with real world experiments. By analyzing the Fourier components of the electric field and the Poynting vector, it could be shown that with increasing energy $\gamma$ of the electron the radiation frequency increased and the radiation of Liénard-Wiechert fields became more directed. \\
 \newline
-As already outlined in Section \ref{sec: Particle History} the storage of particle positions can be optimized. A plausible criteria for finding the particle position after which all following positions can be neglected has to be velocity dependent. An even better approach would be to define a cutoff distance at which the emitted fields would be attenuated so much, that they be could be neglected. To make large simulations with more than $10^{10}$ particles possible, an effective memory management is absolutely necessary, which makes this point worth looking into.\\
-Another point which can be optimized is UPML. Problems occur when Liénard-Wiechert fields are calculated from the extended particle history prior to the simulation. If field values are set into the UPML region, the they stay there or even worse, they diverge, causing strange artefacts to occur at the boundaries. One should definitely exclude the UPML layer from the field initialization. Regarding memory consumption, UPMLs can be optimized as well. Arrays are used to store the values for the conductivity $\sigma$ and the extinction coefficient $\kappa$ throughout the grid. Problem being that $\sigma$ and $\kappa$ are constant inside the simulation area or equivalently outside the defined UPML layer width. Having a large number of grid points, this way of storing $\sigma$ and $\kappa$ is highly unfavorable. There is a solution for that problem, as discussed in \cite{Taflove}, at the cost of more complex code. Yet, another problem is to find optimal values for $\sigma_{max}$ and $\kappa_{max}$. Even though there are suggestions for $\sigma$ like equation \eqref{eqn: sigmaMaxOpt}, there are no suggestions for $\kappa$ and still there is a lot of try and error to find the best values.\\
+As already outlined in Section \ref{sec: Particle History} the storage of particle positions can be optimized. A plausible criteria for finding the particle position after which all following positions can be neglected has to be velocity dependent. An even better approach would be to define a cutoff distance at which the emitted fields would be attenuated so much, that they could be neglected. To make large simulations with more than $10^{10}$ particles possible, an effective memory management is absolutely necessary, which makes this point worth looking into.\\
+Another point which can be optimized is UPML. Problems occur when Liénard-Wiechert fields are calculated from the extended particle history prior to the simulation. If field values are set into the UPML region, they stay there or even worse, they diverge, causing strange artefacts to occur at the boundaries. One should definitely exclude the UPML layer from the field initialization. Regarding memory consumption, UPMLs can be optimized as well. Arrays are used to store the values for the conductivity $\sigma$ and the extinction coefficient $\kappa$ throughout the grid. Problem being that $\sigma$ and $\kappa$ are constant inside the simulation area or equivalently outside the defined UPML layer width. Having a large number of grid points, this way of storing $\sigma$ and $\kappa$ is highly unfavorable. There is a solution for that problem, as discussed in \cite{Taflove}, at the cost of more complex code. Yet, another problem is to find optimal values for $\sigma_{max}$ and $\kappa_{max}$. Even though there are suggestions for $\sigma$ like equation \eqref{eqn: sigmaMaxOpt}, there are no suggestions for $\kappa$ and still there is a lot of try and error to find the best values.\\
 
 %======================== Appendix ============================
 %===========================================================
@@ -1733,7 +1724,7 @@ Another point which can be optimized is UPML. Problems occur when Liénard-Wieche
 \chapter{Gauge Transformations}
 \label{appendix: Gauge Transformations}
 \noindent
-In this chapter we show that the gauge fields leave both the electric and magnetic fields and the corresponding potential equations invariant.
+In this chapter it is shown that the gauge fields leave both the electric and magnetic fields and the corresponding potential equations invariant.
 \section{Invariance of Fields}
 We show that $\vec{E}' = \vec{E}$ and $\vec{B}' = \vec{B}$.
 \beq
@@ -1756,7 +1747,7 @@ and
 
 %======================== Invariance of Potential Equations ============================
 \section{Invariance of Potential Equations}
-Now we show the invariance of the potential equations. Therefore, consider
+Now the invariance of the potential equations is shown. Therefore, consider
 \beq
 \bal
 -\Delta \varphi' - \vec{\nabla}\left(\frac{\del \vec{A}'}{\del t}\right) &= \frac{\rho}{\epsilon_0} \nn\\
@@ -1778,7 +1769,7 @@ and
 \chapter{Retarded Potential Equations Fulfill Laurentz Gauge}
 \label{appendix: Retarded Potential Equations Fulfill Laurentz Gauge}
 \noindent
-We show that the retarded potential equations 
+It is shown that the retarded potential equations 
 \beq
 \varphi(\vec{r},t) &=& \frac{1}{4\pi \epsilon_0} \int_{V} \frac{\rho(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~',\nn\\
 \vec{A}(\vec{r},t) &=& \frac{\mu_0}{4\pi} \int_{V} \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~'\nn
@@ -1795,21 +1786,21 @@ Plugging in yields
 &=  \frac{\mu_0}{4\pi} \int_{V} \vec{\nabla}_{\vec{r}}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \frac{\del}{\del t}\frac{\rho(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~',\nn\\
 \eal
 \eeq
-where we used $c^2 = \frac{1}{\mu_0\epsilon_0}$. Now consider the first term in the integrand
+where $c^2 = \frac{1}{\mu_0\epsilon_0}$ is used. Now consider the first term in the integrand
 \beq
 \bal
 \vec{\nabla}_{\vec{r}}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} &= \vec{j}(\vec{r}~', t_{ret}) \vec{\nabla}_{\vec{r}} \left( \frac{1}{|\vec{r} - \vec{r}~'|}\right) + \frac{1}{|\vec{r} - \vec{r}~'|} \del_{t_{ret}}\vec{j}(\vec{r}~', t_{ret}) \vec{\nabla}_{\vec{r}}~ t_{ret}\nn \\
 &= -\vec{j}(\vec{r}~', t_{ret}) \frac{\vec{r} - \vec{r}~'}{|\vec{r} - \vec{r}~'|^3} - \frac{1}{c} \frac{\vec{r} - \vec{r}~'}{|\vec{r} - \vec{r}~'|^2} \del_{t_{ret}}\vec{j}(\vec{r}~', t_{ret})
 \eal
 \eeq
-On the other hand we also have
+On the other hand one also has
 \beq
 \bal
 \vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} &= \vec{j}(\vec{r}~', t_{ret}) \vec{\nabla}_{\vec{r}~'} \left( \frac{1}{|\vec{r} - \vec{r}~'|}\right) + \frac{1}{|\vec{r} - \vec{r}~'|} \left( \vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret})\Bigr |_{t_{ret}} + \del_{t_{ret}}\vec{j}(\vec{r}~', t_{ret}) \vec{\nabla}_{\vec{r}~'}~ t_{ret}\right)\nn \\
 &= \vec{j}(\vec{r}~', t_{ret}) \frac{\vec{r} - \vec{r}~'}{|\vec{r} - \vec{r}~'|^3} + \frac{1}{|\vec{r} - \vec{r}~'|} \left( \vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret}) \Bigr |_{t_{ret}}+ \frac{1}{c}  \frac{\vec{r} - \vec{r}~'}{|\vec{r} - \vec{r}~'|} \del_{t_{ret}}\vec{j}(\vec{r}~', t_{ret}) \right),
 \eal
 \eeq
-which means that we can write
+which means that one can write
 \beq
 \vec{\nabla}_{\vec{r}}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} + \vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} =  \frac{\vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret})\Bigr |_{t_{ret}}}{|\vec{r} - \vec{r}~'|}. \nn
 \eeq
@@ -1817,11 +1808,11 @@ Plugging in this into \eqref{eqn: step1} yields
 \beq
 \vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} = \frac{\mu_0}{4\pi} \int_{V} - \vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} + \underbrace{ \frac{\vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret})\Bigr |_{t_{ret}}}{|\vec{r} - \vec{r}~'|} + \frac{\del}{\del t}\frac{\rho(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|}}_{= 0 \text{ due to continuity equation}} ~\dm \vec{r}~'. \nn 
 \eeq
-For the remaining first term we use \textit{Stokes Law}
+For the remaining first term \textit{Stokes Law} is used
 \beq
 \vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} = -\frac{\mu_0}{4\pi} \int_{V} \vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~' =  - \frac{\mu_0}{4\pi} \oint_{\del V}  \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{\sigma} = 0, \nn
 \eeq
-because the current density vanishes at infinity. That's what we wanted to show.
+because the current density vanishes at infinity. That was to show.
 
 %======================== Softwarestack and Documentation ============================
 \chapter{Softwarestack and Documentation}
@@ -1841,9 +1832,8 @@ The following Softwarestack was used to create this thesis:
 %======================== Normalization ============================
 \chapter{Normalization}
 \label{app: Normalization}
-In this chapter we show how we can make the basic equations from Section \ref{sec: Equations of Motion} dimensionless. Even though it's not necessary, it's always advisable in numerics to have a dimensionless systems for reasons of simplicity and clarity. In addition to the transformation equations we will also present the dimensionless Lorentz-Newton equation \eqref{eqn: Lorentz-Newton}, the damping term, i.e. Landau-Lifschitz equation \eqref{eqn: Landau-Lifschitz} and of course the Liénard-Wiechart equations \eqref{eqn: Liénard-Wiechert}.\\
-\newline
-To make the physical entities dimensionless we introduce a characteristic frequency $\omega$. Dimensionless parameters are denoted with a tilde. \\
+This chapter deals with how to make the basic equations from Section \ref{sec: Equations of Motion} dimensionless. Even though it's not necessary, it's always advisable in numerics to have a dimensionless systems for reasons of simplicity and clarity. In addition to the transformation equations the dimensionless Lorentz-Newton equation \eqref{eqn: Lorentz-Newton}, the damping term, i.e. Landau-Lifschitz equation \eqref{eqn: Landau-Lifschitz} and of course the Liénard-Wiechart equations \eqref{eqn: Liénard-Wiechert} is also presented.\newline
+To make the physical entities dimensionless a characteristic frequency $\omega$ is introduced. Dimensionless parameters are denoted with a tilde. \\
 With the following transformations
 \beq
 \bal
@@ -1857,7 +1847,7 @@ F^{\mu\nu}_{\quad\text{lw}} &= \frac{q}{4\pi\epsilon_0}\frac{\omega^2}{c^3}\tild
 F^{\mu\nu}&= F^{\mu\nu}_{\quad\text{ext}} + \frac{q^2}{4\pi\epsilon_0}\frac{\omega^2}{c^3}\tilde{F}^{\mu\nu}_{\quad\text{lw}}
 \eal
 \eeq
-the aforementioned equations become dimensionless, where $F^{\mu\nu}_{\quad\text{ext}}$ denotes the external fields, $F^{\mu\nu}_{\quad\text{lw}}$ the Liénard-Wiechert fields and $F^{\mu\nu}$ the total fields. If we define the characteristic frequency $\omega$ such, that 
+the aforementioned equations become dimensionless, where $F^{\mu\nu}_{\quad\text{ext}}$ denotes the external fields, $F^{\mu\nu}_{\quad\text{lw}}$ the Liénard-Wiechert fields and $F^{\mu\nu}$ the total fields. Defining the characteristic frequency $\omega$ such, that 
 \beq
 \bal
 \frac{q^2}{4\pi\epsilon_0}\frac{\omega^2}{c^3} &\stackrel{!}{=} 1 \\
@@ -1868,7 +1858,7 @@ both the external and the Liénard-Wiechert fields have the same units
 \beq
 \frac{\omega m_e}{q} = 4\pi\epsilon_0 \frac{m^2_ec^3}{q^3}.
 \eeq
-In the following we present the basic equations from Section \ref{sec: Equations of Motion} in dimensionless form: \\
+In the following the basic equations from Section \ref{sec: Equations of Motion} are presented in dimensionless form: \\
 The dimensionless Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} reads
 \beq
 \frac{\dm u^{\mu}}{\dm\tilde{s}} = \biggl( \tilde{F}^{\mu\nu}_{\quad\text{lw}}(x^{\mu}) + \tilde{F}^{\mu\nu}_{\quad\text{ext}}(x^{\mu})\biggr) u^{\nu} + \tilde{g}^{\mu}.
