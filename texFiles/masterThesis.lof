@@ -1,90 +1,90 @@
 \select@language {english}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Illustration of how to calculate the energy emission of a moving particle with charge $q$.}}{11}{figure.1.1}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Radiation characteristics of an moving charged particle}}{13}{figure.1.2}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Radiation characteristics of an moving charged particle}}{14}{figure.1.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Procedural Error}}{19}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Velocity space showing the rotation from $\mathaccentV {vec}17E{v}_{-}$ to $\mathaccentV {vec}17E{v}~'$}}{22}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Determination of $\left |\qopname \relax o{tan}\left (\frac {\theta }{2}\right )\right |$ from boris roation}}{23}{figure.2.3}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Procedural Error}}{20}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Velocity space showing the rotation from $\mathaccentV {vec}17E{v}_{-}$ to $\mathaccentV {vec}17E{v}~'$}}{23}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Determination of $\left |\qopname \relax o{tan}\left (\frac {\theta }{2}\right )\right |$ from boris roation}}{24}{figure.2.3}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Interpolation of Trajectories}}{25}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Cube with its eight corner points A, B, C, ..., H and interpolation point $P_f$.}}{26}{figure.3.2}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Interpolation of Trajectories}}{26}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Cube with its eight corner points A, B, C, ..., H and interpolation point $P_f$.}}{27}{figure.3.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Yee-Box}}{29}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of numerical and analytical dispersion relation of discretized Maxwell Equations with Yee Scheme}}{32}{figure.4.2}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces near fields of one and two particles}}{34}{figure.4.3}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{34}{figure.4.3}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{34}{figure.4.3}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces One plane of a grid showing the near field and far field of a particle. The near field does not contain any field values of the particle}}{35}{figure.4.4}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Section of a grid with three boxes, two of which are near field boxes (NF) and one being a far field box (FF)}}{37}{figure.4.5}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Simulation of an electron with $\gamma = 1.1$ in a constant $B_z = 1$ field}}{39}{figure.4.6}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {t = 7}}}{39}{figure.4.6}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {t = 9}}}{39}{figure.4.6}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {t = 11}}}{39}{figure.4.6}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Gyration of two electrons with $\gamma = 1.1$ each.}}{40}{figure.4.7}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Particle push from time $t$ to $t + \dm t$. Since the particle changes its box the near field region also changes}}{41}{figure.4.8}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Simulation of an electron with $\gamma = 1.2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2}}{42}{figure.4.9}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {t = 5}}}{42}{figure.4.9}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {t = 7}}}{42}{figure.4.9}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {t = 9}}}{42}{figure.4.9}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces The faster the particle gets, the longer the history needs to be}}{43}{figure.4.10}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$v = 0$}}}{43}{figure.4.10}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$v \approx 0.5 c$}}}{43}{figure.4.10}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$v \approx c$}}}{43}{figure.4.10}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Initial fields for different values of simulation parameter $\texttt {t}$}}{45}{figure.4.11}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$\texttt {t} = 8$, $\texttt {tEnd} = 9$}}}{45}{figure.4.11}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$\texttt {t} = 10$, $\texttt {tEnd} = 11$}}}{45}{figure.4.11}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\texttt {t} = 12$, $\texttt {tEnd} = 13$}}}{45}{figure.4.11}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Flow Chart showing the relevant function calls when the user sets $t = t_0 > 0$}}{46}{figure.4.12}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces External laser pulse at \texttt {t = 700 * pow(10, 7)}}}{49}{figure.4.13}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 0.1$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{50}{figure.4.14}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{50}{figure.4.14}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{50}{figure.4.14}
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Ratio of the damping force $g^{\mu }$ and Lorentz force $F_L$ at $\gamma = 1.0$. $g^{\mu }$ was calculated at each time step according to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eqn: Landau-Lifschitz}\unskip \@@italiccorr )}}. Obviously, the damping term $g^{\mu }$ can be neglected. Time is in units of $e^2 / (4\pi \epsilon _0m_ec^3) = 9.40 \cdot 10^{-24}\si {\second }$.}}{50}{figure.4.15}
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 0.46$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{51}{figure.4.16}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{51}{figure.4.16}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{51}{figure.4.16}
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Ratio of the damping force $g^{\mu }$ and Lorentz force $F_L$ at $\gamma = 1.1$. $g^{\mu }$ was calculated at each time step according to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eqn: Landau-Lifschitz}\unskip \@@italiccorr )}}. Obviously, the damping term $g^{\mu }$ can be neglected. Time is in units of $e^2 / (4\pi \epsilon _0m_ec^3) = 9.40 \cdot 10^{-24}\si {\second }$.}}{51}{figure.4.17}
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 0.67$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{52}{figure.4.18}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{52}{figure.4.18}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{52}{figure.4.18}
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Ratio of the damping force $g^{\mu }$ and Lorentz force $F_L$ at $\gamma = 1.2$. $g^{\mu }$ was calculated at each time step according to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eqn: Landau-Lifschitz}\unskip \@@italiccorr )}}. Obviously, the damping term $g^{\mu }$ can be neglected. Time is in units of $e^2 / (4\pi \epsilon _0m_ec^3) = 9.40 \cdot 10^{-24}\si {\second }$.}}{52}{figure.4.19}
-\contentsline {figure}{\numberline {4.20}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 0.84$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{53}{figure.4.20}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{53}{figure.4.20}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{53}{figure.4.20}
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Ratio of the damping force $g^{\mu }$ and Lorentz force $F_L$ at $\gamma = 1.3$. $g^{\mu }$ was calculated at each time step according to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eqn: Landau-Lifschitz}\unskip \@@italiccorr )}}. Obviously, the damping term $g^{\mu }$ can be neglected. Time is in units of $e^2 / (4\pi \epsilon _0m_ec^3) = 9.40 \cdot 10^{-24}\si {\second }$.}}{53}{figure.4.21}
-\contentsline {figure}{\numberline {4.22}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 0.98$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{54}{figure.4.22}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{54}{figure.4.22}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{54}{figure.4.22}
-\contentsline {figure}{\numberline {4.23}{\ignorespaces Ratio of the damping force $g^{\mu }$ and Lorentz force $F_L$ at $\gamma = 1.4$. $g^{\mu }$ was calculated at each time step according to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eqn: Landau-Lifschitz}\unskip \@@italiccorr )}}. Obviously, the damping term $g^{\mu }$ can be neglected. Time is in units of $e^2 / (4\pi \epsilon _0m_ec^3) = 9.40 \cdot 10^{-24}\si {\second }$.}}{54}{figure.4.23}
-\contentsline {figure}{\numberline {4.24}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 1.12$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{55}{figure.4.24}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{55}{figure.4.24}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{55}{figure.4.24}
-\contentsline {figure}{\numberline {4.25}{\ignorespaces Ratio of the damping force $g^{\mu }$ and Lorentz force $F_L$ at $\gamma = 1.5$. $g^{\mu }$ was calculated at each time step according to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eqn: Landau-Lifschitz}\unskip \@@italiccorr )}}. Obviously, the damping term $g^{\mu }$ can be neglected. Time is in units of $e^2 / (4\pi \epsilon _0m_ec^3) = 9.40 \cdot 10^{-24}\si {\second }$.}}{55}{figure.4.25}
-\contentsline {figure}{\numberline {4.26}{\ignorespaces Fourier analysis of (a) the electric field components of $\mathaccentV {vec}17E{E}$ and (b) the components of the Poynting vector $\mathaccentV {vec}17E{S}$ at $\gamma = 1.0$}}{56}{figure.4.26}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{56}{figure.4.26}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{56}{figure.4.26}
-\contentsline {figure}{\numberline {4.27}{\ignorespaces Fourier analysis of (a) the electric field components of $\mathaccentV {vec}17E{E}$ and (b) the components of the Poynting vector $\mathaccentV {vec}17E{S}$ at $\gamma = 1.1$}}{57}{figure.4.27}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{57}{figure.4.27}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{57}{figure.4.27}
-\contentsline {figure}{\numberline {4.28}{\ignorespaces Fourier analysis of (a) the electric field components of $\mathaccentV {vec}17E{E}$ and (b) the components of the Poynting vector $\mathaccentV {vec}17E{S}$ at $\gamma = 1.2$}}{58}{figure.4.28}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{58}{figure.4.28}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{58}{figure.4.28}
-\contentsline {figure}{\numberline {4.29}{\ignorespaces Fourier analysis of (a) the electric field components of $\mathaccentV {vec}17E{E}$ and (b) the components of the Poynting vector $\mathaccentV {vec}17E{S}$ at $\gamma = 1.3$}}{59}{figure.4.29}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{59}{figure.4.29}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{59}{figure.4.29}
-\contentsline {figure}{\numberline {4.30}{\ignorespaces Fourier analysis of (a) the electric field components of $\mathaccentV {vec}17E{E}$ and (b) the components of the Poynting vector $\mathaccentV {vec}17E{S}$ at $\gamma = 1.4$}}{60}{figure.4.30}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{60}{figure.4.30}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{60}{figure.4.30}
-\contentsline {figure}{\numberline {4.31}{\ignorespaces Fourier analysis of (a) the electric field components of $\mathaccentV {vec}17E{E}$ and (b) the components of the Poynting vector $\mathaccentV {vec}17E{S}$ at $\gamma = 1.5$}}{61}{figure.4.31}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{61}{figure.4.31}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{61}{figure.4.31}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Yee-Box}}{30}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of numerical and analytical dispersion relation of discretized Maxwell Equations with Yee Scheme}}{33}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces near fields of one and two particles}}{35}{figure.4.3}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{35}{figure.4.3}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{35}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces One plane of a grid showing the near field and far field of a particle. The near field does not contain any field values of the particle}}{36}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Section of a grid with three boxes, two of which are near field boxes (NF) and one being a far field box (FF)}}{38}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Simulation of an electron with $\gamma = 1.1$ in a constant $B_z = 1$ field}}{40}{figure.4.6}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {t = 7}}}{40}{figure.4.6}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {t = 9}}}{40}{figure.4.6}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {t = 11}}}{40}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Gyration of two electrons with $\gamma = 1.1$ each.}}{41}{figure.4.7}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Particle push from time $t$ to $t + \dm t$. Since the particle changes its box the near field region also changes}}{42}{figure.4.8}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Simulation of an electron with $\gamma = 1.2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2}}{43}{figure.4.9}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {t = 5}}}{43}{figure.4.9}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {t = 7}}}{43}{figure.4.9}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {t = 9}}}{43}{figure.4.9}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces The faster the particle gets, the longer the history needs to be}}{44}{figure.4.10}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$v = 0$}}}{44}{figure.4.10}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$v \approx 0.5 c$}}}{44}{figure.4.10}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$v \approx c$}}}{44}{figure.4.10}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Initial fields for different values of simulation parameter $\texttt {t}$}}{46}{figure.4.11}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$\texttt {t} = 8$, $\texttt {tEnd} = 9$}}}{46}{figure.4.11}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$\texttt {t} = 10$, $\texttt {tEnd} = 11$}}}{46}{figure.4.11}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\texttt {t} = 12$, $\texttt {tEnd} = 13$}}}{46}{figure.4.11}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Flow Chart showing the relevant function calls when the user sets $t = t_0 > 0$}}{47}{figure.4.12}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces External laser pulse at \texttt {t = 700 * pow(10, 7)}}}{50}{figure.4.13}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 0.1$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{51}{figure.4.14}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{51}{figure.4.14}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{51}{figure.4.14}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Ratio of the damping force $g^{\mu }$ and Lorentz force $F_L$ at $\gamma = 1.0$. $g^{\mu }$ was calculated at each time step according to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eqn: Landau-Lifschitz}\unskip \@@italiccorr )}}. Obviously, the damping term $g^{\mu }$ can be neglected. Time is in units of $e^2 / (4\pi \epsilon _0m_ec^3) = 9.40 \cdot 10^{-24}\si {\second }$.}}{51}{figure.4.15}
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 0.46$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{52}{figure.4.16}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{52}{figure.4.16}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{52}{figure.4.16}
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Ratio of the damping force $g^{\mu }$ and Lorentz force $F_L$ at $\gamma = 1.1$. $g^{\mu }$ was calculated at each time step according to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eqn: Landau-Lifschitz}\unskip \@@italiccorr )}}. Obviously, the damping term $g^{\mu }$ can be neglected. Time is in units of $e^2 / (4\pi \epsilon _0m_ec^3) = 9.40 \cdot 10^{-24}\si {\second }$.}}{52}{figure.4.17}
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 0.67$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{53}{figure.4.18}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{53}{figure.4.18}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{53}{figure.4.18}
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Ratio of the damping force $g^{\mu }$ and Lorentz force $F_L$ at $\gamma = 1.2$. $g^{\mu }$ was calculated at each time step according to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eqn: Landau-Lifschitz}\unskip \@@italiccorr )}}. Obviously, the damping term $g^{\mu }$ can be neglected. Time is in units of $e^2 / (4\pi \epsilon _0m_ec^3) = 9.40 \cdot 10^{-24}\si {\second }$.}}{53}{figure.4.19}
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 0.84$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{54}{figure.4.20}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{54}{figure.4.20}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{54}{figure.4.20}
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Ratio of the damping force $g^{\mu }$ and Lorentz force $F_L$ at $\gamma = 1.3$. $g^{\mu }$ was calculated at each time step according to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eqn: Landau-Lifschitz}\unskip \@@italiccorr )}}. Obviously, the damping term $g^{\mu }$ can be neglected. Time is in units of $e^2 / (4\pi \epsilon _0m_ec^3) = 9.40 \cdot 10^{-24}\si {\second }$.}}{54}{figure.4.21}
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 0.98$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{55}{figure.4.22}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{55}{figure.4.22}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{55}{figure.4.22}
+\contentsline {figure}{\numberline {4.23}{\ignorespaces Ratio of the damping force $g^{\mu }$ and Lorentz force $F_L$ at $\gamma = 1.4$. $g^{\mu }$ was calculated at each time step according to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eqn: Landau-Lifschitz}\unskip \@@italiccorr )}}. Obviously, the damping term $g^{\mu }$ can be neglected. Time is in units of $e^2 / (4\pi \epsilon _0m_ec^3) = 9.40 \cdot 10^{-24}\si {\second }$.}}{55}{figure.4.23}
+\contentsline {figure}{\numberline {4.24}{\ignorespaces Initial Conditions: $\texttt {Particle1->u[1]} = 1.12$, $\texttt {Particle1->u[2] = 0.01}$ and $\texttt {Particle1->u[3] = 0.0}$}}{56}{figure.4.24}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with near field}}}{56}{figure.4.24}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {For convenience the fields in the near field region are plotted as well}}}{56}{figure.4.24}
+\contentsline {figure}{\numberline {4.25}{\ignorespaces Ratio of the damping force $g^{\mu }$ and Lorentz force $F_L$ at $\gamma = 1.5$. $g^{\mu }$ was calculated at each time step according to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eqn: Landau-Lifschitz}\unskip \@@italiccorr )}}. Obviously, the damping term $g^{\mu }$ can be neglected. Time is in units of $e^2 / (4\pi \epsilon _0m_ec^3) = 9.40 \cdot 10^{-24}\si {\second }$.}}{56}{figure.4.25}
+\contentsline {figure}{\numberline {4.26}{\ignorespaces Fourier analysis of (a) the electric field components of $\mathaccentV {vec}17E{E}$ and (b) the components of the Poynting vector $\mathaccentV {vec}17E{S}$ at $\gamma = 1.0$}}{57}{figure.4.26}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{57}{figure.4.26}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{57}{figure.4.26}
+\contentsline {figure}{\numberline {4.27}{\ignorespaces Fourier analysis of (a) the electric field components of $\mathaccentV {vec}17E{E}$ and (b) the components of the Poynting vector $\mathaccentV {vec}17E{S}$ at $\gamma = 1.1$}}{58}{figure.4.27}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{58}{figure.4.27}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{58}{figure.4.27}
+\contentsline {figure}{\numberline {4.28}{\ignorespaces Fourier analysis of (a) the electric field components of $\mathaccentV {vec}17E{E}$ and (b) the components of the Poynting vector $\mathaccentV {vec}17E{S}$ at $\gamma = 1.2$}}{59}{figure.4.28}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{59}{figure.4.28}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{59}{figure.4.28}
+\contentsline {figure}{\numberline {4.29}{\ignorespaces Fourier analysis of (a) the electric field components of $\mathaccentV {vec}17E{E}$ and (b) the components of the Poynting vector $\mathaccentV {vec}17E{S}$ at $\gamma = 1.3$}}{60}{figure.4.29}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{60}{figure.4.29}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{60}{figure.4.29}
+\contentsline {figure}{\numberline {4.30}{\ignorespaces Fourier analysis of (a) the electric field components of $\mathaccentV {vec}17E{E}$ and (b) the components of the Poynting vector $\mathaccentV {vec}17E{S}$ at $\gamma = 1.4$}}{61}{figure.4.30}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{61}{figure.4.30}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{61}{figure.4.30}
+\contentsline {figure}{\numberline {4.31}{\ignorespaces Fourier analysis of (a) the electric field components of $\mathaccentV {vec}17E{E}$ and (b) the components of the Poynting vector $\mathaccentV {vec}17E{S}$ at $\gamma = 1.5$}}{62}{figure.4.31}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{62}{figure.4.31}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{62}{figure.4.31}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Wave with wavevector $\mathaccentV {vec}17E{k}$, arbitrary polarization and angle of incidence $\theta $ at a surface with impedance $\eta _i$ and refractive index $n_i$}}{66}{figure.5.1}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Simulation using UPML}}{71}{figure.5.2}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$\texttt {t} = 11$}}}{71}{figure.5.2}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$\texttt {t} = 15.75$}}}{71}{figure.5.2}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\texttt {t} = 18$}}}{71}{figure.5.2}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Wave with wavevector $\mathaccentV {vec}17E{k}$, arbitrary polarization and angle of incidence $\theta $ at a surface with impedance $\eta _i$ and refractive index $n_i$}}{67}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Simulation using UPML}}{72}{figure.5.2}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$\texttt {t} = 11$}}}{72}{figure.5.2}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$\texttt {t} = 15.75$}}}{72}{figure.5.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\texttt {t} = 18$}}}{72}{figure.5.2}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

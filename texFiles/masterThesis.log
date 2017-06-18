@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  18 JUN 2017 12:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  18 JUN 2017 12:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1233,21 +1233,21 @@ ation.1.3.17}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.289 \eeq
+l.290 \eeq
           pdfTeX warning (ext4): destination with the same identifier (name{equ
 ation.1.3.17}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.289 \eeq
+l.290 \eeq
           ] [8pdfTeX warning (ext4): destination with the same identifier (name
 {equation.1.3.25}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.323 \beq
+l.324 \beq
           ]
-Underfull \hbox (badness 10000) in paragraph at lines 353--355
+Underfull \hbox (badness 10000) in paragraph at lines 354--356
 
  []
 
@@ -1255,517 +1255,506 @@ Underfull \hbox (badness 10000) in paragraph at lines 353--355
 File: Pictures/PoyntingVector.png Graphic file (type png)
 
 <use Pictures/PoyntingVector.png>
-Package pdftex.def Info: Pictures/PoyntingVector.png used on input line 390.
+Package pdftex.def Info: Pictures/PoyntingVector.png used on input line 397.
 (pdftex.def)             Requested size: 209.12686pt x 96.79855pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--406
+Underfull \hbox (badness 10000) in paragraph at lines 405--409
 
  []
 
-[11pdfTeX warning (ext4): destination with the same identifier (name{figure.1.1
-}) has been already used, duplicate ignored
+[11pdfTeX warning (ext4): destination with the same identifier (name{equation.1
+.3.36}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.406 \beq
-          pdfTeX warning (ext4): destination with the same identifier (name{equ
-ation.1.3.36}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.406 \beq
-           <./Pictures/PoyntingVector.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 421--423
-
- []
-
-[12]pdfTeX warning (ext4): destination with the same identifier (name{equation.
-1.3.42}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.435 \beq
-          pdfTeX warning (ext4): destination with the same identifier (name{equ
-ation.1.3.42}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.435 \beq
-          pdfTeX warning (ext4): destination with the same identifier (name{equ
-ation.1.3.42}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.435 \beq
-          pdfTeX warning (ext4): destination with the same identifier (name{equ
-ation.1.3.42}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.435 \beq
-          
-Overfull \hbox (14.1741pt too wide) in alignment at lines 439--448
- [][][] []
- []
-
-<Pictures/RadiationSummary.png, id=470, 317.185pt x 173.64874pt>
-File: Pictures/RadiationSummary.png Graphic file (type png)
-
-<use Pictures/RadiationSummary.png>
-Package pdftex.def Info: Pictures/RadiationSummary.png used on input line 452.
-(pdftex.def)             Requested size: 209.12686pt x 114.49458pt.
- [13pdfTeX warning (ext4): destination with the same identifier (name{figure.1.
-2}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.461 \part
-           {Numerics} <./Pictures/RadiationSummary.png>]
-part II.
-Package scrkbase Info: You've told me to use the font selection of the element
-(scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 461.
-[14
-
-] [15]
-chapter 2.
-[16
-
-] [17pdfTeX warning (ext4): destination with the same identifier (name{equation
-.2.2.6}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.540 \eeq
-          ]
-Underfull \hbox (badness 10000) in paragraph at lines 547--549
-
- []
-
-\c@env_definition=\count199
-<Pictures/Verfahrensfehler.png, id=517, 701.62125pt x 503.8825pt>
-File: Pictures/Verfahrensfehler.png Graphic file (type png)
-
-<use Pictures/Verfahrensfehler.png>
-Package pdftex.def Info: Pictures/Verfahrensfehler.png used on input line 577.
-(pdftex.def)             Requested size: 209.12686pt x 150.18945pt.
- [18] [19pdfTeX warning (ext4): destination with the same identifier (name{figu
-re.2.1}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.609 \eeq
-           <./Pictures/Verfahrensfehler.png>] [20]
-<Pictures/borisProjection.png, id=567, 406.51875pt x 293.095pt>
-File: Pictures/borisProjection.png Graphic file (type png)
-
-<use Pictures/borisProjection.png>
-Package pdftex.def Info: Pictures/borisProjection.png used on input line 676.
-(pdftex.def)             Requested size: 209.12686pt x 150.7779pt.
- [21] [22pdfTeX warning (ext4): destination with the same identifier (name{figu
-re.2.2}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.709 \eeq
-           <./Pictures/borisProjection.png>]
-<Pictures/borisRotation.png, id=597, 557.08125pt x 308.15125pt>
-File: Pictures/borisRotation.png Graphic file (type png)
-
-<use Pictures/borisRotation.png>
-Package pdftex.def Info: Pictures/borisRotation.png used on input line 713.
-(pdftex.def)             Requested size: 209.12686pt x 115.67868pt.
- [23pdfTeX warning (ext4): destination with the same identifier (name{equation.
-2.3.27}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.721 \chapter
-              {Interpolations}pdfTeX warning (ext4): destination with the same 
-identifier (name{figure.2.3}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.721 \chapter
-              {Interpolations} <./Pictures/borisRotation.png>]
-chapter 3.
-<Pictures/LightconeNew.pdf, id=608, 353.7309pt x 265.21068pt>
-File: Pictures/LightconeNew.pdf Graphic file (type pdf)
-
-<use Pictures/LightconeNew.pdf>
-Package pdftex.def Info: Pictures/LightconeNew.pdf used on input line 731.
-(pdftex.def)             Requested size: 334.60425pt x 250.87631pt.
- [24
-
-]
-Underfull \vbox (badness 1888) has occurred while \output is active []
-
- [25pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-1}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.768 \eeq
-          pdfTeX warning (ext4): destination with the same identifier (name{equ
-ation.3.1.4}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.768 \eeq
-           <./Pictures/LightconeNew.pdf>]
-<Pictures/trilinearInterpolation.pdf, id=700, 415.55869pt x 416.55934pt>
-File: Pictures/trilinearInterpolation.pdf Graphic file (type pdf)
-
-<use Pictures/trilinearInterpolation.pdf>
-Package pdftex.def Info: Pictures/trilinearInterpolation.pdf used on input line
- 778.
-(pdftex.def)             Requested size: 167.29893pt x 167.70132pt.
- [26pdfTeX warning (ext4): destination with the same identifier (name{equation.
-3.1.4}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.784 \beq
+l.409 \beq
           pdfTeX warning (ext4): destination with the same identifier (name{fig
-ure.3.2}) has been already used, duplicate ignored
+ure.1.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.784 \beq
-           <./Pictures/trilinearInterpolation.pdf>] [27]
-chapter 4.
-<Pictures/YeeBox.png, id=750, 761.84625pt x 622.325pt>
-File: Pictures/YeeBox.png Graphic file (type png)
-
-<use Pictures/YeeBox.png>
-Package pdftex.def Info: Pictures/YeeBox.png used on input line 840.
-(pdftex.def)             Requested size: 292.77632pt x 239.1543pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 835--843
-
- []
-
-[28
-
-]
-Overfull \hbox (6.80202pt too wide) in alignment at lines 854--858
- [][][] []
- []
-
-[29pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
-}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.858 \eeq
-           <./Pictures/YeeBox.png>]
-Underfull \vbox (badness 3396) has occurred while \output is active []
-
- [30]
-[31] <Pictures/dispersionRelation.png, id=792, 410.7345pt x 314.1336pt>
-File: Pictures/dispersionRelation.png Graphic file (type png)
-
-<use Pictures/dispersionRelation.png>
-Package pdftex.def Info: Pictures/dispersionRelation.png used on input line 935
-.
-(pdftex.def)             Requested size: 250.95477pt x 191.93756pt.
- [32pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-2}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.944 \section{Near-and Far Fields}
-                                    <./Pictures/dispersionRelation.png>]
-Overfull \hbox (7.44633pt too wide) in paragraph at lines 945--946
-\T1/cmr/m/n/10.95 boxes, each of which has \T1/cmtt/m/n/10.95 numberOfGridPoint
-sForBoxInX\T1/cmr/m/n/10.95 , \T1/cmtt/m/n/10.95 numberOfGridPointsForBoxInY
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 947.
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 947.
-
-Overfull \hbox (45.57445pt too wide) in paragraph at lines 947--948
-[][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (45.57445pt too wide) in paragraph at lines 948--949
-[][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (45.57445pt too wide) in paragraph at lines 949--950
-[][][][][][][][][][][][][] 
- []
-
-<Pictures/nearFieldOneParticle.png, id=809, 476.5002pt x 399.4122pt>
-File: Pictures/nearFieldOneParticle.png Graphic file (type png)
-
-<use Pictures/nearFieldOneParticle.png>
-Package pdftex.def Info: Pictures/nearFieldOneParticle.png used on input line 9
-59.
-(pdftex.def)             Requested size: 204.94661pt x 171.79265pt.
-
-<Pictures/nearFieldTwoParticles.png, id=810, 476.5002pt x 399.4122pt>
-File: Pictures/nearFieldTwoParticles.png Graphic file (type png)
-
-<use Pictures/nearFieldTwoParticles.png>
-Package pdftex.def Info: Pictures/nearFieldTwoParticles.png used on input line 
-960.
-(pdftex.def)             Requested size: 204.94661pt x 171.79265pt.
- [33]
-<Pictures/createdPictures/grid.pdf, id=826, 421.06825pt x 425.98564pt>
-File: Pictures/createdPictures/grid.pdf Graphic file (type pdf)
-
-<use Pictures/createdPictures/grid.pdf>
-Package pdftex.def Info: Pictures/createdPictures/grid.pdf used on input line 9
-72.
-(pdftex.def)             Requested size: 209.12686pt x 211.56879pt.
-
-Underfull \vbox (badness 4967) has occurred while \output is active []
-
- [34pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-3}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.984 \eeq
-           <./Pictures/nearFieldOneParticle.png> <./Pictures/nearFieldTwoPartic
-les.png>]
-Underfull \vbox (badness 5133) has occurred while \output is active []
-
- [35pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-4}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.989 \end{multline}
-                     <./Pictures/createdPictures/grid.pdf>]
-<Pictures/createdPictures/boxes.pdf, id=885, 274.42258pt x 201.76733pt>
-File: Pictures/createdPictures/boxes.pdf Graphic file (type pdf)
-
-<use Pictures/createdPictures/boxes.pdf>
-Package pdftex.def Info: Pictures/createdPictures/boxes.pdf used on input line 
-1001.
-(pdftex.def)             Requested size: 292.77632pt x 215.27316pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 994--1004
+l.409 \beq
+           <./Pictures/PoyntingVector.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 424--426
 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [36]
-[37pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5
+ [12]
+Overfull \hbox (14.1741pt too wide) in alignment at lines 442--451
+ [][][] []
+ []
+
+<Pictures/RadiationSummary.png, id=469, 317.185pt x 173.64874pt>
+File: Pictures/RadiationSummary.png Graphic file (type png)
+
+<use Pictures/RadiationSummary.png>
+Package pdftex.def Info: Pictures/RadiationSummary.png used on input line 455.
+(pdftex.def)             Requested size: 209.12686pt x 114.49458pt.
+ [13pdfTeX warning (ext4): destination with the same identifier (name{equation.
+1.3.42}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.458 \end{figure}
+                  ] [14pdfTeX warning (ext4): destination with the same identif
+ier (name{figure.1.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.464 \part
+           {Numerics} <./Pictures/RadiationSummary.png>]
+part II.
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `partprefix' that is an alias of element `partnumber'
+(scrkbase)              on input line 464.
+[15
+
+] [16]
+chapter 2.
+[17
+
+] [18pdfTeX warning (ext4): destination with the same identifier (name{equation
+.2.2.6}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.543 \eeq
+          ]
+Underfull \hbox (badness 10000) in paragraph at lines 550--552
+
+ []
+
+\c@env_definition=\count199
+<Pictures/Verfahrensfehler.png, id=521, 701.62125pt x 503.8825pt>
+File: Pictures/Verfahrensfehler.png Graphic file (type png)
+
+<use Pictures/Verfahrensfehler.png>
+Package pdftex.def Info: Pictures/Verfahrensfehler.png used on input line 580.
+(pdftex.def)             Requested size: 209.12686pt x 150.18945pt.
+ [19] [20pdfTeX warning (ext4): destination with the same identifier (name{figu
+re.2.1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.612 \eeq
+           <./Pictures/Verfahrensfehler.png>] [21]
+<Pictures/borisProjection.png, id=571, 406.51875pt x 293.095pt>
+File: Pictures/borisProjection.png Graphic file (type png)
+
+<use Pictures/borisProjection.png>
+Package pdftex.def Info: Pictures/borisProjection.png used on input line 679.
+(pdftex.def)             Requested size: 209.12686pt x 150.7779pt.
+ [22] [23pdfTeX warning (ext4): destination with the same identifier (name{figu
+re.2.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.712 \eeq
+           <./Pictures/borisProjection.png>]
+<Pictures/borisRotation.png, id=601, 557.08125pt x 308.15125pt>
+File: Pictures/borisRotation.png Graphic file (type png)
+
+<use Pictures/borisRotation.png>
+Package pdftex.def Info: Pictures/borisRotation.png used on input line 716.
+(pdftex.def)             Requested size: 209.12686pt x 115.67868pt.
+ [24pdfTeX warning (ext4): destination with the same identifier (name{equation.
+2.3.27}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.724 \chapter
+              {Interpolations}pdfTeX warning (ext4): destination with the same 
+identifier (name{figure.2.3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.724 \chapter
+              {Interpolations} <./Pictures/borisRotation.png>]
+chapter 3.
+<Pictures/LightconeNew.pdf, id=612, 353.7309pt x 265.21068pt>
+File: Pictures/LightconeNew.pdf Graphic file (type pdf)
+
+<use Pictures/LightconeNew.pdf>
+Package pdftex.def Info: Pictures/LightconeNew.pdf used on input line 734.
+(pdftex.def)             Requested size: 334.60425pt x 250.87631pt.
+ [25
+
+]
+Underfull \vbox (badness 1888) has occurred while \output is active []
+
+ [26pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.771 \eeq
+          pdfTeX warning (ext4): destination with the same identifier (name{equ
+ation.3.1.4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.771 \eeq
+           <./Pictures/LightconeNew.pdf>]
+<Pictures/trilinearInterpolation.pdf, id=704, 415.55869pt x 416.55934pt>
+File: Pictures/trilinearInterpolation.pdf Graphic file (type pdf)
+
+<use Pictures/trilinearInterpolation.pdf>
+Package pdftex.def Info: Pictures/trilinearInterpolation.pdf used on input line
+ 781.
+(pdftex.def)             Requested size: 167.29893pt x 167.70132pt.
+ [27pdfTeX warning (ext4): destination with the same identifier (name{equation.
+3.1.4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.787 \beq
+          pdfTeX warning (ext4): destination with the same identifier (name{fig
+ure.3.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.787 \beq
+           <./Pictures/trilinearInterpolation.pdf>] [28]
+chapter 4.
+<Pictures/YeeBox.png, id=755, 761.84625pt x 622.325pt>
+File: Pictures/YeeBox.png Graphic file (type png)
+
+<use Pictures/YeeBox.png>
+Package pdftex.def Info: Pictures/YeeBox.png used on input line 843.
+(pdftex.def)             Requested size: 292.77632pt x 239.1543pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 838--846
+
+ []
+
+[29
+
+]
+Overfull \hbox (6.80202pt too wide) in alignment at lines 857--861
+ [][][] []
+ []
+
+[30pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1019 
+l.861 \eeq
+           <./Pictures/YeeBox.png>]
+Underfull \vbox (badness 3396) has occurred while \output is active []
+
+ [31]
+[32] <Pictures/dispersionRelation.png, id=796, 410.7345pt x 314.1336pt>
+File: Pictures/dispersionRelation.png Graphic file (type png)
+
+<use Pictures/dispersionRelation.png>
+Package pdftex.def Info: Pictures/dispersionRelation.png used on input line 938
+.
+(pdftex.def)             Requested size: 250.95477pt x 191.93756pt.
+ [33pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.947 \section{Near-and Far Fields}
+                                    <./Pictures/dispersionRelation.png>]
+Overfull \hbox (7.44633pt too wide) in paragraph at lines 948--949
+\T1/cmr/m/n/10.95 boxes, each of which has \T1/cmtt/m/n/10.95 numberOfGridPoint
+sForBoxInX\T1/cmr/m/n/10.95 , \T1/cmtt/m/n/10.95 numberOfGridPointsForBoxInY
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 950.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 950.
+
+Overfull \hbox (45.57445pt too wide) in paragraph at lines 950--951
+[][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (45.57445pt too wide) in paragraph at lines 951--952
+[][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (45.57445pt too wide) in paragraph at lines 952--953
+[][][][][][][][][][][][][] 
+ []
+
+<Pictures/nearFieldOneParticle.png, id=813, 476.5002pt x 399.4122pt>
+File: Pictures/nearFieldOneParticle.png Graphic file (type png)
+
+<use Pictures/nearFieldOneParticle.png>
+Package pdftex.def Info: Pictures/nearFieldOneParticle.png used on input line 9
+62.
+(pdftex.def)             Requested size: 204.94661pt x 171.79265pt.
+
+<Pictures/nearFieldTwoParticles.png, id=814, 476.5002pt x 399.4122pt>
+File: Pictures/nearFieldTwoParticles.png Graphic file (type png)
+
+<use Pictures/nearFieldTwoParticles.png>
+Package pdftex.def Info: Pictures/nearFieldTwoParticles.png used on input line 
+963.
+(pdftex.def)             Requested size: 204.94661pt x 171.79265pt.
+ [34]
+<Pictures/createdPictures/grid.pdf, id=831, 421.06825pt x 425.98564pt>
+File: Pictures/createdPictures/grid.pdf Graphic file (type pdf)
+
+<use Pictures/createdPictures/grid.pdf>
+Package pdftex.def Info: Pictures/createdPictures/grid.pdf used on input line 9
+75.
+(pdftex.def)             Requested size: 209.12686pt x 211.56879pt.
+
+Underfull \vbox (badness 4967) has occurred while \output is active []
+
+ [35pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.987 \eeq
+           <./Pictures/nearFieldOneParticle.png> <./Pictures/nearFieldTwoPartic
+les.png>]
+Underfull \vbox (badness 5133) has occurred while \output is active []
+
+ [36pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.992 \end{multline}
+                     <./Pictures/createdPictures/grid.pdf>]
+<Pictures/createdPictures/boxes.pdf, id=889, 274.42258pt x 201.76733pt>
+File: Pictures/createdPictures/boxes.pdf Graphic file (type pdf)
+
+<use Pictures/createdPictures/boxes.pdf>
+Package pdftex.def Info: Pictures/createdPictures/boxes.pdf used on input line 
+1004.
+(pdftex.def)             Requested size: 292.77632pt x 215.27316pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 997--1007
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [37]
+[38pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1022 
         <./Pictures/createdPictures/boxes.pdf>]
-Overfull \hbox (2.14514pt too wide) in paragraph at lines 1029--1030
+Overfull \hbox (2.14514pt too wide) in paragraph at lines 1032--1033
 \T1/cmr/m/n/10.95 then it gets the val-ues stored by \T1/cmtt/m/n/10.95 setHFie
 ldOnBorders() \T1/cmr/m/n/10.95 and ad-justed by \T1/cmtt/m/n/10.95 adjustHFiel
 d()
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1029--1030
+Underfull \hbox (badness 10000) in paragraph at lines 1032--1033
 
  []
 
-[38] <Pictures/gyration_7.png, id=947, 484.209pt x 399.4122pt>
+[39] <Pictures/gyration_7.png, id=951, 484.209pt x 399.4122pt>
 File: Pictures/gyration_7.png Graphic file (type png)
 
 <use Pictures/gyration_7.png>
-Package pdftex.def Info: Pictures/gyration_7.png used on input line 1042.
+Package pdftex.def Info: Pictures/gyration_7.png used on input line 1045.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-<Pictures/gyration_9.png, id=948, 484.209pt x 399.4122pt>
+<Pictures/gyration_9.png, id=952, 484.209pt x 399.4122pt>
 File: Pictures/gyration_9.png Graphic file (type png)
 
 <use Pictures/gyration_9.png>
-Package pdftex.def Info: Pictures/gyration_9.png used on input line 1043.
+Package pdftex.def Info: Pictures/gyration_9.png used on input line 1046.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-<Pictures/gyration_11.png, id=949, 484.209pt x 399.4122pt>
+<Pictures/gyration_11.png, id=953, 484.209pt x 399.4122pt>
 File: Pictures/gyration_11.png Graphic file (type png)
 
 <use Pictures/gyration_11.png>
-Package pdftex.def Info: Pictures/gyration_11.png used on input line 1044.
+Package pdftex.def Info: Pictures/gyration_11.png used on input line 1047.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1038--1047
+Underfull \hbox (badness 10000) in paragraph at lines 1041--1050
 
  []
 
-<Pictures/gyrationTwoParticles.png, id=951, 484.9317pt x 402.5439pt>
+<Pictures/gyrationTwoParticles.png, id=955, 484.9317pt x 402.5439pt>
 File: Pictures/gyrationTwoParticles.png Graphic file (type png)
 
 <use Pictures/gyrationTwoParticles.png>
 Package pdftex.def Info: Pictures/gyrationTwoParticles.png used on input line 1
-053.
+056.
 (pdftex.def)             Requested size: 209.12686pt x 173.59416pt.
- [39pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [40pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1057 \noindent
+l.1060 \noindent
                  <./Pictures/gyration_7.png> <./Pictures/gyration_9.png> <./Pic
 tures/gyration_11.png>]
-<Pictures/nearFieldUpdate.png, id=970, 316.18124pt x 300.12125pt>
+<Pictures/nearFieldUpdate.png, id=975, 316.18124pt x 300.12125pt>
 File: Pictures/nearFieldUpdate.png Graphic file (type png)
 
 <use Pictures/nearFieldUpdate.png>
-Package pdftex.def Info: Pictures/nearFieldUpdate.png used on input line 1067.
+Package pdftex.def Info: Pictures/nearFieldUpdate.png used on input line 1070.
 (pdftex.def)             Requested size: 167.29893pt x 158.80247pt.
 
-<Pictures/nearFieldOldBoxes.png, id=971, 106.3975pt x 98.3675pt>
+<Pictures/nearFieldOldBoxes.png, id=976, 106.3975pt x 98.3675pt>
 File: Pictures/nearFieldOldBoxes.png Graphic file (type png)
 
 <use Pictures/nearFieldOldBoxes.png>
-Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1068
+Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1071
 .
 (pdftex.def)             Requested size: 12.9782pt x 12.0pt.
 
-<Pictures/nearFieldNewBoxes.png, id=972, 94.3525pt x 99.37125pt>
+<Pictures/nearFieldNewBoxes.png, id=977, 94.3525pt x 99.37125pt>
 File: Pictures/nearFieldNewBoxes.png Graphic file (type png)
 
 <use Pictures/nearFieldNewBoxes.png>
-Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1068
+Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1071
 .
 (pdftex.def)             Requested size: 11.39378pt x 12.0pt.
 
-<Pictures/nearFieldBoth.png, id=973, 59.22125pt x 57.21375pt>
+<Pictures/nearFieldBoth.png, id=978, 59.22125pt x 57.21375pt>
 File: Pictures/nearFieldBoth.png Graphic file (type png)
 
 <use Pictures/nearFieldBoth.png>
-Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1068.
+Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1071.
 (pdftex.def)             Requested size: 12.42055pt x 12.0pt.
 File: Pictures/nearFieldOldBoxes.png Graphic file (type png)
  <use Pictures/nearFieldOldBoxes.png>
-Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1068
+Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1071
 .
 (pdftex.def)             Requested size: 12.9782pt x 12.0pt.
 File: Pictures/nearFieldNewBoxes.png Graphic file (type png)
 
 <use Pictures/nearFieldNewBoxes.png>
-Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1068
+Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1071
 .
 (pdftex.def)             Requested size: 11.39378pt x 12.0pt.
 File: Pictures/nearFieldBoth.png Graphic file (type png)
  <use Pictures/nearFieldBoth.png>
-Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1068.
+Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1071.
 (pdftex.def)             Requested size: 12.42055pt x 12.0pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1062--1070
+Underfull \hbox (badness 10000) in paragraph at lines 1065--1073
 
  []
 
 
 Underfull \vbox (badness 1533) has occurred while \output is active []
 
- [40pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [41pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 7}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1071 \noindent
+l.1074 \noindent
                  <./Pictures/gyrationTwoParticles.png>]
 File: Pictures/nearFieldOldBoxes.png Graphic file (type png)
 
 <use Pictures/nearFieldOldBoxes.png>
-Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1072
+Package pdftex.def Info: Pictures/nearFieldOldBoxes.png used on input line 1075
 .
 (pdftex.def)             Requested size: 12.9782pt x 12.0pt.
 File: Pictures/nearFieldNewBoxes.png Graphic file (type png)
  <use Pictures/nearFieldNewBoxes.png>
-Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1072
+Package pdftex.def Info: Pictures/nearFieldNewBoxes.png used on input line 1075
 .
 (pdftex.def)             Requested size: 11.39378pt x 12.0pt.
 File: Pictures/nearFieldBoth.png Graphic file (type png)
 
 <use Pictures/nearFieldBoth.png>
-Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1072.
+Package pdftex.def Info: Pictures/nearFieldBoth.png used on input line 1075.
 (pdftex.def)             Requested size: 12.42055pt x 12.0pt.
 
-<Pictures/crossedField_5.png, id=987, 484.209pt x 399.4122pt>
+<Pictures/crossedField_5.png, id=991, 484.209pt x 399.4122pt>
 File: Pictures/crossedField_5.png Graphic file (type png)
 
 <use Pictures/crossedField_5.png>
-Package pdftex.def Info: Pictures/crossedField_5.png used on input line 1075.
+Package pdftex.def Info: Pictures/crossedField_5.png used on input line 1078.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-<Pictures/crossedField_7.png, id=988, 484.209pt x 399.4122pt>
+<Pictures/crossedField_7.png, id=992, 484.209pt x 399.4122pt>
 File: Pictures/crossedField_7.png Graphic file (type png)
 
 <use Pictures/crossedField_7.png>
-Package pdftex.def Info: Pictures/crossedField_7.png used on input line 1076.
+Package pdftex.def Info: Pictures/crossedField_7.png used on input line 1079.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-<Pictures/crossedField_9.png, id=989, 484.209pt x 399.4122pt>
+<Pictures/crossedField_9.png, id=993, 484.209pt x 399.4122pt>
 File: Pictures/crossedField_9.png Graphic file (type png)
 
 <use Pictures/crossedField_9.png>
-Package pdftex.def Info: Pictures/crossedField_9.png used on input line 1077.
+Package pdftex.def Info: Pictures/crossedField_9.png used on input line 1080.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [41pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [42pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 8}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1081 \noindent
+l.1084 \noindent
                  <./Pictures/nearFieldUpdate.png> <./Pictures/nearFieldOldBoxes
 .png> <./Pictures/nearFieldNewBoxes.png> <./Pictures/nearFieldBoth.png>]
-<Pictures/createdPictures/historyLengthStill.pdf, id=1002, 362.62129pt x 263.70
+<Pictures/createdPictures/historyLengthStill.pdf, id=1006, 362.62129pt x 263.70
 401pt>
 File: Pictures/createdPictures/historyLengthStill.pdf Graphic file (type pdf)
  <use Pictures/createdPictures/historyLengthStill.pdf>
 Package pdftex.def Info: Pictures/createdPictures/historyLengthStill.pdf used o
-n input line 1091.
+n input line 1094.
 (pdftex.def)             Requested size: 138.02449pt x 100.37354pt.
 
-<Pictures/createdPictures/historyLengthHalfC.pdf, id=1003, 359.46664pt x 263.70
+<Pictures/createdPictures/historyLengthHalfC.pdf, id=1007, 359.46664pt x 263.70
 401pt>
 File: Pictures/createdPictures/historyLengthHalfC.pdf Graphic file (type pdf)
  <use Pictures/createdPictures/historyLengthHalfC.pdf>
 Package pdftex.def Info: Pictures/createdPictures/historyLengthHalfC.pdf used o
-n input line 1092.
+n input line 1095.
 (pdftex.def)             Requested size: 138.02449pt x 101.25475pt.
 
-<Pictures/createdPictures/historyLengthAlmostC.pdf, id=1004, 343.53629pt x 261.
+<Pictures/createdPictures/historyLengthAlmostC.pdf, id=1008, 343.53629pt x 261.
 21928pt>
 File: Pictures/createdPictures/historyLengthAlmostC.pdf Graphic file (type pdf)
 
  <use Pictures/createdPictures/historyLengthAlmostC.pdf>
 Package pdftex.def Info: Pictures/createdPictures/historyLengthAlmostC.pdf used
- on input line 1093.
+ on input line 1096.
 (pdftex.def)             Requested size: 138.02449pt x 104.95221pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1086--1096
+Underfull \hbox (badness 10000) in paragraph at lines 1089--1099
 
  []
 
-[42pdfTeX warning (ext4): destination with the same identifier (name{figure.4.9
+[43pdfTeX warning (ext4): destination with the same identifier (name{figure.4.9
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1097 \noindent
+l.1100 \noindent
                  <./Pictures/crossedField_5.png> <./Pictures/crossedField_7.png
-> <./Pictures/crossedField_9.png>] [43pdfTeX warning (ext4): destination with t
+> <./Pictures/crossedField_9.png>] [44pdfTeX warning (ext4): destination with t
 he same identifier (name{figure.4.10}) has been already used, duplicate ignored
 
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1103 \newpage
+l.1106 \newpage
                 <./Pictures/createdPictures/historyLengthStill.pdf> <./Pictures
 /createdPictures/historyLengthHalfC.pdf
 
@@ -1778,701 +1767,701 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Pictures/createdPictures/h
 istoryLengthAlmostC.pdf): PDF inclusion: multiple pdfs with page group included
  in a single page
 >]
-<Pictures/particleHistoryInitialFields8.png, id=1113, 476.5002pt x 399.4122pt>
+<Pictures/particleHistoryInitialFields8.png, id=1117, 476.5002pt x 399.4122pt>
 File: Pictures/particleHistoryInitialFields8.png Graphic file (type png)
 
 <use Pictures/particleHistoryInitialFields8.png>
 Package pdftex.def Info: Pictures/particleHistoryInitialFields8.png used on inp
-ut line 1109.
+ut line 1112.
 (pdftex.def)             Requested size: 138.02449pt x 115.69249pt.
 
-<Pictures/particleHistoryInitialFields10.png, id=1114, 476.5002pt x 399.4122pt>
+<Pictures/particleHistoryInitialFields10.png, id=1118, 476.5002pt x 399.4122pt>
 File: Pictures/particleHistoryInitialFields10.png Graphic file (type png)
 <use Pictures/particleHistoryInitialFields10.png>
 Package pdftex.def Info: Pictures/particleHistoryInitialFields10.png used on in
-put line 1110.
+put line 1113.
 (pdftex.def)             Requested size: 138.02449pt x 115.69249pt.
 
-<Pictures/particleHistoryInitialFields12.png, id=1115, 476.5002pt x 399.4122pt>
+<Pictures/particleHistoryInitialFields12.png, id=1119, 476.5002pt x 399.4122pt>
 File: Pictures/particleHistoryInitialFields12.png Graphic file (type png)
 <use Pictures/particleHistoryInitialFields12.png>
 Package pdftex.def Info: Pictures/particleHistoryInitialFields12.png used on in
-put line 1111.
+put line 1114.
 (pdftex.def)             Requested size: 138.02449pt x 115.69249pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [44]
-<Pictures/createdPictures/particleHistoryFlowChart.pdf, id=1125, 547.04375pt x 
+ [45]
+<Pictures/createdPictures/particleHistoryFlowChart.pdf, id=1129, 547.04375pt x 
 1064.97874pt>
 File: Pictures/createdPictures/particleHistoryFlowChart.pdf Graphic file (type 
 pdf)
  <use Pictures/createdPictures/particleHistoryFlowChart.pdf>
 Package pdftex.def Info: Pictures/createdPictures/particleHistoryFlowChart.pdf 
-used on input line 1120.
+used on input line 1123.
 (pdftex.def)             Requested size: 292.77632pt x 569.97739pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [45pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [46pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 11}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1124 \noindent
+l.1127 \noindent
                  <./Pictures/particleHistoryInitialFields8.png> <./Pictures/par
 ticleHistoryInitialFields10.png> <./Pictures/particleHistoryInitialFields12.png
 >]
 Overfull \vbox (104.72717pt too high) has occurred while \output is active []
 
 
-[46pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
+[47pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
 2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1124 \noindent
+l.1127 \noindent
                  <./Pictures/createdPictures/particleHistoryFlowChart.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 1129--1132
+Underfull \hbox (badness 10000) in paragraph at lines 1132--1135
 
  []
 
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 1138
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 1141
 .
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [47]
-Underfull \hbox (badness 10000) in paragraph at lines 1170--1174
+) [48]
+Underfull \hbox (badness 10000) in paragraph at lines 1173--1177
 
  []
 
-[48] <Pictures/externalPulse_700.png, id=1209, 480.3546pt x 379.1766pt>
+[49] <Pictures/externalPulse_700.png, id=1213, 480.3546pt x 379.1766pt>
 File: Pictures/externalPulse_700.png Graphic file (type png)
 
 <use Pictures/externalPulse_700.png>
-Package pdftex.def Info: Pictures/externalPulse_700.png used on input line 1205
+Package pdftex.def Info: Pictures/externalPulse_700.png used on input line 1208
 .
 (pdftex.def)             Requested size: 292.77632pt x 231.11224pt.
 
-<Pictures/results/0.1_0.01_gamma1.0/plain.png, id=1212, 479.6319pt x 379.1766pt
+<Pictures/results/0.1_0.01_gamma1.0/plain.png, id=1216, 479.6319pt x 379.1766pt
 >
 File: Pictures/results/0.1_0.01_gamma1.0/plain.png Graphic file (type png)
  <use Pictures/results/0.1_0.01_gamma1.0/plain.png>
 Package pdftex.def Info: Pictures/results/0.1_0.01_gamma1.0/plain.png used on i
-nput line 1214.
+nput line 1217.
 (pdftex.def)             Requested size: 204.94661pt x 162.01868pt.
 
-<Pictures/results/0.1_0.01_gamma1.0/plain_nearField.png, id=1213, 479.6319pt x 
+<Pictures/results/0.1_0.01_gamma1.0/plain_nearField.png, id=1217, 479.6319pt x 
 379.1766pt>
 File: Pictures/results/0.1_0.01_gamma1.0/plain_nearField.png Graphic file (type
  png)
  <use Pictures/results/0.1_0.01_gamma1.0/plain_nearField.png>
 Package pdftex.def Info: Pictures/results/0.1_0.01_gamma1.0/plain_nearField.png
- used on input line 1215.
+ used on input line 1218.
 (pdftex.def)             Requested size: 204.94661pt x 162.01868pt.
 
 Underfull \vbox (badness 5667) has occurred while \output is active []
 
- [49pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [50pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 13}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1220 \noindent
+l.1223 \noindent
                  <./Pictures/externalPulse_700.png>]
-<Pictures/results/0.1_0.01_gamma1.0/dampingTermVSLorentzForce.png, id=1222, 577
+<Pictures/results/0.1_0.01_gamma1.0/dampingTermVSLorentzForce.png, id=1226, 577
 .9191pt x 409.7709pt>
 File: Pictures/results/0.1_0.01_gamma1.0/dampingTermVSLorentzForce.png Graphic 
 file (type png)
 
 <use Pictures/results/0.1_0.01_gamma1.0/dampingTermVSLorentzForce.png>
 Package pdftex.def Info: Pictures/results/0.1_0.01_gamma1.0/dampingTermVSLorent
-zForce.png used on input line 1224.
+zForce.png used on input line 1227.
 (pdftex.def)             Requested size: 200.64331pt x 142.26378pt.
 
-<Pictures/results/0.46_0.01_gamma1.1/plain.png, id=1225, 480.3546pt x 379.1766p
+<Pictures/results/0.46_0.01_gamma1.1/plain.png, id=1229, 480.3546pt x 379.1766p
 t>
 File: Pictures/results/0.46_0.01_gamma1.1/plain.png Graphic file (type png)
  <use Pictures/results/0.46_0.01_gamma1.1/plain.png>
 Package pdftex.def Info: Pictures/results/0.46_0.01_gamma1.1/plain.png used on 
-input line 1233.
+input line 1236.
 (pdftex.def)             Requested size: 204.94661pt x 161.78146pt.
 
-<Pictures/results/0.46_0.01_gamma1.1/plain_nearField.png, id=1226, 480.3546pt x
+<Pictures/results/0.46_0.01_gamma1.1/plain_nearField.png, id=1230, 480.3546pt x
  379.1766pt>
 File: Pictures/results/0.46_0.01_gamma1.1/plain_nearField.png Graphic file (typ
 e png)
  <use Pictures/results/0.46_0.01_gamma1.1/plain_nearField.png>
 Package pdftex.def Info: Pictures/results/0.46_0.01_gamma1.1/plain_nearField.pn
-g used on input line 1234.
+g used on input line 1237.
 (pdftex.def)             Requested size: 204.94661pt x 161.78146pt.
 
-[50pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
+[51pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
 4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1239 \noindent
+l.1242 \noindent
                 pdfTeX warning (ext4): destination with the same identifier (na
 me{figure.4.15}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1239 \noindent
+l.1242 \noindent
                  <./Pictures/results/0.1_0.01_gamma1.0/plain.png> <./Pictures/r
 esults/0.1_0.01_gamma1.0/plain_nearField.png> <./Pictures/results/0.1_0.01_gamm
 a1.0/dampingTermVSLorentzForce.png>]
-<Pictures/results/0.46_0.01_gamma1.1/dampingTermVSLorentzForce.png, id=1237, 56
+<Pictures/results/0.46_0.01_gamma1.1/dampingTermVSLorentzForce.png, id=1241, 56
 6.3559pt x 405.6756pt>
 File: Pictures/results/0.46_0.01_gamma1.1/dampingTermVSLorentzForce.png Graphic
  file (type png)
 
 <use Pictures/results/0.46_0.01_gamma1.1/dampingTermVSLorentzForce.png>
 Package pdftex.def Info: Pictures/results/0.46_0.01_gamma1.1/dampingTermVSLoren
-tzForce.png used on input line 1243.
+tzForce.png used on input line 1246.
 (pdftex.def)             Requested size: 198.60777pt x 142.26378pt.
 
-<Pictures/results/0.67_0.01_gamma1.2/plain.png, id=1240, 480.3546pt x 379.1766p
+<Pictures/results/0.67_0.01_gamma1.2/plain.png, id=1244, 480.3546pt x 379.1766p
 t>
 File: Pictures/results/0.67_0.01_gamma1.2/plain.png Graphic file (type png)
  <use Pictures/results/0.67_0.01_gamma1.2/plain.png>
 Package pdftex.def Info: Pictures/results/0.67_0.01_gamma1.2/plain.png used on 
-input line 1252.
+input line 1255.
 (pdftex.def)             Requested size: 204.94661pt x 161.78146pt.
 
-<Pictures/results/0.67_0.01_gamma1.2/plain_nearField.png, id=1241, 480.3546pt x
+<Pictures/results/0.67_0.01_gamma1.2/plain_nearField.png, id=1245, 480.3546pt x
  379.1766pt>
 File: Pictures/results/0.67_0.01_gamma1.2/plain_nearField.png Graphic file (typ
 e png)
  <use Pictures/results/0.67_0.01_gamma1.2/plain_nearField.png>
 Package pdftex.def Info: Pictures/results/0.67_0.01_gamma1.2/plain_nearField.pn
-g used on input line 1253.
+g used on input line 1256.
 (pdftex.def)             Requested size: 204.94661pt x 161.78146pt.
 
-[51pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
+[52pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
 6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1258 \noindent
+l.1261 \noindent
                 pdfTeX warning (ext4): destination with the same identifier (na
 me{figure.4.17}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1258 \noindent
+l.1261 \noindent
                  <./Pictures/results/0.46_0.01_gamma1.1/plain.png> <./Pictures/
 results/0.46_0.01_gamma1.1/plain_nearField.png> <./Pictures/results/0.46_0.01_g
 amma1.1/dampingTermVSLorentzForce.png>]
-<Pictures/results/0.67_0.01_gamma1.2/dampingTermVSLorentzForce.png, id=1253, 56
+<Pictures/results/0.67_0.01_gamma1.2/dampingTermVSLorentzForce.png, id=1258, 56
 6.3559pt x 405.6756pt>
 File: Pictures/results/0.67_0.01_gamma1.2/dampingTermVSLorentzForce.png Graphic
  file (type png)
 
 <use Pictures/results/0.67_0.01_gamma1.2/dampingTermVSLorentzForce.png>
 Package pdftex.def Info: Pictures/results/0.67_0.01_gamma1.2/dampingTermVSLoren
-tzForce.png used on input line 1262.
+tzForce.png used on input line 1265.
 (pdftex.def)             Requested size: 198.60777pt x 142.26378pt.
 
-<Pictures/results/0.84_0.01_gamma1.3/plain.png, id=1256, 480.3546pt x 379.1766p
+<Pictures/results/0.84_0.01_gamma1.3/plain.png, id=1261, 480.3546pt x 379.1766p
 t>
 File: Pictures/results/0.84_0.01_gamma1.3/plain.png Graphic file (type png)
  <use Pictures/results/0.84_0.01_gamma1.3/plain.png>
 Package pdftex.def Info: Pictures/results/0.84_0.01_gamma1.3/plain.png used on 
-input line 1271.
+input line 1274.
 (pdftex.def)             Requested size: 204.94661pt x 161.78146pt.
 
-<Pictures/results/0.84_0.01_gamma1.3/plain_nearField.png, id=1257, 480.3546pt x
+<Pictures/results/0.84_0.01_gamma1.3/plain_nearField.png, id=1262, 480.3546pt x
  379.1766pt>
 File: Pictures/results/0.84_0.01_gamma1.3/plain_nearField.png Graphic file (typ
 e png)
  <use Pictures/results/0.84_0.01_gamma1.3/plain_nearField.png>
 Package pdftex.def Info: Pictures/results/0.84_0.01_gamma1.3/plain_nearField.pn
-g used on input line 1272.
+g used on input line 1275.
 (pdftex.def)             Requested size: 204.94661pt x 161.78146pt.
 
-[52pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
+[53pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
 8}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1277 \noindent
+l.1280 \noindent
                 pdfTeX warning (ext4): destination with the same identifier (na
 me{figure.4.19}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1277 \noindent
+l.1280 \noindent
                  <./Pictures/results/0.67_0.01_gamma1.2/plain.png> <./Pictures/
 results/0.67_0.01_gamma1.2/plain_nearField.png> <./Pictures/results/0.67_0.01_g
 amma1.2/dampingTermVSLorentzForce.png>]
-<Pictures/results/0.84_0.01_gamma1.3/dampingTermVSLorentzForce.png, id=1270, 56
+<Pictures/results/0.84_0.01_gamma1.3/dampingTermVSLorentzForce.png, id=1274, 56
 6.3559pt x 405.6756pt>
 File: Pictures/results/0.84_0.01_gamma1.3/dampingTermVSLorentzForce.png Graphic
  file (type png)
 
 <use Pictures/results/0.84_0.01_gamma1.3/dampingTermVSLorentzForce.png>
 Package pdftex.def Info: Pictures/results/0.84_0.01_gamma1.3/dampingTermVSLoren
-tzForce.png used on input line 1281.
+tzForce.png used on input line 1284.
 (pdftex.def)             Requested size: 198.60777pt x 142.26378pt.
 
-<Pictures/results/0.98_0.01_gamma1.4/plain.png, id=1273, 487.8225pt x 379.1766p
+<Pictures/results/0.98_0.01_gamma1.4/plain.png, id=1277, 487.8225pt x 379.1766p
 t>
 File: Pictures/results/0.98_0.01_gamma1.4/plain.png Graphic file (type png)
  <use Pictures/results/0.98_0.01_gamma1.4/plain.png>
 Package pdftex.def Info: Pictures/results/0.98_0.01_gamma1.4/plain.png used on 
-input line 1291.
+input line 1294.
 (pdftex.def)             Requested size: 204.94661pt x 159.29936pt.
 
-<Pictures/results/0.98_0.01_gamma1.4/plain_nearField.png, id=1274, 487.8225pt x
+<Pictures/results/0.98_0.01_gamma1.4/plain_nearField.png, id=1278, 487.8225pt x
  379.1766pt>
 File: Pictures/results/0.98_0.01_gamma1.4/plain_nearField.png Graphic file (typ
 e png)
  <use Pictures/results/0.98_0.01_gamma1.4/plain_nearField.png>
 Package pdftex.def Info: Pictures/results/0.98_0.01_gamma1.4/plain_nearField.pn
-g used on input line 1292.
+g used on input line 1295.
 (pdftex.def)             Requested size: 204.94661pt x 159.29936pt.
 
-[53pdfTeX warning (ext4): destination with the same identifier (name{figure.4.2
+[54pdfTeX warning (ext4): destination with the same identifier (name{figure.4.2
 0}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1297 \noindent
+l.1300 \noindent
                 pdfTeX warning (ext4): destination with the same identifier (na
 me{figure.4.21}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1297 \noindent
+l.1300 \noindent
                  <./Pictures/results/0.84_0.01_gamma1.3/plain.png> <./Pictures/
 results/0.84_0.01_gamma1.3/plain_nearField.png> <./Pictures/results/0.84_0.01_g
 amma1.3/dampingTermVSLorentzForce.png>]
-<Pictures/results/0.98_0.01_gamma1.4/dampingTermVSLorentzForce.png, id=1286, 56
+<Pictures/results/0.98_0.01_gamma1.4/dampingTermVSLorentzForce.png, id=1290, 56
 6.3559pt x 405.6756pt>
 File: Pictures/results/0.98_0.01_gamma1.4/dampingTermVSLorentzForce.png Graphic
  file (type png)
 
 <use Pictures/results/0.98_0.01_gamma1.4/dampingTermVSLorentzForce.png>
 Package pdftex.def Info: Pictures/results/0.98_0.01_gamma1.4/dampingTermVSLoren
-tzForce.png used on input line 1301.
+tzForce.png used on input line 1304.
 (pdftex.def)             Requested size: 198.60777pt x 142.26378pt.
 
-<Pictures/results/1.12_0.01_gamma1.5/plain.png, id=1289, 487.8225pt x 379.1766p
+<Pictures/results/1.12_0.01_gamma1.5/plain.png, id=1293, 487.8225pt x 379.1766p
 t>
 File: Pictures/results/1.12_0.01_gamma1.5/plain.png Graphic file (type png)
  <use Pictures/results/1.12_0.01_gamma1.5/plain.png>
 Package pdftex.def Info: Pictures/results/1.12_0.01_gamma1.5/plain.png used on 
-input line 1310.
+input line 1313.
 (pdftex.def)             Requested size: 204.94661pt x 159.29936pt.
 
-<Pictures/results/1.12_0.01_gamma1.5/plain_nearField.png, id=1290, 487.8225pt x
+<Pictures/results/1.12_0.01_gamma1.5/plain_nearField.png, id=1294, 487.8225pt x
  379.1766pt>
 File: Pictures/results/1.12_0.01_gamma1.5/plain_nearField.png Graphic file (typ
 e png)
  <use Pictures/results/1.12_0.01_gamma1.5/plain_nearField.png>
 Package pdftex.def Info: Pictures/results/1.12_0.01_gamma1.5/plain_nearField.pn
-g used on input line 1311.
+g used on input line 1314.
 (pdftex.def)             Requested size: 204.94661pt x 159.29936pt.
 
 Underfull \vbox (badness 1127) has occurred while \output is active []
 
- [54pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [55pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 22}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1316 \noindent
+l.1319 \noindent
                 pdfTeX warning (ext4): destination with the same identifier (na
 me{figure.4.23}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1316 \noindent
+l.1319 \noindent
                  <./Pictures/results/0.98_0.01_gamma1.4/plain.png> <./Pictures/
 results/0.98_0.01_gamma1.4/plain_nearField.png> <./Pictures/results/0.98_0.01_g
 amma1.4/dampingTermVSLorentzForce.png>]
-<Pictures/results/1.12_0.01_gamma1.5/dampingTermVSLorentzForce.png, id=1302, 56
+<Pictures/results/1.12_0.01_gamma1.5/dampingTermVSLorentzForce.png, id=1306, 56
 6.3559pt x 405.6756pt>
 File: Pictures/results/1.12_0.01_gamma1.5/dampingTermVSLorentzForce.png Graphic
  file (type png)
 
 <use Pictures/results/1.12_0.01_gamma1.5/dampingTermVSLorentzForce.png>
 Package pdftex.def Info: Pictures/results/1.12_0.01_gamma1.5/dampingTermVSLoren
-tzForce.png used on input line 1320.
+tzForce.png used on input line 1323.
 (pdftex.def)             Requested size: 198.60777pt x 142.26378pt.
 
 Underfull \vbox (badness 1127) has occurred while \output is active []
 
- [55pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [56pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 24}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1327 
+l.1330 
        pdfTeX warning (ext4): destination with the same identifier (name{figure
 .4.25}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1327 
+l.1330 
         <./Pictures/results/1.12_0.01_gamma1.5/plain.png> <./Pictures/results/1
 .12_0.01_gamma1.5/plain_nearField.png> <./Pictures/results/1.12_0.01_gamma1.5/d
 ampingTermVSLorentzForce.png>]
-<Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.png, id=1317, 852.3042pt 
+<Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.png, id=1321, 852.3042pt 
 x 421.0932pt>
 File: Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.png Graphic file (ty
 pe png)
  <use Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.png>
 Package pdftex.def Info: Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.p
-ng used on input line 1331.
+ng used on input line 1334.
 (pdftex.def)             Requested size: 334.60425pt x 165.318pt.
 
-<Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoynting2D.png, id=1318, 853
+<Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoynting2D.png, id=1322, 853
 .2678pt x 423.984pt>
 File: Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoynting2D.png Graphic 
 file (type png)
 
 <use Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoynting2D.png>
 Package pdftex.def Info: Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoyn
-ting2D.png used on input line 1332.
+ting2D.png used on input line 1335.
 (pdftex.def)             Requested size: 334.60425pt x 166.26527pt.
 
-<Pictures/results/0.46_0.01_gamma1.1/fourierAnalysis2D.png, id=1319, 852.3042pt
+<Pictures/results/0.46_0.01_gamma1.1/fourierAnalysis2D.png, id=1323, 852.3042pt
  x 421.0932pt>
 File: Pictures/results/0.46_0.01_gamma1.1/fourierAnalysis2D.png Graphic file (t
 ype png)
  <use Pictures/results/0.46_0.01_gamma1.1/fourierAnalysis2D.png>
 Package pdftex.def Info: Pictures/results/0.46_0.01_gamma1.1/fourierAnalysis2D.
-png used on input line 1341.
+png used on input line 1344.
 (pdftex.def)             Requested size: 376.4258pt x 185.98193pt.
 
-<Pictures/results/0.46_0.01_gamma1.1/fourierAnalysisPoynting2D.png, id=1320, 85
+<Pictures/results/0.46_0.01_gamma1.1/fourierAnalysisPoynting2D.png, id=1324, 85
 3.2678pt x 423.984pt>
 File: Pictures/results/0.46_0.01_gamma1.1/fourierAnalysisPoynting2D.png Graphic
  file (type png)
 
 <use Pictures/results/0.46_0.01_gamma1.1/fourierAnalysisPoynting2D.png>
 Package pdftex.def Info: Pictures/results/0.46_0.01_gamma1.1/fourierAnalysisPoy
-nting2D.png used on input line 1342.
+nting2D.png used on input line 1345.
 (pdftex.def)             Requested size: 376.4258pt x 187.0452pt.
 
 Underfull \vbox (badness 5161) has occurred while \output is active []
 
- [56pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [57pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 26}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1346 \noindent
+l.1349 \noindent
                  <./Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.png> <
 ./Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoynting2D.png>]
-<Pictures/results/0.67_0.01_gamma1.2/fourierAnalysis2D.png, id=1332, 852.3042pt
+<Pictures/results/0.67_0.01_gamma1.2/fourierAnalysis2D.png, id=1336, 852.3042pt
  x 420.1296pt>
 File: Pictures/results/0.67_0.01_gamma1.2/fourierAnalysis2D.png Graphic file (t
 ype png)
  <use Pictures/results/0.67_0.01_gamma1.2/fourierAnalysis2D.png>
 Package pdftex.def Info: Pictures/results/0.67_0.01_gamma1.2/fourierAnalysis2D.
-png used on input line 1351.
+png used on input line 1354.
 (pdftex.def)             Requested size: 376.4258pt x 185.55635pt.
 
-<Pictures/results/0.67_0.01_gamma1.2/fourierAnalysisPoynting2D.png, id=1333, 85
+<Pictures/results/0.67_0.01_gamma1.2/fourierAnalysisPoynting2D.png, id=1337, 85
 3.2678pt x 423.0204pt>
 File: Pictures/results/0.67_0.01_gamma1.2/fourierAnalysisPoynting2D.png Graphic
  file (type png)
 
 <use Pictures/results/0.67_0.01_gamma1.2/fourierAnalysisPoynting2D.png>
 Package pdftex.def Info: Pictures/results/0.67_0.01_gamma1.2/fourierAnalysisPoy
-nting2D.png used on input line 1352.
+nting2D.png used on input line 1355.
 (pdftex.def)             Requested size: 376.4258pt x 186.6201pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [57pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [58pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 27}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1356 \noindent
+l.1359 \noindent
                  <./Pictures/results/0.46_0.01_gamma1.1/fourierAnalysis2D.png> 
 <./Pictures/results/0.46_0.01_gamma1.1/fourierAnalysisPoynting2D.png>]
-<Pictures/results/0.84_0.01_gamma1.3/fourierAnalysis2D.png, id=1343, 852.3042pt
+<Pictures/results/0.84_0.01_gamma1.3/fourierAnalysis2D.png, id=1348, 852.3042pt
  x 419.166pt>
 File: Pictures/results/0.84_0.01_gamma1.3/fourierAnalysis2D.png Graphic file (t
 ype png)
  <use Pictures/results/0.84_0.01_gamma1.3/fourierAnalysis2D.png>
 Package pdftex.def Info: Pictures/results/0.84_0.01_gamma1.3/fourierAnalysis2D.
-png used on input line 1361.
+png used on input line 1364.
 (pdftex.def)             Requested size: 376.4258pt x 185.13077pt.
 
-<Pictures/results/0.84_0.01_gamma1.3/fourierAnalysisPoynting2D.png, id=1344, 85
+<Pictures/results/0.84_0.01_gamma1.3/fourierAnalysisPoynting2D.png, id=1349, 85
 3.2678pt x 422.0568pt>
 File: Pictures/results/0.84_0.01_gamma1.3/fourierAnalysisPoynting2D.png Graphic
  file (type png)
 
 <use Pictures/results/0.84_0.01_gamma1.3/fourierAnalysisPoynting2D.png>
 Package pdftex.def Info: Pictures/results/0.84_0.01_gamma1.3/fourierAnalysisPoy
-nting2D.png used on input line 1362.
+nting2D.png used on input line 1365.
 (pdftex.def)             Requested size: 376.4258pt x 186.195pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [58pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [59pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 28}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1366 \noindent
+l.1369 \noindent
                  <./Pictures/results/0.67_0.01_gamma1.2/fourierAnalysis2D.png> 
 <./Pictures/results/0.67_0.01_gamma1.2/fourierAnalysisPoynting2D.png>]
-<Pictures/results/0.98_0.01_gamma1.4/fourierAnalysis2D.png, id=1355, 852.3042pt
+<Pictures/results/0.98_0.01_gamma1.4/fourierAnalysis2D.png, id=1359, 852.3042pt
  x 419.6478pt>
 File: Pictures/results/0.98_0.01_gamma1.4/fourierAnalysis2D.png Graphic file (t
 ype png)
  <use Pictures/results/0.98_0.01_gamma1.4/fourierAnalysis2D.png>
 Package pdftex.def Info: Pictures/results/0.98_0.01_gamma1.4/fourierAnalysis2D.
-png used on input line 1371.
+png used on input line 1374.
 (pdftex.def)             Requested size: 376.4258pt x 185.34355pt.
 
-<Pictures/results/0.98_0.01_gamma1.4/fourierAnalysisPoynting2D.png, id=1356, 85
+<Pictures/results/0.98_0.01_gamma1.4/fourierAnalysisPoynting2D.png, id=1360, 85
 3.2678pt x 422.0568pt>
 File: Pictures/results/0.98_0.01_gamma1.4/fourierAnalysisPoynting2D.png Graphic
  file (type png)
 
 <use Pictures/results/0.98_0.01_gamma1.4/fourierAnalysisPoynting2D.png>
 Package pdftex.def Info: Pictures/results/0.98_0.01_gamma1.4/fourierAnalysisPoy
-nting2D.png used on input line 1372.
+nting2D.png used on input line 1375.
 (pdftex.def)             Requested size: 376.4258pt x 186.195pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [59pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [60pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 29}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1376 \noindent
+l.1379 \noindent
                  <./Pictures/results/0.84_0.01_gamma1.3/fourierAnalysis2D.png> 
 <./Pictures/results/0.84_0.01_gamma1.3/fourierAnalysisPoynting2D.png>]
-<Pictures/results/1.12_0.01_gamma1.5/fourierAnalysis2D.png, id=1366, 852.3042pt
+<Pictures/results/1.12_0.01_gamma1.5/fourierAnalysis2D.png, id=1370, 852.3042pt
  x 421.0932pt>
 File: Pictures/results/1.12_0.01_gamma1.5/fourierAnalysis2D.png Graphic file (t
 ype png)
  <use Pictures/results/1.12_0.01_gamma1.5/fourierAnalysis2D.png>
 Package pdftex.def Info: Pictures/results/1.12_0.01_gamma1.5/fourierAnalysis2D.
-png used on input line 1381.
+png used on input line 1384.
 (pdftex.def)             Requested size: 376.4258pt x 185.98193pt.
 
-<Pictures/results/1.12_0.01_gamma1.5/fourierAnalysisPoynting2D.png, id=1367, 85
+<Pictures/results/1.12_0.01_gamma1.5/fourierAnalysisPoynting2D.png, id=1371, 85
 3.2678pt x 423.984pt>
 File: Pictures/results/1.12_0.01_gamma1.5/fourierAnalysisPoynting2D.png Graphic
  file (type png)
 
 <use Pictures/results/1.12_0.01_gamma1.5/fourierAnalysisPoynting2D.png>
 Package pdftex.def Info: Pictures/results/1.12_0.01_gamma1.5/fourierAnalysisPoy
-nting2D.png used on input line 1382.
+nting2D.png used on input line 1385.
 (pdftex.def)             Requested size: 376.4258pt x 187.0452pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [60pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [61pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 30}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1386 \noindent
+l.1389 \noindent
                  <./Pictures/results/0.98_0.01_gamma1.4/fourierAnalysis2D.png> 
 <./Pictures/results/0.98_0.01_gamma1.4/fourierAnalysisPoynting2D.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [61pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [62pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 31}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1390 \chapter
+l.1393 \chapter
                {Uniaxial Perfectly Matched Layer} <./Pictures/results/1.12_0.01
 _gamma1.5/fourierAnalysis2D.png> <./Pictures/results/1.12_0.01_gamma1.5/fourier
-AnalysisPoynting2D.png>] [62]
+AnalysisPoynting2D.png>] [63]
 chapter 5.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1392--1395
+Underfull \hbox (badness 10000) in paragraph at lines 1395--1398
 
  []
 
-[63
+[64
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [64]
-<Pictures/Fresnel.png, id=1424, 443.6575pt x 449.68pt>
+ [65]
+<Pictures/Fresnel.png, id=1428, 443.6575pt x 449.68pt>
 File: Pictures/Fresnel.png Graphic file (type png)
 
 <use Pictures/Fresnel.png>
-Package pdftex.def Info: Pictures/Fresnel.png used on input line 1511.
+Package pdftex.def Info: Pictures/Fresnel.png used on input line 1514.
 (pdftex.def)             Requested size: 209.12686pt x 211.9603pt.
- [65] [66pdfTeX warning (ext4): destination with the same identifier (name{figu
+ [66] [67pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.5.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1531 \beq
-            <./Pictures/Fresnel.png>] [67] [68] [69]
-Overfull \hbox (39.04166pt too wide) in paragraph at lines 1701--1702
+l.1534 \beq
+            <./Pictures/Fresnel.png>] [68] [69] [70]
+Overfull \hbox (39.04166pt too wide) in paragraph at lines 1704--1705
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][] 
  []
 
 
-Overfull \hbox (39.04166pt too wide) in paragraph at lines 1703--1704
+Overfull \hbox (39.04166pt too wide) in paragraph at lines 1706--1707
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][] 
  []
 
-[70] <Pictures/upml_11.png, id=1504, 484.209pt x 399.4122pt>
+[71] <Pictures/upml_11.png, id=1508, 484.209pt x 399.4122pt>
 File: Pictures/upml_11.png Graphic file (type png)
 
 <use Pictures/upml_11.png>
-Package pdftex.def Info: Pictures/upml_11.png used on input line 1725.
+Package pdftex.def Info: Pictures/upml_11.png used on input line 1728.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-<Pictures/upml_15_75.png, id=1505, 484.209pt x 399.4122pt>
+<Pictures/upml_15_75.png, id=1509, 484.209pt x 399.4122pt>
 File: Pictures/upml_15_75.png Graphic file (type png)
 
 <use Pictures/upml_15_75.png>
-Package pdftex.def Info: Pictures/upml_15_75.png used on input line 1726.
+Package pdftex.def Info: Pictures/upml_15_75.png used on input line 1729.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
 
-<Pictures/upml_18.png, id=1506, 484.209pt x 399.4122pt>
+<Pictures/upml_18.png, id=1510, 484.209pt x 399.4122pt>
 File: Pictures/upml_18.png Graphic file (type png)
 
 <use Pictures/upml_18.png>
-Package pdftex.def Info: Pictures/upml_18.png used on input line 1727.
+Package pdftex.def Info: Pictures/upml_18.png used on input line 1730.
 (pdftex.def)             Requested size: 138.02449pt x 113.85194pt.
- [71pdfTeX warning (ext4): destination with the same identifier (name{figure.5.
+ [72pdfTeX warning (ext4): destination with the same identifier (name{figure.5.
 2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1735 \part
+l.1738 \part
             {Summary \& Outlook} <./Pictures/upml_11.png> <./Pictures/upml_15_7
 5.png> <./Pictures/upml_18.png>]
 part III.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 1735.
-[72
+(scrkbase)              on input line 1738.
+[73
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1736--1740
+Underfull \hbox (badness 10000) in paragraph at lines 1739--1743
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1736--1740
+Underfull \hbox (badness 10000) in paragraph at lines 1739--1743
 
  []
 
-[73]
+[74]
 part IV.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 1743.
-[74
+(scrkbase)              on input line 1746.
+[75
 
 ]
 chapter A.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [75
+ [76
 
 pdfTeX warning (ext4): destination with the same identifier (name{equation.A.1.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1781 \eeq
-           ] [76pdfTeX warning (ext4): destination with the same identifier (na
+l.1784 \eeq
+           ] [77pdfTeX warning (ext4): destination with the same identifier (na
 me{equation.A.2.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1792 \chapter
+l.1795 \chapter
                {Retarded Potential Equations Fulfill Laurentz Gauge}]
 chapter B.
 
-Overfull \hbox (84.39264pt too wide) in alignment at lines 1820--1825
+Overfull \hbox (84.39264pt too wide) in alignment at lines 1823--1828
  [][][] []
  []
 
-[77
+[78
 
 pdfTeX warning (ext4): destination with the same identifier (name{equation.B.0.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1829 \eeq
+l.1832 \eeq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1829 \eeq
+l.1832 \eeq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1829 \eeq
+l.1832 \eeq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1829 \eeq
+l.1832 \eeq
            ]pdfTeX warning (ext4): destination with the same identifier (name{e
 quation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1831 \beq
+l.1834 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1831 \beq
+l.1834 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1831 \beq
+l.1834 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1831 \beq
+l.1834 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1835 \beq
+l.1838 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1835 \beq
+l.1838 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1835 \beq
+l.1838 \beq
            pdfTeX warning (ext4): destination with the same identifier (name{eq
 uation.B.0.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1835 \beq
+l.1838 \beq
            
 
 Package Fancyhdr Warning: \headheight is too small (17.0pt): 
@@ -2480,43 +2469,43 @@ Package Fancyhdr Warning: \headheight is too small (17.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[78pdfTeX warning (ext4): destination with the same identifier (name{equation.B
+[79pdfTeX warning (ext4): destination with the same identifier (name{equation.B
 .0.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1841 \chapter
+l.1844 \chapter
                {Softwarestack and Documentation}]
 chapter C.
-[79
+[80
 
 ]
 chapter D.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1858--1862
+Underfull \hbox (badness 10000) in paragraph at lines 1861--1865
 
  []
 
-[80
+[81
 
-] [81] (./masterThesis.lof
+] [82] (./masterThesis.lof
 Underfull \vbox (badness 1845) has occurred while \output is active []
 
- [82
+ [83
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [83])
+ [84])
 \tf@lof=\write5
 \openout5 = `masterThesis.lof'.
 
 
-(./masterThesis.bbl [84]
+(./masterThesis.bbl [85]
 chapter without number
-[85
+[86
 
-]) [86]
+]) [87]
 \openout2 = `declaration.aux'.
 
  (./declaration.tex
@@ -2529,16 +2518,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--12
 
  []
 
-) [87
+) [88
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1914.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1914.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1917.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1917.
  (./masterThesis.aux (./acknowledgments.aux) (./symbols.aux)
 (./declaration.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1914.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1914.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1917.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1917.
 
 Package rerunfilecheck Info: File `masterThesis.out' has not changed.
 (rerunfilecheck)             Checksum: A91539AB6F15D1642B0EF745CD63BA54;3213.
@@ -2550,11 +2539,11 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1914.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1917.
  ) 
 Here is how much of TeX's memory you used:
- 24298 strings out of 493014
- 449592 string characters out of 6133350
+ 24299 strings out of 493014
+ 449599 string characters out of 6133350
  592451 words of memory out of 5000000
  27017 multiletter control sequences out of 15000+600000
  33250 words of font info for 83 fonts, out of 8000000 for 9000
@@ -2598,10 +2587,10 @@ public/cm-super/sfsx2488.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
 blic/cm-super/sfti1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
 ic/cm-super/sftt0900.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
 /cm-super/sftt1095.pfb>
-Output written on masterThesis.pdf (96 pages, 16706453 bytes).
+Output written on masterThesis.pdf (97 pages, 16701313 bytes).
 PDF statistics:
- 1871 PDF objects out of 2073 (max. 8388607)
- 1471 compressed objects within 15 object streams
- 439 named destinations out of 1000 (max. 500000)
+ 1876 PDF objects out of 2073 (max. 8388607)
+ 1475 compressed objects within 15 object streams
+ 440 named destinations out of 1000 (max. 500000)
  712 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -278,6 +278,7 @@ which finally leads to the retarded potential equations
 \eeq
 Lastly, we show in Appendix \ref{appendix: Retarded Potential Equations Fulfill Laurentz Gauge} that they indeed fulfill the Laurentz Gauge \eqref{eqn: LaurentzGauge}.
 
+% ================= Moving point charge ======================
 \subsection{Special Case: Moving point charge}
 Now we want to discuss the special case of a particle with charge q, moving along the trajectory $\vec{r}_p$ with velocity $\vec{v} \coloneqq \dot{\vec{r}}_p$, where the dot donates the time derivative. As mentioned before, we now define the source functions for our problem at hand. For the charge density we have
 \beq
@@ -353,9 +354,10 @@ The latter potentials are the generalization of the Coulomb Potential. With the 
 \eeq
 This is the electric and magnetic field of a moving charged particle. Due to the finite speed of light, the fields need time to travel from their source to the observation point. That means, that the fields at time $t$, were actually produced at a earlier time $t_{ret}$. As can be seen in Figure \ref{fig: Interpolation}, the retarded time is determined by the intersection point of the particle trajectory with the backward lightcone of the observation point.\\
 
+% ================= Energy Emission ======================
 \subsection{Energy emission}
 \label{sec: Energy emission}
-Now we want to discuss the energy flow and emission. Therefore, we need to analyze the Poynting Vector
+Now we discuss the energy flow and emission. Therefore, we need to analyze the Poynting Vector
 \beq
 \label{eqn: PoyntingVector}
 \vec{S} = \frac{1}{\mu_0}\vec{E} \times \vec{B} =  \frac{1}{\mu_0 c} \left[ \vec{n}_{ret} E^2  - \left(\vec{n}_{ret} \vec{E}\right) \vec{E}\right],
@@ -376,7 +378,7 @@ whilst the other is through $\dot{\vec{\beta}}$
 \vec{B}_{(a)}(\vec{r}, t) &= \frac{q}{4\pi \epsilon_0c^2} \frac{\vec{n}(\vec{r},t') \times \left[\vec{n}(\vec{r},t') \times \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right) \times \dot{\vec{\beta}}(t')\right]}{\left(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')\right)^3 R(\vec{r},t')}\Biggr |_{t' = t_{ret}}.
 \eal
 \eeq
-Since $E_{(v)} \propto \frac{1}{R^2}$ whereas $E_{(a)} \propto \frac{1}{R}$, its field contributions will dominate in the far field, i.e. for large distances from the source. Plugging in \eqref{eqn: Liénard-Wiechert} in \eqref{eqn: PoyntingVector} gives us several terms with different orders of $\frac{1}{R}$, namely
+Since $E_{(v)} \propto \frac{1}{R^2}$ whereas $E_{(a)} \propto \frac{1}{R}$, the field contributions of $E_{(a)}$ will dominate in the far field, i.e. for large distances from the source. Plugging in \eqref{eqn: Liénard-Wiechert} in \eqref{eqn: PoyntingVector} gives us several terms with different orders of $\frac{1}{R}$, namely
 \beq
 \bal
 \vec{S}_{vv} &\propto \left| \vec{E}_{(v)} \times \vec{B}_{(v)} \right| \propto \frac{1}{R^4},\\
@@ -385,6 +387,11 @@ Since $E_{(v)} \propto \frac{1}{R^2}$ whereas $E_{(a)} \propto \frac{1}{R}$, its
 \eal
 \eeq
 By evaluating the energy flux through an arbitrary surface with differential surface area $\dm\vec{\sigma}$, as illustrated in Figure \ref{fig: PoyntingVector},
+we can see, that it will suffice to only consider the $\frac{1}{R^2}$ terms, because the $\frac{1}{R^3}$ or higher terms do not contribute to the energy emission, since
+\beq
+\oint \vec{S} \dm\vec{\sigma} \rightsquigarrow \oint \frac{1}{R^3} r^2 \dm\Omega \rightsquigarrow \oint \frac{1}{r} \dm\Omega \rightsquigarrow \frac{1}{r} \stackrel{r \rightarrow \infty}{\longrightarrow} 0,
+\eeq
+where $\dm\Omega \coloneqq \sin(\vartheta)\dm\vartheta\dm\varphi$. 
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/PoyntingVector.png}
@@ -392,17 +399,13 @@ By evaluating the energy flux through an arbitrary surface with differential sur
 	\label{fig: PoyntingVector}
 \end{figure}
 \noindent
-we can see, that it will suffice to only consider the $\frac{1}{R^2}$ terms, because the $\frac{1}{R^3}$ or higher terms do not contribute to the energy emission, since
-\beq
-\oint \vec{S} \dm\vec{\sigma} \rightsquigarrow \oint \frac{1}{R^3} r^2 \dm\Omega \rightsquigarrow \oint \frac{1}{r} \dm\Omega \rightsquigarrow \frac{1}{r} \stackrel{r \rightarrow \infty}{\longrightarrow} 0,
-\eeq
-where $\dm\Omega \coloneqq \sin(\vartheta)\dm\vartheta\dm\varphi$. That means we can focus on $\eqref{eqn: Ea}$ when calculating $\eqref{eqn: PoyntingVector}$
-\beq
-\vec{S} =  \frac{1}{\mu_0 c} \frac{q^2}{16\pi^2 \epsilon_0^2 c^2}  \frac{\vec{n}(\vec{r},t') \left[\vec{n}(\vec{r},t') \times \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right) \times \dot{\vec{\beta}}(t')\right]^2}{\left(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')\right)^6 R^2(\vec{r},t')}\Biggr |_{t' = t_{ret}} + \mathcal{O}\left(\frac{1}{R^3}\right).
-\eeq
+That means we can focus on $\eqref{eqn: Ea}$ when calculating $\eqref{eqn: PoyntingVector}$
+\begin{multline}
+\vec{S} =  \frac{1}{\mu_0 c} \frac{q^2}{16\pi^2 \epsilon_0^2 c^2}  \frac{\vec{n}(\vec{r},t') \left[\vec{n}(\vec{r},t') \times \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right) \times \dot{\vec{\beta}}(t')\right]^2}{\left(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')\right)^6 R^2(\vec{r},t')}\Biggr |_{t' = t_{ret}} \\ + \mathcal{O}\left(\frac{1}{R^3}\right).
+\end{multline}
 The energy flux has the direction of $\vec{n}_{ret}$, i.e. it flows from the particle position $\vec{r}_p$ at time $t' = t_{ret}$ to the observation point $\vec{r}$. We can also see, that only accelerated particles ($\dot{\vec{\beta}} \neq 0$) loose energy through radiation, which leads to a reduction in kinetic energy. Although an uniformly moving particle produces E and B - fields, it does not loose energy through radiation.\\
 \newline
-Lastly, we want to discuss the radiation power. The emitted energy per time $\dm t$ into the solid angle $\dm \Omega$ is described by
+Lastly, we discuss the radiation power. The emitted energy per time $\dm t$ into the solid angle $\dm \Omega$ is described by
 \beq
 \frac{\dm W}{\dm \Omega} = \left( \vec{S} \cdot \vec{n}(\vec{r}, t') \right) R^2(\vec{r}, t')\Bigr |_{t' = t_{ret}}.
 \eeq
@@ -460,10 +463,10 @@ Obviously the angle decreases monotonically with increasing velocity, i.e. incre
 %===========================================================
 \part{Numerics}
 \noindent
-The following section deals with the numeric aspects of this thesis. We explain the underlying equation of motions and their history. After that, we go into several methods with which we can solve differential equations. Over the course of the last decades numerous methods were invented each of which has its own strengths and weaknesses. 
-Some of them are very easy to implement, which in turn usually leads to unprecise results. Others are quite complicated and sophisticated to implement, but very accurate.
+The following section deals with the numeric aspects of this thesis. An explanation of the underlying equations of motion and their history is given. After that, several methods are presented with which one can solve differential equations. Over the course of the last decades numerous methods were invented each of which has its own strengths and weaknesses. Some of them are very easy to implement, like the \textit{Euler} scheme, since it only uses first order derivation to approximate the next position. This usually leads to unprecise results, especially when the solution of the differential equation at hand changes rapidly. Then the approximated solution by the solver and the actual solution differ drastically. \\
+Others are quite complicated and sophisticated to implement, like the \textit{Runge Kutta} 4th order scheme, since it uses several derivations at different time steps to approximate the next position. This makes Runge Kutta very accurate though.
 Therefore, one should always consider which method is best for the problem and what it is one want to achieve.\\
-Following this, we also want to define and calculate the numerical complexity of some chosen algorithms. 
+Following this, we also define and calculate the numerical complexity of some chosen algorithms. 
 
 %======================== Integration of equation of motion ========================
 %===========================================================
