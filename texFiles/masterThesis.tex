@@ -175,7 +175,7 @@ In the case of vacuum, the material equations \eqref{eqn: materialEquationsFull}
 
 %======================== Colomb and Lorentz Gauge ========================
 \section{Colomb and Lorentz Gauge}
-In the following section we consider the Maxwell Equations in vacuum. The electric and magnetic fields can also be described by a scalar and a vector potential respectively. From \eqref{eqn: maxwell1} we can conclude that 
+In the following section the Maxwell Equations in vacuum are considered. The electric and magnetic fields can also be described by a scalar and a vector potential respectively. From \eqref{eqn: maxwell1} one can conclude that 
 \beq
 \label{eqn: vecA}
 \exists \vec{A} \in \mathbb{R}^3 \colon \vec{B} = \vec{\nabla} \times \vec{A},
@@ -194,7 +194,7 @@ $\varphi$ is called scalar potential. Plugging in \eqref{eqn: varphi} into \eqre
 \underbrace{\left(\Delta- \frac{1}{c^2}\frac{\del^2}{\del t^2}\right)}_{\coloneqq \hat\square} \vec{A} - \vec{\nabla} \left(\vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t}\right) &= -\mu_0\vec{j},
 \eal
 \eeq
-where we used the \textit{Graßmann Identity}: $\vec{\nabla} \times (\vec{\nabla} \times \vec{A}) = \vec{\nabla}(\vec{\nabla}\vec{A}) - \Delta \vec{A}$.\\
+where the \textit{Graßmann Identity}: $\vec{\nabla} \times (\vec{\nabla} \times \vec{A}) = \vec{\nabla}(\vec{\nabla}\vec{A}) - \Delta \vec{A}$ is used.\\
 The description of the fields by the aforementioned potentials $\varphi$ and $\vec{A}$ are not unique. This is called gauge freedom. The potentials can be specifically adjusted to the problem at hand. The gauge transformations look like
 \beq
 \bal
@@ -202,14 +202,14 @@ The description of the fields by the aforementioned potentials $\varphi$ and $\v
 \varphi \mapsto \varphi' = \varphi - \frac{\del \psi}{\del t},
 \eal
 \eeq
-where $\psi \colon \mathbb{R}^3 \times \mathbb{R} \mapsto \mathbb{R}$. In Appendix \ref{appendix: Gauge Transformations} we show, that $\psi$ does indeed not change the physics.\\
+where $\psi \colon \mathbb{R}^3 \times \mathbb{R} \mapsto \mathbb{R}$. In Appendix \ref{appendix: Gauge Transformations} is shown, that $\psi$ does indeed not change the physics.\\
 \newline
-If we choose $\psi$ such that 
+If one chooses $\psi$ such that 
 \beq
 \label{eqn: LaurentzGauge}
 \vec{\nabla} \vec{A} + \frac{1}{c^2}\frac{\del \varphi}{\del t} = 0,
 \eeq
-then we call it a \textit{Lorentz Gauge} and the potential Equations \eqref{eqn: potentialEquations} decouple into two separate wave equations
+then it is called a \textit{Lorentz Gauge} and the potential Equations \eqref{eqn: potentialEquations} decouple into two separate wave equations
 \beq
 \label{eqn: waveEquations}
 \bal
@@ -222,22 +222,22 @@ then we call it a \textit{Lorentz Gauge} and the potential Equations \eqref{eqn:
 \section{Liénard-Wiechert Potentials}
 \label{sec: lw-potentials}
 \subsection{Solution of the inhomogeneous wave equation}
-The \textit{Liénard-Wiechert} Potentials are the solution of equation \eqref{eqn: waveEquations}. Following \cite{Nolting} we solve the general case
+The \textit{Liénard-Wiechert} Potentials are the solution of equation \eqref{eqn: waveEquations}. Following \cite{Nolting} the general case
 \beq
 \label{eqn: generalWaveEquation}
 \hat\square \psi(\vec{r}, t) = f(\vec{r},t),
 \eeq
-where $\psi, f: \mathbb{R}^3 \times \mathbb{R} \mapsto \mathbb{R}$. $f$ is called source function and will be specified later. \eqref{eqn: generalWaveEquation} is a linear inhomgeneous partial differential equation. Those kind of equations are solved with the \textit{Green's function} approach. If we can find the Green's function G fulfilling
+is solved. where $\psi, f: \mathbb{R}^3 \times \mathbb{R} \mapsto \mathbb{R}$. $f$ is called source function and will be specified later. \eqref{eqn: generalWaveEquation} is a linear inhomgeneous partial differential equation. Those kind of equations are solved with the \textit{Green's function} approach. If one can find the Green's function G fulfilling
 \beq
 \label{eqn: Greens function}
 \hat\square G(\vec{r} - \vec{r}~', t - t') = - \delta(\vec{r} - \vec{r}~')\delta(t - t'),
 \eeq
-then we can calculate the solution of \eqref{eqn: generalWaveEquation} via
+then one can calculate the solution of \eqref{eqn: generalWaveEquation} via
 \beq
 \label{eqn: WaveEquationSolution}
 \psi(\vec{r}, t) = \int \int G(\vec{r} - \vec{r}', t - t') f(\vec{r},t) \dm t' ~\dm \vec{r}~'.
 \eeq
-To find G we use the following Fourier - Transformations 
+To find G one uses the following Fourier - Transformations 
 \beq
 \label{eqn: FourierTransforms}
 \bal
@@ -250,11 +250,11 @@ Plugging in \eqref{eqn: FourierTransforms} into \eqref{eqn: Greens function} yie
 \beq
 \int \int \exp(i\vec{k}(\vec{r} - \vec{r}~'))\exp(-i\omega(t - t')) \left[ G(\vec{k}, \omega) \left( -k^2 + \frac{\omega^2}{c^2}\right) + \frac{1}{4\pi^2} \right] = 0, \nn
 \eeq
-which leaves us with
+which determines $G$ to be
 \beq
 G(\vec{k}, \omega) = \frac{1}{4\pi^2} \frac{1}{k^2 - \frac{\omega^2}{c^2}}. \nn
 \eeq
-Using residue theorem we find the Fourier Back Transform of G to be
+Using residue theorem one finds the Fourier Back Transform of G to be
 \beq
 \label{eqn: Gret}
 G_{ret}(\vec{r} - \vec{r}~', t - t') = \frac{\delta(t' - t_{ret})}{4\pi |\vec{r} - \vec{r}~'|},
@@ -263,11 +263,11 @@ where
 \beq
 t_{ret} \coloneqq t - \frac{|\vec{r} - \vec{r}~'|}{c} 
 \eeq
-is the retarded time. We also call $G_{ret}$ the \textit{retarded Green's function} in contrast to the \textit{advanced Green's function} $G_{av}$ with the advanced time
+is the retarded time. $G_{ret}$ is also called the \textit{retarded Green's function} in contrast to the \textit{advanced Green's function} $G_{av}$ with the advanced time
 \beq
 t_{av} \coloneqq t + \frac{|\vec{r} - \vec{r}~'|}{c}.
 \eeq
-The latter does not fulfill the causal principle of physics. We expect the reason for a change in our signal at $\vec{r}$ at time t, due to a perturbation, to be in the past, not the future. Because $t_{ret} < t$ the retarded Green's function is the one to work with. Plugging in \eqref{eqn: Gret} into \eqref{eqn: WaveEquationSolution} yields
+The latter does not fulfill the causal principle of physics. One expects the reason for a change in a signal at $\vec{r}$ at time t, due to a perturbation, to be in the past, not the future. Because $t_{ret} < t$ the retarded Green's function is the one to work with. Plugging in \eqref{eqn: Gret} into \eqref{eqn: WaveEquationSolution} yields
 \beq
 \psi(\vec{r}, t) = \frac{1}{4\pi}\int \frac{f(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~',
 \eeq
@@ -276,11 +276,11 @@ which finally leads to the retarded potential equations
 \varphi(\vec{r},t) &=& \frac{1}{4\pi \epsilon_0} \int \frac{\rho(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~',\\
 \vec{A}(\vec{r},t) &=& \frac{\mu_0}{4\pi} \int \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} \dm \vec{r}~'.
 \eeq
-Lastly, we show in Appendix \ref{appendix: Retarded Potential Equations Fulfill Laurentz Gauge} that they indeed fulfill the Laurentz Gauge \eqref{eqn: LaurentzGauge}.
+Lastly, in Appendix \ref{appendix: Retarded Potential Equations Fulfill Laurentz Gauge} is shown that they indeed fulfill the Laurentz Gauge \eqref{eqn: LaurentzGauge}.
 
 % ================= Moving point charge ======================
 \subsection{Special Case: Moving point charge}
-Now we discuss the special case of a particle with charge q, moving along the trajectory $\vec{r}_p$ with velocity $\vec{v} \coloneqq \dot{\vec{r}}_p$, where the dot donates the time derivative. As mentioned before, we now define the source functions for our problem at hand. For the charge density we have
+Now the special case of a particle with charge q, moving along the trajectory $\vec{r}_p$ with velocity $\vec{v} \coloneqq \dot{\vec{r}}_p$, where the dot donates the time derivative, is discussed. As mentioned before, the source functions for the problem at hand are defined. For the charge density one has
 \beq
 \rho(\vec{r}, t) = q\delta(\vec{r} - \vec{r}_p(t))
 \eeq
@@ -302,7 +302,7 @@ and using \eqref{eqn: WaveEquationSolution} with \eqref{eqn: Gret} yields after 
 \vec{A}(\vec{r},t) &= \frac{q \mu_0}{4\pi} \int \vec{v}(t')\frac{\delta\left(\frac{ |\vec{r} - \vec{r}_p|}{c} - t + t'\right)}{|\vec{r} - \vec{r}_p|} \dm t'.
 \eal
 \eeq
-For the $t'$ - integration we need the following property of the $\delta$ - distribution
+For the $t'$ - integration the following property of the $\delta$ - distribution is needed
 \beq
 \delta\left[g(t')\right] = \sum_{i = 1}^{n} \frac{\delta(t' - t_i)}{\left| \left( \frac{\dm g}{\dm t'}\right)\Bigr |_{t' = t_i} \right|},
 \eeq
@@ -311,7 +311,7 @@ where
 \label{eqn: gDefinition}
 g(t') \coloneqq \frac{ |\vec{r} - \vec{r}_p|}{c} - t + t'
 \eeq
- and $t_i$ are the roots of $g$. To find the roots of g, let's consider
+ and $t_i$ are the roots of $g$. To find the roots of g, consider
 \beq
 \bal
 \frac{\dm g}{\dm t'} &= 1+ \frac{1}{c}\frac{\dm}{\dm t'}|\vec{r} - \vec{r}_p|  = 1 - \frac{\vec{v}(t')}{c} \underbrace{ \frac{\vec{r} - \vec{r}_p}{|\vec{r} - \vec{r}_p| }}_{ |\cdot| = 1 }\\
@@ -319,7 +319,7 @@ g(t') \coloneqq \frac{ |\vec{r} - \vec{r}_p|}{c} - t + t'
 &\stackrel{v < c}{\Longrightarrow} \frac{\dm g}{\dm t'} > 0,
  \eal
 \eeq
-which means that $g$ is a monotonically increasing function and therefore has at most one root, which is $t' = t_{ret}$ as can be seen from \eqref{eqn: gDefinition}. In case that g has no roots at all, we can conclude that $\varphi \equiv 0$ and $\vec{A} \equiv 0$.\\
+which means that $g$ is a monotonically increasing function and therefore has at most one root, which is $t' = t_{ret}$ as can be seen from \eqref{eqn: gDefinition}. In case that g has no roots at all, one can conclude that $\varphi \equiv 0$ and $\vec{A} \equiv 0$.\\
 With $t_{ret} \coloneqq t - \frac{|\vec{r} - \vec{r}_p|}{c} $ the integration over $t'$ yields
 \beq
 \bal
@@ -335,7 +335,7 @@ which are the \textit{Liénard-Wiechert} Potentials. Upon defining
 \vec{n}(\vec{r},t) &\coloneqq \frac{\vec{R}(\vec{r},t)}{R(\vec{r},t)}
 \eal
 \eeq
-we can rewrite the Liénard-Wiechert Potentials in a more compact and final form
+one can rewrite the Liénard-Wiechert Potentials in a more compact and final form
 \beq
 \bal
 \label{eqn: LWPotentials}
@@ -343,7 +343,7 @@ we can rewrite the Liénard-Wiechert Potentials in a more compact and final form
 \vec{A}(\vec{r},t) &= \frac{\mu_0}{4\pi} \frac{q\vec{\beta}(t')}{(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')) R(\vec{r},t')}\Biggr |_{t' = t_{ret}}.
 \eal
 \eeq
-The latter potentials are the generalization of the Coulomb Potential. With the help of \eqref{eqn: varphi} the electric and magnetic fields can be derived from the \textit{Liénard-Wiechert} Potentials \eqref{eqn: LWPotentials}. Since this is a quite longish calculation it is refered to \cite{Nolting} and just present the final result 
+The latter potentials are the generalization of the Coulomb Potential. With the help of \eqref{eqn: varphi} the electric and magnetic fields can be derived from the \textit{Liénard-Wiechert} Potentials \eqref{eqn: LWPotentials}. Since this is a quite longish calculation it is referred to \cite{Nolting} and the final result is just presented
 \beq
 \label{eqn: Liénard-Wiechert}
 \bal
@@ -357,7 +357,7 @@ This is the electric and magnetic field of a moving charged particle. Due to the
 % ================= Energy Emission ======================
 \subsection{Energy emission}
 \label{sec: Energy emission}
-Now we discuss the energy flow and emission. Therefore, we need to analyze the Poynting Vector
+Now the energy flow and emission is discussed. Therefore, the Poynting Vector needs to be analyzed
 \beq
 \label{eqn: PoyntingVector}
 \vec{S} = \frac{1}{\mu_0}\vec{E} \times \vec{B} =  \frac{1}{\mu_0 c} \left[ \vec{n}_{ret} E^2  - \left(\vec{n}_{ret} \vec{E}\right) \vec{E}\right],
@@ -378,7 +378,7 @@ whilst the other is through $\dot{\vec{\beta}}$
 \vec{B}_{(a)}(\vec{r}, t) &= \frac{q}{4\pi \epsilon_0c^2} \frac{\vec{n}(\vec{r},t') \times \left[\vec{n}(\vec{r},t') \times \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right) \times \dot{\vec{\beta}}(t')\right]}{\left(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')\right)^3 R(\vec{r},t')}\Biggr |_{t' = t_{ret}}.
 \eal
 \eeq
-Since $E_{(v)} \propto \frac{1}{R^2}$ whereas $E_{(a)} \propto \frac{1}{R}$, the field contributions of $E_{(a)}$ will dominate in the far field, i.e. for large distances from the source. Plugging in \eqref{eqn: Liénard-Wiechert} in \eqref{eqn: PoyntingVector} gives us several terms with different orders of $\frac{1}{R}$, namely
+Since $E_{(v)} \propto \frac{1}{R^2}$ whereas $E_{(a)} \propto \frac{1}{R}$, the field contributions of $E_{(a)}$ will dominate in the far field, i.e. for large distances from the source. Plugging in \eqref{eqn: Liénard-Wiechert} in \eqref{eqn: PoyntingVector} yields several terms with different orders of $\frac{1}{R}$, namely
 \beq
 \bal
 \vec{S}_{vv} &\propto \left| \vec{E}_{(v)} \times \vec{B}_{(v)} \right| \propto \frac{1}{R^4},\\
@@ -387,7 +387,7 @@ Since $E_{(v)} \propto \frac{1}{R^2}$ whereas $E_{(a)} \propto \frac{1}{R}$, the
 \eal
 \eeq
 By evaluating the energy flux through an arbitrary surface with differential surface area $\dm\vec{\sigma}$, as illustrated in Figure \ref{fig: PoyntingVector},
-we can see, that it will suffice to only consider the $\frac{1}{R^2}$ terms, because the $\frac{1}{R^3}$ or higher terms do not contribute to the energy emission, since
+one can see, that it will suffice to only consider the $\frac{1}{R^2}$ terms, because the $\frac{1}{R^3}$ or higher terms do not contribute to the energy emission, since
 \beq
 \oint \vec{S} \dm\vec{\sigma} \rightsquigarrow \oint \frac{1}{R^3} r^2 \dm\Omega \rightsquigarrow \oint \frac{1}{r} \dm\Omega \rightsquigarrow \frac{1}{r} \stackrel{r \rightarrow \infty}{\longrightarrow} 0,
 \eeq
@@ -399,30 +399,31 @@ where $\dm\Omega \coloneqq \sin(\vartheta)\dm\vartheta\dm\varphi$.
 	\label{fig: PoyntingVector}
 \end{figure}
 \noindent
-That means we can focus on $\eqref{eqn: Ea}$ when calculating $\eqref{eqn: PoyntingVector}$
+That means one can focus on $\eqref{eqn: Ea}$ when calculating $\eqref{eqn: PoyntingVector}$
 \begin{multline}
 \vec{S} =  \frac{1}{\mu_0 c} \frac{q^2}{16\pi^2 \epsilon_0^2 c^2}  \frac{\vec{n}(\vec{r},t') \left[\vec{n}(\vec{r},t') \times \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right) \times \dot{\vec{\beta}}(t')\right]^2}{\left(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')\right)^6 R^2(\vec{r},t')}\Biggr |_{t' = t_{ret}} \\ + \mathcal{O}\left(\frac{1}{R^3}\right).
 \end{multline}
-The energy flux has the direction of $\vec{n}_{ret}$, i.e. it flows from the particle position $\vec{r}_p$ at time $t' = t_{ret}$ to the observation point $\vec{r}$. We can also see, that only accelerated particles ($\dot{\vec{\beta}} \neq 0$) loose energy through radiation, which leads to a reduction in kinetic energy. Although an uniformly moving particle produces E and B - fields, it does not loose energy through radiation.\\
+The energy flux has the direction of $\vec{n}_{ret}$, i.e. it flows from the particle position $\vec{r}_p$ at time $t' = t_{ret}$ to the observation point $\vec{r}$. It can also be seen, that only accelerated particles ($\dot{\vec{\beta}} \neq 0$) loose energy through radiation, which leads to a reduction in kinetic energy. Although an uniformly moving particle produces E and B - fields, it does not loose energy through radiation.\\
 \newline
-Lastly, we discuss the radiation power. The emitted energy per time $\dm t$ into the solid angle $\dm \Omega$ is described by
+Lastly, the radiation power is discussed. The emitted energy per time $\dm t$ into the solid angle $\dm \Omega$ is described by
 \beq
+\label{eqn: dw/do}
 \frac{\dm W}{\dm \Omega} = \left( \vec{S} \cdot \vec{n}(\vec{r}, t') \right) R^2(\vec{r}, t')\Bigr |_{t' = t_{ret}}.
 \eeq
-Usually the observed amount of energy per unit time $\dm t$ is not the same as the emitted energy of the particle per unit time $\dm t_{ret}$. To learn more about the emission within the particles system, we want to express our equation in terms of $\dm t_{ret}$, which gives us
+Usually the observed amount of energy per unit time $\dm t$ is not the same as the emitted energy of the particle per unit time $\dm t_{ret}$. To learn more about the emission within the particles system, equation \eqref{eqn: dw/do} needs to be expressed n terms of $\dm t_{ret}$, which yields
 \beq
 \frac{\dm W}{\dm \Omega} = \left( \vec{S} \cdot \vec{n}(\vec{r}, t') \right) R^2(\vec{r}, t') \left(\frac{\dm t}{\dm t'}\right)\Bigr |_{t' = t_{ret}}.
 \eeq
-From the definition of $t_{ret} \coloneqq t' - \frac{|\vec{r} - \vec{r}~'|}{c}$ we find
+From the definition of $t_{ret} \coloneqq t' - \frac{|\vec{r} - \vec{r}~'|}{c}$ one finds
 \beq
 \left(\frac{\dm t}{\dm t'}\right)\Bigr |_{t' = t_{ret}} = \left(1 + \frac{1}{c} \frac{\dm}{\dm t'} |\vec{r} - \vec{r}_p(t')|\right)\Bigr |_{t' = t_{ret}} = \left(1 - \frac{1}{c} \vec{n}(\vec{r}, t')\vec{v}(t')\right)\Bigr |_{t' = t_{ret}}.
 \eeq
-Finally, we obtain
+Finally, one obtains
 \beq
 \label{eqn: RadiationPower}
 \frac{\dm W}{\dm \Omega} =  \frac{q^2}{16\pi^2 \epsilon_0 c}  \frac{ \left[\vec{n}(\vec{r},t') \times \left(\vec{n}(\vec{r},t') - \vec{\beta}(t')\right) \times \dot{\vec{\beta}}(t')\right]^2}{\left(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')\right)^5} \Biggr |_{t' = t_{ret}}.
 \eeq
-Now we can discuss two cases. The non relativistic case ($\beta \approx 0$) and the relativistic case ($\beta \approx 1$).\\
+Now two cases are discussed. The non relativistic case ($\beta \approx 0$) and the relativistic case ($\beta \approx 1$).\\
 \begin{description}
 \item[$\beta \approx 0$:] In this case \eqref{eqn: RadiationPower} simplifies to
 \beq
@@ -433,12 +434,12 @@ Now we can discuss two cases. The non relativistic case ($\beta \approx 0$) and 
 &=  \frac{q^2 \dot{\beta}^2_{ret}}{16\pi^2 \epsilon_0 c} \sin^2(\vartheta) \nn,
 \eal
 \eeq 
-where $\vartheta$ is the angle between $\dot{\vec{\beta}}$ and $\vec{n}$. $\beta_{ret}$ means again the evaluation at $t' = t_{ret}$. We conclude that the direction of maximum radiation is perpendicular to the particles direction of motion, in contrast to
-\item[$\beta \approx 1$:] where we will see shortly that the maximum radiation will be primarily in the direction of motion of the particle. We will restrict ourselves to the simple case, where $\dot{\vec{\beta}} \parallel \vec{\beta}$. Following the same steps as above we obtain
+where $\vartheta$ is the angle between $\dot{\vec{\beta}}$ and $\vec{n}$. $\beta_{ret}$ means again the evaluation at $t' = t_{ret}$. One concludes that the direction of maximum radiation is perpendicular to the particles direction of motion, in contrast to
+\item[$\beta \approx 1$:] where one will see shortly that the maximum radiation will be primarily in the direction of motion of the particle. In the following only the simple case, where $\dot{\vec{\beta}} \parallel \vec{\beta}$ is conducted. Following the same steps as above one obtains
 \beq
 \frac{\dm W}{\dm \Omega} = \frac{q^2 \dot{\beta}^2_{ret}}{16\pi^2 \epsilon_0 c} \frac{\sin^2(\vartheta)}{\left(1 - \beta(t')\cos(\vartheta)\right)^5}.
 \eeq
-To get the angle, where the radiation is maximal, we calculate
+To get the angle, where the radiation is maximal, one calculates
 \beq
 \bal
 \frac{\dm}{\dm(\cos(\vartheta))} &\left(\frac{\dm W}{\dm \Omega}\right) \stackrel{!}{=} 0 \\
@@ -449,7 +450,7 @@ To get the angle, where the radiation is maximal, we calculate
 \Longrightarrow& \cos(\vartheta)_{max} = \frac{1}{3\beta_{ret}}\left(\sqrt{1+15\beta_{ret}^2} -1\right).\nn
 \eal
 \eeq
-Obviously the angle decreases monotonically with increasing velocity, i.e. increasing $\beta_{ret}$. For $\beta_{ret} = 1$ we get $\cos(\vartheta) = 1$ or equivalently $\vartheta = 0$. In Figure \ref{fig: radiationSummary} the results are summarized.
+Obviously the angle decreases monotonically with increasing velocity, i.e. increasing $\beta_{ret}$. $\beta_{ret} = 1$ yields $\cos(\vartheta) = 1$ or equivalently $\vartheta = 0$. In Figure \ref{fig: radiationSummary} the results are summarized.
  \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/RadiationSummary.png}
@@ -463,10 +464,10 @@ Obviously the angle decreases monotonically with increasing velocity, i.e. incre
 %===========================================================
 \part{Numerics}
 \noindent
-The following section deals with the numeric aspects of this thesis. An explanation of the underlying equations of motion and their history is given. After that, several methods are presented with which one can solve differential equations. Over the course of the last decades numerous methods were invented each of which has its own strengths and weaknesses. Some of them are very easy to implement, like the \textit{Euler} scheme, since it only uses first order derivation to approximate the next position. This usually leads to unprecise results, especially when the solution of the differential equation at hand changes rapidly. Then the approximated solution by the solver and the actual solution differ drastically. \\
+The following section deals with the numeric aspects of this thesis. An explanation of the underlying equations of motion and their history is given. After that, several methods are presented with which one can solve differential equations. Over the course of the last decades numerous methods were invented each of which has its own strengths and weaknesses. Some of them are very easy to implement, like the \textit{Euler} scheme, since it only uses first order derivation to approximate the next position. This usually leads to unprecise results, especially when the solution of the differential equation changes rapidly. Then the approximated solution by the solver and the actual solution differ drastically. \\
 Others are quite complicated and sophisticated to implement, like the \textit{Runge Kutta} 4th order scheme, since it uses several derivations at different time steps to approximate the next position. This makes Runge Kutta very accurate though.
 Therefore, one should always consider which method is best for the problem and what it is one want to achieve.\\
-Following this, we also define and calculate the numerical complexity of some chosen algorithms. 
+Following this, the numerical complexity is defined and calculated for some chosen algorithms. 
 
 %======================== Integration of equation of motion ========================
 %===========================================================
@@ -474,7 +475,7 @@ Following this, we also define and calculate the numerical complexity of some ch
 %======================== Equations of Motion ========================
 \section{Equations of Motion}
 \label{sec: Equations of Motion}
-As we know from mechanics the dynamics of particles is determined by the forces acting on them. In our case there is a force due to electro-magnetic fields. That can be external fields, but also fields due to moving particles, as we explained in Section \ref{sec: lw-potentials}.\\
+As is known from mechanics the dynamics of particles is determined by the forces acting on them. In case of an electron scattering process there is a force due to electromagnetic fields. That can be external fields, but also fields due to moving particles, as explained in Section \ref{sec: lw-potentials}.\\
 The dynamics of our system is described by the \textit{Lorentz-Newton} equations
 \beq
 \label{eqn: Lorentz-Newton}
@@ -506,12 +507,12 @@ In this thesis the damping term $g^{\mu}$ is neglected. In \cite{Jackson} a roug
 \label{eqn: damping estimation}
 \omega_0 \Delta \tilde{t} \ll 1
 \eeq
-holds. $\Delta \tilde{t} = \frac{q^2}{4\pi\epsilon_0m_ec^3} = 9.40 \cdot 10^{-24}\si{\second}$ is the normalized time. In Section \ref{sec: electron scattering} we show, that equation \eqref{eqn: damping estimation} is indeed fulfilled in our simulations. \\
-We now present different methods of how to solve the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} numerically.
+holds. $\Delta \tilde{t} = \frac{q^2}{4\pi\epsilon_0m_ec^3} = 9.40 \cdot 10^{-24}\si{\second}$ is the normalized time. In Section \ref{sec: electron scattering} is shown, that equation \eqref{eqn: damping estimation} is indeed fulfilled in our simulations. \\
+In the following different methods are presented of how to solve the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} numerically.
 
 %======================== Euler Scheme ========================
 \section{Euler-Scheme}
-The most simple method is the explicit \textit{Euler}-Method. It's easy to implement but not very accurate, as we shall see later. But before we go into the details of the explicit Euler-Scheme we need to address some prerequisites all following methods will have in common. \\
+The most simple method is the explicit \textit{Euler}-Method. It's easy to implement but not very accurate, as can be seen later. But before going into the details of the explicit Euler-Scheme prerequisites are addressed, which all following methods have in common. \\
 Starting point will always be a first order system of the kind
 \beq
 \label{eqn: Euler}
@@ -523,7 +524,7 @@ u^{\mu}(\tau_0) &= u^{\mu}_0.
 \eal
 \eeq
 Systems of higher order can always be reduced to a first order system. \\
-In order to solve the equation of motion numerically the domain needs to be discretized. Therefore, we divide the time interval into N equidistant partial intervals $h$, by defining
+In order to solve the equation of motion numerically the domain needs to be discretized. Therefore, the time interval is divided into N equidistant partial intervals $h$, by defining
 \beq
 h \coloneqq \Delta \tau = \tau_{i+1} - \tau_i. \nn
 \eeq
@@ -548,7 +549,7 @@ x^{\mu}_{i+1} &= x^{\mu}_i + h~u^{\mu}_i\\
 u^{\mu}_{i+1} &= u^{\mu}_i + h~f^{\mu}(x^{\nu}_i,u^{\nu}_i).
 \eal
 \eeq
-In order for us to calculate the goodness of this approximation we need to introduce the \textit{Procedural Error} and the \textit{Order of Consistency} \cite{NumerikSkript}.\\
+In order to calculate the goodness of this approximation one needs to introduce the \textit{Procedural Error} and the \textit{Order of Consistency} \cite{NumerikSkript}.\\
 \newtheorem{env_definition}{Definition}[section]
 \begin{env_definition}[Procedural Error  and Order of Consistency]
 \label{def: Procedural Error}
@@ -572,7 +573,7 @@ is called local Procedural Error of the One-Step-Scheme at $\tau$ for the increm
 with a constant $C\ge 0$, which is independent of $\tau$ and $h$.
 \end{description}
 \end{env_definition}
-Descriptively the Procedural Error is the difference between the exact solution $y(\tau+h)$ and the result, which we get from the One-Step-Scheme starting from the exact solution at the earlier time step $y(\tau)$.
+Descriptively the Procedural Error is the difference between the exact solution $y(\tau+h)$ and the result, which one gets from the One-Step-Scheme starting from the exact solution at the earlier time step $y(\tau)$.
 Figure \ref{fig: Procedural Error} illustrates the situation.
 \begin{figure}[H]
 	\centering
@@ -581,13 +582,13 @@ Figure \ref{fig: Procedural Error} illustrates the situation.
 	\label{fig: Procedural Error}
 \end{figure}
 \noindent
-We now use the definitions \ref{def: Procedural Error} to calculate the Order of Consistency of the Euler-Scheme.\\
-Starting point is the system \eqref{eqn: Lorentz-Newton}. Thereby we focus on the equation for $u^{\mu}$, since $x^{\mu}$ can be easily integrated from $u^{\mu}$.
-Following Definition \ref{def: Procedural Error} we have
+The definitions \ref{def: Procedural Error} is now used to calculate the Order of Consistency of the Euler-Scheme.\\
+Starting point is the system \eqref{eqn: Lorentz-Newton}. Thereby the focus is on the equation for $u^{\mu}$, since $x^{\mu}$ can be easily integrated from $u^{\mu}$.
+Following Definition \ref{def: Procedural Error} yields
 \beq
 y = u^{\mu}. \nn \\
 \eeq
-We get
+One gets
 \beq
 \label{eqn: eta u}
 \eta(\tau, h) = u^{\mu}(\tau_i) + h f^{\mu}(x^{\nu}, u^{\nu}) - u^{\mu}(\tau_{i+1}).
@@ -620,7 +621,7 @@ Thus the differential equation should be of the form
 \beq
 \frac{\dm^2 x^{\mu}}{\dm \tau^2} = \frac{\dm u^{\mu}}{\dm \tau} = f^{\mu}(x^{\nu}).
 \eeq
-As we already mentioned, the various methods discretize the differential operators differently.
+As already mentioned, the various methods discretize the differential operators differently.
 The Leap-Frog-Scheme uses
 \beq
 \bal
@@ -636,8 +637,8 @@ u^{\mu}_{i+\frac{1}{2}} &= u^{\mu}_{i-\frac{1}{2}} + h f^{\mu}(x^{\nu}_i).
 \eal
 \eeq
 \noindent
-As we can see, position and velocity are calculated at different times. They are shifted against each other in time by $h = \frac{1}{2}$. \\
-But what if we have a system in which the force depends on the velocity? Are we stuck with expensive implicit methods? Fortunately not. We can use the \textit{Boris} - Method.
+As one can see, position and velocity are calculated at different times. They are shifted against each other in time by $h = \frac{1}{2}$. \\
+But what if one has a system, in which the force depends on the velocity? Is one stuck with expensive implicit methods? Fortunately not. One can use the \textit{Boris} - Method.
 
 \section{Boris-Method}
 \label{sec: Boris-Method}
@@ -672,7 +673,7 @@ where $\vartheta$ is the angle between $\vec{B}$ and $\vec{v}$. By splitting up 
 \end{enumerate}
 \noindent
 In the code used in this master thesis, the slightly more sophisticated but relativistically correct form with $u = \gamma v$ is used. \\
-Up to now one question remains unanswered. How do we solve for $\vec{v}_{+}$ in \eqref{eqn: v+}? To answer this, we use Figure \ref{fig: borisProjection}.
+Up to now one question remains unanswered. How does one solve for $\vec{v}_{+}$ in \eqref{eqn: v+}? To answer this, consider Figure \ref{fig: borisProjection}.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/borisProjection.png} 
@@ -680,16 +681,16 @@ Up to now one question remains unanswered. How do we solve for $\vec{v}_{+}$ in 
 	\label{fig: borisProjection}
 \end{figure}
 \noindent
-What we want is a vector, which is parallel to $\vec{v}_{+} - \vec{v}_{-}$. Its magnitude is yet to be determined. However, if we can find a vector $\vec{v}~'$ which is perpendicular to $\vec{v}_{+} - \vec{v}_{-}$, then $\vec{v}~' \times \vec{s}$, where $\vec{s} \propto \vec{B}$, is exactly what we need.\\
+What one wants is a vector, which is parallel to $\vec{v}_{+} - \vec{v}_{-}$. Its magnitude is yet to be determined. However, if one can find a vector $\vec{v}~'$ which is perpendicular to $\vec{v}_{+} - \vec{v}_{-}$, then $\vec{v}~' \times \vec{s}$, where $\vec{s} \propto \vec{B}$, is exactly what one needs.\\
 Upon defining
 \beq
 \vec{t} \coloneqq -\frac{\vec{B}}{B} \tan\left(\frac{\theta}{2}\right) = \frac{q\vec{B}h}{2m},
 \eeq
-we obtain $\vec{v}~'$ from
+one obtains $\vec{v}~'$ from
 \beq
 \vec{v}~' = \vec{v}_{-} + \vec{v}_{-} \times \vec{t}.
 \eeq
-Now $\vec{v}~' $ is perpendicular to  $\vec{v}_{+} - \vec{v}_{-}$. Finally, we need a vector $\vec{s} \propto \vec{B}$ which magnitude is determined by the constraint $|\vec{v}_{+}|= |\vec{v}_{-}|$. Using half angle formulas we find 
+Now $\vec{v}~' $ is perpendicular to  $\vec{v}_{+} - \vec{v}_{-}$. Finally, a vector $\vec{s} \propto \vec{B}$ is needed, which magnitude is determined by the constraint $|\vec{v}_{+}|= |\vec{v}_{-}|$. Using half angle formulas one finds
 \beq
 \vec{s} = \frac{2\vec{t}}{1+t^2}.
 \eeq
@@ -697,7 +698,7 @@ Hence,
 \beq
 \vec{v}_{+}= \vec{v}_{-} + \vec{v}~' \times \vec{s}.
 \eeq
-Finally, we do a quick error analysis. We expect the angle of rotation $\theta$ to be close to 
+Finally, a quick error analysis is conducted. The angle of rotation $\theta$ is expected to be close to 
 \beq
 \omega_ch = \frac{2\pi h}{T} = \frac{qBh}{m},\nn
 \eeq
@@ -717,7 +718,7 @@ For $\omega_ch < 0.35$ the error is smaller than $1\%$.
 	\label{fig: borisRotation}
 \end{figure}
 \noindent
-To sum it up equation \ref{eqn: Liénard-Wiechert} allows the calculation of Liénard-Wiechert fields at a given observation point. With the Boris-Scheme an effective and precise pushing of particles in an electromagnetic field is possible. The next step is to combine those two and present a way of how to set up a simulation.
+To sum it up equation \eqref{eqn: Liénard-Wiechert} allows the calculation of Liénard-Wiechert fields at a given observation point. With the Boris-Scheme an effective and precise pushing of particles in an electromagnetic field is possible. The next step is to combine those two and present a way of how to set up a simulation.
 %======================== Interpolations ========================
 %===========================================================
 \chapter{Interpolations}
@@ -735,7 +736,7 @@ The simplest solution is a linear interpolation between the last point inside an
 	\label{fig: Interpolation}
 \end{figure}
 \noindent
-Thereto let $x_j^{\mu} \in \mathbb{R}^{3+1}$ be the last point inside and $x_{j+1}^{\mu} \in \mathbb{R}^{3+1}$ the first point outside the lightcone. Further let $x_{c}^{\mu} \in \mathbb{R}^{3+1}$ be the intersection point of interest then we get
+Thereto let $x_j^{\mu} \in \mathbb{R}^{3+1}$ be the last point inside and $x_{j+1}^{\mu} \in \mathbb{R}^{3+1}$ the first point outside the lightcone. Further let $x_{c}^{\mu} \in \mathbb{R}^{3+1}$ be the intersection point of interest then one gets
 \beq
 \label{eqn: linInt}
 x_c^{\mu} = x_j^{\mu} + \lambda ~\left(x_{j+1}^{\mu} - x_j^{\mu}\right),
@@ -752,7 +753,7 @@ Plugging in \eqref{eqn: linInt} in \eqref{eqn: constraint} yields
 \label{eqn: quadEq}
 \lambda^2 (x_{j+1} - x_j)_{\mu}(x_{j+1} - x_j)^{\mu} + \lambda~2(x_{j+1} - x_j)_{\mu}(x_j - x_o)^{\mu} + (x_j)_{\mu}(x_j)^{\mu} \\ + (x_o)_{\mu}(x_o)^{\mu} - 2(x_j)_{\mu}(x_o)^{\mu}  = 0.
 \end{multline}
-We define
+Equation \eqref{eqn: quadEq} suggests the following definitions
 \beq
 \bal
 a &\coloneqq (x_{j+1} - x_j)_{\mu}(x_{j+1} - x_j)^{\mu}\\
@@ -764,7 +765,7 @@ In general the quadratic equation \eqref{eqn: quadEq} in $\lambda$ has two solut
 \beq
 \lambda_{1/2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}. \nn
 \eeq
-One solution denotes the intersection point with the backward lightcone, the other one with the forward lightcone. Since  $\lambda \in [0,1]$ we are only interested in the larger one. 
+One solution denotes the intersection point with the backward lightcone, the other one with the forward lightcone. Since  $\lambda \in [0,1]$ one is only interested in the larger one. 
 \beq
 \lambda_{1/2} = \frac{-b + \sqrt{b^2 - 4ac}}{2a}. \nn
 \eeq
@@ -773,8 +774,8 @@ Plugging in $\lambda$ in \eqref{eqn: linInt} gives the desired intersection poin
 %======================== trilinear interpolation of fields ========================
 \section{Trilinear Interpolation of Fields}
 \label{sec: trilinear Interpolation}
-Another interpolation method we are using is the trilinear interpolation to calculate the field values at the particle position more accurately. As is explained in more detail later (see Chapter \ref{cha: HybridFieldApproach}), field values will either be stored on grid points or calculated analytically. However, if we want to consider interactions between multiple particles correctly, we need the field values at the particle position which does usually not coincide with the grid point where the field values are stored. Matters were complicated further by the fact that our grid will be staggered, due to numerical stability issues and is explained in more detail in Section \ref{sec: Yee-Scheme}.\\
-Let's assume we have a cube with the points A, B, C, ..., H, as is illustrated in the following Figure \ref{fig: trilinearInterpolation}
+Another interpolation method used in this thesis is the trilinear interpolation to calculate the field values at the particle position more accurately. As is explained in more detail later (see Chapter \ref{cha: HybridFieldApproach}), field values will either be stored on grid points or calculated analytically. However, if one wants to consider interactions between multiple particles correctly, one needs the field values at the particle position which does usually not coincide with the grid point where the field values are stored. Matters are complicated further by the fact that the grid is staggered, due to numerical stability issues and is explained in more detail in Section \ref{sec: Yee-Scheme}.\\
+Consider a cube with the points A, B, C, ..., H, as is illustrated in the following Figure \ref{fig: trilinearInterpolation}
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.40\textwidth]{Pictures/trilinearInterpolation.pdf} 
@@ -782,7 +783,7 @@ Let's assume we have a cube with the points A, B, C, ..., H, as is illustrated i
 	\label{fig: trilinearInterpolation}
 \end{figure}
 \noindent
-Those eight points are part of the grid and contain the field values for both $\vec{E}$ and $\vec{H}$. To get the correct field values at the particle position \textcolor{red}{$P_f$} we need to interpolate in 3D. The trilinear interpolation simply consists out of seven linear interpolations. We first interpolate the $x$ - value along $\overline{AE}$, $\overline{CG}$, $\overline{BF}$ and $\overline{DH}$ to get the points \textcolor{blue}{$P_1$},  \textcolor{blue}{$P_2$},  \textcolor{blue}{$P_3$} and  \textcolor{blue}{$P_4$}. Thereto let $x_p \in \mathbb{R}$ be the particle's $x$ position and $x_0 \in \mathbb{R}$ and $x_1 \in \mathbb{R}$ be the corresponding $x$ - values at A and E respectively. Same holds for the aforementioned tuples as well. Then we can write
+These eight points are part of the grid and contain the field values for both $\vec{E}$ and $\vec{H}$. To get the correct field values at the particle position \textcolor{red}{$P_f$} a 3D interpolation is necessary. The trilinear interpolation simply consists of seven linear interpolations. First one interpolates the $x$ - value along $\overline{AE}$, $\overline{CG}$, $\overline{BF}$ and $\overline{DH}$ to get the points \textcolor{blue}{$P_1$},  \textcolor{blue}{$P_2$},  \textcolor{blue}{$P_3$} and  \textcolor{blue}{$P_4$}. Thereto let $x_p \in \mathbb{R}$ be the particle's $x$ position and $x_0 \in \mathbb{R}$ and $x_1 \in \mathbb{R}$ be the corresponding $x$ - values at A and E respectively. Same holds for the aforementioned tuples as well. Then one can write
 \beq
 \bal
 u & \coloneqq \frac{x_p - x_0}{x_1 - x_0} \\
@@ -792,7 +793,7 @@ u & \coloneqq \frac{x_p - x_0}{x_1 - x_0} \\
 \Longrightarrow \textcolor{blue}{P_4} &= D + u (H - D).
 \eal
 \eeq
-In the next step, we interpolate along the $y$ - axis. Analogously we define $y_p$, $y_0$ and $y_1$. We conclude
+In the next step, one interpolates along the $y$ - axis. Analogously one defines $y_p$, $y_0$ and $y_1$. One concludes
 \beq
 \bal
 v &\coloneqq \frac{y_p - y_0}{y_1 - y_0} \\
@@ -800,7 +801,7 @@ v &\coloneqq \frac{y_p - y_0}{y_1 - y_0} \\
 \Longrightarrow  \textcolor{green}{P_o} &= \textcolor{blue}{P_3} + v (\textcolor{blue}{P_4} - \textcolor{blue}{P_3}).\\
 \eal
 \eeq
-And finally with $z_p$, $z_0$ and $z_1$ we get
+And finally with $z_p$, $z_0$ and $z_1$ one gets
 \beq
 \bal
 w &\coloneqq \frac{z_p - z_0}{z_1 - z_0} \\
