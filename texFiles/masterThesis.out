@@ -19,7 +19,7 @@
 \BOOKMARK [0][-]{chapter.4}{Hybrid Field Approach}{part.2}% 19
 \BOOKMARK [1][-]{section.4.1}{FDTD}{chapter.4}% 20
 \BOOKMARK [1][-]{section.4.2}{Numeric Dispersion Relation}{chapter.4}% 21
-\BOOKMARK [1][-]{section.4.3}{Near-and Far Fields}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.3}{Near- and Far Fields}{chapter.4}% 22
 \BOOKMARK [1][-]{section.4.4}{Field Push}{chapter.4}% 23
 \BOOKMARK [2][-]{subsection.4.4.1}{pushEFieldInsideBoxes\(\)}{section.4.4}% 24
 \BOOKMARK [2][-]{subsection.4.4.2}{setHFieldOnBorders\(\)}{section.4.4}% 25

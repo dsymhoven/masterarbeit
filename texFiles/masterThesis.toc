@@ -20,7 +20,7 @@
 \contentsline {chapter}{\numberline {4}Hybrid Field Approach}{29}{chapter.4}
 \contentsline {section}{\numberline {4.1}FDTD}{29}{section.4.1}
 \contentsline {section}{\numberline {4.2}Numeric Dispersion Relation}{31}{section.4.2}
-\contentsline {section}{\numberline {4.3}Near-and Far Fields}{34}{section.4.3}
+\contentsline {section}{\numberline {4.3}Near- and Far Fields}{34}{section.4.3}
 \contentsline {section}{\numberline {4.4}Field Push}{35}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}pushEFieldInsideBoxes()}{39}{subsection.4.4.1}
 \contentsline {subsection}{\numberline {4.4.2}setHFieldOnBorders()}{39}{subsection.4.4.2}
