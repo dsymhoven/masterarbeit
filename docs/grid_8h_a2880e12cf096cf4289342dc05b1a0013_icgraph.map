@@ -3,7 +3,13 @@
 <area shape="rect" id="node3" href="$experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="261,56,341,83"/>
 <area shape="rect" id="node4" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="229,107,373,133"/>
 <area shape="rect" id="node5" href="$experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="231,157,371,184"/>
-<area shape="rect" id="node6" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="196,209,405,250"/>
-<area shape="rect" id="node7" href="$experiment_8h.html#aba97ca9ea25115ea974bfeb9c86f0720" title="scatteringInEMWave" alt="" coords="228,275,373,301"/>
-<area shape="rect" id="node8" href="$main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="453,275,504,301"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="249,208,353,235"/>
+<area shape="rect" id="node7" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="196,259,405,301"/>
+<area shape="rect" id="node8" href="$experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="206,325,395,366"/>
+<area shape="rect" id="node9" href="$experiment_8h.html#a16f202a1fbcc96fa0e2ef7d700416c36" title="scatteringInEMWave\l_analytic" alt="" coords="228,390,373,431"/>
+<area shape="rect" id="node10" href="$experiment_8h.html#a499c2f8b19d50b6d93af3b4e5b4e3532" title="scatteringInEMWave\l_simulation" alt="" coords="228,455,373,497"/>
+<area shape="rect" id="node11" href="$experiment_8h.html#a8a98a5d9f123ef495d6984ba042fd864" title="scatteringInEMWave\l_analytic_largeScale" alt="" coords="228,521,373,562"/>
+<area shape="rect" id="node13" href="$experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="221,586,381,627"/>
+<area shape="rect" id="node14" href="$experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="244,652,357,679"/>
+<area shape="rect" id="node12" href="$main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="453,528,504,555"/>
 </map>

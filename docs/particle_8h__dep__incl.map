@@ -1,10 +1,14 @@
 <map id="particle.h" name="particle.h">
-<area shape="rect" id="node2" href="$calculations_8h.html" title="calculations.h" alt="" coords="171,155,273,181"/>
+<area shape="rect" id="node2" href="$calculations_8h.html" title="calculations.h" alt="" coords="336,155,439,181"/>
 <area shape="rect" id="node4" href="$experiment_8c.html" title="experiment.c" alt="" coords="237,229,335,256"/>
-<area shape="rect" id="node7" href="$grid_8h.html" title="grid.h" alt="" coords="283,80,339,107"/>
-<area shape="rect" id="node8" href="$lw_fields_8h.html" title="lwFields.h" alt="" coords="65,155,147,181"/>
-<area shape="rect" id="node9" href="$particle_8c.html" title="particle.c" alt="" coords="451,80,527,107"/>
+<area shape="rect" id="node5" href="$forces_8c.html" title="forces.c" alt="" coords="558,229,627,256"/>
+<area shape="rect" id="node9" href="$grid_8h.html" title="grid.h" alt="" coords="282,80,338,107"/>
+<area shape="rect" id="node10" href="$lw_fields_8h.html" title="lwFields.h" alt="" coords="77,155,159,181"/>
+<area shape="rect" id="node11" href="$serializers_8h.html" title="serializers.h" alt="" coords="463,155,557,181"/>
+<area shape="rect" id="node12" href="$forces_8h.html" title="forces.h" alt="" coords="475,80,545,107"/>
+<area shape="rect" id="node13" href="$particle_8c.html" title="particle.c" alt="" coords="683,80,759,107"/>
 <area shape="rect" id="node3" href="$calculations_8c.html" title="calculations.c" alt="" coords="5,229,108,256"/>
-<area shape="rect" id="node5" href="$grid_8c.html" title="grid.c" alt="" coords="360,229,415,256"/>
-<area shape="rect" id="node6" href="$lw_fields_8c.html" title="lwFields.c" alt="" coords="133,229,213,256"/>
+<area shape="rect" id="node6" href="$grid_8c.html" title="grid.c" alt="" coords="360,229,415,256"/>
+<area shape="rect" id="node7" href="$lw_fields_8c.html" title="lwFields.c" alt="" coords="133,229,213,256"/>
+<area shape="rect" id="node8" href="$serializers_8c.html" title="serializers.c" alt="" coords="440,229,532,256"/>
 </map>

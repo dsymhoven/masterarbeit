@@ -1,4 +1,6 @@
 <map id="particle.c" name="particle.c">
-<area shape="rect" id="node2" href="$particle_8h.html" title="particle.h" alt="" coords="63,80,139,107"/>
-<area shape="rect" id="node4" href="$grid_8h.html" title="grid.h" alt="" coords="73,155,129,181"/>
+<area shape="rect" id="node2" href="$particle_8h.html" title="particle.h" alt="" coords="33,80,109,107"/>
+<area shape="rect" id="node4" href="$grid_8h.html" title="grid.h" alt="" coords="43,155,99,181"/>
+<area shape="rect" id="node6" href="$resolution_8h.html" title="resolution.h" alt="" coords="134,229,225,256"/>
+<area shape="rect" id="node7" href="$box_8h.html" title="box.h" alt="" coords="249,229,304,256"/>
 </map>

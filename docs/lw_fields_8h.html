@@ -72,8 +72,10 @@ Include dependency graph for lwFields.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h__incl.png" border="0" usemap="#lw_fields_8h" alt=""/></div>
 <map name="lw_fields_8h" id="lw_fields_8h">
-<area shape="rect" id="node3" href="grid_8h.html" title="grid.h" alt="" coords="92,80,148,107"/>
-<area shape="rect" id="node5" href="particle_8h.html" title="particle.h" alt="" coords="174,155,250,181"/>
+<area shape="rect" id="node3" href="grid_8h.html" title="grid.h" alt="" coords="184,80,240,107"/>
+<area shape="rect" id="node5" href="particle_8h.html" title="particle.h" alt="" coords="330,155,406,181"/>
+<area shape="rect" id="node6" href="resolution_8h.html" title="resolution.h" alt="" coords="136,155,226,181"/>
+<area shape="rect" id="node7" href="box_8h.html" title="box.h" alt="" coords="251,155,306,181"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -139,12 +141,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a4138b9989d8810aa35e0e6c1e0ea4fe0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lw_fields_8h.html#a4138b9989d8810aa35e0e6c1e0ea4fe0">pushHFieldInsideBoxes</a> (<a class="el" href="struct_grid.html">Grid</a> *<a class="el" href="struct_grid.html">Grid</a>, double dt)</td></tr>
 <tr class="memdesc:a4138b9989d8810aa35e0e6c1e0ea4fe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maxwell Pusher for HField inside Boxes. This method is used for the hybrid field method.  <a href="#a4138b9989d8810aa35e0e6c1e0ea4fe0">More...</a><br /></td></tr>
 <tr class="separator:a4138b9989d8810aa35e0e6c1e0ea4fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02f39870c725f9dd68cef0f8d06a481e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lw_fields_8h.html#a02f39870c725f9dd68cef0f8d06a481e">writeFieldsToFile</a> (<a class="el" href="struct_grid.html">Grid</a> *<a class="el" href="struct_grid.html">Grid</a>, char *filename, int index, int planeForPlotting, bool plotE, bool plotB)</td></tr>
-<tr class="memdesc:a02f39870c725f9dd68cef0f8d06a481e"><td class="mdescLeft">&#160;</td><td class="mdescRight">loops through the entire E and B array and writes |B|^2 and |E|^2 to seperate files. File is structured similiar to the grid.  <a href="#a02f39870c725f9dd68cef0f8d06a481e">More...</a><br /></td></tr>
-<tr class="separator:a02f39870c725f9dd68cef0f8d06a481e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38c9fdb75dd81fd9029d1a65c4d5a567"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lw_fields_8h.html#a38c9fdb75dd81fd9029d1a65c4d5a567">writeFieldsFromCompleteGridToFile</a> (<a class="el" href="struct_grid.html">Grid</a> *<a class="el" href="struct_grid.html">Grid</a>)</td></tr>
-<tr class="memdesc:a38c9fdb75dd81fd9029d1a65c4d5a567"><td class="mdescLeft">&#160;</td><td class="mdescRight">loops through the entire grid and writes respective E and B values to E_initalFields.txt and H_initialFields.txt respectively.  <a href="#a38c9fdb75dd81fd9029d1a65c4d5a567">More...</a><br /></td></tr>
-<tr class="separator:a38c9fdb75dd81fd9029d1a65c4d5a567"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accd066409e3d31d783b6695e00a001d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lw_fields_8h.html#accd066409e3d31d783b6695e00a001d7">addLWField</a> (<a class="el" href="struct_grid.html">Grid</a> *<a class="el" href="struct_grid.html">Grid</a>, <a class="el" href="struct_particle.html">Particle</a> *<a class="el" href="struct_particle.html">Particle</a>, double *destination, double xObserver[4], int component)</td></tr>
 <tr class="memdesc:accd066409e3d31d783b6695e00a001d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds LW fields at grid point with index "gridIndexInBox". Each point on the grid is considered to be the observation point, where the zeroth component is the current simulation time and also the time at which we want to calculate the fields. Therefore loop through the particle xhistory vector up to the current simulation time and search for the pair of positions which fulfil the condition that the old position is inside and the new position is outside the backward lightcone of the observation point. Once that pair of positions is found the rest of the xHistory vector can be skipped because all following points will be outside as well.  <a href="#accd066409e3d31d783b6695e00a001d7">More...</a><br /></td></tr>
 <tr class="separator:accd066409e3d31d783b6695e00a001d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -225,15 +221,14 @@ Here is the call graph for this function:</div>
 <map name="lw_fields_8h_accd066409e3d31d783b6695e00a001d7_cgraph" id="lw_fields_8h_accd066409e3d31d783b6695e00a001d7_cgraph">
 <area shape="rect" id="node2" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="157,27,341,53"/>
 <area shape="rect" id="node5" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="162,81,335,108"/>
-<area shape="rect" id="node8" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="197,132,300,159"/>
-<area shape="rect" id="node9" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="163,183,335,225"/>
-<area shape="rect" id="node10" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="187,249,310,276"/>
-<area shape="rect" id="node11" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="147,300,351,327"/>
+<area shape="rect" id="node8" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="163,133,335,174"/>
+<area shape="rect" id="node9" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="187,199,310,225"/>
+<area shape="rect" id="node10" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="147,249,351,276"/>
 <area shape="rect" id="node3" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="632,5,751,32"/>
-<area shape="rect" id="node4" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="437,27,541,53"/>
+<area shape="rect" id="node4" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="437,27,541,53"/>
 <area shape="rect" id="node6" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="399,78,579,119"/>
-<area shape="rect" id="node7" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="627,85,756,112"/>
-<area shape="rect" id="node12" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="439,300,539,327"/>
+<area shape="rect" id="node7" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="627,85,756,112"/>
+<area shape="rect" id="node11" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="439,249,539,276"/>
 </map>
 </div>
 <div class="dynheader">
@@ -241,34 +236,40 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_accd066409e3d31d783b6695e00a001d7_icgraph.png" border="0" usemap="#lw_fields_8h_accd066409e3d31d783b6695e00a001d7_icgraph" alt=""/></div>
 <map name="lw_fields_8h_accd066409e3d31d783b6695e00a001d7_icgraph" id="lw_fields_8h_accd066409e3d31d783b6695e00a001d7_icgraph">
-<area shape="rect" id="node2" href="calculations_8h.html#a0fd8e3c4ba78390bd6a0f3245d1540a1" title="calcLWFieldsForPlane" alt="" coords="147,161,303,188"/>
-<area shape="rect" id="node8" href="calculations_8h.html#a32c97a4eb1ac3f14484661bc2720ab10" title="calcLWFieldsForPlaneWith\lNearField" alt="" coords="595,49,777,90"/>
-<area shape="rect" id="node14" href="lw_fields_8h.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="170,212,279,239"/>
-<area shape="rect" id="node18" href="lw_fields_8h.html#a3e5719955e373b30ae2de7e6b91829eb" title="this method adjusts the H values infront and on the back side border of the near field. " alt="" coords="170,263,279,289"/>
-<area shape="rect" id="node19" href="lw_fields_8h.html#aefc1a6143e678da91f19584c826428cd" title="this method adjusts the H values on the top and bottom side border of the near field. " alt="" coords="168,313,281,340"/>
-<area shape="rect" id="node20" href="lw_fields_8h.html#ae05dc350695f83d10835578077f7ce61" title="this method adjusts the E values on the left and right side border of the near field. " alt="" coords="172,364,277,391"/>
-<area shape="rect" id="node23" href="lw_fields_8h.html#ac917d3c7ad39bc896aa96ce84ad0d71c" title="this method adjusts the E values infront and on the back side border of the near field. " alt="" coords="172,415,277,441"/>
-<area shape="rect" id="node24" href="lw_fields_8h.html#aceb9e81297ffee9719f4267301baa19b" title="this method adjusts the E values at top and bottom side border of the near field. ..." alt="" coords="170,465,279,492"/>
-<area shape="rect" id="node25" href="lw_fields_8h.html#a31e3c429ce6db01564dba954fe965a78" title="adds LW fields in box specified by input parameter &quot;boxIndex&quot; " alt="" coords="378,427,511,453"/>
-<area shape="rect" id="node3" href="experiment_8h.html#a93af21472ce6a2cf691bb5fb9a2555b5" title="testLWFieldCalculationFor\lPlane" alt="" coords="355,85,534,126"/>
-<area shape="rect" id="node4" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="868,275,1008,301"/>
-<area shape="rect" id="node5" href="experiment_8h.html#af35f4f27dfc0aab6ff2c4bf1dd1e9b4a" title="electronScatteringSmallGrid\l_init9" alt="" coords="351,150,539,191"/>
-<area shape="rect" id="node6" href="experiment_8h.html#aba97ca9ea25115ea974bfeb9c86f0720" title="scatteringInEMWave" alt="" coords="372,216,517,243"/>
-<area shape="rect" id="node7" href="main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="661,115,711,141"/>
-<area shape="rect" id="node9" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="862,56,1014,83"/>
-<area shape="rect" id="node10" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="898,107,978,133"/>
-<area shape="rect" id="node11" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="866,157,1010,184"/>
-<area shape="rect" id="node12" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="886,5,990,32"/>
-<area shape="rect" id="node13" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="833,209,1043,250"/>
-<area shape="rect" id="node15" href="lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="393,317,496,344"/>
-<area shape="rect" id="node16" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="641,165,731,192"/>
-<area shape="rect" id="node17" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="845,325,1031,352"/>
-<area shape="rect" id="node21" href="lw_fields_8h.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="393,372,496,399"/>
-<area shape="rect" id="node22" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="641,216,731,243"/>
-<area shape="rect" id="node26" href="calculations_8h.html#a5d8ed902b351b331f64c2f2b10ce8488" title="calcualtes Liénard&#45;Wiechert Fields everywhere on the grid. Each point on the grid is considered to be..." alt="" coords="614,435,758,461"/>
-<area shape="rect" id="node27" href="calculations_8h.html#a333f7c0ac8a981945502dbf30fab0b3a" title="updates the near field region of a particle. If the particle moves into another box the near field re..." alt="" coords="626,317,746,344"/>
-<area shape="rect" id="node28" href="calculations_8h.html#a270dd08201ef3f6cd773222bd3ff06cf" title="calcualtes LW fields on complete grid by looping through all boxes. In the near field region of each ..." alt="" coords="587,369,785,410"/>
-<area shape="rect" id="node29" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="843,377,1033,418"/>
+<area shape="rect" id="node2" href="calculations_8h.html#a0fd8e3c4ba78390bd6a0f3245d1540a1" title="calcLWFieldsForPlane" alt="" coords="147,799,303,826"/>
+<area shape="rect" id="node5" href="calculations_8h.html#a32c97a4eb1ac3f14484661bc2720ab10" title="calcLWFieldsForPlaneWith\lNearField" alt="" coords="595,343,777,384"/>
+<area shape="rect" id="node20" href="calculations_8h.html#ae1d8de4fcf285d29b111a076b19df375" title="calcLWFieldsForPlaneInNear\lFieldRegion" alt="" coords="588,415,784,456"/>
+<area shape="rect" id="node21" href="lw_fields_8h.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="170,445,279,471"/>
+<area shape="rect" id="node24" href="lw_fields_8h.html#a3e5719955e373b30ae2de7e6b91829eb" title="this method adjusts the H values infront and on the back side border of the near field. " alt="" coords="170,495,279,522"/>
+<area shape="rect" id="node25" href="lw_fields_8h.html#aefc1a6143e678da91f19584c826428cd" title="this method adjusts the H values on the top and bottom side border of the near field. " alt="" coords="168,546,281,573"/>
+<area shape="rect" id="node26" href="lw_fields_8h.html#ae05dc350695f83d10835578077f7ce61" title="this method adjusts the E values on the left and right side border of the near field. " alt="" coords="172,597,277,623"/>
+<area shape="rect" id="node29" href="lw_fields_8h.html#ac917d3c7ad39bc896aa96ce84ad0d71c" title="this method adjusts the E values infront and on the back side border of the near field. " alt="" coords="172,647,277,674"/>
+<area shape="rect" id="node30" href="lw_fields_8h.html#aceb9e81297ffee9719f4267301baa19b" title="this method adjusts the E values at top and bottom side border of the near field. ..." alt="" coords="170,698,279,725"/>
+<area shape="rect" id="node31" href="lw_fields_8h.html#a31e3c429ce6db01564dba954fe965a78" title="adds LW fields in box specified by input parameter &quot;boxIndex&quot; " alt="" coords="378,691,511,718"/>
+<area shape="rect" id="node3" href="experiment_8h.html#af35f4f27dfc0aab6ff2c4bf1dd1e9b4a" title="electronScatteringSmallGrid\l_init9" alt="" coords="351,827,539,868"/>
+<area shape="rect" id="node4" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="861,768,1021,809"/>
+<area shape="rect" id="node6" href="experiment_8h.html#a93af21472ce6a2cf691bb5fb9a2555b5" title="testLWFieldCalculationFor\lPlane" alt="" coords="852,5,1031,47"/>
+<area shape="rect" id="node7" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="865,333,1017,359"/>
+<area shape="rect" id="node8" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="901,383,981,410"/>
+<area shape="rect" id="node9" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="869,535,1013,562"/>
+<area shape="rect" id="node10" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="871,485,1011,511"/>
+<area shape="rect" id="node11" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="889,586,993,613"/>
+<area shape="rect" id="node12" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="837,637,1046,679"/>
+<area shape="rect" id="node13" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="847,703,1036,744"/>
+<area shape="rect" id="node14" href="experiment_8h.html#a16f202a1fbcc96fa0e2ef7d700416c36" title="scatteringInEMWave\l_analytic" alt="" coords="869,71,1014,112"/>
+<area shape="rect" id="node15" href="experiment_8h.html#a499c2f8b19d50b6d93af3b4e5b4e3532" title="scatteringInEMWave\l_simulation" alt="" coords="869,136,1014,177"/>
+<area shape="rect" id="node16" href="experiment_8h.html#aa5690fcaa4608dad7969739bbc10b6e9" title="testRadiationDampingVSLorentz\lForce" alt="" coords="833,201,1049,243"/>
+<area shape="rect" id="node17" href="experiment_8h.html#a8a98a5d9f123ef495d6984ba042fd864" title="scatteringInEMWave\l_analytic_largeScale" alt="" coords="869,267,1014,308"/>
+<area shape="rect" id="node19" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="885,434,998,461"/>
+<area shape="rect" id="node18" href="main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="1097,274,1148,301"/>
+<area shape="rect" id="node22" href="lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="393,495,496,522"/>
+<area shape="rect" id="node23" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="641,495,731,522"/>
+<area shape="rect" id="node27" href="lw_fields_8h.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="393,622,496,649"/>
+<area shape="rect" id="node28" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="641,546,731,573"/>
+<area shape="rect" id="node32" href="calculations_8h.html#a5d8ed902b351b331f64c2f2b10ce8488" title="calculates LW fields on complete grid by looping through every box and calculating LW fields in there..." alt="" coords="614,597,758,623"/>
+<area shape="rect" id="node33" href="calculations_8h.html#a333f7c0ac8a981945502dbf30fab0b3a" title="updates the near field region of a particle. If the particle moves into another box the near field re..." alt="" coords="626,647,746,674"/>
+<area shape="rect" id="node34" href="calculations_8h.html#a270dd08201ef3f6cd773222bd3ff06cf" title="calcualtes LW fields on complete grid by looping through all boxes. In the near field region of each ..." alt="" coords="587,701,785,743"/>
+<area shape="rect" id="node35" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="848,834,1035,861"/>
 </map>
 </div>
 
@@ -328,18 +329,17 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a31e3c429ce6db01564dba954fe965a78_cgraph.png" border="0" usemap="#lw_fields_8h_a31e3c429ce6db01564dba954fe965a78_cgraph" alt=""/></div>
 <map name="lw_fields_8h_a31e3c429ce6db01564dba954fe965a78_cgraph" id="lw_fields_8h_a31e3c429ce6db01564dba954fe965a78_cgraph">
-<area shape="rect" id="node2" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="187,161,280,188"/>
+<area shape="rect" id="node2" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="187,140,280,167"/>
 <area shape="rect" id="node3" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="338,27,522,53"/>
 <area shape="rect" id="node6" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="343,81,517,108"/>
-<area shape="rect" id="node9" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="379,132,481,159"/>
-<area shape="rect" id="node10" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="344,183,516,225"/>
-<area shape="rect" id="node11" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="369,249,491,276"/>
-<area shape="rect" id="node12" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="328,300,532,327"/>
+<area shape="rect" id="node9" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="344,133,516,174"/>
+<area shape="rect" id="node10" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="369,199,491,225"/>
+<area shape="rect" id="node11" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="328,249,532,276"/>
 <area shape="rect" id="node4" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="813,5,932,32"/>
-<area shape="rect" id="node5" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="618,27,722,53"/>
+<area shape="rect" id="node5" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="618,27,722,53"/>
 <area shape="rect" id="node7" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="580,78,760,119"/>
-<area shape="rect" id="node8" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="808,85,937,112"/>
-<area shape="rect" id="node13" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="620,300,720,327"/>
+<area shape="rect" id="node8" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="808,85,937,112"/>
+<area shape="rect" id="node12" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="620,249,720,276"/>
 </map>
 </div>
 <div class="dynheader">
@@ -347,14 +347,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a31e3c429ce6db01564dba954fe965a78_icgraph.png" border="0" usemap="#lw_fields_8h_a31e3c429ce6db01564dba954fe965a78_icgraph" alt=""/></div>
 <map name="lw_fields_8h_a31e3c429ce6db01564dba954fe965a78_icgraph" id="lw_fields_8h_a31e3c429ce6db01564dba954fe965a78_icgraph">
-<area shape="rect" id="node2" href="calculations_8h.html#a5d8ed902b351b331f64c2f2b10ce8488" title="calcualtes Liénard&#45;Wiechert Fields everywhere on the grid. Each point on the grid is considered to be..." alt="" coords="214,64,358,91"/>
-<area shape="rect" id="node3" href="calculations_8h.html#a333f7c0ac8a981945502dbf30fab0b3a" title="updates the near field region of a particle. If the particle moves into another box the near field re..." alt="" coords="226,115,346,141"/>
-<area shape="rect" id="node8" href="calculations_8h.html#a270dd08201ef3f6cd773222bd3ff06cf" title="calcualtes LW fields on complete grid by looping through all boxes. In the near field region of each ..." alt="" coords="187,166,385,207"/>
-<area shape="rect" id="node4" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="466,56,610,83"/>
-<area shape="rect" id="node5" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="468,5,608,32"/>
-<area shape="rect" id="node6" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="445,173,631,200"/>
-<area shape="rect" id="node7" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="433,107,643,149"/>
-<area shape="rect" id="node9" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="443,225,633,266"/>
+<area shape="rect" id="node2" href="calculations_8h.html#a5d8ed902b351b331f64c2f2b10ce8488" title="calculates LW fields on complete grid by looping through every box and calculating LW fields in there..." alt="" coords="214,133,358,160"/>
+<area shape="rect" id="node3" href="calculations_8h.html#a333f7c0ac8a981945502dbf30fab0b3a" title="updates the near field region of a particle. If the particle moves into another box the near field re..." alt="" coords="226,184,346,211"/>
+<area shape="rect" id="node11" href="calculations_8h.html#a270dd08201ef3f6cd773222bd3ff06cf" title="calcualtes LW fields on complete grid by looping through all boxes. In the near field region of each ..." alt="" coords="187,253,385,294"/>
+<area shape="rect" id="node4" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="466,5,610,32"/>
+<area shape="rect" id="node5" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="468,56,608,83"/>
+<area shape="rect" id="node6" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="486,289,590,316"/>
+<area shape="rect" id="node7" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="433,341,643,382"/>
+<area shape="rect" id="node8" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="443,158,633,199"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="458,223,618,265"/>
+<area shape="rect" id="node10" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="481,107,595,133"/>
+<area shape="rect" id="node12" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="445,407,631,433"/>
 </map>
 </div>
 
@@ -413,28 +416,28 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_ab7a60b207d6d07de2f2f9ed4f0507c50_cgraph.png" border="0" usemap="#lw_fields_8h_ab7a60b207d6d07de2f2f9ed4f0507c50_cgraph" alt=""/></div>
 <map name="lw_fields_8h_ab7a60b207d6d07de2f2f9ed4f0507c50_cgraph" id="lw_fields_8h_ab7a60b207d6d07de2f2f9ed4f0507c50_cgraph">
-<area shape="rect" id="node2" href="lw_fields_8c.html#ae05dc350695f83d10835578077f7ce61" title="this method adjusts the E values on the left and right side border of the near field. " alt="" coords="158,107,263,133"/>
-<area shape="rect" id="node20" href="lw_fields_8c.html#ac917d3c7ad39bc896aa96ce84ad0d71c" title="this method adjusts the E values infront and on the back side border of the near field. " alt="" coords="158,208,263,235"/>
-<area shape="rect" id="node22" href="lw_fields_8c.html#aceb9e81297ffee9719f4267301baa19b" title="this method adjusts the E values at top and bottom side border of the near field. ..." alt="" coords="156,157,265,184"/>
-<area shape="rect" id="node3" href="calculations_8c.html#a9f530e232a5918981b4efe6edee87a01" title="calcBoxIndexIp1" alt="" coords="344,56,464,83"/>
-<area shape="rect" id="node4" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="313,208,495,235"/>
-<area shape="rect" id="node7" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="358,107,450,133"/>
-<area shape="rect" id="node19" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="357,157,451,184"/>
-<area shape="rect" id="node5" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="543,325,756,366"/>
-<area shape="rect" id="node6" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="804,332,1008,359"/>
-<area shape="rect" id="node8" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="557,157,741,184"/>
-<area shape="rect" id="node11" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="563,56,736,83"/>
-<area shape="rect" id="node14" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="598,208,701,235"/>
-<area shape="rect" id="node15" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="563,259,735,301"/>
-<area shape="rect" id="node16" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="588,5,711,32"/>
-<area shape="rect" id="node17" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="547,107,751,133"/>
-<area shape="rect" id="node9" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="1061,128,1180,155"/>
-<area shape="rect" id="node10" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="854,208,958,235"/>
-<area shape="rect" id="node12" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="816,41,996,82"/>
-<area shape="rect" id="node13" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="1056,48,1185,75"/>
-<area shape="rect" id="node18" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="856,107,956,133"/>
-<area shape="rect" id="node21" href="calculations_8c.html#a91bbcdcec7d3406c78ca2de7e0fd04d5" title="calcBoxIndexJp1" alt="" coords="343,309,465,336"/>
-<area shape="rect" id="node23" href="calculations_8c.html#a78ac4cd5aeb7e56277aa9543877ccdc0" title="calcBoxIndexKp1" alt="" coords="341,259,467,285"/>
+<area shape="rect" id="node2" href="lw_fields_8c.html#ae05dc350695f83d10835578077f7ce61" title="this method adjusts the E values on the left and right side border of the near field. " alt="" coords="158,126,263,153"/>
+<area shape="rect" id="node20" href="lw_fields_8c.html#ac917d3c7ad39bc896aa96ce84ad0d71c" title="this method adjusts the E values infront and on the back side border of the near field. " alt="" coords="158,227,263,254"/>
+<area shape="rect" id="node22" href="lw_fields_8c.html#aceb9e81297ffee9719f4267301baa19b" title="this method adjusts the E values at top and bottom side border of the near field. ..." alt="" coords="156,177,265,203"/>
+<area shape="rect" id="node3" href="calculations_8c.html#a9f530e232a5918981b4efe6edee87a01" title="calcBoxIndexIp1" alt="" coords="344,75,464,102"/>
+<area shape="rect" id="node4" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="313,227,495,254"/>
+<area shape="rect" id="node7" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="358,177,450,203"/>
+<area shape="rect" id="node19" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="357,126,451,153"/>
+<area shape="rect" id="node5" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="543,333,756,375"/>
+<area shape="rect" id="node6" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="804,341,1008,367"/>
+<area shape="rect" id="node8" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="557,231,741,258"/>
+<area shape="rect" id="node11" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="563,13,736,39"/>
+<area shape="rect" id="node14" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="598,282,701,309"/>
+<area shape="rect" id="node15" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="563,115,735,156"/>
+<area shape="rect" id="node16" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="588,181,711,207"/>
+<area shape="rect" id="node17" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="547,63,751,90"/>
+<area shape="rect" id="node9" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="1061,93,1180,119"/>
+<area shape="rect" id="node10" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="854,231,958,258"/>
+<area shape="rect" id="node12" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="816,5,996,47"/>
+<area shape="rect" id="node13" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="1056,13,1185,39"/>
+<area shape="rect" id="node18" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="856,71,956,98"/>
+<area shape="rect" id="node21" href="calculations_8c.html#a91bbcdcec7d3406c78ca2de7e0fd04d5" title="calcBoxIndexJp1" alt="" coords="343,329,465,355"/>
+<area shape="rect" id="node23" href="calculations_8c.html#a78ac4cd5aeb7e56277aa9543877ccdc0" title="calcBoxIndexKp1" alt="" coords="341,278,467,305"/>
 </map>
 </div>
 <div class="dynheader">
@@ -442,13 +445,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_ab7a60b207d6d07de2f2f9ed4f0507c50_icgraph.png" border="0" usemap="#lw_fields_8h_ab7a60b207d6d07de2f2f9ed4f0507c50_icgraph" alt=""/></div>
 <map name="lw_fields_8h_ab7a60b207d6d07de2f2f9ed4f0507c50_icgraph" id="lw_fields_8h_ab7a60b207d6d07de2f2f9ed4f0507c50_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="156,132,245,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="156,208,245,235"/>
 <area shape="rect" id="node3" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="322,5,474,32"/>
 <area shape="rect" id="node4" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="358,56,438,83"/>
 <area shape="rect" id="node5" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="326,107,470,133"/>
 <area shape="rect" id="node6" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="328,157,468,184"/>
-<area shape="rect" id="node7" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="305,208,491,235"/>
+<area shape="rect" id="node7" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="346,208,450,235"/>
 <area shape="rect" id="node8" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="293,259,503,301"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="303,325,493,366"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="318,390,478,431"/>
+<area shape="rect" id="node11" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="341,456,455,483"/>
 </map>
 </div>
 
@@ -536,23 +542,23 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_aceb9e81297ffee9719f4267301baa19b_cgraph.png" border="0" usemap="#lw_fields_8h_aceb9e81297ffee9719f4267301baa19b_cgraph" alt=""/></div>
 <map name="lw_fields_8h_aceb9e81297ffee9719f4267301baa19b_cgraph" id="lw_fields_8h_aceb9e81297ffee9719f4267301baa19b_cgraph">
-<area shape="rect" id="node2" href="calculations_8c.html#a78ac4cd5aeb7e56277aa9543877ccdc0" title="calcBoxIndexKp1" alt="" coords="191,86,316,113"/>
-<area shape="rect" id="node3" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="163,137,344,163"/>
-<area shape="rect" id="node6" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="207,187,299,214"/>
-<area shape="rect" id="node18" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="207,238,300,265"/>
+<area shape="rect" id="node2" href="calculations_8c.html#a78ac4cd5aeb7e56277aa9543877ccdc0" title="calcBoxIndexKp1" alt="" coords="191,46,316,73"/>
+<area shape="rect" id="node3" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="163,97,344,123"/>
+<area shape="rect" id="node6" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="207,198,299,225"/>
+<area shape="rect" id="node18" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="207,147,300,174"/>
 <area shape="rect" id="node4" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="392,5,605,47"/>
 <area shape="rect" id="node5" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="653,13,857,39"/>
-<area shape="rect" id="node7" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="407,289,591,315"/>
-<area shape="rect" id="node10" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="412,187,585,214"/>
-<area shape="rect" id="node13" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="447,339,550,366"/>
-<area shape="rect" id="node14" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="413,71,585,112"/>
-<area shape="rect" id="node15" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="437,137,560,163"/>
-<area shape="rect" id="node16" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="397,238,601,265"/>
-<area shape="rect" id="node8" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="911,285,1029,311"/>
-<area shape="rect" id="node9" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="703,289,807,315"/>
-<area shape="rect" id="node11" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="665,172,845,213"/>
-<area shape="rect" id="node12" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="905,179,1035,206"/>
-<area shape="rect" id="node17" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="705,238,805,265"/>
+<area shape="rect" id="node7" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="407,223,591,250"/>
+<area shape="rect" id="node10" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="412,122,585,149"/>
+<area shape="rect" id="node13" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="447,341,550,367"/>
+<area shape="rect" id="node14" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="413,275,585,316"/>
+<area shape="rect" id="node15" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="437,71,560,98"/>
+<area shape="rect" id="node16" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="397,173,601,199"/>
+<area shape="rect" id="node8" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="911,194,1029,221"/>
+<area shape="rect" id="node9" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="703,274,807,301"/>
+<area shape="rect" id="node11" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="665,107,845,148"/>
+<area shape="rect" id="node12" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="905,114,1035,141"/>
+<area shape="rect" id="node17" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="705,173,805,199"/>
 </map>
 </div>
 <div class="dynheader">
@@ -560,14 +566,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_aceb9e81297ffee9719f4267301baa19b_icgraph.png" border="0" usemap="#lw_fields_8h_aceb9e81297ffee9719f4267301baa19b_icgraph" alt=""/></div>
 <map name="lw_fields_8h_aceb9e81297ffee9719f4267301baa19b_icgraph" id="lw_fields_8h_aceb9e81297ffee9719f4267301baa19b_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="163,132,265,159"/>
-<area shape="rect" id="node3" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="313,132,403,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="163,208,265,235"/>
+<area shape="rect" id="node3" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="313,208,403,235"/>
 <area shape="rect" id="node4" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="479,5,631,32"/>
 <area shape="rect" id="node5" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="515,56,595,83"/>
 <area shape="rect" id="node6" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="483,107,627,133"/>
 <area shape="rect" id="node7" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="485,157,625,184"/>
-<area shape="rect" id="node8" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="462,208,649,235"/>
+<area shape="rect" id="node8" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="503,208,607,235"/>
 <area shape="rect" id="node9" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="451,259,660,301"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="461,325,650,366"/>
+<area shape="rect" id="node11" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="475,390,635,431"/>
+<area shape="rect" id="node12" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="499,456,612,483"/>
 </map>
 </div>
 
@@ -655,23 +664,23 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_ac917d3c7ad39bc896aa96ce84ad0d71c_cgraph.png" border="0" usemap="#lw_fields_8h_ac917d3c7ad39bc896aa96ce84ad0d71c_cgraph" alt=""/></div>
 <map name="lw_fields_8h_ac917d3c7ad39bc896aa96ce84ad0d71c_cgraph" id="lw_fields_8h_ac917d3c7ad39bc896aa96ce84ad0d71c_cgraph">
-<area shape="rect" id="node2" href="calculations_8c.html#a91bbcdcec7d3406c78ca2de7e0fd04d5" title="calcBoxIndexJp1" alt="" coords="188,86,311,113"/>
-<area shape="rect" id="node3" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="159,137,340,163"/>
-<area shape="rect" id="node6" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="203,187,295,214"/>
-<area shape="rect" id="node18" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="203,238,296,265"/>
+<area shape="rect" id="node2" href="calculations_8c.html#a91bbcdcec7d3406c78ca2de7e0fd04d5" title="calcBoxIndexJp1" alt="" coords="188,46,311,73"/>
+<area shape="rect" id="node3" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="159,97,340,123"/>
+<area shape="rect" id="node6" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="203,198,295,225"/>
+<area shape="rect" id="node18" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="203,147,296,174"/>
 <area shape="rect" id="node4" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="388,5,601,47"/>
 <area shape="rect" id="node5" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="649,13,853,39"/>
-<area shape="rect" id="node7" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="403,289,587,315"/>
-<area shape="rect" id="node10" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="408,187,581,214"/>
-<area shape="rect" id="node13" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="443,339,546,366"/>
-<area shape="rect" id="node14" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="409,71,581,112"/>
-<area shape="rect" id="node15" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="433,137,556,163"/>
-<area shape="rect" id="node16" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="393,238,597,265"/>
-<area shape="rect" id="node8" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="907,285,1025,311"/>
-<area shape="rect" id="node9" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="699,289,803,315"/>
-<area shape="rect" id="node11" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="661,172,841,213"/>
-<area shape="rect" id="node12" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="901,179,1031,206"/>
-<area shape="rect" id="node17" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="701,238,801,265"/>
+<area shape="rect" id="node7" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="403,223,587,250"/>
+<area shape="rect" id="node10" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="408,122,581,149"/>
+<area shape="rect" id="node13" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="443,341,546,367"/>
+<area shape="rect" id="node14" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="409,275,581,316"/>
+<area shape="rect" id="node15" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="433,71,556,98"/>
+<area shape="rect" id="node16" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="393,173,597,199"/>
+<area shape="rect" id="node8" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="907,194,1025,221"/>
+<area shape="rect" id="node9" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="699,274,803,301"/>
+<area shape="rect" id="node11" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="661,107,841,148"/>
+<area shape="rect" id="node12" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="901,114,1031,141"/>
+<area shape="rect" id="node17" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="701,173,801,199"/>
 </map>
 </div>
 <div class="dynheader">
@@ -679,14 +688,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_ac917d3c7ad39bc896aa96ce84ad0d71c_icgraph.png" border="0" usemap="#lw_fields_8h_ac917d3c7ad39bc896aa96ce84ad0d71c_icgraph" alt=""/></div>
 <map name="lw_fields_8h_ac917d3c7ad39bc896aa96ce84ad0d71c_icgraph" id="lw_fields_8h_ac917d3c7ad39bc896aa96ce84ad0d71c_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="159,132,261,159"/>
-<area shape="rect" id="node3" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="309,132,399,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="159,208,261,235"/>
+<area shape="rect" id="node3" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="309,208,399,235"/>
 <area shape="rect" id="node4" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="475,5,627,32"/>
 <area shape="rect" id="node5" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="511,56,591,83"/>
 <area shape="rect" id="node6" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="479,107,623,133"/>
 <area shape="rect" id="node7" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="481,157,621,184"/>
-<area shape="rect" id="node8" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="458,208,645,235"/>
+<area shape="rect" id="node8" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="499,208,603,235"/>
 <area shape="rect" id="node9" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="447,259,656,301"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="457,325,646,366"/>
+<area shape="rect" id="node11" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="471,390,631,431"/>
+<area shape="rect" id="node12" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="495,456,608,483"/>
 </map>
 </div>
 
@@ -774,23 +786,23 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_ae05dc350695f83d10835578077f7ce61_cgraph.png" border="0" usemap="#lw_fields_8h_ae05dc350695f83d10835578077f7ce61_cgraph" alt=""/></div>
 <map name="lw_fields_8h_ae05dc350695f83d10835578077f7ce61_cgraph" id="lw_fields_8h_ae05dc350695f83d10835578077f7ce61_cgraph">
-<area shape="rect" id="node2" href="calculations_8c.html#a9f530e232a5918981b4efe6edee87a01" title="calcBoxIndexIp1" alt="" coords="189,86,309,113"/>
-<area shape="rect" id="node3" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="159,137,340,163"/>
-<area shape="rect" id="node6" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="203,187,295,214"/>
-<area shape="rect" id="node18" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="203,238,296,265"/>
+<area shape="rect" id="node2" href="calculations_8c.html#a9f530e232a5918981b4efe6edee87a01" title="calcBoxIndexIp1" alt="" coords="189,46,309,73"/>
+<area shape="rect" id="node3" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="159,97,340,123"/>
+<area shape="rect" id="node6" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="203,198,295,225"/>
+<area shape="rect" id="node18" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="203,147,296,174"/>
 <area shape="rect" id="node4" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="388,5,601,47"/>
 <area shape="rect" id="node5" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="649,13,853,39"/>
-<area shape="rect" id="node7" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="403,289,587,315"/>
-<area shape="rect" id="node10" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="408,187,581,214"/>
-<area shape="rect" id="node13" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="443,339,546,366"/>
-<area shape="rect" id="node14" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="409,71,581,112"/>
-<area shape="rect" id="node15" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="433,137,556,163"/>
-<area shape="rect" id="node16" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="393,238,597,265"/>
-<area shape="rect" id="node8" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="907,285,1025,311"/>
-<area shape="rect" id="node9" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="699,289,803,315"/>
-<area shape="rect" id="node11" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="661,172,841,213"/>
-<area shape="rect" id="node12" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="901,179,1031,206"/>
-<area shape="rect" id="node17" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="701,238,801,265"/>
+<area shape="rect" id="node7" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="403,223,587,250"/>
+<area shape="rect" id="node10" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="408,122,581,149"/>
+<area shape="rect" id="node13" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="443,341,546,367"/>
+<area shape="rect" id="node14" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="409,275,581,316"/>
+<area shape="rect" id="node15" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="433,71,556,98"/>
+<area shape="rect" id="node16" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="393,173,597,199"/>
+<area shape="rect" id="node8" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="907,194,1025,221"/>
+<area shape="rect" id="node9" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="699,274,803,301"/>
+<area shape="rect" id="node11" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="661,107,841,148"/>
+<area shape="rect" id="node12" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="901,114,1031,141"/>
+<area shape="rect" id="node17" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="701,173,801,199"/>
 </map>
 </div>
 <div class="dynheader">
@@ -798,14 +810,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_ae05dc350695f83d10835578077f7ce61_icgraph.png" border="0" usemap="#lw_fields_8h_ae05dc350695f83d10835578077f7ce61_icgraph" alt=""/></div>
 <map name="lw_fields_8h_ae05dc350695f83d10835578077f7ce61_icgraph" id="lw_fields_8h_ae05dc350695f83d10835578077f7ce61_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="159,132,261,159"/>
-<area shape="rect" id="node3" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="309,132,399,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="159,208,261,235"/>
+<area shape="rect" id="node3" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="309,208,399,235"/>
 <area shape="rect" id="node4" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="475,5,627,32"/>
 <area shape="rect" id="node5" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="511,56,591,83"/>
 <area shape="rect" id="node6" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="479,107,623,133"/>
 <area shape="rect" id="node7" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="481,157,621,184"/>
-<area shape="rect" id="node8" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="458,208,645,235"/>
+<area shape="rect" id="node8" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="499,208,603,235"/>
 <area shape="rect" id="node9" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="447,259,656,301"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="457,325,646,366"/>
+<area shape="rect" id="node11" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="471,390,631,431"/>
+<area shape="rect" id="node12" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="495,456,608,483"/>
 </map>
 </div>
 
@@ -864,28 +879,28 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_ad8dbdc1271ca06b419d54acc97bcd8e2_cgraph.png" border="0" usemap="#lw_fields_8h_ad8dbdc1271ca06b419d54acc97bcd8e2_cgraph" alt=""/></div>
 <map name="lw_fields_8h_ad8dbdc1271ca06b419d54acc97bcd8e2_cgraph" id="lw_fields_8h_ad8dbdc1271ca06b419d54acc97bcd8e2_cgraph">
-<area shape="rect" id="node2" href="lw_fields_8c.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="158,107,267,133"/>
-<area shape="rect" id="node20" href="lw_fields_8c.html#a3e5719955e373b30ae2de7e6b91829eb" title="this method adjusts the H values infront and on the back side border of the near field. " alt="" coords="158,208,267,235"/>
-<area shape="rect" id="node22" href="lw_fields_8c.html#aefc1a6143e678da91f19584c826428cd" title="this method adjusts the H values on the top and bottom side border of the near field. " alt="" coords="156,157,269,184"/>
-<area shape="rect" id="node3" href="calculations_8c.html#adb1e1ed963b15e1e05fa5681af66b005" title="calcBoxIndexIm1" alt="" coords="346,56,470,83"/>
-<area shape="rect" id="node4" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="317,208,499,235"/>
-<area shape="rect" id="node7" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="362,107,454,133"/>
-<area shape="rect" id="node19" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="361,157,455,184"/>
-<area shape="rect" id="node5" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="547,325,760,366"/>
-<area shape="rect" id="node6" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="808,332,1012,359"/>
-<area shape="rect" id="node8" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="561,157,745,184"/>
-<area shape="rect" id="node11" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="567,56,740,83"/>
-<area shape="rect" id="node14" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="602,208,705,235"/>
-<area shape="rect" id="node15" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="567,259,739,301"/>
-<area shape="rect" id="node16" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="592,5,715,32"/>
-<area shape="rect" id="node17" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="551,107,755,133"/>
-<area shape="rect" id="node9" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="1065,128,1184,155"/>
-<area shape="rect" id="node10" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="858,208,962,235"/>
-<area shape="rect" id="node12" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="820,41,1000,82"/>
-<area shape="rect" id="node13" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="1060,48,1189,75"/>
-<area shape="rect" id="node18" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="860,107,960,133"/>
-<area shape="rect" id="node21" href="calculations_8c.html#a31b2824a548acf6c7c181397ea41b643" title="calcBoxIndexJm1" alt="" coords="345,309,471,336"/>
-<area shape="rect" id="node23" href="calculations_8c.html#a23447665efada367a850bebc6b3787ff" title="calcBoxIndexKm1" alt="" coords="343,259,473,285"/>
+<area shape="rect" id="node2" href="lw_fields_8c.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="158,126,267,153"/>
+<area shape="rect" id="node20" href="lw_fields_8c.html#a3e5719955e373b30ae2de7e6b91829eb" title="this method adjusts the H values infront and on the back side border of the near field. " alt="" coords="158,227,267,254"/>
+<area shape="rect" id="node22" href="lw_fields_8c.html#aefc1a6143e678da91f19584c826428cd" title="this method adjusts the H values on the top and bottom side border of the near field. " alt="" coords="156,177,269,203"/>
+<area shape="rect" id="node3" href="calculations_8c.html#adb1e1ed963b15e1e05fa5681af66b005" title="calcBoxIndexIm1" alt="" coords="346,75,470,102"/>
+<area shape="rect" id="node4" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="317,227,499,254"/>
+<area shape="rect" id="node7" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="362,177,454,203"/>
+<area shape="rect" id="node19" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="361,126,455,153"/>
+<area shape="rect" id="node5" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="547,333,760,375"/>
+<area shape="rect" id="node6" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="808,341,1012,367"/>
+<area shape="rect" id="node8" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="561,231,745,258"/>
+<area shape="rect" id="node11" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="567,13,740,39"/>
+<area shape="rect" id="node14" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="602,282,705,309"/>
+<area shape="rect" id="node15" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="567,115,739,156"/>
+<area shape="rect" id="node16" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="592,181,715,207"/>
+<area shape="rect" id="node17" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="551,63,755,90"/>
+<area shape="rect" id="node9" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="1065,93,1184,119"/>
+<area shape="rect" id="node10" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="858,231,962,258"/>
+<area shape="rect" id="node12" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="820,5,1000,47"/>
+<area shape="rect" id="node13" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="1060,13,1189,39"/>
+<area shape="rect" id="node18" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="860,71,960,98"/>
+<area shape="rect" id="node21" href="calculations_8c.html#a31b2824a548acf6c7c181397ea41b643" title="calcBoxIndexJm1" alt="" coords="345,329,471,355"/>
+<area shape="rect" id="node23" href="calculations_8c.html#a23447665efada367a850bebc6b3787ff" title="calcBoxIndexKm1" alt="" coords="343,278,473,305"/>
 </map>
 </div>
 <div class="dynheader">
@@ -893,13 +908,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_ad8dbdc1271ca06b419d54acc97bcd8e2_icgraph.png" border="0" usemap="#lw_fields_8h_ad8dbdc1271ca06b419d54acc97bcd8e2_icgraph" alt=""/></div>
 <map name="lw_fields_8h_ad8dbdc1271ca06b419d54acc97bcd8e2_icgraph" id="lw_fields_8h_ad8dbdc1271ca06b419d54acc97bcd8e2_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="156,132,245,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="156,208,245,235"/>
 <area shape="rect" id="node3" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="322,5,474,32"/>
 <area shape="rect" id="node4" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="358,56,438,83"/>
 <area shape="rect" id="node5" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="326,107,470,133"/>
 <area shape="rect" id="node6" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="328,157,468,184"/>
-<area shape="rect" id="node7" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="305,208,491,235"/>
+<area shape="rect" id="node7" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="346,208,450,235"/>
 <area shape="rect" id="node8" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="293,259,503,301"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="303,325,493,366"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="318,390,478,431"/>
+<area shape="rect" id="node11" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="341,456,455,483"/>
 </map>
 </div>
 
@@ -987,23 +1005,23 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_aefc1a6143e678da91f19584c826428cd_cgraph.png" border="0" usemap="#lw_fields_8h_aefc1a6143e678da91f19584c826428cd_cgraph" alt=""/></div>
 <map name="lw_fields_8h_aefc1a6143e678da91f19584c826428cd_cgraph" id="lw_fields_8h_aefc1a6143e678da91f19584c826428cd_cgraph">
-<area shape="rect" id="node2" href="calculations_8c.html#a23447665efada367a850bebc6b3787ff" title="calcBoxIndexKm1" alt="" coords="193,86,322,113"/>
-<area shape="rect" id="node3" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="167,137,348,163"/>
-<area shape="rect" id="node6" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="211,187,303,214"/>
-<area shape="rect" id="node18" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="211,238,304,265"/>
+<area shape="rect" id="node2" href="calculations_8c.html#a23447665efada367a850bebc6b3787ff" title="calcBoxIndexKm1" alt="" coords="193,46,322,73"/>
+<area shape="rect" id="node3" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="167,97,348,123"/>
+<area shape="rect" id="node6" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="211,198,303,225"/>
+<area shape="rect" id="node18" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="211,147,304,174"/>
 <area shape="rect" id="node4" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="396,5,609,47"/>
 <area shape="rect" id="node5" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="657,13,861,39"/>
-<area shape="rect" id="node7" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="411,289,595,315"/>
-<area shape="rect" id="node10" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="416,187,589,214"/>
-<area shape="rect" id="node13" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="451,339,554,366"/>
-<area shape="rect" id="node14" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="417,71,589,112"/>
-<area shape="rect" id="node15" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="441,137,564,163"/>
-<area shape="rect" id="node16" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="401,238,605,265"/>
-<area shape="rect" id="node8" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="915,285,1033,311"/>
-<area shape="rect" id="node9" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="707,289,811,315"/>
-<area shape="rect" id="node11" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="669,172,849,213"/>
-<area shape="rect" id="node12" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="909,179,1039,206"/>
-<area shape="rect" id="node17" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="709,238,809,265"/>
+<area shape="rect" id="node7" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="411,223,595,250"/>
+<area shape="rect" id="node10" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="416,122,589,149"/>
+<area shape="rect" id="node13" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="451,341,554,367"/>
+<area shape="rect" id="node14" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="417,275,589,316"/>
+<area shape="rect" id="node15" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="441,71,564,98"/>
+<area shape="rect" id="node16" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="401,173,605,199"/>
+<area shape="rect" id="node8" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="915,194,1033,221"/>
+<area shape="rect" id="node9" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="707,274,811,301"/>
+<area shape="rect" id="node11" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="669,107,849,148"/>
+<area shape="rect" id="node12" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="909,114,1039,141"/>
+<area shape="rect" id="node17" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="709,173,809,199"/>
 </map>
 </div>
 <div class="dynheader">
@@ -1011,14 +1029,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_aefc1a6143e678da91f19584c826428cd_icgraph.png" border="0" usemap="#lw_fields_8h_aefc1a6143e678da91f19584c826428cd_icgraph" alt=""/></div>
 <map name="lw_fields_8h_aefc1a6143e678da91f19584c826428cd_icgraph" id="lw_fields_8h_aefc1a6143e678da91f19584c826428cd_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="167,132,269,159"/>
-<area shape="rect" id="node3" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="317,132,407,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="167,208,269,235"/>
+<area shape="rect" id="node3" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="317,208,407,235"/>
 <area shape="rect" id="node4" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="483,5,635,32"/>
 <area shape="rect" id="node5" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="519,56,599,83"/>
 <area shape="rect" id="node6" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="487,107,631,133"/>
 <area shape="rect" id="node7" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="489,157,629,184"/>
-<area shape="rect" id="node8" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="466,208,653,235"/>
+<area shape="rect" id="node8" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="507,208,611,235"/>
 <area shape="rect" id="node9" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="455,259,664,301"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="465,325,654,366"/>
+<area shape="rect" id="node11" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="479,390,639,431"/>
+<area shape="rect" id="node12" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="503,456,616,483"/>
 </map>
 </div>
 
@@ -1106,23 +1127,23 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a3e5719955e373b30ae2de7e6b91829eb_cgraph.png" border="0" usemap="#lw_fields_8h_a3e5719955e373b30ae2de7e6b91829eb_cgraph" alt=""/></div>
 <map name="lw_fields_8h_a3e5719955e373b30ae2de7e6b91829eb_cgraph" id="lw_fields_8h_a3e5719955e373b30ae2de7e6b91829eb_cgraph">
-<area shape="rect" id="node2" href="calculations_8c.html#a31b2824a548acf6c7c181397ea41b643" title="calcBoxIndexJm1" alt="" coords="190,86,317,113"/>
-<area shape="rect" id="node3" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="163,137,344,163"/>
-<area shape="rect" id="node6" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="207,187,299,214"/>
-<area shape="rect" id="node18" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="207,238,300,265"/>
+<area shape="rect" id="node2" href="calculations_8c.html#a31b2824a548acf6c7c181397ea41b643" title="calcBoxIndexJm1" alt="" coords="190,46,317,73"/>
+<area shape="rect" id="node3" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="163,97,344,123"/>
+<area shape="rect" id="node6" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="207,198,299,225"/>
+<area shape="rect" id="node18" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="207,147,300,174"/>
 <area shape="rect" id="node4" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="392,5,605,47"/>
 <area shape="rect" id="node5" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="653,13,857,39"/>
-<area shape="rect" id="node7" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="407,289,591,315"/>
-<area shape="rect" id="node10" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="412,187,585,214"/>
-<area shape="rect" id="node13" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="447,339,550,366"/>
-<area shape="rect" id="node14" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="413,71,585,112"/>
-<area shape="rect" id="node15" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="437,137,560,163"/>
-<area shape="rect" id="node16" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="397,238,601,265"/>
-<area shape="rect" id="node8" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="911,285,1029,311"/>
-<area shape="rect" id="node9" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="703,289,807,315"/>
-<area shape="rect" id="node11" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="665,172,845,213"/>
-<area shape="rect" id="node12" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="905,179,1035,206"/>
-<area shape="rect" id="node17" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="705,238,805,265"/>
+<area shape="rect" id="node7" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="407,223,591,250"/>
+<area shape="rect" id="node10" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="412,122,585,149"/>
+<area shape="rect" id="node13" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="447,341,550,367"/>
+<area shape="rect" id="node14" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="413,275,585,316"/>
+<area shape="rect" id="node15" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="437,71,560,98"/>
+<area shape="rect" id="node16" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="397,173,601,199"/>
+<area shape="rect" id="node8" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="911,194,1029,221"/>
+<area shape="rect" id="node9" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="703,274,807,301"/>
+<area shape="rect" id="node11" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="665,107,845,148"/>
+<area shape="rect" id="node12" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="905,114,1035,141"/>
+<area shape="rect" id="node17" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="705,173,805,199"/>
 </map>
 </div>
 <div class="dynheader">
@@ -1130,14 +1151,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a3e5719955e373b30ae2de7e6b91829eb_icgraph.png" border="0" usemap="#lw_fields_8h_a3e5719955e373b30ae2de7e6b91829eb_icgraph" alt=""/></div>
 <map name="lw_fields_8h_a3e5719955e373b30ae2de7e6b91829eb_icgraph" id="lw_fields_8h_a3e5719955e373b30ae2de7e6b91829eb_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="163,132,265,159"/>
-<area shape="rect" id="node3" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="313,132,403,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="163,208,265,235"/>
+<area shape="rect" id="node3" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="313,208,403,235"/>
 <area shape="rect" id="node4" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="479,5,631,32"/>
 <area shape="rect" id="node5" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="515,56,595,83"/>
 <area shape="rect" id="node6" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="483,107,627,133"/>
 <area shape="rect" id="node7" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="485,157,625,184"/>
-<area shape="rect" id="node8" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="462,208,649,235"/>
+<area shape="rect" id="node8" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="503,208,607,235"/>
 <area shape="rect" id="node9" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="451,259,660,301"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="461,325,650,366"/>
+<area shape="rect" id="node11" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="475,390,635,431"/>
+<area shape="rect" id="node12" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="499,456,612,483"/>
 </map>
 </div>
 
@@ -1225,23 +1249,23 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_adc8ac4e291df72434f59801ae4431349_cgraph.png" border="0" usemap="#lw_fields_8h_adc8ac4e291df72434f59801ae4431349_cgraph" alt=""/></div>
 <map name="lw_fields_8h_adc8ac4e291df72434f59801ae4431349_cgraph" id="lw_fields_8h_adc8ac4e291df72434f59801ae4431349_cgraph">
-<area shape="rect" id="node2" href="calculations_8c.html#adb1e1ed963b15e1e05fa5681af66b005" title="calcBoxIndexIm1" alt="" coords="191,86,315,113"/>
-<area shape="rect" id="node3" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="163,137,344,163"/>
-<area shape="rect" id="node6" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="207,187,299,214"/>
-<area shape="rect" id="node18" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="207,238,300,265"/>
+<area shape="rect" id="node2" href="calculations_8c.html#adb1e1ed963b15e1e05fa5681af66b005" title="calcBoxIndexIm1" alt="" coords="191,46,315,73"/>
+<area shape="rect" id="node3" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="163,97,344,123"/>
+<area shape="rect" id="node6" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="207,198,299,225"/>
+<area shape="rect" id="node18" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="207,147,300,174"/>
 <area shape="rect" id="node4" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="392,5,605,47"/>
 <area shape="rect" id="node5" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="653,13,857,39"/>
-<area shape="rect" id="node7" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="407,289,591,315"/>
-<area shape="rect" id="node10" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="412,187,585,214"/>
-<area shape="rect" id="node13" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="447,339,550,366"/>
-<area shape="rect" id="node14" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="413,71,585,112"/>
-<area shape="rect" id="node15" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="437,137,560,163"/>
-<area shape="rect" id="node16" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="397,238,601,265"/>
-<area shape="rect" id="node8" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="911,285,1029,311"/>
-<area shape="rect" id="node9" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="703,289,807,315"/>
-<area shape="rect" id="node11" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="665,172,845,213"/>
-<area shape="rect" id="node12" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="905,179,1035,206"/>
-<area shape="rect" id="node17" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="705,238,805,265"/>
+<area shape="rect" id="node7" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="407,223,591,250"/>
+<area shape="rect" id="node10" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="412,122,585,149"/>
+<area shape="rect" id="node13" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="447,341,550,367"/>
+<area shape="rect" id="node14" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="413,275,585,316"/>
+<area shape="rect" id="node15" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="437,71,560,98"/>
+<area shape="rect" id="node16" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="397,173,601,199"/>
+<area shape="rect" id="node8" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="911,194,1029,221"/>
+<area shape="rect" id="node9" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="703,274,807,301"/>
+<area shape="rect" id="node11" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="665,107,845,148"/>
+<area shape="rect" id="node12" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="905,114,1035,141"/>
+<area shape="rect" id="node17" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="705,173,805,199"/>
 </map>
 </div>
 <div class="dynheader">
@@ -1249,14 +1273,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_adc8ac4e291df72434f59801ae4431349_icgraph.png" border="0" usemap="#lw_fields_8h_adc8ac4e291df72434f59801ae4431349_icgraph" alt=""/></div>
 <map name="lw_fields_8h_adc8ac4e291df72434f59801ae4431349_icgraph" id="lw_fields_8h_adc8ac4e291df72434f59801ae4431349_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="163,132,265,159"/>
-<area shape="rect" id="node3" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="313,132,403,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="163,208,265,235"/>
+<area shape="rect" id="node3" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="313,208,403,235"/>
 <area shape="rect" id="node4" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="479,5,631,32"/>
 <area shape="rect" id="node5" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="515,56,595,83"/>
 <area shape="rect" id="node6" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="483,107,627,133"/>
 <area shape="rect" id="node7" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="485,157,625,184"/>
-<area shape="rect" id="node8" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="462,208,649,235"/>
+<area shape="rect" id="node8" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="503,208,607,235"/>
 <area shape="rect" id="node9" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="451,259,660,301"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="461,325,650,366"/>
+<area shape="rect" id="node11" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="475,390,635,431"/>
+<area shape="rect" id="node12" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="499,456,612,483"/>
 </map>
 </div>
 
@@ -1322,32 +1349,32 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a476da358b14047cff9fbfd11e46bb275_cgraph.png" border="0" usemap="#lw_fields_8h_a476da358b14047cff9fbfd11e46bb275_cgraph" alt=""/></div>
 <map name="lw_fields_8h_a476da358b14047cff9fbfd11e46bb275_cgraph" id="lw_fields_8h_a476da358b14047cff9fbfd11e46bb275_cgraph">
-<area shape="rect" id="node2" href="lw_fields_8c.html#a472e4ed96bca43242a8b4e94b15991d1" title="Maxwell Pusher for EField inside Boxes. This method is used for the hybrid field method. " alt="" coords="143,56,304,83"/>
-<area shape="rect" id="node3" href="lw_fields_8c.html#a764fbbefccc598e48988dab3371f808b" title="this methods loops through all boxes and stores all values of H in the plane left, infront and below of the current box. As can be seen from the Yee Scheme only Hy and Hz are needed from the left plane. Hz and Hx are needed from the plane infront and Hy and Hx are needed from the plane below. If the current box is a box where to the left does not exist (ib = 0) then the respective values for H are set to 0. " alt="" coords="152,107,295,133"/>
-<area shape="rect" id="node4" href="lw_fields_8c.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="172,157,275,184"/>
-<area shape="rect" id="node27" href="lw_fields_8c.html#a8542932ce0ccd85e67cd10d0a0ff81eb" title="Maxwell Pusher for EField at box borders. This method is used for the hybrid field method..." alt="" coords="149,208,297,235"/>
-<area shape="rect" id="node5" href="lw_fields_8c.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="354,107,463,133"/>
-<area shape="rect" id="node23" href="lw_fields_8c.html#a3e5719955e373b30ae2de7e6b91829eb" title="this method adjusts the H values infront and on the back side border of the near field. " alt="" coords="354,208,463,235"/>
-<area shape="rect" id="node25" href="lw_fields_8c.html#aefc1a6143e678da91f19584c826428cd" title="this method adjusts the H values on the top and bottom side border of the near field. " alt="" coords="352,157,465,184"/>
-<area shape="rect" id="node6" href="calculations_8c.html#adb1e1ed963b15e1e05fa5681af66b005" title="calcBoxIndexIm1" alt="" coords="542,56,666,83"/>
-<area shape="rect" id="node7" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="513,208,695,235"/>
-<area shape="rect" id="node10" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="558,107,650,133"/>
-<area shape="rect" id="node22" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="557,157,651,184"/>
-<area shape="rect" id="node8" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="743,325,956,366"/>
-<area shape="rect" id="node9" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="1004,332,1208,359"/>
-<area shape="rect" id="node11" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="757,157,941,184"/>
-<area shape="rect" id="node14" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="763,56,936,83"/>
-<area shape="rect" id="node17" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="798,208,901,235"/>
-<area shape="rect" id="node18" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="763,259,935,301"/>
-<area shape="rect" id="node19" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="788,5,911,32"/>
-<area shape="rect" id="node20" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="747,107,951,133"/>
-<area shape="rect" id="node12" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="1261,128,1380,155"/>
-<area shape="rect" id="node13" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="1054,208,1158,235"/>
-<area shape="rect" id="node15" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="1016,41,1196,82"/>
-<area shape="rect" id="node16" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="1256,48,1385,75"/>
-<area shape="rect" id="node21" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="1056,107,1156,133"/>
-<area shape="rect" id="node24" href="calculations_8c.html#a31b2824a548acf6c7c181397ea41b643" title="calcBoxIndexJm1" alt="" coords="541,309,667,336"/>
-<area shape="rect" id="node26" href="calculations_8c.html#a23447665efada367a850bebc6b3787ff" title="calcBoxIndexKm1" alt="" coords="539,259,669,285"/>
+<area shape="rect" id="node2" href="lw_fields_8c.html#a472e4ed96bca43242a8b4e94b15991d1" title="Maxwell Pusher for EField inside Boxes. This method is used for the hybrid field method. " alt="" coords="143,75,304,102"/>
+<area shape="rect" id="node3" href="lw_fields_8c.html#a764fbbefccc598e48988dab3371f808b" title="this methods loops through all boxes and stores all values of H in the plane left, infront and below of the current box. As can be seen from the Yee Scheme only Hy and Hz are needed from the left plane. Hz and Hx are needed from the plane infront and Hy and Hx are needed from the plane below. If the current box is a box where to the left does not exist (ib = 0) then the respective values for H are set to 0. " alt="" coords="152,126,295,153"/>
+<area shape="rect" id="node4" href="lw_fields_8c.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="172,177,275,203"/>
+<area shape="rect" id="node27" href="lw_fields_8c.html#a8542932ce0ccd85e67cd10d0a0ff81eb" title="Maxwell Pusher for EField at box borders. This method is used for the hybrid field method..." alt="" coords="149,227,297,254"/>
+<area shape="rect" id="node5" href="lw_fields_8c.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="354,126,463,153"/>
+<area shape="rect" id="node23" href="lw_fields_8c.html#a3e5719955e373b30ae2de7e6b91829eb" title="this method adjusts the H values infront and on the back side border of the near field. " alt="" coords="354,227,463,254"/>
+<area shape="rect" id="node25" href="lw_fields_8c.html#aefc1a6143e678da91f19584c826428cd" title="this method adjusts the H values on the top and bottom side border of the near field. " alt="" coords="352,177,465,203"/>
+<area shape="rect" id="node6" href="calculations_8c.html#adb1e1ed963b15e1e05fa5681af66b005" title="calcBoxIndexIm1" alt="" coords="542,75,666,102"/>
+<area shape="rect" id="node7" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="513,227,695,254"/>
+<area shape="rect" id="node10" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="558,177,650,203"/>
+<area shape="rect" id="node22" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="557,126,651,153"/>
+<area shape="rect" id="node8" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="743,333,956,375"/>
+<area shape="rect" id="node9" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="1004,341,1208,367"/>
+<area shape="rect" id="node11" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="757,231,941,258"/>
+<area shape="rect" id="node14" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="763,13,936,39"/>
+<area shape="rect" id="node17" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="798,282,901,309"/>
+<area shape="rect" id="node18" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="763,115,935,156"/>
+<area shape="rect" id="node19" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="788,181,911,207"/>
+<area shape="rect" id="node20" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="747,63,951,90"/>
+<area shape="rect" id="node12" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="1261,93,1380,119"/>
+<area shape="rect" id="node13" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="1054,231,1158,258"/>
+<area shape="rect" id="node15" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="1016,5,1196,47"/>
+<area shape="rect" id="node16" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="1256,13,1385,39"/>
+<area shape="rect" id="node21" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="1056,71,1156,98"/>
+<area shape="rect" id="node24" href="calculations_8c.html#a31b2824a548acf6c7c181397ea41b643" title="calcBoxIndexJm1" alt="" coords="541,329,667,355"/>
+<area shape="rect" id="node26" href="calculations_8c.html#a23447665efada367a850bebc6b3787ff" title="calcBoxIndexKm1" alt="" coords="539,278,669,305"/>
 </map>
 </div>
 <div class="dynheader">
@@ -1359,8 +1386,11 @@ Here is the caller graph for this function:</div>
 <area shape="rect" id="node3" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="207,56,287,83"/>
 <area shape="rect" id="node4" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="175,107,319,133"/>
 <area shape="rect" id="node5" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="177,157,317,184"/>
-<area shape="rect" id="node6" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="154,208,341,235"/>
+<area shape="rect" id="node6" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="195,208,299,235"/>
 <area shape="rect" id="node7" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="143,259,352,301"/>
+<area shape="rect" id="node8" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="153,325,342,366"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="167,390,327,431"/>
+<area shape="rect" id="node10" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="191,456,304,483"/>
 </map>
 </div>
 
@@ -1406,13 +1436,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a8542932ce0ccd85e67cd10d0a0ff81eb_icgraph.png" border="0" usemap="#lw_fields_8h_a8542932ce0ccd85e67cd10d0a0ff81eb_icgraph" alt=""/></div>
 <map name="lw_fields_8h_a8542932ce0ccd85e67cd10d0a0ff81eb_icgraph" id="lw_fields_8h_a8542932ce0ccd85e67cd10d0a0ff81eb_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="201,132,291,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="201,208,291,235"/>
 <area shape="rect" id="node3" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="367,5,519,32"/>
 <area shape="rect" id="node4" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="403,56,483,83"/>
 <area shape="rect" id="node5" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="371,107,515,133"/>
 <area shape="rect" id="node6" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="373,157,513,184"/>
-<area shape="rect" id="node7" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="350,208,537,235"/>
+<area shape="rect" id="node7" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="391,208,495,235"/>
 <area shape="rect" id="node8" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="339,259,548,301"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="349,325,538,366"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="363,390,523,431"/>
+<area shape="rect" id="node11" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="387,456,500,483"/>
 </map>
 </div>
 
@@ -1458,13 +1491,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a472e4ed96bca43242a8b4e94b15991d1_icgraph.png" border="0" usemap="#lw_fields_8h_a472e4ed96bca43242a8b4e94b15991d1_icgraph" alt=""/></div>
 <map name="lw_fields_8h_a472e4ed96bca43242a8b4e94b15991d1_icgraph" id="lw_fields_8h_a472e4ed96bca43242a8b4e94b15991d1_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="215,132,304,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="215,208,304,235"/>
 <area shape="rect" id="node3" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="381,5,533,32"/>
 <area shape="rect" id="node4" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="417,56,497,83"/>
 <area shape="rect" id="node5" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="385,107,529,133"/>
 <area shape="rect" id="node6" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="387,157,527,184"/>
-<area shape="rect" id="node7" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="363,208,550,235"/>
+<area shape="rect" id="node7" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="405,208,509,235"/>
 <area shape="rect" id="node8" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="352,259,561,301"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="362,325,551,366"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="377,390,537,431"/>
+<area shape="rect" id="node11" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="400,456,513,483"/>
 </map>
 </div>
 
@@ -1530,32 +1566,32 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_af45e2e7d9e6c006510383e5295410fa8_cgraph.png" border="0" usemap="#lw_fields_8h_af45e2e7d9e6c006510383e5295410fa8_cgraph" alt=""/></div>
 <map name="lw_fields_8h_af45e2e7d9e6c006510383e5295410fa8_cgraph" id="lw_fields_8h_af45e2e7d9e6c006510383e5295410fa8_cgraph">
-<area shape="rect" id="node2" href="lw_fields_8c.html#a4138b9989d8810aa35e0e6c1e0ea4fe0" title="Maxwell Pusher for HField inside Boxes. This method is used for the hybrid field method. " alt="" coords="143,56,305,83"/>
-<area shape="rect" id="node3" href="lw_fields_8c.html#a46580d5ee2d7d0ae9277aee52395f565" title="this methods loops through all boxes and stores all values of E in the plane right, behind and above of the current box. As can be seen from the Yee Scheme only Ey and Ez are needed from the right plane. Ez and Ex are needed from the plane behind and Ey and Ex are needed from the plane above. If the current box is a box where the plane to the right does not exist (ib = numberOfBoxesInX) then the respective values for E are set to 0. " alt="" coords="153,107,295,133"/>
-<area shape="rect" id="node4" href="lw_fields_8c.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="173,157,275,184"/>
-<area shape="rect" id="node27" href="lw_fields_8c.html#ae76bc3c422d73fce2c5c4ac84f8e5d6e" title="Maxwell Pusher for HField at box borders. This method is used for the hybrid field method..." alt="" coords="149,208,299,235"/>
-<area shape="rect" id="node5" href="lw_fields_8c.html#ae05dc350695f83d10835578077f7ce61" title="this method adjusts the E values on the left and right side border of the near field. " alt="" coords="355,107,461,133"/>
-<area shape="rect" id="node23" href="lw_fields_8c.html#ac917d3c7ad39bc896aa96ce84ad0d71c" title="this method adjusts the E values infront and on the back side border of the near field. " alt="" coords="355,208,461,235"/>
-<area shape="rect" id="node25" href="lw_fields_8c.html#aceb9e81297ffee9719f4267301baa19b" title="this method adjusts the E values at top and bottom side border of the near field. ..." alt="" coords="353,157,463,184"/>
-<area shape="rect" id="node6" href="calculations_8c.html#a9f530e232a5918981b4efe6edee87a01" title="calcBoxIndexIp1" alt="" coords="541,56,661,83"/>
-<area shape="rect" id="node7" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="511,208,692,235"/>
-<area shape="rect" id="node10" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="555,107,647,133"/>
-<area shape="rect" id="node22" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="555,157,648,184"/>
-<area shape="rect" id="node8" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="740,325,953,366"/>
-<area shape="rect" id="node9" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="1001,332,1205,359"/>
-<area shape="rect" id="node11" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="755,157,939,184"/>
-<area shape="rect" id="node14" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="760,56,933,83"/>
-<area shape="rect" id="node17" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="795,208,898,235"/>
-<area shape="rect" id="node18" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="761,259,933,301"/>
-<area shape="rect" id="node19" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="785,5,908,32"/>
-<area shape="rect" id="node20" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="745,107,949,133"/>
-<area shape="rect" id="node12" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="1259,128,1377,155"/>
-<area shape="rect" id="node13" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="1051,208,1155,235"/>
-<area shape="rect" id="node15" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="1013,41,1193,82"/>
-<area shape="rect" id="node16" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="1253,48,1383,75"/>
-<area shape="rect" id="node21" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="1053,107,1153,133"/>
-<area shape="rect" id="node24" href="calculations_8c.html#a91bbcdcec7d3406c78ca2de7e0fd04d5" title="calcBoxIndexJp1" alt="" coords="540,309,663,336"/>
-<area shape="rect" id="node26" href="calculations_8c.html#a78ac4cd5aeb7e56277aa9543877ccdc0" title="calcBoxIndexKp1" alt="" coords="539,259,664,285"/>
+<area shape="rect" id="node2" href="lw_fields_8c.html#a4138b9989d8810aa35e0e6c1e0ea4fe0" title="Maxwell Pusher for HField inside Boxes. This method is used for the hybrid field method. " alt="" coords="143,75,305,102"/>
+<area shape="rect" id="node3" href="lw_fields_8c.html#a46580d5ee2d7d0ae9277aee52395f565" title="this methods loops through all boxes and stores all values of E in the plane right, behind and above of the current box. As can be seen from the Yee Scheme only Ey and Ez are needed from the right plane. Ez and Ex are needed from the plane behind and Ey and Ex are needed from the plane above. If the current box is a box where the plane to the right does not exist (ib = numberOfBoxesInX) then the respective values for E are set to 0. " alt="" coords="153,126,295,153"/>
+<area shape="rect" id="node4" href="lw_fields_8c.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="173,177,275,203"/>
+<area shape="rect" id="node27" href="lw_fields_8c.html#ae76bc3c422d73fce2c5c4ac84f8e5d6e" title="Maxwell Pusher for HField at box borders. This method is used for the hybrid field method..." alt="" coords="149,227,299,254"/>
+<area shape="rect" id="node5" href="lw_fields_8c.html#ae05dc350695f83d10835578077f7ce61" title="this method adjusts the E values on the left and right side border of the near field. " alt="" coords="355,126,461,153"/>
+<area shape="rect" id="node23" href="lw_fields_8c.html#ac917d3c7ad39bc896aa96ce84ad0d71c" title="this method adjusts the E values infront and on the back side border of the near field. " alt="" coords="355,227,461,254"/>
+<area shape="rect" id="node25" href="lw_fields_8c.html#aceb9e81297ffee9719f4267301baa19b" title="this method adjusts the E values at top and bottom side border of the near field. ..." alt="" coords="353,177,463,203"/>
+<area shape="rect" id="node6" href="calculations_8c.html#a9f530e232a5918981b4efe6edee87a01" title="calcBoxIndexIp1" alt="" coords="541,75,661,102"/>
+<area shape="rect" id="node7" href="calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="511,227,692,254"/>
+<area shape="rect" id="node10" href="lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="555,177,647,203"/>
+<area shape="rect" id="node22" href="lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="555,126,648,153"/>
+<area shape="rect" id="node8" href="calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="740,333,953,375"/>
+<area shape="rect" id="node9" href="calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="1001,341,1205,367"/>
+<area shape="rect" id="node11" href="calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="755,231,939,258"/>
+<area shape="rect" id="node14" href="calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="760,13,933,39"/>
+<area shape="rect" id="node17" href="calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="795,282,898,309"/>
+<area shape="rect" id="node18" href="calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="761,115,933,156"/>
+<area shape="rect" id="node19" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="785,181,908,207"/>
+<area shape="rect" id="node20" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="745,63,949,90"/>
+<area shape="rect" id="node12" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="1259,93,1377,119"/>
+<area shape="rect" id="node13" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="1051,231,1155,258"/>
+<area shape="rect" id="node15" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="1013,5,1193,47"/>
+<area shape="rect" id="node16" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="1253,13,1383,39"/>
+<area shape="rect" id="node21" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="1053,71,1153,98"/>
+<area shape="rect" id="node24" href="calculations_8c.html#a91bbcdcec7d3406c78ca2de7e0fd04d5" title="calcBoxIndexJp1" alt="" coords="540,329,663,355"/>
+<area shape="rect" id="node26" href="calculations_8c.html#a78ac4cd5aeb7e56277aa9543877ccdc0" title="calcBoxIndexKp1" alt="" coords="539,278,664,305"/>
 </map>
 </div>
 <div class="dynheader">
@@ -1567,8 +1603,11 @@ Here is the caller graph for this function:</div>
 <area shape="rect" id="node3" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="207,56,287,83"/>
 <area shape="rect" id="node4" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="175,107,319,133"/>
 <area shape="rect" id="node5" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="177,157,317,184"/>
-<area shape="rect" id="node6" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="154,208,341,235"/>
+<area shape="rect" id="node6" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="195,208,299,235"/>
 <area shape="rect" id="node7" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="143,259,352,301"/>
+<area shape="rect" id="node8" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="153,325,342,366"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="167,390,327,431"/>
+<area shape="rect" id="node10" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="191,456,304,483"/>
 </map>
 </div>
 
@@ -1614,13 +1653,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_ae76bc3c422d73fce2c5c4ac84f8e5d6e_icgraph.png" border="0" usemap="#lw_fields_8h_ae76bc3c422d73fce2c5c4ac84f8e5d6e_icgraph" alt=""/></div>
 <map name="lw_fields_8h_ae76bc3c422d73fce2c5c4ac84f8e5d6e_icgraph" id="lw_fields_8h_ae76bc3c422d73fce2c5c4ac84f8e5d6e_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="203,132,292,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="203,208,292,235"/>
 <area shape="rect" id="node3" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="369,5,521,32"/>
 <area shape="rect" id="node4" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="405,56,485,83"/>
 <area shape="rect" id="node5" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="373,107,517,133"/>
 <area shape="rect" id="node6" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="375,157,515,184"/>
-<area shape="rect" id="node7" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="351,208,538,235"/>
+<area shape="rect" id="node7" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="393,208,497,235"/>
 <area shape="rect" id="node8" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="340,259,549,301"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="350,325,539,366"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="365,390,525,431"/>
+<area shape="rect" id="node11" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="388,456,501,483"/>
 </map>
 </div>
 
@@ -1666,13 +1708,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a4138b9989d8810aa35e0e6c1e0ea4fe0_icgraph.png" border="0" usemap="#lw_fields_8h_a4138b9989d8810aa35e0e6c1e0ea4fe0_icgraph" alt=""/></div>
 <map name="lw_fields_8h_a4138b9989d8810aa35e0e6c1e0ea4fe0_icgraph" id="lw_fields_8h_a4138b9989d8810aa35e0e6c1e0ea4fe0_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="216,132,305,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="216,208,305,235"/>
 <area shape="rect" id="node3" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="382,5,534,32"/>
 <area shape="rect" id="node4" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="418,56,498,83"/>
 <area shape="rect" id="node5" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="386,107,530,133"/>
 <area shape="rect" id="node6" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="388,157,528,184"/>
-<area shape="rect" id="node7" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="365,208,551,235"/>
+<area shape="rect" id="node7" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="406,208,510,235"/>
 <area shape="rect" id="node8" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="353,259,563,301"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="363,325,553,366"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="378,390,538,431"/>
+<area shape="rect" id="node11" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="401,456,515,483"/>
 </map>
 </div>
 
@@ -1707,13 +1752,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a46580d5ee2d7d0ae9277aee52395f565_icgraph.png" border="0" usemap="#lw_fields_8h_a46580d5ee2d7d0ae9277aee52395f565_icgraph" alt=""/></div>
 <map name="lw_fields_8h_a46580d5ee2d7d0ae9277aee52395f565_icgraph" id="lw_fields_8h_a46580d5ee2d7d0ae9277aee52395f565_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="196,132,285,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="196,208,285,235"/>
 <area shape="rect" id="node3" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="362,5,514,32"/>
 <area shape="rect" id="node4" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="398,56,478,83"/>
 <area shape="rect" id="node5" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="366,107,510,133"/>
 <area shape="rect" id="node6" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="368,157,508,184"/>
-<area shape="rect" id="node7" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="345,208,531,235"/>
+<area shape="rect" id="node7" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="386,208,490,235"/>
 <area shape="rect" id="node8" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="333,259,543,301"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="343,325,533,366"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="358,390,518,431"/>
+<area shape="rect" id="node11" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="381,456,495,483"/>
 </map>
 </div>
 
@@ -1748,13 +1796,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a764fbbefccc598e48988dab3371f808b_icgraph.png" border="0" usemap="#lw_fields_8h_a764fbbefccc598e48988dab3371f808b_icgraph" alt=""/></div>
 <map name="lw_fields_8h_a764fbbefccc598e48988dab3371f808b_icgraph" id="lw_fields_8h_a764fbbefccc598e48988dab3371f808b_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="196,132,285,159"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="196,208,285,235"/>
 <area shape="rect" id="node3" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="362,5,514,32"/>
 <area shape="rect" id="node4" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="398,56,478,83"/>
 <area shape="rect" id="node5" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="366,107,510,133"/>
 <area shape="rect" id="node6" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="368,157,508,184"/>
-<area shape="rect" id="node7" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="345,208,531,235"/>
+<area shape="rect" id="node7" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="386,208,490,235"/>
 <area shape="rect" id="node8" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="333,259,543,301"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="343,325,533,366"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="358,390,518,431"/>
+<area shape="rect" id="node11" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="381,456,495,483"/>
 </map>
 </div>
 
@@ -1828,9 +1879,9 @@ Here is the call graph for this function:</div>
 <area shape="rect" id="node10" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="186,249,309,276"/>
 <area shape="rect" id="node11" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="145,300,349,327"/>
 <area shape="rect" id="node3" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="631,5,749,32"/>
-<area shape="rect" id="node4" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="435,27,539,53"/>
+<area shape="rect" id="node4" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="435,27,539,53"/>
 <area shape="rect" id="node6" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="397,78,577,119"/>
-<area shape="rect" id="node7" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="625,85,755,112"/>
+<area shape="rect" id="node7" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="625,85,755,112"/>
 <area shape="rect" id="node12" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="437,300,537,327"/>
 </map>
 </div>
@@ -1839,24 +1890,27 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a96197f1e2e5444c3f9f16b528a453f2f_icgraph.png" border="0" usemap="#lw_fields_8h_a96197f1e2e5444c3f9f16b528a453f2f_icgraph" alt=""/></div>
 <map name="lw_fields_8h_a96197f1e2e5444c3f9f16b528a453f2f_icgraph" id="lw_fields_8h_a96197f1e2e5444c3f9f16b528a453f2f_icgraph">
-<area shape="rect" id="node2" href="lw_fields_8h.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="147,157,257,184"/>
-<area shape="rect" id="node11" href="lw_fields_8h.html#a3e5719955e373b30ae2de7e6b91829eb" title="this method adjusts the H values infront and on the back side border of the near field. " alt="" coords="147,208,257,235"/>
-<area shape="rect" id="node12" href="lw_fields_8h.html#aefc1a6143e678da91f19584c826428cd" title="this method adjusts the H values on the top and bottom side border of the near field. " alt="" coords="145,259,259,285"/>
-<area shape="rect" id="node13" href="lw_fields_8h.html#ae05dc350695f83d10835578077f7ce61" title="this method adjusts the E values on the left and right side border of the near field. " alt="" coords="149,5,255,32"/>
-<area shape="rect" id="node16" href="lw_fields_8h.html#ac917d3c7ad39bc896aa96ce84ad0d71c" title="this method adjusts the E values infront and on the back side border of the near field. " alt="" coords="149,56,255,83"/>
-<area shape="rect" id="node17" href="lw_fields_8h.html#aceb9e81297ffee9719f4267301baa19b" title="this method adjusts the E values at top and bottom side border of the near field. ..." alt="" coords="147,107,257,133"/>
-<area shape="rect" id="node18" href="lw_fields_8h.html#a296507eaeaf163c36b80660b879cd330" title="subtracts LW fields in box specified by input parameter &quot;boxIndex&quot; " alt="" coords="307,284,440,311"/>
-<area shape="rect" id="node3" href="lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="322,208,425,235"/>
-<area shape="rect" id="node4" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="503,208,593,235"/>
+<area shape="rect" id="node2" href="lw_fields_8h.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="147,180,257,207"/>
+<area shape="rect" id="node14" href="lw_fields_8h.html#a3e5719955e373b30ae2de7e6b91829eb" title="this method adjusts the H values infront and on the back side border of the near field. " alt="" coords="147,231,257,257"/>
+<area shape="rect" id="node15" href="lw_fields_8h.html#aefc1a6143e678da91f19584c826428cd" title="this method adjusts the H values on the top and bottom side border of the near field. " alt="" coords="145,281,259,308"/>
+<area shape="rect" id="node16" href="lw_fields_8h.html#ae05dc350695f83d10835578077f7ce61" title="this method adjusts the E values on the left and right side border of the near field. " alt="" coords="149,28,255,55"/>
+<area shape="rect" id="node19" href="lw_fields_8h.html#ac917d3c7ad39bc896aa96ce84ad0d71c" title="this method adjusts the E values infront and on the back side border of the near field. " alt="" coords="149,79,255,105"/>
+<area shape="rect" id="node20" href="lw_fields_8h.html#aceb9e81297ffee9719f4267301baa19b" title="this method adjusts the E values at top and bottom side border of the near field. ..." alt="" coords="147,129,257,156"/>
+<area shape="rect" id="node21" href="lw_fields_8h.html#a296507eaeaf163c36b80660b879cd330" title="subtracts LW fields in box specified by input parameter &quot;boxIndex&quot; " alt="" coords="307,315,440,341"/>
+<area shape="rect" id="node3" href="lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="322,231,425,257"/>
+<area shape="rect" id="node4" href="lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="503,231,593,257"/>
 <area shape="rect" id="node5" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="685,56,837,83"/>
-<area shape="rect" id="node6" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="721,107,801,133"/>
-<area shape="rect" id="node7" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="689,157,833,184"/>
-<area shape="rect" id="node8" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="691,208,831,235"/>
-<area shape="rect" id="node9" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="667,259,854,285"/>
-<area shape="rect" id="node10" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="656,310,865,351"/>
-<area shape="rect" id="node14" href="lw_fields_8h.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="322,81,425,108"/>
-<area shape="rect" id="node15" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="503,157,593,184"/>
-<area shape="rect" id="node19" href="calculations_8h.html#a333f7c0ac8a981945502dbf30fab0b3a" title="updates the near field region of a particle. If the particle moves into another box the near field re..." alt="" coords="488,259,608,285"/>
+<area shape="rect" id="node6" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="721,5,801,32"/>
+<area shape="rect" id="node7" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="689,405,833,432"/>
+<area shape="rect" id="node8" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="691,456,831,483"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="709,107,813,133"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="656,158,865,199"/>
+<area shape="rect" id="node11" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="666,223,855,265"/>
+<area shape="rect" id="node12" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="681,289,841,330"/>
+<area shape="rect" id="node13" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="704,355,817,381"/>
+<area shape="rect" id="node17" href="lw_fields_8h.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="322,104,425,131"/>
+<area shape="rect" id="node18" href="lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="503,172,593,199"/>
+<area shape="rect" id="node22" href="calculations_8h.html#a333f7c0ac8a981945502dbf30fab0b3a" title="updates the near field region of a particle. If the particle moves into another box the near field re..." alt="" coords="488,305,608,332"/>
 </map>
 </div>
 
@@ -1924,9 +1978,9 @@ Here is the call graph for this function:</div>
 <area shape="rect" id="node11" href="calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="367,249,490,276"/>
 <area shape="rect" id="node12" href="calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="327,300,531,327"/>
 <area shape="rect" id="node4" href="calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="812,5,931,32"/>
-<area shape="rect" id="node5" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="vectorProduct" alt="" coords="617,27,721,53"/>
+<area shape="rect" id="node5" href="calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="617,27,721,53"/>
 <area shape="rect" id="node7" href="calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="579,78,759,119"/>
-<area shape="rect" id="node8" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="minkowskiProduct" alt="" coords="807,85,936,112"/>
+<area shape="rect" id="node8" href="calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="807,85,936,112"/>
 <area shape="rect" id="node13" href="calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="619,300,719,327"/>
 </map>
 </div>
@@ -1935,11 +1989,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a296507eaeaf163c36b80660b879cd330_icgraph.png" border="0" usemap="#lw_fields_8h_a296507eaeaf163c36b80660b879cd330_icgraph" alt=""/></div>
 <map name="lw_fields_8h_a296507eaeaf163c36b80660b879cd330_icgraph" id="lw_fields_8h_a296507eaeaf163c36b80660b879cd330_icgraph">
-<area shape="rect" id="node2" href="calculations_8h.html#a333f7c0ac8a981945502dbf30fab0b3a" title="updates the near field region of a particle. If the particle moves into another box the near field re..." alt="" coords="187,81,307,108"/>
+<area shape="rect" id="node2" href="calculations_8h.html#a333f7c0ac8a981945502dbf30fab0b3a" title="updates the near field region of a particle. If the particle moves into another box the near field re..." alt="" coords="187,165,307,192"/>
 <area shape="rect" id="node3" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="387,5,531,32"/>
 <area shape="rect" id="node4" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="389,56,529,83"/>
-<area shape="rect" id="node5" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="366,107,553,133"/>
+<area shape="rect" id="node5" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="407,107,511,133"/>
 <area shape="rect" id="node6" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="355,158,564,199"/>
+<area shape="rect" id="node7" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="365,223,554,265"/>
+<area shape="rect" id="node8" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="379,289,539,330"/>
+<area shape="rect" id="node9" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="403,355,516,381"/>
 </map>
 </div>
 
@@ -2008,158 +2065,32 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="lw_fields_8h_a11d47532e4411c70d5cb6adaa199e68e_cgraph.png" border="0" usemap="#lw_fields_8h_a11d47532e4411c70d5cb6adaa199e68e_cgraph" alt=""/></div>
-<map name="lw_fields_8h_a11d47532e4411c70d5cb6adaa199e68e_cgraph" id="lw_fields_8h_a11d47532e4411c70d5cb6adaa199e68e_cgraph">
-<area shape="rect" id="node2" href="calculations_8h.html#a69926635ff8dec5008380035b6be532b" title="interpolateFields" alt="" coords="247,5,367,32"/>
-</map>
-</div>
-<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lw_fields_8h_a11d47532e4411c70d5cb6adaa199e68e_icgraph.png" border="0" usemap="#lw_fields_8h_a11d47532e4411c70d5cb6adaa199e68e_icgraph" alt=""/></div>
 <map name="lw_fields_8h_a11d47532e4411c70d5cb6adaa199e68e_icgraph" id="lw_fields_8h_a11d47532e4411c70d5cb6adaa199e68e_icgraph">
-<area shape="rect" id="node2" href="calculations_8h.html#abc30b03964ca466fdf0a089dfefd0dae" title="updates velocity with boris method. " alt="" coords="247,323,456,350"/>
-<area shape="rect" id="node3" href="calculations_8c.html#aaa3f91ed7132a457ca21ca23da463b59" title="performs a reverse Boris Push. Uses same methods like standard BorisPusher but uses &#45;E und &#45;B..." alt="" coords="530,120,657,147"/>
-<area shape="rect" id="node4" href="calculations_8h.html#adbff8a7444a6b76f6ae268b1925506d0" title="extends and calculates particle history up to time t. Example: Let&#39;s say t = 8 and tEnd = 12 then the..." alt="" coords="731,152,879,179"/>
-<area shape="rect" id="node5" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="938,19,1125,46"/>
-<area shape="rect" id="node6" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="979,72,1083,99"/>
-<area shape="rect" id="node7" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="927,192,1136,233"/>
-<area shape="rect" id="node8" href="experiment_8h.html#af35f4f27dfc0aab6ff2c4bf1dd1e9b4a" title="electronScatteringSmallGrid\l_init9" alt="" coords="937,257,1125,298"/>
-<area shape="rect" id="node10" href="experiment_8h.html#aba97ca9ea25115ea974bfeb9c86f0720" title="scatteringInEMWave" alt="" coords="959,323,1104,350"/>
-<area shape="rect" id="node12" href="experiment_8h.html#a48fa4b50c818d762b95f86e04195b0a2" title="testBorisPusher" alt="" coords="535,374,651,400"/>
-<area shape="rect" id="node13" href="experiment_8h.html#a93af21472ce6a2cf691bb5fb9a2555b5" title="testLWFieldCalculationFor\lPlane" alt="" coords="504,425,683,466"/>
-<area shape="rect" id="node14" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="517,491,669,518"/>
-<area shape="rect" id="node15" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="553,542,633,568"/>
-<area shape="rect" id="node16" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="521,592,665,619"/>
-<area shape="rect" id="node17" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="523,643,663,670"/>
-<area shape="rect" id="node9" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="937,126,1126,168"/>
-<area shape="rect" id="node11" href="main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="1184,323,1235,350"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a38c9fdb75dd81fd9029d1a65c4d5a567"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38c9fdb75dd81fd9029d1a65c4d5a567">&#9670;&nbsp;</a></span>writeFieldsFromCompleteGridToFile()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void writeFieldsFromCompleteGridToFile </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_grid.html">Grid</a> *&#160;</td>
-          <td class="paramname"><em>Grid</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>loops through the entire grid and writes respective E and B values to E_initalFields.txt and H_initialFields.txt respectively. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname"><a class="el" href="struct_grid.html">Grid</a></td><td>instance of <a class="el" href="struct_grid.html">Grid</a> struct </td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="lw_fields_8h_a38c9fdb75dd81fd9029d1a65c4d5a567_icgraph.png" border="0" usemap="#lw_fields_8h_a38c9fdb75dd81fd9029d1a65c4d5a567_icgraph" alt=""/></div>
-<map name="lw_fields_8h_a38c9fdb75dd81fd9029d1a65c4d5a567_icgraph" id="lw_fields_8h_a38c9fdb75dd81fd9029d1a65c4d5a567_icgraph">
-<area shape="rect" id="node2" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="252,5,461,47"/>
-<area shape="rect" id="node3" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="262,71,451,112"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a02f39870c725f9dd68cef0f8d06a481e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02f39870c725f9dd68cef0f8d06a481e">&#9670;&nbsp;</a></span>writeFieldsToFile()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void writeFieldsToFile </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_grid.html">Grid</a> *&#160;</td>
-          <td class="paramname"><em>Grid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>filename</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>index</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>planeForPlotting</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>plotE</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>plotB</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>loops through the entire E and B array and writes |B|^2 and |E|^2 to seperate files. File is structured similiar to the grid. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>pointer to a char. Gets modified inside the method </td></tr>
-    <tr><td class="paramname">index</td><td>outer loop index. Is used to name the output file </td></tr>
-    <tr><td class="paramname">plotE</td><td>set to true, if you want to write E-field to file </td></tr>
-    <tr><td class="paramname">plotB</td><td>set to true, if you want to write B-field to file </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">ERROR</td><td>Could not open file for E or B field </td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="lw_fields_8h_a02f39870c725f9dd68cef0f8d06a481e_icgraph.png" border="0" usemap="#lw_fields_8h_a02f39870c725f9dd68cef0f8d06a481e_icgraph" alt=""/></div>
-<map name="lw_fields_8h_a02f39870c725f9dd68cef0f8d06a481e_icgraph" id="lw_fields_8h_a02f39870c725f9dd68cef0f8d06a481e_icgraph">
-<area shape="rect" id="node2" href="experiment_8h.html#ab1fee8000e98d5da702493e433bf111c" title="testMaxwellPusher" alt="" coords="214,5,347,32"/>
-<area shape="rect" id="node3" href="experiment_8h.html#a93af21472ce6a2cf691bb5fb9a2555b5" title="testLWFieldCalculationFor\lPlane" alt="" coords="191,57,370,98"/>
-<area shape="rect" id="node4" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="205,123,357,149"/>
-<area shape="rect" id="node5" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="241,173,321,200"/>
-<area shape="rect" id="node6" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="209,224,353,251"/>
-<area shape="rect" id="node7" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="211,275,351,301"/>
-<area shape="rect" id="node8" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="187,325,374,352"/>
-<area shape="rect" id="node9" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="229,376,333,403"/>
-<area shape="rect" id="node10" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="176,427,385,469"/>
-<area shape="rect" id="node11" href="experiment_8h.html#af35f4f27dfc0aab6ff2c4bf1dd1e9b4a" title="electronScatteringSmallGrid\l_init9" alt="" coords="187,493,375,534"/>
-<area shape="rect" id="node12" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="186,558,375,599"/>
-<area shape="rect" id="node13" href="experiment_8h.html#aba97ca9ea25115ea974bfeb9c86f0720" title="scatteringInEMWave" alt="" coords="208,624,353,651"/>
-<area shape="rect" id="node14" href="main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="433,624,484,651"/>
+<area shape="rect" id="node2" href="calculations_8h.html#abc30b03964ca466fdf0a089dfefd0dae" title="updates velocity with boris method. " alt="" coords="247,511,456,537"/>
+<area shape="rect" id="node3" href="calculations_8c.html#aaa3f91ed7132a457ca21ca23da463b59" title="performs a reverse Boris Push. Uses same methods like standard BorisPusher but uses &#45;E und &#45;B..." alt="" coords="530,384,657,411"/>
+<area shape="rect" id="node4" href="calculations_8h.html#adbff8a7444a6b76f6ae268b1925506d0" title="extends and calculates particle history up to time t. Example: Let&#39;s say t = 8 and tEnd = 12 then the..." alt="" coords="731,333,879,360"/>
+<area shape="rect" id="node5" href="experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="941,23,1128,49"/>
+<area shape="rect" id="node6" href="experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="983,73,1087,100"/>
+<area shape="rect" id="node7" href="experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="930,125,1139,166"/>
+<area shape="rect" id="node8" href="experiment_8h.html#af35f4f27dfc0aab6ff2c4bf1dd1e9b4a" title="electronScatteringSmallGrid\l_init9" alt="" coords="941,190,1129,231"/>
+<area shape="rect" id="node9" href="experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="940,255,1129,297"/>
+<area shape="rect" id="node10" href="experiment_8h.html#a16f202a1fbcc96fa0e2ef7d700416c36" title="scatteringInEMWave\l_analytic" alt="" coords="962,321,1107,362"/>
+<area shape="rect" id="node11" href="experiment_8h.html#a499c2f8b19d50b6d93af3b4e5b4e3532" title="scatteringInEMWave\l_simulation" alt="" coords="962,386,1107,427"/>
+<area shape="rect" id="node12" href="experiment_8h.html#aa5690fcaa4608dad7969739bbc10b6e9" title="testRadiationDampingVSLorentz\lForce" alt="" coords="927,451,1143,493"/>
+<area shape="rect" id="node13" href="experiment_8h.html#a8a98a5d9f123ef495d6984ba042fd864" title="scatteringInEMWave\l_analytic_largeScale" alt="" coords="962,517,1107,558"/>
+<area shape="rect" id="node15" href="experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="955,582,1115,623"/>
+<area shape="rect" id="node16" href="experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="978,648,1091,675"/>
+<area shape="rect" id="node17" href="experiment_8h.html#a48fa4b50c818d762b95f86e04195b0a2" title="testBorisPusher" alt="" coords="535,688,651,715"/>
+<area shape="rect" id="node18" href="experiment_8h.html#a942e0bf6db498c776bccb2baee4e88ab" title="testNearFieldCalculation" alt="" coords="510,739,677,765"/>
+<area shape="rect" id="node19" href="experiment_8h.html#a93af21472ce6a2cf691bb5fb9a2555b5" title="testLWFieldCalculationFor\lPlane" alt="" coords="504,790,683,831"/>
+<area shape="rect" id="node20" href="experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="517,856,669,883"/>
+<area shape="rect" id="node21" href="experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="553,907,633,933"/>
+<area shape="rect" id="node22" href="experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="521,957,665,984"/>
+<area shape="rect" id="node23" href="experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="523,1008,663,1035"/>
+<area shape="rect" id="node14" href="main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="1191,524,1241,551"/>
 </map>
 </div>
 

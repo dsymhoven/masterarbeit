@@ -1,3 +1,7 @@
 <map id="calcGridIndizesNextNeighbours" name="calcGridIndizesNextNeighbours">
-<area shape="rect" id="node2" href="$calculations_8h.html#a69926635ff8dec5008380035b6be532b" title="interpolateFields" alt="" coords="263,5,383,32"/>
+<area shape="rect" id="node2" href="$calculations_8h.html#a69926635ff8dec5008380035b6be532b" title="interpolateFields" alt="" coords="281,5,401,32"/>
+<area shape="rect" id="node3" href="$calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="276,56,405,83"/>
+<area shape="rect" id="node4" href="$calculations_8h.html#a75e698c43c823da6c38571a672b54124" title="calcRadiationDamping" alt="" coords="263,107,419,133"/>
+<area shape="rect" id="node5" href="$calculations_8h.html#a688c324c37bcdf15223995992c331c25" title="calculateLorentzForce" alt="" coords="264,157,417,184"/>
+<area shape="rect" id="node6" href="$calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="291,208,391,235"/>
 </map>

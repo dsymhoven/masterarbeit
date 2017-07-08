@@ -13,7 +13,8 @@ var searchData=
   ['adjusthyz_5fim1',['adjustHyz_im1',['../lw_fields_8c.html#adc8ac4e291df72434f59801ae4431349',1,'adjustHyz_im1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t):&#160;lwFields.c'],['../lw_fields_8h.html#adc8ac4e291df72434f59801ae4431349',1,'adjustHyz_im1(Grid *Grid, Particle *Particles, int numberOfParticles, const int boxIndex, const int ib, const int jb, const int kb, const double t):&#160;lwFields.c']]],
   ['allocatefieldsonboxborders',['allocateFieldsOnBoxBorders',['../grid_8c.html#aba1ef3f97b8dd7eec0f26c361d2a742e',1,'grid.c']]],
   ['allocatefieldsongrid',['allocateFieldsOnGrid',['../grid_8c.html#ae1a8c1626c471a6d76a7b1127d7ebc84',1,'grid.c']]],
-  ['allocatememoryongrid',['allocateMemoryOnGrid',['../grid_8c.html#a76e6ebe94eda1c9e1e213a601b57dca4',1,'allocateMemoryOnGrid(Grid *Grid):&#160;grid.c'],['../grid_8h.html#a76e6ebe94eda1c9e1e213a601b57dca4',1,'allocateMemoryOnGrid(Grid *Grid):&#160;grid.c']]],
+  ['allocatememoryongrid',['allocateMemoryOnGrid',['../grid_8c.html#a76e6ebe94eda1c9e1e213a601b57dca4',1,'grid.c']]],
   ['allocateparticlehistories',['allocateParticleHistories',['../particle_8c.html#a72e31b58254a02eda9a1a67300f19247',1,'allocateParticleHistories(Particle *Particle, int const arrayLength):&#160;particle.c'],['../particle_8h.html#a72e31b58254a02eda9a1a67300f19247',1,'allocateParticleHistories(Particle *Particle, int const arrayLength):&#160;particle.c']]],
-  ['allocateupmlcoefficients',['allocateUPMLCoefficients',['../grid_8c.html#a65975d28602dae50a6efc9397fd91b9f',1,'grid.c']]]
+  ['allocateupmlcoefficients',['allocateUPMLCoefficients',['../grid_8c.html#a65975d28602dae50a6efc9397fd91b9f',1,'grid.c']]],
+  ['analyzeforces',['analyzeForces',['../forces_8c.html#ad4b4fecd0452d28ab69bc30e34a1f4c1',1,'analyzeForces(Particle *Particle, Forces *Forces, double Eextern[3], double Bextern[3], double t):&#160;forces.c'],['../forces_8h.html#ad4b4fecd0452d28ab69bc30e34a1f4c1',1,'analyzeForces(Particle *Particle, Forces *Forces, double Eextern[3], double Bextern[3], double t):&#160;forces.c']]]
 ];

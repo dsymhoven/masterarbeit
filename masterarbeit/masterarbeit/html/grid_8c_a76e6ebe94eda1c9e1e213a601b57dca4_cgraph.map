@@ -1,5 +1,0 @@
-<map id="allocateMemoryOnGrid" name="allocateMemoryOnGrid">
-<area shape="rect" id="node2" href="$grid_8c.html#ae1a8c1626c471a6d76a7b1127d7ebc84" title="Allocation of E and B field array. Inits E and B with 0 by default. " alt="" coords="234,5,381,32"/>
-<area shape="rect" id="node3" href="$grid_8c.html#aba1ef3f97b8dd7eec0f26c361d2a742e" title="allocates memory for H and E fields on the planes at box borders " alt="" coords="212,56,403,83"/>
-<area shape="rect" id="node4" href="$grid_8c.html#a65975d28602dae50a6efc9397fd91b9f" title="allocates memeory for UPML coefficients " alt="" coords="220,107,395,133"/>
-</map>

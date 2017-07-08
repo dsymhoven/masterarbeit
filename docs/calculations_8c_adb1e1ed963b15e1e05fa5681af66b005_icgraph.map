@@ -1,11 +1,14 @@
 <map id="calcBoxIndexIm1" name="calcBoxIndexIm1">
-<area shape="rect" id="node2" href="$lw_fields_8h.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="177,132,287,159"/>
-<area shape="rect" id="node3" href="$lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="335,132,437,159"/>
-<area shape="rect" id="node4" href="$lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="485,132,575,159"/>
+<area shape="rect" id="node2" href="$lw_fields_8h.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="177,208,287,235"/>
+<area shape="rect" id="node3" href="$lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="335,208,437,235"/>
+<area shape="rect" id="node4" href="$lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="485,208,575,235"/>
 <area shape="rect" id="node5" href="$experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="651,5,803,32"/>
 <area shape="rect" id="node6" href="$experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="687,56,767,83"/>
 <area shape="rect" id="node7" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="655,107,799,133"/>
 <area shape="rect" id="node8" href="$experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="657,157,797,184"/>
-<area shape="rect" id="node9" href="$experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="634,208,821,235"/>
+<area shape="rect" id="node9" href="$experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="675,208,779,235"/>
 <area shape="rect" id="node10" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="623,259,832,301"/>
+<area shape="rect" id="node11" href="$experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="633,325,822,366"/>
+<area shape="rect" id="node12" href="$experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="647,390,807,431"/>
+<area shape="rect" id="node13" href="$experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="671,456,784,483"/>
 </map>

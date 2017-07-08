@@ -1,10 +1,14 @@
 <map id="grid.h" name="grid.h">
-<area shape="rect" id="node2" href="$particle_8h.html" title="particle.h" alt="" coords="93,80,169,107"/>
-<area shape="rect" id="node5" href="$experiment_8c.html" title="experiment.c" alt="" coords="5,229,104,256"/>
-<area shape="rect" id="node6" href="$grid_8c.html" title="grid.c" alt="" coords="386,229,441,256"/>
-<area shape="rect" id="node8" href="$lw_fields_8h.html" title="lwFields.h" alt="" coords="166,155,247,181"/>
-<area shape="rect" id="node3" href="$calculations_8h.html" title="calculations.h" alt="" coords="271,155,374,181"/>
-<area shape="rect" id="node9" href="$particle_8c.html" title="particle.c" alt="" coords="66,155,142,181"/>
-<area shape="rect" id="node4" href="$calculations_8c.html" title="calculations.c" alt="" coords="154,229,257,256"/>
-<area shape="rect" id="node7" href="$lw_fields_8c.html" title="lwFields.c" alt="" coords="281,229,361,256"/>
+<area shape="rect" id="node2" href="$particle_8h.html" title="particle.h" alt="" coords="413,80,489,107"/>
+<area shape="rect" id="node5" href="$experiment_8c.html" title="experiment.c" alt="" coords="5,304,104,331"/>
+<area shape="rect" id="node7" href="$grid_8c.html" title="grid.c" alt="" coords="477,229,531,256"/>
+<area shape="rect" id="node10" href="$lw_fields_8h.html" title="lwFields.h" alt="" coords="181,155,262,181"/>
+<area shape="rect" id="node11" href="$serializers_8h.html" title="serializers.h" alt="" coords="556,229,649,256"/>
+<area shape="rect" id="node3" href="$calculations_8h.html" title="calculations.h" alt="" coords="286,155,389,181"/>
+<area shape="rect" id="node6" href="$forces_8c.html" title="forces.c" alt="" coords="609,304,679,331"/>
+<area shape="rect" id="node12" href="$forces_8h.html" title="forces.h" alt="" coords="615,155,684,181"/>
+<area shape="rect" id="node13" href="$particle_8c.html" title="particle.c" alt="" coords="413,155,489,181"/>
+<area shape="rect" id="node4" href="$calculations_8c.html" title="calculations.c" alt="" coords="197,229,299,256"/>
+<area shape="rect" id="node8" href="$lw_fields_8c.html" title="lwFields.c" alt="" coords="92,229,172,256"/>
+<area shape="rect" id="node9" href="$serializers_8c.html" title="serializers.c" alt="" coords="417,304,509,331"/>
 </map>

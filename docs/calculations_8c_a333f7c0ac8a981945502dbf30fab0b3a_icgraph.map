@@ -1,6 +1,9 @@
 <map id="updateNearField" name="updateNearField">
 <area shape="rect" id="node2" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="206,5,350,32"/>
 <area shape="rect" id="node3" href="$experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="208,56,348,83"/>
-<area shape="rect" id="node4" href="$experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="185,107,371,133"/>
+<area shape="rect" id="node4" href="$experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="226,107,330,133"/>
 <area shape="rect" id="node5" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="173,158,383,199"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="183,223,373,265"/>
+<area shape="rect" id="node7" href="$experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="198,289,358,330"/>
+<area shape="rect" id="node8" href="$experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="221,355,335,381"/>
 </map>

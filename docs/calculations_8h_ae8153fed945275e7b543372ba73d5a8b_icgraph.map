@@ -1,38 +1,45 @@
 <map id="calculateLienardWiechertParameters" name="calculateLienardWiechertParameters">
-<area shape="rect" id="node2" href="$calculations_8h.html#aed4ffee0dd6e79b784c77ceb544ef1af" title="calcualtes the field interactions in the near field region of a particle with other particles..." alt="" coords="225,603,393,644"/>
-<area shape="rect" id="node19" href="$lw_fields_8h.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="263,875,356,902"/>
-<area shape="rect" id="node36" href="$lw_fields_8h.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="263,951,355,978"/>
-<area shape="rect" id="node3" href="$calculations_8h.html#abc30b03964ca466fdf0a089dfefd0dae" title="updates velocity with boris method. " alt="" coords="441,378,651,405"/>
-<area shape="rect" id="node4" href="$calculations_8c.html#aaa3f91ed7132a457ca21ca23da463b59" title="performs a reverse Boris Push. Uses same methods like standard BorisPusher but uses &#45;E und &#45;B..." alt="" coords="702,251,829,278"/>
-<area shape="rect" id="node5" href="$calculations_8h.html#adbff8a7444a6b76f6ae268b1925506d0" title="extends and calculates particle history up to time t. Example: Let&#39;s say t = 8 and tEnd = 12 then the..." alt="" coords="905,286,1053,313"/>
-<area shape="rect" id="node6" href="$experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="1138,497,1325,523"/>
-<area shape="rect" id="node7" href="$experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="1179,286,1283,313"/>
-<area shape="rect" id="node8" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="1127,616,1336,657"/>
-<area shape="rect" id="node9" href="$experiment_8h.html#af35f4f27dfc0aab6ff2c4bf1dd1e9b4a" title="electronScatteringSmallGrid\l_init9" alt="" coords="1137,88,1325,129"/>
-<area shape="rect" id="node11" href="$experiment_8h.html#aba97ca9ea25115ea974bfeb9c86f0720" title="scatteringInEMWave" alt="" coords="1159,154,1304,181"/>
-<area shape="rect" id="node13" href="$experiment_8h.html#a48fa4b50c818d762b95f86e04195b0a2" title="testBorisPusher" alt="" coords="707,403,823,430"/>
-<area shape="rect" id="node14" href="$experiment_8h.html#a93af21472ce6a2cf691bb5fb9a2555b5" title="testLWFieldCalculationFor\lPlane" alt="" coords="1142,5,1321,47"/>
-<area shape="rect" id="node15" href="$experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="1155,759,1307,786"/>
-<area shape="rect" id="node16" href="$experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="1191,814,1271,841"/>
-<area shape="rect" id="node17" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="1159,707,1303,734"/>
-<area shape="rect" id="node18" href="$experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="1161,565,1301,591"/>
-<area shape="rect" id="node10" href="$experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="1137,423,1326,464"/>
-<area shape="rect" id="node12" href="$main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="1384,154,1435,181"/>
-<area shape="rect" id="node20" href="$calculations_8h.html#a0fd8e3c4ba78390bd6a0f3245d1540a1" title="calcLWFieldsForPlane" alt="" coords="901,99,1057,126"/>
-<area shape="rect" id="node21" href="$calculations_8h.html#a32c97a4eb1ac3f14484661bc2720ab10" title="calcLWFieldsForPlaneWith\lNearField" alt="" coords="888,809,1071,851"/>
-<area shape="rect" id="node22" href="$lw_fields_8h.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="491,1078,601,1105"/>
-<area shape="rect" id="node25" href="$lw_fields_8h.html#a3e5719955e373b30ae2de7e6b91829eb" title="this method adjusts the H values infront and on the back side border of the near field. " alt="" coords="491,977,601,1003"/>
-<area shape="rect" id="node26" href="$lw_fields_8h.html#aefc1a6143e678da91f19584c826428cd" title="this method adjusts the H values on the top and bottom side border of the near field. " alt="" coords="489,1027,603,1054"/>
-<area shape="rect" id="node27" href="$lw_fields_8h.html#ae05dc350695f83d10835578077f7ce61" title="this method adjusts the E values on the left and right side border of the near field. " alt="" coords="493,926,599,953"/>
-<area shape="rect" id="node30" href="$lw_fields_8h.html#ac917d3c7ad39bc896aa96ce84ad0d71c" title="this method adjusts the E values infront and on the back side border of the near field. " alt="" coords="493,825,599,851"/>
-<area shape="rect" id="node31" href="$lw_fields_8h.html#aceb9e81297ffee9719f4267301baa19b" title="this method adjusts the E values at top and bottom side border of the near field. ..." alt="" coords="491,875,601,902"/>
-<area shape="rect" id="node32" href="$lw_fields_8h.html#a31e3c429ce6db01564dba954fe965a78" title="adds LW fields in box specified by input parameter &quot;boxIndex&quot; " alt="" coords="699,581,832,607"/>
-<area shape="rect" id="node23" href="$lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="714,1027,817,1054"/>
-<area shape="rect" id="node24" href="$lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="935,758,1024,785"/>
-<area shape="rect" id="node28" href="$lw_fields_8h.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="714,977,817,1003"/>
-<area shape="rect" id="node29" href="$lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="935,707,1024,734"/>
-<area shape="rect" id="node33" href="$calculations_8h.html#a5d8ed902b351b331f64c2f2b10ce8488" title="calcualtes Liénard&#45;Wiechert Fields everywhere on the grid. Each point on the grid is considered to be..." alt="" coords="907,555,1051,582"/>
-<area shape="rect" id="node34" href="$calculations_8h.html#a333f7c0ac8a981945502dbf30fab0b3a" title="updates the near field region of a particle. If the particle moves into another box the near field re..." alt="" coords="919,606,1039,633"/>
-<area shape="rect" id="node35" href="$calculations_8h.html#a270dd08201ef3f6cd773222bd3ff06cf" title="calcualtes LW fields on complete grid by looping through all boxes. In the near field region of each ..." alt="" coords="880,439,1079,480"/>
-<area shape="rect" id="node37" href="$lw_fields_8h.html#a296507eaeaf163c36b80660b879cd330" title="subtracts LW fields in box specified by input parameter &quot;boxIndex&quot; " alt="" coords="699,1103,832,1130"/>
+<area shape="rect" id="node2" href="$calculations_8h.html#aed4ffee0dd6e79b784c77ceb544ef1af" title="calcualtes the field interactions in the near field region of a particle with other particles..." alt="" coords="225,622,393,664"/>
+<area shape="rect" id="node25" href="$lw_fields_8h.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="263,298,356,324"/>
+<area shape="rect" id="node43" href="$lw_fields_8h.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="263,196,355,223"/>
+<area shape="rect" id="node3" href="$calculations_8h.html#abc30b03964ca466fdf0a089dfefd0dae" title="updates velocity with boris method. " alt="" coords="441,954,651,980"/>
+<area shape="rect" id="node4" href="$calculations_8c.html#aaa3f91ed7132a457ca21ca23da463b59" title="performs a reverse Boris Push. Uses same methods like standard BorisPusher but uses &#45;E und &#45;B..." alt="" coords="719,1106,845,1132"/>
+<area shape="rect" id="node5" href="$calculations_8h.html#adbff8a7444a6b76f6ae268b1925506d0" title="extends and calculates particle history up to time t. Example: Let&#39;s say t = 8 and tEnd = 12 then the..." alt="" coords="939,1131,1087,1158"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="1175,1255,1361,1282"/>
+<area shape="rect" id="node7" href="$experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="1216,680,1320,707"/>
+<area shape="rect" id="node8" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="1163,732,1373,773"/>
+<area shape="rect" id="node9" href="$experiment_8h.html#af35f4f27dfc0aab6ff2c4bf1dd1e9b4a" title="electronScatteringSmallGrid\l_init9" alt="" coords="1174,1402,1362,1444"/>
+<area shape="rect" id="node10" href="$experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="1173,797,1363,838"/>
+<area shape="rect" id="node11" href="$experiment_8h.html#a16f202a1fbcc96fa0e2ef7d700416c36" title="scatteringInEMWave\l_analytic" alt="" coords="1195,1058,1341,1100"/>
+<area shape="rect" id="node12" href="$experiment_8h.html#a499c2f8b19d50b6d93af3b4e5b4e3532" title="scatteringInEMWave\l_simulation" alt="" coords="1195,1124,1341,1165"/>
+<area shape="rect" id="node13" href="$experiment_8h.html#aa5690fcaa4608dad7969739bbc10b6e9" title="testRadiationDampingVSLorentz\lForce" alt="" coords="1160,1189,1376,1230"/>
+<area shape="rect" id="node14" href="$experiment_8h.html#a8a98a5d9f123ef495d6984ba042fd864" title="scatteringInEMWave\l_analytic_largeScale" alt="" coords="1195,993,1341,1034"/>
+<area shape="rect" id="node16" href="$experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="1188,862,1348,904"/>
+<area shape="rect" id="node17" href="$experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="1211,584,1325,611"/>
+<area shape="rect" id="node18" href="$experiment_8h.html#a48fa4b50c818d762b95f86e04195b0a2" title="testBorisPusher" alt="" coords="724,1460,840,1487"/>
+<area shape="rect" id="node19" href="$experiment_8h.html#a942e0bf6db498c776bccb2baee4e88ab" title="testNearFieldCalculation" alt="" coords="699,760,865,787"/>
+<area shape="rect" id="node20" href="$experiment_8h.html#a93af21472ce6a2cf691bb5fb9a2555b5" title="testLWFieldCalculationFor\lPlane" alt="" coords="1179,928,1357,969"/>
+<area shape="rect" id="node21" href="$experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="1192,526,1344,552"/>
+<area shape="rect" id="node22" href="$experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="1228,374,1308,400"/>
+<area shape="rect" id="node23" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="1196,424,1340,451"/>
+<area shape="rect" id="node24" href="$experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="1198,475,1338,502"/>
+<area shape="rect" id="node15" href="$main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="1424,1000,1475,1027"/>
+<area shape="rect" id="node26" href="$calculations_8h.html#a0fd8e3c4ba78390bd6a0f3245d1540a1" title="calcLWFieldsForPlane" alt="" coords="935,1460,1091,1487"/>
+<area shape="rect" id="node27" href="$calculations_8h.html#a32c97a4eb1ac3f14484661bc2720ab10" title="calcLWFieldsForPlaneWith\lNearField" alt="" coords="921,745,1104,786"/>
+<area shape="rect" id="node28" href="$calculations_8h.html#ae1d8de4fcf285d29b111a076b19df375" title="calcLWFieldsForPlaneInNear\lFieldRegion" alt="" coords="915,577,1111,618"/>
+<area shape="rect" id="node29" href="$lw_fields_8h.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="491,323,601,350"/>
+<area shape="rect" id="node32" href="$lw_fields_8h.html#a3e5719955e373b30ae2de7e6b91829eb" title="this method adjusts the H values infront and on the back side border of the near field. " alt="" coords="491,222,601,248"/>
+<area shape="rect" id="node33" href="$lw_fields_8h.html#aefc1a6143e678da91f19584c826428cd" title="this method adjusts the H values on the top and bottom side border of the near field. " alt="" coords="489,272,603,299"/>
+<area shape="rect" id="node34" href="$lw_fields_8h.html#ae05dc350695f83d10835578077f7ce61" title="this method adjusts the E values on the left and right side border of the near field. " alt="" coords="493,120,599,147"/>
+<area shape="rect" id="node37" href="$lw_fields_8h.html#ac917d3c7ad39bc896aa96ce84ad0d71c" title="this method adjusts the E values infront and on the back side border of the near field. " alt="" coords="493,171,599,198"/>
+<area shape="rect" id="node38" href="$lw_fields_8h.html#aceb9e81297ffee9719f4267301baa19b" title="this method adjusts the E values at top and bottom side border of the near field. ..." alt="" coords="491,70,601,96"/>
+<area shape="rect" id="node39" href="$lw_fields_8h.html#a31e3c429ce6db01564dba954fe965a78" title="adds LW fields in box specified by input parameter &quot;boxIndex&quot; " alt="" coords="715,476,849,503"/>
+<area shape="rect" id="node30" href="$lw_fields_8h.html#ad8dbdc1271ca06b419d54acc97bcd8e2" title="this method loops through all boxes and adjusts the H fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustHyz_im1()&quot;, &quot;adjustHxz_jm1()&quot; and &quot;adjustHxy_km1()&quot; method. " alt="" coords="731,120,833,147"/>
+<area shape="rect" id="node31" href="$lw_fields_8h.html#a476da358b14047cff9fbfd11e46bb275" title="pushes E field inside Boxes. Sets H field at box borders. Adjusts H fields at box borders and finally..." alt="" coords="968,424,1057,451"/>
+<area shape="rect" id="node35" href="$lw_fields_8h.html#ab7a60b207d6d07de2f2f9ed4f0507c50" title="this method loops through all boxes and adjusts the E fields in the plane to the left, infront and below. The actual adjustemnt takes place in &quot;adjustEyz_ip1()&quot;, &quot;adjustExz_jp1()&quot; and &quot;adjustExy_kp1()&quot; method. " alt="" coords="731,70,833,96"/>
+<area shape="rect" id="node36" href="$lw_fields_8h.html#af45e2e7d9e6c006510383e5295410fa8" title="pushes H field inside Boxes. Sets E field at box borders. Adjusts E fields at box borders and finally..." alt="" coords="968,374,1057,400"/>
+<area shape="rect" id="node40" href="$calculations_8h.html#a5d8ed902b351b331f64c2f2b10ce8488" title="calculates LW fields on complete grid by looping through every box and calculating LW fields in there..." alt="" coords="941,526,1085,552"/>
+<area shape="rect" id="node41" href="$calculations_8h.html#a333f7c0ac8a981945502dbf30fab0b3a" title="updates the near field region of a particle. If the particle moves into another box the near field re..." alt="" coords="953,475,1073,502"/>
+<area shape="rect" id="node42" href="$calculations_8h.html#a270dd08201ef3f6cd773222bd3ff06cf" title="calcualtes LW fields on complete grid by looping through all boxes. In the near field region of each ..." alt="" coords="913,862,1112,904"/>
+<area shape="rect" id="node44" href="$lw_fields_8h.html#a296507eaeaf163c36b80660b879cd330" title="subtracts LW fields in box specified by input parameter &quot;boxIndex&quot; " alt="" coords="479,19,613,46"/>
 </map>

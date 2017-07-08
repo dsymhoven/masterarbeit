@@ -1,5 +1,7 @@
 <map id="grid.c" name="grid.c">
-<area shape="rect" id="node2" href="$grid_8h.html" title="grid.h" alt="" coords="45,80,101,107"/>
-<area shape="rect" id="node9" href="$calculations_8h.html" title="calculations.h" alt="" coords="126,80,229,107"/>
-<area shape="rect" id="node5" href="$particle_8h.html" title="particle.h" alt="" coords="37,155,113,181"/>
+<area shape="rect" id="node2" href="$grid_8h.html" title="grid.h" alt="" coords="181,80,237,107"/>
+<area shape="rect" id="node11" href="$calculations_8h.html" title="calculations.h" alt="" coords="262,80,364,107"/>
+<area shape="rect" id="node5" href="$particle_8h.html" title="particle.h" alt="" coords="218,155,294,181"/>
+<area shape="rect" id="node6" href="$resolution_8h.html" title="resolution.h" alt="" coords="24,155,114,181"/>
+<area shape="rect" id="node7" href="$box_8h.html" title="box.h" alt="" coords="139,155,194,181"/>
 </map>

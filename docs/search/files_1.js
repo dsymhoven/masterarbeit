@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['experiment_2ec',['experiment.c',['../experiment_8c.html',1,'']]],
-  ['experiment_2eh',['experiment.h',['../experiment_8h.html',1,'']]]
+  ['calculations_2ec',['calculations.c',['../calculations_8c.html',1,'']]],
+  ['calculations_2eh',['calculations.h',['../calculations_8h.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['grid',['Grid',['../struct_grid.html',1,'']]]
+  ['box',['Box',['../struct_box.html',1,'']]]
 ];

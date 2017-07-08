@@ -1,4 +1,0 @@
-<map id="boxIsInNearFieldOfParticle" name="boxIsInNearFieldOfParticle">
-<area shape="rect" id="node2" href="$calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="235,5,448,47"/>
-<area shape="rect" id="node3" href="$calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="496,13,700,39"/>
-</map>
