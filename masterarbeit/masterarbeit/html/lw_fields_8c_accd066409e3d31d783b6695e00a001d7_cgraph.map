@@ -1,0 +1,12 @@
+<map id="addLWField" name="addLWField">
+<area shape="rect" id="node2" href="$calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="157,27,341,53"/>
+<area shape="rect" id="node5" href="$calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="162,81,335,108"/>
+<area shape="rect" id="node8" href="$calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="163,133,335,174"/>
+<area shape="rect" id="node9" href="$calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="187,199,310,225"/>
+<area shape="rect" id="node10" href="$calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="147,249,351,276"/>
+<area shape="rect" id="node3" href="$calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="632,5,751,32"/>
+<area shape="rect" id="node4" href="$calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="437,27,541,53"/>
+<area shape="rect" id="node6" href="$calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="399,78,579,119"/>
+<area shape="rect" id="node7" href="$calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="627,85,756,112"/>
+<area shape="rect" id="node11" href="$calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="439,249,539,276"/>
+</map>

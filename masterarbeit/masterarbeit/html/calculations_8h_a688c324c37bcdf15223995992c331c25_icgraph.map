@@ -1,0 +1,9 @@
+<map id="calculateLorentzForce" name="calculateLorentzForce">
+<area shape="rect" id="node2" href="$calculations_8c.html#a05f1d817dbd7989fcdf0e0a60011c4ba" title="calcualtes the surrounding eigth grid points respective to the current particle location and saves th..." alt="" coords="207,61,416,87"/>
+<area shape="rect" id="node3" href="$forces_8h.html#ad4b4fecd0452d28ab69bc30e34a1f4c1" title="analyzes lorentz and damping force by comparing them at every time step. " alt="" coords="257,111,366,138"/>
+<area shape="rect" id="node4" href="$experiment_8h.html#a16f202a1fbcc96fa0e2ef7d700416c36" title="scatteringInEMWave\l_analytic" alt="" coords="499,5,645,47"/>
+<area shape="rect" id="node5" href="$experiment_8h.html#aa5690fcaa4608dad7969739bbc10b6e9" title="testRadiationDampingVSLorentz\lForce" alt="" coords="464,71,680,112"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#a8a98a5d9f123ef495d6984ba042fd864" title="scatteringInEMWave\l_analytic_largeScale" alt="" coords="499,136,645,177"/>
+<area shape="rect" id="node8" href="$experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="492,201,652,243"/>
+<area shape="rect" id="node7" href="$main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="728,143,779,170"/>
+</map>

@@ -1,0 +1,24 @@
+<map id="getGammaFromVelocityVector" name="getGammaFromVelocityVector">
+<area shape="rect" id="node2" href="$calculations_8h.html#abc30b03964ca466fdf0a089dfefd0dae" title="updates velocity with boris method. " alt="" coords="257,825,467,852"/>
+<area shape="rect" id="node5" href="$experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="952,420,1139,447"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="993,521,1097,548"/>
+<area shape="rect" id="node7" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="941,609,1150,650"/>
+<area shape="rect" id="node8" href="$experiment_8h.html#af35f4f27dfc0aab6ff2c4bf1dd1e9b4a" title="electronScatteringSmallGrid\l_init9" alt="" coords="951,674,1139,715"/>
+<area shape="rect" id="node9" href="$experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="951,1071,1140,1113"/>
+<area shape="rect" id="node10" href="$experiment_8h.html#a16f202a1fbcc96fa0e2ef7d700416c36" title="scatteringInEMWave\l_analytic" alt="" coords="973,1173,1118,1214"/>
+<area shape="rect" id="node11" href="$experiment_8h.html#a499c2f8b19d50b6d93af3b4e5b4e3532" title="scatteringInEMWave\l_simulation" alt="" coords="973,811,1118,853"/>
+<area shape="rect" id="node12" href="$experiment_8h.html#aa5690fcaa4608dad7969739bbc10b6e9" title="testRadiationDampingVSLorentz\lForce" alt="" coords="937,877,1153,918"/>
+<area shape="rect" id="node13" href="$experiment_8h.html#a8a98a5d9f123ef495d6984ba042fd864" title="scatteringInEMWave\l_analytic_largeScale" alt="" coords="973,970,1118,1011"/>
+<area shape="rect" id="node15" href="$experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="965,210,1125,251"/>
+<area shape="rect" id="node16" href="$experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="989,319,1102,345"/>
+<area shape="rect" id="node17" href="$experiment_8h.html#a48fa4b50c818d762b95f86e04195b0a2" title="testBorisPusher" alt="" coords="546,319,662,345"/>
+<area shape="rect" id="node18" href="$experiment_8h.html#a942e0bf6db498c776bccb2baee4e88ab" title="testNearFieldCalculation" alt="" coords="521,369,687,396"/>
+<area shape="rect" id="node19" href="$experiment_8h.html#a93af21472ce6a2cf691bb5fb9a2555b5" title="testLWFieldCalculationFor\lPlane" alt="" coords="515,1079,693,1121"/>
+<area shape="rect" id="node20" href="$experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="528,1145,680,1172"/>
+<area shape="rect" id="node21" href="$experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="564,1196,644,1223"/>
+<area shape="rect" id="node22" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="532,1247,676,1273"/>
+<area shape="rect" id="node23" href="$experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="534,1297,674,1324"/>
+<area shape="rect" id="node3" href="$calculations_8c.html#aaa3f91ed7132a457ca21ca23da463b59" title="performs a reverse Boris Push. Uses same methods like standard BorisPusher but uses &#45;E und &#45;B..." alt="" coords="541,724,667,751"/>
+<area shape="rect" id="node4" href="$calculations_8h.html#adbff8a7444a6b76f6ae268b1925506d0" title="extends and calculates particle history up to time t. Example: Let&#39;s say t = 8 and tEnd = 12 then the..." alt="" coords="741,724,889,751"/>
+<area shape="rect" id="node14" href="$main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="1201,977,1252,1004"/>
+</map>

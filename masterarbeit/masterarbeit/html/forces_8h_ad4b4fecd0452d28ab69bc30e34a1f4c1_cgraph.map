@@ -1,0 +1,5 @@
+<map id="analyzeForces" name="analyzeForces">
+<area shape="rect" id="node2" href="$calculations_8h.html#a75e698c43c823da6c38571a672b54124" title="calcRadiationDamping" alt="" coords="163,5,319,32"/>
+<area shape="rect" id="node3" href="$calculations_8h.html#a688c324c37bcdf15223995992c331c25" title="calculateLorentzForce" alt="" coords="164,56,317,83"/>
+<area shape="rect" id="node4" href="$serializers_8c.html#a0dcb3e08c5c423988eee8acb0cf0b85f" title="writeForcesToFile" alt="" coords="177,107,305,133"/>
+</map>

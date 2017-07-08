@@ -1,0 +1,22 @@
+<map id="addCurrentStateToParticleHistory" name="addCurrentStateToParticleHistory">
+<area shape="rect" id="node2" href="$calculations_8c.html#aaa3f91ed7132a457ca21ca23da463b59" title="performs a reverse Boris Push. Uses same methods like standard BorisPusher but uses &#45;E und &#45;B..." alt="" coords="259,337,386,364"/>
+<area shape="rect" id="node3" href="$calculations_8h.html#adbff8a7444a6b76f6ae268b1925506d0" title="extends and calculates particle history up to time t. Example: Let&#39;s say t = 8 and tEnd = 12 then the..." alt="" coords="460,337,608,364"/>
+<area shape="rect" id="node4" href="$experiment_8h.html#a3e9d738020dbbe2a6f6c524a4756af30" title="testHistoryBeforeSimulation" alt="" coords="671,26,857,53"/>
+<area shape="rect" id="node5" href="$experiment_8h.html#a2d41ecb76886c918dd5778010c03ab6e" title="testScattering" alt="" coords="712,77,816,104"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#a7e5f074daf8512b8c1a8b77d4fcd4175" title="extendHistoryAndCalcLWFields\lIndependantly" alt="" coords="659,128,869,170"/>
+<area shape="rect" id="node7" href="$experiment_8h.html#af35f4f27dfc0aab6ff2c4bf1dd1e9b4a" title="electronScatteringSmallGrid\l_init9" alt="" coords="670,194,858,235"/>
+<area shape="rect" id="node8" href="$experiment_8h.html#a5b14baa3986802af9e003740cbc19217" title="electronScatteringLargeGrid\l_init8" alt="" coords="669,259,859,300"/>
+<area shape="rect" id="node9" href="$experiment_8h.html#a16f202a1fbcc96fa0e2ef7d700416c36" title="scatteringInEMWave\l_analytic" alt="" coords="691,324,837,366"/>
+<area shape="rect" id="node10" href="$experiment_8h.html#a499c2f8b19d50b6d93af3b4e5b4e3532" title="scatteringInEMWave\l_simulation" alt="" coords="691,390,837,431"/>
+<area shape="rect" id="node11" href="$experiment_8h.html#aa5690fcaa4608dad7969739bbc10b6e9" title="testRadiationDampingVSLorentz\lForce" alt="" coords="656,455,872,496"/>
+<area shape="rect" id="node12" href="$experiment_8h.html#a8a98a5d9f123ef495d6984ba042fd864" title="scatteringInEMWave\l_analytic_largeScale" alt="" coords="691,520,837,562"/>
+<area shape="rect" id="node14" href="$experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="684,586,844,627"/>
+<area shape="rect" id="node15" href="$experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="707,652,821,678"/>
+<area shape="rect" id="node16" href="$experiment_8h.html#a942e0bf6db498c776bccb2baee4e88ab" title="testNearFieldCalculation" alt="" coords="239,692,406,718"/>
+<area shape="rect" id="node17" href="$experiment_8h.html#a93af21472ce6a2cf691bb5fb9a2555b5" title="testLWFieldCalculationFor\lPlane" alt="" coords="233,743,412,784"/>
+<area shape="rect" id="node18" href="$experiment_8h.html#afa945de4c746fc5a517cf69a5ac36543" title="testNearAndFarFields" alt="" coords="247,809,399,836"/>
+<area shape="rect" id="node19" href="$experiment_8h.html#a35aeaaa9c59b63ebb3b1bd44eee47660" title="testUPML" alt="" coords="283,860,363,886"/>
+<area shape="rect" id="node20" href="$experiment_8h.html#acd27e8d50cbba15a38c1f28f3b5f83e0" title="testNearFieldUpdate" alt="" coords="251,910,395,937"/>
+<area shape="rect" id="node21" href="$experiment_8h.html#ad224439ef154d4551b879f0fff5403b9" title="testMultipleParticles" alt="" coords="253,961,393,988"/>
+<area shape="rect" id="node13" href="$main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="920,528,971,554"/>
+</map>

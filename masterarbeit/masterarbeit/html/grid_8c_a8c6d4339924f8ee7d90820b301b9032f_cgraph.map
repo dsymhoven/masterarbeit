@@ -1,0 +1,7 @@
+<map id="initGrid" name="initGrid">
+<area shape="rect" id="node2" href="$grid_8c.html#a76e6ebe94eda1c9e1e213a601b57dca4" title="calls allocateFieldsOnGrid() and allocateFieldsOnBoxBorders(). For details see their documentation ..." alt="" coords="117,56,276,83"/>
+<area shape="rect" id="node6" href="$calculations_8c.html#a4473c6ae295e8c4cf4553918d0596dad" title="calculates the UPML Coefficients according to Taflove page 301. " alt="" coords="121,107,273,133"/>
+<area shape="rect" id="node3" href="$grid_8c.html#ae1a8c1626c471a6d76a7b1127d7ebc84" title="Allocation of E and B field array. Inits E and B with 0 by default. " alt="" coords="346,5,493,32"/>
+<area shape="rect" id="node4" href="$grid_8c.html#aba1ef3f97b8dd7eec0f26c361d2a742e" title="allocates memory for H and E fields on the planes at box borders " alt="" coords="324,56,515,83"/>
+<area shape="rect" id="node5" href="$grid_8c.html#a65975d28602dae50a6efc9397fd91b9f" title="allocates memeory for UPML coefficients " alt="" coords="332,107,507,133"/>
+</map>

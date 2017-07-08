@@ -1,0 +1,5 @@
+<map id="freeMemoryOnGrid" name="freeMemoryOnGrid">
+<area shape="rect" id="node2" href="$grid_8c.html#a02725bab963d5f3789d5b8584d536179" title="Releases all allocated memory for fields. " alt="" coords="211,5,335,32"/>
+<area shape="rect" id="node3" href="$grid_8c.html#a4d89187f873d6fde1913b8196c23e0c6" title="Releases all allocated memory for fields on box borders. " alt="" coords="189,56,357,83"/>
+<area shape="rect" id="node4" href="$grid_8c.html#af87933366ad3db37cdb9af1c21d3569d" title="Releases all allocated memory for UPML Coefficients. " alt="" coords="197,107,349,133"/>
+</map>

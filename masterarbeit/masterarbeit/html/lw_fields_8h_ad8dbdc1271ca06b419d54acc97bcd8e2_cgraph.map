@@ -1,0 +1,24 @@
+<map id="adjustHFields" name="adjustHFields">
+<area shape="rect" id="node2" href="$lw_fields_8c.html#adc8ac4e291df72434f59801ae4431349" title="this method adjusts the H values on the left and right side border of the near field. " alt="" coords="158,126,267,153"/>
+<area shape="rect" id="node20" href="$lw_fields_8c.html#a3e5719955e373b30ae2de7e6b91829eb" title="this method adjusts the H values infront and on the back side border of the near field. " alt="" coords="158,227,267,254"/>
+<area shape="rect" id="node22" href="$lw_fields_8c.html#aefc1a6143e678da91f19584c826428cd" title="this method adjusts the H values on the top and bottom side border of the near field. " alt="" coords="156,177,269,203"/>
+<area shape="rect" id="node3" href="$calculations_8c.html#adb1e1ed963b15e1e05fa5681af66b005" title="calcBoxIndexIm1" alt="" coords="346,75,470,102"/>
+<area shape="rect" id="node4" href="$calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="317,227,499,254"/>
+<area shape="rect" id="node7" href="$lw_fields_8c.html#a96197f1e2e5444c3f9f16b528a453f2f" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="362,177,454,203"/>
+<area shape="rect" id="node19" href="$lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="361,126,455,153"/>
+<area shape="rect" id="node5" href="$calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="547,333,760,375"/>
+<area shape="rect" id="node6" href="$calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="808,341,1012,367"/>
+<area shape="rect" id="node8" href="$calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="561,231,745,258"/>
+<area shape="rect" id="node11" href="$calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="567,13,740,39"/>
+<area shape="rect" id="node14" href="$calculations_8c.html#ab5a57fc028df589b0c2e685c03a2dc3e" title="calcuates acceleration of particle " alt="" coords="602,282,705,309"/>
+<area shape="rect" id="node15" href="$calculations_8c.html#ae8153fed945275e7b543372ba73d5a8b" title="updates location x for particles with velocity u using x = v * dt time component x[0] gets updated as..." alt="" coords="567,115,739,156"/>
+<area shape="rect" id="node16" href="$calculations_8c.html#aad3a0aa662c097cc6aa1c8e5fd35f2ed" title="calcultes time derivative in each component of beta. " alt="" coords="592,181,715,207"/>
+<area shape="rect" id="node17" href="$calculations_8c.html#a8793862cf844e854b5acaa30b9a63ff6" title="calculates LW fields from formula " alt="" coords="551,63,755,90"/>
+<area shape="rect" id="node9" href="$calculations_8c.html#abf8f0fc7a9dda22c0b3ca897b1287a2c" title="calcualtes the vector difference of spatial dimensions of the two four vectors and saves the result i..." alt="" coords="1065,93,1184,119"/>
+<area shape="rect" id="node10" href="$calculations_8c.html#a2c4af1aebe183def86b489823f7a5e43" title="returns the spatial vector product in three dimensions of two four vectors " alt="" coords="858,231,962,258"/>
+<area shape="rect" id="node12" href="$calculations_8c.html#acbce4e3cd63f64eda54d827e6d91eb67" title="returns parameter lambda for the linear interpolation between particle trajectory and backwards light..." alt="" coords="820,5,1000,47"/>
+<area shape="rect" id="node13" href="$calculations_8c.html#af147ce40bad8abab7f620dbbc5bfd040" title="calculates the minkowski product with metric (+,&#45;,&#45;,&#45;) " alt="" coords="1060,13,1189,39"/>
+<area shape="rect" id="node18" href="$calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="860,71,960,98"/>
+<area shape="rect" id="node21" href="$calculations_8c.html#a31b2824a548acf6c7c181397ea41b643" title="calcBoxIndexJm1" alt="" coords="345,329,471,355"/>
+<area shape="rect" id="node23" href="$calculations_8c.html#a23447665efada367a850bebc6b3787ff" title="calcBoxIndexKm1" alt="" coords="343,278,473,305"/>
+</map>

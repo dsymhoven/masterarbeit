@@ -1,0 +1,10 @@
+<map id="externalPulse" name="externalPulse">
+<area shape="rect" id="node2" href="$experiment_8h.html#a16f202a1fbcc96fa0e2ef7d700416c36" title="scatteringInEMWave\l_analytic" alt="" coords="397,5,542,47"/>
+<area shape="rect" id="node3" href="$experiment_8h.html#a8a98a5d9f123ef495d6984ba042fd864" title="scatteringInEMWave\l_analytic_largeScale" alt="" coords="169,293,315,335"/>
+<area shape="rect" id="node5" href="$experiment_8h.html#a8b24881327f6bcbca31495e159d66968" title="scatteringInEMWave\l_simulation_largeScale" alt="" coords="389,71,549,112"/>
+<area shape="rect" id="node6" href="$experiment_8h.html#affc86a8976d8fcbfaac8209600d5eac0" title="test_largeScale" alt="" coords="413,267,526,294"/>
+<area shape="rect" id="node7" href="$serializers_8h.html#a00ec5d4cee7a8851050d08eaccd43eb8" title="loops through the specified grid plane and calcutes |B|^2 and |E|^2 of external fields. Values are stored in seperate files. File is structured similiar to the grid. " alt="" coords="156,143,328,170"/>
+<area shape="rect" id="node4" href="$main_8c.html#ac0f2228420376f4db7e1274f2b41667c" title="main" alt="" coords="444,318,495,345"/>
+<area shape="rect" id="node8" href="$experiment_8h.html#ac8a28021af3a9a0a911397e0d95bed69" title="testTimeDependentExternal\lFields" alt="" coords="376,136,563,177"/>
+<area shape="rect" id="node9" href="$experiment_8h.html#a499c2f8b19d50b6d93af3b4e5b4e3532" title="scatteringInEMWave\l_simulation" alt="" coords="397,201,542,243"/>
+</map>

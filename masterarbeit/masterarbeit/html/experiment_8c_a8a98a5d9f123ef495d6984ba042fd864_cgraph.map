@@ -1,0 +1,51 @@
+<map id="scatteringInEMWave_analytic_largeScale" name="scatteringInEMWave_analytic_largeScale">
+<area shape="rect" id="node2" href="$resolution_8c.html#ac887dd8fd2ae0dc62da53f2f173197e8" title="initResolution" alt="" coords="256,5,359,32"/>
+<area shape="rect" id="node3" href="$box_8c.html#a6aaa56aae0a4e0547b192b9570e54a4a" title="initBox" alt="" coords="276,56,339,83"/>
+<area shape="rect" id="node4" href="$grid_8c.html#a8c6d4339924f8ee7d90820b301b9032f" title="initializes all properties of struct Grid and allocates memory for all arrays including UPML ..." alt="" coords="275,107,339,133"/>
+<area shape="rect" id="node10" href="$forces_8c.html#a1b6bf63ca4cf8589a25e9628321fe8d0" title="initializes dampingForce array and lorentzFroce array with 0. " alt="" coords="267,157,347,184"/>
+<area shape="rect" id="node11" href="$particle_8c.html#a9cf856bf5b4e617a6c8654c694e14483" title="initializes all particles in Particles array with initParticle() method " alt="" coords="262,208,353,235"/>
+<area shape="rect" id="node14" href="$particle_8c.html#aacd0b7fa448a80a381cce465709f7189" title="calculates gamma from spatial components of given velocity vector via gamma = sqrt(1 + u^2) ..." alt="" coords="937,259,1141,285"/>
+<area shape="rect" id="node15" href="$calculations_8c.html#adbff8a7444a6b76f6ae268b1925506d0" title="extends and calculates particle history up to time t. Example: Let&#39;s say t = 8 and tEnd = 12 then the..." alt="" coords="233,512,381,539"/>
+<area shape="rect" id="node19" href="$particle_8c.html#a0745a691af31efbc41dd01b650d66e83" title="adds current position and velocity information (the entire four vectors) to respective history array ..." alt="" coords="695,551,875,593"/>
+<area shape="rect" id="node20" href="$calculations_8c.html#abc30b03964ca466fdf0a089dfefd0dae" title="updates velocity with boris method. " alt="" coords="680,364,889,391"/>
+<area shape="rect" id="node30" href="$calculations_8c.html#af8c77535964cc5c8579e14eca98ef994" title="updates location x for particle with velocity u using x = v * dt time component x[0] gets updated as ..." alt="" coords="728,617,841,644"/>
+<area shape="rect" id="node32" href="$serializers_8c.html#adcaaf192664669afcbda38eae83fdca4" title="writes numberOfParticles and startTime of simulation to file. This is needed for python scripts..." alt="" coords="221,816,393,843"/>
+<area shape="rect" id="node33" href="$serializers_8c.html#a912b58749600c51c4a8ba7c57a6261f8" title="writes current position, velocity vectors and near field info to file. First line is four vector x..." alt="" coords="238,867,377,893"/>
+<area shape="rect" id="node34" href="$forces_8c.html#ad4b4fecd0452d28ab69bc30e34a1f4c1" title="analyzes lorentz and damping force by comparing them at every time step. " alt="" coords="253,917,362,944"/>
+<area shape="rect" id="node38" href="$grid_8c.html#a90075586660e44a672ee1594c92fabce" title="sets external time dependent E and H field as plane wave. " alt="" coords="256,968,359,995"/>
+<area shape="rect" id="node39" href="$grid_8c.html#a2880e12cf096cf4289342dc05b1a0013" title="clearFieldsFromGrid" alt="" coords="236,1019,379,1045"/>
+<area shape="rect" id="node40" href="$calculations_8c.html#a32c97a4eb1ac3f14484661bc2720ab10" title="calcLWFieldsForPlaneWith\lNearField" alt="" coords="693,715,876,757"/>
+<area shape="rect" id="node43" href="$serializers_8c.html#a5eb89a4386693af45138cff09818b2cd" title="loops through the entire E and B array and writes Bx,By,Bz and (or) Ex,Ey,Ez to seperate files..." alt="" coords="199,1070,416,1111"/>
+<area shape="rect" id="node44" href="$serializers_8c.html#a02f39870c725f9dd68cef0f8d06a481e" title="loops through the entire E and B array and writes |B|^2 and |E|^2 to seperate files. File is structured similiar to the grid. " alt="" coords="246,1136,369,1163"/>
+<area shape="rect" id="node45" href="$serializers_8c.html#a9cb2befe835872c7ddf6168a593c4e83" title="writes Grid parameters to file, in order for python to use them as plot parameters ..." alt="" coords="217,1187,398,1213"/>
+<area shape="rect" id="node46" href="$particle_8c.html#a1bfb00ae2038b073ac2be182e2b053ce" title="method for releasing all previously allocated memory in struct Particle. Put all free() invokations i..." alt="" coords="226,1237,389,1264"/>
+<area shape="rect" id="node47" href="$grid_8c.html#aa0076382b987f1b1d5a5817716d3b062" title="method for releasing all previously allocated memory in struct Grid. Put all free() invokations in he..." alt="" coords="239,1288,375,1315"/>
+<area shape="rect" id="node5" href="$grid_8c.html#a76e6ebe94eda1c9e1e213a601b57dca4" title="calls allocateFieldsOnGrid() and allocateFieldsOnBoxBorders(). For details see their documentation ..." alt="" coords="469,81,627,108"/>
+<area shape="rect" id="node9" href="$calculations_8c.html#a4473c6ae295e8c4cf4553918d0596dad" title="calculates the UPML Coefficients according to Taflove page 301. " alt="" coords="472,132,624,159"/>
+<area shape="rect" id="node6" href="$grid_8c.html#ae1a8c1626c471a6d76a7b1127d7ebc84" title="Allocation of E and B field array. Inits E and B with 0 by default. " alt="" coords="711,31,858,57"/>
+<area shape="rect" id="node7" href="$grid_8c.html#aba1ef3f97b8dd7eec0f26c361d2a742e" title="allocates memory for H and E fields on the planes at box borders " alt="" coords="689,81,880,108"/>
+<area shape="rect" id="node8" href="$grid_8c.html#a65975d28602dae50a6efc9397fd91b9f" title="allocates memeory for UPML coefficients " alt="" coords="697,132,872,159"/>
+<area shape="rect" id="node12" href="$particle_8c.html#a4af6858fe365aa6ad335ec2ebf08a2d3" title="initializes all properties of struct Particle. x and u are initilized with 0 " alt="" coords="506,208,590,235"/>
+<area shape="rect" id="node13" href="$particle_8c.html#a72e31b58254a02eda9a1a67300f19247" title="allocates memory for trajectroy and velocity history. " alt="" coords="703,208,867,235"/>
+<area shape="rect" id="node16" href="$calculations_8c.html#a5d5b3c019a2f6def87239690b541d766" title="reallocates the size of particle xHistory and uHistory array by t / dt. If simulation starts at t &gt; 0..." alt="" coords="465,461,631,488"/>
+<area shape="rect" id="node17" href="$calculations_8c.html#aaa3f91ed7132a457ca21ca23da463b59" title="performs a reverse Boris Push. Uses same methods like standard BorisPusher but uses &#45;E und &#45;B..." alt="" coords="485,512,611,539"/>
+<area shape="rect" id="node31" href="$calculations_8c.html#abdd8d12cce50e34e18817b5654e222e0" title="After a reverse borisBush was performed the initial conditions have to be reset in order to start the..." alt="" coords="475,411,621,437"/>
+<area shape="rect" id="node18" href="$calculations_8c.html#a01e94df694e64aec7a0b6b9257946933" title="scales a given vector x with factor " alt="" coords="739,457,831,484"/>
+<area shape="rect" id="node21" href="$particle_8c.html#ab1c08190f54520248289f2ec177a2d00" title="particleIsInsideSimulationArea" alt="" coords="939,477,1140,504"/>
+<area shape="rect" id="node22" href="$lw_fields_8c.html#a11d47532e4411c70d5cb6adaa199e68e" title="in order to push the current particle properly not just the external fields but also the field contri..." alt="" coords="943,309,1136,336"/>
+<area shape="rect" id="node23" href="$calculations_8c.html#aed4ffee0dd6e79b784c77ceb544ef1af" title="calcualtes the field interactions in the near field region of a particle with other particles..." alt="" coords="955,361,1123,402"/>
+<area shape="rect" id="node29" href="$calculations_8c.html#af3e1a8686943f2507047e9519a111a0a" title="calculates the cross product of two vectors &quot;a&quot; and &quot;b&quot; and saves the result in array &quot;result&quot; ..." alt="" coords="989,427,1089,453"/>
+<area shape="rect" id="node24" href="$calculations_8c.html#a7e0480084af24bf17eded3e04b7d4c98" title="calcualtes the box index in which the particle is currently located. " alt="" coords="1683,500,1887,527"/>
+<area shape="rect" id="node25" href="$calculations_8c.html#ab63ddedc6da8245a582deb4070082f12" title="boxIsInNearFieldOfParticle" alt="" coords="1191,420,1372,447"/>
+<area shape="rect" id="node27" href="$calculations_8c.html#a770c5d06af64ec4c44828f0d187dd3f5" title="true if position of particle is inside the backward lightcone of the observer, otherwise false..." alt="" coords="1189,524,1373,551"/>
+<area shape="rect" id="node28" href="$calculations_8c.html#a5de1d92c531e59f82bde88373178ec39" title="calculateIntersectionPoint" alt="" coords="1195,472,1368,499"/>
+<area shape="rect" id="node26" href="$calculations_8c.html#a4f47621e229194f09741578119708259" title="calcualtes the indices of next neighbour boxes from current particle position and saves them in boxIn..." alt="" coords="1421,493,1635,534"/>
+<area shape="rect" id="node35" href="$calculations_8h.html#a75e698c43c823da6c38571a672b54124" title="calcRadiationDamping" alt="" coords="470,867,626,893"/>
+<area shape="rect" id="node36" href="$calculations_8h.html#a688c324c37bcdf15223995992c331c25" title="calculateLorentzForce" alt="" coords="471,917,625,944"/>
+<area shape="rect" id="node37" href="$serializers_8c.html#a0dcb3e08c5c423988eee8acb0cf0b85f" title="writeForcesToFile" alt="" coords="484,968,612,995"/>
+<area shape="rect" id="node41" href="$particle_8c.html#a9520f64dd4829563d757dd3b378f177e" title="saves min and max values of x,y and z of the near field box in edgesOfNearFieldArray of Particle stru..." alt="" coords="953,723,1126,749"/>
+<area shape="rect" id="node42" href="$lw_fields_8c.html#accd066409e3d31d783b6695e00a001d7" title="adds LW fields at grid point with index &quot;gridIndexInBox&quot;. Each point on the grid is considered to be ..." alt="" coords="993,528,1086,555"/>
+<area shape="rect" id="node48" href="$grid_8c.html#a02725bab963d5f3789d5b8584d536179" title="Releases all allocated memory for fields. " alt="" coords="486,1237,610,1264"/>
+<area shape="rect" id="node49" href="$grid_8c.html#a4d89187f873d6fde1913b8196c23e0c6" title="Releases all allocated memory for fields on box borders. " alt="" coords="464,1288,632,1315"/>
+<area shape="rect" id="node50" href="$grid_8c.html#af87933366ad3db37cdb9af1c21d3569d" title="Releases all allocated memory for UPML Coefficients. " alt="" coords="472,1339,624,1365"/>
+</map>
