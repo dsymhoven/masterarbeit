@@ -3,7 +3,7 @@
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Illustration of how to calculate the energy emission of a moving particle with charge $q$.}}{11}{figure.1.1}
 \contentsline {figure}{\numberline {1.2}{\ignorespaces Radiation characteristics of an moving charged particle}}{14}{figure.1.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Procedural Error}}{20}{figure.2.1}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces procedural error}}{20}{figure.2.1}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Velocity space showing the rotation from $\mathaccentV {vec}17E{v}_{-}$ to $\mathaccentV {vec}17E{v}~'$}}{23}{figure.2.2}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Determination of $\left |\qopname \relax o{tan}\left (\frac {\theta }{2}\right )\right |$ from boris roation}}{24}{figure.2.3}
 \addvspace {10\p@ }
@@ -11,7 +11,7 @@
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Cube with its eight corner points A, B, C, ..., H and interpolation point $P_f$.}}{27}{figure.3.2}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Yee-Box}}{30}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of numerical and analytical dispersion relation of discretized Maxwell Equations with Yee Scheme}}{33}{figure.4.2}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of numerical and analytical dispersion relation of discretized Maxwell equations with Yee scheme}}{33}{figure.4.2}
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Near fields of one and two particles}}{35}{figure.4.3}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{35}{figure.4.3}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{35}{figure.4.3}
