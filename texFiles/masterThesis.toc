@@ -3,7 +3,7 @@
 \contentsline {part}{\numberline {I}Fundamentals}{2}{part.1}
 \contentsline {chapter}{\numberline {1}Electromagnetic radiation}{4}{chapter.1}
 \contentsline {section}{\numberline {1.1}Maxwell equations}{4}{section.1.1}
-\contentsline {section}{\numberline {1.2}Colomb and lorentz gauge}{5}{section.1.2}
+\contentsline {section}{\numberline {1.2}Colomb and Lorentz gauge}{5}{section.1.2}
 \contentsline {section}{\numberline {1.3}Li\'enard-Wiechert potentials}{6}{section.1.3}
 \contentsline {subsection}{\numberline {1.3.1}Solution of the inhomogeneous wave equation}{6}{subsection.1.3.1}
 \contentsline {subsection}{\numberline {1.3.2}Special Case: Moving point charge}{7}{subsection.1.3.2}
@@ -17,7 +17,7 @@
 \contentsline {chapter}{\numberline {3}Interpolations}{25}{chapter.3}
 \contentsline {section}{\numberline {3.1}Linear interpolation of trajectories}{25}{section.3.1}
 \contentsline {section}{\numberline {3.2}Trilinear interpolation of fields}{27}{section.3.2}
-\contentsline {chapter}{\numberline {4}Hybrid Field Approach}{29}{chapter.4}
+\contentsline {chapter}{\numberline {4}Hybrid field approach}{29}{chapter.4}
 \contentsline {section}{\numberline {4.1}FDTD}{29}{section.4.1}
 \contentsline {section}{\numberline {4.2}Numeric dispersion relation}{31}{section.4.2}
 \contentsline {section}{\numberline {4.3}Near- and far fields}{34}{section.4.3}
@@ -38,8 +38,8 @@
 \contentsline {part}{\numberline {III}Summary \& Outlook}{73}{part.3}
 \contentsline {part}{\numberline {IV}Appendix}{75}{part.4}
 \contentsline {chapter}{\numberline {A}Gauge Transformations}{76}{appendix.A}
-\contentsline {section}{\numberline {A.1}Invariance of fields}{76}{section.A.1}
-\contentsline {section}{\numberline {A.2}Invariance of potential equations}{77}{section.A.2}
+\contentsline {section}{\numberline {A.1}Gauge invariance of fields}{76}{section.A.1}
+\contentsline {section}{\numberline {A.2}Gauge invariance of potential equations}{77}{section.A.2}
 \contentsline {chapter}{\numberline {B}Retarded potential equations fulfill Laurentz gauge}{78}{appendix.B}
 \contentsline {chapter}{\numberline {C}Softwarestack and Documentation}{80}{appendix.C}
 \contentsline {chapter}{\numberline {D}Normalization}{81}{appendix.D}

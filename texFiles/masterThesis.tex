@@ -146,7 +146,7 @@ The Maxwell equations are the foundation of the classical electromagnetism theor
 \beq
 \bal
 \label{eqn: materialEquationsFull}
-\vec{D} &\coloneqq \epsilon_0 \vec{E} + \vec{P}\\
+\vec{D} &\coloneqq \epsilon_0 \vec{E} + \vec{P},\\
 \vec{H} &\coloneqq \frac{1}{\mu_0} \vec{B} - \vec{M},
 \eal
 \eeq
@@ -173,7 +173,7 @@ In the case of vacuum, the material equations \eqref{eqn: materialEquationsFull}
 \eeq
 
 %======================== Colomb and Lorentz Gauge ========================
-\section{Colomb and lorentz gauge}
+\section{Colomb and Lorentz gauge}
 In the following section the Maxwell equations in vacuum are considered. The electric and magnetic fields can also be described by a scalar and a vector potential respectively. From \eqref{eqn: maxwell1} one can conclude that 
 \beq
 \label{eqn: vecA}
@@ -809,7 +809,7 @@ w &\coloneqq \frac{z_p - z_0}{z_1 - z_0} \\
 \eeq
 %======================== Hybrid Field Approach ========================
 %===========================================================
-\chapter{Hybrid Field Approach}
+\chapter{Hybrid field approach}
 \label{cha: HybridFieldApproach}
 \noindent
 In this section the concept of hybrid fields is introduced. Christian Herzing developed this concept in his dissertation \cite{Herzing} and showed how this approach reduces the numerical complexity from $N^2$ to $N$. 
@@ -1709,10 +1709,16 @@ The electron has an energy of $\gamma = 1.2$. A constant $B_z = 1$ is used as ex
 %======================== Summary ============================
 %===========================================================
 \part{Summary \& Outlook}
-This thesis was build upon the Hybrid Field Approach from \cite{Herzing}. The framework, written in \texttt{C++}, was entirely rewritten in \texttt{C} and furthermore extended with new features, like a reverse Boris Push to extend the particle history before the simulation, trilinear Interpolation of fields at the particle position, effective storage of precalculated fields, due to extended particle history and UPML. A stable code base was produced, including Doxygen documentation allowing others to use and extend the code more easily. In order to ensure the proper functionality of the framework, a scattering process of an electron in an electromagnetic wave was simulated. Considering realistic scales made it possible to compare the results with real world experiments. By analyzing the Fourier components of the electric field and the Poynting vector, it could be shown that with increasing energy $\gamma$ of the electron the radiation frequency increased and the radiation of Liénard-Wiechert fields became more directed. \\
+\noindent
+This thesis is build upon the hybrid field approach presented in \cite{Herzing}. The framework outlined in \cite{Herzing} is written in \texttt{C++}. In the present work the framework has been rewritten in \texttt{C} and furthermore has been extended with new features like a reverse Boris push to extend the particle history to times prior to the start of the simulation, the trilinear interpolation of fields at the particle positions, the effective storage of precalculated fields needed for a more efficient calculation of the MD scheme, and UPMLs. A stable code base has been produced, including Doxygen documentation in order to allow other users to understand and use the code more easily. In order to test the implementation of the MD scheme of the present work, a scattering process of an electron in an electromagnetic wave has been simulated and can be compared with real world experiments. By analyzing the Fourier components of the scattered electric field and the associated Poynting vector, it has been shown that with increasing energy $\gamma$ of the electron the radiation frequency increases and the radiation becomes more directed. \\
 \newline
-As already outlined in Section \ref{sec: Particle History} the storage of particle positions can be optimized. A plausible criteria for finding the particle position after which all following positions can be neglected has to be velocity dependent. An even better approach would be to define a cutoff distance at which the emitted fields would be attenuated so much, that they could be neglected. To make large simulations with more than $10^{10}$ particles possible, an effective memory management is absolutely necessary, which makes this point worth looking into.\\
-Another point, which can be optimized is UPML. Problems occur when Liénard-Wiechert fields are calculated from the extended particle history prior to the simulation. If field values are set into the UPML region, they stay there or even worse, they diverge, causing strange artefacts to occur at the boundaries. One should definitely exclude the UPML layer from the field initialization. Regarding memory consumption, UPMLs can be optimized as well. Arrays are used to store the values for the conductivity $\sigma$ and the extinction coefficient $\kappa$ throughout the grid. Problem being that $\sigma$ and $\kappa$ are constant inside the simulation area or equivalently outside the defined UPML layer width. Having a large number of grid points, this way of storing $\sigma$ and $\kappa$ is highly unfavorable. There is a solution for that problem, as discussed in \cite{Taflove}, at the cost of more complex code. Yet, another problem is to find optimal values for $\sigma_{max}$ and $\kappa_{max}$. Even though there are suggestions for $\sigma$ like equation \eqref{eqn: sigmaMaxOpt}, there are no suggestions for $\kappa$ and still there is a lot of try and error to find the best values.\\
+As already outlined in Section \ref{sec: Particle History} the storage of particle positions must be optimized, as soon as particle numbers become large. In the present work it has been shown, that a plausible criterium for finding particles, who's position and velocity has to be stored, will depend on the velocity of the particles. \\
+%In the present work it has been shown that a plausible criterium for finding the particle position, after which all following positions don't need to be stored, has to be velocity dependent.\\
+%An even better approach would be to define a cutoff distance at which the emitted fields would be attenuated so much, that they could be neglected.
+\newline
+Another feature of the numerical scheme in the present work, that can be optimized are the UPMLs. Problems of UPMLs occur when Liénard-Wiechert fields are calculated from the extended particle history prior to the simulation. If field values are set into the UPML region, they will stay there or even worse diverge causing strange artefacts at the boundaries. The UPML layer should be excluded from the field initialization. Furthermore, the UPMLs have more specific problems \cite{Taflove}. They, however, are not specifically related to the present work. 
+
+% With regard to memory consumption UPMLs can be optimized as well. Presently. arrays are used to store the values for the conductivity $\sigma$ and the extinction coefficient $\kappa$ throughout the grid. The problem is that $\sigma$ and $\kappa$ are constant inside the simulation area or equivalently outside the defined UPML layer width. For a large grid storing $\sigma$ and $\kappa$ this way is highly unfavorable. A solution for this problem at the cost of more complex code has been discussed in \cite{Taflove}. Another problem related to UPMLs is to find optimal values for $\sigma_{max}$ and $\kappa_{max}$. Even though there are suggestions for $\sigma$ like equation \eqref{eqn: sigmaMaxOpt}, there are no suggestions for $\kappa$ and still there is a lot of try and error to find the best values.\\
 
 %======================== Appendix ============================
 %===========================================================
@@ -1724,7 +1730,7 @@ Another point, which can be optimized is UPML. Problems occur when Liénard-Wiech
 \label{appendix: Gauge Transformations}
 \noindent
 In this chapter it is shown that the gauge fields leave both the electric and magnetic fields and the corresponding potential equations invariant.
-\section{Invariance of fields}
+\section{Gauge invariance of fields}
 It is shown that $\vec{E}' = \vec{E}$ and $\vec{B}' = \vec{B}$.
 \beq
 \bal
@@ -1745,7 +1751,7 @@ and
 \eeq
 
 %======================== Invariance of Potential Equations ============================
-\section{Invariance of potential equations}
+\section{Gauge invariance of potential equations}
 Now the invariance of the potential equations is shown. Therefore, consider
 \beq
 \bal
@@ -1795,10 +1801,13 @@ where $c^2 = \frac{1}{\mu_0\epsilon_0}$ is used. Now consider the first term in 
 On the other hand one also has
 \beq
 \bal
-\vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} &= \vec{j}(\vec{r}~', t_{ret}) \vec{\nabla}_{\vec{r}~'} \left( \frac{1}{|\vec{r} - \vec{r}~'|}\right) + \frac{1}{|\vec{r} - \vec{r}~'|} \left( \vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret})\Bigr |_{t_{ret}} + \del_{t_{ret}}\vec{j}(\vec{r}~', t_{ret}) \vec{\nabla}_{\vec{r}~'}~ t_{ret}\right)\nn \\
-&= \vec{j}(\vec{r}~', t_{ret}) \frac{\vec{r} - \vec{r}~'}{|\vec{r} - \vec{r}~'|^3} + \frac{1}{|\vec{r} - \vec{r}~'|} \left( \vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret}) \Bigr |_{t_{ret}}+ \frac{1}{c}  \frac{\vec{r} - \vec{r}~'}{|\vec{r} - \vec{r}~'|} \del_{t_{ret}}\vec{j}(\vec{r}~', t_{ret}) \right),
+\vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} &= \vec{j}(\vec{r}~', t_{ret}) \vec{\nabla}_{\vec{r}~'} \left( \frac{1}{|\vec{r} - \vec{r}~'|}\right) + \\
+& \frac{1}{|\vec{r} - \vec{r}~'|} \left( \vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret})\Bigr |_{t_{ret}} + \del_{t_{ret}}\vec{j}(\vec{r}~', t_{ret}) \vec{\nabla}_{\vec{r}~'}~ t_{ret}\right) \\ \nn
+&= \vec{j}(\vec{r}~', t_{ret}) \frac{\vec{r} - \vec{r}~'}{|\vec{r} - \vec{r}~'|^3} + \\
+& \frac{1}{|\vec{r} - \vec{r}~'|} \left( \vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret}) \Bigr |_{t_{ret}}+ \frac{1}{c}  \frac{\vec{r} - \vec{r}~'}{|\vec{r} - \vec{r}~'|} \del_{t_{ret}}\vec{j}(\vec{r}~', t_{ret}) \right),
 \eal
 \eeq
+
 which means that one can write
 \beq
 \vec{\nabla}_{\vec{r}}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} + \vec{\nabla}_{\vec{r}~'}~ \frac{\vec{j}(\vec{r}~', t_{ret})}{|\vec{r} - \vec{r}~'|} =  \frac{\vec{\nabla}_{\vec{r}~'} \vec{j}(\vec{r}~', t_{ret})\Bigr |_{t_{ret}}}{|\vec{r} - \vec{r}~'|}. \nn
@@ -1815,6 +1824,7 @@ because the current density vanishes at infinity. That was to show.
 
 %======================== Softwarestack and Documentation ============================
 \chapter{Softwarestack and Documentation}
+\noindent
 The following Softwarestack was used to create this thesis:
 \begin{itemize}
 \item IDE: XCode Version 8.3.3 (8E3004b)
@@ -1831,6 +1841,7 @@ The following Softwarestack was used to create this thesis:
 %======================== Normalization ============================
 \chapter{Normalization}
 \label{app: Normalization}
+\noindent
 This chapter deals with how to make the basic equations from Section \ref{sec: Equations of motion} dimensionless. Even though it's not necessary, it's always advisable in numerics to have a dimensionless systems for reasons of simplicity and clarity. In addition to the transformation equations the dimensionless Lorentz-Newton equation \eqref{eqn: Lorentz-Newton}, the damping term, i.e. Landau-Lifschitz equation \eqref{eqn: Landau-Lifschitz} and of course the Liénard-Wiechart equations \eqref{eqn: Liénard-Wiechert} is also presented.\newline
 To make the physical entities dimensionless a characteristic frequency $\omega$ is introduced. Dimensionless parameters are denoted with a tilde. \\
 With the following transformations
