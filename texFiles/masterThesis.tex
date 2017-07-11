@@ -1154,16 +1154,13 @@ The same holds for $B_{0L}$. Finally, the dimensionless grid and time resolution
 \beq
 \Delta t_L \omega_L \ll 1
 \eeq
-as to hold. Making use of \eqref{eqn: ratio omega} one obtains
+has to hold. Making use of \eqref{eqn: ratio omega} one obtains
 \beq
-\bal
-\Delta t_L &\ll \frac{1}{\omega_L} \stackrel{\eqref{eqn: ratio omega}}{=} \frac{1}{1.77 \cdot 10^{-8} \omega},
-dt &= \Delta t_L \omega,  
-\eal
+\Delta t_L &\ll \frac{1}{\omega_L} \stackrel{\eqref{eqn: ratio omega}}{=} \frac{1}{1.77 \cdot 10^{-8} \omega}, 
 \eeq
-Since $dt = 0.5 dx$ (see Section \ref{sec: Yee-scheme}) choosing $dx = 10^{7}$ is sufficiently small.\\
+Since $dt = \Delta t_L \omega$ and $dt = 0.5 dx$ (see Section \ref{sec: Yee-scheme}) choosing $dx = 10^{7}$ is sufficiently small.\\
 \newline
-For results being discussed shortly the following settings are used
+For the results being discussed shortly the following settings are used
 \begin{lstlisting}
 Resolution->dx = pow(10,7);
 Resolution->dy = pow(10,7);
