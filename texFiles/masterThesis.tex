@@ -342,7 +342,7 @@ one can rewrite the Liénard-Wiechert potentials in a more compact and final form
 \vec{A}(\vec{r},t) &= \frac{\mu_0}{4\pi} \frac{q\vec{\beta}(t')}{(1 - \vec{\beta}(t') \cdot \vec{n}(\vec{r},t')) R(\vec{r},t')}\Biggr |_{t' = t_{ret}}.
 \eal
 \eeq
-The latter potentials are the generalization of the Coulomb potential. With the help of \eqref{eqn: varphi} the electric and magnetic fields can be derived from the \textit{Liénard-Wiechert} potentials \eqref{eqn: LWPotentials}. Since this is a quite longish calculation it is referred to \cite{Nolting} and the final result is just presented
+The latter potentials are the generalization of the Coulomb potential. With the help of \eqref{eqn: varphi} the electric and magnetic fields can be derived from the \textit{Liénard-Wiechert} potentials \eqref{eqn: LWPotentials}. Since this is a quite lengthy calculation it is referred to \cite{Nolting} and the final result is just presented
 \beq
 \label{eqn: Liénard-Wiechert}
 \bal
@@ -394,7 +394,7 @@ where $\dm\Omega \coloneqq \sin(\vartheta)\dm\vartheta\dm\varphi$.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/PoyntingVector.png}
-	\caption[Illustration of how to calculate the energy emission of a moving particle with charge $q$.]{Illustration of how to calculate the energy emission of a moving particle with charge $q$. \cite{Nolting}}
+	\caption[Illustration of how to calculate the energy emission of a moving particle with charge $q$.]{Illustration of how to calculate the energy emission of a moving particle with charge $q$ \cite{Nolting}.}
 	\label{fig: PoyntingVector}
 \end{figure}
 \noindent
@@ -453,7 +453,7 @@ Obviously the angle decreases monotonically with increasing velocity, i.e. incre
  \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/RadiationSummary.png}
-	\caption[Radiation characteristics of an moving charged particle]{Radiation characteristics of an moving charged particle. \cite{Nolting}}
+	\caption[Radiation characteristics of an moving charged particle]{Radiation characteristics of an moving charged particle \cite{Nolting}.}
 	\label{fig: radiationSummary}
 \end{figure}
 \noindent
@@ -577,7 +577,7 @@ Figure \ref{fig: procedural error} illustrates the situation.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/Verfahrensfehler.png} %Bild 1
-	\caption[procedural error]{Illustration of the procedural errors of an one-step-scheme.~ \cite{NumerikSkript}}
+	\caption[procedural error]{Illustration of the procedural errors of an one-step-scheme \cite{NumerikSkript}.}
 	\label{fig: procedural error}
 \end{figure}
 \noindent
@@ -675,7 +675,7 @@ Up to now one question remains unanswered. How does one solve for $\vec{v}_{+}$ 
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.50\textwidth]{Pictures/borisProjection.png} 
-	\caption[Velocity space showing the rotation from $\vec{v}_{-}$ to $\vec{v}~'$]{Velocity space showing the rotation from $\vec{v}_{-}$ to $\vec{v}~'$. The velocities shown are projections of the total velocities onto the plane perpendicular to $\vec{B}$. ~\cite{Birdsall}}
+	\caption[Velocity space showing the rotation from $\vec{v}_{-}$ to $\vec{v}~'$]{Velocity space showing the rotation from $\vec{v}_{-}$ to $\vec{v}~'$. The velocities shown are projections of the total velocities onto the plane perpendicular to $\vec{B}$ \cite{Birdsall}.}
 	\label{fig: borisProjection}
 \end{figure}
 \noindent
@@ -823,7 +823,7 @@ To push the fields on the grid, i.e solving for the fields at the next time step
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.70\textwidth]{Pictures/YeeBox.png} 
-	\caption[Yee-Box]{Illustration of a so called Yee-Box, which is used to solve the curl Maxwell equations. Shown are the positions of the electric and magnetic field vector components about a cubic unit cell of the Yee space lattice. The Yee algorithm centers its E and H components in three dimensional space so that every E component is surrounded by four circulating H components, and every H component is surrounded by four circulating E components \cite{Taflove}.}
+	\caption[Yee-Box]{Illustration of a so called Yee-Box which is used to solve the curl Maxwell equations. Shown are the positions of the electric and magnetic field vector components about a cubic unit cell of the Yee space lattice. The Yee algorithm centers its E and H components in three dimensional space so that every E component is surrounded by four circulating H components, and every H component is surrounded by four circulating E components \cite{Taflove}.}
 	\label{fig: YeeBox}
 \end{figure}
 The discrete Maxwell equations then read
@@ -926,11 +926,15 @@ After having discussed the fundamentals the practical section of the present wor
 Far fields are stored on the grid and propagated with the Yee-scheme \eqref{eqn: discreteMaxwellEq}.
 %======================== Near and Far- Fields ========================
 \section{Near- and far fields}
-Before the simulation area is separated into near- and far fields a grid needs to be initialized. The grid is divided in \texttt{numberBoxesInX}, \texttt{numberBoxesInY} and \texttt{numberBoxesInZ} boxes, each of which has \texttt{numberOfGridPointsForBoxInX}, \texttt{numberOfGridPointsForBoxInY} and \texttt{numberOfGridPointsForBoxInZ} length, which yields a total of
+Before the simulation area is separated into near and far fields a grid needs to be initialized. The grid is divided in \texttt{numberBoxesInX}, \texttt{numberBoxesInY} and \texttt{numberBoxesInZ} boxes, each of which has \texttt{numberOfGridPointsForBoxInX}, \\ 
+\texttt{numberOfGridPointsForBoxInY} and \texttt{numberOfGridPointsForBoxInZ} length, which yields a total of
 \begin{lstlisting}
-numberOfGridPointsInX = numberOfGridPointsForBoxInX * numberOfBoxesInX;
-numberOfGridPointsInY = numberOfGridPointsForBoxInY * numberOfBoxesInY;
-numberOfGridPointsInZ = numberOfGridPointsForBoxInZ * numberOfBoxesInZ;
+numberOfGridPointsInX = 
+numberOfGridPointsForBoxInX * numberOfBoxesInX;
+numberOfGridPointsInY = 
+numberOfGridPointsForBoxInY * numberOfBoxesInY;
+numberOfGridPointsInZ = 
+numberOfGridPointsForBoxInZ * numberOfBoxesInZ;
 \end{lstlisting}
 Upon defining the resolution \texttt{dx}, \texttt{dy}, \texttt{dz} the size of the simulation area is then given by 
 \begin{lstlisting}
@@ -942,7 +946,7 @@ The near field is then defined as the $3 \cdot 3 \cdot 3 = 27$ boxes with the bo
 \begin{figure}[t]
 \subfigure[]{\includegraphics[width=0.49\textwidth]{Pictures/nearFieldOneParticle.png}}\hfill
 \subfigure[]{\includegraphics[width=0.49\textwidth]{Pictures/nearFieldTwoParticles.png}}
-\caption[Near fields of one and two particles]{Near fields of one (a) and two (b) particles. The box at $(18,18)$ belongs to the near field of both particles, marked with $e^{-}$. Notice the staggered red grid in the background. In this example 8 boxes, with 20 grid points each and a resolution of $dx = dy = dz = 0.2$, are used. The plane plotted was chosen according to the z-coordinate of the particle.}	
+\caption[Near fields of one and two particles]{Near fields of (a) one and (b) two particles. The box at $(18,18)$ belongs to the near field of both particles, marked with $e^{-}$. Notice the staggered red grid in the background. In this example 8 boxes with 20 grid points each and a resolution of $dx = dy = dz = 0.2$ are used. The plane plotted was chosen according to the z-coordinate of the particle.}	
 \label{fig: near fields}
 \end{figure}
 \noindent
@@ -1025,7 +1029,7 @@ As an example an electron with $\gamma = 1.1$ is simulated in a constant externa
 \subfigure[t = 7]{\includegraphics[width=0.33\textwidth]{Pictures/gyration_7.png}}\hfill
 \subfigure[t = 9]{\includegraphics[width=0.33\textwidth]{Pictures/gyration_9.png}}\hfill
 \subfigure[t = 11]{\includegraphics[width=0.33\textwidth]{Pictures/gyration_11.png}}
-\caption[Simulation of an electron with $\gamma = 1.1$ in a constant $B_z = 1$ field]{Simulation of an electron with $\gamma = 1.1$ in a constant $B_z = 1$ field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3)  = 9.40 \cdot 10^{-24}\si{\second}$.}	
+\caption[Simulation of an electron with $\gamma = 1.1$ in a constant $B_z = 1$ field]{Simulation of an electron with $\gamma = 1.1$ in a constant $B_z = 1$ field at (a) $t = 7$, (b) $t = 9$ and (c) $t = 11$. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3)  = 9.40 \cdot 10^{-24}\si{\second}$.}	
 \label{fig: gyration electron}
 \end{figure}
 \noindent
@@ -1048,7 +1052,7 @@ If a particle changes its box during one push from time $t$ to $t + \dm t$ the n
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.40\textwidth]{Pictures/nearFieldUpdate.png} 
-	\caption[Particle push from time $t$ to $t + \dm t$. Since the particle changes its box the near field region also changes]{\textcolor{blue}{Particle} push from time $t$ to $t + \dm t$. Since the particle changes its box the near field region also changes. The boxes marked with \includegraphics[height=12pt]{Pictures/nearFieldOldBoxes.png} do no longer belong to the near field, whereas the boxes marked with \includegraphics[height=12pt]{Pictures/nearFieldNewBoxes.png} do now belong to the near field area. Boxes illustrated as \includegraphics[height=12pt]{Pictures/nearFieldBoth.png} remain as near field boxes. \cite{Herzing}}
+	\caption[Particle push from time $t$ to $t + \dm t$. Since the particle changes its box the near field region also changes]{\textcolor{blue}{Particle} push from time $t$ to $t + \dm t$. Since the particle changes its box the near field region also changes. The boxes marked with \includegraphics[height=12pt]{Pictures/nearFieldOldBoxes.png} do no longer belong to the near field, whereas the boxes marked with \includegraphics[height=12pt]{Pictures/nearFieldNewBoxes.png} do now belong to the near field area. Boxes illustrated as \includegraphics[height=12pt]{Pictures/nearFieldBoth.png} remain as near field boxes \cite{Herzing}.}
 	\label{fig: nearFieldUpdate}
 \end{figure}
 \noindent
@@ -1058,7 +1062,7 @@ As an example an electron with $\gamma = 1.2$ is simulated in a crossed $\vec{E}
 \subfigure[t = 5]{\includegraphics[width=0.33\textwidth]{Pictures/crossedField_5.png}}\hfill
 \subfigure[t = 7]{\includegraphics[width=0.33\textwidth]{Pictures/crossedField_7.png}}\hfill
 \subfigure[t = 9]{\includegraphics[width=0.33\textwidth]{Pictures/crossedField_9.png}}
-\caption[Simulation of an electron with $\gamma = 1.2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2]{Simulation of an electron with $\gamma = 1.2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3)  = 9.40 \cdot 10^{-24}\si{\second}$}	
+\caption[Simulation of an electron with $\gamma = 1.2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y = 0,2$]{Simulation of an electron with $\gamma = 1.2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y = 0,2$ at (a) $t = 5$, (b) $t = 7$ and $t = 9$. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3)  = 9.40 \cdot 10^{-24}\si{\second}$}	
 \label{fig: electronCrossedField}
 \end{figure}
 \noindent
@@ -1091,10 +1095,10 @@ So far a particle (or multiple particles) can be initialized and can be moved on
 Boris pusher is used (see Section \ref{sec: Boris-method}) to push the particles from $t$ to $t + \dm t$, starting with the initial conditions, given prior to the simulation. This algorithm can also be used to push backwards in time since it is symplectic and therefore time reversible. By selecting the simulation parameter $t = t_0 > 0$ the trajectory is calculated backwards in time for $t_0$ time units. This can be achieved by reversing the external fields and the initial velocity vector of the particle. Once one gets $t_0$ back in time one reverses the external fields and the velocity vector again, sets the particles proper time to zero and starts pushing the particle from there. In order to store all new trajectory points in the history it needs to be extended by $\frac{t_0}{\dm t}$ elements first. With this approach the simulation starts with the particle being at the specified initial conditions by the user, but the particle will already have a trajectory history, from which the initial Liénard-Wiechert fields can be calculated with \eqref{eqn: Liénard-Wiechert} in all far field boxes of the grid. This, however, is computationally quite expensive. Therefore, a routine was developed which serializes the initial conditions of the simulation in a file and only calculates the fields if they were not calculated and stored before. The flow chart in Figure \ref{fig: particleHistoryFlowChart} shows which functions get called when the user sets $t = t_0 > 0$.
 In Figure \ref{fig: particleHistoryExamples} some examples of initial fields for different times are shown. Notice, that in all cases the simulation starts with the particle being at the initial position \footnote{The initial position used in the simulation is $\texttt{Particle->x[1]} = 11.1$ and $\texttt{Particle->x[2]} = 15.5$} the user entered prior to the simulation. Only the distance over which the fields are initialized differ due to different particle history lengths.
 \begin{figure}[H]
-\subfigure[$\texttt{t} = 8$, $\texttt{tEnd} = 9$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields8.png}}\hfill
-\subfigure[$\texttt{t} = 10$, $\texttt{tEnd} = 11$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields10.png}}\hfill
-\subfigure[$\texttt{t} = 12$, $\texttt{tEnd} = 13$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields12.png}}
-\caption[Initial fields for different values of simulation parameter $\texttt{t}$]{Initial fields for different values of simulation parameter $t$. If $t > 0$ the history gets extended with a reverse Boris push such that the initial conditions are still met at the beginning of the simulation. The Liénard-Wiechert fields are calculated from the extended particle history.
+\subfigure[$t = 8$, $t_{End} = 9$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields8.png}}\hfill
+\subfigure[$t = 10$, $t_{End} = 11$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields10.png}}\hfill
+\subfigure[$t = 12$, $t_{End} = 13$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields12.png}}
+\caption[Initial fields for different values of simulation parameter $\texttt{t}$]{The plots show the radiation fields after simulating for $t=1$ with a start time of (a) $t = 8$, (b) $t=10$ and (c) $t = 12$. If $t > 0$ the history gets extended with a reverse Boris push such that the initial conditions are still met at the beginning of the simulation. The Liénard-Wiechert fields are calculated from the extended particle history.
 The electron has an energy of $\gamma = 1.2$. A constant $B_z = 1$ is used as external field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$}	
 \label{fig: particleHistoryExamples}
 \end{figure}
@@ -1103,7 +1107,7 @@ The electron has an energy of $\gamma = 1.2$. A constant $B_z = 1$ is used as ex
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.7\textwidth]{Pictures/createdPictures/particleHistoryFlowChart.pdf} 
-	\caption[Flow chart showing the relevant function calls when the user sets $t = t_0 > 0$]{Flow chart showing the relevant function calls when the user sets $t = t_0 > 0$. If $t = t_0 = 0$ the simulation starts right away.}
+	\caption[Flow chart showing the relevant function calls when the user sets $t = t_0 > 0$]{Flow chart showing the relevant function calls when the user sets $t = t_0 > 0$. In this case the radiation fields are calculated from the extended particle history and are set onto the numerical grid. If $t = t_0 = 0$ the simulation starts right away. This way of setting up the simulation is only correct if there is only one particle or the the particles do not interact during the initialization process.}
 	\label{fig: particleHistoryFlowChart}
 \end{figure}
 \noindent
@@ -1325,9 +1329,9 @@ In the next step the electric field components $\vec{E}$ as well as the Poynting
 % fourier gamma = 1.0
 \begin{figure}[H]
 \centering
-\subfigure[]{\includegraphics[width=0.8\textwidth]{Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.png}}
-\subfigure[]{\includegraphics[width=0.8\textwidth]{Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoynting2D.png}}
-\caption[Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.0$]{Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.0$. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$.}
+\subfigure[]{\includegraphics[width=0.7\textwidth]{Pictures/results/0.1_0.01_gamma1.0/fourierAnalysis2D.png}}
+\subfigure[]{\includegraphics[width=0.7\textwidth]{Pictures/results/0.1_0.01_gamma1.0/fourierAnalysisPoynting2D.png}}
+\caption[Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.0$]{Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.0$. The colorbars in the upper row show the values of (a) $E_x$, $E_y$, $E_z$ and (b) $S_x$, $S_y$ and $S_z$ in the xy-plane. The colorbars in the lower row show the magnitude of the Fourier components of (a) $E_x$, $E_y$, $E_z$ and (b) $S_x$, $S_y$ and $S_z$ in the xy-plane. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$.}
 	\label{fig: E fourier gamma1.0}
 \end{figure}
 \noindent
@@ -1337,7 +1341,7 @@ In the next step the electric field components $\vec{E}$ as well as the Poynting
 \centering
 \subfigure[]{\includegraphics[width=0.9\textwidth]{Pictures/results/0.46_0.01_gamma1.1/fourierAnalysis2D.png}}
 \subfigure[]{\includegraphics[width=0.9\textwidth]{Pictures/results/0.46_0.01_gamma1.1/fourierAnalysisPoynting2D.png}}
-\caption[Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.1$]{Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.1$. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$.}
+\caption[Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.1$]{Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.1$. The colorbars in the upper row show the values of (a) $E_x$, $E_y$, $E_z$ and (b) $S_x$, $S_y$ and $S_z$ in the xy-plane. The colorbars in the lower row show the magnitude of the Fourier components of (a) $E_x$, $E_y$, $E_z$ and (b) $S_x$, $S_y$ and $S_z$ in the xy-plane. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$.}
 	\label{fig: E fourier gamma1.1}
 \end{figure}
 \noindent
@@ -1347,7 +1351,7 @@ In the next step the electric field components $\vec{E}$ as well as the Poynting
 \centering
 \subfigure[]{\includegraphics[width=0.9\textwidth]{Pictures/results/0.67_0.01_gamma1.2/fourierAnalysis2D.png}}
 \subfigure[]{\includegraphics[width=0.9\textwidth]{Pictures/results/0.67_0.01_gamma1.2/fourierAnalysisPoynting2D.png}}
-\caption[Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.2$]{Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.2$. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$.}
+\caption[Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.2$]{Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.2$. The colorbars in the upper row show the values of (a) $E_x$, $E_y$, $E_z$ and (b) $S_x$, $S_y$ and $S_z$ in the xy-plane. The colorbars in the lower row show the magnitude of the Fourier components of (a) $E_x$, $E_y$, $E_z$ and (b) $S_x$, $S_y$ and $S_z$ in the xy-plane. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$.}
 	\label{fig: E fourier gamma1.2}
 \end{figure}
 \noindent
@@ -1357,7 +1361,7 @@ In the next step the electric field components $\vec{E}$ as well as the Poynting
 \centering
 \subfigure[]{\includegraphics[width=0.9\textwidth]{Pictures/results/0.84_0.01_gamma1.3/fourierAnalysis2D.png}}
 \subfigure[]{\includegraphics[width=0.9\textwidth]{Pictures/results/0.84_0.01_gamma1.3/fourierAnalysisPoynting2D.png}}
-\caption[Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.3$]{Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.3$. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$.}
+\caption[Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.3$]{Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.3$. The colorbars in the upper row show the values of (a) $E_x$, $E_y$, $E_z$ and (b) $S_x$, $S_y$ and $S_z$ in the xy-plane. The colorbars in the lower row show the magnitude of the Fourier components of (a) $E_x$, $E_y$, $E_z$ and (b) $S_x$, $S_y$ and $S_z$ in the xy-plane. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$.}
 	\label{fig: E fourier gamma1.3}
 \end{figure}
 \noindent
@@ -1367,7 +1371,7 @@ In the next step the electric field components $\vec{E}$ as well as the Poynting
 \centering
 \subfigure[]{\includegraphics[width=0.9\textwidth]{Pictures/results/0.98_0.01_gamma1.4/fourierAnalysis2D.png}}
 \subfigure[]{\includegraphics[width=0.9\textwidth]{Pictures/results/0.98_0.01_gamma1.4/fourierAnalysisPoynting2D.png}}
-\caption[Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.4$]{Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.4$. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$.}
+\caption[Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.4$]{Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.4$. The colorbars in the upper row show the values of (a) $E_x$, $E_y$, $E_z$ and (b) $S_x$, $S_y$ and $S_z$ in the xy-plane. The colorbars in the lower row show the magnitude of the Fourier components of (a) $E_x$, $E_y$, $E_z$ and (b) $S_x$, $S_y$ and $S_z$ in the xy-plane. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$.}
 	\label{fig: E fourier gamma1.4}
 \end{figure}
 \noindent
@@ -1377,22 +1381,22 @@ In the next step the electric field components $\vec{E}$ as well as the Poynting
 \centering
 \subfigure[]{\includegraphics[width=0.9\textwidth]{Pictures/results/1.12_0.01_gamma1.5/fourierAnalysis2D.png}}
 \subfigure[]{\includegraphics[width=0.9\textwidth]{Pictures/results/1.12_0.01_gamma1.5/fourierAnalysisPoynting2D.png}}
-\caption[Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.5$]{Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.5$. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$.}
+\caption[Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.5$]{Fourier analysis of (a) the electric field components of $\vec{E}$ and (b) the components of the Poynting vector $\vec{S}$ for $\gamma = 1.5$. The colorbars in the upper row show the values of (a) $E_x$, $E_y$, $E_z$ and (b) $S_x$, $S_y$ and $S_z$ in the xy-plane. The colorbars in the lower row show the magnitude of the Fourier components of (a) $E_x$, $E_y$, $E_z$ and (b) $S_x$, $S_y$ and $S_z$ in the xy-plane. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$.}
 	\label{fig: E fourier gamma1.5}
 \end{figure}
 \noindent
-From the Fourier analysis of the electric field components, especially from the $E_y$ component, in the figures \ref{fig: E fourier gamma1.0} - \ref{fig: E fourier gamma1.5} one can clearly see an increase in frequency of the radiated fields. There is a main peak moving from low frequencies to high frequencies along the $\omega_x$-axis as $\gamma$ is increasing. This behavior is as expected from Section \ref{sec: Energy emission}. The particle is first directed into x-direction. While interacting with the laser pulse the particle changes its trajectory and is therefore accelerated, causing Liénard-Wiechert fields to be radiated parallel to the direction of acceleration. Whereas at low energies the trajectory of the particle tends more towards y-direction the trajectory tends more towards x-direction at higher energies. This is because the  time the particle interacts with the laser pulse decreases with higher values of $\gamma$. The less time the particle interacts with the laser pulse, the less it gets deflected in y-direction. Therefore, $\omega_y$ frequencies appear more often at lower than at higher values of $\gamma$. The same argumentation holds for the Fourier analysis of the Poynting vector $\vec{S}$. As the Liénard-Wiechert fields become more and more directed into x-direction with increasing $\gamma$, the energy flux $\vec{S}$ becomes also more directed. 
+From the Fourier analysis of the electric field components, shown in the Figures \ref{fig: E fourier gamma1.0} - \ref{fig: E fourier gamma1.5}, especially from the Ey component, an increase in frequency of the radiated fields can clearly be seen. There is a main peak moving from low frequencies to high frequencies along the $\omega_x$-axis as $\gamma$ increases. This behavior is as expected from Section \ref{sec: Energy emission}. While interacting with the laser pulse the particle is accelerated causing radiation parallel to the direction of acceleration. Whereas at low energies the trajectory of the particle drifts dominantly along the y-direction the particles moves more along the x-direction at higher energies. The reason is that the time the particle interacts with the laser pulse decreases with higher values of $\gamma$. The less time the particle interacts with the laser pulse the less it gets deflected in y-direction. Therefore, $\omega_y$ frequencies appear more often at lower than at higher values of $\gamma$. The same argument holds for the Fourier spectrum of the Poynting vector $\vec{S}$. As the radiation fields become more and more directed along the x-direction with increasing $\gamma$ the energy flux $\vec{S}$ becomes more directed as well. 
 %======================== UPML ============================
 %===========================================================
 \chapter{Uniaxial Perfectly Matched Layer}
 \section{Introduction}
-With all simulations there is the topic about boundary conditions. This chapter deals with that important aspect. \\
-Boundary conditions apply at the edge of the numerical grid and dictate how the solution is treated, when approaching the edge. The Dirichlet boundary condition, for instance, sets the solution to zero, leading to reflections \footnote{It's like a rope with a fixed connection to a wall. Since the energy cannot be transferred to the wall, all energy is reflected, causing the incident wave to move back. }. Periodic boundary conditions extend the grid by setting one edge on top of the opposite one. Solutions leaving the grid to the right enter the simulation area to the left again. \\ 
+With all simulations there is the topic about boundary conditions. This chapter deals with that important aspect. 
+Boundary conditions apply at the edge of the numerical grid and dictate how the solution is treated, when approaching the edge. The Dirichlet boundary condition, for instance, sets the solution to zero, leading to reflections \footnote{It's like a rope with a fixed connection to a wall. Since the energy cannot be transferred to the wall, all energy is reflected, causing the incident wave to move back. }. Periodic boundary conditions extend the grid by setting one edge on top of the opposite one. Solutions leaving the grid to the right enter the simulation area to the left again. 
 When solving differential equations numerically one always has to think about, which boundary conditions apply best for the problem at hand. The most commonly used ones are the two aforementioned ones. Dirichlet boundary conditions apply for physical problems involving fast decaying solutions in space so that truncation does not matter, as long as the numerical grid is large enough. Other problems, like periodic structures, can be simulated with periodic boundary conditions. However, one of the most challenging problems to truncate involve wave equations, like in our case, since their solution only decays slowly \footnote{Energy conservation requires the energy flux $|S| \propto |E|^2$ to decay inversely proportional to the surface area $\sim r^2$ in three dimensions. Therefore, $|E| \propto \frac{1}{r}$.}. Using periodic, Dirichlet or Neumann boundary conditions will lead to unacceptable artifacts from boundary reflections. One approach is the \textit{absorbing boundary condition} \cite{Taflove}. It turns out that this approach works just fine for the one dimensional case, i.e. waves traveling in only one direction. However, most problems - like the one in the present work - include three dimensions. Fortunately in 1994 Berenger came up with a new idea presented in his seminal paper \cite{Berenger}. Instead of having an absorbing boundary condition he rather proposed an absorbing boundary layer. The layer is part of the grid and has a specified width. When a wave enters the layer, it is attenuated by the absorption and decays exponentially. Now the problems remains, that the absorbing layer represents an interface, where the impedance change, which in turn causes reflection and transmission. Berenger, however, showed that it's possible to construct a medium, which does not reflect any incident wave, independent of angle, polarization and frequency. A so called PML - \textit{Perfectly Matched Layer}. Aside from Berenger's  original formulation -the \textit{split field} PML -  some equivalent descriptions of PML came up over the years. For one there are the \textit{uniaxial} PML (UPML), which are used in this thesis and are explained in more detail below. The most elegant and general description is the \textit{stretched coordinate} PML \cite{Chew, Rappaport, Teixeira}, which is based upon an analytic continuation of Maxwell`s equations into complex spatial coordinates. Both the split field PML and the UPML can be derived from this approach.\\
 
 %======================== Derivation ============================
 \section{Derivation}
-The most common formulation is the UPML. Following \cite{Taflove, CEM} an overview of the most important steps is presented to understand why UPML works and how to implement it. \\
+The most common formulation is the UPML. Following \cite{Taflove, CEM} an overview of the most important steps is presented to understand why UPML works and how to implement it. 
 It will turn out that the medium inside our PML needs to be anisotropic. Why that is can be seen later. Being able to describe anisotropic phenomenon one needs to incorporate anisotropy into Maxwell equations. One can do this by making the permittivity $\epsilon_r$ and permeability $\mu_r$ tensors \footnote{There are three types of anisotropic media: \\
 isotropic:
 $ \begin{bmatrix}
@@ -1445,7 +1449,7 @@ E_x \\
 E_y \\
 E_z
 \end{pmatrix} 
-\\
+,\\
 \begin{pmatrix}
 0 & - \frac{\del}{\del z} & \frac{\del}{\del y}  \\
 \frac{\del}{\del z} & 0 & -\frac{\del}{\del x}  \\
@@ -1466,11 +1470,11 @@ E_z
 H_x \\ 
 H_y \\
 H_z
-\end{pmatrix} 
+\end{pmatrix},
 \eal
 \eeq
-Now we need to talk about reflection and transmission at a surface. 
-In the case of a wave with arbitrary polarization and angle of incidence, as illustrated in Figure \ref{fig: Fresnel}, one can use \textit{Fresnel} equations. \footnote{
+Next reflection and transmission at a surface is discussed. 
+In the case of a wave with arbitrary polarization and angle of incidence, illustrated in Figure \ref{fig: Fresnel}, one can use \textit{Fresnel} equations. \footnote{
 \beq
 \bal
 r_{TE} &= \frac{\eta_2 \cos(\theta_1) - \eta_1\cos(\theta_2)}{\eta_2 \cos(\theta_1) + \eta_1\cos(\theta_2)}, \\
@@ -1493,7 +1497,7 @@ a & 0 & 0  \\
 0 & 0 & c 
 \end{bmatrix},
 \eeq
-with $a, b, c$ to be determined. Considering anisotropy the Fresnel equations change. For example for an incident wave traveling along z-axis, the Fresnel equations read
+with $a, b, c$ to be determined. Considering anisotropy the Fresnel equations change. For example, for an incident wave traveling along z-axis the Fresnel equations read
 \begin{figure}[t]
 	\centering
 		\includegraphics[width=0.5\textwidth]{Pictures/Fresnel.png} 
@@ -1510,19 +1514,19 @@ r_{TM} &= \frac{-\sqrt{a} \cos(\theta_1) + \sqrt{b}\cos(\theta_2)}{\sqrt{a} \cos
 t_{TM} &= \frac{\sqrt{a} \cos(\theta_1)}{\sqrt{b} \cos(\theta_1) + \sqrt{a}\cos(\theta_2)},
 \eal
 \eeq
-where $\theta_1$ the angle of incidence and $\theta_2$ the angle of transmission. These two are connected via Snell's Law
+where $\theta_1$ the angle of incidence and $\theta_2$ the angle of transmission. These two are connected via Snell's law
 \beq
 \sin(\theta_1) = \sqrt{bc}\sin{\theta_2}.
 \eeq
-Now conditions need to be found for $a,b,c$ to make the Fresnel equations \eqref{eqn: Fresnel} independent of angle and simultaneously let the reflection parameter vanish. \\
-By choosing $\sqrt{bc} = 1$ Snell's Law simplifies to $\theta_1 = \theta_2$. Thus the reflection parameters reduce to
+Now conditions need to be found for $a,b,c$ to make the Fresnel equations \eqref{eqn: Fresnel} independent of angle and simultaneously let the reflection parameter vanish. 
+By choosing $\sqrt{bc} = 1$ Snell's law simplifies to $\theta_1 = \theta_2$. Thus, the reflection parameters reduce to
 \beq
 \bal
 r_{TE} &= \frac{\sqrt{a} - \sqrt{b}}{\sqrt{a} + \sqrt{b}}, \\
 r_{TM} &= \frac{-\sqrt{a} + \sqrt{b}}{\sqrt{a} + \sqrt{b}}.
 \eal
 \eeq
-With this choice the reflection is independent of angle. Furthermore, if we require $r_{TE} \stackrel{!}{=} 0$ and $r_{TM} \stackrel{!}{=} 0$, we get $a \stackrel{!}{=} b$. To sum it up, $a, b, c$ need to fulfill 
+With this choice the reflection is independent of angle. Furthermore, if $r_{TE} \stackrel{!}{=} 0$ and $r_{TM} \stackrel{!}{=} 0$ holds, $a \stackrel{!}{=} b$ follows. To sum it up, $a, b, c$ need to fulfill 
 \beq
 a = b = \frac{1}{c}.
 \eeq
@@ -1535,7 +1539,7 @@ s_z & 0 & 0  \\
 0 & 0 & \frac{1}{s_z} 
 \end{bmatrix}.
 \eeq
-Recall that this is an uniaxial tensor. This is the reason why this approach is called Uniaxial Perfectly Matched Layer. \\
+Recall that this is an uniaxial tensor. This is the reason why this approach is called Uniaxial Perfectly Matched Layer. 
 Analogously one gets
 \beq
 \bal
@@ -1567,12 +1571,12 @@ where
 \beq
 \bal
 \label{eqn: s-factors}
-s_x(x) = \kappa_x + \frac{\sigma^{'}_x(x)}{j\omega_0\epsilon_0} \\
-s_y(y) = \kappa_y + \frac{\sigma^{'}_y(y)}{j\omega_0\epsilon_0}\\
+s_x(x) = \kappa_x + \frac{\sigma^{'}_x(x)}{j\omega_0\epsilon_0}, \\
+s_y(y) = \kappa_y + \frac{\sigma^{'}_y(y)}{j\omega_0\epsilon_0}, \\
 s_z(z) = \kappa_z + \frac{\sigma^{'}_z(z)}{j\omega_0\epsilon_0}.
 \eal
 \eeq
-$\sigma^{'}$ and $\kappa$ will be specified later. Having this, the Maxwell equations \eqref{eqn: frequencyDomainMaxwellEquations} now read
+The parameters $\sigma^{'}$ and $\kappa$ will be specified later. Having this, the Maxwell equations \eqref{eqn: frequencyDomainMaxwellEquations} now read
 \beq
 \bal
 \label{eqn: frequencyDomainMaxwellEquationsWithPML}
@@ -1580,7 +1584,7 @@ $\sigma^{'}$ and $\kappa$ will be specified later. Having this, the Maxwell equa
 \vec{\nabla} \times \vec{H}(\omega) &= \sigma \vec{E}(\omega) + j\omega\left[s\right]\vec{D}(\omega).
 \eal
 \eeq
-Before deriving the update equations, the electric field is normalized as follows
+Before deriving the update equations the electric field is normalized as follows
 \beq
 \bal
 \vec{\tilde{E}} = \sqrt{\frac{\epsilon_0}{\mu_0}} \vec{E} = \frac{1}{\eta_0} \vec{E} \\
@@ -1598,8 +1602,8 @@ which yields
 
 %======================== Update Equations ============================
 \section{Update equations}
-The update equations are now derived from \eqref{eqn: frequencyDomainMaxwellEquationsWithPML}. For simplicity we focus on Ampere's Law and consider the case, where the interior of the simulation area has no loss ($\sigma = 0$). Only the PML will have loss ($\sigma^{'} \neq 0$).
-Ampere's Law rewritten in matrix form then simplifies to
+The update equations are now derived from \eqref{eqn: frequencyDomainMaxwellEquationsWithPML}. For simplicity, only Ampere's law with the additional assumption that the interior of the simulation area has no loss ($\sigma = 0$) is considered. Only the PML will have loss ($\sigma^{'} \neq 0$).
+Ampere's law rewritten in matrix form then simplifies to
 \beq
 \label{eqn: Ampere's Law}
 \begin{pmatrix}
@@ -1657,7 +1661,7 @@ where $g$ is a piecewise $\mathcal{C}^{1}$ function and $g \in \mathcal{L}^{1}(\
 \tilde{Dz} 
 \end{pmatrix}.
 \eeq
-The system \eqref{eqn: Ampere's Law in time domain} can be discretized with Yee-scheme, as explained in Section \ref{sec: Yee-scheme} and using central differences. Because it's quite longish and a lot's of Algebra it is omitted here and instead referred to literature (see \cite{Taflove, CEM}). For instance, the $D_x$ update is given by
+The system \eqref{eqn: Ampere's Law in time domain} can be discretized with Yee-scheme, as explained in Section \ref{sec: Yee-scheme} and using central differences. Because it's quite lengthy it is omitted here and instead referred to literature (see \cite{Taflove, CEM}). For instance, the $D_x$ update is given by
 \begin{multline}
 \label{eqn: updateD}
 \textcolor{red}{D_x\Bigr|_{(i+\frac{1}{2},j,k)}^{n+1}} = \left(\frac{2\epsilon_0\kappa_y - \sigma^{'}_y h}{2\epsilon_0\kappa_y + \sigma^{'}_y h}\right) D_x\Bigr|_{i+\frac{1}{2},j,k}^{n} + \left(\frac{2\epsilon_0 h}{2\epsilon_0\kappa_y + \sigma^{'}_y h}\right) \\
@@ -1669,7 +1673,7 @@ From $\vec{D}(\omega) = \epsilon_0\left[\epsilon_r\right]\vec{E}$ the update equ
 E_x\Bigr|_{(i+\frac{1}{2},j,k)}^{n+1} = \left(\frac{2\epsilon_0\kappa_z - \sigma^{'}_z h}{2\epsilon_0\kappa_z + \sigma^{'}_z h}\right) E_x\Bigr|_{i+\frac{1}{2},j,k}^{n} + \left(\frac{1}{(2\epsilon_0\kappa_z + \sigma^{'}_z h) \epsilon}\right) \\
  \left( (2\epsilon_0\kappa_x + \sigma^{'}_x h) \textcolor{red}{D_x\Bigr|_{i+\frac{1}{2},j,k}^{n+1}} - (2\epsilon_0\kappa_x - \sigma^{'}_x h) D_x\Bigr|_{i+\frac{1}{2},j,k}^{n}\right).
 \end{multline}
-As one can see, the update equation for $E_x\Bigr|_{(i+\frac{1}{2},j,k)}^{n+1}$ contains the term $\textcolor{red}{D_x\Bigr|_{i+\frac{1}{2},j,k}^{n+1}}$. Consequently the update process of $E_x$ requires an update of $D_x$ first. Meaning, $D_x$ is calculated for the next time step first and then this result is used to update $E_x$. The same procedure applies for the update equations of $B_x$ and $H_x$
+As can be seen the update equation for $E_x\Bigr|_{(i+\frac{1}{2},j,k)}^{n+1}$ contains the term $\textcolor{red}{D_x\Bigr|_{i+\frac{1}{2},j,k}^{n+1}}$. Consequently, the update process of $E_x$ requires an update of $D_x$ first. Meaning, $D_x$ is calculated for the next time step first and then this result is used to update $E_x$. The same procedure applies for the update equations of $B_x$ and $H_x$
 \begin{multline}
 \label{eqn: updateB}
 \textcolor{blue}{B_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{3}{2}}} = \left(\frac{2\epsilon_0\kappa_y - \sigma^{'}_y h}{2\epsilon_0\kappa_y + \sigma^{'}_y h}\right) B_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{1}{2}} + \left(\frac{2\epsilon_0 h}{2\epsilon_0\kappa_y + \sigma^{'}_y h}\right) \\
@@ -1680,41 +1684,41 @@ As one can see, the update equation for $E_x\Bigr|_{(i+\frac{1}{2},j,k)}^{n+1}$ 
 H_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{3}{2}}= \left(\frac{2\epsilon_0\kappa_z - \sigma^{'}_z h}{2\epsilon_0\kappa_z + \sigma^{'}_z h}\right) H_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{1}{2}} + \left(\frac{1}{(2\epsilon_0\kappa_z + \sigma^{'}_z h) \mu}\right) \\
  \left( (2\epsilon_0\kappa_x + \sigma^{'}_x h) \textcolor{blue}{B_x\Bigr|_{(i,j+\frac{1}{2},k+\frac{1}{2})}^{n+\frac{3}{2}}} - (2\epsilon_0\kappa_x - \sigma^{'}_x h) B_x\Bigr|_{i,j+\frac{1}{2},k+\frac{1}{2}}^{n+\frac{1}{2}}\right).
 \end{multline}
-Notice that if the PML is turned off, i.e. $\sigma^{'} = 0$ and $\kappa = 1$ the prefactors simplify drastically. Plugging in \eqref{eqn: updateD} into \eqref{eqn: updateE} and also \eqref{eqn: updateB} into \eqref{eqn: updateH} result in the discretized Maxwell equations, as derived in \eqref{eqn: discreteMaxwellEq}. Of course, the update equations of the other field components can be derived analogously. 
+Notice, that if the PML is turned off, i.e. $\sigma^{'} = 0$ and $\kappa = 1$ the prefactors simplify drastically. Plugging in \eqref{eqn: updateD} into \eqref{eqn: updateE} and also \eqref{eqn: updateB} into \eqref{eqn: updateH} result in the discretized Maxwell equations derived in \eqref{eqn: discreteMaxwellEq}. Of course, the update equations of the other field components can be derived analogously. 
 
 %======================== Implementation of UPML in FDTD ============================
 \section{Implementation of UPML in FDTD}
-Finally, this Section shows how to implement UPML into an existing FDTD simulation. Since all the prefactors are constants, it's advisable to calculate them beforehand. Here is a snippet of the code
+Finally, this Section shows how to implement UPML into an existing FDTD simulation. Since all the prefactors are constants it's advisable to calculate them beforehand. Here is a snippet of the code used in the present work
 \begin{lstlisting}
-Grid->upml1E[j] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
-Grid->upml2E[j] = (2 * dt) / (2 * kappa + sigma * dt);
-Grid->upml3E[k] = (2 * kappa - sigma * dt) / (2 * kappa + sigma * dt);
-Grid->upml4E[k] = 1.0 / (2 * kappa + sigma * dt);
-Grid->upml5E[i] = (2 * kappa + sigma * dt);
-Grid->upml6E[i] = (2 * kappa - sigma * dt);
+Grid->upml1E[j] = (2*kappa-sigma*dt)/(2*kappa+sigma*dt);
+Grid->upml2E[j] = (2*dt)/(2*kappa+sigma*dt);
+Grid->upml3E[k] = (2*kappa-sigma*dt)/(2*kappa+sigma*dt);
+Grid->upml4E[k] = 1.0/(2*kappa+sigma*dt);
+Grid->upml5E[i] = (2*kappa+sigma*dt);
+Grid->upml6E[i] = (2*kappa-sigma*dt);
 \end{lstlisting}
-The same applies for the H components. \\
-From a theoretical point of view, a reflectionless PML is possible. In practice, however, numerical artifacts arise, due to finite spatial sampling \cite{Taflove}. The change from $\sigma$ in the interior to $\sigma^{'}$ in the PML is effectively a local discontinuity and thus causes reflections. For best performance, Berenger proposed that the PML losses $\sigma^{'}$ shall gradually rise from zero at $x = 0$ to $\sigma_{max}$ at $x = d$, where $d$ is the PML layer width \cite{Berenger}
+The same applies for the H components.
+From a theoretical point of view a reflectionless PML is possible. In practice, however, numerical artifacts arise, due to finite spatial sampling \cite{Taflove}. The change from $\sigma$ in the interior to $\sigma^{'}$ in the PML is effectively a local discontinuity and thus causes reflections. For best performance, Berenger proposed that the PML losses $\sigma^{'}$ shall gradually rise from zero at $x = 0$ to $\sigma_{max}$ at $x = d$ where $d$ is the PML layer width \cite{Berenger}
 \beq
 \bal
-\sigma_x(x) &= \left(\frac{x}{d}\right)^{m} \sigma_{x,max} \\
+\sigma_x(x) &= \left(\frac{x}{d}\right)^{m} \sigma_{x,max}, \\
 \kappa_x(x) &= 1+ \left(\kappa_{x,max} - 1\right)  \left(\frac{x}{d}\right)^{m}.
 \eal
 \eeq
-m defines the grading and is typically $3 \le m \le 4$ in FDTD simulations. $m = 3.5$ has been found to be a good choice. Through a lot of testing and experimenting, $\sigma_{max}$ was found to be \cite{Taflove}
+The parameter m defines the grading and is typically $3 \le m \le 4$ in FDTD simulations. $m = 3.5$ has been found to be a good choice. Through a lot of testing and experimenting $\sigma_{max}$ was found to be \cite{Taflove}
 \beq
 \label{eqn: sigmaMaxOpt}
 \sigma_x^{opt} = \frac{0.8 (m+1)}{\eta \Delta x},
 \eeq
-where $\eta = \sqrt{\frac{\mu}{\epsilon}}$. This of course also applies for the other components of $\sigma$. \\
+where $\eta = \sqrt{\frac{\mu}{\epsilon}}$. This of course also applies for the other components of $\sigma$.
 Figure \ref{fig: upml} shows how a simulation with UPML looks like
 
 \begin{figure}[H]
-\subfigure[$\texttt{t} = 11$]{\includegraphics[width=0.33\textwidth]{Pictures/upml_11.png}}\hfill
-\subfigure[$\texttt{t} = 15.75$]{\includegraphics[width=0.33\textwidth]{Pictures/upml_15_75.png}}\hfill
-\subfigure[$\texttt{t} = 18$]{\includegraphics[width=0.33\textwidth]{Pictures/upml_18.png}}
-\caption[Simulation of an electron in constant $B_z$ field using UPML]{Simulation of an electron in constant $B_z$ field using UPML.\\  
-The electron has an energy of $\gamma = 1.2$. A constant $B_z = 1$ is used as external field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, length in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and times in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$}	
+\subfigure[$t = 11$]{\includegraphics[width=0.33\textwidth]{Pictures/upml_11.png}}\hfill
+\subfigure[$t = 15.75$]{\includegraphics[width=0.33\textwidth]{Pictures/upml_15_75.png}}\hfill
+\subfigure[$t = 18$]{\includegraphics[width=0.33\textwidth]{Pictures/upml_18.png}}
+\caption[Simulation of an electron in constant $B_z$ field using UPML]{Simulation of an electron in constant $B_z$ field using UPML at (a) $t = 11$, (b) $t = 15.75$ and (c) $t = 18$. 
+The electron has an energy of $\gamma = 1.2$. A constant $B_z = 1$ is used as external field. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3) = 9.40 \cdot 10^{-24}\si{\second}$.}	
 \label{fig: upml}
 \end{figure}
 \noindent

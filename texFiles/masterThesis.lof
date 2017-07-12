@@ -23,7 +23,7 @@
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {t = 11}}}{40}{figure.4.6}
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Gyration of two electrons with $\gamma = 1.1$ each.}}{41}{figure.4.7}
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Particle push from time $t$ to $t + \dm t$. Since the particle changes its box the near field region also changes}}{42}{figure.4.8}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Simulation of an electron with $\gamma = 1.2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y$ = 0,2}}{43}{figure.4.9}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Simulation of an electron with $\gamma = 1.2$ in a crossed electromagnetic field with $B_z = 1$ and $E_y = 0,2$}}{43}{figure.4.9}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {t = 5}}}{43}{figure.4.9}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {t = 7}}}{43}{figure.4.9}
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {t = 9}}}{43}{figure.4.9}
@@ -32,9 +32,9 @@
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$v \approx 0.5 c$}}}{44}{figure.4.10}
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$v \approx c$}}}{44}{figure.4.10}
 \contentsline {figure}{\numberline {4.11}{\ignorespaces Initial fields for different values of simulation parameter $\texttt {t}$}}{46}{figure.4.11}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$\texttt {t} = 8$, $\texttt {tEnd} = 9$}}}{46}{figure.4.11}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$\texttt {t} = 10$, $\texttt {tEnd} = 11$}}}{46}{figure.4.11}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\texttt {t} = 12$, $\texttt {tEnd} = 13$}}}{46}{figure.4.11}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$t = 8$, $t_{End} = 9$}}}{46}{figure.4.11}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$t = 10$, $t_{End} = 11$}}}{46}{figure.4.11}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$t = 12$, $t_{End} = 13$}}}{46}{figure.4.11}
 \contentsline {figure}{\numberline {4.12}{\ignorespaces Flow chart showing the relevant function calls when the user sets $t = t_0 > 0$}}{47}{figure.4.12}
 \contentsline {figure}{\numberline {4.13}{\ignorespaces External laser pulse at $t = 700 \cdot 10^7$}}{50}{figure.4.13}
 \contentsline {figure}{\numberline {4.14}{\ignorespaces Initial conditions: $u_x = 0.1$, $u_y = 0.01$ and $u_z = 0.0$}}{51}{figure.4.14}
@@ -82,9 +82,9 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Wave with wavevector $\mathaccentV {vec}17E{k}$, arbitrary polarization and angle of incidence $\theta $ at a surface with impedance $\eta _i$ and refractive index $n_i$}}{67}{figure.5.1}
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Simulation of an electron in constant $B_z$ field using UPML}}{72}{figure.5.2}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$\texttt {t} = 11$}}}{72}{figure.5.2}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$\texttt {t} = 15.75$}}}{72}{figure.5.2}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\texttt {t} = 18$}}}{72}{figure.5.2}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$t = 11$}}}{72}{figure.5.2}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$t = 15.75$}}}{72}{figure.5.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$t = 18$}}}{72}{figure.5.2}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
