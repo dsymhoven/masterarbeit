@@ -11,7 +11,7 @@
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Cube with its eight corner points A, B, C, ..., H and interpolation point $P_f$.}}{27}{figure.3.2}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Yee-Box}}{30}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of numerical and analytical dispersion relation of discretized Maxwell equations with Yee scheme}}{33}{figure.4.2}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of numerical and analytical dispersion relation of discretized Maxwell equations with Yee-scheme}}{33}{figure.4.2}
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Near fields of one and two particles}}{35}{figure.4.3}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{35}{figure.4.3}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{35}{figure.4.3}
@@ -35,7 +35,7 @@
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$\texttt {t} = 8$, $\texttt {tEnd} = 9$}}}{46}{figure.4.11}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$\texttt {t} = 10$, $\texttt {tEnd} = 11$}}}{46}{figure.4.11}
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\texttt {t} = 12$, $\texttt {tEnd} = 13$}}}{46}{figure.4.11}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Flow Chart showing the relevant function calls when the user sets $t = t_0 > 0$}}{47}{figure.4.12}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Flow chart showing the relevant function calls when the user sets $t = t_0 > 0$}}{47}{figure.4.12}
 \contentsline {figure}{\numberline {4.13}{\ignorespaces External laser pulse at $t = 700 \cdot 10^7$}}{50}{figure.4.13}
 \contentsline {figure}{\numberline {4.14}{\ignorespaces Initial conditions: $u_x = 0.1$, $u_y = 0.01$ and $u_z = 0.0$}}{51}{figure.4.14}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {with far field only}}}{51}{figure.4.14}
