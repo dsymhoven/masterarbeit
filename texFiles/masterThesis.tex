@@ -463,7 +463,7 @@ Obviously the angle decreases monotonically with increasing velocity, i.e. incre
 %===========================================================
 \part{Numerics}
 \noindent
-The following section deals with the numeric aspects of this thesis. An explanation of the underlying equations of motion and their history is given. After that several methods are presented with which one can solve differential equations. Over the course of the last decades numerous methods were invented each of which has its own strengths and weaknesses. Some of them are very easy to implement, like the \textit{Euler} scheme, since it only uses first order derivation to approximate the next position. This usually leads to unprecise results, especially when the solution of the differential equation changes rapidly. Then the approximated solution by the solver and the actual solution differ drastically. \\
+The following section deals with the numeric aspects of this thesis. An explanation of the underlying equations of motion and their history is given. After that several numeric differential equation solvers are presented. Over the course of the last decades numerous methods have been invented each of which has its own strengths and weaknesses. Some of them are very easy to implement, like the \textit{Euler} scheme, since it only uses first order derivation to approximate the next position. This usually leads to unprecise results especially when the solution of the differential equation changes rapidly. Then the approximated solution by the solver and the actual solution differ drastically. 
 Others are quite complicated and sophisticated to implement, like the \textit{Runge Kutta} 4th order scheme, since it uses several derivations at different time steps to approximate the next position. This makes Runge Kutta very accurate, though.
 %Therefore, one should always consider which method is best for the problem and what it is one want to achieve.\\
 Following this, the numerical complexity is defined and calculated for some chosen algorithms. 
@@ -474,7 +474,8 @@ Following this, the numerical complexity is defined and calculated for some chos
 %======================== Equations of Motion ========================
 \section{Equations of motion}
 \label{sec: Equations of motion}
-As is known from mechanics the dynamics of particles is determined by the forces acting on them. In case of an electron scattering process there is a force due to electromagnetic fields. That can be external fields, but also fields due to moving particles, as explained in Section \ref{sec: lw-potentials}.\\
+As is known from mechanics the dynamics of particles is determined by the forces acting on them. In case of an electron scattering process there is a force due to electromagnetic fields. That can be external fields but also fields due to moving particles as explained in Section \ref{sec: lw-potentials}.\\
+\newline
 The dynamics of our system is described by the \textit{Lorentz-Newton} equations
 \beq
 \label{eqn: Lorentz-Newton}
@@ -494,24 +495,24 @@ E_z & B_y & -B_x & 0
 \end{pmatrix}
 .
 \eeq
-The damping term $g^{\mu}$ considers the fact that charged particles radiate fields when they are moving, which leads to a loss in their kinetic energy. Within the context of classical electrodynamics Max \textit{Abraham} and Hendrick \textit{Lorentz} discussed radiation damping in their same-named equation first.
-In 1938 \textit{Dirac} generalized the equation whilst taking special relativity into account \cite{Dirac}. It turned out, however, that this equation has unphysical solutions, which violate the causality principle. \textit{Landau} and \textit{Lifschitz} solved this problem using perturbation theory \cite{Landau}. The Landau-Lifschitz equation reads
+The damping term $g^{\mu}$ considers the fact that charged particles radiate fields when they are moving which leads to a loss in their kinetic energy. Within the context of classical electrodynamics Max \textit{Abraham} and Hendrick \textit{Lorentz} discussed radiation damping in their same-named equation first.
+In 1938 \textit{Dirac} generalized the equation whilst taking special relativity into account \cite{Dirac}. It turned out, however, that this equation has unphysical solutions which violate the causality principle. \textit{Landau} and \textit{Lifschitz} solved this problem using perturbation theory \cite{Landau}. The Landau-Lifschitz equation reads
 \begin{multline}
 \label{eqn: Landau-Lifschitz}
 g^{\mu} = \frac{\mu_0q^2}{6\pi c}\biggl(\frac{q}{m_e}\frac{\del F^{\mu\nu}_{\quad \text{ext}}}{\del x^{\xi}}u^{\nu}u^{\xi} - \frac{e^2}{m^{2}_e}F^{\mu\xi}_{\quad \text{ext}}F_{\nu\xi~\text{ext}}u^{\nu} \\
 +\frac{q^2}{m^{2}_ec^2}(F_{\nu\xi~\text{ext}}u^{\xi})(F^{\nu\pi}_{\quad \text{ext}}u_{\pi})u^{\mu}\biggr).
 \end{multline}
-In this thesis the damping term $g^{\mu}$ is neglected. In \cite{Jackson} a rough estimation shows that radiation damping of an electron gyrating in a constant $B$ field with frequency $\omega_0$ can be neglected if 
+In the present work the damping term $g^{\mu}$ is neglected. In \cite{Jackson} a rough estimation shows that radiation damping of an electron gyrating in a constant $B$ field with frequency $\omega_0$ can be neglected if 
 \beq
 \label{eqn: damping estimation}
 \omega_0 \Delta \tilde{t} \ll 1
 \eeq
-holds. The parameter $\Delta \tilde{t} = \frac{q^2}{4\pi\epsilon_0m_ec^3} = 9.40 \cdot 10^{-24}\si{\second}$ is the normalized time. In Section \ref{sec: electron scattering} is shown that equation \eqref{eqn: damping estimation} is indeed fulfilled in the simulations of the present work. \\
+holds. The parameter $\Delta \tilde{t} = \frac{q^2}{4\pi\epsilon_0m_ec^3} = 9.40 \cdot 10^{-24}\si{\second}$ is the normalized time. In Section \ref{sec: electron scattering} is shown that equation \eqref{eqn: damping estimation} is indeed fulfilled in the simulations of the present work. 
 In the following different methods are presented of how to solve the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} numerically.
 
 %======================== Euler scheme ========================
 \section{Euler-scheme}
-The most simple method is the explicit \textit{Euler}-method. It's easy to implement but not very accurate, as can be seen later. But before going into the details of the explicit Euler-scheme prerequisites are addressed, which all following methods have in common. \\
+The most simple method is the explicit \textit{Euler}-method. It's easy to implement but not very accurate, as can be seen later. But before going into the details of the explicit Euler-scheme prerequisites are addressed which all following methods have in common. 
 Starting point will always be a first order system of the kind
 \beq
 \label{eqn: Euler}
@@ -523,18 +524,18 @@ u^{\mu}(\tau_0) &= u^{\mu}_0.
 \eal
 \eeq
 Systems of higher order can always be reduced to a first order system. \\
-In order to solve the equation of motion numerically the domain needs to be discretized. Therefore, the time interval is divided into N equidistant partial intervals $h$, by defining
+In order to solve the equation of motion numerically the domain needs to be discretized. Therefore, the time interval is divided into N equidistant partial intervals $h$ by defining
 \beq
 h \coloneqq \Delta \tau = \tau_{i+1} - \tau_i. \nn
 \eeq
-The idea is to calculate each point along the trajectory $x^{\mu}_i = x^{\mu}(\tau_i)$ iteratively, starting from the initial values $x^{\mu}_0$ and $u^{\mu}_0$.
-But to calculate these points all differential operators in  \eqref{eqn: Euler} need to be discretized as well. That is, where all methods differ. Each method has its own way to discretize the differential operators.\\
+The idea is to calculate each point along the trajectory $x^{\mu}_i = x^{\mu}(\tau_i)$ iteratively starting from the initial values $x^{\mu}_0$ and $u^{\mu}_0$.
+But to calculate these points all differential operators in  \eqref{eqn: Euler} need to be discretized as well. That is, where all methods differ. Each method has its own way to discretize the differential operators.
 The basis of the Euler-scheme is a first order Taylor expansion of the integration variable $x^{\mu}$ in $\tau$ around $\tau_i$
 \beq
 \label{eqn: Taylor}
 x^{\mu}(\tau_{i+1}) =  x^{\mu}(\tau_i) + \frac{\dm x^{\mu}}{\dm \tau} \Big |_{\tau=\tau_i} \underbrace{(\tau_{i+1} - \tau_i)}_{=h} + \mathcal{O}(h^2).
 \eeq
-Analogously for $u^{\mu}$ and solving for  $\frac{\dm x^{\mu}}{\dm \tau}$ and $\frac{\dm u^{\mu}}{\dm \tau}$ respectively yields
+Analogously, for $u^{\mu}$ and solving for  $\frac{\dm x^{\mu}}{\dm \tau}$ and $\frac{\dm u^{\mu}}{\dm \tau}$ respectively yields
 \beq
 \bal
 \frac{x^{\mu}_{i+1} - x^{\mu}_i}{h} &= u^{\mu}_i,\\
@@ -572,7 +573,7 @@ is called local procedural error of the one-step-scheme at $\tau$ for the increm
 with a constant $C\ge 0$, which is independent of $\tau$ and $h$.
 \end{description}
 \end{env_definition}
-Descriptively, the procedural error is the difference between the exact solution $y(\tau+h)$ and the result, which one gets from the one-step-scheme starting from the exact solution at the earlier time step $y(\tau)$.
+Descriptively, the procedural error is the difference between the exact solution $y(\tau+h)$ and the result which one gets from the one-step-scheme starting from the exact solution at the earlier time step $y(\tau)$.
 Figure \ref{fig: procedural error} illustrates the situation.
 \begin{figure}[H]
 	\centering
@@ -581,7 +582,7 @@ Figure \ref{fig: procedural error} illustrates the situation.
 	\label{fig: procedural error}
 \end{figure}
 \noindent
-The definitions \ref{def: procedural error} is now used to calculate the order of consistency of the Euler-scheme.\\
+The definition \ref{def: procedural error} is now used to calculate the order of consistency of the Euler-scheme.
 Starting point is the system \eqref{eqn: Lorentz-Newton}. Thereby, the focus is on the equation for $u^{\mu}$ since $x^{\mu}$ can be easily integrated from $u^{\mu}$.
 Following definition \ref{def: procedural error} yields
 \beq
@@ -614,13 +615,13 @@ $\mathcal{D}(u^{\mu})$ denotes the domain of $u^{\mu}$. Therefore, the Euler-sch
 %======================== Leap Frog scheme ========================
 \section{Leap-Frog-scheme}
 A definitely better method is the so called \textit{Leap-Frog}-scheme. One can easily proof that it has an order of consistency of two. 
-In contrast to the explicit Euler-scheme this method has several advantages. For one, it is time reversible, i.e. it is possible to reach any previous point in time from every point later in the trajectory. On the other hand, the Leap-Frog-scheme is symplectic, meaning it conserves the phase space volume from which energy and momentum conservation follows. 
+In contrast to the explicit Euler-scheme this method has several advantages. For one, it is time reversible, i.e. it is possible to reach any previous point in time from every point later in the trajectory. On the other hand the Leap-Frog-scheme is symplectic, meaning it conserves the phase space volume from which energy and momentum conservation follows. 
 However, one disadvantage is that it's only suited for systems in which the acting force exclusively depends on the current position but not on the velocity of the particle. This would lead to an implicit equation system which is numerically way more expensive to solve. 
 Thus, the differential equation should be of the form
 \beq
 \frac{\dm^2 x^{\mu}}{\dm \tau^2} = \frac{\dm u^{\mu}}{\dm \tau} = f^{\mu}(x^{\nu}).
 \eeq
-As already mentioned, the various methods discretize the differential operators differently.
+As already mentioned the various methods discretize the differential operators differently.
 The Leap-Frog-scheme uses
 \beq
 \bal
@@ -636,8 +637,8 @@ u^{\mu}_{i+\frac{1}{2}} &= u^{\mu}_{i-\frac{1}{2}} + h f^{\mu}(x^{\nu}_i).
 \eal
 \eeq
 \noindent
-As one can see, position and velocity are calculated at different times. They are shifted against each other in time by $h = \frac{1}{2}$.
-But what if one has a system in which the force depends on the velocity? Is one stuck with expensive implicit methods? Fortunately not. One can use the \textit{Boris}-method.
+As can be seen position and velocity are calculated at different times. They are shifted against each other in time by $h = \frac{1}{2}$.
+But what if the system depends on the velocity? Is one stuck with expensive implicit methods? Fortunately not. One can use the \textit{Boris}-method.
 \section{Boris-method}
 \label{sec: Boris-method}
 This method was invented in 1970 by J.P. Boris \cite{boris} and is the standard method for pushing particles in plasma simulations today. Goal is to solve the Lorentz-Newton equation
@@ -906,6 +907,7 @@ which is still more complicated than the analytic dispersion relation
 In Figure \ref{fig: dispersionRelation} both, the analytical and the numerical dispersion relation are plotted. Equation \eqref{eqn: dispersionRelation1D} has a maximum at 
 \beq
 \bal
+\label{eqn: kmax}
 \tilde{k}_x^{max} &= \frac{\pi}{\Delta x}\\
 \Longleftrightarrow\lambda_x^{max} &= 2 \Delta x.
 \eal
@@ -987,7 +989,7 @@ How this works out in code is explained below. Figure \ref{fig: CodeRoutineBoxes
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.70\textwidth]{Pictures/createdPictures/boxes.pdf} 
-	\caption[Section of a grid with three boxes, two of which are near field boxes (NF) and one being a far field box (FF)]{Section of a grid with three boxes, two of which are near field boxes (NF) and one being a far field box (FF). The colored planes represent those grid points, where adjustments are necessary, as explained above. One $\vec{E}$ - Field push consists of four steps, or equivalently four subroutines in code: 1. \texttt{pushEFieldInsideBoxes}, 2. \texttt{setHFieldOnBorders}, 3. \texttt{adjustHFields}, 4 \texttt{pushEFieldAtBorders}. For reasons of clarity the grid points within the boxes are left out. }
+	\caption[Section of a grid with three boxes, two of which are near field boxes (NF) and one being a far field box (FF)]{Section of a grid with three boxes, two of which are near field boxes (NF) and one being a far field box (FF). The colored planes represent those grid points, where adjustments are necessary, as explained above. One $\vec{E}$-field push consists of four steps, or equivalently four subroutines in code: 1. \texttt{pushEFieldInsideBoxes}, 2. \texttt{setHFieldOnBorders}, 3. \texttt{adjustHFields}, 4 \texttt{pushEFieldAtBorders}. For reasons of clarity the grid points within the boxes are left out. }
 	\label{fig: CodeRoutineBoxes}
 \end{figure}
 \noindent
@@ -1067,32 +1069,42 @@ As an example an electron with $\gamma = 1.2$ is simulated in a crossed $\vec{E}
 \end{figure}
 \noindent
 
+\section{Aliasing}
+This Section deals with an effect called \textit{Aliasing}. As explained in Section \ref{sec: DispersionRelation} the FDTD grid has a maximum wavevector $\tilde{k}_x^{max}$ - the Nyquist limit - at which the group velocity vanishes. If wavevectos are too large they can not be resolved correctly on the grid. This can cause waves to travel with different velocities or even let them move backwards. Figure \ref{fig: Aliasing} illustrates the problem. Picture (a) shows that waves travel with different velocities. Instead of having one sharp tail on the top edge of the near field region this simulation shows several small tails one close after the other. This makes the tail look blurry compared to the one in Figure \ref{fig: electronCrossedField}. Both pictures (b) and (c) show that if the wavevector $k$ becomes too large waves can even travel backwards and into the near field region of the particle. This behavior can be fixed by either reducing the energy $\gamma$ of the electron or increasing the resolution $\Delta x$, $\Delta y$ and $\Delta z$ of the numerical grid (see equation \eqref{eqn: kmax}).
+\begin{figure}[H]
+\subfigure[t = 3.9]{\includegraphics[width=0.33\textwidth]{Pictures/Aliasing_3_9.png}}\hfill
+\subfigure[t = 4.75]{\includegraphics[width=0.33\textwidth]{Pictures/Aliasing_4_75.png}}\hfill
+\subfigure[t = 6.4]{\includegraphics[width=0.33\textwidth]{Pictures/Aliasing_6_4.png}}
+\caption[Simulation of an electron with $\gamma = 1.9$ in a crossed electromagnetic field with $B_z = 1$ and $E_y = 0,2$ showing aliasing]{Simulation of an electron with $\gamma = 1.9$ in a crossed electromagnetic field with $B_z = 1$ and $E_y = 0,2$ at (a) $t = 3.9$, (b) $t = 4.75$ and $t = 6.4$ showing aliasing. Picture (a) shows that waves travel with different velocities. Picture (b) and (c) show that waves can even travel backwards. The colorbar shows the value of $|\vec{E}|^2$. $\vec{E}$ and $c\vec{B}$ are in units of $4\pi\epsilon_0m_e^2c^4/e^3 = 1.77 \cdot 10^{20} \si{\volt\per\meter}$, the length is in units of $e^2 / (4\pi\epsilon_0m_ec^2) = 2.82 \cdot 10^{-15}\si{\meter}$ and the time is in units of $e^2 / (4\pi\epsilon_0m_ec^3)  = 9.40 \cdot 10^{-24}\si{\second}$}	
+\label{fig: Aliasing}
+\end{figure}
+\noindent
 %======================== Particle History ========================
 \section{Particle history}
 \label{sec: Particle History}
-In order to calculate the Liénard-Wiechert Field according to \eqref{eqn: Liénard-Wiechert} at an observation point, i.e. a grid point, the intersection point of the particles trajectory with the backward lightcone of that observation point is needed. For a more detailed explanation see Section \ref{sec: Interpolation of Trajectories}. That means that first all positions of the particle have to be stored. Second, they have to be tracked along the trajectory to check whether the backward lightcone was crossed or not. To store the entire trajectory of a few particles is not very memory consuming.  However, if one wants to simulate $10^{10}$ or even $10^{20}$ particles one would need a huge amount of memory just to store the trajectories. As the following rough calculation shows this is not feasible:\\
+In order to calculate the Liénard-Wiechert field according to \eqref{eqn: Liénard-Wiechert} at an observation point, i.e. a grid point, the intersection point of the particle's trajectory with the backward lightcone of that observation point is needed. For a more detailed explanation see Section \ref{sec: Interpolation of Trajectories}. That means that first all positions of the particle have to be stored. Second, they have to be tracked along the trajectory to check whether the backward lightcone was crossed or not. To store the entire trajectory of a few particles is not very memory consuming.  However, with a large amount of particles a huge amount of memory is required just to store the trajectories. As the following rough calculation shows this is not feasible:\\
 \newline
-One position contains of four Doubles. One for time, three for spacial components. A Double has 8 \si{\byte}. That makes a total of 32 \si{\byte} memory for one particle position. A simulation for $t = 10$ with a resolution of $dx = dy = dz = 0.1$ using Yee-scheme has $\frac{10}{0.5 \cdot 0.1} = 200$ steps. That yields $200 \cdot 32~\si{\byte} = 6.4~\si{\kilo\byte}$. For $10^{10}$ particles this sums up to 64 \si{\tera\byte}. Not to mention that there is a lot more memory necessary to store all the calculated fields on the grid.\\
+One position information consists of four Doubles. One for time, three for spacial components. A Double has 8 \si{\byte}. That makes a total of 32 \si{\byte} memory for one particle position. A simulation for $t = 10$ with a resolution of $dx = dy = dz = 0.1$ using Yee-scheme has $\frac{10}{0.5 \cdot 0.1} = 200$ steps. That yields $200 \cdot 32~\si{\byte} = 6.4~\si{\kilo\byte}$. For $10^{10}$ particles this sums up to 64 \si{\tera\byte}. Not to mention that there is a lot more memory necessary to store all the calculated fields on the grid.\\
 \newline
-The problem is that the positions which are already used to find an intersection point can't simply be deleted because the intersection point depends on the particle's velocity. The faster the particle gets, the longer the history needs to be. It can be seen why that is in the following picture \ref{fig: particleHistory}
+The problem is that the positions which are already used to find an intersection point can't simply be deleted because the intersection point depends on the particle's velocity. The faster the particle gets the longer the history needs to be. Why that is can be seen in the following Figure \ref{fig: particleHistory}
 \begin{figure}[H]
 \subfigure[$v = 0$]{\includegraphics[width=0.33\textwidth]{Pictures/createdPictures/historyLengthStill.pdf}}\hfill
 \subfigure[$v \approx 0.5 c$]{\includegraphics[width=0.33\textwidth]{Pictures/createdPictures/historyLengthHalfC.pdf}}\hfill
 \subfigure[$v \approx c$]{\includegraphics[width=0.33\textwidth]{Pictures/createdPictures/historyLengthAlmostC.pdf}}
-\caption[The faster the particle gets, the longer the history needs to be]{Observation point $x_o$ at time $ct$. The particle trajectory is shown in ocher. The intersection point is marked red. It can be seen that the faster the particle gets, the longer the particle history needs to be in order to find the intersection point. At the speed of light there would be no intersection point since the backward lightcone and the particle history would be parallel. }	
+\caption[The faster the particle gets, the longer the history needs to be]{Observation point $x_o$ at time $ct$. The particle trajectory is shown in ocher. The intersection point is marked red. It can be seen that the faster the particle gets the longer the particle history needs to be in order to find the intersection point. At the speed of light there would be no intersection point since the backward lightcone and the particle history would be parallel. }	
 \label{fig: particleHistory}
 \end{figure}
 \noindent
-The Figure shows an observation point $x_o$ and its backward lightcone in a Minkowsky space. The ocher line illustrates the particle's trajectory, crossing the backward lightcone at an intersection point, is marked as a red dot. With increasing velocity the trajectory tends more and more towards a $45^\circ$ angle. At $v = c$ the trajectory would be parallel to the backward lightcone and thus an intersection would be impossible. Therefore, one can conclude that a plausible criteria for finding the position after which all following positions could be neglected has to be velocity dependent. Due to the aforementioned arguments one can moreover conclude that the dependence would be proportional to $\frac{1}{1 - \beta}$.
-But this is not good enough. Since the velocity can change during runtime, an a priori approach is required to reduce the memory consumption. As discussed in Section \ref{sec: Energy emission} the intensity declines with a $\frac{1}{r^2}$ dependance.
-This allows to define a distance over which the emitted fields would be attenuated so much that they could be neglected. Unfortunately, a concrete formulation of that idea could not be developed in the present work.
+The Figure shows an observation point $x_o$ and its backward lightcone in a Minkowsky space. The ocher line illustrates the particle's trajectory crossing the backward lightcone at an intersection point marked as a red dot. With increasing velocity the trajectory tends more and more towards a $45^\circ$ angle. At $v = c$ the trajectory would be parallel to the backward lightcone and thus an intersection would be impossible. Therefore, one can conclude that a plausible criteria for finding the position after which all following positions could be neglected has to be velocity dependent. Moreover, under the assumption that there is a limit speed $u_{max} < c$ than there also is a maximal distance $d$ where the fields could have been emitted. All positions in the particle history which are further away than the maximal distance $d$ can be neglected. Due to the aforementioned arguments the dependence would be proportional to $\frac{d}{1 - \beta}$.
+But the velocity can change during runtime. In this case another approach is required to reduce the memory consumption. As discussed in Section \ref{sec: Energy emission} the intensity declines with a $\frac{1}{r^2}$ dependance. This allows to define a distance over which the emitted fields would be attenuated so much that they could be neglected, as long as the number of particles does not increase quadratically with increasing $r$. Unfortunately, a concrete formulation of that idea could not be developed in the present work.
 
 %======================== Far field Setup Before Simulation ========================
-\newpage
 \section{Far field setup before simulation}
-So far a particle (or multiple particles) can be initialized and can be moved on the grid according to the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} without damping. If there are external fields or interaction forces between multiple particles they get accelerated and start to radiate Liénard-Wiechert fields. As soon as the retardation constraint is met ($t_{ret} > 0$) the fields will appear at the border between near and far field region and get propagated via \eqref{eqn: discreteMaxwellEq}. This works fine but unfortunately this initial setup is far from realistic. The particles were not created the second the simulation starts. It is not of interest to simulate the creational process but the emitted fields due to interactions between particles which do already exist. Therefore, the particles will already have a long trajectory history and some kind of Liénard-Wiechert fields coming with them. The question is: How do setup the fields on the grid before the simulation starts? The following approach is used:\\
+So far a particle (or multiple particles) can be initialized and can be moved on the grid according to the Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} without damping. If there are external fields or interaction forces between multiple particles they get accelerated and start to radiate. As soon as the retardation constraint is met ($t_{ret} > 0$) the fields will appear at the border between near and far field region and get propagated via \eqref{eqn: discreteMaxwellEq}. Unfortunately, this initial setup is far from realistic. The particles were not created the second the simulation starts. It is not of interest to simulate the creational process but the emitted fields due to interactions between particles which do already exist. Therefore, the particles will already have a long trajectory history and fields. The question is: How to setup the fields on the grid before the simulation starts? In the following two methods for setting up the far fields are discussed.\\
 \newline
-Boris pusher is used (see Section \ref{sec: Boris-method}) to push the particles from $t$ to $t + \dm t$, starting with the initial conditions, given prior to the simulation. This algorithm can also be used to push backwards in time since it is symplectic and therefore time reversible. By selecting the simulation parameter $t = t_0 > 0$ the trajectory is calculated backwards in time for $t_0$ time units. This can be achieved by reversing the external fields and the initial velocity vector of the particle. Once one gets $t_0$ back in time one reverses the external fields and the velocity vector again, sets the particles proper time to zero and starts pushing the particle from there. In order to store all new trajectory points in the history it needs to be extended by $\frac{t_0}{\dm t}$ elements first. With this approach the simulation starts with the particle being at the specified initial conditions by the user, but the particle will already have a trajectory history, from which the initial Liénard-Wiechert fields can be calculated with \eqref{eqn: Liénard-Wiechert} in all far field boxes of the grid. This, however, is computationally quite expensive. Therefore, a routine was developed which serializes the initial conditions of the simulation in a file and only calculates the fields if they were not calculated and stored before. The flow chart in Figure \ref{fig: particleHistoryFlowChart} shows which functions get called when the user sets $t = t_0 > 0$.
+One method is to setup the plasma such that the far fields vanish. Then the entire grid can be initialized with zero. This can be achieved by using the same amount of positively and negatively charged particles. If two opposing charges are placed  close togeher then the net charge cancels and the far field of that charge distribution can be neglected. If there are no opposing charges then a static background field can be used to neutralize the charge. \\
+\newline
+The other method, which is used in the present work and therefore discussed in more detail, uses the trajectory of a particle to initialize the far fields. The Boris pusher is used (see Section \ref{sec: Boris-method}) to push the particles from $t$ to $t + \dm t$, starting with the initial conditions, given prior to the simulation. This algorithm can also be used to push backwards in time since it is symplectic and therefore time reversible. By selecting the simulation parameter $t = t_0 > 0$ the trajectory is calculated backwards in time for $t_0$ time units. This can be achieved by reversing the external fields and the initial velocity vector of the particle. Once one gets $t_0$ back in time one reverses the external fields and the velocity vector again, sets the particles proper time to zero and starts pushing the particle from there. In order to store all new trajectory points in the history it needs to be extended by $\frac{t_0}{\dm t}$ elements first. With this approach the simulation starts with the particle being at the specified initial conditions by the user, but the particle will already have a trajectory history, from which the initial Liénard-Wiechert fields can be calculated with \eqref{eqn: Liénard-Wiechert} in all far field boxes of the grid. It is important to stress that this method can only be used if the particles do not interact with each other during the initialization process. Otherwise, the radiation fields would change the trajectories of the particles which can not be anticipated beforehand. In order to prevent such interactions the particles need to be spatially separated over large distances. This method, however, is computationally quite expensive. Therefore, a routine was developed which serializes the initial conditions of the simulation in a file and only calculates the fields if they were not calculated and stored before. The following flow chart in Figure \ref{fig: particleHistoryFlowChart} shows which functions get called when the user sets $t = t_0 > 0$.
 In Figure \ref{fig: particleHistoryExamples} some examples of initial fields for different times are shown. Notice, that in all cases the simulation starts with the particle being at the initial position \footnote{The initial position used in the simulation is $\texttt{Particle->x[1]} = 11.1$ and $\texttt{Particle->x[2]} = 15.5$} the user entered prior to the simulation. Only the distance over which the fields are initialized differ due to different particle history lengths.
 \begin{figure}[H]
 \subfigure[$t = 8$, $t_{End} = 9$]{\includegraphics[width=0.33\textwidth]{Pictures/particleHistoryInitialFields8.png}}\hfill
@@ -1107,7 +1119,7 @@ The electron has an energy of $\gamma = 1.2$. A constant $B_z = 1$ is used as ex
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.7\textwidth]{Pictures/createdPictures/particleHistoryFlowChart.pdf} 
-	\caption[Flow chart showing the relevant function calls when the user sets $t = t_0 > 0$]{Flow chart showing the relevant function calls when the user sets $t = t_0 > 0$. In this case the radiation fields are calculated from the extended particle history and are set onto the numerical grid. If $t = t_0 = 0$ the simulation starts right away. This way of setting up the simulation is only correct if there is only one particle or the the particles do not interact during the initialization process.}
+	\caption[Flow chart showing the relevant function calls when the user sets $t = t_0 > 0$]{Flow chart showing the relevant function calls when the user sets $t = t_0 > 0$. In this case the radiation fields are calculated from the extended particle history and are set onto the numerical grid. If $t = t_0 = 0$ the simulation starts right away. This way of setting up the simulation is only correct if there is only one particle or if the particles do not interact during the initialization process.}
 	\label{fig: particleHistoryFlowChart}
 \end{figure}
 \noindent
@@ -1391,13 +1403,13 @@ From the Fourier analysis of the electric field components, shown in the Figures
 \chapter{Uniaxial Perfectly Matched Layer}
 \section{Introduction}
 With all simulations there is the topic about boundary conditions. This chapter deals with that important aspect. 
-Boundary conditions apply at the edge of the numerical grid and dictate how the solution is treated, when approaching the edge. The Dirichlet boundary condition, for instance, sets the solution to zero, leading to reflections \footnote{It's like a rope with a fixed connection to a wall. Since the energy cannot be transferred to the wall, all energy is reflected, causing the incident wave to move back. }. Periodic boundary conditions extend the grid by setting one edge on top of the opposite one. Solutions leaving the grid to the right enter the simulation area to the left again. 
-When solving differential equations numerically one always has to think about, which boundary conditions apply best for the problem at hand. The most commonly used ones are the two aforementioned ones. Dirichlet boundary conditions apply for physical problems involving fast decaying solutions in space so that truncation does not matter, as long as the numerical grid is large enough. Other problems, like periodic structures, can be simulated with periodic boundary conditions. However, one of the most challenging problems to truncate involve wave equations, like in our case, since their solution only decays slowly \footnote{Energy conservation requires the energy flux $|S| \propto |E|^2$ to decay inversely proportional to the surface area $\sim r^2$ in three dimensions. Therefore, $|E| \propto \frac{1}{r}$.}. Using periodic, Dirichlet or Neumann boundary conditions will lead to unacceptable artifacts from boundary reflections. One approach is the \textit{absorbing boundary condition} \cite{Taflove}. It turns out that this approach works just fine for the one dimensional case, i.e. waves traveling in only one direction. However, most problems - like the one in the present work - include three dimensions. Fortunately in 1994 Berenger came up with a new idea presented in his seminal paper \cite{Berenger}. Instead of having an absorbing boundary condition he rather proposed an absorbing boundary layer. The layer is part of the grid and has a specified width. When a wave enters the layer, it is attenuated by the absorption and decays exponentially. Now the problems remains, that the absorbing layer represents an interface, where the impedance change, which in turn causes reflection and transmission. Berenger, however, showed that it's possible to construct a medium, which does not reflect any incident wave, independent of angle, polarization and frequency. A so called PML - \textit{Perfectly Matched Layer}. Aside from Berenger's  original formulation -the \textit{split field} PML -  some equivalent descriptions of PML came up over the years. For one there are the \textit{uniaxial} PML (UPML), which are used in this thesis and are explained in more detail below. The most elegant and general description is the \textit{stretched coordinate} PML \cite{Chew, Rappaport, Teixeira}, which is based upon an analytic continuation of Maxwell`s equations into complex spatial coordinates. Both the split field PML and the UPML can be derived from this approach.\\
+Boundary conditions apply at the edge of the numerical grid and dictate how the solution is treated when approaching the edge. The Dirichlet boundary condition, for instance, sets the solution to zero leading to reflections \footnote{It's like a rope with a fixed connection to a wall. Since the energy cannot be transferred to the wall all energy is reflected causing the incident wave to move back.}. Periodic boundary conditions extend the grid by setting one edge on top of the opposite one. Solutions leaving the grid to the right enter the simulation area to the left again. 
+When solving differential equations numerically one always has to think about which boundary conditions apply best for the problem at hand. The most commonly used ones are the two aforementioned ones. Dirichlet boundary conditions apply for physical problems involving fast decaying solutions in space so that truncation does not matter, as long as the numerical grid is large enough. Other problems, like periodic structures, can be simulated with periodic boundary conditions. However, one of the most challenging problems to truncate involve wave equations, like in our case, since their solution only decays slowly \footnote{Energy conservation requires the energy flux $|S| \propto |E|^2$ to decay inversely proportional to the surface area $\sim r^2$ in three dimensions. Therefore, $|E| \propto \frac{1}{r}$.}. Using periodic Dirichlet or Neumann boundary conditions will lead to unacceptable artifacts from boundary reflections. One approach is the \textit{absorbing boundary condition} \cite{Taflove}. It turns out that this approach works just fine for the one dimensional case, i.e. waves traveling in only one direction. However, most problems - like the one in the present work - include three dimensions. Fortunately in 1994 Berenger came up with a new idea presented in his seminal paper \cite{Berenger}. Instead of having an absorbing boundary condition he rather proposed an absorbing boundary layer. The layer is part of the grid and has a specified width. When a wave enters the layer it is attenuated by the absorption and decays exponentially. Still, the problem remains that the absorbing layer represents an interface where the impedance change which in turn causes reflection and transmission. Berenger, however, showed that it's possible to construct a medium which does not reflect any incident wave independent of angle, polarization and frequency. A so called PML - \textit{Perfectly Matched Layer}. Aside from Berenger's  original formulation -the \textit{split field} PML -  some equivalent descriptions of PML came up over the years. For one there are the \textit{uniaxial} PML (UPML) which are used in this thesis and are explained in more detail below. The most elegant and general description is the \textit{stretched coordinate} PML \cite{Chew, Rappaport, Teixeira} which is based upon an analytic continuation of Maxwell`s equations into complex spatial coordinates. Both the split field PML and the UPML can be derived from this approach.\\
 
 %======================== Derivation ============================
 \section{Derivation}
 The most common formulation is the UPML. Following \cite{Taflove, CEM} an overview of the most important steps is presented to understand why UPML works and how to implement it. 
-It will turn out that the medium inside our PML needs to be anisotropic. Why that is can be seen later. Being able to describe anisotropic phenomenon one needs to incorporate anisotropy into Maxwell equations. One can do this by making the permittivity $\epsilon_r$ and permeability $\mu_r$ tensors \footnote{There are three types of anisotropic media: \\
+It will turn out that the medium inside the PML needs to be anisotropic. Why that is can be seen later. Being able to describe anisotropic phenomenon one needs to incorporate anisotropy into Maxwell equations. This can be achieved by making the permittivity $\epsilon_r$ and permeability $\mu_r$ tensors \footnote{There are three types of anisotropic media: \\
 isotropic:
 $ \begin{bmatrix}
 a & 0 & 0  \\
@@ -1425,7 +1437,7 @@ The time harmonic Maxwell's Curl equations then read
 \vec{\nabla} \times \vec{H}(\omega) &= \sigma \vec{E}(\omega) + j\omega\vec{D}(\omega),
 \eal
 \eeq
-with the relation $\vec{D}(\omega) = \epsilon_0\left[\epsilon_r\right]\vec{E}$ and conductivity $\sigma$. As usual, $\epsilon_0$ and $\epsilon_r$ are the vacuum and relative permittivity respectively. One starts in the frequency domain, because PML is a frequency domain concept and thus it's easier to work with in frequency domain. However, to get the update equations, a back transform to time domain is required. The update equations then need to be implement. Equation \eqref{eqn: frequencyDomainMaxwellEquations} can be rewritten as
+with the relation $\vec{D}(\omega) = \epsilon_0\left[\epsilon_r\right]\vec{E}$ and conductivity $\sigma$. As usual, $\epsilon_0$ and $\epsilon_r$ are the vacuum and relative permittivity respectively. One starts in the frequency domain, because PML is a frequency domain concept and therefore it's easier to work with in frequency domain. However, to get the update equations, a back transform to time domain is required. Equation \eqref{eqn: frequencyDomainMaxwellEquations} can be rewritten as
 \beq
 \bal
 \begin{pmatrix}
@@ -1742,7 +1754,7 @@ Another feature of the numerical scheme in the present work, that can be optimiz
 \appendix
 
 %======================== Gauge Transformations ============================
-\chapter{Gauge Transformations}
+\chapter{Gauge transformations}
 \label{appendix: Gauge Transformations}
 \noindent
 In this chapter it is shown that the gauge fields leave both the electric and magnetic fields and the corresponding potential equations invariant.
@@ -1858,8 +1870,9 @@ The following Softwarestack was used to create this thesis:
 \chapter{Normalization}
 \label{app: Normalization}
 \noindent
-This chapter deals with how to make the basic equations from Section \ref{sec: Equations of motion} dimensionless. Even though it's not necessary, it's always advisable in numerics to have a dimensionless systems for reasons of simplicity and clarity. In addition to the transformation equations the dimensionless Lorentz-Newton equation \eqref{eqn: Lorentz-Newton}, the damping term, i.e. Landau-Lifschitz equation \eqref{eqn: Landau-Lifschitz} and of course the Liénard-Wiechart equations \eqref{eqn: Liénard-Wiechert} is also presented.\newline
-To make the physical entities dimensionless a characteristic frequency $\omega$ is introduced. Dimensionless parameters are denoted with a tilde. \\
+This chapter deals with how to make the basic equations from Section \ref{sec: Equations of motion} dimensionless. Even though it's not necessary in numerics it's always advisable to have a dimensionless systems for reasons of simplicity and clarity. In addition to the transformation equations the dimensionless Lorentz-Newton equation \eqref{eqn: Lorentz-Newton}, the damping term, i.e. Landau-Lifschitz equation \eqref{eqn: Landau-Lifschitz} and of course the Liénard-Wiechert equations \eqref{eqn: Liénard-Wiechert} is also presented.\\
+\newline
+To make the physical entities dimensionless a characteristic frequency $\omega$ is introduced. Dimensionless parameters are denoted with a tilde.
 With the following transformations
 \beq
 \bal
@@ -1873,7 +1886,7 @@ F^{\mu\nu}_{\quad\text{lw}} &= \frac{q}{4\pi\epsilon_0}\frac{\omega^2}{c^3}\tild
 F^{\mu\nu}&= F^{\mu\nu}_{\quad\text{ext}} + \frac{q^2}{4\pi\epsilon_0}\frac{\omega^2}{c^3}\tilde{F}^{\mu\nu}_{\quad\text{lw}}
 \eal
 \eeq
-the aforementioned equations become dimensionless, where $F^{\mu\nu}_{\quad\text{ext}}$ denotes the external fields, $F^{\mu\nu}_{\quad\text{lw}}$ the Liénard-Wiechert fields and $F^{\mu\nu}$ the total fields. Defining the characteristic frequency $\omega$ such, that 
+the aforementioned equations become dimensionless, where $F^{\mu\nu}_{\quad\text{ext}}$ denotes the external fields, $F^{\mu\nu}_{\quad\text{lw}}$ the Liénard-Wiechert fields and $F^{\mu\nu}$ the total fields. Defining the characteristic frequency $\omega$ such that 
 \beq
 \bal
 \frac{q^2}{4\pi\epsilon_0}\frac{\omega^2}{c^3} &\stackrel{!}{=} 1 \\
@@ -1885,6 +1898,7 @@ both the external and the Liénard-Wiechert fields have the same units
 \frac{\omega m_e}{q} = 4\pi\epsilon_0 \frac{m^2_ec^3}{q^3}.
 \eeq
 In the following the basic equations from Section \ref{sec: Equations of motion} are presented in dimensionless form: \\
+\newline
 The dimensionless Lorentz-Newton equation \eqref{eqn: Lorentz-Newton} reads
 \beq
 \frac{\dm u^{\mu}}{\dm\tilde{s}} = \biggl( \tilde{F}^{\mu\nu}_{\quad\text{lw}}(x^{\mu}) + \tilde{F}^{\mu\nu}_{\quad\text{ext}}(x^{\mu})\biggr) u^{\nu} + \tilde{g}^{\mu}.
@@ -1893,7 +1907,7 @@ The Landau-Lifschitz equation \eqref{eqn: Landau-Lifschitz} becomes
 \beq
 \tilde{g}^{\mu} = \frac{2}{3}\biggl(\frac{\del \tilde{F}^{\mu\nu}}{\del \tilde{x}^{\xi}}u^{\nu}u^{\xi} - \tilde{F}^{\mu\xi}\tilde{F}_{\nu\xi}u^{\nu} + (\tilde{F}_{\nu\xi}u^{\xi})(\tilde{F}^{\nu\pi}u_{\pi})u^{\mu}\biggr),
 \eeq
-and finally the Liénard-Wiechart equations \eqref{eqn: Liénard-Wiechert}
+and finally the Liénard-Wiechert equations \eqref{eqn: Liénard-Wiechert}
 \beq
 \bal
 \vec{\tilde{E}}(\vec{\tilde{r}}, \tilde{t}) &= \left( \frac{\vec{n}(\vec{\tilde{r}},\tilde{t}') - \vec{\beta}(\tilde{t})}{ \gamma^2(1 - \vec{\beta}(\tilde{t}) \cdot \vec{n}(\vec{\tilde{r}},\tilde{t}'))^3 \tilde{R}^2(\vec{\tilde{r}},\tilde{t}')} \right. \\

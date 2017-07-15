@@ -27,21 +27,22 @@
 \contentsline {subsection}{\numberline {4.4.3}adjustHField()}{39}{subsection.4.4.3}
 \contentsline {subsection}{\numberline {4.4.4}pushEFieldOnBorders()}{39}{subsection.4.4.4}
 \contentsline {section}{\numberline {4.5}Particle push and near field update}{41}{section.4.5}
-\contentsline {section}{\numberline {4.6}Particle history}{43}{section.4.6}
-\contentsline {section}{\numberline {4.7}Far field setup before simulation}{45}{section.4.7}
-\contentsline {section}{\numberline {4.8}Electron scattering in an electromagnetic wave}{48}{section.4.8}
-\contentsline {chapter}{\numberline {5}Uniaxial Perfectly Matched Layer}{64}{chapter.5}
-\contentsline {section}{\numberline {5.1}Introduction}{64}{section.5.1}
-\contentsline {section}{\numberline {5.2}Derivation}{65}{section.5.2}
-\contentsline {section}{\numberline {5.3}Update equations}{69}{section.5.3}
-\contentsline {section}{\numberline {5.4}Implementation of UPML in FDTD}{71}{section.5.4}
-\contentsline {part}{\numberline {III}Summary \& Outlook}{73}{part.3}
-\contentsline {part}{\numberline {IV}Appendix}{75}{part.4}
-\contentsline {chapter}{\numberline {A}Gauge Transformations}{76}{appendix.A}
-\contentsline {section}{\numberline {A.1}Gauge invariance of fields}{76}{section.A.1}
-\contentsline {section}{\numberline {A.2}Gauge invariance of potential equations}{77}{section.A.2}
-\contentsline {chapter}{\numberline {B}Retarded potential equations fulfill Laurentz gauge}{78}{appendix.B}
-\contentsline {chapter}{\numberline {C}Softwarestack and Documentation}{80}{appendix.C}
-\contentsline {chapter}{\numberline {D}Normalization}{81}{appendix.D}
-\contentsline {chapter}{\nonumberline Bibliography}{86}{chapter*.6}
-\contentsline {chapter}{Declaration}{88}{chapter*.7}
+\contentsline {section}{\numberline {4.6}Aliasing}{43}{section.4.6}
+\contentsline {section}{\numberline {4.7}Particle history}{44}{section.4.7}
+\contentsline {section}{\numberline {4.8}Far field setup before simulation}{46}{section.4.8}
+\contentsline {section}{\numberline {4.9}Electron scattering in an electromagnetic wave}{49}{section.4.9}
+\contentsline {chapter}{\numberline {5}Uniaxial Perfectly Matched Layer}{65}{chapter.5}
+\contentsline {section}{\numberline {5.1}Introduction}{65}{section.5.1}
+\contentsline {section}{\numberline {5.2}Derivation}{66}{section.5.2}
+\contentsline {section}{\numberline {5.3}Update equations}{70}{section.5.3}
+\contentsline {section}{\numberline {5.4}Implementation of UPML in FDTD}{72}{section.5.4}
+\contentsline {part}{\numberline {III}Summary \& Outlook}{74}{part.3}
+\contentsline {part}{\numberline {IV}Appendix}{76}{part.4}
+\contentsline {chapter}{\numberline {A}Gauge transformations}{77}{appendix.A}
+\contentsline {section}{\numberline {A.1}Gauge invariance of fields}{77}{section.A.1}
+\contentsline {section}{\numberline {A.2}Gauge invariance of potential equations}{78}{section.A.2}
+\contentsline {chapter}{\numberline {B}Retarded potential equations fulfill Laurentz gauge}{79}{appendix.B}
+\contentsline {chapter}{\numberline {C}Softwarestack and Documentation}{81}{appendix.C}
+\contentsline {chapter}{\numberline {D}Normalization}{82}{appendix.D}
+\contentsline {chapter}{\nonumberline Bibliography}{87}{chapter*.6}
+\contentsline {chapter}{Declaration}{89}{chapter*.7}
