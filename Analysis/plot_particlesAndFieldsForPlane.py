@@ -14,8 +14,8 @@ numberOfParticleFiles = len(fnmatch.filter(os.listdir('Particles/Particle0/'), '
 files = glob.glob('Particles/*.txt')
 gridParameters = np.genfromtxt('gridParameters.txt')
 field = np.genfromtxt('E_fields/E_field0.txt')
-EMax = field.max()
-#EMax = 4.5 * pow(10,-13)
+#EMax = 0.05
+EMax = 4.5 * pow(10,-13)
 
 lengthOfSimulationBoxInX = gridParameters[6]
 lengthOfSimulationBoxInY = gridParameters[7]

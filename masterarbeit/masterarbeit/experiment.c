@@ -531,7 +531,7 @@ void testNearFieldUpdate(){
     Particle->x[2] = 15.5;
     Particle->x[3] = 10.1;
     
-    Particle->u[1] = 0.658;
+    Particle->u[1] = 1.9;
     Particle->u[2] = 0;
     Particle->u[3] = 0;
     Particle->u[0] = getGammaFromVelocityVector(Particle->u);
@@ -619,8 +619,8 @@ void testMultipleParticles(){
     Particle1->mass = 1;
     Particle1->charge = 1;
     Particle1->x[0] = 0;
-    Particle1->x[1] = 4.0;
-    Particle1->x[2] = 4.5;
+    Particle1->x[1] = 17.5;
+    Particle1->x[2] = 17.5;
     Particle1->x[3] = 6.8;
     
     Particle1->u[1] = 0.458;
@@ -632,7 +632,7 @@ void testMultipleParticles(){
     Particle2->charge = 1;
     Particle2->x[0] = 0;
     Particle2->x[1] = 8.5;
-    Particle2->x[2] = 8.0;
+    Particle2->x[2] = 8.5;
     Particle2->x[3] = 6.8;
     
     Particle2->u[1] = 0.458;
@@ -1679,8 +1679,8 @@ void scatteringInEMWave_analytic_largeScale(){
     printf("executing bash-script ...\n");
     system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/fourierAnalysis.sh");
 //    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/externalFields.sh");
-//    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/analyzeForces.sh");
-//    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/analyzeForces.sh");
+    system("~/Desktop/Projects/masterarbeit/Analysis/Scripts/particlesAndFieldsForPlane.sh");
     
     freeMemoryOnParticles(Particles, numberOfParticles);
     freeMemoryOnGrid(&Grid);
