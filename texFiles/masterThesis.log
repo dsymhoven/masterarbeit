@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  15 JUL 2017 16:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.14)  16 JUL 2017 16:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2619,17 +2619,17 @@ chapter without number
 ]) [88]
 \openout2 = `declaration.aux'.
 
- (./declaration.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--12
+ (./declaration.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 4--1927
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4--12
+Underfull \hbox (badness 10000) in paragraph at lines 4--1927
 
  []
 
-) [89
+[89
 
 
 ]
@@ -2653,11 +2653,11 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1930.
  ) 
 Here is how much of TeX's memory you used:
- 24326 strings out of 493014
- 450144 string characters out of 6133350
- 593485 words of memory out of 5000000
- 27033 multiletter control sequences out of 15000+600000
- 33250 words of font info for 83 fonts, out of 8000000 for 9000
+ 24325 strings out of 493014
+ 450131 string characters out of 6133350
+ 593482 words of memory out of 5000000
+ 27032 multiletter control sequences out of 15000+600000
+ 32937 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,25n,66p,10448b,2176s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
@@ -2698,7 +2698,7 @@ public/cm-super/sfsx2488.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
 blic/cm-super/sfti1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
 ic/cm-super/sftt0900.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
 /cm-super/sftt1095.pfb>
-Output written on masterThesis.pdf (98 pages, 16925193 bytes).
+Output written on masterThesis.pdf (98 pages, 16934411 bytes).
 PDF statistics:
  1879 PDF objects out of 2073 (max. 8388607)
  1483 compressed objects within 15 object streams
